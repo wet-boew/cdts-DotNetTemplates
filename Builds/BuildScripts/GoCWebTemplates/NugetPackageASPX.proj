@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="MainBuild">
+
+  <!-- Variables -->
+  <PropertyGroup>
+    <!-- Base Folder for MSBuild -->
+    <BaseDir>$(MSBuildProjectDirectory)</BaseDir>
+    <!-- Source directory of the project -->
+    <SourceDir>$([System.IO.Path]::GetFullPath('..\..\..\'))</SourceDir>
+    <!-- Library directory of the project -->
+    <LibrariesDir>$([System.IO.Path]::GetFullPath('..\..\'))Libraries\</LibrariesDir>
+    <!-- Library directory of the project -->
+    <NuGetSpecDir>$([System.IO.Path]::GetFullPath('..\..\'))NuSpec Files\</NuGetSpecDir>
+    <!-- Nuget Folder (Include exe and config -->
+    <NuGetDir>$([System.IO.Path]::GetFullPath('..\..\')).nuget\</NuGetDir>
+    
+    <!-- Project Template Starter directory -->
+    <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplate</WebTemplateProjectDir>
+    <!-- Project File -->
+    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate.csproj</WebTemplateProjectFile>
+    
+    <!-- Release Folder -->
+    <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
+    <!-- Release Folder Template -->
+    <ReleaseTemplateDir>$(ReleaseRootDir)\GocWebTemplate</ReleaseTemplateDir>
+    
+    <!-- Binaries Folder -->
+    <OutBinariesDir>$(WebTemplateProjectDir)\bin</OutBinariesDir>
+    <!-- Content Folder -->
+    <OutContentDir>$(WebTemplateProjectDir)\GoC.WebTemplate</OutContentDir>
+    
+    <!-- Create NuGet package? -->
+    <CreatePackage>1</CreatePackage>
+    
+    <!-- Configuration Value -->
+    <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+  </PropertyGroup>
+
+  <Import Project="$(LibrariesDir)MSBuild.Community.Tasks.targets" />
+
+  <UsingTask AssemblyFile="$(MSBuildCommunityTasksLib)" TaskName="MSBuild.Community.Tasks.XmlUpdate" />
+  <UsingTask AssemblyFile="$(MSBuildCommunityTasksLib)" TaskName="MSBuild.Community.Tasks.Zip" />
+
+  <!-- "MainBuild" -->
+  <Target Name="MainBuild">
+
+    <CallTarget Targets="CopyRelease"/>
+    <CallTarget Condition="$(CreatePackage) == '1'" Targets="NuGet;CleanUpReleaseFolder;"/>
+    
+  </Target>
+
+  <!-- Copy files to release folder -->
+  <Target Name="CopyRelease">
+    <MakeDir Directories="$(ReleaseTemplateDir)\Lib"/>
+    <MakeDir Directories="$(ReleaseTemplateDir)\Content"/>
+
+    <ItemGroup>
+      <ReleaseFiles Include="$(OutBinariesDir)\*.dll"/>
+      <ReleaseFilesContent Include="$(OutContentDir)\**\*.*"  Exclude="$(WebTemplateProjectDir)\GoC.WebTemplate\**\*.cs"></ReleaseFilesContent>
+    </ItemGroup>
+    
+    <!--Copy the XDT file to the content dir -->
+    <Copy SourceFiles="$(NuGetSpecDir)GoC.WebTemplate.nuspec" DestinationFolder="$(ReleaseTemplateDir)\" />
+
+    <!--Second copy the Binarie files to the package dir -->
+    <Copy SourceFiles="@(ReleaseFiles)" DestinationFolder="$(ReleaseTemplateDir)\Lib\Net45"/>
+
+    <!--This copy the content to the package dir -->
+    <Copy SourceFiles="@(ReleaseFilesContent)" DestinationFolder="$(ReleaseTemplateDir)\Content\GoC.WebTemplate\%(RecursiveDir)"/>
+
+  </Target>
+
+  <!-- Make NuGet package-->
+  <Target Name="NuGet">
+    
+    <!--First copy the nuspec template files to the package dir -->
+    <Copy SourceFiles="$(WebTemplateProjectDir)\Web.config.install.xdt" DestinationFolder="$(ReleaseTemplateDir)\Content\" />
+
+     <!--Get the version number of the main FV assembly to insert into the nuspec files--> 
+    <GetAssemblyIdentity AssemblyFiles="$(ReleaseTemplateDir)\Lib\Net45\GoC.WebTemplate.dll">
+      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+    </GetAssemblyIdentity>
+
+    <PropertyGroup>
+      <PreRelease
+          Condition="$(PreRelease) != ''">%(AsmInfo.Version)-$(PreRelease)</PreRelease>
+      <PreRelease
+          Condition="$(PreRelease) == ''">%(AsmInfo.Version)</PreRelease>
+    </PropertyGroup>
+    
+    <!-- insert the version number into the nuspec files -->    
+    <XmlUpdate
+      Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+      XmlFileName="$(ReleaseRootDir)\GocWebTemplate\GoC.WebTemplate.nuspec"
+      XPath="/package/metadata/version"
+      Value="$(PreRelease)" />
+
+    <!--insert the release notes-->
+    <XmlUpdate
+      Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+      XmlFileName="$(ReleaseRootDir)\GocWebTemplate\GoC.WebTemplate.nuspec"
+      XPath="/package/metadata/releaseNotes"
+      Value="$(releaseNotes)" />
+    
+    <!-- 3. create package -->    
+    <Exec WorkingDirectory="$(ReleaseRootDir)" Command="$(NuGetDir)nuget.exe pack $(ReleaseTemplateDir)\GoC.WebTemplate.nuspec" />
+    
+  </Target>
+
+  <!-- Cleanup the Release folder -->
+  <Target Name="CleanUpReleaseFolder">
+    <RemoveDir Directories="$(ReleaseRootDir)\GocWebTemplate"/>
+  </Target>
+
+</Project>

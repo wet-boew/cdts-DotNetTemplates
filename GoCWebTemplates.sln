@@ -1,0 +1,192 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{0AF664E7-F710-418D-8040-B4634190472F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{E5D96498-3C33-4E87-96D1-EF220E63BBE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate", "Applications\GoC.WebTemplate\GoC.WebTemplate.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplateMVC", "Applications\GoC.WebTemplateMVC\GoC.WebTemplateMVC.csproj", "{EC1904AE-61D0-4C51-B431-8682EC4C6C42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTemplateCore", "Components\WebTemplateCore\WebTemplateCore.csproj", "{A9ACE274-5F6A-4634-A40A-E775F5B81B90}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleCode", "SampleCode", "{2CFB095F-7524-496B-9618-3134660376AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleCode.C3", "SampleCode\SampleCode.C3\SampleCode.C3.csproj", "{6F3DB406-D252-4918-B26F-BB2CD49633B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleCode.C3.MVC", "SampleCode\SampleCode.C3.MVC\SampleCode.C3.MVC.csproj", "{9B2BB546-93CE-47F6-9096-3F0F57BC0260}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Builds", "Builds", "{2C7F0302-D673-4B36-8376-A83DF7C7B622}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CustomTask", "CustomTask", "{5ACF3DD5-C20B-4BD6-951B-37AFEF75C564}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProjectFileTask", "ProjectFileTask", "{E75F1272-A180-4DB3-AB98-082B3E9946DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectBuildTask", "Builds\CustomTasks\ProjectFileTask\ProjectBuildTask.csproj", "{BA63C3EB-4B3E-4098-96FE-2338BEE57F79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{5B729907-DC83-485D-B62C-CCA646F8D604}"
+	ProjectSection(SolutionItems) = preProject
+		Builds\Libraries\DiffCopy.dll = Builds\Libraries\DiffCopy.dll
+		Builds\Libraries\Microsoft.Web.XmlTransform.dll = Builds\Libraries\Microsoft.Web.XmlTransform.dll
+		Builds\Libraries\Microsoft.WebApplication.Build.Tasks.Dll = Builds\Libraries\Microsoft.WebApplication.Build.Tasks.Dll
+		Builds\Libraries\Microsoft.WebApplication.targets = Builds\Libraries\Microsoft.WebApplication.targets
+		Builds\Libraries\MSBuild.Community.Tasks.dll = Builds\Libraries\MSBuild.Community.Tasks.dll
+		Builds\Libraries\MSBuild.Community.Tasks.Targets = Builds\Libraries\MSBuild.Community.Tasks.Targets
+		Builds\Libraries\MSBuild.Community.Tasks.xml = Builds\Libraries\MSBuild.Community.Tasks.xml
+		Builds\Libraries\MSBuild.Community.Tasks.xsd = Builds\Libraries\MSBuild.Community.Tasks.xsd
+		Builds\Libraries\MSBuild.ExtensionPack.dll = Builds\Libraries\MSBuild.ExtensionPack.dll
+		Builds\Libraries\MSBuild.ExtensionPack.tasks = Builds\Libraries\MSBuild.ExtensionPack.tasks
+		Builds\Libraries\ProjectBuildTask.dll = Builds\Libraries\ProjectBuildTask.dll
+		Builds\Libraries\SlowCheetah.Transforms.targets = Builds\Libraries\SlowCheetah.Transforms.targets
+		Builds\Libraries\SlowCheetah.Xdt.dll = Builds\Libraries\SlowCheetah.Xdt.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec Files", "NuSpec Files", "{C85CB8C7-06EF-44A7-A3B3-F48B6A8B9B78}"
+	ProjectSection(SolutionItems) = preProject
+		Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate.MVC.nuspec = Builds\NuSpec Files\GoC.WebTemplate.MVC.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate.nuspec = Builds\NuSpec Files\GoC.WebTemplate.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildScripts", "BuildScripts", "{00395D06-74E7-4699-BD42-48CE0B69606E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoCWebTemplates", "GoCWebTemplates", "{F4B9A61A-C2AB-42A9-8E4C-DCA0A136B59B}"
+	ProjectSection(SolutionItems) = preProject
+		..\Workspaces\AlainBelleville\buildScripts\GoCWebTemplate\BuildNuGetPackage-Server.proj = ..\Workspaces\AlainBelleville\buildScripts\GoCWebTemplate\BuildNuGetPackage-Server.proj
+		Builds\BuildScripts\GoCWebTemplates\NugetPackageASPX.proj = Builds\BuildScripts\GoCWebTemplates\NugetPackageASPX.proj
+		Builds\BuildScripts\GoCWebTemplates\NugetPackageMVC.proj = Builds\BuildScripts\GoCWebTemplates\NugetPackageMVC.proj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GCPedia", "GCPedia", "{CC8C0331-8D39-45D1-A8EB-F89C672BE5DA}"
+	ProjectSection(SolutionItems) = preProject
+		Builds\BuildScripts\GCPedia\GCPediaASPXProject.proj = Builds\BuildScripts\GCPedia\GCPediaASPXProject.proj
+		Builds\BuildScripts\GCPedia\GCPediaMVCProject.proj = Builds\BuildScripts\GCPedia\GCPediaMVCProject.proj
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoCWebTemplateStarterASPX", "Applications\GoCWebTemplateStarterASPX\GoCWebTemplateStarterASPX.csproj", "{5507561E-5A15-4DB1-9752-BB6B2F0DB991}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DiffCopy", "DiffCopy", "{E8396313-BA84-4D8C-B268-D1AFA28CDFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiffCopy", "Builds\CustomTasks\DiffCopy\DiffCopy.csproj", "{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoCWebTemplateStarterMVC", "Applications\GoCWebTemplateStarterMVC\GoCWebTemplateStarterMVC.csproj", "{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoCWebTemplateSamples", "GoCWebTemplateSamples", "{85DD043B-76ED-468E-8B4C-14357DAE5D22}"
+	ProjectSection(SolutionItems) = preProject
+		Builds\BuildScripts\GoCWebTemplateSamples\NuGetPackageSamplesASPX.proj = Builds\BuildScripts\GoCWebTemplateSamples\NuGetPackageSamplesASPX.proj
+		Builds\BuildScripts\GoCWebTemplateSamples\NugetPackageSamplesMVC.proj = Builds\BuildScripts\GoCWebTemplateSamples\NugetPackageSamplesMVC.proj
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 10
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://mlap1098:8080/tfs/projectcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Applications\\GoC.WebTemplate\\GoC.WebTemplate.csproj
+		SccProjectTopLevelParentUniqueName1 = GoCWebTemplates.sln
+		SccProjectName1 = Applications/GoC.WebTemplate
+		SccLocalPath1 = Applications\\GoC.WebTemplate
+		SccProjectUniqueName2 = Applications\\GoC.WebTemplateMVC\\GoC.WebTemplateMVC.csproj
+		SccProjectTopLevelParentUniqueName2 = GoCWebTemplates.sln
+		SccProjectName2 = Applications/GoC.WebTemplateMVC
+		SccLocalPath2 = Applications\\GoC.WebTemplateMVC
+		SccProjectUniqueName3 = Components\\WebTemplateCore\\WebTemplateCore.csproj
+		SccProjectTopLevelParentUniqueName3 = GoCWebTemplates.sln
+		SccProjectName3 = Components/WebTemplateCore
+		SccLocalPath3 = Components\\WebTemplateCore
+		SccProjectUniqueName4 = SampleCode\\SampleCode.C3\\SampleCode.C3.csproj
+		SccProjectTopLevelParentUniqueName4 = GoCWebTemplates.sln
+		SccProjectName4 = SampleCode/SampleCode.C3
+		SccLocalPath4 = SampleCode\\SampleCode.C3
+		SccProjectUniqueName5 = SampleCode\\SampleCode.C3.MVC\\SampleCode.C3.MVC.csproj
+		SccProjectTopLevelParentUniqueName5 = GoCWebTemplates.sln
+		SccProjectName5 = SampleCode/SampleCode.C3.MVC
+		SccLocalPath5 = SampleCode\\SampleCode.C3.MVC
+		SccProjectUniqueName6 = Builds\\CustomTasks\\ProjectFileTask\\ProjectBuildTask.csproj
+		SccProjectTopLevelParentUniqueName6 = GoCWebTemplates.sln
+		SccProjectName6 = Builds/CustomTasks/ProjectFileTask
+		SccLocalPath6 = Builds\\CustomTasks\\ProjectFileTask
+		SccProjectUniqueName7 = Builds\\CustomTasks\\DiffCopy\\DiffCopy.csproj
+		SccProjectTopLevelParentUniqueName7 = GoCWebTemplates.sln
+		SccProjectName7 = Builds/CustomTasks/DiffCopy
+		SccLocalPath7 = Builds\\CustomTasks\\DiffCopy
+		SccProjectUniqueName8 = Applications\\GoCWebTemplateStarterMVC\\GoCWebTemplateStarterMVC.csproj
+		SccProjectTopLevelParentUniqueName8 = GoCWebTemplates.sln
+		SccProjectName8 = Applications/GoCWebTemplateStarterMVC
+		SccLocalPath8 = Applications\\GoCWebTemplateStarterMVC
+		SccProjectUniqueName9 = Applications\\GoCWebTemplateStarterASPX\\GoCWebTemplateStarterASPX.csproj
+		SccProjectTopLevelParentUniqueName9 = GoCWebTemplates.sln
+		SccProjectName9 = Applications/GoCWebTemplateStarterASPX
+		SccLocalPath9 = Applications\\GoCWebTemplateStarterASPX
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC1904AE-61D0-4C51-B431-8682EC4C6C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC1904AE-61D0-4C51-B431-8682EC4C6C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC1904AE-61D0-4C51-B431-8682EC4C6C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC1904AE-61D0-4C51-B431-8682EC4C6C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F3DB406-D252-4918-B26F-BB2CD49633B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F3DB406-D252-4918-B26F-BB2CD49633B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F3DB406-D252-4918-B26F-BB2CD49633B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F3DB406-D252-4918-B26F-BB2CD49633B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B2BB546-93CE-47F6-9096-3F0F57BC0260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B2BB546-93CE-47F6-9096-3F0F57BC0260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B2BB546-93CE-47F6-9096-3F0F57BC0260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B2BB546-93CE-47F6-9096-3F0F57BC0260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA63C3EB-4B3E-4098-96FE-2338BEE57F79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA63C3EB-4B3E-4098-96FE-2338BEE57F79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA63C3EB-4B3E-4098-96FE-2338BEE57F79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA63C3EB-4B3E-4098-96FE-2338BEE57F79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5507561E-5A15-4DB1-9752-BB6B2F0DB991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5507561E-5A15-4DB1-9752-BB6B2F0DB991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5507561E-5A15-4DB1-9752-BB6B2F0DB991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5507561E-5A15-4DB1-9752-BB6B2F0DB991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{26FD115A-4321-4AA5-B8A0-72C061AC0491} = {0AF664E7-F710-418D-8040-B4634190472F}
+		{EC1904AE-61D0-4C51-B431-8682EC4C6C42} = {0AF664E7-F710-418D-8040-B4634190472F}
+		{A9ACE274-5F6A-4634-A40A-E775F5B81B90} = {E5D96498-3C33-4E87-96D1-EF220E63BBE9}
+		{6F3DB406-D252-4918-B26F-BB2CD49633B4} = {2CFB095F-7524-496B-9618-3134660376AA}
+		{9B2BB546-93CE-47F6-9096-3F0F57BC0260} = {2CFB095F-7524-496B-9618-3134660376AA}
+		{5ACF3DD5-C20B-4BD6-951B-37AFEF75C564} = {2C7F0302-D673-4B36-8376-A83DF7C7B622}
+		{E75F1272-A180-4DB3-AB98-082B3E9946DB} = {5ACF3DD5-C20B-4BD6-951B-37AFEF75C564}
+		{BA63C3EB-4B3E-4098-96FE-2338BEE57F79} = {E75F1272-A180-4DB3-AB98-082B3E9946DB}
+		{5B729907-DC83-485D-B62C-CCA646F8D604} = {2C7F0302-D673-4B36-8376-A83DF7C7B622}
+		{C85CB8C7-06EF-44A7-A3B3-F48B6A8B9B78} = {2C7F0302-D673-4B36-8376-A83DF7C7B622}
+		{00395D06-74E7-4699-BD42-48CE0B69606E} = {2C7F0302-D673-4B36-8376-A83DF7C7B622}
+		{F4B9A61A-C2AB-42A9-8E4C-DCA0A136B59B} = {00395D06-74E7-4699-BD42-48CE0B69606E}
+		{CC8C0331-8D39-45D1-A8EB-F89C672BE5DA} = {00395D06-74E7-4699-BD42-48CE0B69606E}
+		{5507561E-5A15-4DB1-9752-BB6B2F0DB991} = {0AF664E7-F710-418D-8040-B4634190472F}
+		{E8396313-BA84-4D8C-B268-D1AFA28CDFDF} = {5ACF3DD5-C20B-4BD6-951B-37AFEF75C564}
+		{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6} = {E8396313-BA84-4D8C-B268-D1AFA28CDFDF}
+		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C} = {0AF664E7-F710-418D-8040-B4634190472F}
+		{85DD043B-76ED-468E-8B4C-14357DAE5D22} = {00395D06-74E7-4699-BD42-48CE0B69606E}
+	EndGlobalSection
+EndGlobal

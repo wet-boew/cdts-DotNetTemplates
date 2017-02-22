@@ -1,0 +1,41 @@
+﻿************************************************************************************************************
+1.0.10.0
+	-Updated LeavingSecureSite sample with "DisplayModalWindow"
+	-Update LeftSideMenu sample with "OpenInNewWindow"
+
+************************************************************************************************************
+1.0.9
+	-Splash Page sample added
+	-GCIntranet theme sample added
+	-added Screen Identifier example on Basic Settings Sample
+
+************************************************************************************************************
+1.0.8
+	-Implements web template 4.0.22
+	-Updated FeedbackandShareThisPage sample to include new feedbackLinkURL logic
+
+************************************************************************************************************
+1.0.7
+	-Update LeftSideMenuSample to incorporate the 3rd level sub menu items.
+
+************************************************************************************************************
+1.0.6
+	-Implements web template 4.0.21
+	-Update LeftSideMenuSample to incorporate the MenuSection link.
+
+************************************************************************************************************
+1.0.5
+	-Updated SessionTimeoutSample so that it updates the servers session.
+
+************************************************************************************************************
+1.0.4 
+	-implements web template 4.0.20
+	-Removed JumbotronSample as it is no longer supported and replaced with the Carousel Wet PlugIn
+	-4.0.20.3 brings a new structure are requies the addition of WebTemplateCore to access properties and methods
+		   ex: this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "My Title";
+	
+************************************************************************************************************
+1.0.3 Original Release
+	-implements web template 4.0.18
+	
+

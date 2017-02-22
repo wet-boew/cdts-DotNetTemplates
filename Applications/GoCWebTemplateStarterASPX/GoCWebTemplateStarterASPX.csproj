@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion></ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5507561E-5A15-4DB1-9752-BB6B2F0DB991}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoCWebTemplateStarterASPX</RootNamespace>
+    <AssemblyName>GoCWebTemplateStarterASPX</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>enabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>false</IISExpressUseClassicPipelineMode>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GoC.WebTemplate, Version=4.0.20.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\GoCWebTemplateStarter\Libraries\GoC.WebTemplate.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebTemplateCore, Version=1.0.5851.20464, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\GoCWebTemplateStarter\Libraries\WebTemplateCore.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="GoC.WebTemplate\ChangeLog.txt" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\refTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\refTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splash.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splashTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Libraries\GoC.WebTemplate.dll" />
+    <Content Include="Libraries\WebTemplateCore.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\AddJSandCSSFilesSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\BaseSettingsSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\BreadcrumbSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\ChangeLog.txt" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePageSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\GCIntranetThemeSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeavingSecureSiteSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeftSideMenuSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\Logout.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\myJS.js" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\mystyle.css" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\NestedMasterPageSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\NestedMasterPageSample.master" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\Redirect.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\SamplesNavigation.html" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\SessionTimeoutSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\SessionValidity.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\SplashPageSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\TransactionalSample.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs"/>         
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\AddJSandCSSFilesSample.aspx.cs">
+      <DependentUpon>AddJSandCSSFilesSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\AddJSandCSSFilesSample.aspx.designer.cs">
+      <DependentUpon>AddJSandCSSFilesSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BaseSettingsSample.aspx.cs">
+      <DependentUpon>BaseSettingsSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BaseSettingsSample.aspx.designer.cs">
+      <DependentUpon>BaseSettingsSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BreadcrumbSample.aspx.cs">
+      <DependentUpon>BreadcrumbSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BreadcrumbSample.aspx.designer.cs">
+      <DependentUpon>BreadcrumbSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx.cs">
+      <DependentUpon>ErrorSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx.designer.cs">
+      <DependentUpon>ErrorSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePageSample.aspx.cs">
+      <DependentUpon>ExtendedBasePageSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePageSample.aspx.designer.cs">
+      <DependentUpon>ExtendedBasePageSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx.cs">
+      <DependentUpon>FeedbackandShareThisPageSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx.designer.cs">
+      <DependentUpon>FeedbackandShareThisPageSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx.cs">
+      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx.designer.cs">
+      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\GCIntranetThemeSample.aspx.cs">
+      <DependentUpon>GCIntranetThemeSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\GCIntranetThemeSample.aspx.designer.cs">
+      <DependentUpon>GCIntranetThemeSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\LeavingSecureSiteSample.aspx.cs">
+      <DependentUpon>LeavingSecureSiteSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\LeavingSecureSiteSample.aspx.designer.cs">
+      <DependentUpon>LeavingSecureSiteSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\LeftSideMenuSample.aspx.cs">
+      <DependentUpon>LeftSideMenuSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\LeftSideMenuSample.aspx.designer.cs">
+      <DependentUpon>LeftSideMenuSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\NestedMasterPageSample.aspx.cs">
+      <DependentUpon>NestedMasterPageSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\NestedMasterPageSample.aspx.designer.cs">
+      <DependentUpon>NestedMasterPageSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\NestedMasterPageSample.master.cs">
+      <DependentUpon>NestedMasterPageSample.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\NestedMasterPageSample.master.designer.cs">
+      <DependentUpon>NestedMasterPageSample.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\Redirect.aspx.cs">
+      <DependentUpon>Redirect.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\Redirect.aspx.designer.cs">
+      <DependentUpon>Redirect.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\SessionTimeoutSample.aspx.cs">
+      <DependentUpon>SessionTimeoutSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\SessionTimeoutSample.aspx.designer.cs">
+      <DependentUpon>SessionTimeoutSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\SessionValidity.aspx.cs">
+      <DependentUpon>SessionValidity.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\SessionValidity.aspx.designer.cs">
+      <DependentUpon>SessionValidity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\SplashPageSample.aspx.cs">
+      <DependentUpon>SplashPageSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\SplashPageSample.aspx.designer.cs">
+      <DependentUpon>SplashPageSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\TransactionalSample.aspx.cs">
+      <DependentUpon>TransactionalSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\TransactionalSample.aspx.designer.cs">
+      <DependentUpon>TransactionalSample.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>12334</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:12334/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl></CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

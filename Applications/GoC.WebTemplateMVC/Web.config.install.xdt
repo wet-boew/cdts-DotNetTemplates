@@ -1,0 +1,54 @@
+﻿<?xml version="1.0"?>
+  <configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+
+   <configSections xdt:Transform="InsertBefore(/configuration/*[1])" />
+   <configSections xdt:Locator="XPath(/configuration/configSections[last()])">
+	<section name="GoC.WebTemplate" type="GoC.WebTemplate.Configurations" xdt:Locator="Match(name)" xdt:Transform="InsertIfMissing" />
+   </configSections>
+   <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
+  
+   <GoC.WebTemplate xdt:Transform="Remove"></GoC.WebTemplate>
+
+    <GoC.WebTemplate xdt:Transform="Insert"
+   version="v4_0_23"
+   theme="gcweb"
+   subTheme=""
+   environment="Akamai"
+   useHTTPS="true"
+   loadJQueryFromGoogle="false"
+   showPreContent="true"
+   showPostContent="true"
+   showFeedbackLink="true"
+   feedbackLinkUrl=""
+   showLanguageLink="true"
+   showSharePageLink="true"
+   showSearch="true"
+   showFeatures="true"
+   staticFilesLocation="~\Views\GoC.WebTemplate\StaticFallbackFiles">
+
+      <sessionTimeOut
+        enabled="false"
+        inactivity="1200000"
+        reactionTime="180000"
+        sessionalive="1200000"
+        logouturl="#"
+        refreshCallbackUrl="#"
+        refreshOnClick="false"
+        refreshLimit="120000"
+        method=""
+        additionalData=""></sessionTimeOut>
+
+      <cdtsEnvironments>
+        <cdtsEnvironment key="Akamai" path="http{0}://www.canada.ca/etc/designs/canada/cdts/{1}/{2}/cdts/compiled/" env="prod"/>
+        <cdtsEnvironment key="ESDCProd" path= "http{0}://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/" env="esdcprod"/>
+        <cdtsEnvironment key="ESDCNonProd" path= "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/" env="esdcnonprod"/>
+        <cdtsEnvironment key="ESDCQA" path= "http{0}://cdn-canada.services.gc.qat/{1}/cls/wet/{2}/{3}cdts/compiled/" env="esdcqat"/>
+      </cdtsEnvironments>
+
+      <leavingSecureSiteWarning
+        enabled="false"
+        displayModalWindow="true"
+        redirectURL=""
+        excludedDomains=""></leavingSecureSiteWarning>
+    </GoC.WebTemplate>
+ </configuration>

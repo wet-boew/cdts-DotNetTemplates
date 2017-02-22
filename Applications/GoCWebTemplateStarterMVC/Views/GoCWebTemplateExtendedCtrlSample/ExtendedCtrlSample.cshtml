@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "~/Views/GoC.WebTemplate/GoCWebTemplate_Layout.cshtml";
+}
+<h1>GoC Web Template Samples - Extended Controller</h1>
+<p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
+
+<p>This page provides an example on how to extend the <code class="wb-prettify">WebTemplateBaseController</code> provided by the Web Template.  The <code class="wb-prettify">WebTemplateBaseController</code> has very little functions and therefore applications may wish to extend its functionality. This will be useful should you require to add your own common logic that will be used by your applications' pages.</p>
+
+<p>In this sample, we've created a new controller <code class="wb-prettify">ExtendedBaseController</code>, which extend the <code class="wb-prettify">WebTemplateBaseController</code> from the Web Template and it includes the following:</p>
+<ul>
+    <li>A function <code class="wb-prettify">"GetWeather"</code>, which returns a string.</li>
+    <li>A property <code class="wb-prettify">"SessionID"</code>, which returns the ID of the user's session</li>
+    <li>Sets the <code class="wb-prettify">"GoC.WebTemplate.HeaderTitle"</code> of the WebTemplate in the "EndExecuteCore".  This would set the page title for all actions of this controller.</li>
+</ul>
+<p>Your controller inherits from the <code class="wb-prettify">ExtendedBaseController</code> controller, which allows it to have access to the properties and methods of the <code class="wb-prettify">"ExtendedBaseController"</code> but also the properties and methods of the Web Template <code class="wb-prettify">"WebTemplateBaseController"</code>.  In the sample the SessionID and GetWeather are called and the value is displayed on screen.</p>
+
+<h2>Level of inheritance:</h2>
+<ul>
+    <li>Your Controllers will inherit your Extended Controller</li>
+    <li>Your Extended Controller inherits <code class="wb-prettify">WebTemplateBaseController</code></li>
+    <li>The <code class="wb-prettify">WebTemplateBaseController</code>inherits <code class="wb-prettify">Controller</code></li>
+</ul>
+
+<h2>Steps to Extend the WebTemplateBaseController</h2>
+<ul>
+    <li>Create a new controller under the "controllers" folder.</li>
+    <li>Change the inheritance to <code class="wb-prettify">"GoC.WebTemplate.WebTemplateBaseController"</code></li>
+    <li>Include the logic required for your application</li>
+</ul>
+<h2>Steps when adding your controllers</h2>
+<ul>
+    <li>Create a new controller under the "controllers" folder.</li>
+    <li>Change the inheritance to your Extended Controller</li>
+</ul>
+
+<h2>Values from the "ExtendedBaseController"</h2>
+<div>
+    Session ID: <Label ID="lblSessionID">@ViewBag.lblSessionID</Label>
+</div>
+<div>
+    Today's Weather: <Label ID="lblWeather">@ViewBag.lblWeather</Label>
+</div>
+@Html.Partial("_SamplesNavigation")

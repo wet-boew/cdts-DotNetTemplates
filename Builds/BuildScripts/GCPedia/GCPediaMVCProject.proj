@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="MainBuild" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Base Folder for MSBuild -->
+    <BaseDir>$(MSBuildProjectDirectory)</BaseDir>
+    <!-- Source directory of the project -->
+    <SourceDir>$([System.IO.Path]::GetFullPath('..\..\..\'))</SourceDir>
+
+    <!-- Project Template Starter directory -->
+    <GCPediaProjectDir>$(SourceDir)Applications\GoCWebTemplateStarterMVC</GCPediaProjectDir>
+    <!-- Project File -->
+    <GCPediaProjectFile>$(GCPediaProjectDir)\GoCWebTemplateStarterMVC.csproj</GCPediaProjectFile>
+
+    <!-- Template Starter Libraries directory -->
+    <GCPediaControllers>$(SourceDir)Applications\GoCWebTemplateStarterMVC\Controllers</GCPediaControllers>
+    <!-- Template Starter Content directory -->
+    <GCPediaTemplate>$(SourceDir)Applications\GoCWebTemplateStarterMVC\Views\GoC.WebTemplate</GCPediaTemplate>
+    <!-- Template Starter Libraries directory -->
+    <GCPediaLibraries>$(SourceDir)Applications\GoCWebTemplateStarterMVC\Libraries</GCPediaLibraries>
+
+    <!-- Template Starter Samples directory -->
+    <GCPediaTemplateSamples>$(SourceDir)Applications\GoCWebTemplateStarterMVC\Views\GoCWebTemplateSample</GCPediaTemplateSamples>
+    <!-- Template Starter Samples directory -->
+    <GCPediaExtendedTemplateSamples>$(SourceDir)Applications\GoCWebTemplateStarterMVC\Views\GoCWebTemplateExtendedCtrlSample</GCPediaExtendedTemplateSamples>
+    <!-- Template Starter Samples directory -->
+    <GCPediaSharedSamples>$(SourceDir)Applications\GoCWebTemplateStarterMVC\Views\Shared</GCPediaSharedSamples>
+
+    <!-- Files to be compiled -->
+    <CompileCSFiles>$(GCPediaProjectDir)\Samples\GoC.WebTemplate.C3.Sample</CompileCSFiles>
+    <CompileCSPropertiesFile>$(GCPediaProjectDir)\Properties</CompileCSPropertiesFile>
+
+    <!-- Source - Project Template directory -->
+    <GocWebTemplateDir>$(SourceDir)Applications\GoC.WebTemplateMVC</GocWebTemplateDir>
+    <WebTemplateCoreDir>$(SourceDir)Components\WebTemplateCore</WebTemplateCoreDir>
+
+    <!-- Sample Source - Samples Root Folder-->
+    <SamplesRootDir>$(SourceDir)SampleCode\SampleCode.C3.MVC</SamplesRootDir>
+    <!-- Sample Source - Controller Sample directory -->
+    <SamplesControllersDir>$(SamplesRootDir)\Controllers</SamplesControllersDir>
+    <!-- Sample Source - GoCWebTemplate Sample directory -->
+    <SamplesTemplateDir>$(SamplesRootDir)\Views\GoCWebTemplateSample</SamplesTemplateDir>
+    <!-- Sample Source - GoCWebTemplate ExtendedCtrl Sample directory -->
+    <SamplesExtendedCtrlDir>$(SamplesRootDir)\Views\GoCWebTemplateExtendedCtrlSample</SamplesExtendedCtrlDir>
+    <!-- Sample Source - Shared Sample directory -->
+    <SamplesSharedDir>$(SamplesRootDir)\Views\Shared</SamplesSharedDir>
+
+    <!-- Source - Library directory of the project -->
+    <GoCWebTemplateLib>$(SourceDir)Applications\GoC.WebTemplate\obj\Release\</GoCWebTemplateLib>
+    <WebTemplateCoreLib>$(SourceDir)Components\WebTemplateCore\obj\Release\</WebTemplateCoreLib>
+
+    <!-- Release Folder -->
+    <ReleaseDir>c:\temp\Release</ReleaseDir>
+
+    <!-- Libraries Extension -->
+    <LibrariesExtensionDir>$([System.IO.Path]::GetFullPath($(MSBuildProjectDirectory)\..\..\Libraries\))</LibrariesExtensionDir>
+    <ExtensionPack>$([System.IO.Path]::GetFullPath($(LibrariesExtensionDir)))MSBuild.ExtensionPack.tasks</ExtensionPack>
+    <WebAppPath>$([System.IO.Path]::GetFullPath($(LibrariesExtensionDir)))Microsoft.WebApplication.targets</WebAppPath>
+    
+    <!-- Nuget Folder (Include exe and config -->
+    <NuGetDir>$([System.IO.Path]::GetFullPath('..\..\')).nuget\</NuGetDir>
+
+    <!-- Pacakges Folder  -->
+    <NugetPackages>$(TFSWorkingFolder)\packages\</NugetPackages>
+          
+  </PropertyGroup>
+
+  <Import Project="$(ExtensionPack)"/>
+  <Import Project="$(WebAppPath)"/>
+  
+  <UsingTask TaskName="CleanProject" AssemblyFile="$(LibrariesExtensionDir)ProjectBuildTask.dll" />
+  <UsingTask TaskName="AddContentFilesSection" AssemblyFile="$(LibrariesExtensionDir)ProjectBuildTask.dll" />
+  <UsingTask TaskName="AddCompileFilesSection" AssemblyFile="$(LibrariesExtensionDir)ProjectBuildTask.dll" />
+  <UsingTask TaskName="AddWebConfigFilesSection" AssemblyFile="$(LibrariesExtensionDir)ProjectBuildTask.dll" />
+  <UsingTask TaskName="GetNuGetPackagesList" AssemblyFile="$(LibrariesExtensionDir)ProjectBuildTask.dll" />
+  <UsingTask TaskName="UpdateNuGetHintPath" AssemblyFile="$(LibrariesExtensionDir)ProjectBuildTask.dll" />
+  <UsingTask TaskName="DiffCopy.DiffCopyBuildTask" AssemblyFile="$(LibrariesExtensionDir)DiffCopy.dll"  />
+  
+  <Target Name="MainBuild">
+    <CallTarget Targets="CheckPendingChanges"/>
+    <CallTarget Targets="GetLatestVersion"/>
+    <MSBuild Projects="$(GoCWebTemplateDir)\GoC.WebTemplateMVC.csproj" Properties="Configuration=Release" ContinueOnError="false"  />
+    <MSBuild Projects="$(WebTemplateCoreDir)\WebTemplateCore.csproj" Properties="Configuration=Release" ContinueOnError="false"  />	
+    <CallTarget Targets="DiffGoCTemplateFiles"/>
+    <CallTarget Targets="DiffSamples"/>
+    <CallTarget Targets="DiffTemplateExtendedCtrlSample"/>
+    <CallTarget Targets="DiffViewsShared"/>
+    <CallTarget Targets="DiffTemplateControllersSample"/>   
+    <CallTarget Targets="ProcessNewTemplateFiles"/>
+    <CallTarget Targets="ProcessNewSamplesFiles"/>
+    <CallTarget Targets="ProcessNotInSourceTemplateFiles"/>
+    <CallTarget Targets="ProcessNotInSourceSampleFiles"/>
+    <CallTarget Targets="ProcessNewExtCtrlSampleFiles"/> 
+    <CallTarget Targets="ProcessNotInSourceExtCtrlSampleFiles"/>
+    <CallTarget Targets="ProcessNewSharedSampleFiles"/>
+    <CallTarget Targets="ProcessNotInSourceSharedSampleFiles"/>
+    <CallTarget Targets="ProcessLibrarieFiles"/>	
+    <CallTarget Targets="ProcessModifiedTemplateFiles"/>	
+    <CallTarget Targets="ProcessModifiedSamplesFiles"/> 
+    <CallTarget Targets="ProcessModifiedExtendedCtrlSample"/>
+    <CallTarget Targets="ProcessModifiedSharedSample"/>
+    <CallTarget Targets="ProcessModifiedControllerFiles"/> 
+    <CallTarget Targets="UpdateProjectFile"/>       
+    <MSBuild Projects="$(GCPediaProjectFile)" />        
+    <CallTarget Targets="CopyRelease"/>
+    <CallTarget Targets="CleanUpReleaseFolder"/>    
+  </Target>
+
+  <!-- Check if there is any files pending first -->
+  <Target Name="CheckPendingChanges">
+
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="GetPendingChanges" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC" WorkingDirectory="$(GCPediaProjectDir)\">
+      <Output TaskParameter="PendingChanges" PropertyName="PendingChangesText" />
+      <Output TaskParameter="PendingChangesExist" PropertyName="DoChangesExist" />
+    </MSBuild.ExtensionPack.VisualStudio.TfsSource>
+
+    <!-- If DoChangesExist equals 'True' stop the build with error-->
+    <Error Condition="'$(DoChangesExist)'=='True'" Text="There are pending changes. Build can not continue"/>
+
+    <Message Text="Pending Changes Report: $(PendingChangesText)"/>
+    <Message Text="Pending Changes Exist: $(DoChangesExist)"/>
+
+  </Target>
+
+  <!-- Get Latest version of the template, libraries -->
+  <Target Name="GetLatestVersion" Condition="$(DoChangesExist) == 'False'">
+
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Get" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC" Force="True" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Get" ItemPath="$/SF-ML/DEV/Applications/GoC.WebTemplateMVC" Force="True" Recursive="True" WorkingDirectory="$(GocWebTemplateDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Get" ItemPath="$/SF-ML/DEV/SampleCode/SampleCode.C3.MVC/" Force="True" Recursive="True" WorkingDirectory="$(SamplesRootDir)"/>
+
+  </Target>
+
+  <!-- Check if there is any new files to add to the Source Control -->
+  <Target Name="DiffGoCTemplateFiles">
+    <DiffCopyBuildTask
+        SourceDirectory="$(GocWebTemplateDir)\Views\GoC.WebTemplate"
+        DestinationDirectory="$(GCPediaTemplate)" ExcludeExtensions=".cs">
+      <Output TaskParameter="NewFiles" ItemName="NewTemplateFiles" />
+      <Output TaskParameter="ModifiedFiles" ItemName="ModifiedFiles" />
+      <Output TaskParameter="NotInSourceFiles" ItemName="NotInSourceFiles" />
+      <Output TaskParameter="NewFilesCount" PropertyName="NewTemplateFilesCount" />
+      <Output TaskParameter="ModifiedFilesCount" PropertyName="ModifiedFilesCount" />
+      <Output TaskParameter="NotInSourceFilesCount" PropertyName="NotInSourceFilesCount" />
+    </DiffCopyBuildTask>
+  </Target>
+
+  <!-- Check if there is any new samples files to add to the Source Control -->
+  <Target Name="DiffSamples">
+    <DiffCopyBuildTask
+        SourceDirectory="$(SamplesTemplateDir)"
+        DestinationDirectory="$(GCPediaTemplateSamples)">
+      <Output TaskParameter="NewFiles" ItemName="NewSampleFiles" />
+      <Output TaskParameter="ModifiedFiles" ItemName="ModifiedSampleFiles" />
+      <Output TaskParameter="NotInSourceFiles" ItemName="SampleNotInSourceFiles" />
+      <Output TaskParameter="NewFilesCount" PropertyName="NewSampleFilesCount" />
+      <Output TaskParameter="ModifiedFilesCount" PropertyName="ModifiedSampleFilesCount" />
+      <Output TaskParameter="NotInSourceFilesCount" PropertyName="SampleNotInSourceFilesCount" />
+    </DiffCopyBuildTask>
+  </Target>
+
+  <!-- Check if there is any new samples files to add to the Source Control -->
+  <Target Name="DiffTemplateExtendedCtrlSample">
+    <DiffCopyBuildTask
+      SourceDirectory="$(SamplesExtendedCtrlDir)"
+      DestinationDirectory="$(GCPediaExtendedTemplateSamples)">
+      <Output TaskParameter="NewFiles" ItemName="NewExtCtrlFiles" />
+      <Output TaskParameter="ModifiedFiles" ItemName="ModifiedExtCtrlFiles" />
+      <Output TaskParameter="NotInSourceFiles" ItemName="NotInSourceFilesExtCtrl" />
+      <Output TaskParameter="NewFilesCount" PropertyName="NewExtCtrlFilesCount" />
+      <Output TaskParameter="ModifiedFilesCount" PropertyName="ModifiedExtCtrlFilesCount" />
+      <Output TaskParameter="NotInSourceFilesCount" PropertyName="NotInSourceExtCtrlFilesCount" />
+    </DiffCopyBuildTask>
+  </Target>
+
+  <!-- Check if there is any new samples files to add to the Source Control -->
+  <Target Name="DiffViewsShared">
+    <DiffCopyBuildTask
+      SourceDirectory="$(SamplesSharedDir)"
+      DestinationDirectory="$(GCPediaSharedSamples)">
+      <Output TaskParameter="NewFiles" ItemName="NewSharedFiles" />
+      <Output TaskParameter="ModifiedFiles" ItemName="ModifiedSharedFiles" />
+      <Output TaskParameter="NotInSourceFiles" ItemName="NotInSourceFilesShared" />
+      <Output TaskParameter="NewFilesCount" PropertyName="NewSharedFilesCount" />
+      <Output TaskParameter="ModifiedFilesCount" PropertyName="ModifiedSharedFilesCount" />
+      <Output TaskParameter="NotInSourceFilesCount" PropertyName="NotInSourceSharedFilesCount" />
+    </DiffCopyBuildTask>
+  </Target>
+  
+  <!-- Check if there is any new controller files to add to the Source Control -->
+  <Target Name="DiffTemplateControllersSample">
+    <DiffCopyBuildTask
+      SourceDirectory="$(SamplesControllersDir)"
+      DestinationDirectory="$(GCPediaControllers)">
+      <Output TaskParameter="NewFiles" ItemName="NewCtrlFiles" />
+      <Output TaskParameter="ModifiedFiles" ItemName="ModifiedCtrlFiles" />
+      <Output TaskParameter="NotInSourceFiles" ItemName="NotInSourceFilesCtrl" />
+      <Output TaskParameter="NewFilesCount" PropertyName="NewControllerFilesCount" />
+      <Output TaskParameter="ModifiedFilesCount" PropertyName="ModifiedControllerFilesCount" />
+      <Output TaskParameter="NotInSourceFilesCount" PropertyName="NotInSourceControllerFilesCount" />
+    </DiffCopyBuildTask>
+  </Target>
+
+  <!-- Check if there is any New Template files to add the project and TFS -->
+  <Target Name="ProcessNewTemplateFiles" Condition="$(NewTemplateFilesCount) > 0">
+    <Copy SourceFiles="$(GocWebTemplateDir)\Views\GoC.WebTemplate%(NewTemplateFiles.RecursiveDir)%(NewTemplateFiles.FileName)%(NewTemplateFiles.Extension)" DestinationFolder="$(GCPediaTemplate)%(NewTemplateFiles.RecursiveDir)" ContinueOnError="false"/>
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Add" ItemPath="$(GCPediaTemplate)%(NewTemplateFiles.RecursiveDir)%(NewTemplateFiles.Filename)%(NewTemplateFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaTemplate)%(NewTemplateFiles.RecursiveDir)%(NewTemplateFiles.FileName)%(NewTemplateFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Template files that should be removed in TFS -->
+  <Target Name="ProcessNotInSourceTemplateFiles" Condition="$(NotInSourceFilesCount) > 0">
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Delete" ItemPath="$(GCPediaTemplate)%(NotInSourceFiles.RecursiveDir)%(NotInSourceFiles.Filename)%(NotInSourceFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaTemplate)%(NotInSourceFiles.RecursiveDir)%(NotInSourceFiles.FileName)%(NotInSourceFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Modified Template files to update to TFS -->
+  <Target Name="ProcessModifiedTemplateFiles" Condition="$(ModifiedFilesCount) > 0">
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/GoC.WebTemplate%(ModifiedFiles.TFSFormatPath)%(ModifiedFiles.FileName)%(ModifiedFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Copy SourceFiles="$(GocWebTemplateDir)\Views\GoC.WebTemplate%(ModifiedFiles.RecursiveDir)%(ModifiedFiles.FileName)%(ModifiedFiles.Extension)" DestinationFolder="$(GCPediaTemplate)%(ModifiedFiles.RecursiveDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/GoC.WebTemplate/" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+  </Target>
+
+  <!-- Check if there is any New Sample files to add the project and TFS -->
+  <Target Name="ProcessNewSamplesFiles" Condition="$(NewSampleFilesCount) > 0">
+    <Copy SourceFiles="$(SamplesTemplateDir)%(NewSampleFiles.RecursiveDir)%(NewSampleFiles.FileName)%(NewSampleFiles.Extension)" DestinationFolder="$(GCPediaTemplateSamples)%(NewSampleFiles.RecursiveDir)" ContinueOnError="false"/>
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Add" ItemPath="$(GCPediaTemplateSamples)%(NewSampleFiles.RecursiveDir)%(NewSampleFiles.FileName)%(NewSampleFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaTemplateSamples)%(NewSampleFiles.RecursiveDir)%(NewSampleFiles.FileName)%(NewSampleFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+  </Target>
+
+  <!-- Check if there is any Sample files that should be removed in TFS -->
+  <Target Name="ProcessNotInSourceSampleFiles" Condition="$(SampleNotInSourceFilesCount) > 0">
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Delete" ItemPath="$(GCPediaTemplateSamples)%(SampleNotInSourceFiles.RecursiveDir)%(SampleNotInSourceFiles.Filename)%(SampleNotInSourceFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaTemplateSamples)%(SampleNotInSourceFiles.RecursiveDir)%(SampleNotInSourceFiles.FileName)%(SampleNotInSourceFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Modified Sample files to update to TFS -->
+  <Target Name="ProcessModifiedSamplesFiles" Condition="$(ModifiedSampleFilesCount) > 0">
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/GoCWebTemplateSample%(ModifiedSampleFiles.TFSFormatPath)%(ModifiedSampleFiles.FileName)%(ModifiedSampleFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Copy SourceFiles="$(SamplesTemplateDir)%(ModifiedSampleFiles.RecursiveDir)%(ModifiedSampleFiles.FileName)%(ModifiedSampleFiles.Extension)" DestinationFolder="$(GCPediaTemplateSamples)%(ModifiedSampleFiles.RecursiveDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/GoCWebTemplateSample/" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+  </Target>
+
+  <!-- Check if there is any New Sample files to add the project and TFS -->
+  <Target Name="ProcessNewExtCtrlSampleFiles" Condition="$(NewExtCtrlFilesCount) > 0">
+    <Copy SourceFiles="$(SamplesExtendedCtrlDir)%(NewExtCtrlFiles.RecursiveDir)%(NewExtCtrlFiles.FileName)%(NewExtCtrlFiles.Extension)" DestinationFolder="$(GCPediaExtendedTemplateSamples)%(NewExtCtrlFiles.RecursiveDir)" ContinueOnError="false"/>
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Add" ItemPath="$(GCPediaExtendedTemplateSamples)%(NewExtCtrlFiles.RecursiveDir)%(NewExtCtrlFiles.FileName)%(NewExtCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaExtendedTemplateSamples)%(NewExtCtrlFiles.RecursiveDir)%(NewExtCtrlFiles.FileName)%(NewExtCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+  </Target>
+
+  <!-- Check if there is any Sample files that should be removed in TFS -->
+  <Target Name="ProcessNotInSourceExtCtrlSampleFiles" Condition="$(NotInSourceExtCtrlFilesCount) > 0">
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Delete" ItemPath="$(GCPediaTemplateSamples)%(NotInSourceFilesExtCtrl.RecursiveDir)%(NotInSourceFilesExtCtrl.Filename)%(NotInSourceFilesExtCtrl.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaTemplateSamples)%(NotInSourceFilesExtCtrl.RecursiveDir)%(NotInSourceFilesExtCtrl.FileName)%(NotInSourceFilesExtCtrl.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Modified Extended Control Sample files to update to TFS -->
+  <Target Name="ProcessModifiedExtendedCtrlSample" Condition="$(ModifiedExtCtrlFilesCount) > 0">
+
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/GoCWebTemplateExtendedCtrlSample%(ModifiedExtCtrlFiles.TFSFormatPath)%(ModifiedExtCtrlFiles.FileName)%(ModifiedExtCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Copy SourceFiles="$(SamplesExtendedCtrlDir)%(ModifiedExtCtrlFiles.RecursiveDir)%(ModifiedSampleFiles.FileName)%(ModifiedExtCtrlFiles.Extension)" DestinationFolder="$(GCPediaExtendedTemplateSamples)%(ModifiedExtCtrlFiles.RecursiveDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/GoCWebTemplateExtendedCtrlSample/" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+
+  </Target>
+
+  <!-- Check if there is any New Sample files to add the project and TFS -->
+  <Target Name="ProcessNewSharedSampleFiles" Condition="$(NewSharedFilesCount) > 0">
+    <Copy SourceFiles="$(SamplesSharedDir)%(NewSharedFiles.RecursiveDir)%(NewSharedFiles.FileName)%(NewSharedFiles.Extension)" DestinationFolder="$(GCPediaSharedSamples)%(NewSharedFiles.RecursiveDir)" ContinueOnError="false"/>
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Add" ItemPath="$(GCPediaSharedSamples)%(NewSharedFiles.RecursiveDir)%(NewSharedFiles.FileName)%(NewSharedFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaSharedSamples)%(NewSharedFiles.RecursiveDir)%(NewSharedFiles.FileName)%(NewSharedFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+  </Target>
+
+  <!-- Check if there is any Sample files that should be removed in TFS -->
+  <Target Name="ProcessNotInSourceSharedSampleFiles" Condition="$(NotInSourceSharedFilesCount) > 0">
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Delete" ItemPath="$(GCPediaSharedSamples)%(NotInSourceFilesShared.RecursiveDir)%(NotInSourceFilesShared.Filename)%(NotInSourceFilesShared.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaSharedSamples)%(NotInSourceFilesShared.RecursiveDir)%(NotInSourceFilesShared.FileName)%(NotInSourceFilesShared.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Modified Extended Control Sample files to update to TFS -->
+  <Target Name="ProcessModifiedSharedSample" Condition="$(ModifiedSharedFilesCount) > 0">
+
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/Shared%(ModifiedSharedFiles.TFSFormatPath)%(ModifiedSharedFiles.FileName)%(ModifiedSharedFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Copy SourceFiles="$(SamplesSharedDir)%(ModifiedSharedFiles.RecursiveDir)%(ModifiedSharedFiles.FileName)%(ModifiedSharedFiles.Extension)" DestinationFolder="$(GCPediaSharedSamples)%(ModifiedSharedFiles.RecursiveDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Views/Shared/" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+
+  </Target>
+  
+  <!-- Check if there is any New Template files to add the project and TFS -->
+  <Target Name="ProcessNewControllerFiles" Condition="$(NewControllerFilesCount) > 0">
+    <Copy SourceFiles="$(GocWebTemplateDir)\Controllers\%(NewCtrlFiles.RecursiveDir)%(NewCtrlFiles.FileName)%(NewCtrlFiles.Extension)" DestinationFolder="$(GCPediaControllers)%(NewCtrlFiles.RecursiveDir)" ContinueOnError="false"/>
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Add" ItemPath="$(GCPediaControllers)%(NewCtrlFiles.RecursiveDir)%(NewCtrlFiles.Filename)%(NewCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaControllers)%(NewCtrlFiles.RecursiveDir)%(NewCtrlFiles.FileName)%(NewCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Template files that should be removed in TFS -->
+  <Target Name="ProcessNotInSourceControllerFiles" Condition="$(NotInSourceControllerFilesCount) > 0">
+    <MsBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Delete" ItemPath="$(GCPediaControllers)%(NotInSourceFilesCtrl.RecursiveDir)%(NotInSourceFilesCtrl.Filename)%(NotInSourceFilesCtrl.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaControllers)%(NotInSourceFilesCtrl.RecursiveDir)%(NotInSourceFilesCtrl.FileName)%(NotInSourceFilesCtrl.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+  </Target>
+
+  <!-- Check if there is any Modified Template files to update to TFS -->
+  <Target Name="ProcessModifiedControllerFiles" Condition="$(ModifiedControllerFilesCount) > 0">
+    <Message Text="@(ModifiedCtrlFiles->'$(SamplesControllersDir)%(RecursiveDir)%(FileName)%(Extension)' , '%0D%0A')"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Controllers/%(ModifiedCtrlFiles.TFSFormatPath)%(ModifiedCtrlFiles.FileName)%(ModifiedCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Copy SourceFiles="$(SamplesControllersDir)%(ModifiedCtrlFiles.RecursiveDir)%(ModifiedCtrlFiles.FileName)%(ModifiedCtrlFiles.Extension)" DestinationFolder="$(GCPediaControllers)%(ModifiedCtrlFiles.RecursiveDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Controllers/%(ModifiedCtrlFiles.TFSFormatPath)%(ModifiedCtrlFiles.FileName)%(ModifiedCtrlFiles.Extension)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+
+  </Target>
+
+  <!-- Check if there is any Modified Template files to update to TFS -->
+  <Target Name="ProcessLibrarieFiles">
+
+    <CreateItem Include="$(GoCWebTemplateLib)\**\*.dll">
+      <Output TaskParameter="Include" ItemName="ContentLibrariesFiles" />
+    </CreateItem>
+
+    <CreateItem Include="$(WebTemplateCoreLib)\**\*.dll">
+      <Output TaskParameter="Include" ItemName="ContentWebTemplateCoreFile" />
+    </CreateItem>
+
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Libraries/" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Copy SourceFiles="@(ContentLibrariesFiles)" DestinationFolder="$(GCPediaLibraries)%(ContentLibrariesFiles.RecursiveDir)"/>
+    <Copy SourceFiles="@(ContentWebTemplateCoreFile)" DestinationFolder="$(GCPediaLibraries)%(ContentWebTemplateCoreFile.RecursiveDir)"/>
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/Libraries/" Recursive="True" WorkingDirectory="$(GCPediaProjectDir)"/>
+
+  </Target>
+
+  <!--Update the project file and checkin the file in TFS -->
+  <Target Name="UpdateProjectFile" Condition="$(NewTemplateFilesCount) > 0 or $(NewSampleFilesCount) > 0 or $(NewExtCtrlFilesCount) > 0 or $(NewSharedFilesCount) > 0">
+
+    <Message Text="Update Project File"/>
+    <!-- Create all parameter needed to build the new csproj file -->
+
+    <CreateItem Include="$(GCPediaTemplate)\**\*.*" Exclude="$(GCPediaTemplate)\**\*.cs">
+      <Output TaskParameter="Include" ItemName="ContentFiles" />
+    </CreateItem>
+
+    <CreateItem Include="$(GCPediaLibraries)\**\*.dll">
+      <Output TaskParameter="Include" ItemName="DLLFiles" />
+    </CreateItem>
+
+    <CreateItem Include="$(GCPediaTemplateSamples)\**\*.*" Exclude="$(GCPediaTemplateSamples)\**\*.cs">
+      <Output TaskParameter="Include" ItemName="ContentSamples" />
+    </CreateItem>
+
+    <CreateItem Include="$(GCPediaProjectDir)\*.config">
+      <Output TaskParameter="Include" ItemName="WebConfigFiles" />
+    </CreateItem>
+
+    <CreateItem Include="$(CompileCSFiles)\**\*.cs;">
+      <Output TaskParameter="Include" ItemName="CompileFiles" />
+    </CreateItem>
+
+    <CreateItem Include="$(CompileCSPropertiesFile)\**\*.cs;">
+      <Output TaskParameter="Include" ItemName="CompileFileProperties" />
+    </CreateItem>
+
+    <CreateItem Include="$(SamplesRootDir)\**\*.*;">
+      <Output TaskParameter="Include" ItemName="SampleFiles" />
+    </CreateItem>
+
+    <!--Checkout the csproj file-->
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/GoCWebTemplateStarterMVC.csproj" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+
+    <CleanProject FileName="$(GCPediaProjectFile)" />
+
+    <!--Add the new content files to the ItemGroup in the csproj file-->
+    <AddContentFilesSection ContentFiles="@(ContentFiles)" FileName="$(GCPediaProjectFile)" DirectoryName="\GoC.WebTemplate\"/>
+    <AddContentFilesSection ContentFiles="@(DLLFiles)" FileName="$(GCPediaProjectFile)" DirectoryName="\Libraries\" />
+    <AddContentFilesSection ContentFiles="@(ContentSamples)" FileName="$(GCPediaProjectFile)" DirectoryName="\Samples\"/>
+
+    <!--Add the new web config files to the ItemGroup in the csproj file-->
+    <AddWebConfigFilesSection WebConfigFiles="@(WebConfigFiles)" FileName="$(GCPediaProjectFile)"/>
+
+    <!--Add the new compile files to the ItemGroup in the csproj file-->
+    <AddCompileFilesSection CompileFiles="@(CompileFileProperties)" FileName="$(GCPediaProjectFile)" DirectoryName="Properties"/>
+    <AddCompileFilesSection CompileFiles="@(CompileFiles)" FileName="$(GCPediaProjectFile)" DirectoryName="Samples"/>
+
+    <!--Checkin the csproj file-->
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="Checkin" ItemPath="$(GCPediaProjectFile)" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)" ContinueOnError="false"/>
+
+  </Target>
+
+  <!-- Copy all file to the release folder -->
+  <Target Name="CopyRelease">
+    <RemoveDir Directories="$(ReleaseDir)\Content"/>
+    <MakeDir Directories="$(ReleaseDir)\Content"/>
+
+    <ItemGroup>
+      <ReleaseFilesContent Include="$(GCPediaProjectDir)\**\*.*"  Exclude="$(GCPediaTemplate)\**\*.cs;$(GCPediaProjectDir)\bin\**\*.*;$(GCPediaProjectDir)\obj\**\*.*;$(GCPediaProjectDir)\*.csproj.user;$(GCPediaProjectDir)\*.csproj.vspscc;"></ReleaseFilesContent>
+    </ItemGroup>
+
+    <!--This copy the content to the package dir -->
+    <Copy SourceFiles="@(ReleaseFilesContent)" DestinationFolder="$(ReleaseDir)\Content\%(RecursiveDir)"/>
+    <Exec Command="&quot;$(LibrariesExtensionDir)\ctt.exe&quot; s:&quot;$(GCPediaProjectDir)\Web.Config&quot; t:&quot;$(GocWebTemplateDir)\Web.config.install.xdt&quot; d:&quot;$(ReleaseDir)\Content\Web.Config&quot;" ContinueOnError="false" />		
+    
+    <CallTarget Targets="CopyNuGetPackages"/>
+    <CallTarget Targets="Zip"/>
+  </Target>
+
+  <!-- create zip file with content of release\bin folder -->
+  <Target Name="Zip">
+    <CreateItem Include="$(ReleaseDir)\Content\**\*.*" >
+      <Output ItemName="ZipFiles" TaskParameter="Include"/>
+    </CreateItem>
+    <MakeDir Directories="C:\Temp\Release\GCPedia\MVC"/>
+    <MSBuild.ExtensionPack.Compression.Zip TaskAction="Create" CompressFiles="@(ZipFiles)" ZipFileName="C:\Temp\Release\GCPedia\MVC\GocWebTemplate.zip" CompressionLevel="BestCompression" RemoveRoot="$(ReleaseDir)\Content\"/>
+  </Target>
+
+  <!-- Undo checkout if something happened -->
+  <Target Name="UndoCheckout" Condition="$(NewFilesCount) > 0 Or $(ModifiedFilesCount) > 0 Or $(NotInSourceFilesCount) > 0">
+    <MSBuild.ExtensionPack.VisualStudio.TfsSource TaskAction="UndoCheckout" ItemPath="$/SF-ML/DEV/Applications/GoCWebTemplateStarterMVC/GoCWebTemplateStarterMVC.csproj" Recursive="False" WorkingDirectory="$(GCPediaProjectDir)"/>
+    <Message Text="Undo Checkout Done"/>
+  </Target>
+
+  <!-- Cleanup the Release folder -->
+  <Target Name="CleanUpReleaseFolder">
+    <RemoveDir Directories="$(ReleaseDir)\Content"/>
+  </Target>
+
+
+  <Target Name="CopyNuGetPackages">
+    <GetNuGetPackagesList FileName="$(GCPediaProjectFile)">
+      <Output TaskParameter="PackageNameItems" ItemName="PackageNameItems" />
+    </GetNuGetPackagesList>
+    
+    <ItemGroup>
+      <PackagesNuGetFiles Include="$(NugetPackages)\**\%(PackageNameItems.FilePath)\**\*.*"/>
+    </ItemGroup>
+    
+     <!--Copy using the metadata--> 
+    <Copy SourceFiles="@(PackagesNuGetFiles )" DestinationFolder="$(ReleaseDir)\Content\packages\%(RecursiveDir)" />
+
+    <UpdateNuGetHintPath FileName="$(ReleaseDir)\Content\GoCWebTemplateStarterMVC.csproj"></UpdateNuGetHintPath>
+    
+  </Target>
+
+</Project>

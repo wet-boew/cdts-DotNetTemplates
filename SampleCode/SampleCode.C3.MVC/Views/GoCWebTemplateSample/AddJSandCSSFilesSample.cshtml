@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/GoC.WebTemplate/GoCWebTemplate_Layout.cshtml";
+}
+<h1>GoC Web Template Samples - Adding CSS or JS</h1>
+<p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
+
+<p>This sample page demonstrates how your application can add your own CSS files or JS files via the GoC Web Template.</p>
+
+<p>The GoC Web Template provides 2 string collections to include HTML Elements to the head section and/or body section of the page. The string collections expects the complete html tag to be supplied by the application.</p>
+
+<p>For this sample we have a css "mystyle.css" that is added to add some distinct colors to label tags.  We also have add a javascript file "myJS.js" that has a function that will be called at the click of the button.</p>
+
+<p><h6>NOTE:</h6>  Before adding your own CSS, please make sure that the style doesn't already exist in your theme and/or will not interfere with the styles of the theme.  We also recommend talking with the Portfolio Web or the Principal Publisher since they may consider adding your style to the theme for others to use.</p>
+<div>
+    <label class="mySpecialLabel">This is my own style for labels</label>
+</div>
+<div>
+    <button type="button" onclick="myAlertFunction()">Click me to call my JS function.</button>
+</div>
+
+<h2>Header Tags</h2>
+<p>Set programmatically by populating the <code class="wb-prettify">"HTMLHeaderElements"</code> collection of the Web Template.</p>
+<p>The collection is of type <code class="wb-prettify">"String"</code>, and the complete html tag must be supplied.</p>
+<p>The header tag should be used for MetaTags, CSS and possibly for JS files.</p>
+
+<h2>Body Tags</h2>
+<p>Set programmatically by populating the <code class="wb-prettify">"HTMLBodyElements"</code> collection of the Web Template.</p>
+<p>The collection is of type <code class="wb-prettify">"String"</code>, and the complete html tag must be supplied.</p>
+<p>The body tag should be used for JS files.</p>
+
+<div class="wb-prettify all-pre lang-vb linenums">
+    <h3>C# Code Sample</h3>
+    <pre>
+//Add a CSS to the header
+this.WebTemplateCore.HTMLHeaderElements.Add("&lt;link rel='stylesheet' type='text/css' href='mystyle.css'&gt;");
+//Add a JS to the header
+//this.WebTemplateCore.HTMLHeaderElements.Add("&lt;script src='myJS.js'/&gt;");
+//or to add it to the body (bottom of page)
+this.WebTemplateCore.HTMLBodyElements.Add("&lt;script src='myJS.js'/&gt;");
+        </pre>
+</div>
+@Html.Partial("_SamplesNavigation")

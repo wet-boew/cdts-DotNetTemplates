@@ -1,0 +1,32 @@
+﻿************************************************************************************************************
+1.0.8
+	-Updated LeavingSecureSite sample with "DisplayModalWindow"
+	-Updated LeftSideMenu sample with "OpenInNewWindow"
+
+************************************************************************************************************
+1.0.7
+	-Splash Page sample added
+	-GCIntranet theme sample added
+	-added Screen Identifier example on Basic Settings Sample
+
+************************************************************************************************************
+1.0.6
+	-Implements web template 4.0.22
+	-Updated FeedbackandShareThisPage sample to include new feedbackLinkURL logic
+	
+************************************************************************************************************
+1.0.5
+	-Update LeftSideMenuSample to incorporate the 3rd level sub menu items.
+
+************************************************************************************************************
+1.0.4
+	-Implements web template 4.0.21
+	-Update LeftSideMenuSample to incorporate the MenuSection link.
+
+************************************************************************************************************
+1.0.3
+	-Updated SessionTimeoutSample so that it updates the servers session.
+
+************************************************************************************************************
+1.0.2
+	-Original Release

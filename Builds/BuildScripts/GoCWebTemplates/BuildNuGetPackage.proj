@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Start">
+ 
+  <!-- Variables -->
+  <PropertyGroup>
+    <!-- Base Folder for MSBuild -->
+    <BaseDir>$(MSBuildProjectDirectory)</BaseDir>
+    <!-- Source directory of the project -->
+    <SourceDir>$([System.IO.Path]::GetFullPath('..\..\'))</SourceDir>
+    <!-- Library directory of the project -->
+    <LibraryDir>$([System.IO.Path]::GetFullPath('..\'))\Library\</LibraryDir>
+    <!-- Output directory of the build server -->
+    <OutputDirectory>$([System.IO.Path]::GetFullPath('..\..\..\'))</OutputDirectory>
+    <!-- Release Folder -->
+    <ReleaseDir>$(OutputDirectory)Binaries\_PublishedWebsites\</ReleaseDir>
+    <!-- Binaries Folder -->
+    <OutBinariesDir>$(ReleaseDir)GoC.WebTemplate\bin</OutBinariesDir>
+    <!-- Content Folder -->
+    <OutContentDir>$(ReleaseDir)GoC.WebTemplate\GoC.WebTemplate</OutContentDir>
+    <!-- NuGet working folder -->
+    <NuGetDir>$(OutputDirectory)Binaries\NugetPackage</NuGetDir>
+    <!-- Create NuGet package? -->
+    <CreatePackage>1</CreatePackage>
+    <!-- Create zip file for Nuget Package -->
+    <CreateZip>1</CreateZip>
+    <!-- Configuration Value -->
+    <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+    <MSBuildExtensions>$(LibraryDir)msbuild.community.tasks.dll</MSBuildExtensions>
+  </PropertyGroup>
+
+  <Import Project="$(LibraryDir)\MSBuild.Community.Tasks.targets" />
+  
+  <UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.XmlUpdate" />
+  <UsingTask AssemblyFile="$(MSBuildExtensions)" TaskName="MSBuild.Community.Tasks.Zip" />
+  
+  <Target Name="CustomVariables">
+    <Message Text=" BaseDir  = $(BaseDir)" />
+    <Message Text=" SourceDir  = $(SourceDir)" />
+    <Message Text=" ReleaseDir  = $(ReleaseDir)" />
+    <Message Text=" OutBinariesDir  = $(OutBinariesDir)" />
+    <Message Text=" OutContentDir  = $(OutContentDir)" />
+    <Message Text=" OutputDirectory  = $(OutputDirectory)" />
+    <Message Text=" BuildScriptsDir  = $(BuildScriptsDir)" />    
+  </Target>
+  
+  <!-- "Autostart" -->
+  <Target Name="Start">    
+    <CallTarget Targets="CustomVariables"/>
+    <CallTarget Targets="Build"/>    
+    <CallTarget Condition="$(CreatePackage) == '1'" Targets="NuGet; CleanFiles"/>
+    <CallTarget Condition="$(CreateZip) == '1'" Targets="Zip"/>
+  </Target>
+
+  <!-- compile solution as release -->
+  <Target Name="Build">
+    <Message Text="$(OutputPath)"/>
+    <Message Text="$(MSBuildExtensions)"/>    
+    <MSBuild Projects="$(SourceDir)GoC.WebTemplate.sln" Properties="Configuration=Release"/>
+  </Target>
+
+  <!-- copy files to release folder -->
+  <Target Name="NuGet">        
+    <ItemGroup>
+      <ReleaseFiles Include="$(OutBinariesDir)\*.dll"/>
+      <ReleaseFilesContent Include="$(OutContentDir)\**\*.*"  Exclude="$(SourceDir)GoC.WebTemplate\GoC.WebTemplate\**\*.cs"></ReleaseFilesContent>
+    </ItemGroup>
+
+    <!--Copy the XDT file to the content dir -->
+    <Copy SourceFiles="$(BaseDir)\..\nuspec Files\GoC.WebTemplate.nuspec" DestinationFolder="$(NuGetDir)\GoCWebTemplate\" />    
+
+    <!--Second copy the Binarie files to the package dir -->
+    <Copy SourceFiles="@(ReleaseFiles)" DestinationFolder="$(NuGetDir)\GoCWebTemplate\lib\net45"/>
+
+    <!--This copy the content to the package dir -->
+    <Copy SourceFiles="@(ReleaseFilesContent)" DestinationFolder="$(NuGetDir)\GoCWebTemplate\Content\GoC.WebTemplate\%(RecursiveDir)"/>
+
+    <!-- Get the version number of the main FV assembly to insert into the nuspec files -->
+    <GetAssemblyIdentity AssemblyFiles="$(OutBinariesDir)\GoC.WebTemplate.dll">
+      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+    </GetAssemblyIdentity>
+
+    <!-- insert the version number into the nuspec files -->
+    <XmlUpdate
+      Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
+      XmlFileName="$(NuGetDir)\GoCWebTemplate\GoC.WebTemplate.nuspec"
+      XPath="/package/metadata/version"
+      Value="%(AsmInfo.Version)" />
+    
+    <Exec WorkingDirectory="$(NuGetDir)" Command="$(SourceDir).nuget\nuget.exe pack $(NuGetDir)\GoCWebTemplate\GoC.WebTemplate.nuspec" />
+    
+  </Target> 
+
+  <!-- create zip file with content of release\bin folder -->
+  <Target Name="Zip">
+    <CreateItem Include="$(NuGetDir)\**\*.*" >
+      <Output ItemName="ZipFiles" TaskParameter="Include"/>
+    </CreateItem>   
+    <Zip ZipFileName="$(OutputDirectory)Binaries\GocWebTemplate.zip" WorkingDirectory="$(NuGetDir)" Files="@(ZipFiles)" />
+  </Target>
+
+  <Target Name="CleanFiles">
+    <ItemGroup>
+      <TempFiles Include="$(OutputDirectory)Binaries\*" />
+    </ItemGroup>
+    <Delete Files="@(TempFiles)" />    
+  </Target>
+</Project>
