@@ -24,7 +24,7 @@
             document.write(wet.builder.refTop({
                 cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
                 subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderjQuery()%>
+                <%= WebTemplateCore.RenderjQuery()%>,
                 <%= WebTemplateCore.RenderLocalPath() %>
             }));
         </script>
