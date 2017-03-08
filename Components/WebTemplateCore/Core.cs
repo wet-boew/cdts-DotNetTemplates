@@ -637,7 +637,7 @@ namespace GoC.WebTemplate
         public HtmlString RenderjQuery()
         {
             return LoadJQueryFromGoogle == true ?
-                new HtmlString("jqueryEnv: \"external\"") : null;
+                new HtmlString("jqueryEnv: \"external\",") : null;
         }
 
         public HtmlString RenderLocalPath()
