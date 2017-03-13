@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Applications", "{0AF664E7-F710-418D-8040-B4634190472F}"
 EndProject
@@ -81,49 +81,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoCWebTemplateSamples", "Go
 		Builds\BuildScripts\GoCWebTemplateSamples\NugetPackageSamplesMVC.proj = Builds\BuildScripts\GoCWebTemplateSamples\NugetPackageSamplesMVC.proj
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CEB338B9-C37F-44A1-A4D9-D1A71D6F822C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTest", "CoreTest\CoreTest.csproj", "{D95157C2-E029-476E-AA6F-E8878D487C2F}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://mlap1098:8080/tfs/projectcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = Applications\\GoC.WebTemplate\\GoC.WebTemplate.csproj
-		SccProjectTopLevelParentUniqueName1 = GoCWebTemplates.sln
-		SccProjectName1 = Applications/GoC.WebTemplate
-		SccLocalPath1 = Applications\\GoC.WebTemplate
-		SccProjectUniqueName2 = Applications\\GoC.WebTemplateMVC\\GoC.WebTemplateMVC.csproj
-		SccProjectTopLevelParentUniqueName2 = GoCWebTemplates.sln
-		SccProjectName2 = Applications/GoC.WebTemplateMVC
-		SccLocalPath2 = Applications\\GoC.WebTemplateMVC
-		SccProjectUniqueName3 = Components\\WebTemplateCore\\WebTemplateCore.csproj
-		SccProjectTopLevelParentUniqueName3 = GoCWebTemplates.sln
-		SccProjectName3 = Components/WebTemplateCore
-		SccLocalPath3 = Components\\WebTemplateCore
-		SccProjectUniqueName4 = SampleCode\\SampleCode.C3\\SampleCode.C3.csproj
-		SccProjectTopLevelParentUniqueName4 = GoCWebTemplates.sln
-		SccProjectName4 = SampleCode/SampleCode.C3
-		SccLocalPath4 = SampleCode\\SampleCode.C3
-		SccProjectUniqueName5 = SampleCode\\SampleCode.C3.MVC\\SampleCode.C3.MVC.csproj
-		SccProjectTopLevelParentUniqueName5 = GoCWebTemplates.sln
-		SccProjectName5 = SampleCode/SampleCode.C3.MVC
-		SccLocalPath5 = SampleCode\\SampleCode.C3.MVC
-		SccProjectUniqueName6 = Builds\\CustomTasks\\ProjectFileTask\\ProjectBuildTask.csproj
-		SccProjectTopLevelParentUniqueName6 = GoCWebTemplates.sln
-		SccProjectName6 = Builds/CustomTasks/ProjectFileTask
-		SccLocalPath6 = Builds\\CustomTasks\\ProjectFileTask
-		SccProjectUniqueName7 = Builds\\CustomTasks\\DiffCopy\\DiffCopy.csproj
-		SccProjectTopLevelParentUniqueName7 = GoCWebTemplates.sln
-		SccProjectName7 = Builds/CustomTasks/DiffCopy
-		SccLocalPath7 = Builds\\CustomTasks\\DiffCopy
-		SccProjectUniqueName8 = Applications\\GoCWebTemplateStarterMVC\\GoCWebTemplateStarterMVC.csproj
-		SccProjectTopLevelParentUniqueName8 = GoCWebTemplates.sln
-		SccProjectName8 = Applications/GoCWebTemplateStarterMVC
-		SccLocalPath8 = Applications\\GoCWebTemplateStarterMVC
-		SccProjectUniqueName9 = Applications\\GoCWebTemplateStarterASPX\\GoCWebTemplateStarterASPX.csproj
-		SccProjectTopLevelParentUniqueName9 = GoCWebTemplates.sln
-		SccProjectName9 = Applications/GoCWebTemplateStarterASPX
-		SccLocalPath9 = Applications\\GoCWebTemplateStarterASPX
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -165,6 +127,10 @@ Global
 		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,5 +154,6 @@ Global
 		{C6A2A418-B357-4B40-BE4C-69F3CFCA27A6} = {E8396313-BA84-4D8C-B268-D1AFA28CDFDF}
 		{035EA6E5-ECFE-4489-B96E-7E370CBDAB1C} = {0AF664E7-F710-418D-8040-B4634190472F}
 		{85DD043B-76ED-468E-8B4C-14357DAE5D22} = {00395D06-74E7-4699-BD42-48CE0B69606E}
+		{D95157C2-E029-476E-AA6F-E8878D487C2F} = {CEB338B9-C37F-44A1-A4D9-D1A71D6F822C}
 	EndGlobalSection
 EndGlobal
