@@ -10,6 +10,13 @@ namespace GoC.WebTemplateMVC.Controllers
 {
     public class TestWebTemplatePageController : GoC.WebTemplate.WebTemplateBaseController
     {
+        public ActionResult HelloWorld()
+        {
+            WebTemplateCore.ApplicationName = "Application Web Template";
+            WebTemplateCore.ShowSecure = true;
+            WebTemplateCore.Breadcrumbs = null;
+            return View();
+        }
         //
         // GET: /TestWebTemplatePage/
         public ActionResult TestPage()

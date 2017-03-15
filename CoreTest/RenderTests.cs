@@ -1,45 +1,76 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 using FluentAssertions;
 using GoC.WebTemplate;
 using Xunit;
 
 namespace CoreTest
 {
-    public class RenderTests
+
+    public class RenderTests 
     {
-        public void SetupHttpContext()
+
+        [Theory, AutoNSubstituteData]
+        public void SignInLinkNotRenderedWhenFlagisFalse(Core sut)
         {
-            HttpContext.Current = new HttpContext(
-                new HttpRequest(null,"http://foo.bar", "fakeQueryString"),
-                new HttpResponse(null));
+
+            sut.ShowSignInLink = false;
+            var json = sut.RenderApplicationDefTop();
+            json.ToString().Should().NotContain("signIn");
         }
 
-        [Fact]
-        public void RenderLeftMenuTest()
+        [Theory, AutoNSubstituteData]
+        public void SignInLinkNotRenderedWhenLinkIsNull(Core sut)
         {
-            //Setup
-            SetupHttpContext(); 
-            var core = new Core();
-            core.LeftMenuItems.Add(new MenuSection("SectionName", "SectionLink", new[] {new Link("Href", "Text")}));
 
-            //Execute
-            var result = core.RenderLeftMenu();
+            sut.ShowSignOutLink = true;
+            sut.SignOutLink = null;
+            var json = sut.RenderApplicationDefTop();
+            json.ToString().Should().NotContain("signIn");
+        }
 
-            //Verify
+        [Theory, AutoNSubstituteData]
+        public void SignOutLinkNotRenderedWhenFlagisFalse(Core sut)
+        {
+
+            sut.ShowSignOutLink = false;
+            var json = sut.RenderApplicationDefTop();
+            json.ToString().Should().NotContain("signOut");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void SignOutLinkNotRenderedWhenLinkIsNull(Core sut)
+        {
+
+            sut.ShowSignOutLink = true;
+            sut.SignOutLink = null;
+            var json = sut.RenderApplicationDefTop();
+            json.ToString().Should().NotContain("signOut");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void SignInAndSignOutLinkBothOn(Core sut)
+        {
+            sut.ShowSignOutLink = true;
+            sut.ShowSignInLink = true;
+            // ReSharper disable once MustUseReturnValue
+            Action act = () =>  sut.RenderApplicationDefTop();
+            act.ShouldThrow<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderLeftMenuTest(Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection("SectionName", "SectionLink", new[] {new Link("Href", "Text")}));
+
+            var result = sut.RenderLeftMenu();
+
             result.ToString().Should().Be("sections: [ {sectionName: 'SectionName', sectionLink: 'SectionLink', menuLinks: [{href: 'Href', text: 'Text'},]},]");
         }
 
-        [Fact]
-        public void RenderEmptyLeftMenu()
+        [Theory, AutoNSubstituteData]
+        public void RenderEmptyLeftMenu(Core sut)
         {
-            SetupHttpContext();
-            var core = new Core();
-            var result = core.RenderLeftMenu();
+            var result = sut.RenderLeftMenu();
             result.ToString().Should().BeEmpty();
         }
 

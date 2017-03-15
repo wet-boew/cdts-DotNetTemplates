@@ -7,12 +7,59 @@ using System.Net;
 using System.Web;
 using System.Globalization;
 using System.Web.Caching;
-using GOC.WebTemplate;
 using GOC.WebTemplate.ConfigSections;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
 {
+
+    
+    public class ApplicationDefTop
+    {
+        
+        public string MenuPath { get; set; }
+        public string CdnEnvVar { get; set; }
+        public string AppName { get; set;  }
+        public List<LanguageLink> LangLinks { get; set; }
+        public bool SiteMenu { get; set; }
+
+        public bool Secure { get; set; }
+        /// <summary>
+        /// This is an array but it should only have one item in it. 
+        /// </summary>
+        public List<Link> SignIn { get; set; }
+        /// <summary>
+        /// This is an array but it should only have one item in it. 
+        /// </summary>
+        public List<Link> SignOut { get; set; }
+        public bool Search { get; set; }
+        public List<Breadcrumb> Breadcrumbs { get; set; }
+        public string SubTheme { get; set; }
+        public List<Link> IntranetTitle { get; set; }
+        public bool ShowPreContent { get; set; }
+        public string LocalPath { get; set; }
+    }
+
+    public class LanguageLink : Link
+    {
+        public string Lang { get; set; }
+
+    }
+
+    public class ApplicationDefFooter
+    {
+        public string CdnEnvVar { get; set; }
+        public bool ShowFeatures { get; set; }
+        public bool GlobalNav { get; set; }
+        public List<Link> FooterSections { get; set;  }
+        public List<Link> ContactLinks { get; set; }
+        public string TermsLink { get; set; }
+        public string PrivacyLink { get; set; }
+    }
+
     public class Core
     {
         #region Enums
@@ -21,6 +68,7 @@ namespace GoC.WebTemplate
         /// Enum that represents the context of the list of links
         /// </summary>
         /// <remarks>The enum item name must match the parameter name expected by the Closure Template for the template to work.  The enum item name is used by the template as the paramter name when calling the Closure Template.</remarks>
+        // ReSharper disable InconsistentNaming
         public enum LinkTypes { contactLinks, newsLinks, aboutLinks };
         /// <summary>
         /// Enum that represents the social sites to be displayed when the user clicks the "Share this Page" link.
@@ -38,12 +86,22 @@ namespace GoC.WebTemplate
         /// </remarks>
         public enum CDTSEnvironments { AKAMAI, ESDCPROD, ESDCNNONPROD, ESDCQA };
 
+        // ReSharper restore InconsistentNaming
         #endregion 
 
         private string twoLetterCulture;
 
         public Core()
         {
+
+             _settings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                NullValueHandling = NullValueHandling.Ignore
+            };
+            
+
+
            twoLetterCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
             
             //Set properties
@@ -444,7 +502,109 @@ namespace GoC.WebTemplate
 
         #endregion
 
+
+        public bool ShowSecure { get; set; }
+        public bool ShowSignInLink { get; set; }
+        public bool ShowSignOutLink { get; set; }
+        public Link SignInLink { get; set; }
+        public Link SignOutLink { get; set; }
+        public string ApplicationName { get; set; }
+
         #region Renderers
+
+
+        public HtmlString RenderApplicationDefTop()
+        {
+            var defTop = new ApplicationDefTop();
+            defTop.AppName = ApplicationName;
+            defTop.SignIn = BuildSignInLink();
+            defTop.SignOut = BuildSignOutLink();
+            defTop.Secure = ShowSecure;
+            defTop.CdnEnvVar = CDNEnvironment;
+            defTop.SubTheme = WebTemplateSubTheme;
+            defTop.Search = ShowSearch;
+            defTop.LangLinks = BuildLanguageLinkList();
+            defTop.ShowPreContent = ShowPreContent;
+            defTop.IntranetTitle = BuildIntranetTitle();
+            defTop.Breadcrumbs = Breadcrumbs;
+            defTop.LocalPath = BuildLocalPath();
+            defTop.SiteMenu = true;
+            defTop.MenuPath = null;
+            return new HtmlString(JsonConvert.SerializeObject(defTop, _settings));
+        }
+
+        private List<Link> BuildSignOutLink()
+        {
+            if (!ShowSignOutLink || SignOutLink == null)
+            {
+                return null;
+            }
+            if (ShowSignInLink && ShowSignOutLink)
+            {
+                throw new InvalidOperationException("Unable to show sign in and sign out link together");
+            }
+            return new List<Link> {SignOutLink};
+        }
+
+        private List<Link> BuildSignInLink()
+        {
+            if (!ShowSignInLink || SignInLink == null)
+            {
+                return null;
+            }
+
+            if (ShowSignInLink && ShowSignOutLink)
+            {
+                throw new InvalidOperationException("Unable to show sign in and sign out link together");
+            }
+
+            return new List<Link> {SignInLink};
+        }
+
+
+        private string BuildLocalPath()
+        {
+            if (string.IsNullOrWhiteSpace(LocalPath))
+            {
+                return null;
+            }
+            return string.Format(LocalPath, WebTemplateTheme, WebTemplateVersion);
+        }
+
+
+        private List<Link> BuildIntranetTitle()
+        {
+            if (string.IsNullOrWhiteSpace(ApplicationTitle_Text))
+            {
+                return null;
+            }
+
+            return new List<Link> {
+                new Link
+                {
+                    Href = ApplicationTitle_URL,
+                    Text = ApplicationTitle_Text
+                }
+            };
+        }
+
+        private List<LanguageLink> BuildLanguageLinkList()
+        {
+            if (!ShowLanguageLink)
+            {
+                return null;
+            }
+
+            return new List<LanguageLink>
+            {
+                new LanguageLink
+                {
+                    Href = LanguageLink_URL,
+                    Text = LanguageLink_Text,
+                    Lang = LanguageLink_Lang
+                }
+            };
+        }
 
         public HtmlString RenderFooterLinks(bool transactionalMode)
         {
@@ -1063,6 +1223,9 @@ namespace GoC.WebTemplate
         /// </summary>
         /// <remarks></remarks>
         private static object lockObject = new object();
+
+        private readonly JsonSerializerSettings _settings;
+
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
         /// </summary>
