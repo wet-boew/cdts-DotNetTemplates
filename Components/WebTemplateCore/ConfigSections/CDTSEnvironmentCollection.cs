@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Linq;
 
 // ReSharper disable once CheckNamespace
-namespace GOC.WebTemplate.ConfigSections
+namespace GoC.WebTemplate.ConfigSections
 {
     [ConfigurationCollection(typeof(CDTSEnvironmentElement), AddItemName = "cdtsEnvironment")]
     public class CDTSEnvironmentCollection : ConfigurationElementCollection, IEnumerable<CDTSEnvironmentElement>, IComparer<CustomStringComparer>
@@ -22,21 +22,12 @@ namespace GOC.WebTemplate.ConfigSections
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            var l_configElement = element as CDTSEnvironmentElement;
-            if (l_configElement != null)
-                return l_configElement.Key;
-            else
-                return null;
+            var configElement = element as CDTSEnvironmentElement;
+            return configElement?.Key;
         }
 
 
-        public CDTSEnvironmentElement this[int index]
-        {
-            get
-            {
-                return BaseGet(index) as CDTSEnvironmentElement;
-            }
-        }
+        public CDTSEnvironmentElement this[int index] => BaseGet(index) as CDTSEnvironmentElement;
 
         public CDTSEnvironmentElement this[string key]
         {

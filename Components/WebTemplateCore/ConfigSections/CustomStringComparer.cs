@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 
-namespace GOC.WebTemplate.ConfigSections
+// ReSharper disable once CheckNamespace
+namespace GoC.WebTemplate.ConfigSections
 {
     public class CustomStringComparer : IComparer<string>
     {

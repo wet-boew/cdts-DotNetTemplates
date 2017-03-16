@@ -8,13 +8,45 @@ namespace CoreTest
 
     public class RenderTests 
     {
+        [Theory, AutoNSubstituteData]
+        public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
+        {
+            sut.PrivacyLink_URL = null;
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().NotContain("privacyLink");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
+        {
+            sut.PrivacyLink_URL = "http://foo.bar";
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("privacyLink");
+        }
+
+
+        [Theory, AutoNSubstituteData]
+        public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
+        {
+            sut.TermsConditionsLink_URL = null;
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().NotContain("termsLink");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void TermsLinkRenderedWhenURLIsProvided(Core sut)
+        {
+            sut.TermsConditionsLink_URL = "http://foo.bar";
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("termsLink");
+        }
 
         [Theory, AutoNSubstituteData]
         public void SignInLinkNotRenderedWhenFlagisFalse(Core sut)
         {
 
             sut.ShowSignInLink = false;
-            var json = sut.RenderApplicationDefTop();
+            var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signIn");
         }
 
@@ -24,7 +56,7 @@ namespace CoreTest
 
             sut.ShowSignOutLink = true;
             sut.SignOutLink = null;
-            var json = sut.RenderApplicationDefTop();
+            var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signIn");
         }
 
@@ -33,7 +65,7 @@ namespace CoreTest
         {
 
             sut.ShowSignOutLink = false;
-            var json = sut.RenderApplicationDefTop();
+            var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signOut");
         }
 
@@ -43,7 +75,7 @@ namespace CoreTest
 
             sut.ShowSignOutLink = true;
             sut.SignOutLink = null;
-            var json = sut.RenderApplicationDefTop();
+            var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signOut");
         }
 
@@ -53,7 +85,7 @@ namespace CoreTest
             sut.ShowSignOutLink = true;
             sut.ShowSignInLink = true;
             // ReSharper disable once MustUseReturnValue
-            Action act = () =>  sut.RenderApplicationDefTop();
+            Action act = () =>  sut.RenderAppTop();
             act.ShouldThrow<InvalidOperationException>();
         }
 

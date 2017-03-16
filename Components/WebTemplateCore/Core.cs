@@ -7,7 +7,7 @@ using System.Net;
 using System.Web;
 using System.Globalization;
 using System.Web.Caching;
-using GOC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.ConfigSections;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -17,7 +17,7 @@ namespace GoC.WebTemplate
 {
 
     
-    public class ApplicationDefTop
+    public class AppTop
     {
         
         public string MenuPath { get; set; }
@@ -49,7 +49,7 @@ namespace GoC.WebTemplate
 
     }
 
-    public class ApplicationDefFooter
+    public class AppFooter
     {
         public string CdnEnvVar { get; set; }
         public bool ShowFeatures { get; set; }
@@ -58,6 +58,8 @@ namespace GoC.WebTemplate
         public List<Link> ContactLinks { get; set; }
         public string TermsLink { get; set; }
         public string PrivacyLink { get; set; }
+        public string SubTheme { get; set; }
+        public string LocalPath { get; set; }
     }
 
     public class Core
@@ -89,7 +91,7 @@ namespace GoC.WebTemplate
         // ReSharper restore InconsistentNaming
         #endregion 
 
-        private string twoLetterCulture;
+        private readonly string twoLetterCulture;
 
         public Core()
         {
@@ -169,7 +171,7 @@ namespace GoC.WebTemplate
         /// Represents the list of links to override the About links in Footer
         /// Set by application programmatically
         /// </summary>
-        public List<Link> AboutLinks { get; set; }
+        public List<Link> AboutLinks { get;  }
         /// <summary>
         /// The title that will be displayed in the header above the top menu.
         /// Set programmatically
@@ -191,6 +193,7 @@ namespace GoC.WebTemplate
         /// Set by application programmatically
         /// </summary>
         public List<Breadcrumb> Breadcrumbs { get; set; }
+
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
         /// The environment provided will determine the CDTS that will be used (url and cdnenv)
@@ -512,25 +515,63 @@ namespace GoC.WebTemplate
 
         #region Renderers
 
-
-        public HtmlString RenderApplicationDefTop()
+        public HtmlString RenderAppFooter()
         {
-            var defTop = new ApplicationDefTop();
-            defTop.AppName = ApplicationName;
-            defTop.SignIn = BuildSignInLink();
-            defTop.SignOut = BuildSignOutLink();
-            defTop.Secure = ShowSecure;
-            defTop.CdnEnvVar = CDNEnvironment;
-            defTop.SubTheme = WebTemplateSubTheme;
-            defTop.Search = ShowSearch;
-            defTop.LangLinks = BuildLanguageLinkList();
-            defTop.ShowPreContent = ShowPreContent;
-            defTop.IntranetTitle = BuildIntranetTitle();
-            defTop.Breadcrumbs = Breadcrumbs;
-            defTop.LocalPath = BuildLocalPath();
-            defTop.SiteMenu = true;
-            defTop.MenuPath = null;
-            return new HtmlString(JsonConvert.SerializeObject(defTop, _settings));
+            
+            var appFooter = new AppFooter();
+
+            appFooter.CdnEnvVar = CDNEnvironment;
+            appFooter.SubTheme = WebTemplateSubTheme;
+            appFooter.ShowFeatures = ShowFeatures;
+            appFooter.TermsLink = BuildTermsLink();
+            appFooter.PrivacyLink = BuildPrivacyLink();
+            appFooter.ShowFeatures = ShowFeatures;
+            appFooter.ContactLinks = ContactLinks;
+            appFooter.LocalPath = BuildLocalPath();
+
+            return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
+        }
+
+        private string BuildPrivacyLink()
+        {
+            if (string.IsNullOrWhiteSpace(PrivacyLink_URL))
+            {
+                return null;
+            }
+            return PrivacyLink_URL;
+        }
+
+        private string BuildTermsLink()
+        {
+            if (string.IsNullOrWhiteSpace(TermsConditionsLink_URL))
+            {
+                return null;
+            }
+            return TermsConditionsLink_URL;
+        }
+
+        public HtmlString RenderAppTop()
+        {
+            var appTop = new AppTop();
+            if (string.IsNullOrWhiteSpace(ApplicationName))
+            {
+                throw new WebTemplateCoreException();
+            }
+            appTop.AppName = ApplicationName;
+            appTop.SignIn = BuildSignInLink();
+            appTop.SignOut = BuildSignOutLink();
+            appTop.Secure = ShowSecure;
+            appTop.CdnEnvVar = CDNEnvironment;
+            appTop.SubTheme = WebTemplateSubTheme;
+            appTop.Search = ShowSearch;
+            appTop.LangLinks = BuildLanguageLinkList();
+            appTop.ShowPreContent = ShowPreContent;
+            appTop.IntranetTitle = BuildIntranetTitle();
+            appTop.Breadcrumbs = Breadcrumbs;
+            appTop.LocalPath = BuildLocalPath();
+            appTop.SiteMenu = true;
+            appTop.MenuPath = null;
+            return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
         }
 
         private List<Link> BuildSignOutLink()
@@ -948,6 +989,7 @@ namespace GoC.WebTemplate
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the left side menu
         /// </summary>
+        // ReSharper restore InconsistentNaming
         /// <returns>
         /// string in the format expected by the Closure Templates to generate the left menu
         /// </returns>
@@ -1286,5 +1328,15 @@ namespace GoC.WebTemplate
             }
             return new HtmlString(info);
         }
+    }
+
+    [Serializable]
+    public class WebTemplateCoreException : Exception
+    {
+        public WebTemplateCoreException()
+        {
+            
+        }
+
     }
 }

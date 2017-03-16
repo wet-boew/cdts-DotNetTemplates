@@ -1,6 +1,7 @@
 using System.Configuration;
 
-namespace GOC.WebTemplate.ConfigSections
+// ReSharper disable once CheckNamespace
+namespace GoC.WebTemplate.ConfigSections
 {
     public class leavingSecureSiteWarningElement : ConfigurationElement
     {

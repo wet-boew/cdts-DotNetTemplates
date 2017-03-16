@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Configuration;
-using GOC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.ConfigSections;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
@@ -9,13 +9,7 @@ namespace GoC.WebTemplate
     {
         private static Configurations settings = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
 
-        public static Configurations Settings
-        {
-            get
-            {
-                return settings;
-            }
-        }
+        public static Configurations Settings => settings;
 
         // Create a "sessionTimeOut element."
         [ConfigurationProperty("sessionTimeOut")]
@@ -31,13 +25,7 @@ namespace GoC.WebTemplate
 
         // Create a "cdtsEnvironments collection."
         [ConfigurationProperty("cdtsEnvironments")]
-        public CDTSEnvironmentCollection CDTSEnvironments
-        {
-            get
-            {
-                return base["cdtsEnvironments"] as CDTSEnvironmentCollection;
-            }
-        }
+        public CDTSEnvironmentCollection CDTSEnvironments => base["cdtsEnvironments"] as CDTSEnvironmentCollection;
 
         // Create a "leavingSecureSiteWarning element."
         [ConfigurationProperty("leavingSecureSiteWarning")]
