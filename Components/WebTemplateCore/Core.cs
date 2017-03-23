@@ -23,7 +23,7 @@ namespace GoC.WebTemplate
         public string MenuPath { get; set; }
         public string CdnEnvVar { get; set; }
         public string AppName { get; set;  }
-        public List<LanguageLink> LangLinks { get; set; }
+        public List<LanguageLink> LngLinks { get; set; }
         public bool SiteMenu { get; set; }
 
         public bool Secure { get; set; }
@@ -54,12 +54,13 @@ namespace GoC.WebTemplate
         public string CdnEnvVar { get; set; }
         public bool ShowFeatures { get; set; }
         public bool GlobalNav { get; set; }
-        public List<Link> FooterSections { get; set;  }
+        public List<FooterLink> FooterSections { get; set;  }
         public List<Link> ContactLinks { get; set; }
         public string TermsLink { get; set; }
         public string PrivacyLink { get; set; }
         public string SubTheme { get; set; }
         public string LocalPath { get; set; }
+        public List<FooterLink> CustomFooterLinks { get; set; }
     }
 
     public class Core
@@ -506,12 +507,24 @@ namespace GoC.WebTemplate
         #endregion
 
 
+        public bool ShowGlobalNav { get; set; }
+        /// <summary>
+        /// Displays the secure icon next to the applicaiton name in the header.
+        /// Set by application programmatically
+        /// Only available in Application Template
+        /// </summary>
         public bool ShowSecure { get; set; }
+        /// <summary>
+        /// Displays the 
+        /// </summary>
         public bool ShowSignInLink { get; set; }
         public bool ShowSignOutLink { get; set; }
-        public Link SignInLink { get; set; }
-        public Link SignOutLink { get; set; }
         public string ApplicationName { get; set; }
+        public string SignInLinkHref { get; set; }
+        public string SignOutLinkHref { get; set; }
+        public bool ShowSiteMenu { get; set; } = true;
+        public string CustomSiteMenuURL { get; set; } = null;
+        public List<FooterLink> CustomFooterLinks { get; set; }
 
         #region Renderers
 
@@ -521,33 +534,36 @@ namespace GoC.WebTemplate
             var appFooter = new AppFooter();
 
             appFooter.CdnEnvVar = CDNEnvironment;
-            appFooter.SubTheme = WebTemplateSubTheme;
+            appFooter.SubTheme = GetStringForJson(WebTemplateSubTheme);
             appFooter.ShowFeatures = ShowFeatures;
-            appFooter.TermsLink = BuildTermsLink();
-            appFooter.PrivacyLink = BuildPrivacyLink();
+            appFooter.TermsLink = GetStringForJson(TermsConditionsLink_URL);
+            appFooter.PrivacyLink = GetStringForJson(PrivacyLink_URL);
             appFooter.ShowFeatures = ShowFeatures;
             appFooter.ContactLinks = ContactLinks;
-            appFooter.LocalPath = BuildLocalPath();
+            appFooter.LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
+            appFooter.GlobalNav = ShowGlobalNav;
+            appFooter.FooterSections= CustomFooterLinks;
+       
 
             return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
         }
 
-        private string BuildPrivacyLink()
+        private string GetStringForJson(string str)
         {
-            if (string.IsNullOrWhiteSpace(PrivacyLink_URL))
+            if (string.IsNullOrWhiteSpace(str))
             {
                 return null;
             }
-            return PrivacyLink_URL;
+            return str;
         }
 
-        private string BuildTermsLink()
+        private string GetFormattedJsonString(string formatStr, params object[] strs)
         {
-            if (string.IsNullOrWhiteSpace(TermsConditionsLink_URL))
+            if (string.IsNullOrWhiteSpace(formatStr))
             {
                 return null;
             }
-            return TermsConditionsLink_URL;
+            return string.Format(formatStr, strs);
         }
 
         public HtmlString RenderAppTop()
@@ -558,60 +574,41 @@ namespace GoC.WebTemplate
                 throw new WebTemplateCoreException();
             }
             appTop.AppName = ApplicationName;
-            appTop.SignIn = BuildSignInLink();
-            appTop.SignOut = BuildSignOutLink();
+
+            CheckIfBothSignInAndSignOutAreSet();
+            appTop.SignIn = BuildHideableHrefOnlyLink(SignInLinkHref, ShowSignInLink);
+            appTop.SignOut = BuildHideableHrefOnlyLink(SignOutLinkHref, ShowSignOutLink);
             appTop.Secure = ShowSecure;
             appTop.CdnEnvVar = CDNEnvironment;
             appTop.SubTheme = WebTemplateSubTheme;
             appTop.Search = ShowSearch;
-            appTop.LangLinks = BuildLanguageLinkList();
+            appTop.LngLinks = BuildLanguageLinkList();
             appTop.ShowPreContent = ShowPreContent;
             appTop.IntranetTitle = BuildIntranetTitle();
             appTop.Breadcrumbs = Breadcrumbs;
-            appTop.LocalPath = BuildLocalPath();
-            appTop.SiteMenu = true;
-            appTop.MenuPath = null;
+            appTop.LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
+            appTop.SiteMenu = ShowSiteMenu;
+            appTop.MenuPath = CustomSiteMenuURL;
             return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
         }
 
-        private List<Link> BuildSignOutLink()
+        private List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
         {
-            if (!ShowSignOutLink || SignOutLink == null)
+            
+            if (!showLink || string.IsNullOrWhiteSpace(href))
             {
                 return null;
             }
+            return new List<Link> { new Link { Href = href, Text = null} };
+        }
+
+        private void CheckIfBothSignInAndSignOutAreSet()
+        {
             if (ShowSignInLink && ShowSignOutLink)
             {
                 throw new InvalidOperationException("Unable to show sign in and sign out link together");
             }
-            return new List<Link> {SignOutLink};
         }
-
-        private List<Link> BuildSignInLink()
-        {
-            if (!ShowSignInLink || SignInLink == null)
-            {
-                return null;
-            }
-
-            if (ShowSignInLink && ShowSignOutLink)
-            {
-                throw new InvalidOperationException("Unable to show sign in and sign out link together");
-            }
-
-            return new List<Link> {SignInLink};
-        }
-
-
-        private string BuildLocalPath()
-        {
-            if (string.IsNullOrWhiteSpace(LocalPath))
-            {
-                return null;
-            }
-            return string.Format(LocalPath, WebTemplateTheme, WebTemplateVersion);
-        }
-
 
         private List<Link> BuildIntranetTitle()
         {

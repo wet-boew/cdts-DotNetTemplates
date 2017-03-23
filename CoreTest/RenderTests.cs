@@ -9,6 +9,13 @@ namespace CoreTest
     public class RenderTests 
     {
         [Theory, AutoNSubstituteData]
+        public void SiteMenuShownByDefault(Core sut)
+        {
+            var json = sut.RenderAppTop();
+            json.ToString().Should().Contain("\"siteMenu\":true");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
         {
             sut.PrivacyLink_URL = null;
@@ -54,8 +61,8 @@ namespace CoreTest
         public void SignInLinkNotRenderedWhenLinkIsNull(Core sut)
         {
 
-            sut.ShowSignOutLink = true;
-            sut.SignOutLink = null;
+            sut.ShowSignInLink = true;
+            sut.SignInLinkHref = null;
             var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signIn");
         }
@@ -74,7 +81,8 @@ namespace CoreTest
         {
 
             sut.ShowSignOutLink = true;
-            sut.SignOutLink = null;
+            sut.ShowSignInLink = false;
+            sut.SignOutLinkHref = null;
             var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signOut");
         }

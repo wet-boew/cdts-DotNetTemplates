@@ -40,7 +40,7 @@
     <!-- Write closure template -->
     <script type="text/javascript">
         var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.appTop(@ViewBag.WebTemplateCore.RenderApplicationDefTop());
+        defTop.outerHTML = wet.builder.appTop(@ViewBag.WebTemplateCore.RenderAppTop());
     </script>
     <main role="main" property="mainContentOfPage" class="container">
         <!-- the main content -->
@@ -70,13 +70,7 @@
     <!-- Write closure template -->
     <script type="text/javascript">
     var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.footer({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderFeatures()
-            @ViewBag.WebTemplateCore.RenderFooterLinks(false)
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        defFooter.outerHTML = wet.builder.appFooter(@ViewBag.WebTemplateCore.RenderAppFooter());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">

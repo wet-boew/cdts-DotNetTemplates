@@ -60,6 +60,7 @@
     <Compile Include="ConfigSections\SessionTimeOutElement.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="FooterLink.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="MenuSection.cs" />
