@@ -3,6 +3,7 @@ using System.Configuration;
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.ConfigSections
 {
+    // ReSharper disable once InconsistentNaming
     public class leavingSecureSiteWarningElement : ConfigurationElement
     {
 

@@ -7,9 +7,7 @@ namespace GoC.WebTemplate
 {
     public class Configurations : ConfigurationSection
     {
-        private static Configurations settings = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
-
-        public static Configurations Settings => settings;
+        public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
 
         // Create a "sessionTimeOut element."
         [ConfigurationProperty("sessionTimeOut")]
@@ -181,9 +179,4 @@ namespace GoC.WebTemplate
         }
     }
 
-    // Define the "sessionTimeOut" element 
-
-    //Define the "cdtsEnvironments" collection
-
-    //Define the "cdtsEnvironment" element
 }
