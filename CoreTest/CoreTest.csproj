@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoNsubstituteDataAttribute.cs" />
+    <Compile Include="ProxyTests.cs" />
     <Compile Include="RenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

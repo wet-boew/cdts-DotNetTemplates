@@ -8,6 +8,7 @@ using System.Web;
 using System.Globalization;
 using System.Web.Caching;
 using GoC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.Proxies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -15,54 +16,6 @@ using Newtonsoft.Json.Serialization;
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
 {
-
-    
-    public class AppTop
-    {
-        
-        public string MenuPath { get; set; }
-        public string CdnEnvVar { get; set; }
-        public string AppName { get; set;  }
-        public List<LanguageLink> LngLinks { get; set; }
-        public bool SiteMenu { get; set; }
-
-        public bool Secure { get; set; }
-        /// <summary>
-        /// This is an array but it should only have one item in it. 
-        /// </summary>
-        public List<Link> SignIn { get; set; }
-        /// <summary>
-        /// This is an array but it should only have one item in it. 
-        /// </summary>
-        public List<Link> SignOut { get; set; }
-        public bool Search { get; set; }
-        public List<Breadcrumb> Breadcrumbs { get; set; }
-        public string SubTheme { get; set; }
-        public List<Link> IntranetTitle { get; set; }
-        public bool ShowPreContent { get; set; }
-        public string LocalPath { get; set; }
-    }
-
-    public class LanguageLink : Link
-    {
-        public string Lang { get; set; }
-
-    }
-
-    public class AppFooter
-    {
-        public string CdnEnvVar { get; set; }
-        public bool ShowFeatures { get; set; }
-        public bool GlobalNav { get; set; }
-        public List<FooterLink> FooterSections { get; set;  }
-        public List<Link> ContactLinks { get; set; }
-        public string TermsLink { get; set; }
-        public string PrivacyLink { get; set; }
-        public string SubTheme { get; set; }
-        public string LocalPath { get; set; }
-        public List<FooterLink> CustomFooterLinks { get; set; }
-    }
-
     public class Core
     {
         #region Enums
@@ -94,7 +47,7 @@ namespace GoC.WebTemplate
 
         private readonly string twoLetterCulture;
 
-        public Core()
+        public Core(ICurrentRequestProxy currentRequest)
         {
 
              _settings = new JsonSerializerSettings
@@ -128,7 +81,7 @@ namespace GoC.WebTemplate
             SessionTimeout.AdditionalData = Configurations.Settings.SessionTimeOut.AdditionalData;
 
             //Set Top section options        
-            LanguageLink_URL = BuildLanguageLinkURL(HttpContext.Current.Request.QueryString.ToString());
+            LanguageLink_URL = BuildLanguageLinkURL(currentRequest.QueryString);
             ShowPreContent = Configurations.Settings.ShowPreContent;
             ShowSearch = Configurations.Settings.ShowShearch;
 
@@ -1325,15 +1278,5 @@ namespace GoC.WebTemplate
             }
             return new HtmlString(info);
         }
-    }
-
-    [Serializable]
-    public class WebTemplateCoreException : Exception
-    {
-        public WebTemplateCoreException()
-        {
-            
-        }
-
     }
 }

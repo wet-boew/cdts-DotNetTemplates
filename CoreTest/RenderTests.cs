@@ -5,9 +5,9 @@ using Xunit;
 
 namespace CoreTest
 {
-
     public class RenderTests 
     {
+
         [Theory, AutoNSubstituteData]
         public void SiteMenuShownByDefault(Core sut)
         {
