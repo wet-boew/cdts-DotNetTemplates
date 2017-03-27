@@ -54,7 +54,7 @@
     <Compile Include="AppFooter.cs" />
     <Compile Include="AppTop.cs" />
     <Compile Include="Breadcrumb.cs" />
-    <Compile Include="ConfigSections\CDTSEnvironmElementProxy.cs" />
+    <Compile Include="ConfigSections\CDTSEnvironmentElementProxy.cs" />
     <Compile Include="ConfigSections\CDTSEnvironmentCollection.cs" />
     <Compile Include="ConfigSections\CDTSEnvironmentElement.cs" />
     <Compile Include="ConfigSections\ICDTSEnvironmentElementProxy.cs" />

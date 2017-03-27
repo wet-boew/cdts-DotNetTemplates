@@ -6,6 +6,7 @@ using System.Reflection;
 
 using System.Web.Caching;
 using System.Web;
+using GoC.WebTemplate.Proxies;
 
 namespace GoC.WebTemplate
 {
@@ -82,7 +83,7 @@ namespace GoC.WebTemplate
             }
 
             //Core needs to be created here to pass in the proper culture 
-            this.WebTemplateCore = new Core();
+            this.WebTemplateCore = new Core(new CurrentRequestProxy(),new ConfigurationProxy());
 
             return base.BeginExecuteCore(callback, state);
         }

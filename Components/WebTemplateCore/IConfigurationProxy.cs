@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using GoC.WebTemplate.ConfigSections;
@@ -9,42 +8,38 @@ namespace GoC.WebTemplate
 
     public class ConfigurationProxy : IConfigurationProxy
     {
-        private readonly Configurations _configurations;
 
-        public ConfigurationProxy(Configurations configurations)
-        {
-            _configurations = configurations;
-        }
 
-        public ISessionTimeOutElementProxy SessionTimeOut =>  new SessionTimeOutElementProxy(_configurations.SessionTimeOut);
+        public ISessionTimeOutElementProxy SessionTimeOut =>  new SessionTimeOutElementProxy(Configurations.Settings.SessionTimeOut);
 
-        public IList<CDTSEnvironmElementProxy> CDTSEnvironments
-            => _configurations.CDTSEnvironments.Select(env => new CDTSEnvironmElementProxy(env)).ToList();
+        public IList<CDTSEnvironmentElementProxy> CDTSEnvironments
+            => Configurations.Settings.CDTSEnvironments.Select(env => new CDTSEnvironmentElementProxy(env)).ToList();
 
         public ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning
-            => new LeaveSecureSiteWarningElementProxy(_configurations.leavingSecureSiteWarning);
-        public string Version => _configurations.Version;
-        public string Theme => _configurations.Theme;
-        public string SubTheme => _configurations.SubTheme;
-        public string Environment => _configurations.Environment;
-        public bool useHTTPS => _configurations.useHTTPS;
-        public bool LoadJQueryFromGoogle => _configurations.LoadJQueryFromGoogle;
-        public bool ShowPreContent => _configurations.ShowPreContent;
-        public bool ShowPostContent => _configurations.ShowPostContent;
-        public bool ShowFeedbackLink => _configurations.ShowFeedbackLink;
-        public string FeedbackLinkurl => _configurations.FeedbackLinkurl;
-        public bool ShowShearch => _configurations.ShowShearch;
-        public bool ShowSharePageLink => _configurations.ShowSharePageLink;
-        public bool ShowLanguageLink => _configurations.ShowLanguageLink;
-        public bool ShowFeatures => _configurations.ShowFeatures;
-        public string StaticFilesLocation => _configurations.StaticFilesLocation;
+            => new LeaveSecureSiteWarningElementProxy(Configurations.Settings.leavingSecureSiteWarning);
+        public string Version => Configurations.Settings.Version;
+        public string Theme => Configurations.Settings.Theme;
+        public string SubTheme => Configurations.Settings.SubTheme;
+        public string Environment => Configurations.Settings.Environment;
+        public bool UseHTTPS => Configurations.Settings.useHTTPS;
+        public bool LoadJQueryFromGoogle => Configurations.Settings.LoadJQueryFromGoogle;
+        public bool ShowPreContent => Configurations.Settings.ShowPreContent;
+        public bool ShowPostContent => Configurations.Settings.ShowPostContent;
+        public bool ShowFeedbackLink => Configurations.Settings.ShowFeedbackLink;
+        public string FeedbackLinkurl => Configurations.Settings.FeedbackLinkurl;
+        public bool ShowShearch => Configurations.Settings.ShowShearch;
+        public bool ShowSharePageLink => Configurations.Settings.ShowSharePageLink;
+        public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
+        public bool ShowFeatures => Configurations.Settings.ShowFeatures;
+        public string StaticFilesLocation => Configurations.Settings.StaticFilesLocation;
+        public ICDTSEnvironmentElementProxy CurrentEnvironment => new CDTSEnvironmentElementProxy(Configurations.Settings.CDTSEnvironments[Configurations.Settings.Environment]);
     }
 
 
     public interface IConfigurationProxy
     {
         ISessionTimeOutElementProxy SessionTimeOut { get;  }
-        IList<CDTSEnvironmElementProxy> CDTSEnvironments { get; }
+        IList<CDTSEnvironmentElementProxy> CDTSEnvironments { get; }
         ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning { get;  }
 
         /// <summary>
@@ -70,27 +65,27 @@ namespace GoC.WebTemplate
         /// <summary>
         /// use Https
         /// </summary>
-        Boolean useHTTPS { get;  }
+        bool UseHTTPS { get;  }
 
         /// <summary>
         /// LoadJQueryFromGoogle
         /// </summary>
-        Boolean LoadJQueryFromGoogle { get;  }
+        bool LoadJQueryFromGoogle { get;  }
 
         /// <summary>
         /// ShowPreContent
         /// </summary>
-        Boolean ShowPreContent { get;  }
+        bool ShowPreContent { get;  }
 
         /// <summary>
         /// ShowPostContent
         /// </summary>
-        Boolean ShowPostContent { get;  }
+        bool ShowPostContent { get;  }
 
         /// <summary>
         /// ShowFeedbackLink
         /// </summary>
-        Boolean ShowFeedbackLink { get;  }
+        bool ShowFeedbackLink { get;  }
 
         /// <summary>
         /// URL used to redirect users when they click the feedback link
@@ -100,26 +95,28 @@ namespace GoC.WebTemplate
         /// <summary>
         /// ShowSearch
         /// </summary>
-        Boolean ShowShearch { get;  }
+        bool ShowShearch { get;  }
 
         /// <summary>
         /// ShowSharePageLink
         /// </summary>
-        Boolean ShowSharePageLink { get;  }
+        bool ShowSharePageLink { get;  }
 
         /// <summary>
         /// ShowLanguageLink
         /// </summary>
-        Boolean ShowLanguageLink { get; }
+        bool ShowLanguageLink { get; }
 
         /// <summary>
         /// ShowFeatures
         /// </summary>
-        Boolean ShowFeatures { get;  }
+        bool ShowFeatures { get;  }
 
         /// <summary>
         /// StaticFilesLocation
         /// </summary>
         string StaticFilesLocation { get;  }
+
+        ICDTSEnvironmentElementProxy CurrentEnvironment { get; }
     }
 }

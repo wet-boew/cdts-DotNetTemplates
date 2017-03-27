@@ -18,6 +18,8 @@ namespace GoC.WebTemplate
 {
     public class Core
     {
+        private readonly IConfigurationProxy _configProxy;
+
         #region Enums
 
         /// <summary>
@@ -47,10 +49,11 @@ namespace GoC.WebTemplate
 
         private readonly string twoLetterCulture;
 
-        public Core(ICurrentRequestProxy currentRequest)
+        public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy)
         {
+            _configProxy = configProxy;
 
-             _settings = new JsonSerializerSettings
+            _settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 NullValueHandling = NullValueHandling.Ignore
@@ -59,54 +62,54 @@ namespace GoC.WebTemplate
 
 
            twoLetterCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
-            
+            _currentEnvironment = _configProxy.CurrentEnvironment;
             //Set properties
-            WebTemplateVersion = Configurations.Settings.Version;
-            WebTemplateTheme = Configurations.Settings.Theme;
-            WebTemplateSubTheme = Configurations.Settings.SubTheme;
-            Environment = Configurations.Settings.Environment;
-            UseHTTPS = Configurations.Settings.useHTTPS;
-            LoadJQueryFromGoogle = Configurations.Settings.LoadJQueryFromGoogle;
+            WebTemplateVersion = _configProxy.Version;
+            WebTemplateTheme = _configProxy.Theme;
+            WebTemplateSubTheme = _configProxy.SubTheme;
+            Environment = _configProxy.Environment;
+            UseHTTPS = _configProxy.UseHTTPS;
+            LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
  
             this.SessionTimeout = new SessionTimeout();
-            SessionTimeout.Enabled = Configurations.Settings.SessionTimeOut.Enabled;
-            SessionTimeout.Inactivity = Configurations.Settings.SessionTimeOut.Inactivity;
-            SessionTimeout.ReactionTime = Configurations.Settings.SessionTimeOut.ReactionTime;
-            SessionTimeout.SessionAlive = Configurations.Settings.SessionTimeOut.Sessionalive;
-            SessionTimeout.LogoutUrl = Configurations.Settings.SessionTimeOut.Logouturl;
-            SessionTimeout.RefreshCallbackUrl = Configurations.Settings.SessionTimeOut.RefreshCallbackUrl;
-            SessionTimeout.RefreshOnClick = Configurations.Settings.SessionTimeOut.RefreshOnClick;
-            SessionTimeout.RefreshLimit = Configurations.Settings.SessionTimeOut.RefreshLimit;
-            SessionTimeout.Method = Configurations.Settings.SessionTimeOut.Method;
-            SessionTimeout.AdditionalData = Configurations.Settings.SessionTimeOut.AdditionalData;
+            SessionTimeout.Enabled = _configProxy.SessionTimeOut.Enabled;
+            SessionTimeout.Inactivity = _configProxy.SessionTimeOut.Inactivity;
+            SessionTimeout.ReactionTime = _configProxy.SessionTimeOut.ReactionTime;
+            SessionTimeout.SessionAlive = _configProxy.SessionTimeOut.Sessionalive;
+            SessionTimeout.LogoutUrl = _configProxy.SessionTimeOut.Logouturl;
+            SessionTimeout.RefreshCallbackUrl = _configProxy.SessionTimeOut.RefreshCallbackUrl;
+            SessionTimeout.RefreshOnClick = _configProxy.SessionTimeOut.RefreshOnClick;
+            SessionTimeout.RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit;
+            SessionTimeout.Method = _configProxy.SessionTimeOut.Method;
+            SessionTimeout.AdditionalData = _configProxy.SessionTimeOut.AdditionalData;
 
             //Set Top section options        
             LanguageLink_URL = BuildLanguageLinkURL(currentRequest.QueryString);
-            ShowPreContent = Configurations.Settings.ShowPreContent;
-            ShowSearch = Configurations.Settings.ShowShearch;
+            ShowPreContent = _configProxy.ShowPreContent;
+            ShowSearch = _configProxy.ShowShearch;
 
             //Set preFooter section options
-            ShowPostContent = Configurations.Settings.ShowPostContent;
-            ShowFeedbackLink = Configurations.Settings.ShowFeedbackLink;
-            FeedbackLink_URL = Configurations.Settings.FeedbackLinkurl;
-            ShowLanguageLink = Configurations.Settings.ShowLanguageLink;
-            ShowSharePageLink = Configurations.Settings.ShowSharePageLink;
+            ShowPostContent = _configProxy.ShowPostContent;
+            ShowFeedbackLink = _configProxy.ShowFeedbackLink;
+            FeedbackLink_URL = _configProxy.FeedbackLinkurl;
+            ShowLanguageLink = _configProxy.ShowLanguageLink;
+            ShowSharePageLink = _configProxy.ShowSharePageLink;
 
             //Set Footer section options
-            ShowFeatures = Configurations.Settings.ShowFeatures;
-            LeavingSecureSiteWarning_Enabled = Configurations.Settings.leavingSecureSiteWarning.Enabled;
-            LeavingSecureSiteWarning_DisplayModalWindow = Configurations.Settings.leavingSecureSiteWarning.DisplayModalWindow;
-            leavingSecureSiteWarning_RedirectURL = Configurations.Settings.leavingSecureSiteWarning.RedirectURL;
-            leavingSecureSiteWarning_ExcludedDomains = Configurations.Settings.leavingSecureSiteWarning.ExcludedDomains;
+            ShowFeatures = _configProxy.ShowFeatures;
+            LeavingSecureSiteWarning_Enabled = _configProxy.LeavingSecureSiteWarning.Enabled;
+            LeavingSecureSiteWarning_DisplayModalWindow = _configProxy.LeavingSecureSiteWarning.DisplayModalWindow;
+            leavingSecureSiteWarning_RedirectURL = _configProxy.LeavingSecureSiteWarning.RedirectURL;
+            leavingSecureSiteWarning_ExcludedDomains = _configProxy.LeavingSecureSiteWarning.ExcludedDomains;
 
-            this.HTMLHeaderElements = new List<string>();
-            this.HTMLBodyElements = new List<string>();
-            this.ContactLinks = new List<Link>();
-            this.NewsLinks = new List<Link>();
-            this.AboutLinks = new List<Link>();
-            this.Breadcrumbs = new List<Breadcrumb>();
-            this.SharePageMediaSites = new List<SocialMediaSites>();
-            this.LeftMenuItems = new List<MenuSection>();
+            HTMLHeaderElements = new List<string>();
+            HTMLBodyElements = new List<string>();
+            ContactLinks = new List<Link>();
+            NewsLinks = new List<Link>();
+            AboutLinks = new List<Link>();
+            Breadcrumbs = new List<Breadcrumb>();
+            SharePageMediaSites = new List<SocialMediaSites>();
+            LeftMenuItems = new List<MenuSection>();
             
         }
         #region Properties
@@ -159,37 +162,19 @@ namespace GoC.WebTemplate
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNEnvironment
-        {
-            get 
-            {
-                CDTSEnvironmentElement cdtsEnvironmentElement = Configurations.Settings.CDTSEnvironments[Environment];
-                return cdtsEnvironmentElement.Env;
-            }
-        }
+        public string CDNEnvironment => _currentEnvironment.Env;
+
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
         /// </summary>
-        public string LocalPath
-        {
-            get
-            {
-                var cdtsEnvironmentElement = Configurations.Settings.CDTSEnvironments[Environment];
-                return cdtsEnvironmentElement.LocalPath;
-            }
-        }
+        public string LocalPath => _currentEnvironment.LocalPath;
+
         /// <summary>
         /// URL from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNURL
-        {
-            get 
-            {
-                CDTSEnvironmentElement cdtsEnvironmentElement = Configurations.Settings.CDTSEnvironments[Environment];
-                return cdtsEnvironmentElement.Path;
-            }
-        }
+        public string CDNURL => _currentEnvironment.Path;
+
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
@@ -321,6 +306,7 @@ namespace GoC.WebTemplate
                 }
             }
         }
+
         /// <summary>
         /// Represents a list of menu items
         /// </summary>
@@ -395,7 +381,7 @@ namespace GoC.WebTemplate
         {
             get
             {
-                if (staticFilesPath == null) staticFilesPath = string.Concat(Configurations.Settings.StaticFilesLocation, "/", WebTemplateTheme);
+                if (staticFilesPath == null) staticFilesPath = string.Concat(_configProxy.StaticFilesLocation, "/", WebTemplateTheme);
                 return staticFilesPath;
             }
             set
@@ -414,13 +400,8 @@ namespace GoC.WebTemplate
         /// Used by generate paths, determine language etc...
         /// Set by Template
         /// </summary>
-        public string TwoLetterCultureLanguage
-        {
-            get
-            {
-                return twoLetterCulture;
-            }
-        }
+        public string TwoLetterCultureLanguage => twoLetterCulture;
+
         /// <summary>
         /// title of page
         /// Set by application programmatically
@@ -1214,9 +1195,10 @@ namespace GoC.WebTemplate
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
         /// </summary>
         /// <remarks></remarks>
-        private static object lockObject = new object();
+        private static readonly object lockObject = new object();
 
         private readonly JsonSerializerSettings _settings;
+        private readonly ICDTSEnvironmentElementProxy _currentEnvironment;
 
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.

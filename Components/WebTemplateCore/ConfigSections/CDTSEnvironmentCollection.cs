@@ -22,14 +22,22 @@ namespace GoC.WebTemplate.ConfigSections
 
         protected override object GetElementKey(ConfigurationElement element)
         {
+            if (element == null)
+            {
+                throw new ArgumentNullException(nameof(element));
+            }
             var configElement = element as CDTSEnvironmentElement;
-            return configElement?.Key;
+            if (configElement == null)
+            {
+                throw new ArgumentException($"{nameof(element)} must be of type CDTSEnviromentElement");
+            }
+            return configElement.Key;
         }
 
 
         public CDTSEnvironmentElement this[int index] => BaseGet(index) as CDTSEnvironmentElement;
 
-        public CDTSEnvironmentElement this[string key]
+        public new CDTSEnvironmentElement this[string key]
         {
             get
             {

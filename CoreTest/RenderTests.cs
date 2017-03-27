@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using GoC.WebTemplate;
+using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
 namespace CoreTest
@@ -98,7 +99,7 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void RenderLeftMenuTest(Core sut)
+        public void RenderLeftMenuTest([Frozen]IConfigurationProxy fakeConfig, Core sut)
         {
             sut.LeftMenuItems.Add(new MenuSection("SectionName", "SectionLink", new[] {new Link("Href", "Text")}));
 

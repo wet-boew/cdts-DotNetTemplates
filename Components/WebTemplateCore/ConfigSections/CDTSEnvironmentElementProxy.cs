@@ -1,10 +1,10 @@
 namespace GoC.WebTemplate.ConfigSections
 {
-    public class CDTSEnvironmElementProxy : ICDTSEnvironmentElementProxy
+    public class CDTSEnvironmentElementProxy : ICDTSEnvironmentElementProxy
     {
         private readonly CDTSEnvironmentElement _cdtsEnvironmentElement;
 
-        public CDTSEnvironmElementProxy(CDTSEnvironmentElement cdtsEnvironmentElement)
+        public CDTSEnvironmentElementProxy(CDTSEnvironmentElement cdtsEnvironmentElement)
         {
             _cdtsEnvironmentElement = cdtsEnvironmentElement;
         }
