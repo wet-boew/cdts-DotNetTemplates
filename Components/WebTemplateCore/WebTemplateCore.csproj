@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppFooter.cs" />
+    <Compile Include="ApplicationTitle.cs" />
     <Compile Include="AppTop.cs" />
     <Compile Include="Breadcrumb.cs" />
     <Compile Include="ConfigSections\CDTSEnvironmentElementProxy.cs" />
@@ -62,6 +63,8 @@
     <Compile Include="ConfigSections\ISessionTimeOutElementProxy.cs" />
     <Compile Include="ConfigSections\LeaveSecureSiteWarningElementProxy.cs" />
     <Compile Include="ConfigSections\SessionTimeOutElementProxy.cs" />
+    <Compile Include="LanguageLink.cs" />
+    <Compile Include="LeavingSecureSiteWarning.cs" />
     <Compile Include="Proxies\ConfigurationProxy.cs" />
     <Compile Include="Configurations.cs" />
     <Compile Include="ConfigSections\CustomStringComparer.cs" />
@@ -73,7 +76,6 @@
     <Compile Include="Proxies\CurrentRequestProxy.cs" />
     <Compile Include="FooterLink.cs" />
     <Compile Include="Proxies\ICurrentRequestProxy.cs" />
-    <Compile Include="LanguageLink.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="MenuSection.cs" />
