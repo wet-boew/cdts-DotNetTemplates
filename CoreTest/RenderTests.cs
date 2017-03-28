@@ -1,7 +1,6 @@
 ﻿using System;
 using FluentAssertions;
 using GoC.WebTemplate;
-using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
 namespace CoreTest
@@ -63,7 +62,7 @@ namespace CoreTest
         {
 
             sut.ShowSignInLink = true;
-            sut.SignInLinkHref = null;
+            sut.SignInLinkURL = null;
             var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signIn");
         }
@@ -83,7 +82,7 @@ namespace CoreTest
 
             sut.ShowSignOutLink = true;
             sut.ShowSignInLink = false;
-            sut.SignOutLinkHref = null;
+            sut.SignOutLinkURL = null;
             var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("signOut");
         }
@@ -99,7 +98,7 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void RenderLeftMenuTest([Frozen]IConfigurationProxy fakeConfig, Core sut)
+        public void RenderLeftMenuTest( Core sut)
         {
             sut.LeftMenuItems.Add(new MenuSection("SectionName", "SectionLink", new[] {new Link("Href", "Text")}));
 

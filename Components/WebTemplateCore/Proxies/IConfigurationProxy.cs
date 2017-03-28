@@ -1,43 +1,16 @@
 using System.Collections.Generic;
-using System.Linq;
 using GoC.WebTemplate.ConfigSections;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Proxies
 {
-
-    public class ConfigurationProxy : IConfigurationProxy
-    {
-
-
-        public ISessionTimeOutElementProxy SessionTimeOut =>  new SessionTimeOutElementProxy(Configurations.Settings.SessionTimeOut);
-
-        public IList<CDTSEnvironmentElementProxy> CDTSEnvironments
-            => Configurations.Settings.CDTSEnvironments.Select(env => new CDTSEnvironmentElementProxy(env)).ToList();
-
-        public ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning
-            => new LeaveSecureSiteWarningElementProxy(Configurations.Settings.leavingSecureSiteWarning);
-        public string Version => Configurations.Settings.Version;
-        public string Theme => Configurations.Settings.Theme;
-        public string SubTheme => Configurations.Settings.SubTheme;
-        public string Environment => Configurations.Settings.Environment;
-        public bool UseHTTPS => Configurations.Settings.useHTTPS;
-        public bool LoadJQueryFromGoogle => Configurations.Settings.LoadJQueryFromGoogle;
-        public bool ShowPreContent => Configurations.Settings.ShowPreContent;
-        public bool ShowPostContent => Configurations.Settings.ShowPostContent;
-        public bool ShowFeedbackLink => Configurations.Settings.ShowFeedbackLink;
-        public string FeedbackLinkurl => Configurations.Settings.FeedbackLinkurl;
-        public bool ShowShearch => Configurations.Settings.ShowShearch;
-        public bool ShowSharePageLink => Configurations.Settings.ShowSharePageLink;
-        public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
-        public bool ShowFeatures => Configurations.Settings.ShowFeatures;
-        public string StaticFilesLocation => Configurations.Settings.StaticFilesLocation;
-        public ICDTSEnvironmentElementProxy CurrentEnvironment => new CDTSEnvironmentElementProxy(Configurations.Settings.CDTSEnvironments[Configurations.Settings.Environment]);
-    }
-
-
     public interface IConfigurationProxy
     {
+        string CustomSiteMenuURL { get; }
+        bool ShowGlobalNav { get; }
+        bool ShowSiteMenu { get; }
+        string SignOutLinkURL { get; }
+        string SignInLinkURL { get; }
         ISessionTimeOutElementProxy SessionTimeOut { get;  }
         IList<CDTSEnvironmentElementProxy> CDTSEnvironments { get; }
         ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning { get;  }

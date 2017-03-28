@@ -52,36 +52,36 @@ namespace GoC.WebTemplate
         public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy)
         {
             _configProxy = configProxy;
-
+            _currentEnvironment = _configProxy.CurrentEnvironment;
             _settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 NullValueHandling = NullValueHandling.Ignore
             };
-            
-
 
            twoLetterCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
-            _currentEnvironment = _configProxy.CurrentEnvironment;
             //Set properties
             WebTemplateVersion = _configProxy.Version;
             WebTemplateTheme = _configProxy.Theme;
             WebTemplateSubTheme = _configProxy.SubTheme;
+
             Environment = _configProxy.Environment;
             UseHTTPS = _configProxy.UseHTTPS;
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
- 
-            this.SessionTimeout = new SessionTimeout();
-            SessionTimeout.Enabled = _configProxy.SessionTimeOut.Enabled;
-            SessionTimeout.Inactivity = _configProxy.SessionTimeOut.Inactivity;
-            SessionTimeout.ReactionTime = _configProxy.SessionTimeOut.ReactionTime;
-            SessionTimeout.SessionAlive = _configProxy.SessionTimeOut.Sessionalive;
-            SessionTimeout.LogoutUrl = _configProxy.SessionTimeOut.Logouturl;
-            SessionTimeout.RefreshCallbackUrl = _configProxy.SessionTimeOut.RefreshCallbackUrl;
-            SessionTimeout.RefreshOnClick = _configProxy.SessionTimeOut.RefreshOnClick;
-            SessionTimeout.RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit;
-            SessionTimeout.Method = _configProxy.SessionTimeOut.Method;
-            SessionTimeout.AdditionalData = _configProxy.SessionTimeOut.AdditionalData;
+
+            SessionTimeout = new SessionTimeout
+            {
+                Enabled = _configProxy.SessionTimeOut.Enabled,
+                Inactivity = _configProxy.SessionTimeOut.Inactivity,
+                ReactionTime = _configProxy.SessionTimeOut.ReactionTime,
+                SessionAlive = _configProxy.SessionTimeOut.Sessionalive,
+                LogoutUrl = _configProxy.SessionTimeOut.Logouturl,
+                RefreshCallbackUrl = _configProxy.SessionTimeOut.RefreshCallbackUrl,
+                RefreshOnClick = _configProxy.SessionTimeOut.RefreshOnClick,
+                RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit,
+                Method = _configProxy.SessionTimeOut.Method,
+                AdditionalData = _configProxy.SessionTimeOut.AdditionalData
+            };
 
             //Set Top section options        
             LanguageLink_URL = BuildLanguageLinkURL(currentRequest.QueryString);
@@ -110,7 +110,16 @@ namespace GoC.WebTemplate
             Breadcrumbs = new List<Breadcrumb>();
             SharePageMediaSites = new List<SocialMediaSites>();
             LeftMenuItems = new List<MenuSection>();
-            
+
+            //Set Application Template Specific Sections
+            SignOutLinkURL = _configProxy.SignOutLinkURL;
+            SignInLinkURL = _configProxy.SignInLinkURL;
+            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL;
+            ShowSiteMenu = _configProxy.ShowSiteMenu;
+            ShowGlobalNav = _configProxy.ShowGlobalNav;
+
+
+
         }
         #region Properties
 
@@ -438,28 +447,112 @@ namespace GoC.WebTemplate
         /// </summary>
         public bool LoadJQueryFromGoogle { get; set; }
 
-        #endregion
 
 
+        /// <summary>
+        /// Determines if the Global Nav bar in the footer is to be displayed.
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
         public bool ShowGlobalNav { get; set; }
+        /// <summary>
+        /// Determines if the Site Menu is to appear at the top of the page. 
+        /// If set to false only a blue band will be seen.
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
+        public bool ShowSiteMenu { get; set; } = true;
+        /// <summary>
+        /// A custom site menu to be used in place of the standard canada.ca site menu
+        /// This defaults to null (use standard menu)
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
+        public string CustomSiteMenuURL { get; set; } = null;
+        /// <summary>
+        /// The link to use for the sign in button, will only appear if <see cref="ShowSignInLink"/> is set to true
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
+        public string SignInLinkURL { get; set; }
+        /// <summary>
+        /// The link to use for the sign out button, will only appear if <see cref="ShowSignOutLink"/> is set to true
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
+        public string SignOutLinkURL { get; set; }
+
+
         /// <summary>
         /// Displays the secure icon next to the applicaiton name in the header.
         /// Set by application programmatically
-        /// Only available in Application Template
+        /// Only available in the Application Template
         /// </summary>
         public bool ShowSecure { get; set; }
         /// <summary>
-        /// Displays the 
+        /// Displays the sign in link set.
+        /// <see cref="SignInLinkURL"/> must not be null or whitespace
+        /// <see cref="ShowSignOutLink"/> must not be set at the same time.
+        /// Set by application programmatically
+        /// Only available in the Application Template
         /// </summary>
         public bool ShowSignInLink { get; set; }
+        /// <summary>
+        /// Displays the signout link set.
+        /// <see cref="SignOutLinkURL"/> must not be null or whitespace
+        /// <see cref="ShowSignInLink"/> must not be set at the same time.
+        /// Set by application programmatically
+        /// Only available in the Application Template
+        /// </summary>
         public bool ShowSignOutLink { get; set; }
-        public string ApplicationName { get; set; }
-        public string SignInLinkHref { get; set; }
-        public string SignOutLinkHref { get; set; }
-        public bool ShowSiteMenu { get; set; } = true;
-        public string CustomSiteMenuURL { get; set; } = null;
+        /// <summary>
+        /// Custom links if null uses standard links if not null overrides the existing footer links
+        /// Set by application programmatically
+        /// Only available in the Application Template
+        /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
 
+
+        #endregion
+
+
+
+
+        private string GetStringForJson(string str)
+        {
+            if (string.IsNullOrWhiteSpace(str))
+            {
+                return null;
+            }
+            return str;
+        }
+
+        private string GetFormattedJsonString(string formatStr, params object[] strs)
+        {
+            if (string.IsNullOrWhiteSpace(formatStr))
+            {
+                return null;
+            }
+            return string.Format(formatStr, strs);
+        }
+
+        private List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
+        {
+            
+            if (!showLink || string.IsNullOrWhiteSpace(href))
+            {
+                return null;
+            }
+            return new List<Link> { new Link { Href = href, Text = null} };
+        }
+
+        private void CheckIfBothSignInAndSignOutAreSet()
+        {
+            if (ShowSignInLink && ShowSignOutLink)
+            {
+                throw new InvalidOperationException("Unable to show sign in and sign out link together");
+            }
+        }
         #region Renderers
 
         public HtmlString RenderAppFooter()
@@ -482,36 +575,15 @@ namespace GoC.WebTemplate
             return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
         }
 
-        private string GetStringForJson(string str)
-        {
-            if (string.IsNullOrWhiteSpace(str))
-            {
-                return null;
-            }
-            return str;
-        }
-
-        private string GetFormattedJsonString(string formatStr, params object[] strs)
-        {
-            if (string.IsNullOrWhiteSpace(formatStr))
-            {
-                return null;
-            }
-            return string.Format(formatStr, strs);
-        }
 
         public HtmlString RenderAppTop()
         {
             var appTop = new AppTop();
-            if (string.IsNullOrWhiteSpace(ApplicationName))
-            {
-                throw new WebTemplateCoreException();
-            }
-            appTop.AppName = ApplicationName;
 
+            appTop.AppName = ApplicationTitle_Text;
             CheckIfBothSignInAndSignOutAreSet();
-            appTop.SignIn = BuildHideableHrefOnlyLink(SignInLinkHref, ShowSignInLink);
-            appTop.SignOut = BuildHideableHrefOnlyLink(SignOutLinkHref, ShowSignOutLink);
+            appTop.SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink);
+            appTop.SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink);
             appTop.Secure = ShowSecure;
             appTop.CdnEnvVar = CDNEnvironment;
             appTop.SubTheme = WebTemplateSubTheme;
@@ -526,23 +598,6 @@ namespace GoC.WebTemplate
             return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
         }
 
-        private List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
-        {
-            
-            if (!showLink || string.IsNullOrWhiteSpace(href))
-            {
-                return null;
-            }
-            return new List<Link> { new Link { Href = href, Text = null} };
-        }
-
-        private void CheckIfBothSignInAndSignOutAreSet()
-        {
-            if (ShowSignInLink && ShowSignOutLink)
-            {
-                throw new InvalidOperationException("Unable to show sign in and sign out link together");
-            }
-        }
 
         private List<Link> BuildIntranetTitle()
         {

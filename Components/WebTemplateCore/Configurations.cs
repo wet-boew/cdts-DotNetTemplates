@@ -9,16 +9,47 @@ namespace GoC.WebTemplate
     {
         public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
 
+        [ConfigurationProperty("signOutLinkURL")]
+        public string SignOutLinkURL
+        {
+            get { return (string) this["signOutLinkURL"];  }
+            set { this["signOutLinkURL"] = value; }
+        }
+
+        [ConfigurationProperty("signInLinkURL")]
+        public string SignInLinkURL
+        {
+            get { return (string) this["signInLinkURL"];  }
+            set { this["signInLinkURL"] = value; }
+        }
+
+        [ConfigurationProperty("customSiteMenuURL")]
+        public string CustomSiteMenuURL
+        {
+            get { return (string) this["customSiteMenuURL"];  }
+            set { this["customSiteMenuURL"] = value; }
+        }
+        
+        [ConfigurationProperty("showSiteMenu")]
+        public bool ShowSiteMenu
+        {
+            get { return (bool) this["showSiteMenu"];  }
+            set { this["showSiteMenu"] = value; }
+        }
+
+        [ConfigurationProperty("showGlobalNav")]
+        public bool ShowGlobalNav
+        {
+            get { return (bool) this["showGlobalNav"]; }
+            set { this["showGlobalNav"] = value; }
+        }
+
         // Create a "sessionTimeOut element."
         [ConfigurationProperty("sessionTimeOut")]
         public SessionTimeOutElement SessionTimeOut
         {
-            get
-            {
-                return (SessionTimeOutElement)this["sessionTimeOut"];
-            }
-            set
-            { this["sessionTimeOut"] = value; }
+            get { return (SessionTimeOutElement)this["sessionTimeOut"]; }
+            set { this["sessionTimeOut"] = value; }
         }
 
         // Create a "cdtsEnvironments collection."
@@ -29,12 +60,8 @@ namespace GoC.WebTemplate
         [ConfigurationProperty("leavingSecureSiteWarning")]
         public leavingSecureSiteWarningElement leavingSecureSiteWarning
         {
-            get
-            {
-                return (leavingSecureSiteWarningElement)this["leavingSecureSiteWarning"];
-            }
-            set
-            { this["leavingSecureSiteWarning"] = value; }
+            get { return (leavingSecureSiteWarningElement)this["leavingSecureSiteWarning"]; }
+            set { this["leavingSecureSiteWarning"] = value; }
         }
 
         /// <summary>

@@ -62,13 +62,14 @@
     <Compile Include="ConfigSections\ISessionTimeOutElementProxy.cs" />
     <Compile Include="ConfigSections\LeaveSecureSiteWarningElementProxy.cs" />
     <Compile Include="ConfigSections\SessionTimeOutElementProxy.cs" />
+    <Compile Include="Proxies\ConfigurationProxy.cs" />
     <Compile Include="Configurations.cs" />
     <Compile Include="ConfigSections\CustomStringComparer.cs" />
     <Compile Include="ConfigSections\leavingSecureSiteWarningElement.cs" />
     <Compile Include="ConfigSections\SessionTimeOutElement.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Core.cs" />
-    <Compile Include="IConfigurationProxy.cs" />
+    <Compile Include="Proxies\IConfigurationProxy.cs" />
     <Compile Include="Proxies\CurrentRequestProxy.cs" />
     <Compile Include="FooterLink.cs" />
     <Compile Include="Proxies\ICurrentRequestProxy.cs" />
