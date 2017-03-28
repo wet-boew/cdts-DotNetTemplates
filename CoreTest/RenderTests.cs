@@ -1,6 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using GoC.WebTemplate;
+using GoC.WebTemplate.Proxies;
 using Xunit;
 
 namespace CoreTest
@@ -9,8 +10,10 @@ namespace CoreTest
     {
 
         [Theory, AutoNSubstituteData]
-        public void SiteMenuShownByDefault(Core sut)
+        public void SiteMenuShownByDefault(ICurrentRequestProxy fakeCurrentRequestProxy)
         {
+            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
             var json = sut.RenderAppTop();
             json.ToString().Should().Contain("\"siteMenu\":true");
         }
@@ -18,7 +21,7 @@ namespace CoreTest
         [Theory, AutoNSubstituteData]
         public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
         {
-            sut.PrivacyLink_URL = null;
+            sut.PrivacyLinkURL = null;
             var json = sut.RenderAppFooter();
             json.ToString().Should().NotContain("privacyLink");
         }
@@ -26,7 +29,7 @@ namespace CoreTest
         [Theory, AutoNSubstituteData]
         public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
         {
-            sut.PrivacyLink_URL = "http://foo.bar";
+            sut.PrivacyLinkURL = "http://foo.bar";
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("privacyLink");
         }
@@ -35,7 +38,7 @@ namespace CoreTest
         [Theory, AutoNSubstituteData]
         public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
         {
-            sut.TermsConditionsLink_URL = null;
+            sut.TermsConditionsLinkURL = null;
             var json = sut.RenderAppFooter();
             json.ToString().Should().NotContain("termsLink");
         }
@@ -43,7 +46,7 @@ namespace CoreTest
         [Theory, AutoNSubstituteData]
         public void TermsLinkRenderedWhenURLIsProvided(Core sut)
         {
-            sut.TermsConditionsLink_URL = "http://foo.bar";
+            sut.TermsConditionsLinkURL = "http://foo.bar";
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("termsLink");
         }

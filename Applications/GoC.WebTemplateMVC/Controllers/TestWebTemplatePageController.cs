@@ -10,7 +10,7 @@ namespace GoC.WebTemplateMVC.Controllers
     {
         public ActionResult HelloWorld()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Web Template";
+            WebTemplateCore.ApplicationTitleText = "Application Web Template";
             WebTemplateCore.ShowSecure = true;
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.ShowGlobalNav = true;
@@ -19,9 +19,9 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult StandardPage ()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
@@ -33,9 +33,9 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult Secure()
         {
 
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowSecure = true;
             WebTemplateCore.ShowFeatures = false;
@@ -48,9 +48,9 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult SignIn()
         {
             
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
@@ -63,9 +63,9 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult SignOut()
         {
             
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
@@ -78,9 +78,9 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult NoSearch()
         {
 
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowSearch = false;
@@ -92,9 +92,9 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult NoMenu()
         {
 
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowSiteMenu = false;
@@ -106,9 +106,9 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult CustomMenu()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.CustomSiteMenuURL =
@@ -121,9 +121,9 @@ namespace GoC.WebTemplateMVC.Controllers
         }
         public ActionResult SignInWithCustomMenu()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.CustomSiteMenuURL =
@@ -139,13 +139,13 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult WithBreadCrumbs()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = new List<Breadcrumb>
             {
                 new Breadcrumb{ Href = "https://www.canada.ca/en.html", Title = "GoC", Acronym = "Government of Canada"  },
                 new Breadcrumb { Title = "My application" }
             };
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
@@ -157,26 +157,26 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult StandardFooter()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
             WebTemplateCore.ContactLinks = null;
-            WebTemplateCore.ShowPostContent = false; ;
+            WebTemplateCore.ShowPostContent = false; 
             return View("HelloWorld");
         }
         public ActionResult CustomFooter()
         {
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
             WebTemplateCore.ContactLinks = null;
-            WebTemplateCore.ShowPostContent = false; ;
+            WebTemplateCore.ShowPostContent = false; 
             WebTemplateCore.CustomFooterLinks = new List<FooterLink>
             {
                 new FooterLink {Href= "#", Text= "Link 1"},
@@ -196,16 +196,16 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult TransactionalFooterCustomLinks()
         {
             
-            WebTemplateCore.ApplicationTitle_Text = "Application Name";
+            WebTemplateCore.ApplicationTitleText = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
-            WebTemplateCore.LanguageLink_URL = "apptop-fr.html";
+            WebTemplateCore.LanguageLinkURL = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
             WebTemplateCore.ContactLinks = new List<Link> { new Link {Href = "#"} };
             WebTemplateCore.ShowFeatures = false;
-            WebTemplateCore.TermsConditionsLink_URL = "#";
-            WebTemplateCore.PrivacyLink_URL = "#";
+            WebTemplateCore.TermsConditionsLinkURL = "#";
+            WebTemplateCore.PrivacyLinkURL = "#";
             return View("HelloWorld");
         }
         //
@@ -220,7 +220,7 @@ namespace GoC.WebTemplateMVC.Controllers
 
             WebTemplateCore.ScreenIdentifier = "897987sadfjkkla--33";
 
-            WebTemplateCore.ApplicationTitle_Text = "HELLO";
+            WebTemplateCore.ApplicationTitleText = "HELLO";
 
             WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
 
@@ -250,8 +250,8 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.SessionTimeout.Method = "20008";
             WebTemplateCore.SessionTimeout.AdditionalData = "20009";
 
-            WebTemplateCore.TermsConditionsLink_URL = "http://www.pinkbike.com";
-            WebTemplateCore.PrivacyLink_URL = "http://www.lapresse.ca";
+            WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
+            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
 
             //BREADCRUMB ====================================
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
@@ -294,8 +294,8 @@ namespace GoC.WebTemplateMVC.Controllers
             //this.WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            WebTemplateCore.LeftMenuItems.Add(new MenuSection("l'index Section B", "http://www.pinkbike.com", new Link[] { 
-                                                                                new MenuItem("http://www.rds.ca", "RDS", true, new MenuItem[] { 
+            WebTemplateCore.LeftMenuItems.Add(new MenuSection("l'index Section B", "http://www.pinkbike.com", new [] { 
+                                                                                new MenuItem("http://www.rds.ca", "RDS", true, new [] { 
                                                                                     new MenuItem("http://www.rds.ca", "sub 1", true), 
                                                                                     new MenuItem("http://www.lapresse.com", "sub 2") }), 
                                                                                 new Link("http://www.lapresse.com", "L'a Presse") }));
@@ -303,11 +303,11 @@ namespace GoC.WebTemplateMVC.Controllers
             // GoC.WebTemplate.MenuSection leftMenu = new GoC.WebTemplate.MenuSection();
 
             //Leaving Secure site ====================================
-            WebTemplateCore.LeavingSecureSiteWarning_Enabled = true;
-            WebTemplateCore.LeavingSecureSiteWarning_DisplayModalWindow = false;
-            WebTemplateCore.leavingSecureSiteWarning_ExcludedDomains = "www.redseal.ca";
+            WebTemplateCore.LeavingSecureSiteWarningEnabled = true;
+            WebTemplateCore.LeavingSecureSiteWarningDisplayModalWindow = false;
+            WebTemplateCore.LeavingSecureSiteWarningExcludedDomains = "www.redseal.ca";
 
-            WebTemplateCore.LeavingSecureSiteWarning_Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
+            WebTemplateCore.LeavingSecureSiteWarningMessage = "Y'éou are about to leave a secure site, do you wish to continue?223";
 
             //HTML HEADER/BODY ELEMENTS ====================================
             //this.WebTemplateCore.HTMLHeaderElements.Add("jones.css");
