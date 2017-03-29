@@ -5,11 +5,27 @@ using Xunit;
 
 namespace CoreTest
 {
+    
     /// <summary>
     /// Tests that test the Core object in isolation.
     /// </summary>
     public class RenderTests 
     {
+        [Theory, AutoNSubstituteData]
+        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme(Core sut)
+        {
+            sut.HeaderTitle = "Foo";
+            sut.WebTemplateTheme = "GCWeb";
+            sut.HeaderTitle.Should().Be("Foo - Canada.ca");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void DontAddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme(Core sut)
+        {
+            sut.HeaderTitle = "Foo";
+            sut.WebTemplateTheme = "Intranet";
+            sut.HeaderTitle.Should().Be("Foo");
+        }
         [Theory, AutoNSubstituteData]
         public void SiteMenuPathShouldNotRenderWhenNull(Core sut)
         {

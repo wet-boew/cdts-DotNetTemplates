@@ -545,11 +545,21 @@ namespace GoC.WebTemplate
         /// </summary>
         public string TwoLetterCultureLanguage => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
+        private string _headerTitle;
         /// <summary>
-        /// title of page
+        /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per 
         /// Set by application programmatically
         /// </summary>
-        public string HeaderTitle { get; set; }
+        public string HeaderTitle {
+            get
+            {
+                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return _headerTitle + " - Canada.ca";
+                }
+                return _headerTitle;
+            }
+            set { _headerTitle = value; } }
 
         /// <summary>
         /// version of application to be displayed instead of the date modified
