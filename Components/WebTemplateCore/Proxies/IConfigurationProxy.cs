@@ -6,7 +6,6 @@ namespace GoC.WebTemplate.Proxies
 {
     public interface IConfigurationProxy
     {
-        string CustomSiteMenuURL { get; }
         bool ShowGlobalNav { get; }
         bool ShowSiteMenu { get; }
         string SignOutLinkURL { get; }

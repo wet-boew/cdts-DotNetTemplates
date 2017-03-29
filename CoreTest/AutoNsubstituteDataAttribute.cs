@@ -23,6 +23,8 @@ namespace CoreTest
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.
                                           .Without(p => p.ShowSignOutLink)
                                           .Without(p => p.ShowSignInLink)
+            //The Site Menu URL should be null
+                                          .Without(p => p.CustomSiteMenuURL)
             //We also create want to ignore some of the lists as they should start out empty.
             //Normally you don't need to ignore so much but this object breaks normal .Net conventions by using the constructor
             //to set properties, instead of just using the properties

@@ -1,22 +1,22 @@
 ﻿using System;
 using FluentAssertions;
 using GoC.WebTemplate;
-using GoC.WebTemplate.Proxies;
 using Xunit;
 
 namespace CoreTest
 {
+    /// <summary>
+    /// Tests that test the Core object in isolation.
+    /// </summary>
     public class RenderTests 
     {
-
         [Theory, AutoNSubstituteData]
-        public void SiteMenuShownByDefault(ICurrentRequestProxy fakeCurrentRequestProxy)
+        public void SiteMenuPathShouldNotRenderWhenNull(Core sut)
         {
-            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
             var json = sut.RenderAppTop();
-            json.ToString().Should().Contain("\"siteMenu\":true");
+            json.ToString().Should().NotContain("menuPath");
         }
+
 
         [Theory, AutoNSubstituteData]
         public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)

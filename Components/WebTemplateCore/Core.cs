@@ -152,7 +152,6 @@ namespace GoC.WebTemplate
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL;
             ShowSiteMenu = _configProxy.ShowSiteMenu;
             ShowGlobalNav = _configProxy.ShowGlobalNav;
 

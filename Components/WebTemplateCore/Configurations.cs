@@ -30,14 +30,14 @@ namespace GoC.WebTemplate
             set { this["customSiteMenuURL"] = value; }
         }
         
-        [ConfigurationProperty("showSiteMenu"), DefaultSettingValue("true")]
+        [ConfigurationProperty("showSiteMenu", DefaultValue= true) ]
         public bool ShowSiteMenu
         {
             get { return (bool) this["showSiteMenu"];  }
             set { this["showSiteMenu"] = value; }
         }
 
-        [ConfigurationProperty("showGlobalNav"), DefaultSettingValue("true")]
+        [ConfigurationProperty("showGlobalNav", DefaultValue = true)]
         public bool ShowGlobalNav
         {
             get { return (bool) this["showGlobalNav"]; }
