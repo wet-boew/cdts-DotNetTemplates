@@ -8,6 +8,37 @@ namespace GoC.WebTemplateMVC.Controllers
 {
     public class TestWebTemplatePageController : WebTemplateBaseController
     {
+
+        public ActionResult LeftMenuSecure()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowSecure = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            WebTemplateCore.LeftMenuItems = new List<MenuSection>
+            {
+                new MenuSection
+                {
+                    Items = new List<Link> { new Link {
+                            Href = "",
+                            Text = "Menu Item 1"
+                        }, new Link {
+                            Href= "#",
+                            Text = "Menu Item 2"
+                        }
+                    } ,
+                    Link = "#", 
+                    Name  = "MenuSection",
+                    OpenInNewWindow = false
+                }
+            };
+            return View("HelloWorldLeftMenu");
+        }
         public ActionResult HelloWorld()
         {
             WebTemplateCore.ApplicationTitle.Text = "Application Web Template";
