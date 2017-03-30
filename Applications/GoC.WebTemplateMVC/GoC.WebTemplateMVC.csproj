@@ -79,14 +79,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\TestWebTemplatePageController.cs" />
+    <None Include="Controllers\TestWebTemplatePageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\WebTemplateBaseController.cs" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
-    <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
+    <None Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -133,7 +133,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
-    <Content Include="Views\TestWebTemplatePage\TestPage.cshtml" />
+    <None Include="Views\TestWebTemplatePage\TestPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu_Layout.cshtml" />
@@ -154,13 +154,13 @@
     <Content Include="Web.config.install.xdt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TestWebTemplatePage\HelloWorldTransactional.cshtml" />
+    <None Include="Views\TestWebTemplatePage\HelloWorldTransactional.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TestWebTemplatePage\HelloWorldLeftMenu.cshtml" />
+    <None Include="Views\TestWebTemplatePage\HelloWorldLeftMenu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -23,6 +23,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -68,6 +69,8 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
     <Content Include="Web.config.install.xdt" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
