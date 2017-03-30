@@ -35,7 +35,7 @@
     @ViewBag.WebTemplateCore.RenderSessionTimeoutControl()
     <div id="def-top">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("top-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("appTop-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
@@ -65,7 +65,7 @@
     </main>
     <div id="def-footer">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("footer-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("appFooter-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">

@@ -37,7 +37,7 @@
                 
         <div id="def-top">
             <!-- Write closure fall-back static file -->
-            <%= WebTemplateCore.LoadStaticFile(string.Concat("top-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>            
+            <%= WebTemplateCore.LoadStaticFile(string.Concat("appTop-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>            
         </div>
         <!-- Write closure template -->
         <script type="text/javascript">
@@ -82,7 +82,7 @@
 	    </div>
         <div id="def-footer">
             <!-- Write closure fall-back static file -->
-            <%= WebTemplateCore.LoadStaticFile(string.Concat("footer-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>
+            <%= WebTemplateCore.LoadStaticFile(string.Concat("appFooter-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>
         </div>
         <!-- Write closure template -->
         <script type="text/javascript">
