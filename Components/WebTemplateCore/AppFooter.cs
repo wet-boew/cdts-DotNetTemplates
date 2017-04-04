@@ -17,6 +17,5 @@ namespace GoC.WebTemplate
         public string PrivacyLink { get; set; }
         public string SubTheme { get; set; }
         public string LocalPath { get; set; }
-        public List<FooterLink> CustomFooterLinks { get; set; }
     }
 }
