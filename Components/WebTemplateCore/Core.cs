@@ -552,8 +552,16 @@ namespace GoC.WebTemplate
         public string HeaderTitle {
             get
             {
-                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase) && !_headerTitle.EndsWith(" - Canada.ca"))
+                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
                 {
+                    if (string.IsNullOrWhiteSpace(_headerTitle))
+                    {
+                        return "- Canada.ca";
+                    }
+                    if (_headerTitle.EndsWith(" - Canada.ca"))
+                    {
+                        return _headerTitle;
+                    }
                     return _headerTitle + " - Canada.ca";
                 }
                 return _headerTitle;

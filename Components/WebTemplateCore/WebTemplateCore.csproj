@@ -81,7 +81,6 @@
     <Compile Include="MenuSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionTimeout.cs" />
-    <Compile Include="WebTemplateCoreException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

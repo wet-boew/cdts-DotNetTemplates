@@ -37,7 +37,7 @@ namespace GoC.WebTemplate
             set { this["showSiteMenu"] = value; }
         }
 
-        [ConfigurationProperty("showGlobalNav", DefaultValue = true)]
+        [ConfigurationProperty("showGlobalNav")]
         public bool ShowGlobalNav
         {
             get { return (bool) this["showGlobalNav"]; }

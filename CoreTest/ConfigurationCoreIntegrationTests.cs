@@ -20,6 +20,15 @@ namespace CoreTest
             json.ToString().Should().Contain("\"siteMenu\":true");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void GlobalNavFalseByDefault(ICurrentRequestProxy fakeCurrentRequestProxy)
+        {
+            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("\"globalNav\":false");
+        }
+
 
         [Theory, AutoNSubstituteDataAttribute]
 
@@ -27,8 +36,6 @@ namespace CoreTest
         {
             var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
             sut.LeavingSecureSiteWarning.RedirectURL.Should().Be("foo");
-
-
         }
     }
 }

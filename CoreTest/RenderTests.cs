@@ -27,6 +27,13 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
+        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme(Core sut)
+        {
+            sut.HeaderTitle = null;
+            sut.WebTemplateTheme = "GCWeb";
+            sut.HeaderTitle.Should().Be("- Canada.ca");
+        }
+        [Theory, AutoNSubstituteData]
         public void DontAddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme(Core sut)
         {
             sut.HeaderTitle = "Foo";
