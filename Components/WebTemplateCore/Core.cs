@@ -704,6 +704,8 @@ namespace GoC.WebTemplate
 
         #region Renderers
 
+        public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
+
         public HtmlString RenderAppFooter()
         {
 
