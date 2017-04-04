@@ -2,7 +2,10 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate
 {
-    public class AppTop
+    /// <summary>
+    /// Used to serialize to JSON for the application template in the wet.builder.appTop call
+    /// </summary>
+    internal class AppTop
     {
         
         public string MenuPath { get; set; }

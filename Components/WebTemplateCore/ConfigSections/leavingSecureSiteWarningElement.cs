@@ -4,7 +4,7 @@ using System.Configuration;
 namespace GoC.WebTemplate.ConfigSections
 {
     // ReSharper disable once InconsistentNaming
-    public class leavingSecureSiteWarningElement : ConfigurationElement
+    public class LeavingSecureSiteWarningElement : ConfigurationElement
     {
 
         /// <summary>

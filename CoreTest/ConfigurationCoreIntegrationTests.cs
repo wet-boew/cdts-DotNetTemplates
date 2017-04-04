@@ -19,5 +19,16 @@ namespace CoreTest
             var json = sut.RenderAppTop();
             json.ToString().Should().Contain("\"siteMenu\":true");
         }
+
+
+        [Theory, AutoNSubstituteDataAttribute]
+
+        public void LeavingSecureSiteWarningElementCapitilizationFix(ICurrentRequestProxy fakeCurrentRequestProxy)
+        {
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
+            sut.LeavingSecureSiteWarning.RedirectURL.Should().Be("foo");
+
+
+        }
     }
 }

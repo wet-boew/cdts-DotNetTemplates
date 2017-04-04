@@ -2,7 +2,11 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate
 {
-    public class AppFooter
+
+    /// <summary>
+    /// Used to serialize to JSON for the application template in the wet.builder.appFooter call
+    /// </summary>
+    internal class AppFooter
     {
         public string CdnEnvVar { get; set; }
         public bool ShowFeatures { get; set; }

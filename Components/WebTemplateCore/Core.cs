@@ -175,7 +175,7 @@ namespace GoC.WebTemplate
         /// Represents the list of links to override the About links in Footer
         /// Set by application programmatically
         /// </summary>
-        public List<Link> AboutLinks { get; }
+        public List<Link> AboutLinks { get; set;  }
 
         /// <summary>
         /// The title that will be displayed in the header above the top menu.
@@ -199,7 +199,7 @@ namespace GoC.WebTemplate
         /// value is optional, if no value is supplied the theme will determine the url
         /// Being replaced with <see cref="GoC.WebTemplate.ApplicationTitle.URL"/>
         /// </remarks>
-        [Obsolete("Please use ApplicationTitle.URL")]
+        [Obsolete("Please use ApplicationTitle.URL this will dissapear in v4.0.25")]
         public string ApplicationTitle_URL
         {
             get { return ApplicationTitle.URL; }
@@ -312,7 +312,7 @@ namespace GoC.WebTemplate
         /// or Set by application programmatically
         /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.DisplayModalWindow"/>
         /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarningDisplayModalWindow this will dissapear in v4.0.25")]
+        [Obsolete("Please use LeavingSecureSiteWarning.DisplayModalWindow this will dissapear in v4.0.25")]
         // ReSharper disable once InconsistentNaming
         public bool LeavingSecureSiteWarning_DisplayModalWindow
         {
@@ -326,7 +326,7 @@ namespace GoC.WebTemplate
         /// Can be set by application programmatically
         /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.RedirectURL"/>
         /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarningRedirectURL this will dissapear in v4.0.25")]
+        [Obsolete("Please use LeavingSecureSiteWarning.RedirectURL this will dissapear in v4.0.25")]
         // ReSharper disable once InconsistentNaming
         public string leavingSecureSiteWarning_RedirectURL
         {
@@ -340,7 +340,7 @@ namespace GoC.WebTemplate
         /// Can be set by application programmatically
         /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.ExcludedDomains"/>
         /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarningExcludedDomains this will dissapear in v4.0.25")]
+        [Obsolete("Please use LeavingSecureSiteWarning.ExcludedDomains this will dissapear in v4.0.25")]
         // ReSharper disable once InconsistentNaming
         public string leavingSecureSiteWarning_ExcludedDomains
         {
@@ -350,11 +350,10 @@ namespace GoC.WebTemplate
 
         /// <summary>
         /// The warning message to be displayed to the user when clicking a link that leaves the secure session
-        /// Set by application via web.config
-        /// Can be set by application programmatically
+        /// Set by application programmatically
         /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.Message"/>
         /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarningMessage this will dissapear in v4.0.25")]
+        [Obsolete("Please use LeavingSecureSiteWarning.Message this will dissapear in v4.0.25")]
         public string LeavingSecureSiteWarning_Message
         {
             get { return LeavingSecureSiteWarning.Message; }
@@ -367,7 +366,7 @@ namespace GoC.WebTemplate
         /// or programmatically
         /// Being replaced with <see cref="FeedbackLinkURL"/>
         /// </summary>
-        [Obsolete("Please use FeedbackLinkURL this will dissapear in v4.0.25")]
+        [Obsolete("Please use FeedbackLink.URL this will dissapear in v4.0.25")]
         public string FeedbackLink_URL
         {
             get { return FeedbackLinkURL; }
@@ -386,7 +385,7 @@ namespace GoC.WebTemplate
         /// Set by application programmatically
         /// Being replaced with <see cref="PrivacyLinkURL"/>
         /// </summary>
-        [Obsolete("Please use PrivacyLinkURL this will dissapear in v4.0.25")]
+        [Obsolete("Please use PrivacyLink.URL this will dissapear in v4.0.25")]
         // ReSharper disable once InconsistentNaming
         public string PrivacyLink_URL
         {
@@ -405,7 +404,7 @@ namespace GoC.WebTemplate
         /// Set by application programmatically
         /// Being replaced with <see cref="TermsConditionsLinkURL"/>
         /// </summary>
-        [Obsolete("Please use TermsConditionsLinkURL this will dissapear in v4.0.25")]
+        [Obsolete("Please use TermsConditionsLink.URL this will dissapear in v4.0.25")]
         // ReSharper disable once InconsistentNaming
         public string TermsConditionsLink_URL
         {
@@ -440,7 +439,7 @@ namespace GoC.WebTemplate
         /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.Lang"/>
         /// </summary>
         [Obsolete("Please use LanguageLink.Lang this will dissapear in v4.0.25")]
-        public string LanguageLink_Lang => LanguageLink.Href;
+        public string LanguageLink_Lang => LanguageLink.Lang;
 
         /// <summary>
         /// Read only property, used to populate the text attribute of the language toggle link
@@ -553,7 +552,7 @@ namespace GoC.WebTemplate
         public string HeaderTitle {
             get
             {
-                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
+                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase) && !_headerTitle.EndsWith(" - Canada.ca"))
                 {
                     return _headerTitle + " - Canada.ca";
                 }

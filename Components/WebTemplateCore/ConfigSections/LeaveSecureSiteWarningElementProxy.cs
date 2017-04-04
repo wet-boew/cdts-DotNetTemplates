@@ -2,9 +2,9 @@ namespace GoC.WebTemplate.ConfigSections
 {
     public class LeaveSecureSiteWarningElementProxy : ILeavingSecureSiteWarningElementProxy
     {
-        private readonly leavingSecureSiteWarningElement _leavingSecureSiteWarningElement;
+        private readonly LeavingSecureSiteWarningElement _leavingSecureSiteWarningElement;
 
-        public LeaveSecureSiteWarningElementProxy(leavingSecureSiteWarningElement leavingSecureSiteWarningElement)
+        public LeaveSecureSiteWarningElementProxy(LeavingSecureSiteWarningElement leavingSecureSiteWarningElement)
         {
             _leavingSecureSiteWarningElement = leavingSecureSiteWarningElement;
         }

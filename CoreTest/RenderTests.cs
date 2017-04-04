@@ -12,6 +12,13 @@ namespace CoreTest
     public class RenderTests 
     {
         [Theory, AutoNSubstituteData]
+        public void DoNotAddCanadaCaToTitlesIfItIsAlreadyThere(Core sut)
+        {
+            sut.HeaderTitle = "Foo - Canada.ca";
+            sut.WebTemplateTheme = "GCWeb";
+            sut.HeaderTitle.Should().Be("Foo - Canada.ca");
+        }
+        [Theory, AutoNSubstituteData]
         public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme(Core sut)
         {
             sut.HeaderTitle = "Foo";

@@ -24,7 +24,7 @@ namespace GoC.WebTemplate.Proxies
                     Configurations.Settings.CDTSEnvironments[Configurations.Settings.Environment]);
 
         public ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning
-            => new LeaveSecureSiteWarningElementProxy(Configurations.Settings.leavingSecureSiteWarning);
+            => new LeaveSecureSiteWarningElementProxy(Configurations.Settings.LeavingSecureSiteWarning);
 
         public string Environment => Configurations.Settings.Environment;
         public bool UseHTTPS => Configurations.Settings.useHTTPS;

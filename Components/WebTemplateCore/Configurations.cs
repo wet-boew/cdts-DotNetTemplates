@@ -58,9 +58,9 @@ namespace GoC.WebTemplate
 
         // Create a "leavingSecureSiteWarning element."
         [ConfigurationProperty("leavingSecureSiteWarning")]
-        public leavingSecureSiteWarningElement leavingSecureSiteWarning
+        public LeavingSecureSiteWarningElement LeavingSecureSiteWarning
         {
-            get { return (leavingSecureSiteWarningElement)this["leavingSecureSiteWarning"]; }
+            get { return (LeavingSecureSiteWarningElement)this["leavingSecureSiteWarning"]; }
             set { this["leavingSecureSiteWarning"] = value; }
         }
 
