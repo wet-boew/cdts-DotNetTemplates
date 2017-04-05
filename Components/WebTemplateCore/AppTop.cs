@@ -26,7 +26,6 @@ namespace GoC.WebTemplate
         public bool Search { get; set; }
         public List<Breadcrumb> Breadcrumbs { get; set; }
         public string SubTheme { get; set; }
-        public List<Link> IntranetTitle { get; set; }
         public bool ShowPreContent { get; set; }
         public string LocalPath { get; set; }
     }

@@ -52,10 +52,6 @@ namespace GoC.WebTemplate
                 }
                 return Constants.LANGUAGE_LINK_ENGLISH_TEXT;
             }
-            set
-            {
-                throw new InvalidOperationException("Unable to set text for language link");
-            }
         }
 
     }

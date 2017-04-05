@@ -6,6 +6,7 @@ using System.Text;
 using System.Net;
 using System.Web;
 using System.Globalization;
+using System.Linq;
 using System.Web.Caching;
 using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
@@ -219,6 +220,12 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<Breadcrumb> Breadcrumbs { get; set; }
 
+        public List<Breadcrumb> EncodedBreadcrumbs => Breadcrumbs?.Select(b => new Breadcrumb {
+            Href = HttpUtility.UrlEncode(b.Href),
+            Acronym = b.Acronym,
+            Title = GetStringForJson(b.Title)
+        }).ToList();
+
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
         /// The environment provided will determine the CDTS that will be used (url and cdnenv)
@@ -264,6 +271,11 @@ namespace GoC.WebTemplate
         /// Set by application programmatically
         /// </summary>
         public List<Link> ContactLinks { get; set; }
+
+        public List<Link> EncodedContactLinks => ContactLinks?.Select(l => new Link {
+            Href = HttpUtility.UrlEncode(l.Href),
+            Text = GetStringForJson(l.Text)
+        }).ToList();
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -549,7 +561,8 @@ namespace GoC.WebTemplate
         /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per 
         /// Set by application programmatically
         /// </summary>
-        public string HeaderTitle {
+        public string HeaderTitle
+        {
             get
             {
                 if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
@@ -566,7 +579,11 @@ namespace GoC.WebTemplate
                 }
                 return _headerTitle;
             }
-            set { _headerTitle = value; } }
+            set
+            {
+                _headerTitle = value;
+            }
+        }
 
         /// <summary>
         /// version of application to be displayed instead of the date modified
@@ -675,6 +692,13 @@ namespace GoC.WebTemplate
         /// Only available in the Application Template
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
+        
+        public List<FooterLink> EncodedCustomFooterLinks => CustomFooterLinks?.Select(fl => new FooterLink
+        {
+            Href = HttpUtility.UrlEncode(fl.Href),
+            NewWindow = fl.NewWindow,
+            Text = GetStringForJson(fl.Text)
+        }).ToList();
 
 
         #endregion
@@ -699,7 +723,7 @@ namespace GoC.WebTemplate
             {
                 return null;
             }
-            return new List<Link> {new Link {Href = href, Text = null}};
+            return new List<Link> {new Link {Href = HttpUtility.UrlEncode(href), Text = null}};
         }
 
         private void CheckIfBothSignInAndSignOutAreSet()
@@ -722,12 +746,12 @@ namespace GoC.WebTemplate
                 CdnEnvVar = CDNEnvironment,
                 SubTheme = GetStringForJson(WebTemplateSubTheme),
                 ShowFeatures = ShowFeatures,
-                TermsLink = GetStringForJson(TermsConditionsLinkURL),
-                PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                ContactLinks = ContactLinks,
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
+                TermsLink = HttpUtility.UrlEncode(GetStringForJson(TermsConditionsLinkURL)),
+                PrivacyLink = HttpUtility.UrlEncode(GetStringForJson(PrivacyLinkURL)),
+                ContactLinks = EncodedContactLinks,
+                LocalPath = HttpUtility.UrlEncode(GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)),
                 GlobalNav = ShowGlobalNav,
-                FooterSections = CustomFooterLinks
+                FooterSections = EncodedCustomFooterLinks
             };
 
             return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
@@ -749,33 +773,16 @@ namespace GoC.WebTemplate
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 ShowPreContent = ShowPreContent,
-                IntranetTitle = BuildIntranetTitle(),
-                Breadcrumbs = Breadcrumbs,
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
+                Breadcrumbs = EncodedBreadcrumbs,
+                LocalPath = HttpUtility.UrlEncode(GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)),
                 SiteMenu = ShowSiteMenu,
-                MenuPath = CustomSiteMenuURL
+                MenuPath = HttpUtility.UrlEncode(CustomSiteMenuURL)
             };
 
             return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
         }
 
 
-        private List<Link> BuildIntranetTitle()
-        {
-            if (string.IsNullOrWhiteSpace(ApplicationTitle.Text))
-            {
-                return null;
-            }
-
-            return new List<Link>
-            {
-                new Link
-                {
-                    Href = ApplicationTitle.URL,
-                    Text = ApplicationTitle.Text
-                }
-            };
-        }
 
         private List<LanguageLink> BuildLanguageLinkList()
         {
@@ -784,7 +791,11 @@ namespace GoC.WebTemplate
                 return null;
             }
 
-            return new List<LanguageLink> {LanguageLink};
+            return new List<LanguageLink> {
+                new LanguageLink {
+                    Href = HttpUtility.UrlEncode(LanguageLink.Href)
+                }
+            };
         }
 
         public HtmlString RenderFooterLinks(bool transactionalMode)

@@ -11,6 +11,24 @@ namespace CoreTest
     /// </summary>
     public class RenderTests 
     {
+
+        [Theory, AutoNSubstituteData]
+        public void RenderAppFooterMustNotCrashWithNullContactLinks(Core sut)
+        {
+            sut.ContactLinks = null;
+            // ReSharper disable once MustUseReturnValue
+            Action execute = () => sut.RenderAppFooter();
+            execute.ShouldNotThrow<ArgumentNullException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderAppTopMustNotCrashWithNullBreadCrumbs(Core sut)
+        {
+            sut.Breadcrumbs = null;
+            // ReSharper disable once MustUseReturnValue
+            Action execute = () => sut.RenderAppTop();
+            execute.ShouldNotThrow<ArgumentNullException>();
+        }
         [Theory, AutoNSubstituteData]
         public void DoNotAddCanadaCaToTitlesIfItIsAlreadyThere(Core sut)
         {
