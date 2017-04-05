@@ -4,7 +4,8 @@ using System.Threading;
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
 {
-    public class LanguageLink
+    //We don't inherit from link as the Text is readonly and not settable
+    public class LanguageLink  
     {
         private readonly string _twoLetterCulture;
 
@@ -50,6 +51,10 @@ namespace GoC.WebTemplate
                     return Constants.LANGUAGE_LINK_FRENCH_TEXT;
                 }
                 return Constants.LANGUAGE_LINK_ENGLISH_TEXT;
+            }
+            set
+            {
+                throw new InvalidOperationException("Unable to set text for language link");
             }
         }
 
