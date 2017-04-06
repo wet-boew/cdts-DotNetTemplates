@@ -743,7 +743,7 @@ namespace GoC.WebTemplate
 
             var appFooter = new AppFooter
             {
-                CdnEnvVar = CDNEnvironment,
+                CdnEnv = CDNEnvironment,
                 SubTheme = GetStringForJson(WebTemplateSubTheme),
                 ShowFeatures = ShowFeatures,
                 TermsLink = HttpUtility.UrlEncode(GetStringForJson(TermsConditionsLinkURL)),
@@ -768,7 +768,7 @@ namespace GoC.WebTemplate
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
                 Secure = ShowSecure,
-                CdnEnvVar = CDNEnvironment,
+                CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),

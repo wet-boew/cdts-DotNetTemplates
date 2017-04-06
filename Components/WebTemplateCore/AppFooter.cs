@@ -8,7 +8,7 @@ namespace GoC.WebTemplate
     /// </summary>
     internal class AppFooter
     {
-        public string CdnEnvVar { get; set; }
+        public string CdnEnv { get; set; }
         public bool ShowFeatures { get; set; }
         public bool GlobalNav { get; set; }
         public List<FooterLink> FooterSections { get; set;  }
