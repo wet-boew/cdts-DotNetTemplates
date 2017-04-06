@@ -10,5 +10,8 @@
     <releaseNotes>Implementation of 4.0.21</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="9.0.1" />
+    </dependencies>
   </metadata>
 </package>

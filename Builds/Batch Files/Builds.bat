@@ -7,9 +7,10 @@ for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1)
   set "DEL=%%a"
 )
 
-set msBuildDir=%WINDIR%\Microsoft.NET\Framework\v4.0.30319
-set TFSWorkingFolder=C:\Users\alain.belleville\Source\Workspaces\SF-ML\DEV
-set NuGetDir=C:\Users\alain.belleville\Source\Workspaces\SF-ML\DEV\Builds\.nuget
+::set msBuildDir=%WINDIR%\Microsoft.NET\Framework\v4.0.30319
+set msBuildDir=%PROGRAMFILES(X86)%\MSBuild\14.0\Bin\
+set TFSWorkingFolder=c:\workspaces\DotNetTemplates\
+set NuGetDir=%TFSWorkingFolder%Builds\.nuget
 :: Customize Window
 title Nuget and GCPedia Packages
 
@@ -46,10 +47,13 @@ IF %M%==11 GOTO BUILD_SOLUTION
 IF %M%==10 GOTO EOF
 
 :NUGET_ASPX
+echo Building WebForms solution
 call :BUILD_SOLUTION
+echo navigating to %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :ASKING_QUESTIONS
-call %msBuildDir%\msbuild.exe  NugetPackageASPX.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
+echo Building NuGet Package
+call "%msBuildDir%\msbuild.exe" NugetPackageASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -57,29 +61,29 @@ call :RETURN_TO_MENU
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplateSamples\
 call :ASKING_QUESTIONS_SAMPLES
-call %msBuildDir%\msbuild.exe  NuGetPackageSamplesASPX.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesASPX.log
+call "%msBuildDir%\msbuild.exe"  NuGetPackageSamplesASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesASPX.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
 :GCPEDIA_ASPX
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GCPedia\
-call %msBuildDir%\msbuild.exe  GCPediaASPXProject.proj /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaASPXProject.log
+call "%msBuildDir%\msbuild.exe"  GCPediaASPXProject.proj /p:VisualStudioVersion=14.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaASPXProject.log
 call :RETURN_TO_MENU
 
 :BOTH_ASPX
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
-call %msBuildDir%\msbuild.exe  NugetPackageASPX.proj /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageASPX.proj /p:VisualStudioVersion=14.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
 cd %TFSWorkingFolder%\Builds\BuildScripts\GCPedia\
-call %msBuildDir%\msbuild.exe  GCPediaASPXProject.proj /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaASPXProject.log
+call "%msBuildDir%\msbuild.exe"  GCPediaASPXProject.proj /p:VisualStudioVersion=14.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaASPXProject.log
 call :RETURN_TO_MENU
 
 :NUGET_MVC
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :ASKING_QUESTIONS
-call %msBuildDir%\msbuild.exe  NugetPackageMVC.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -87,14 +91,14 @@ call :RETURN_TO_MENU
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplateSamples\
 call :ASKING_QUESTIONS_SAMPLES
-call %msBuildDir%\msbuild.exe  NugetPackageSamplesMVC.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageSamplesMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesMVC.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
 :GCPEDIA_MVC
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GCPedia\
-call %msBuildDir%\msbuild.exe  GCPediaMVCProject.proj /p:VisualStudioVersion=12.0;TFSWorkingFolder=%TFSWorkingFolder% /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaMVCProject.log
+call "%msBuildDir%\msbuild.exe"  GCPediaMVCProject.proj /p:VisualStudioVersion=14.0;TFSWorkingFolder=%TFSWorkingFolder% /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaMVCProject.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -103,9 +107,9 @@ call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :RESET_VARIABLES
 call :ASKING_QUESTIONS
-call %msBuildDir%\msbuild.exe  NugetPackageMVC.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
 cd %TFSWorkingFolder%\Builds\BuildScripts\GCPedia\
-call %msBuildDir%\msbuild.exe  GCPediaMVCProject.proj /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaMVCProject.log
+call "%msBuildDir%\msbuild.exe"  GCPediaMVCProject.proj /p:VisualStudioVersion=14.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaMVCProject.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -114,24 +118,24 @@ call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 
 call :ASKING_QUESTIONS
-call %msBuildDir%\msbuild.exe  NugetPackageASPX.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
 call :RESET_VARIABLES
 
 call :ASKING_QUESTIONS
-call %msBuildDir%\msbuild.exe  NugetPackageMVC.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
 call :RESET_VARIABLES
 
 cd %TFSWorkingFolder%\Builds\BuildScripts\GCPedia\
-call %msBuildDir%\msbuild.exe  GCPediaASPXProject.proj /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaASPXProject.log
-call %msBuildDir%\msbuild.exe  GCPediaMVCProject.proj /p:VisualStudioVersion=12.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaMVCProject.log
+call "%msBuildDir%\msbuild.exe"  GCPediaASPXProject.proj /p:VisualStudioVersion=14.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaASPXProject.log
+call "%msBuildDir%\msbuild.exe"  GCPediaMVCProject.proj /p:VisualStudioVersion=14.0 /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\GCPediaMVCProject.log
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplateSamples\
 
 call :ASKING_QUESTIONS_SAMPLES
-call %msBuildDir%\msbuild.exe  NuGetPackageSamplesASPX.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesASPX.log
+call "%msBuildDir%\msbuild.exe"  NuGetPackageSamplesASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesASPX.log
 call :RESET_VARIABLES
 
 call :ASKING_QUESTIONS_SAMPLES
-call %msBuildDir%\msbuild.exe  NugetPackageSamplesMVC.proj /p:VisualStudioVersion=12.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageSamplesMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesMVC.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -143,9 +147,13 @@ GOTO MENU
 exit
 
 :BUILD_SOLUTION
+echo Building solution
+echo navigating to %TFSWorkingFolder%\
 cd %TFSWorkingFolder%\
+echo restoring packages using nuget at %NuGetDir%\Nuget.exe
 call %NuGetDir%\Nuget.exe restore "GoCWebTemplates.sln" -ConfigFile "%NuGetDir%\Nuget.config"
-call %msBuildDir%\msbuild.exe  GoCWebTemplates.sln /verbosity:quiet /t:Rebuild /p:VisualStudioVersion=12.0;Configuration=Release /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\BuildSolution.log
+echo calling msbuild
+call "%msBuildDir%\msbuild.exe"  GoCWebTemplates.sln /verbosity:quiet /t:Rebuild /p:VisualStudioVersion=14.0;Configuration=Release /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\BuildSolution.log
 GOTO :EOF
 
 :RESET_VARIABLES
