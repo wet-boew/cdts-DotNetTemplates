@@ -40,6 +40,7 @@
  - ShowSignInLink - Show the sign in link on the page cannot be true when ShowSignOutLink is true
  - ShowSignOutLink - Show the sign out link on the page, cannot be true when ShowSignInLink is true
  - CustomFooterLinks - Will create a custom set of columns for your footer links
+ - Added the dependency JSON.Net to the WebTemplateCore project to handle json serialization.
 ************************************************************************************************************
 4.0.23.4 - 2017-02-08
  -Fixed issue with namespace in configurations.cs
