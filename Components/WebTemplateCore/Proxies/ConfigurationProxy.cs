@@ -9,6 +9,7 @@ namespace GoC.WebTemplate.Proxies
 
     public class ConfigurationProxy : IConfigurationProxy
     {
+        public string CustomSearch => Configurations.Settings.CustomSearch;
         public string CustomSiteMenuURL => Configurations.Settings.CustomSiteMenuURL;
         public bool ShowGlobalNav => Configurations.Settings.ShowGlobalNav;
         public bool ShowSiteMenu => Configurations.Settings.ShowSiteMenu;

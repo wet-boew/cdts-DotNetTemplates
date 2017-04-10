@@ -9,6 +9,12 @@ namespace GoC.WebTemplate
     {
         public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
 
+        [ConfigurationProperty("customSearch")]
+        public string CustomSearch
+        {
+            get { return (string) this["customSearch"]; }
+            set { this["customSearch"] = value; }
+        }
         [ConfigurationProperty("signOutLinkURL")]
         public string SignOutLinkURL
         {

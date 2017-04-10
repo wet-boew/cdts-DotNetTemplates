@@ -9,7 +9,7 @@
         <meta charset="utf-8">
         <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
 		    wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-        <title><%= WebTemplateCore.HeaderTitle %></title>
+        <title><%= WebTemplateCore.RenderHeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport">
         <!-- Load closure template scripts -->
         <script type="text/javascript" src="<%= string.Concat(WebTemplateCore.CDNPath, "soyutils.js")  %>"></script> 
@@ -25,6 +25,7 @@
                 cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
                 subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
                 <%= WebTemplateCore.RenderjQuery()%>
+                <%= WebTemplateCore.RenderLocalPath() %>
             }));
         </script>
         <%= WebTemplateCore.RenderHtmlHeaderElements() %>
@@ -48,6 +49,7 @@
                 <%= WebTemplateCore.RenderLanguageLink() %>
                 siteMenu: false,
                 <%= WebTemplateCore.RenderBreadcrumbsList() %>
+                <%= WebTemplateCore.RenderLocalPath() %>
                 showPreContent: false,
             });
         </script>
@@ -85,6 +87,7 @@
                 showFooter: false,              
                 <%= WebTemplateCore.RenderFeatures() %>
                 <%= WebTemplateCore.RenderFooterLinks(true) %>                
+                <%= WebTemplateCore.RenderLocalPath() %>
             });
         </script>
         <!-- Write closure template -->
@@ -93,6 +96,7 @@
                 cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
                 <%= WebTemplateCore.RenderLeavingSecureSiteWarning() %>
                 <%= WebTemplateCore.RenderjQuery()%>
+                <%= WebTemplateCore.RenderLocalPath() %>
             }));
         </script>
         <%= WebTemplateCore.RenderHtmlBodyElements() %>

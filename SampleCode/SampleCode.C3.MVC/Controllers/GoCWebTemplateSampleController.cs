@@ -66,7 +66,7 @@ namespace SampleCode.C3.MVC.Controllers
         {
             //Display the FeedbackLink
             this.WebTemplateCore.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
-            this.WebTemplateCore.FeedbackLink_URL = "http://www.aircanada.com/en/customercare/customersolutions.html";
+            this.WebTemplateCore.FeedbackLinkURL = "http://www.aircanada.com/en/customercare/customersolutions.html";
 
             ////Specify the Share This Page with Media sites.
             //this.WebTemplateCore.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
@@ -119,10 +119,10 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult LeavingSecureSiteSample()
         {
             //note: other then the message the rest could be set in the web.config
-            this.WebTemplateCore.LeavingSecureSiteWarning_Enabled = true;
-            this.WebTemplateCore.leavingSecureSiteWarning_RedirectURL = "Redirect";
-            this.WebTemplateCore.leavingSecureSiteWarning_ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-            this.WebTemplateCore.LeavingSecureSiteWarning_Message = "You are leaving a secure session sample text!";
+            this.WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
+            this.WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "Redirect";
+            this.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+            this.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
            
             return View();
         }
@@ -189,9 +189,9 @@ namespace SampleCode.C3.MVC.Controllers
             //Contact Links
             this.WebTemplateCore.ContactLinks.Add(new Link("http://travel.gc.ca/", "Travel"));
             //set the Terms and Condition Link
-            this.WebTemplateCore.TermsConditionsLink_URL = "http://www.tsn.ca";
+            this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
-            this.WebTemplateCore.PrivacyLink_URL = "http://www.lapresse.ca";
+            this.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
 
             return View();
         }
@@ -200,9 +200,9 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult TransactionalSample(string data1, string data2, string data4)
         {
             //set the Terms and Condition Link
-            this.WebTemplateCore.TermsConditionsLink_URL = "http://www.tsn.ca";
+            this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
-            this.WebTemplateCore.PrivacyLink_URL = "http://www.lapresse.ca";
+            this.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
             //execute logic for the submit.
             return View();
         }
@@ -270,8 +270,8 @@ namespace SampleCode.C3.MVC.Controllers
             this.WebTemplateCore.WebTemplateTheme = "GCIntranet";
             this.WebTemplateCore.WebTemplateSubTheme = "ESDC";
             this.WebTemplateCore.Environment = GoC.WebTemplate.Core.CDTSEnvironments.ESDCPROD.ToString();
-            this.WebTemplateCore.ApplicationTitle_Text = "My Custom Title";
-            this.WebTemplateCore.ApplicationTitle_URL = "http://iservice.prv/eng/index.shtml";  
+            this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
+            this.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";  
                         
             return View();
         }

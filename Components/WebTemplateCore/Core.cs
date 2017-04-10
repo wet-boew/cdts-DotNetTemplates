@@ -155,6 +155,7 @@ namespace GoC.WebTemplate
             SignInLinkURL = _configProxy.SignInLinkURL;
             ShowSiteMenu = _configProxy.ShowSiteMenu;
             ShowGlobalNav = _configProxy.ShowGlobalNav;
+            CustomSearch = _configProxy.CustomSearch;
 
 
 
@@ -622,6 +623,11 @@ namespace GoC.WebTemplate
         public bool LoadJQueryFromGoogle { get; set; }
 
 
+
+        /// <summary>
+        /// Allows for a custom search to be used in the application, you must contact CDTS to have one created.
+        /// </summary>
+        public string CustomSearch { get; set; }
 
         /// <summary>
         /// Determines if the Global Nav bar in the footer is to be displayed.

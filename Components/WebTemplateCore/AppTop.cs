@@ -11,6 +11,7 @@ namespace GoC.WebTemplate
         public string MenuPath { get; set; }
         public string CdnEnv { get; set; }
         public string AppName { get; set;  }
+        public string CustomSearch { get; set; }
         public List<LanguageLink> LngLinks { get; set; }
         public bool SiteMenu { get; set; }
 

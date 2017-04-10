@@ -13,8 +13,8 @@ namespace SampleCode.C3.Samples
         {
             this.WebTemplateMaster.WebTemplateCore.WebTemplateTheme = "GCIntranet";
             this.WebTemplateMaster.WebTemplateCore.WebTemplateSubTheme = "ESDC";
-            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle_Text = "My Custom Title";
-            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle_URL = "http://iservice.prv/eng/index.shtml";
+            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
+            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";
             this.WebTemplateMaster.WebTemplateCore.Environment = GoC.WebTemplate.Core.CDTSEnvironments.ESDCPROD.ToString();
         }
     }

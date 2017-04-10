@@ -1,0 +1,102 @@
+﻿@using SampleCode.C3.MVC.Controllers
+
+@{
+    ViewBag.Title = "StandardPage";
+    Layout = "~/Views/GoC.WebTemplate/GoCWebTemplate.Application.cshtml";
+}
+<h1>GoC Web Template Samples - Standard Application Settings Sample</h1>
+<section class="alert alert-danger">
+    <h2>Notice for Implementers</h2>
+    <p>Please ensure you have permission from your department, TBS or Principal Publisher before proceeding. The changes below DO NOT follow the <a rel="external" class="alert-link" href="http://www.gcpedia.gc.ca/wiki/Canada.ca_Content_and_Information_Architecture_Specification">C&IA specifications document</a> </p>
+</section>
+
+<p><a rel="external" href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
+
+<h2>Application Name</h2>
+<p>
+    This setting determines the title for your site. Set programmatically by the <code class="wb-prettify">ApplicationName.Title</code>
+    property of the web template
+</p>
+
+<div class="wb-prettify all-pre lang-c# linenums">
+    <pre>WebTemplateCore.ApplicationTitle.Text ="Application Name"; //The name of the web application</pre>
+</div>
+<h2>Custom Search</h2>
+<p><code class="wb-prettify">CustomSearch</code> You need to contact the CDTS team to enable this option, as it needs to be added to the CDTS Template.</p>
+
+<h2>Site Menu</h2>
+<p>The Site Menu can be hidden or overridden using the following settings</p>
+<ul>
+    <li><code class="wb-prettify">ShowSiteMenu</code> is used to hide the site menu. This defaults to true.</li>
+    <li>
+        <code class="wb-prettify">CustomSiteMenuURL</code> This variable is used to display a custom menu.
+        <p>Although you don't need to we suggest you contact the CDTS team to enable this option. If you have done this before then simply provide the URL to your valid menu file to enable this option. </p>
+            
+        <p>You can copy the format in the sample custom menu file provided below in our sample.</p>
+        <a href="https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html">https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html</a>
+    </li>
+</ul>
+
+<h2>Secure Icon</h2>
+<p><code class="wb-prettify">ShowSecure</code> is a boolean variable that is used to either show or hide the secure icon</p>
+
+<h2>Sign In & Out</h2>
+<p>You are able to specify the visibility of and the url for sign in and sign out buttons on the application menu.</p>
+
+<div class="alert alert-warning"><code class="wb-prettify">ShowSignInLink</code> and <code class="wb-prettify">ShowSignOutLink</code> cannot both be set to true at the same time.</div>
+<h3>Sign In</h3>
+<ul>
+    <li> <code class="wb-prettify">ShowSignInLink</code> is a boolean variable that is used to either show or hide the Sign In Button </li>
+    <li>
+        <code class="wb-prettify">ShowSignInURL</code> is the location of your sign in page for this web application, this can also be set in the web.config.
+        If this is set in the web.config it should navigate to a page that is hooked into the applications localization.
+    </li>
+</ul>
+
+<div class="wb-prettify all-pre lang-c# linenums">
+    <pre>WebTemplateCore.ShowSignInLink = true; //Show the sign in button
+WebTemplateCore.SignInLinkURL = "about:blank"; //The URL to your applications sign in page.
+</pre>
+</div>
+<h3>Sign Out</h3>
+<ul>
+    <li> <code class="wb-prettify">ShowSignOutLink</code> is a boolean variable that is used to either show or hide the Sign Out Button </li>
+    <li> <code class="wb-prettify">ShowSignOutURL</code> is the location of your sign out service.  </li>
+</ul>
+<div class="wb-prettify all-pre lang-c# linenums">
+    <pre>WebTemplateCore.ShowSignOutLink = true; //Show the sign out button
+WebTemplateCore.SignOutLinkURL = "about:blank"; //The URL to your applications sign out service.
+</pre>
+</div>
+<h2>Breadcrumps</h2>
+<p>See the example at the following page: @Html.ActionLink("Breadcrumbs Example", "BreadCrumbAction", "GoCWebTemplateSample").</p>
+
+
+<h2>Global Nav</h2>
+<p>This setting determines if the global navigation menu for Canada.ca is displayed in the footer.</p>
+<p>This is set programmatically by the <code class="wb-prettify">ShowGlobalNav</code> property of the application template and can also be</p>
+<div class="alert alert-warning">Setting this to true will override the default footer, custom footer links, and transactional footer</div>
+
+<h2>Custom Footer Links</h2>
+<p>A list of <code class="wb-prettify">FooterLinks</code> is available for you to provide your own links in the application footer.</p>
+
+    OPTIONAL – contactLinks – This variable will override the default contact link located in the footer section of your page. If no variable is specified then the default link will be displayed. Otherwise you can use the following code to include your custom contact us link.
+        contactLinks: [{href: "#"}]
+<h2>Terms and Condition and Privacy Link</h2>
+<p>See the example at the @Html.ActionLink("Transactional Sample page", "TransactionalSample", "GoCWebTemplateSample") for how to implement this.</p>
+    OPTIONAL – showFeatures – This will be used by the Principal Publisher to insert GoC activities and initiatives into your page. By default this is ALWAYS shown on all pages. You will need authorization from the Principal Publisher to not include this content in your web asset. If you receive such authorization then you can insert the following code.
+        showFeatures: false
+
+<div class="wb-prettify all-pre lang-c# linenums">
+    <pre>WebTemplateCore.ShowSearch = true; //Show the Search Button
+WebTemplateCore.ApplicationTitle.Text ="Application Name"; //The name of the web application 
+WebTemplateCore.ShowSiteMenu = true; //Show or hide the site menu
+WebTemplateCore.ShowSecure = true; //Show the lock icons
+WebTemplateCore.ShowGlobalNav = true; //Show the Global Navigation in the footer 
+WebTemplateCore.ShowSignInLink = true; //Show the sign in button
+WebTemplateCore.SignInLinkURL = "about:blank"; //The URL to your applications sign in page.
+WebTemplateCore.ShowSignOutLink = true; //Show the sign out button
+WebTemplateCore.SignOutLinkURL = "about:blank"; //The URL to your applications sign out service.
+WebTemplateCore.
+</pre>
+</div>

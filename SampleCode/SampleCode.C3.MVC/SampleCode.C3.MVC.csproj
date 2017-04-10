@@ -25,6 +25,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,11 +45,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplateMVC, Version=4.0.22.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.22.3\Lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+    <Reference Include="GoC.WebTemplateMVC, Version=4.0.24.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1-rc\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -82,14 +87,15 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebTemplateCore, Version=1.0.6165.27744, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.22.3\Lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6305.29096, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1-rc\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ExtendedBaseController.cs" />
+    <Compile Include="Controllers\GoCWebTemplateApplicationSampleController.cs" />
     <Compile Include="Controllers\GoCWebTemplateExtendedCtrlSampleController.cs" />
     <Compile Include="Controllers\GoCWebTemplateSampleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -183,6 +189,22 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.LeftMenu_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
+    <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\Secure.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\SignIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\SignOut.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\StandardPage.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
