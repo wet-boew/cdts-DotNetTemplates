@@ -101,17 +101,7 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult FooterLinksSample()
         {
             //Contact Links
-            this.WebTemplateCore.ContactLinks.Add(new Link("http://travel.gc.ca/", "Travel"));
-            this.WebTemplateCore.ContactLinks.Add(new Link("http://healthycanadians.gc.ca/index-eng.php", "Health"));
-            this.WebTemplateCore.ContactLinks.Add(new Link("http://jobs-emplois.gc.ca/index-eng.htm", "Jobs"));
-
-            //News Links
-            this.WebTemplateCore.NewsLinks.Add(new Link("http://www.cbc.ca/news/canada", "CBC"));
-            this.WebTemplateCore.NewsLinks.Add(new Link("http://www.cnn.com/", "CNN"));
-
-            //About Links
-            this.WebTemplateCore.AboutLinks.Add(new Link("https://www.facebook.com", "Facebook"));
-            this.WebTemplateCore.AboutLinks.Add(new Link("http://www.lapresse.ca/", "LaPresse"));
+            this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -187,7 +177,7 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult TransactionalSample()
         {
             //Contact Links
-            this.WebTemplateCore.ContactLinks.Add(new Link("http://travel.gc.ca/", "Travel"));
+            this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
             //set the Terms and Condition Link
             this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link

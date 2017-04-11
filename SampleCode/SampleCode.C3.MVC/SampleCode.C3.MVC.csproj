@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GoC.WebTemplateMVC, Version=4.0.24.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1-rc\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1-rc3\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -87,8 +87,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebTemplateCore, Version=1.0.6305.29096, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1-rc\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6310.28753, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1-rc3\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -154,7 +154,6 @@
     <Content Include="Views\GoCWebTemplateSample\BreadcrumbSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\AddJSandCSSFilesSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\FeedbackandShareThisPageSample.cshtml" />
-    <Content Include="Views\GoCWebTemplateSample\FooterLinksSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\LeavingSecureSiteSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\LeftSideMenuSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\SessionTimeoutSample.cshtml" />
@@ -179,6 +178,18 @@
     <Content Include="Views\GoCWebTemplateSample\GCIntranetThemeSample.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\Secure.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\SignIn.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\SignOut.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GoCWebTemplateApplicationSample\StandardPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -191,20 +202,10 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.LeftMenu_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\Secure.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\SignIn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\SignOut.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\StandardPage.cshtml" />
+    <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
