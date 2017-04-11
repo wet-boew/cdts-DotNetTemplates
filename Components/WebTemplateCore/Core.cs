@@ -143,9 +143,12 @@ namespace GoC.WebTemplate
 
             HTMLHeaderElements = new List<string>();
             HTMLBodyElements = new List<string>();
+            //We don't want to break the API so we must set these obsolete collections until the next build.
+#pragma warning disable 618
             ContactLinks = new List<Link>();
             NewsLinks = new List<Link>();
             AboutLinks = new List<Link>();
+#pragma warning restore 618
             Breadcrumbs = new List<Breadcrumb>();
             SharePageMediaSites = new List<SocialMediaSites>();
             LeftMenuItems = new List<MenuSection>();
@@ -177,6 +180,7 @@ namespace GoC.WebTemplate
         /// Represents the list of links to override the About links in Footer
         /// Set by application programmatically
         /// </summary>
+        [Obsolete("This will be removed in next release of Web Templates")]
         public List<Link> AboutLinks { get; set;  }
 
         /// <summary>
@@ -270,13 +274,32 @@ namespace GoC.WebTemplate
         /// <summary>
         /// Represents the list of links to override the Contact links in Footer
         /// Set by application programmatically
+        /// This is deprecated please use <see cref="ContactLinkURL"/>
         /// </summary>
+        [Obsolete("This will be removed in next release of Web Templates, please use ContactLinkURL")]
         public List<Link> ContactLinks { get; set; }
 
-        public List<Link> EncodedContactLinks => ContactLinks?.Select(l => new Link {
-            Href = HttpUtility.UrlEncode(l.Href),
-            Text = GetStringForJson(l.Text)
-        }).ToList();
+        public string ContactLinkURL { get; set; }
+
+        private List<Link> FigureOutContactLinkURL()
+        {
+            if (ContactLinkURL != null)
+            {
+                return new List<Link> {new Link {Href = HttpUtility.UrlEncode(ContactLinkURL)}};
+            }
+
+                //Disable obsolete warning since we need to call an obsolete method.
+#pragma warning disable 618
+            if (ContactLinks != null && ContactLinks.Any())
+            {
+                //This is obsolete I don't really care if it's performant right now it'll be gone soon.
+                return new List<Link> { new Link { Href = HttpUtility.UrlEncode(ContactLinks.First().Href)} };
+            }
+#pragma warning restore 618
+            return null;
+        }
+
+        public List<Link> EncodedContactLinks => FigureOutContactLinkURL();
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -472,6 +495,7 @@ namespace GoC.WebTemplate
         /// Represents the list of links to override the News links in Footer
         /// Set by application programmatically
         /// </summary>
+        [Obsolete("This will be removed in next release of Web Templates")]
         public List<Link> NewsLinks { get; set; }
 
         /// <summary>
@@ -811,16 +835,14 @@ namespace GoC.WebTemplate
             if (transactionalMode)
             {
                 //contact, terms, privacy links
-                RenderLinksList(sb, LinkTypes.contactLinks, ContactLinks);
+                RenderLinksList(sb, LinkTypes.contactLinks, EncodedContactLinks);
                 RenderTermsConditionsLink(sb);
                 RenderPrivacyLink(sb);
             }
             else
             {
                 //contact, news, about links
-                RenderLinksList(sb, LinkTypes.contactLinks, ContactLinks);
-                RenderLinksList(sb, LinkTypes.newsLinks, NewsLinks);
-                RenderLinksList(sb, LinkTypes.aboutLinks, AboutLinks);
+                RenderLinksList(sb, LinkTypes.contactLinks, EncodedContactLinks);
             }
             return new HtmlString(sb.ToString());
         }

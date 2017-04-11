@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using FluentAssertions;
 using GoC.WebTemplate;
 using Xunit;
@@ -11,6 +12,29 @@ namespace CoreTest
     /// </summary>
     public class RenderTests 
     {
+        [Theory, AutoNSubstituteData]
+        public void ExceptionWhenCallingRenderFooterLinks(Core sut)
+        {
+            sut.ContactLinkURL = null;
+            Action execute = () => sut.RenderFooterLinks(false);
+            execute.ShouldNotThrow<NullReferenceException>();
+
+        }
+        [Theory, AutoNSubstituteData]
+        public void DefaultToNonObsoleteURLForContactLinks(Core sut)
+        {
+            sut.ContactLinks.Add(new Link {Href = "foo"});
+            sut.EncodedContactLinks.First().Href.Should().Be(sut.ContactLinkURL);
+        }
+
+        public void UseContactLinksListIfContactLinkURLIsNull(Core sut)
+        {
+            sut.ContactLinks.Add(new Link {Href = "foo"});
+            sut.ContactLinkURL = default(string);
+            sut.EncodedContactLinks.First().Href.Should().Be("foo");
+
+
+        }
 
         [Theory, AutoNSubstituteData]
         public void RenderAppFooterMustNotCrashWithNullContactLinks(Core sut)
