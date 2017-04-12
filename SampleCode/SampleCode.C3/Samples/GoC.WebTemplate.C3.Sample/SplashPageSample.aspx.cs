@@ -6,8 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using GoC.WebTemplate.Proxies;
 
-namespace SampleCode.C3.Samples
-{
     public partial class SplashPageSample : GoC.WebTemplate.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -18,4 +16,3 @@ namespace SampleCode.C3.Samples
         }
         public GoC.WebTemplate.Core WebTemplateCore { get; set; }
     }
-}

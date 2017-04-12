@@ -124,6 +124,7 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\ApplicationTemplate.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\ChangeLog.txt" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\GCIntranetThemeSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\Logout.aspx" />
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\AddJSandCSSFilesSample.aspx.designer.cs">
       <DependentUpon>AddJSandCSSFilesSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ApplicationTemplate.aspx.cs">
+      <DependentUpon>ApplicationTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ApplicationTemplate.aspx.designer.cs">
+      <DependentUpon>ApplicationTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BaseSettingsSample.aspx.cs">
       <DependentUpon>BaseSettingsSample.aspx</DependentUpon>

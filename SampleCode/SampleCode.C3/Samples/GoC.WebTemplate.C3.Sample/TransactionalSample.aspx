@@ -44,9 +44,9 @@
         <h3>C# Code Sample</h3>
         <pre>
 //set the Terms and Condition Link
-this.WebTemplateMaster.WebTemplateCore.TermsConditionsLink_URL = "http://www.tsn.ca";
+this.WebTemplateMaster.WebTemplateCore.TermsConditionsLink.URL = "http://www.tsn.ca";
 //set the Privacy link
-this.WebTemplateMaster.WebTemplateCore.PrivacyLink_URL = "http://www.lapresse.ca";
+this.WebTemplateMaster.WebTemplateCore.PrivacyLink.URL = "http://www.lapresse.ca";
         </pre>
     </div>
 <!-- #include virtual="SamplesNavigation.html" -->

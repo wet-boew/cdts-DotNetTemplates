@@ -178,15 +178,6 @@
     <Content Include="Views\GoCWebTemplateSample\GCIntranetThemeSample.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\Secure.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\SignIn.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\GoCWebTemplateApplicationSample\SignOut.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoCWebTemplateApplicationSample\StandardPage.cshtml" />
   </ItemGroup>
   <ItemGroup>

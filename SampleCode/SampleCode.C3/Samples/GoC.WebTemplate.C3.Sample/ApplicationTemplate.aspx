@@ -1,10 +1,11 @@
-﻿@using SampleCode.C3.MVC.Controllers
-
-@{
-    ViewBag.Title = "StandardPage";
-    Layout = "~/Views/GoC.WebTemplate/GoCWebTemplate.Application.cshtml";
-}
-<h1>GoC Web Template Samples - Standard Application Settings Sample</h1>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Application.Master" AutoEventWireup="true" CodeBehind="ApplicationTemplate.aspx.cs" Inherits="ApplicationTemplate" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    
+    
+    
+    
+    
+    <h1>GoC Web Template Samples - Standard Application Settings Sample</h1>
 <section class="alert alert-danger">
     <h2>Notice for Implementers</h2>
     <p>Please ensure you have permission from your department, TBS or Principal Publisher before proceeding. The changes below DO NOT follow the <a rel="external" class="alert-link" href="http://www.gcpedia.gc.ca/wiki/Canada.ca_Content_and_Information_Architecture_Specification">C&IA specifications document</a> </p>
@@ -21,7 +22,7 @@
 
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>//Set the name of the web application
-WebTemplateMaster.WebTemplateCore..ApplicationTitle.Text ="Application Name"; 
+WebTemplateCore.ApplicationTitle.Text ="Application Name"; 
 </pre>
 </div>
 
@@ -32,7 +33,7 @@ WebTemplateMaster.WebTemplateCore..ApplicationTitle.Text ="Application Name";
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>
 //Set the link to be used for changing languages.
-WebTemplateMaster.WebTemplateCore..LanguageLink.Href = "about:blank";
+WebTemplateCore.LanguageLink.Href = "about:blank";
 </pre>
 </div>
 
@@ -50,11 +51,11 @@ WebTemplateMaster.WebTemplateCore..LanguageLink.Href = "about:blank";
 </ul>
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
-WebTemplateMaster.WebTemplateCore..FooterLinks.Add(new FooterLink {
+WebTemplateCore.FooterLinks.Add(new FooterLink {
     Href = "about:blank",
     Text = "Link Text 1"
 });
-WebTemplateMaster.WebTemplateCore..FooterLinks.Add(new FooterLink {
+WebTemplateCore.FooterLinks.Add(new FooterLink {
     Href = "about:blank",
     Text = "Link Text 2", 
     NewWindow = true
@@ -70,7 +71,7 @@ WebTemplateMaster.WebTemplateCore..FooterLinks.Add(new FooterLink {
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
 //Use the SDS Custom Search from the templates
-WebTemplateMaster.WebTemplateCore..CustomSearch ="SDS"; 
+WebTemplateCore.CustomSearch ="SDS"; 
 </pre>
 </div>
 
@@ -81,7 +82,7 @@ WebTemplateMaster.WebTemplateCore..CustomSearch ="SDS";
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
 //Turn off the features in the footer 
-WebTemplateMaster.WebTemplateCore..ShowFeatures = true; 
+WebTemplateCore.ShowFeatures = true; 
 </pre>
 </div>
 
@@ -95,7 +96,7 @@ WebTemplateMaster.WebTemplateCore..ShowFeatures = true;
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
 //Show the Global Navigation in the footer 
-WebTemplateMaster.WebTemplateCore..ShowGlobalNav = true; 
+WebTemplateCore.ShowGlobalNav = true; 
 </pre>
 </div>
 
@@ -105,21 +106,20 @@ WebTemplateMaster.WebTemplateCore..ShowGlobalNav = true;
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
 //Use ShowSearch to hide the search field on the page.
-WebTemplateMaster.WebTemplateCore..ShowSearch = false; 
+WebTemplateCore.ShowSearch = false; 
 </pre>
 </div>
 
 <h2>Left Menu Variant</h2>
 <p>There is also a left menu version of this template it's available by using the <code class="wb-prettify">GoCWebTemplate.Application.LeftMenu_Layout.cshtml</code> layout for your page.</p>
-<p>The Left Menu is implmented in the same way as the Left Menu for the other templates. See <a href="@Url.Action("LeftSideMenuSample","GoCWebTemplateSample")">Left Side Menu Sample</a> on how to implement this.</p>
+<p>The Left Menu is implmented in the same way as the Left Menu for the other templates. See <a href="LeftSideMenuSample.aspx">Left Side Menu Sample</a> on how to implement this.</p>
 
 <h2>Pre-Content</h2>
 <p> This will be used by Principal Publisher to insert content into the pre content space of your page. By default this is ALWAYS shown on all pages. You will need authorization from the Principal Publisher to not include this content in your web asset</p>
 <p>If you recieve such authorization then you can turn off the pre-content programmatically using the <code class="wb-prettify">ShowPreContent</code> flag or in the web.config.</p>
-
-<div class="wb-prettify all-pre lang-c# linenums">
+    <div class="wb-prettify all-pre lang-c# linenums">
 <pre>//show or hide the pages pre-content 
-WebTemplateMaster.WebTemplateCore..ShowPreContent = false; 
+WebTemplateCore.ShowPreContent = false; 
 </pre>
 </div>
 
@@ -138,9 +138,9 @@ WebTemplateMaster.WebTemplateCore..ShowPreContent = false;
 
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>//show or hide the site menu
-WebTemplateMaster.WebTemplateCore..ShowSiteMenu = true; 
+WebTemplateCore.ShowSiteMenu = true; 
 //set the custom site menu url
-WebTemplateMaster.WebTemplateCore..CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
+WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
 </pre>
 </div>
 
@@ -151,7 +151,7 @@ WebTemplateMaster.WebTemplateCore..CustomSiteMenuURL ="https://ssl-templates.ser
 
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>//Show the lock icons
-WebTemplateMaster.WebTemplateCore..ShowSecure = true; 
+WebTemplateCore.ShowSecure = true; 
 </pre>
 </div>
 
@@ -175,9 +175,9 @@ WebTemplateMaster.WebTemplateCore..ShowSecure = true;
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>
 //Show the sign in button
-WebTemplateMaster.WebTemplateCore..ShowSignInLink = true; 
+WebTemplateCore.ShowSignInLink = true; 
 //The URL to your applications sign in page.
-WebTemplateMaster.WebTemplateCore..SignInLinkURL = "about:blank"; 
+WebTemplateCore.SignInLinkURL = "about:blank"; 
 </pre>
 </div>
 
@@ -188,14 +188,15 @@ WebTemplateMaster.WebTemplateCore..SignInLinkURL = "about:blank";
 </ul>
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>//Show the sign out button
-WebTemplateMaster.WebTemplateCore..ShowSignOutLink = true; 
+WebTemplateCore.ShowSignOutLink = true; 
 //The URL to your applications sign out service.
-WebTemplateMaster.WebTemplateCore..SignOutLinkURL = "about:blank"; 
+WebTemplateCore.SignOutLinkURL = "about:blank"; 
 </pre>
 </div>
 
 <h2>Terms and Condition and Privacy Link</h2>
-<p>See the example at the <a href="@Url.Action("TransactionalSample","GoCWebTemplateSample")">Transactional Sample Page</a> for how to implement this.</p>
+<p>See the example at the <a href="TransactionalSample.aspx">Transactional Sample Page</a> for how to implement this.</p>
 
+<!-- #include virtual="SamplesNavigation.html" -->
 
-@Html.Partial("_SamplesNavigation") 
+</asp:Content>
