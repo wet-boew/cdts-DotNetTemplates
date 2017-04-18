@@ -14,6 +14,12 @@
 <p><a rel="external" href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
 
+<div class="alert alert-warning">
+    <h2>Left Menu Variant</h2>
+    <p>There is also a left menu version of this template it's available by using the <code class="wb-prettify">GoCWebTemplate.Application.LeftMenu_Layout.cshtml</code> layout for your page.</p>
+    <p>The Left Menu is implmented in the same way as the Left Menu for the other templates. See <a href="LeftSideMenuSample.aspx">Left Side Menu Sample</a> on how to implement this.</p>
+</div>
+
 <h2>Application Name</h2>
 <p>
     This setting determines the title for your site. Set programmatically by the <code class="wb-prettify">ApplicationName.Title</code>
@@ -109,10 +115,6 @@ WebTemplateCore.ShowGlobalNav = true;
 WebTemplateCore.ShowSearch = false; 
 </pre>
 </div>
-
-<h2>Left Menu Variant</h2>
-<p>There is also a left menu version of this template it's available by using the <code class="wb-prettify">GoCWebTemplate.Application.LeftMenu_Layout.cshtml</code> layout for your page.</p>
-<p>The Left Menu is implmented in the same way as the Left Menu for the other templates. See <a href="LeftSideMenuSample.aspx">Left Side Menu Sample</a> on how to implement this.</p>
 
 <h2>Pre-Content</h2>
 <p> This will be used by Principal Publisher to insert content into the pre content space of your page. By default this is ALWAYS shown on all pages. You will need authorization from the Principal Publisher to not include this content in your web asset</p>
