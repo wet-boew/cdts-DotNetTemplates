@@ -13,6 +13,15 @@ namespace CoreTest
     public class RenderTests 
     {
         [Theory, AutoNSubstituteData]
+        public void CustomSearchIsRendered(Core sut)
+        {
+            sut.CustomSearch = "foo";
+            var json = sut.RenderAppTop();
+            json.ToString().Should().Contain("\"customSearch\":\"foo\"");
+
+        }
+
+        [Theory, AutoNSubstituteData]
         public void ExceptionWhenCallingRenderFooterLinks(Core sut)
         {
             sut.ContactLinkURL = null;

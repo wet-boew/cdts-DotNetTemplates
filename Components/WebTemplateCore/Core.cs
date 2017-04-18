@@ -806,7 +806,8 @@ namespace GoC.WebTemplate
                 Breadcrumbs = EncodedBreadcrumbs,
                 LocalPath = HttpUtility.UrlEncode(GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)),
                 SiteMenu = ShowSiteMenu,
-                MenuPath = HttpUtility.UrlEncode(CustomSiteMenuURL)
+                MenuPath = HttpUtility.UrlEncode(CustomSiteMenuURL), 
+                CustomSearch = CustomSearch
             };
 
             return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
