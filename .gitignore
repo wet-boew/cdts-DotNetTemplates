@@ -277,4 +277,4 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 /Applications/GoC.WebTemplateMVC/Views/TestWebTemplatePage/HelloWorld.cshtml
-/Builds/BuildScripts/GCPedia/.GCPediaASPXProject.proj.swp
+*.swp
