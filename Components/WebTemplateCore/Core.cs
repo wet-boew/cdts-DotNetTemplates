@@ -225,8 +225,8 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<Breadcrumb> Breadcrumbs { get; set; }
 
-        public List<Breadcrumb> EncodedBreadcrumbs => Breadcrumbs?.Select(b => new Breadcrumb {
-            Href = HttpUtility.UrlEncode(b.Href),
+        public List<Breadcrumb> BuildBreadcrumbs => Breadcrumbs?.Select(b => new Breadcrumb {
+            Href = b.Href,
             Acronym = b.Acronym,
             Title = GetStringForJson(b.Title)
         }).ToList();
@@ -285,7 +285,7 @@ namespace GoC.WebTemplate
         {
             if (ContactLinkURL != null)
             {
-                return new List<Link> {new Link {Href = HttpUtility.UrlEncode(ContactLinkURL)}};
+                return new List<Link> {new Link {Href = ContactLinkURL}};
             }
 
                 //Disable obsolete warning since we need to call an obsolete method.
@@ -293,13 +293,13 @@ namespace GoC.WebTemplate
             if (ContactLinks != null && ContactLinks.Any())
             {
                 //This is obsolete I don't really care if it's performant right now it'll be gone soon.
-                return new List<Link> { new Link { Href = HttpUtility.UrlEncode(ContactLinks.First().Href)} };
+                return new List<Link> { new Link { Href = ContactLinks.First().Href} };
             }
 #pragma warning restore 618
             return null;
         }
 
-        public List<Link> EncodedContactLinks => FigureOutContactLinkURL();
+
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -723,9 +723,9 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
         
-        public List<FooterLink> EncodedCustomFooterLinks => CustomFooterLinks?.Select(fl => new FooterLink
+        public List<FooterLink> BuildCustomFooterLinks => CustomFooterLinks?.Select(fl => new FooterLink
         {
-            Href = HttpUtility.UrlEncode(fl.Href),
+            Href = fl.Href,
             NewWindow = fl.NewWindow,
             Text = GetStringForJson(fl.Text)
         }).ToList();
@@ -753,7 +753,7 @@ namespace GoC.WebTemplate
             {
                 return null;
             }
-            return new List<Link> {new Link {Href = HttpUtility.UrlEncode(href), Text = null}};
+            return new List<Link> {new Link {Href = href, Text = null}};
         }
 
         private void CheckIfBothSignInAndSignOutAreSet()
@@ -776,12 +776,12 @@ namespace GoC.WebTemplate
                 CdnEnv = CDNEnvironment,
                 SubTheme = GetStringForJson(WebTemplateSubTheme),
                 ShowFeatures = ShowFeatures,
-                TermsLink = HttpUtility.UrlEncode(GetStringForJson(TermsConditionsLinkURL)),
-                PrivacyLink = HttpUtility.UrlEncode(GetStringForJson(PrivacyLinkURL)),
-                ContactLinks = EncodedContactLinks,
-                LocalPath = HttpUtility.UrlEncode(GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)),
+                TermsLink = GetStringForJson(TermsConditionsLinkURL),
+                PrivacyLink = GetStringForJson(PrivacyLinkURL),
+                ContactLinks = FigureOutContactLinkURL(),
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 GlobalNav = ShowGlobalNav,
-                FooterSections = EncodedCustomFooterLinks
+                FooterSections = BuildCustomFooterLinks
             };
 
             return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
@@ -803,10 +803,10 @@ namespace GoC.WebTemplate
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 ShowPreContent = ShowPreContent,
-                Breadcrumbs = EncodedBreadcrumbs,
-                LocalPath = HttpUtility.UrlEncode(GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)),
+                Breadcrumbs = BuildBreadcrumbs,
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 SiteMenu = ShowSiteMenu,
-                MenuPath = HttpUtility.UrlEncode(CustomSiteMenuURL), 
+                MenuPath = CustomSiteMenuURL, 
                 CustomSearch = CustomSearch
             };
 
@@ -824,7 +824,7 @@ namespace GoC.WebTemplate
 
             return new List<LanguageLink> {
                 new LanguageLink {
-                    Href = HttpUtility.UrlEncode(LanguageLink.Href)
+                    Href = LanguageLink.Href
                 }
             };
         }
@@ -836,14 +836,14 @@ namespace GoC.WebTemplate
             if (transactionalMode)
             {
                 //contact, terms, privacy links
-                RenderLinksList(sb, LinkTypes.contactLinks, EncodedContactLinks);
+                RenderLinksList(sb, LinkTypes.contactLinks, FigureOutContactLinkURL());
                 RenderTermsConditionsLink(sb);
                 RenderPrivacyLink(sb);
             }
             else
             {
                 //contact, news, about links
-                RenderLinksList(sb, LinkTypes.contactLinks, EncodedContactLinks);
+                RenderLinksList(sb, LinkTypes.contactLinks, FigureOutContactLinkURL());
             }
             return new HtmlString(sb.ToString());
         }

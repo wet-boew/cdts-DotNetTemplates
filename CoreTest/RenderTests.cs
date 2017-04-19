@@ -13,6 +13,14 @@ namespace CoreTest
     public class RenderTests 
     {
         [Theory, AutoNSubstituteData]
+        public void ShouldNotEncodeURL(Core sut)
+        {
+            sut.ContactLinkURL = "http://localhost:8080/foo.html";
+            var htmlstring = sut.RenderFooterLinks(false);
+            htmlstring.ToString().Should().Contain("http://localhost:8080/foo.html");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void CustomSearchIsRendered(Core sut)
         {
             sut.CustomSearch = "foo";
@@ -33,16 +41,23 @@ namespace CoreTest
         public void DefaultToNonObsoleteURLForContactLinks(Core sut)
         {
             sut.ContactLinks.Add(new Link {Href = "foo"});
-            sut.EncodedContactLinks.First().Href.Should().Be(sut.ContactLinkURL);
+            sut.ContactLinkURL = "bar";
+            sut.RenderAppFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"bar\"}]");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void HandleEmptyContactLinkList(Core sut)
+        {
+            sut.ContactLinkURL = "bar";
+            sut.RenderAppFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"bar\"}]");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void UseContactLinksListIfContactLinkURLIsNull(Core sut)
         {
             sut.ContactLinks.Add(new Link {Href = "foo"});
             sut.ContactLinkURL = default(string);
-            sut.EncodedContactLinks.First().Href.Should().Be("foo");
-
-
+            sut.RenderAppFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"foo\"}]");
         }
 
         [Theory, AutoNSubstituteData]
