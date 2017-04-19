@@ -7,7 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleCode.C3.Samples {
     
     
     public partial class SessionTimeoutSample {
@@ -21,4 +20,3 @@ namespace SampleCode.C3.Samples {
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblID;
     }
-}

@@ -6,8 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using GoC.WebTemplate;
 
-namespace SampleCode.C3.Samples
-{
     public partial class NestedMasterPageSample1 : GoC.WebTemplate.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -16,4 +14,3 @@ namespace SampleCode.C3.Samples
             this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "Nested Master Page Sample";
         }
     }
-}

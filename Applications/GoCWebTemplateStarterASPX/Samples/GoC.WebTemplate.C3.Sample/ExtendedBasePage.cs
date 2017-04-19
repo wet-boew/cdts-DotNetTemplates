@@ -4,8 +4,6 @@ using System.Linq;
 using System.Web;
 using GoC.WebTemplate;
 
-namespace SampleCode.C3.Samples
-{
     public class ExtendedBasePage : GoC.WebTemplate.BasePage
     {
         protected void Page_Init(object sender, EventArgs e)
@@ -27,4 +25,3 @@ namespace SampleCode.C3.Samples
         }
         
     }
-}

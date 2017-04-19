@@ -6,8 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using GoC.WebTemplate;
 
-namespace SampleCode.C3.Samples
-{
     public partial class SessionTimeoutSample : GoC.WebTemplate.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -40,4 +38,3 @@ namespace SampleCode.C3.Samples
             this.WebTemplateMaster.WebTemplateCore.SessionTimeout.AdditionalData = "";
         }
     }
-}

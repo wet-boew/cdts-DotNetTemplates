@@ -12,8 +12,8 @@ public partial class TransactionalSample : GoC.WebTemplate.BasePage
     protected void Page_Load(object sender, EventArgs e)
     {
         //set the Terms and Condition Link
-        this.WebTemplateMaster.WebTemplateCore.TermsConditionsLink_URL = "http://www.tsn.ca";
+        this.WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
         //set the Privacy link
-        this.WebTemplateMaster.WebTemplateCore.PrivacyLink_URL = "http://www.lapresse.ca";
+        this.WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
     }
 }
