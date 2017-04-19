@@ -2,13 +2,16 @@
 <package >
   <metadata>
     <id>GoC.WebTemplate.MVC</id>
-    <version>4.0.21.1</version>
+    <version>4.0.24.1</version>
     <authors>SDS</authors>
     <owners>SDS</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MVC Layout File that incorporates SCWASI and the CDTS, written in C#</description>
-    <releaseNotes>Implementation of 4.0.21</releaseNotes>
+    <releaseNotes>Implementation of 4.0.24</releaseNotes>
     <copyright>Copyright 2014</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="9.0.1" />
+    </dependencies>
   </metadata>
 </package>

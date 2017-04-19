@@ -277,3 +277,4 @@ __pycache__/
 # tools/**
 # !tools/packages.config
 /Applications/GoC.WebTemplateMVC/Views/TestWebTemplatePage/HelloWorld.cshtml
+*.swp

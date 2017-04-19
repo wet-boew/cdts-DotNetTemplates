@@ -20,8 +20,8 @@
 
 <h2>Application Title</h2>
 <p>When using the "GCIntranet" theme in your application, you can optionally set the Application Title text and its url. The application title is displayed at the top of the page, above the menu.</p>
-<p>Set programmatically via the <code class="wb-prettify">"WebTemplateCore.ApplicationTitle_Text"</code>.
-<p>The URL for the Application Title is optional.  If left blank the subTheme will determine the URL to use.  You can override the default URL value of the subTheme by setting programmatically the <code class="wb-prettify">"WebTemplateCore.ApplicationTitle_URL"</code> property of the Web Template.</p>
+<p>Set programmatically via the <code class="wb-prettify">"WebTemplateCore.ApplicationTitle.Text"</code>.
+<p>The URL for the Application Title is optional.  If left blank the subTheme will determine the URL to use.  You can override the default URL value of the subTheme by setting programmatically the <code class="wb-prettify">"WebTemplateCore.ApplicationTitle.URL"</code> property of the Web Template.</p>
 
 <div class="wb-prettify all-pre lang-vb linenums">
     <h3>Web Config Sample</h3>
@@ -39,8 +39,8 @@
 this.WebTemplateCore.WebTemplateTheme = "GCIntranet";
 this.WebTemplateCore.WebTemplateSubTheme = "ESDC";
 this.WebTemplateCore.CDNEnvironment = GoC.WebTemplate.Core.CDTSEnvironments.ESDCPROD.ToString();
-this.WebTemplateCore.ApplicationTitle_Text = "My Custom Title";
-this.WebTemplateCore.ApplicationTitle_URL = "http://iservice.prv/eng/index.shtml";           
+this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
+this.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";           
         </pre>
 </div>
 @Html.Partial("_SamplesNavigation")

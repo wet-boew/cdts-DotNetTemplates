@@ -13,6 +13,7 @@ using System.Globalization;
 using System.Text;
 using System.Web.Caching;
 using System.Reflection;
+using GoC.WebTemplate.Proxies;
 
 // TODO
 //consider debug logging?
@@ -24,7 +25,7 @@ namespace GoC.WebTemplate
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.WebTemplateCore = new Core();
+            this.WebTemplateCore = new Core(new CurrentRequestProxy(), new ConfigurationProxy());
         }
 
         public Core WebTemplateCore { get; set; }

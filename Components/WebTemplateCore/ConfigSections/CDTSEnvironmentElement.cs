@@ -1,7 +1,7 @@
 using System.Configuration;
 
 // ReSharper disable once CheckNamespace
-namespace GOC.WebTemplate.ConfigSections
+namespace GoC.WebTemplate.ConfigSections
 {
     public class CDTSEnvironmentElement : ConfigurationElement
     {

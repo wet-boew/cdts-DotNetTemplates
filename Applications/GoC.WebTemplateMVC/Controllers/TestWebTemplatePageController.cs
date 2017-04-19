@@ -1,90 +1,319 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Globalization;
 using GoC.WebTemplate;
 
 namespace GoC.WebTemplateMVC.Controllers
 {
-    public class TestWebTemplatePageController : GoC.WebTemplate.WebTemplateBaseController
+    public class TestWebTemplatePageController : WebTemplateBaseController
     {
+
+        public ActionResult LeftMenuSecure()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowSecure = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            WebTemplateCore.LeftMenuItems = new List<MenuSection>
+            {
+                new MenuSection
+                {
+                    Items = new List<Link> { new Link {
+                            Href = "",
+                            Text = "Menu Item 1"
+                        }, new Link {
+                            Href= "#",
+                            Text = "Menu Item 2"
+                        }
+                    } ,
+                    Link = "#", 
+                    Name  = "MenuSection",
+                    OpenInNewWindow = false
+                }
+            };
+            return View("HelloWorldLeftMenu");
+        }
+        public ActionResult HelloWorld()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Web Template";
+            WebTemplateCore.ShowSecure = true;
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.ShowGlobalNav = true;
+            return View();
+        }
+
+        public ActionResult StandardPage ()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            return View("HelloWorld");
+        }
+
+        public ActionResult Secure()
+        {
+
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowSecure = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            return View("HelloWorld");
+        }
+
+        public ActionResult SignIn()
+        {
+            
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            WebTemplateCore.ShowSignInLink = true;
+            WebTemplateCore.SignInLinkURL = "about//blank";
+            return View("HelloWorld");
+        }
+        public ActionResult SignOut()
+        {
+            
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            WebTemplateCore.ShowSignOutLink = true;
+            WebTemplateCore.SignOutLinkURL = "about//blank";
+            return View("HelloWorld");
+        }
+        public ActionResult NoSearch()
+        {
+
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowSearch = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            return View("HelloWorld");
+        }
+        public ActionResult NoMenu()
+        {
+
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowSiteMenu = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            return View("HelloWorld");
+        }
+
+        public ActionResult CustomMenu()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.CustomSiteMenuURL =
+                "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
+
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            return View("HelloWorld");
+        }
+        public ActionResult SignInWithCustomMenu()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.CustomSiteMenuURL =
+                "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
+
+            WebTemplateCore.SignInLinkURL = "about//blank";
+            WebTemplateCore.ShowSignInLink = true;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+            return View("HelloWorld");
+        }
+
+        public ActionResult WithBreadCrumbs()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = new List<Breadcrumb>
+            {
+                new Breadcrumb{ Href = "https://www.canada.ca/en.html", Title = "GoC", Acronym = "Government of Canada"  },
+                new Breadcrumb { Title = "My application" }
+            };
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false;
+
+            return View("HelloWorld");
+        }
+
+        public ActionResult StandardFooter()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false; 
+            return View("HelloWorld");
+        }
+        public ActionResult CustomFooter()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = null;
+            WebTemplateCore.ShowPostContent = false; 
+            WebTemplateCore.CustomFooterLinks = new List<FooterLink>
+            {
+                new FooterLink {Href= "#", Text= "Link 1"},
+                new FooterLink {Href= "#", Text= "Link 2"},
+                new FooterLink {Href= "#", Text= "Link 3", NewWindow= true},
+                new FooterLink {Href= "#", Text= "Link 4"},
+                new FooterLink {Href= "#", Text= "Link 5"},
+                new FooterLink {Href= "#", Text= "Link 6"},
+                new FooterLink {Href= "#", Text= "Link 7"},
+                new FooterLink {Href= "#", Text= "Link 8"},
+                new FooterLink {Href= "#", Text= "Link 9"}
+            };
+            return View("HelloWorld");
+        }
+
+
+        public ActionResult TransactionalFooterCustomLinks()
+        {
+            
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.ShowGlobalNav = false;
+            WebTemplateCore.ContactLinks = new List<Link> { new Link {Href = "#"} };
+            WebTemplateCore.ShowFeatures = false;
+            WebTemplateCore.TermsConditionsLinkURL = "#";
+            WebTemplateCore.PrivacyLinkURL = "#";
+            return View("HelloWorld");
+        }
         //
         // GET: /TestWebTemplatePage/
         public ActionResult TestPage()
         { 
             //BASIC SETTINGS ====================================
            // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
-            this.WebTemplateCore.Environment = "akamai";
-            this.WebTemplateCore.WebTemplateSubTheme = "esdc";
-            this.WebTemplateCore.HeaderTitle = "Sample Page";
+            WebTemplateCore.Environment = "akamai";
+            WebTemplateCore.WebTemplateSubTheme = "esdc";
+            WebTemplateCore.HeaderTitle = "Sample Page";
 
-            this.WebTemplateCore.ScreenIdentifier = "897987sadfjkkla--33";
+            WebTemplateCore.ScreenIdentifier = "897987sadfjkkla--33";
 
-            this.WebTemplateCore.ApplicationTitle_Text = "HELLO";
+            WebTemplateCore.ApplicationTitle.Text = "HELLO";
 
-            this.WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
+            WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
 
-            this.WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
+            WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
 
-            this.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
+            WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
 
             //this.WebTemplateCore.LanguageLink_URL = "http://www.tsn.com";
            // this.WebTemplateCore.LanguageLink_URL = "../lang.aspx";
 
          //   this.WebTemplateCore.LanguageLink_URL = "../TestWebTemplatePage/ChangeCulture?GoCTemplateCulture=fr-CA";
 
-            this.WebTemplateCore.ShowFeatures = true;
+            WebTemplateCore.ShowFeatures = true;
 
-            this.WebTemplateCore.ShowFeedbackLink = true;
+            WebTemplateCore.ShowFeedbackLink = true;
 
-            this.WebTemplateCore.ShowSearch = true;
+            WebTemplateCore.ShowSearch = true;
 
-            this.WebTemplateCore.SessionTimeout.Enabled = true;
-            this.WebTemplateCore.SessionTimeout.Inactivity = 20000;
-            this.WebTemplateCore.SessionTimeout.ReactionTime = 20001;
-            this.WebTemplateCore.SessionTimeout.SessionAlive = 20002;
-            this.WebTemplateCore.SessionTimeout.LogoutUrl = "20003";
-            this.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
-            this.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-            this.WebTemplateCore.SessionTimeout.RefreshLimit = 20007;
-            this.WebTemplateCore.SessionTimeout.Method = "20008";
-            this.WebTemplateCore.SessionTimeout.AdditionalData = "20009";
+            WebTemplateCore.SessionTimeout.Enabled = true;
+            WebTemplateCore.SessionTimeout.Inactivity = 20000;
+            WebTemplateCore.SessionTimeout.ReactionTime = 20001;
+            WebTemplateCore.SessionTimeout.SessionAlive = 20002;
+            WebTemplateCore.SessionTimeout.LogoutUrl = "20003";
+            WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
+            WebTemplateCore.SessionTimeout.RefreshOnClick = false;
+            WebTemplateCore.SessionTimeout.RefreshLimit = 20007;
+            WebTemplateCore.SessionTimeout.Method = "20008";
+            WebTemplateCore.SessionTimeout.AdditionalData = "20009";
 
-            this.WebTemplateCore.TermsConditionsLink_URL = "http://www.pinkbike.com";
-            this.WebTemplateCore.PrivacyLink_URL = "http://www.lapresse.ca";
+            WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
+            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
 
             //BREADCRUMB ====================================
-            this.WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
-            this.WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "CDN Sample", "Content Delivery Network Sample"));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "CDN Sample", "Content Delivery Network Sample"));
 
             //FOOTER Links SECTIONS ====================================
-            this.WebTemplateCore.ContactLinks.Add(new Link("http://www.cnn.com", "C'Link 4"));
-            this.WebTemplateCore.ContactLinks.Add(new Link("http://www.tsn.com", "CLink 5"));
+            WebTemplateCore.ContactLinks.Add(new Link("http://www.cnn.com", "C'Link 4"));
+            WebTemplateCore.ContactLinks.Add(new Link("http://www.tsn.com", "CLink 5"));
 
-            this.WebTemplateCore.NewsLinks.Add(new Link("#", "NLink3"));
-            this.WebTemplateCore.NewsLinks.Add(new Link("#", "NLink5"));
+            WebTemplateCore.NewsLinks.Add(new Link("#", "NLink3"));
+            WebTemplateCore.NewsLinks.Add(new Link("#", "NLink5"));
 
-            this.WebTemplateCore.AboutLinks.Add(new Link("#", "ALink6"));
-            this.WebTemplateCore.AboutLinks.Add(new Link("#", "ALink7"));
+            WebTemplateCore.AboutLinks.Add(new Link("#", "ALink6"));
+            WebTemplateCore.AboutLinks.Add(new Link("#", "ALink7"));
             
             //Share this page LINK ====================================
-            this.WebTemplateCore.ShowSharePageLink = true;
+            WebTemplateCore.ShowSharePageLink = true;
 
-            this.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            this.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
 
 
             //LEFT MENU ====================================
-            GoC.WebTemplate.MenuSection leftmen = new GoC.WebTemplate.MenuSection();
+            MenuSection leftmen = new MenuSection();
 
             leftmen.Name = "menu aslfkjsaklj";
             
-            leftmen.Items.Add(new GoC.WebTemplate.Link("http://www.tsn.ca", "aaa"));
-            leftmen.Items.Add(new GoC.WebTemplate.Link("http://www.cnn.ca", "bbb"));
+            leftmen.Items.Add(new Link("http://www.tsn.ca", "aaa"));
+            leftmen.Items.Add(new Link("http://www.cnn.ca", "bbb"));
 
-            this.WebTemplateCore.LeftMenuItems.Add(leftmen);
+            WebTemplateCore.LeftMenuItems.Add(leftmen);
 
             ////set the header for this section of the menu
             //leftMenu.Name = "Section A";
@@ -96,20 +325,20 @@ namespace GoC.WebTemplateMVC.Controllers
             //this.WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            this.WebTemplateCore.LeftMenuItems.Add(new GoC.WebTemplate.MenuSection("l'index Section B", "http://www.pinkbike.com", new GoC.WebTemplate.Link[] { 
-                                                                                new GoC.WebTemplate.MenuItem("http://www.rds.ca", "RDS", true, new GoC.WebTemplate.MenuItem[] { 
-                                                                                    new GoC.WebTemplate.MenuItem("http://www.rds.ca", "sub 1", true), 
-                                                                                    new GoC.WebTemplate.MenuItem("http://www.lapresse.com", "sub 2") }), 
-                                                                                new GoC.WebTemplate.Link("http://www.lapresse.com", "L'a Presse") }));
+            WebTemplateCore.LeftMenuItems.Add(new MenuSection("l'index Section B", "http://www.pinkbike.com", new [] { 
+                                                                                new MenuItem("http://www.rds.ca", "RDS", true, new [] { 
+                                                                                    new MenuItem("http://www.rds.ca", "sub 1", true), 
+                                                                                    new MenuItem("http://www.lapresse.com", "sub 2") }), 
+                                                                                new Link("http://www.lapresse.com", "L'a Presse") }));
 
             // GoC.WebTemplate.MenuSection leftMenu = new GoC.WebTemplate.MenuSection();
 
             //Leaving Secure site ====================================
-            this.WebTemplateCore.LeavingSecureSiteWarning_Enabled = true;
-            this.WebTemplateCore.LeavingSecureSiteWarning_DisplayModalWindow = false;
-            this.WebTemplateCore.leavingSecureSiteWarning_ExcludedDomains = "www.redseal.ca";
+            WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
+            WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = false;
+            WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.redseal.ca";
 
-            this.WebTemplateCore.LeavingSecureSiteWarning_Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
+            WebTemplateCore.LeavingSecureSiteWarning.Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
 
             //HTML HEADER/BODY ELEMENTS ====================================
             //this.WebTemplateCore.HTMLHeaderElements.Add("jones.css");
@@ -149,7 +378,7 @@ namespace GoC.WebTemplateMVC.Controllers
             sb.AppendLine("})( jQuery, wb );");
             sb.AppendLine("</script>");
 
-            this.WebTemplateCore.HTMLBodyElements.Add(sb.ToString());
+            WebTemplateCore.HTMLBodyElements.Add(sb.ToString());
 
             //this.WebTemplateCore.HTMLBodyElements.Add("<script type='text/javascript' src='./GoC.WebTemplate/blabla.js'></script>");
             

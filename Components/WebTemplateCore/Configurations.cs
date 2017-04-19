@@ -1,54 +1,73 @@
 ﻿using System;
 using System.Configuration;
-using GOC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.ConfigSections;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
 {
     public class Configurations : ConfigurationSection
     {
-        private static Configurations settings = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
+        public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
 
-        public static Configurations Settings
+        [ConfigurationProperty("customSearch")]
+        public string CustomSearch
         {
-            get
-            {
-                return settings;
-            }
+            get { return (string) this["customSearch"]; }
+            set { this["customSearch"] = value; }
+        }
+        [ConfigurationProperty("signOutLinkURL")]
+        public string SignOutLinkURL
+        {
+            get { return (string) this["signOutLinkURL"];  }
+            set { this["signOutLinkURL"] = value; }
+        }
+
+        [ConfigurationProperty("signInLinkURL")]
+        public string SignInLinkURL
+        {
+            get { return (string) this["signInLinkURL"];  }
+            set { this["signInLinkURL"] = value; }
+        }
+
+        [ConfigurationProperty("customSiteMenuURL")]
+        public string CustomSiteMenuURL
+        {
+            get { return (string) this["customSiteMenuURL"];  }
+            set { this["customSiteMenuURL"] = value; }
+        }
+        
+        [ConfigurationProperty("showSiteMenu", DefaultValue= true) ]
+        public bool ShowSiteMenu
+        {
+            get { return (bool) this["showSiteMenu"];  }
+            set { this["showSiteMenu"] = value; }
+        }
+
+        [ConfigurationProperty("showGlobalNav")]
+        public bool ShowGlobalNav
+        {
+            get { return (bool) this["showGlobalNav"]; }
+            set { this["showGlobalNav"] = value; }
         }
 
         // Create a "sessionTimeOut element."
         [ConfigurationProperty("sessionTimeOut")]
         public SessionTimeOutElement SessionTimeOut
         {
-            get
-            {
-                return (SessionTimeOutElement)this["sessionTimeOut"];
-            }
-            set
-            { this["sessionTimeOut"] = value; }
+            get { return (SessionTimeOutElement)this["sessionTimeOut"]; }
+            set { this["sessionTimeOut"] = value; }
         }
 
         // Create a "cdtsEnvironments collection."
         [ConfigurationProperty("cdtsEnvironments")]
-        public CDTSEnvironmentCollection CDTSEnvironments
-        {
-            get
-            {
-                return base["cdtsEnvironments"] as CDTSEnvironmentCollection;
-            }
-        }
+        public CDTSEnvironmentCollection CDTSEnvironments => base["cdtsEnvironments"] as CDTSEnvironmentCollection;
 
         // Create a "leavingSecureSiteWarning element."
         [ConfigurationProperty("leavingSecureSiteWarning")]
-        public leavingSecureSiteWarningElement leavingSecureSiteWarning
+        public LeavingSecureSiteWarningElement LeavingSecureSiteWarning
         {
-            get
-            {
-                return (leavingSecureSiteWarningElement)this["leavingSecureSiteWarning"];
-            }
-            set
-            { this["leavingSecureSiteWarning"] = value; }
+            get { return (LeavingSecureSiteWarningElement)this["leavingSecureSiteWarning"]; }
+            set { this["leavingSecureSiteWarning"] = value; }
         }
 
         /// <summary>
@@ -193,9 +212,4 @@ namespace GoC.WebTemplate
         }
     }
 
-    // Define the "sessionTimeOut" element 
-
-    //Define the "cdtsEnvironments" collection
-
-    //Define the "cdtsEnvironment" element
 }

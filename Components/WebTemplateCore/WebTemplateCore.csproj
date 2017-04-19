@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>WebTemplateCore.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -32,8 +33,13 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>WebTemplateCore.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -45,15 +51,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppFooter.cs" />
+    <Compile Include="ApplicationTitle.cs" />
+    <Compile Include="AppTop.cs" />
     <Compile Include="Breadcrumb.cs" />
+    <Compile Include="ConfigSections\CDTSEnvironmentElementProxy.cs" />
     <Compile Include="ConfigSections\CDTSEnvironmentCollection.cs" />
     <Compile Include="ConfigSections\CDTSEnvironmentElement.cs" />
+    <Compile Include="ConfigSections\ICDTSEnvironmentElementProxy.cs" />
+    <Compile Include="ConfigSections\ILeavingSecureSiteWarningElementProxy.cs" />
+    <Compile Include="ConfigSections\ISessionTimeOutElementProxy.cs" />
+    <Compile Include="ConfigSections\LeaveSecureSiteWarningElementProxy.cs" />
+    <Compile Include="ConfigSections\SessionTimeOutElementProxy.cs" />
+    <Compile Include="LanguageLink.cs" />
+    <Compile Include="LeavingSecureSiteWarning.cs" />
+    <Compile Include="Proxies\ConfigurationProxy.cs" />
     <Compile Include="Configurations.cs" />
     <Compile Include="ConfigSections\CustomStringComparer.cs" />
-    <Compile Include="ConfigSections\leavingSecureSiteWarningElement.cs" />
+    <Compile Include="ConfigSections\LeavingSecureSiteWarningElement.cs" />
     <Compile Include="ConfigSections\SessionTimeOutElement.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Core.cs" />
+    <Compile Include="Proxies\IConfigurationProxy.cs" />
+    <Compile Include="Proxies\CurrentRequestProxy.cs" />
+    <Compile Include="FooterLink.cs" />
+    <Compile Include="Proxies\ICurrentRequestProxy.cs" />
     <Compile Include="Link.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="MenuSection.cs" />
@@ -61,10 +83,10 @@
     <Compile Include="SessionTimeout.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="GOCWebTemplate.xsd">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
+    <None Include="WebTemplateCore.ruleset" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

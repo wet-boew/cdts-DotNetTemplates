@@ -24,7 +24,7 @@
         </li>
         <li>if the "Yes" button is clicked on the modal window or if <code class="wb-prettify">DisplayModalWindow</code> was set to false:
             <ul>
-                <li>the user will first be redirect to the url set in <code class="wb-prettify">"leavingSecureSiteWarning_URL"</code></li>
+                <li>the user will first be redirect to the url set in <code class="wb-prettify">"LeavingSecureSiteWarning.URL"</code></li>
                 <li>the info of the linked that was clicked is part of the querystring</li>
                 <li>this page should be invisible to the user.</li>
                 <li>this page is there to execute any clean up code your application requires</li>
@@ -39,11 +39,11 @@
     <h2>Steps to implement:</h2>
     <h3>Enable the leaving secure site feature</h3>
     <ul>
-        <li>Set, via the web.config or programmatically, <code class="wb-prettify">"leavingSecureSiteWarning_Enabled"</code> to "true"</li>
-        <li>Determine if the modal window should be displayed by setting the <code class="wb-prettify">"LeavingSecureSiteWarning_DisplayModalWindow"</code> property of the Web Template programmatically.</li>
-        <li>Provide the message to be displayed by setting the <code class="wb-prettify">"LeavingSecureSiteWarning_Message"</code> property of the Web Template programmatically.</li>
-        <li>Set, via the web.config or programmatically, <code class="wb-prettify">"leavingSecureSiteWarning_URL"</code> to your page which will execute your clean up code and then redirect to the selected url.</li>
-        <li>Set, via the web.config or programmatically, <code class="wb-prettify">"leavingSecureSiteWarning_ExcludedDomains"</code> the list of domains you do not want to raise the warning. 
+        <li>Set, via the web.config or programmatically, <code class="wb-prettify">"leavingSecureSiteWarning.Enabled"</code> to "true"</li>
+        <li>Determine if the modal window should be displayed by setting the <code class="wb-prettify">"LeavingSecu.eSiteWarning.DisplayModalWindow"</code> property of the Web Template programmatically.</li>
+        <li>Provide the message to be displayed by setting the <code class="wb-prettify">"LeavingSecureSiteWarning.Message"</code> property of the Web Template programmatically.</li>
+        <li>Set, via the web.config or programmatically, <code class="wb-prettify">"LeavingSecureSiteWarning.URL"</code> to your page which will execute your clean up code and then redirect to the selected url.</li>
+        <li>Set, via the web.config or programmatically, <code class="wb-prettify">"LeavingSecureSiteWarning.ExcludedDomains"</code> the list of domains you do not want to raise the warning. 
             <ul>
                 <li>Do not include "http://" in your list, domains can start with "www" or "esdc.gc.ca".</li>
                 <li>If you have multiple links to the same URL, but some links start with "www" and others don't, you will need to include both domains in the collections.</li>
@@ -62,11 +62,11 @@
         <h3>C# Code Sample to enable the warning</h3>
         <pre>
 //note other then the message the rest could be set in the web.config
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning_Enabled = true;
-//this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning_DisplayModalWindow = true;
-this.WebTemplateMaster.WebTemplateCore.leavingSecureSiteWarning_RedirectURL = "redirect.aspx";
-this.WebTemplateMaster.WebTemplateCore.leavingSecureSiteWarning_ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning_Message = "You are leaving a secure session sample text!";
+this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
+//this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;
+this.WebTemplateMaster.WebTemplateCore.leavingSecureSiteWarning.RedirectURL = "redirect.aspx";
+this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
         </pre>
     </div>
 

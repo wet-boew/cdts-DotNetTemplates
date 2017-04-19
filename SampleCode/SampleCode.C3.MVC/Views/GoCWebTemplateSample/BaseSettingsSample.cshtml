@@ -28,26 +28,29 @@
 <p>The Screen Identifier is displayed near the bottom of the page. This element serves a unique identifier for your page and can be used to help communication between users and the service desk/support team to identify the location exact location of a user in your application.</p>
 <p>Set programmatically via the <code class="wb-prettify">"ScreenIdentifier"</code> property of the Web Template.</p>
 
-<div class="wb-prettify all-pre lang-vb linenums">
+<h2>Contact Link</h2>
+<p>The Contact Link located at the bottom of the page.
+<p>Set programmatically via the <code class="wb-prettify">"ContactLinkURL"</code> property of the Web Template.</p>
+
+<div class="wb-prettify all-pre lang-c# linenums">
     <h3>C# Code Sample</h3>
     <pre>
 //specify a title for this page
 this.WebTemplateCore.HeaderTitle = "My Title";
-
 //specify the metatags
 this.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta charset='UTF-8'&gt;");
 this.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta name='singer' content='Elvis'&gt;");
 this.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta http-equiv='default-style' content='sample'&gt;");
-
 //specify a specific date modified
 this.WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
 //or for using the current date
 //this.WebTemplateCore.DateModified = DateTime.Now.Date;
 //specify the version identifier (Note: since the date modified is supplied the date takes precedence)
 this.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
-
 //specify a screen identifier
 this.WebTemplateCore.ScreenIdentifier = "SP-3485-01";
+//Specify the Contact Link
+this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
         </pre>
 </div>
 @Html.Partial("_SamplesNavigation")

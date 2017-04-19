@@ -27,10 +27,13 @@
     <p>The Screen Identifier is displayed near the bottom of the page. This element serves a unique identifier for your page and can be used to help communication between users and the service desk/support team to identify the location exact location of a user in your application.</p>
     <p>Set programmatically via the <code class="wb-prettify">"ScreenIdentifier"</code> property of the Web Template.</p>
 
+    <h2>Contact Link</h2>
+    <p>The Contact Link located at the bottom of the page.</p>
+    <p>Set programmatically via the <code class="wb-prettify">"ContactLinkURL"</code> property of the Web Template.</p>
 
     <div class="wb-prettify all-pre lang-vb linenums">
-        <h3>C# Code Sample</h3>
-        <pre>
+    <h3>C# Code Sample</h3>
+<pre>
 //specify a title for this page
 this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "My Title";
 
@@ -49,7 +52,10 @@ this.WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
 
 //specify a screen identifier
 this.WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "SP-3485-01";
-        </pre>
-    </div>
+
+//Specify the Contact Link
+this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
+</pre>
+</div>
    <!-- #include virtual="SamplesNavigation.html" -->
 </asp:Content>
