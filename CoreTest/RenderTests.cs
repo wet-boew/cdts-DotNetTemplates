@@ -37,36 +37,12 @@ namespace CoreTest
             execute.ShouldNotThrow<NullReferenceException>();
 
         }
-        [Theory, AutoNSubstituteData]
-        public void DefaultToNonObsoleteURLForContactLinks(Core sut)
-        {
-            sut.ContactLinks.Add(new Link {Href = "foo"});
-            sut.ContactLinkURL = "bar";
-            sut.RenderAppFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"bar\"}]");
-        }
 
         [Theory, AutoNSubstituteData]
         public void HandleEmptyContactLinkList(Core sut)
         {
             sut.ContactLinkURL = "bar";
             sut.RenderAppFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"bar\"}]");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void UseContactLinksListIfContactLinkURLIsNull(Core sut)
-        {
-            sut.ContactLinks.Add(new Link {Href = "foo"});
-            sut.ContactLinkURL = default(string);
-            sut.RenderAppFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"foo\"}]");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void RenderAppFooterMustNotCrashWithNullContactLinks(Core sut)
-        {
-            sut.ContactLinks = null;
-            // ReSharper disable once MustUseReturnValue
-            Action execute = () => sut.RenderAppFooter();
-            execute.ShouldNotThrow<ArgumentNullException>();
         }
 
         [Theory, AutoNSubstituteData]

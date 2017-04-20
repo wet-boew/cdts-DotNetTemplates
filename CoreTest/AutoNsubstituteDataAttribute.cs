@@ -30,8 +30,6 @@ namespace CoreTest
             //to set properties, instead of just using the properties
                                           .Without(p => p.HTMLHeaderElements)
                                           .Without(p => p.HTMLBodyElements)
-                                          .Without(p => p.ContactLinks)
-                                          .Without(p => p.NewsLinks)
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
                                           .Without(p=> p.LeftMenuItems));

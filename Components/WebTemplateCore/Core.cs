@@ -143,12 +143,6 @@ namespace GoC.WebTemplate
 
             HTMLHeaderElements = new List<string>();
             HTMLBodyElements = new List<string>();
-            //We don't want to break the API so we must set these obsolete collections until the next build.
-#pragma warning disable 618
-            ContactLinks = new List<Link>();
-            NewsLinks = new List<Link>();
-            AboutLinks = new List<Link>();
-#pragma warning restore 618
             Breadcrumbs = new List<Breadcrumb>();
             SharePageMediaSites = new List<SocialMediaSites>();
             LeftMenuItems = new List<MenuSection>();
@@ -175,42 +169,6 @@ namespace GoC.WebTemplate
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
         /// </summary>
         public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-        /// <summary>
-        /// Represents the list of links to override the About links in Footer
-        /// Set by application programmatically
-        /// </summary>
-        [Obsolete("This will be removed in next release of Web Templates")]
-        public List<Link> AboutLinks { get; set;  }
-
-        /// <summary>
-        /// The title that will be displayed in the header above the top menu.
-        /// Set programmatically.
-        /// Being replaced with <see cref="GoC.WebTemplate.ApplicationTitle.Text"/>
-        /// </summary>
-        /// <remarks>only available for intranet themes and Application Template Themes</remarks>
-        [Obsolete("Please use ApplicationTitle.Text this will dissapear in v4.0.25")]
-        public string ApplicationTitle_Text
-        {
-            get { return ApplicationTitle.Text; }
-            set { ApplicationTitle.Text = value; }
-        }
-
-        /// <summary>
-        /// The url of the title that will be displayed in the header above the top menu.
-        /// Set programmatically
-        /// </summary>
-        /// <remarks>
-        /// only available for intranet themes
-        /// value is optional, if no value is supplied the theme will determine the url
-        /// Being replaced with <see cref="GoC.WebTemplate.ApplicationTitle.URL"/>
-        /// </remarks>
-        [Obsolete("Please use ApplicationTitle.URL this will dissapear in v4.0.25")]
-        public string ApplicationTitle_URL
-        {
-            get { return ApplicationTitle.URL; }
-            set { ApplicationTitle.URL = value; }
-        }
 
         /// <summary>
         /// Represents the Application Title setting information
@@ -272,31 +230,14 @@ namespace GoC.WebTemplate
         }
 
         /// <summary>
-        /// Represents the list of links to override the Contact links in Footer
+        /// Used to override the Contact links in Footer
         /// Set by application programmatically
-        /// This is deprecated please use <see cref="ContactLinkURL"/>
         /// </summary>
-        [Obsolete("This will be removed in next release of Web Templates, please use ContactLinkURL")]
-        public List<Link> ContactLinks { get; set; }
-
         public string ContactLinkURL { get; set; }
 
-        private List<Link> FigureOutContactLinkURL()
+        private List<Link> BuildContactLinks()
         {
-            if (ContactLinkURL != null)
-            {
                 return new List<Link> {new Link {Href = ContactLinkURL}};
-            }
-
-                //Disable obsolete warning since we need to call an obsolete method.
-#pragma warning disable 618
-            if (ContactLinks != null && ContactLinks.Any())
-            {
-                //This is obsolete I don't really care if it's performant right now it'll be gone soon.
-                return new List<Link> { new Link { Href = ContactLinks.First().Href} };
-            }
-#pragma warning restore 618
-            return null;
         }
 
 
@@ -329,105 +270,11 @@ namespace GoC.WebTemplate
         public bool ShowFeatures { get; set; }
 
         /// <summary>
-        /// Determines if the a warning should be displayed if the user navigates outside the secure session
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.Enabled"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.Enabled this will dissapear in v4.0.25")]
-        public bool LeavingSecureSiteWarning_Enabled
-        {
-            get { return LeavingSecureSiteWarning.Enabled; }
-            set { LeavingSecureSiteWarning.Enabled = value; }
-        }
-
-
-        /// <summary>
-        /// Determines if the popup window should be displayed with the warning message if the user navigates outside the secure session
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.DisplayModalWindow"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.DisplayModalWindow this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public bool LeavingSecureSiteWarning_DisplayModalWindow
-        {
-            get { return LeavingSecureSiteWarning.DisplayModalWindow; }
-            set { LeavingSecureSiteWarning.DisplayModalWindow = value; }
-        }
-
-        /// <summary>
-        /// URL to redirect to when sercuresitewarning is enabled and user clicked a link that leaves the secure session
-        /// Set by application via web.config
-        /// Can be set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.RedirectURL"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.RedirectURL this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string leavingSecureSiteWarning_RedirectURL
-        {
-            get { return LeavingSecureSiteWarning.RedirectURL; }
-            set { LeavingSecureSiteWarning.RedirectURL = value; }
-        }
-
-        /// <summary>
-        /// A comma delimited list of domains that would be excluded from raising the warning
-        /// Set by application via web.config
-        /// Can be set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.ExcludedDomains"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.ExcludedDomains this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string leavingSecureSiteWarning_ExcludedDomains
-        {
-            get { return LeavingSecureSiteWarning.ExcludedDomains; }
-            set { LeavingSecureSiteWarning.ExcludedDomains = value; }
-        }
-
-        /// <summary>
-        /// The warning message to be displayed to the user when clicking a link that leaves the secure session
-        /// Set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.Message"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.Message this will dissapear in v4.0.25")]
-        public string LeavingSecureSiteWarning_Message
-        {
-            get { return LeavingSecureSiteWarning.Message; }
-            set { LeavingSecureSiteWarning.Message = value; }
-        }
-
-        /// <summary>
-        /// URL to be used for the feedback link
-        /// Set by application via web.config
-        /// or programmatically
-        /// Being replaced with <see cref="FeedbackLinkURL"/>
-        /// </summary>
-        [Obsolete("Please use FeedbackLink.URL this will dissapear in v4.0.25")]
-        public string FeedbackLink_URL
-        {
-            get { return FeedbackLinkURL; }
-            set { FeedbackLinkURL = value; }
-        }
-
-        /// <summary>
         /// URL to be used for the feedback link
         /// Set by application via web.config
         /// or programmatically
         /// </summary>
         public string FeedbackLinkURL { get; set; }
-
-        /// <summary>
-        /// URL to be used for the Privacy link in transactional mode
-        /// Set by application programmatically
-        /// Being replaced with <see cref="PrivacyLinkURL"/>
-        /// </summary>
-        [Obsolete("Please use PrivacyLink.URL this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string PrivacyLink_URL
-        {
-            get { return PrivacyLinkURL; }
-            set { PrivacyLinkURL = value; }
-        }
 
         /// <summary>
         /// URL to be used for the Privacy link in transactional mode
@@ -438,65 +285,19 @@ namespace GoC.WebTemplate
         /// <summary>
         /// URL to be used for the Terms & Conditions link in transactional mode
         /// Set by application programmatically
-        /// Being replaced with <see cref="TermsConditionsLinkURL"/>
-        /// </summary>
-        [Obsolete("Please use TermsConditionsLink.URL this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string TermsConditionsLink_URL
-        {
-            get { return TermsConditionsLinkURL; }
-            set { TermsConditionsLinkURL = value; }
-        }
-
-        /// <summary>
-        /// URL to be used for the Terms & Conditions link in transactional mode
-        /// Set by application programmatically
         /// </summary>
         public string TermsConditionsLinkURL { get; set; }
 
+        /// <summary>
+        /// Used to override the langauge link
+        /// </summary>
         public LanguageLink LanguageLink { get; set; }
-
-        /// <summary>
-        /// URL to be used for the language toggle
-        /// Set/built by Template
-        /// Can be set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.URL"/>
-        /// </summary>
-        [Obsolete("Please use LanguageLink.URL this will dissapear in v4.0.25")]
-        public string LanguageLink_URL
-        {
-            get { return LanguageLink.Href; }
-            set { LanguageLink.Href = value; }
-        }
-
-        /// <summary>
-        /// Read only property, used to populate the Lang attribute of the language toggle link
-        /// Value is defaulted by Template
-        /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.Lang"/>
-        /// </summary>
-        [Obsolete("Please use LanguageLink.Lang this will dissapear in v4.0.25")]
-        public string LanguageLink_Lang => LanguageLink.Lang;
-
-        /// <summary>
-        /// Read only property, used to populate the text attribute of the language toggle link
-        /// Value is defaulted by Template
-        /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.Text"/>
-        /// </summary>
-        [Obsolete("Please use LanguageLink.Text this will dissapear in v4.0.25")]
-        public string LanguageLink_Text => LanguageLink.Text;
 
         // ReSharper restore InconsistentNaming
         /// <summary>
         /// Represents a list of menu items
         /// </summary>
         public List<MenuSection> LeftMenuItems { get; set; }
-
-        /// <summary>
-        /// Represents the list of links to override the News links in Footer
-        /// Set by application programmatically
-        /// </summary>
-        [Obsolete("This will be removed in next release of Web Templates")]
-        public List<Link> NewsLinks { get; set; }
 
         /// <summary>
         /// A unique string to identify a web page. Used by user to identify the screen where an issue occured.
@@ -778,7 +579,7 @@ namespace GoC.WebTemplate
                 ShowFeatures = ShowFeatures,
                 TermsLink = GetStringForJson(TermsConditionsLinkURL),
                 PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                ContactLinks = FigureOutContactLinkURL(),
+                ContactLinks = BuildContactLinks(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 GlobalNav = ShowGlobalNav,
                 FooterSections = BuildCustomFooterLinks
@@ -836,14 +637,14 @@ namespace GoC.WebTemplate
             if (transactionalMode)
             {
                 //contact, terms, privacy links
-                RenderLinksList(sb, LinkTypes.contactLinks, FigureOutContactLinkURL());
+                RenderLinksList(sb, LinkTypes.contactLinks, BuildContactLinks());
                 RenderTermsConditionsLink(sb);
                 RenderPrivacyLink(sb);
             }
             else
             {
                 //contact, news, about links
-                RenderLinksList(sb, LinkTypes.contactLinks, FigureOutContactLinkURL());
+                RenderLinksList(sb, LinkTypes.contactLinks, BuildContactLinks());
             }
             return new HtmlString(sb.ToString());
         }
