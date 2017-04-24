@@ -32,7 +32,7 @@ namespace CoreTest
                                           .Without(p => p.HTMLBodyElements)
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
-                                          .Without(p=> p.LeftMenuItems));
+                                          .Without(p => p.LeftMenuItems));
         }
     }
 

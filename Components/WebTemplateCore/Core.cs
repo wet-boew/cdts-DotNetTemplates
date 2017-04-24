@@ -22,6 +22,19 @@ namespace GoC.WebTemplate
     {
         private readonly IConfigurationProxy _configProxy;
 
+        private HtmlString SerializeToJson(object obj) => new HtmlString(JsonConvert.SerializeObject(obj, _settings));
+
+        public HtmlString RenderRefTop()
+        {
+            return SerializeToJson(new RefTop
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                JqueryEnv =  LoadJQueryFromGoogle ? "external" : null,
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme,WebTemplateVersion)
+            });
+        }
+
         #region Enums
 
         /// <summary>
@@ -31,9 +44,7 @@ namespace GoC.WebTemplate
         // ReSharper disable InconsistentNaming
         public enum LinkTypes
         {
-            contactLinks,
-            newsLinks,
-            aboutLinks
+            contactLinks
         };
 
         /// <summary>
@@ -141,12 +152,6 @@ namespace GoC.WebTemplate
                 ExcludedDomains = _configProxy.LeavingSecureSiteWarning.ExcludedDomains
             };
 
-            HTMLHeaderElements = new List<string>();
-            HTMLBodyElements = new List<string>();
-            Breadcrumbs = new List<Breadcrumb>();
-            SharePageMediaSites = new List<SocialMediaSites>();
-            LeftMenuItems = new List<MenuSection>();
-
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
@@ -181,7 +186,7 @@ namespace GoC.WebTemplate
         /// Represents the list of links for the Breadcrumbs
         /// Set by application programmatically
         /// </summary>
-        public List<Breadcrumb> Breadcrumbs { get; set; }
+        public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
         public List<Breadcrumb> BuildBreadcrumbs => Breadcrumbs?.Select(b => new Breadcrumb {
             Href = b.Href,
@@ -247,14 +252,14 @@ namespace GoC.WebTemplate
         /// will be used to add metatags, css, js etc.
         /// Set by application programmatically
         /// </summary>
-        public List<string> HTMLHeaderElements { get; set; }
+        public List<string> HTMLHeaderElements { get; set; } = new List<string>();
 
         /// <summary>
         /// Represents the list of html elements to add at the end of the body tag
         /// will be used to add metatags, css, js etc.
         /// Set by application programmatically
         /// </summary>
-        public List<string> HTMLBodyElements { get; set; }
+        public List<string> HTMLBodyElements { get; set; } = new List<string>();
 
         /// <summary>
         /// Represents the date modified displayed just above the footer
@@ -297,7 +302,7 @@ namespace GoC.WebTemplate
         /// <summary>
         /// Represents a list of menu items
         /// </summary>
-        public List<MenuSection> LeftMenuItems { get; set; }
+        public List<MenuSection> LeftMenuItems { get; set; } = new List<MenuSection>();
 
         /// <summary>
         /// A unique string to identify a web page. Used by user to identify the screen where an issue occured.
@@ -350,7 +355,7 @@ namespace GoC.WebTemplate
         /// Representes the list of items to be displayed in the Share Page window
         /// Set by application programmatically
         /// </summary>
-        public List<SocialMediaSites> SharePageMediaSites { get; set; }
+        public List<SocialMediaSites> SharePageMediaSites { get; set; } = new List<SocialMediaSites>();
 
         /// <summary>
         /// Determines the path to the location of the staticback up files
@@ -534,9 +539,6 @@ namespace GoC.WebTemplate
 
         #endregion
 
-
-
-
         private string GetStringForJson(string str)
         {
             return string.IsNullOrWhiteSpace(str) ? null : str;
@@ -571,8 +573,7 @@ namespace GoC.WebTemplate
 
         public HtmlString RenderAppFooter()
         {
-
-            var appFooter = new AppFooter
+            return SerializeToJson(new AppFooter
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = GetStringForJson(WebTemplateSubTheme),
@@ -583,9 +584,7 @@ namespace GoC.WebTemplate
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 GlobalNav = ShowGlobalNav,
                 FooterSections = BuildCustomFooterLinks
-            };
-
-            return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
+            });
         }
 
 
@@ -593,7 +592,7 @@ namespace GoC.WebTemplate
         {
             CheckIfBothSignInAndSignOutAreSet();
 
-            var appTop = new AppTop
+            return SerializeToJson(new AppTop
             {
                 AppName = ApplicationTitle.Text,
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
@@ -609,9 +608,7 @@ namespace GoC.WebTemplate
                 SiteMenu = ShowSiteMenu,
                 MenuPath = CustomSiteMenuURL, 
                 CustomSearch = CustomSearch
-            };
-
-            return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
+            });
         }
 
 
@@ -806,31 +803,6 @@ namespace GoC.WebTemplate
                 : "search: false,";
         }
 
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to retrieve the jQuery files from google or cdts
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to retrieve the jQuery files from google or cdts
-        /// jqueryEnv: 'external' gets files from Google
-        /// if false, the string (including the parameter name) will be empty
-        /// </returns>
-        /// <example>
-        /// jqueryEnv: 'external'
-        /// </example>
-        public HtmlString RenderjQuery()
-        {
-            return LoadJQueryFromGoogle
-                ? new HtmlString("jqueryEnv: \"external\",")
-                : null;
-        }
-
-        public HtmlString RenderLocalPath()
-        {
-            if (string.IsNullOrWhiteSpace(LocalPath))
-            {
-                return null;
-            }
-            return new HtmlString("localPath: '" + String.Format(LocalPath, WebTemplateTheme, WebTemplateVersion) + "'");
-        }
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the Share Page links

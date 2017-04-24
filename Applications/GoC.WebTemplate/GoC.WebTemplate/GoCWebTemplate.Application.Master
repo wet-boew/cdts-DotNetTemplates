@@ -21,12 +21,7 @@
         </noscript>
          <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
         </script>
 
         <%= WebTemplateCore.RenderHtmlHeaderElements() %>

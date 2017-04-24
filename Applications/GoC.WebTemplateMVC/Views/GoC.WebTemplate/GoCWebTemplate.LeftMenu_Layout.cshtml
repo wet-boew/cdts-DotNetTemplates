@@ -19,13 +19,8 @@
         @ViewBag.WebTemplateCore.LoadStaticFile("refTop.html")
     </noscript>
     <!-- Write closure template -->
-    <script type="text/javascript">
-    document.write(wet.builder.refTop({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-        @ViewBag.WebTemplateCore.RenderjQuery()
-        @ViewBag.WebTemplateCore.RenderLocalPath()
-    }));
+    <script type="text/javascript">  
+        document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderRefTop()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
     <!-- GoC.WebTemplate Version MVC @ViewBag.WebTemplateVersion -->

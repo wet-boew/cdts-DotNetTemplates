@@ -1,7 +1,12 @@
 ﻿using System;
-using System.Linq;
+using System.Web;
 using FluentAssertions;
 using GoC.WebTemplate;
+using GoC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.Proxies;
+using NSubstitute;
+using NSubstitute.ReturnsExtensions;
+using Ploeh.AutoFixture.Xunit2;
 using Xunit;
 
 namespace CoreTest
@@ -12,6 +17,67 @@ namespace CoreTest
     /// </summary>
     public class RenderTests 
     {
+        [Theory, AutoNSubstituteData]
+        public void LocalPathDoesNotRendersWhenNull([Frozen]IConfigurationProxy proxy, Core sut)
+        {
+            proxy.CurrentEnvironment.LocalPath.ReturnsNull();
+            sut.RenderRefTop().ToString().Should().NotContain("localPath");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void LocalPathFormatsCorrectly([Frozen]IConfigurationProxy proxy, Core sut)
+        {
+            proxy.CurrentEnvironment.LocalPath.Returns("{0}:{1}");
+            sut.RenderRefTop().ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
+        }
+
+
+        public void LocalPathRendersWhenNotNull(Core sut)
+        {
+            sut.RenderRefTop().ToString().Should().Contain("localPath");
+        }
+        [Theory, AutoNSubstituteData]
+        public void JQueryExternalRendersWhenLoadJQueryFromGoogleIsTrue(Core sut)
+        {
+            sut.LoadJQueryFromGoogle = true;
+
+            sut.RenderRefTop().ToString().Should().Contain("\"jqueryEnv\":\"external\"");
+        }
+        [Theory, AutoNSubstituteData]
+        public void JQueryExternalDoesNotRenderWhenLoadJQueryFromGoogleIsFalse(Core sut)
+        {
+            sut.LoadJQueryFromGoogle = false;
+
+            sut.RenderRefTop().ToString().Should().NotContain("jqueryEnv");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void WebSubThemeRenderedProperly(IConfigurationProxy configurationProxy,
+            ICurrentRequestProxy currentRequestProxy)
+        {
+
+            configurationProxy.SubTheme.Returns("foo");
+
+            //Because of the wayh the core object is initialized in the constructor we'll occasionally  
+            //have to create it ourselves.
+            var sut = new Core(currentRequestProxy, configurationProxy);
+
+            sut.RenderRefTop().ToString().Should().Contain("\"subTheme\":\"foo\"");
+        }
+        [Theory, AutoNSubstituteData]
+        public void CdnEnvRenderedProperly(ICDTSEnvironmentElementProxy elementProxy,
+            IConfigurationProxy configurationProxy,
+            ICurrentRequestProxy currentRequestProxy)
+        {
+
+            elementProxy.Env.Returns("prod");
+            configurationProxy.CurrentEnvironment.Returns(elementProxy);
+            //Because of the wayh the core object is initialized in the constructor we'll occasionally  
+            //have to create it ourselves.
+            var sut = new Core(currentRequestProxy, configurationProxy);
+            sut.RenderRefTop().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
+        }
+
         [Theory, AutoNSubstituteData]
         public void ShouldNotEncodeURL(Core sut)
         {
