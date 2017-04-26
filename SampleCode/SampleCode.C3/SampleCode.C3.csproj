@@ -136,7 +136,6 @@
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePageSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx" />
-    <Content Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeavingSecureSiteSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeftSideMenuSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\mystyle.css" />
@@ -220,13 +219,6 @@
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx.designer.cs">
       <DependentUpon>FeedbackandShareThisPageSample.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx.cs">
-      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx.designer.cs">
-      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\GCIntranetThemeSample.aspx.cs">
       <DependentUpon>GCIntranetThemeSample.aspx</DependentUpon>
