@@ -7,9 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SampleCode.C3.Samples {
-    
-    
-    public partial class ErrorSample {
-    }
+
+
+public partial class ErrorSample {
 }
