@@ -12,7 +12,7 @@ namespace GoC.WebTemplate.Proxies
         string SignOutLinkURL { get; }
         string SignInLinkURL { get; }
         ISessionTimeOutElementProxy SessionTimeOut { get;  }
-        IList<CDTSEnvironmentElementProxy> CDTSEnvironments { get; }
+        IDictionary<string,ICDTSEnvironmentElementProxy> CDTSEnvironments { get; }
         ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning { get;  }
 
         /// <summary>
@@ -89,7 +89,5 @@ namespace GoC.WebTemplate.Proxies
         /// StaticFilesLocation
         /// </summary>
         string StaticFilesLocation { get;  }
-
-        ICDTSEnvironmentElementProxy CurrentEnvironment { get; }
     }
 }

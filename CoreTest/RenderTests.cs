@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Linq;
 using FluentAssertions;
 using GoC.WebTemplate;
 using Xunit;
 
 namespace CoreTest
 {
-    
+
     /// <summary>
     /// Tests that test the Core object in isolation.
     /// </summary>

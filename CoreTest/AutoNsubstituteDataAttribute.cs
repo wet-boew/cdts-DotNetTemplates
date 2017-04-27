@@ -1,4 +1,8 @@
-﻿using GoC.WebTemplate;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using GoC.WebTemplate;
+using GoC.WebTemplate.ConfigSections;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
 using Ploeh.AutoFixture.Xunit2;
@@ -34,7 +38,17 @@ namespace CoreTest
                                           .Without(p => p.NewsLinks)
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
-                                          .Without(p=> p.LeftMenuItems));
+                                          .Without(p=> p.LeftMenuItems)
+            //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
+                                          .With(p => p.Environment, "ESDCProd"));
+            //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
+            //that the keys are deterministic.
+            fixture.Register<IDictionary<string,ICDTSEnvironmentElementProxy>>(() =>
+            {
+                var keys = new[] {"Akamai", "ESDCProd", "Prod", "NonProd", "QAT"};
+                var values = fixture.Create<Generator<ICDTSEnvironmentElementProxy>>();
+                return keys.Zip(values, Tuple.Create).ToDictionary(x => x.Item1, x => x.Item2);
+            });
         }
     }
 
