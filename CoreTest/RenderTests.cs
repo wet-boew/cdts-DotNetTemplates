@@ -11,6 +11,19 @@ namespace CoreTest
     /// </summary>
     public class RenderTests 
     {
+
+        [Theory, AutoNSubstituteData]
+        public void RenderCustomSearchWhenSet(Core sut)
+        {
+            sut.CustomSearch="Foo";
+            sut.RenderAppTop().ToString().Should().Contain("\"customSearch\":\"Foo\"");
+        }
+        [Theory, AutoNSubstituteData]
+        public void DoNotRenderCustomSearchByDefault(Core sut)
+        {
+            sut.RenderAppTop().ToString().Should().NotContain("\"customSearch\"");
+        }
+
         [Theory, AutoNSubstituteData]
         public void ShouldNotEncodeURL(Core sut)
         {
