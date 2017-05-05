@@ -1,4 +1,53 @@
 ﻿************************************************************************************************************
+v4.0.24.3 2017-04-27
+- Fixed a bug where the user was unable to set the environment programmatically
+************************************************************************************************************
+4.0.24.2 - 2017-04-05
+ - Removing URL Encoding to revert to previous behaviour
+************************************************************************************************************
+4.0.24.1 - 2017-04-05
+- Implementation of WET v4.0.24
+- Added new Application Templates
+- Added new Layouts for the Application Template 
+ - GoCWebTemplate.Application.cshtml
+ - GoCWebTemplate.Application.LeftMenu.cshtml
+ - Modified Core object to allow for injection of a ConfigurationProxy and a CurrentRequestProxy to allow for automatic unit testing of application
+- Began migrating from String Concatenation to json serialization for creation of json Objects passed to Google Closure Templates. 
+- Removed Obsolete property SessionTimeout_Enabled is replaced with SessionTimeout.Enabled
+ - ApplicationTitle_Text
+ - ApplicationTitle_URL
+ - LeavingSecureSiteWarning_Enable
+ - LeavingSecureSiteWarning_DisplayModalWindow
+ - leavingSecureSiteWarning_RedirectURL
+ - leavingSecureSiteWarning_ExcludedDomains 
+ - LeavingSecureSiteWarning_Message
+ - FeedbackLink_URL
+ - PrivacyLink_URL
+ - TermsConditionsLink_URL
+ - LanguageLink_URL
+ - LanguageLink_Lang
+ - LanguageLink_Text
+- Appends `- Canada.ca` to the HeaderTitle when theme is GCWeb as per request from TB
+- Added RenderHeaderTitle to HtmlEncode HeaderTitle
+- Marked several properties as Obsolete in order to match .Net Naming Conventions
+- Added new Application Template specific web.config values 
+  - signOutLinkURL - Link used by the sign-out button on the menu
+  - signInLinkURL - Link used by the sign-in button on the menu
+  - customSiteMenuURL - Custom Menu used to override the CDTS Menu Config value should be pointed to a dynamic page
+  - showSiteMenu - Hide or show the site menu, defaults to true
+  - showGlobalNav - Override the default footer and display the global navigation menu for Canada.ca
+- Added new Application Template specific configuration values
+ - ShowGlobalNav - Override the default footer and display the global navigation menu for Canada.ca
+ - ShowSiteMenu - Hide or show the site menu, defaults to true
+ - CustomSiteMenuURL - Custom Menu used to override the CDTS Menu 
+ - SignInLinkURL - Link used by the sign-out button on the menu
+ - SignOutLinkURL- Link used by the sign-in button on the menu
+ - ShowSecure - Display the lock icon beside the application name 
+ - ShowSignInLink - Show the sign in link on the page cannot be true when ShowSignOutLink is true
+ - ShowSignOutLink - Show the sign out link on the page, cannot be true when ShowSignInLink is true
+ - CustomFooterLinks - Will create a custom set of columns for your footer links
+  - Added the dependency JSON.Net to the WebTemplateCore project to handle json serialization.
+************************************************************************************************************
 4.0.23.4 - 2017-02-08
  -Fixed issue with namespace in configurations.cs
 ************************************************************************************************************

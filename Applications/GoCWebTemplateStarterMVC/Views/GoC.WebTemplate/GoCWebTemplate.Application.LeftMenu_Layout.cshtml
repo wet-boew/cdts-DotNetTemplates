@@ -35,21 +35,12 @@
     @ViewBag.WebTemplateCore.RenderSessionTimeoutControl()
     <div id="def-top">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("top-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("appTop-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
-    var defTop = document.getElementById("def-top");
-    defTop.outerHTML = wet.builder.top({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-        @ViewBag.WebTemplateCore.RenderApplicationTitle()
-        @ViewBag.WebTemplateCore.RenderSearch()
-        @ViewBag.WebTemplateCore.RenderLanguageLink()
-        showPreContent: @ViewBag.WebTemplateCore.ShowPreContent.ToString().ToLower(),
-    @ViewBag.WebTemplateCore.RenderBreadcrumbsList()
-        @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        var defTop = document.getElementById("def-top");
+        defTop.outerHTML = wet.builder.appTop(@ViewBag.WebTemplateCore.RenderAppTop());
     </script>
     <div class="container">
         <div class="row">
@@ -63,20 +54,20 @@
                 </div>
                 <!-- Write closure template -->
                 <script type="text/javascript">
-    var defPreFooter = document.getElementById("def-preFooter");
-    defPreFooter.outerHTML = wet.builder.preFooter({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        @ViewBag.WebTemplateCore.RenderDateModifiedVersionIdentifier()
-        showPostContent: @ViewBag.WebTemplateCore.ShowPostContent.ToString().ToLower(),
-        @ViewBag.WebTemplateCore.RenderFeedbackLink()
-        @ViewBag.WebTemplateCore.RenderSharePageMediaSites()
-        @ViewBag.WebTemplateCore.RenderScreenIdentifier()
-    });
+                    var defPreFooter = document.getElementById("def-preFooter");
+                    defPreFooter.outerHTML = wet.builder.preFooter({
+                        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
+                        @ViewBag.WebTemplateCore.RenderDateModifiedVersionIdentifier()
+                        showPostContent: @ViewBag.WebTemplateCore.ShowPostContent.ToString().ToLower(),
+                        @ViewBag.WebTemplateCore.RenderFeedbackLink()
+                        @ViewBag.WebTemplateCore.RenderSharePageMediaSites()
+                        @ViewBag.WebTemplateCore.RenderScreenIdentifier()
+                    });
                 </script>
             </main>
             <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
                 <!-- Write closure fall-back static file -->
-               @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("secMenu-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+                @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("secMenu-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
             </nav>
             <!-- Write closure template -->
             <script type="text/javascript">
@@ -89,28 +80,22 @@
     </div>
     <div id="def-footer">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("footer-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("appFooter-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
-    var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.footer({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderFeatures()
-            @ViewBag.WebTemplateCore.RenderFooterLinks(false)
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        var defFooter = document.getElementById("def-footer");
+        defFooter.outerHTML = wet.builder.appFooter(@ViewBag.WebTemplateCore.RenderAppFooter());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
-    document.write(wet.builder.refFooter({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        @ViewBag.WebTemplateCore.RenderLeavingSecureSiteWarning()
-        @ViewBag.WebTemplateCore.RenderjQuery()
-        @ViewBag.WebTemplateCore.RenderLocalPath()
-    }));
-</script>
+        document.write(wet.builder.refFooter({
+            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
+            @ViewBag.WebTemplateCore.RenderLeavingSecureSiteWarning()
+            @ViewBag.WebTemplateCore.RenderjQuery()
+            @ViewBag.WebTemplateCore.RenderLocalPath()
+        }));
+    </script>
     @ViewBag.WebTemplateCore.RenderHtmlBodyElements()
 </body>
 </html>

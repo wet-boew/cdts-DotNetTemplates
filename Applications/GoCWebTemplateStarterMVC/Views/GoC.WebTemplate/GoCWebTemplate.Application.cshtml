@@ -35,21 +35,12 @@
     @ViewBag.WebTemplateCore.RenderSessionTimeoutControl()
     <div id="def-top">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("top-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("appTop-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
         var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.top({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderApplicationTitle()
-            @ViewBag.WebTemplateCore.RenderSearch()
-            @ViewBag.WebTemplateCore.RenderLanguageLink()
-            showPreContent: @ViewBag.WebTemplateCore.ShowPreContent.ToString().ToLower(),
-            @ViewBag.WebTemplateCore.RenderBreadcrumbsList()
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        defTop.outerHTML = wet.builder.appTop(@ViewBag.WebTemplateCore.RenderAppTop());
     </script>
     <main role="main" property="mainContentOfPage" class="container">
         <!-- the main content -->
@@ -74,18 +65,12 @@
     </main>
     <div id="def-footer">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("footer-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("appFooter-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
     var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.footer({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderFeatures()
-            @ViewBag.WebTemplateCore.RenderFooterLinks(false)
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        defFooter.outerHTML = wet.builder.appFooter(@ViewBag.WebTemplateCore.RenderAppFooter());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
