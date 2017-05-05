@@ -796,7 +796,7 @@ namespace GoC.WebTemplate
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 SiteMenu = ShowSiteMenu,
                 MenuPath = CustomSiteMenuURL, 
-                CustomSearch = CustomSearch
+                CustomSearch = GetStringForJson(CustomSearch)
             };
 
             return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));

@@ -27,6 +27,8 @@ namespace CoreTest
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.
                                           .Without(p => p.ShowSignOutLink)
                                           .Without(p => p.ShowSignInLink)
+            //We want custom search to start out as default(string)
+                                          .Without(p => p.CustomSearch) 
             //The Site Menu URL should be null
                                           .Without(p => p.CustomSiteMenuURL)
             //We also create want to ignore some of the lists as they should start out empty.

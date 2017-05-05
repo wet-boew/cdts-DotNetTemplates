@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
         wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-    <title>@ViewBag.WebTemplateCore.HeaderTitle</title>
+    <title>@ViewBag.WebTemplateCore.RenderHeaderTitle()</title>
     <meta content="width=device-width,initial-scale=1" name="viewport">
     <!-- Load closure template scripts -->
     <script type="text/javascript" src="@string.Concat(ViewBag.WebTemplateCore.CDNPath, "soyutils.js")"></script>
@@ -23,7 +23,7 @@
     document.write(wet.builder.refTop({
         cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
         subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-        @ViewBag.WebTemplateCore.RenderjQuery()  
+        @ViewBag.WebTemplateCore.RenderjQuery() 
         @ViewBag.WebTemplateCore.RenderLocalPath()
     }));
     </script>
