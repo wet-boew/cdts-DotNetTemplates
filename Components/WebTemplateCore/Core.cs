@@ -537,7 +537,6 @@ namespace GoC.WebTemplate
         }).ToList();
 
 
-        #endregion
 
         private string GetStringForJson(string str)
         {
@@ -850,42 +849,42 @@ namespace GoC.WebTemplate
             StringBuilder sb = new StringBuilder();
             //<span class='wb-sessto' data-wb-sessto='{"inactivity": 5000, "reactionTime": 30000, "sessionalive": 10000, "logouturl": "http://www.tsn.com", "refreshCallbackUrl": "http://www.cnn.com", "refreshOnClick": "33", "refreshLimit": 2, "method": "555", "additionalData": "666"}'></span>
 
-            if (this.SessionTimeout.Enabled)
+            if (SessionTimeout.Enabled)
             {
                 sb.Append("<span class='wb-sessto' data-wb-sessto='{");
                 sb.Append("\"inactivity\": ");
-                sb.Append(this.SessionTimeout.Inactivity);
+                sb.Append(SessionTimeout.Inactivity);
                 sb.Append(", \"reactionTime\": ");
-                sb.Append(this.SessionTimeout.ReactionTime);
+                sb.Append(SessionTimeout.ReactionTime);
                 sb.Append(", \"sessionalive\": ");
-                sb.Append(this.SessionTimeout.SessionAlive);
+                sb.Append(SessionTimeout.SessionAlive);
                 sb.Append(", \"logouturl\": \"");
-                sb.Append(this.SessionTimeout.LogoutUrl);
+                sb.Append(SessionTimeout.LogoutUrl);
                 sb.Append("\"");
-                if (!string.IsNullOrEmpty(this.SessionTimeout.RefreshCallbackUrl))
+                if (!string.IsNullOrEmpty(SessionTimeout.RefreshCallbackUrl))
                 {
                     sb.Append(", \"refreshCallbackUrl\": \"");
-                    sb.Append(this.SessionTimeout.RefreshCallbackUrl);
+                    sb.Append(SessionTimeout.RefreshCallbackUrl);
                     sb.Append("\"");
                 }
                 sb.Append(", \"refreshOnClick\": ");
-                sb.Append(this.SessionTimeout.RefreshOnClick.ToString().ToLower());
+                sb.Append(SessionTimeout.RefreshOnClick.ToString().ToLower());
 
-                if (this.SessionTimeout.RefreshLimit > 0)
+                if (SessionTimeout.RefreshLimit > 0)
                 {
                     sb.Append(", \"refreshLimit\": ");
-                    sb.Append(this.SessionTimeout.RefreshLimit);
+                    sb.Append(SessionTimeout.RefreshLimit);
                 }
-                if (!string.IsNullOrEmpty(this.SessionTimeout.Method))
+                if (!string.IsNullOrEmpty(SessionTimeout.Method))
                 {
                     sb.Append(", \"method\": \"");
-                    sb.Append(this.SessionTimeout.Method);
+                    sb.Append(SessionTimeout.Method);
                     sb.Append("\"");
                 }
-                if (!string.IsNullOrEmpty(this.SessionTimeout.AdditionalData))
+                if (!string.IsNullOrEmpty(SessionTimeout.AdditionalData))
                 {
                     sb.Append(", \"additionalData\": \"");
-                    sb.Append(this.SessionTimeout.AdditionalData);
+                    sb.Append(SessionTimeout.AdditionalData);
                     sb.Append("\"");
                 }
                 sb.Append("}'></span>");
@@ -955,10 +954,10 @@ namespace GoC.WebTemplate
 
             // sectionName: 'Section menu', menuLinks: [{ href: '#', text: 'Link 1' }, { href: '#', text: 'Link 2' }]"
 
-            if (this.LeftMenuItems.Count > 0)
+            if (LeftMenuItems.Count > 0)
             {
                 sb.Append("sections: [");
-                foreach (MenuSection menuSection in this.LeftMenuItems)
+                foreach (MenuSection menuSection in LeftMenuItems)
                 {
                     //add section name
                     sb.Append(" {sectionName: '");
@@ -1075,12 +1074,12 @@ namespace GoC.WebTemplate
 
         public HtmlString RenderHtmlHeaderElements()
         {
-            return RenderHtmlElements(this.HTMLHeaderElements);
+            return RenderHtmlElements(HTMLHeaderElements);
         }
 
         public HtmlString RenderHtmlBodyElements()
         {
-            return RenderHtmlElements(this.HTMLBodyElements);
+            return RenderHtmlElements(HTMLBodyElements);
         }
 
         /// <summary>
@@ -1116,17 +1115,17 @@ namespace GoC.WebTemplate
         {
             StringBuilder sb = new StringBuilder();
 
-            if (DateTime.Compare(this.DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(this.VersionIdentifier))
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
+                !string.IsNullOrEmpty(VersionIdentifier))
             {
                 sb.Append("versionIdentifier: \"");
-                sb.Append(this.VersionIdentifier.Trim());
+                sb.Append(VersionIdentifier.Trim());
                 sb.Append("\",");
             }
             else
             {
                 sb.Append("dateModified: \"");
-                sb.Append(this.DateModified.ToString("yyyy-MM-dd"));
+                sb.Append(DateModified.ToString("yyyy-MM-dd"));
                     // format for english and french are identical, else would need if.
                 sb.Append("\",");
             }
@@ -1173,8 +1172,7 @@ namespace GoC.WebTemplate
                 https = "s";
             }
 
-            if (string.Compare(Environment, CDTSEnvironments.AKAMAI.ToString(), true) == 0)
-            {
+            if (string.Compare(Environment, CDTSEnvironments.AKAMAI.ToString(), StringComparison.OrdinalIgnoreCase) == 0)
                 if (string.IsNullOrEmpty(WebTemplateVersion))
                 {
                     _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, WebTemplateTheme, "rn");
@@ -1184,7 +1182,6 @@ namespace GoC.WebTemplate
                     _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, WebTemplateTheme,
                         WebTemplateVersion);
                 }
-            }
             else //Using ESDC CDTS (SSL)
             {
                 if (string.IsNullOrEmpty(WebTemplateVersion))
@@ -1214,7 +1211,7 @@ namespace GoC.WebTemplate
             System.Collections.Specialized.NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
 
             //Set the value of the "GoCTemplateCulture" parameter
-            if (this.TwoLetterCultureLanguage.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
+            if (TwoLetterCultureLanguage.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
             {
                 nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY, Constants.FRENCH_CULTURE);
             }
@@ -1271,7 +1268,7 @@ namespace GoC.WebTemplate
                 //---[ If we get here, we really have to load the data
                 if (StaticFilesPath.StartsWith("~"))
                 {
-                    filePath = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath(StaticFilesPath),
+                    filePath = System.IO.Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
                         fileName);
                 }
                 else
