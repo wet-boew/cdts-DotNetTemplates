@@ -35,16 +35,7 @@
     <!-- Write closure template -->
     <script type="text/javascript">
         var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.top({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderApplicationTitle()
-            @ViewBag.WebTemplateCore.RenderSearch()
-            @ViewBag.WebTemplateCore.RenderLanguageLink()
-            showPreContent: @ViewBag.WebTemplateCore.ShowPreContent.ToString().ToLower(),
-            @ViewBag.WebTemplateCore.RenderBreadcrumbsList()
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        defTop.outerHTML = wet.builder.top(@ViewBag.WebTemplateCore.RenderTop());
     </script>
     <main role="main" property="mainContentOfPage" class="container">
         <!-- the main content -->

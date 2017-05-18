@@ -19,6 +19,12 @@ namespace CoreTest
     {
 
         [Theory, AutoNSubstituteData]
+        public void DoNotRenderBreadCrumbsByDefault(Core sut)
+        {
+            sut.RenderTop().ToString().Should().NotContain("\"breadcrumbs\"");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void RenderCustomSearchWhenSet(Core sut)
         {
             sut.CustomSearch="Foo";

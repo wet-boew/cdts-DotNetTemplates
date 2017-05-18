@@ -126,13 +126,13 @@
       <DependentUpon>GoCWebTemplate.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="TestWebTemplatePage.aspx.cs">
+    <Compile Include="TestWebTemplatePage.aspx.cs">
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </None>
-    <None Include="TestWebTemplatePage.aspx.designer.cs">
+    </Compile>
+    <Compile Include="TestWebTemplatePage.aspx.designer.cs">
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>
-    </None>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Components\WebTemplateCore\WebTemplateCore.csproj">

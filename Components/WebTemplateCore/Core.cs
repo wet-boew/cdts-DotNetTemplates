@@ -19,9 +19,62 @@ namespace GoC.WebTemplate
 {
     public class Core
     {
+
+        public HtmlString RenderjQuery()
+        {
+            return LoadJQueryFromGoogle
+                ? new HtmlString("jqueryEnv: \"external\",")
+                : null;
+        }
+
+        public HtmlString RenderLocalPath()
+        {
+            if (string.IsNullOrWhiteSpace(LocalPath))
+            {
+                return null;
+            }
+            return new HtmlString("localPath: '" + String.Format(LocalPath, WebTemplateTheme, WebTemplateVersion) + "'");
+        }
+
         private readonly IConfigurationProxy _configProxy;
 
-        private HtmlString SerializeToJson(object obj) => new HtmlString(JsonConvert.SerializeObject(obj, _settings));
+        private HtmlString SerializeToJson(object obj)
+        {
+            return new HtmlString(JsonConvert.SerializeObject(obj, _settings));
+        }
+
+        public HtmlString RenderTransactionalTop()
+        {
+            return SerializeToJson(new Top
+            {
+
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                IntranetTitle = new List<ApplicationTitle> {ApplicationTitle},
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                SiteMenu = false,
+                Breadcrumbs = BuildBreadcrumbs(),
+                ShowPreContent = false,
+                LocalPath = BuildLocalPath()
+
+            });
+        }
+        public HtmlString RenderTop()
+        {
+            return SerializeToJson(new Top
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                IntranetTitle = new List<ApplicationTitle> {ApplicationTitle},
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                SiteMenu = true,
+                ShowPreContent = ShowPreContent,
+                Breadcrumbs = BuildBreadcrumbs(),
+                LocalPath = BuildLocalPath()
+            });
+        }
 
         public HtmlString RenderRefTop()
         {
@@ -30,8 +83,13 @@ namespace GoC.WebTemplate
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
                 JqueryEnv =  LoadJQueryFromGoogle ? "external" : null,
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme,WebTemplateVersion)
+                LocalPath = BuildLocalPath()
             });
+        }
+
+        private string BuildLocalPath()
+        {
+            return GetFormattedJsonString(LocalPath, WebTemplateTheme,WebTemplateVersion);
         }
 
         #region Enums
@@ -124,7 +182,7 @@ namespace GoC.WebTemplate
                 AdditionalData = _configProxy.SessionTimeOut.AdditionalData
             };
 
-            //Set Top section options        
+            //Set Top section options
             LanguageLink = new LanguageLink
             {
                 Href = BuildLanguageLinkURL(currentRequest.QueryString)
@@ -170,7 +228,10 @@ namespace GoC.WebTemplate
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
         /// </summary>
-        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public string AssemblyVersion
+        {
+            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
+        }
 
         /// <summary>
         /// Represents the Application Title setting information
@@ -185,11 +246,20 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
-        public List<Breadcrumb> BuildBreadcrumbs => Breadcrumbs?.Select(b => new Breadcrumb {
-            Href = b.Href,
-            Acronym = b.Acronym,
-            Title = GetStringForJson(b.Title)
-        }).ToList();
+        public List<Breadcrumb> BuildBreadcrumbs()
+        {
+            if (Breadcrumbs == null || !Breadcrumbs.Any())
+            {
+                return null;
+            }
+
+            return Breadcrumbs.Select(b => new Breadcrumb
+            {
+                Href = b.Href,
+                Acronym = b.Acronym,
+                Title = GetStringForJson(b.Title)
+            }).ToList();
+        }
 
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
@@ -202,25 +272,37 @@ namespace GoC.WebTemplate
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNEnvironment => _configProxy.CDTSEnvironments[Environment].Env;
+        public string CDNEnvironment
+        {
+            get { return _configProxy.CDTSEnvironments[Environment].Env; }
+        }
 
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
         /// Set by application via web.config
         /// </summary>
-        public string LocalPath => _configProxy.CDTSEnvironments[Environment].LocalPath;
+        public string LocalPath
+        {
+            get { return _configProxy.CDTSEnvironments[Environment].LocalPath; }
+        }
 
         /// <summary>
         /// URL from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNURL => _configProxy.CDTSEnvironments[Environment].Path;
+        public string CDNURL
+        {
+            get { return _configProxy.CDTSEnvironments[Environment].Path; }
+        }
 
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
-        public string CDNPath => BuildCDNPath();
+        public string CDNPath
+        {
+            get { return BuildCDNPath(); }
+        }
 
         /// <summary>
         /// Used to override the Contact links in Footer
@@ -373,11 +455,14 @@ namespace GoC.WebTemplate
         /// Used by generate paths, determine language etc...
         /// Set by Template
         /// </summary>
-        public string TwoLetterCultureLanguage => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
+        public string TwoLetterCultureLanguage
+        {
+            get { return Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName; }
+        }
 
         private string _headerTitle;
         /// <summary>
-        /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per 
+        /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per
         /// Set by application programmatically
         /// </summary>
         public string HeaderTitle
@@ -455,7 +540,7 @@ namespace GoC.WebTemplate
         public bool ShowGlobalNav { get; set; }
 
         /// <summary>
-        /// Determines if the Site Menu is to appear at the top of the page. 
+        /// Determines if the Site Menu is to appear at the top of the page.
         /// If set to false only a blue band will be seen.
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
@@ -516,14 +601,19 @@ namespace GoC.WebTemplate
         /// Only available in the Application Template
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
-        
-        public List<FooterLink> BuildCustomFooterLinks => CustomFooterLinks?.Select(fl => new FooterLink
-        {
-            Href = fl.Href,
-            NewWindow = fl.NewWindow,
-            Text = GetStringForJson(fl.Text)
-        }).ToList();
 
+        public List<FooterLink> BuildCustomFooterLinks
+        {
+            get
+            {
+                return CustomFooterLinks?.Select(fl => new FooterLink
+                {
+                    Href = fl.Href,
+                    NewWindow = fl.NewWindow,
+                    Text = GetStringForJson(fl.Text)
+                }).ToList();
+            }
+        }
 
 
         private string GetStringForJson(string str)
@@ -556,7 +646,10 @@ namespace GoC.WebTemplate
 
         #region Renderers
 
-        public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
+        public HtmlString RenderHeaderTitle()
+        {
+            return new HtmlString(HeaderTitle);
+        }
 
         public HtmlString RenderAppFooter()
         {
@@ -590,10 +683,10 @@ namespace GoC.WebTemplate
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 ShowPreContent = ShowPreContent,
-                Breadcrumbs = BuildBreadcrumbs,
+                Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 SiteMenu = ShowSiteMenu,
-                MenuPath = CustomSiteMenuURL, 
+                MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch
             });
         }
@@ -666,69 +759,6 @@ namespace GoC.WebTemplate
             }
         }
 
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the application title that is displayed above the top menu
-        /// The text and url for the title is provided programmatically by the consumer
-        /// Will only be displayed if the text is supplied
-        /// if no URL is provided the theme/subtheme will provide a default value
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the application title content</returns>
-        /// <example>//intranetTitle: [{href: "http://hrsdc.prv/eng/iit/index.shtml", text: "IITB"}]</example>
-        public HtmlString RenderApplicationTitle()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(ApplicationTitle.Text))
-            {
-                //intranetTitle: [{href: "http://hrsdc.prv/eng/iit/index.shtml", text: "IITB"}],
-                sb.Append("intranetTitle: [{");
-                if (!string.IsNullOrEmpty(ApplicationTitle.URL))
-                {
-                    sb.Append(string.Concat(" href: \"", ApplicationTitle.URL, "\","));
-                }
-                sb.Append(string.Concat(" text: \"", ApplicationTitle.Text, "\""));
-                sb.Append(" }],");
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the breadcrumb links
-        /// The list of breadcrumbs is provided by the application
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the breadcrumb content</returns>
-        /// <example>breadcrumbs: [{ title: 'Home', href: 'http://www.canada.ca/en/index.htm' }, { title: 'CDN Sample', acronym: 'Content Delivery Network Sample' }]</example>
-        public HtmlString RenderBreadcrumbsList()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            //breadcrumbs: [{ title: 'Home', href: 'http://www.canada.ca/en/index.htm' }, { title: 'CDN Sample', acronym: 'Content Delivery Network Sample' }]
-
-            if (Breadcrumbs != null && Breadcrumbs.Count > 0)
-            {
-                sb.Append("breadcrumbs: [");
-                // TO DO  check Linq
-                foreach (Breadcrumb lk in Breadcrumbs)
-                {
-                    sb.Append("{title: '");
-                    sb.Append(WebUtility.HtmlEncode(lk.Title));
-                    if (string.IsNullOrEmpty(lk.Href) == false)
-                    {
-                        sb.Append("', href: '");
-                        sb.Append(lk.Href);
-                    }
-
-                    if (string.IsNullOrEmpty(lk.Acronym) == false)
-                    {
-                        sb.Append("', acronym: '");
-                        sb.Append(WebUtility.HtmlEncode(lk.Acronym));
-                    }
-                    sb.Append("'},");
-                }
-                sb.Append("],");
-            }
-            return new HtmlString(sb.ToString());
-        }
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the feedback link
@@ -773,23 +803,6 @@ namespace GoC.WebTemplate
                 ? new HtmlString(string.Concat("screenIdentifier: \"", ScreenIdentifier, "\","))
                 : null;
         }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to display or not the search control
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the search control</returns>
-        /// <example>
-        /// /// search: false
-        /// or
-        /// search: true
-        /// </example>
-        public string RenderSearch()
-        {
-            return ShowSearch
-                ? "search: true,"
-                : "search: false,";
-        }
-
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the Share Page links
@@ -895,38 +908,6 @@ namespace GoC.WebTemplate
             return ShowFeatures
                 ? "showFeatures: true,"
                 : "showFeatures: false,";
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to display the language toggle link
-        /// </summary>
-        /// <remarks></remarks>
-        /// <returns>string in the format expected by the Closure Templates to generate the language toggle link</returns>
-        /// <example>
-        /// lngLinks: [{ lang: 'fr', href: '?GoCTemplateCulture=fr-CA', text: 'Français'}],
-        /// </example>
-        public HtmlString RenderLanguageLink()
-        {
-            //lngLinks: [{ lang: 'fr', href: '?GoCTemplateCulture=fr-CA', text: 'Français'}],
-            StringBuilder sb = new StringBuilder();
-
-            if (ShowLanguageLink)
-            {
-                sb.Append("lngLinks: [{");
-                sb.Append(" lang: '");
-                sb.Append(LanguageLink.Lang);
-                sb.Append("',");
-
-                sb.Append(" href: '");
-                sb.Append(LanguageLink.Href);
-                sb.Append("',");
-
-                sb.Append(" text: '");
-                sb.Append(LanguageLink.Text);
-                sb.Append("'");
-                sb.Append("}],");
-            }
-            return new HtmlString(sb.ToString());
         }
 
         /// <summary>
