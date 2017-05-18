@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="ErrorSample.aspx.cs" Inherits="SampleCode.C3.Samples.ErrorSample" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="ErrorSample.aspx.cs" Inherits="ErrorSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
 <div class="row mrgn-tp-lg">

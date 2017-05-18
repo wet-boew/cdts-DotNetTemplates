@@ -16,18 +16,19 @@ namespace GoC.WebTemplate.Proxies
         public string SignOutLinkURL => Configurations.Settings.SignOutLinkURL;
         public string SignInLinkURL => Configurations.Settings.SignInLinkURL;
 
-        public IList<CDTSEnvironmentElementProxy> CDTSEnvironments
-            => Configurations.Settings.CDTSEnvironments.Select(env => new CDTSEnvironmentElementProxy(env)).ToList();
+        public IDictionary<string,ICDTSEnvironmentElementProxy> CDTSEnvironments
+            => Configurations.Settings
+                             .CDTSEnvironments
+            //Convert it to uppercase so it works with the enums
+                             .ToDictionary(cdtsEnv => cdtsEnv.Key.ToUpper(),
+                                           cdtsEnv => new CDTSEnvironmentElementProxy(cdtsEnv) as ICDTSEnvironmentElementProxy);
 
-        public ICDTSEnvironmentElementProxy CurrentEnvironment
-            =>
-                new CDTSEnvironmentElementProxy(
-                    Configurations.Settings.CDTSEnvironments[Configurations.Settings.Environment]);
 
         public ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning
             => new LeaveSecureSiteWarningElementProxy(Configurations.Settings.LeavingSecureSiteWarning);
 
-        public string Environment => Configurations.Settings.Environment;
+        //Convert to upper case to work with the enums
+        public string Environment => Configurations.Settings.Environment.ToUpper();
         public bool UseHTTPS => Configurations.Settings.useHTTPS;
         public bool LoadJQueryFromGoogle => Configurations.Settings.LoadJQueryFromGoogle;
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Web;
+using System.Linq;
 using FluentAssertions;
 using GoC.WebTemplate;
 using GoC.WebTemplate.ConfigSections;
@@ -11,23 +11,31 @@ using Xunit;
 
 namespace CoreTest
 {
-    
+
     /// <summary>
     /// Tests that test the Core object in isolation.
     /// </summary>
     public class RenderTests 
     {
+
+        [Theory, AutoNSubstituteData]
+        public void RenderCustomSearchWhenSet(Core sut)
+        {
+            sut.CustomSearch="Foo";
+            sut.RenderAppTop().ToString().Should().Contain("\"customSearch\":\"Foo\"");
+        }
+
         [Theory, AutoNSubstituteData]
         public void LocalPathDoesNotRendersWhenNull([Frozen]IConfigurationProxy proxy, Core sut)
         {
-            proxy.CurrentEnvironment.LocalPath.ReturnsNull();
+            proxy.CDTSEnvironments[proxy.Environment].LocalPath.ReturnsNull();
             sut.RenderRefTop().ToString().Should().NotContain("localPath");
         }
 
         [Theory, AutoNSubstituteData]
         public void LocalPathFormatsCorrectly([Frozen]IConfigurationProxy proxy, Core sut)
         {
-            proxy.CurrentEnvironment.LocalPath.Returns("{0}:{1}");
+            proxy.CDTSEnvironments[Arg.Any<string>()].LocalPath.Returns("{0}:{1}");
             sut.RenderRefTop().ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
         }
 
@@ -71,7 +79,7 @@ namespace CoreTest
         {
 
             elementProxy.Env.Returns("prod");
-            configurationProxy.CurrentEnvironment.Returns(elementProxy);
+            configurationProxy.CDTSEnvironments[Arg.Any<string>()].Returns(elementProxy);
             //Because of the wayh the core object is initialized in the constructor we'll occasionally  
             //have to create it ourselves.
             var sut = new Core(currentRequestProxy, configurationProxy);

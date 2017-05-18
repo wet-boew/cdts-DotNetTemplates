@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="SessionTimeoutSample.aspx.cs" Inherits="SampleCode.C3.Samples.SessionTimeoutSample" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="SessionTimeoutSample.aspx.cs" Inherits="SessionTimeoutSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <h1>GoC Web Template Samples - Session Timeout</h1>

@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplateMVC, Version=4.0.24.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+    <Reference Include="GoC.WebTemplateMVC, Version=4.0.24.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.3\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -87,8 +87,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebTemplateCore, Version=1.0.6310.28753, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.1\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6326.28990, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.3\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

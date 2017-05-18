@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SplashPageSample.aspx.cs" Inherits="SampleCode.C3.Samples.SplashPageSample" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SplashPageSample.aspx.cs" Inherits="SplashPageSample" %>
 
 <!--[if lt IE 9]><html class="no-js lt-ie9" lang="<%= WebTemplateCore.TwoLetterCultureLanguage %>"><![endif]-->
 <!--[if gt IE 8]><!-->

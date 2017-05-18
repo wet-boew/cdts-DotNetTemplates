@@ -58,13 +58,13 @@
       <HintPath>..\..\packages\GoC.Components.Crypto.2.6\Lib\Net40\Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate, Version=4.0.24.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.24.1\lib\Net45\GoC.WebTemplate.dll</HintPath>
+    <Reference Include="GoC.WebTemplate, Version=4.0.24.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.24.4-RC1\lib\Net45\GoC.WebTemplate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.24.1\lib\Net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.24.4-RC1\lib\Net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -87,8 +87,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebTemplateCore, Version=1.0.6310.28741, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.24.1\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6334.19636, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.24.4-RC1\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -136,7 +136,6 @@
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePageSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx" />
-    <Content Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeavingSecureSiteSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeftSideMenuSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\mystyle.css" />
@@ -220,13 +219,6 @@
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx.designer.cs">
       <DependentUpon>FeedbackandShareThisPageSample.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx.cs">
-      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\FooterLinksSample.aspx.designer.cs">
-      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\GCIntranetThemeSample.aspx.cs">
       <DependentUpon>GCIntranetThemeSample.aspx</DependentUpon>

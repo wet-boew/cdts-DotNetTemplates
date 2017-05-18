@@ -1,4 +1,8 @@
-﻿using GoC.WebTemplate;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using GoC.WebTemplate;
+using GoC.WebTemplate.ConfigSections;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
 using Ploeh.AutoFixture.Xunit2;
@@ -23,6 +27,8 @@ namespace CoreTest
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.
                                           .Without(p => p.ShowSignOutLink)
                                           .Without(p => p.ShowSignInLink)
+            //We want custom search to start out as default(string)
+                                          .Without(p => p.CustomSearch) 
             //The Site Menu URL should be null
                                           .Without(p => p.CustomSiteMenuURL)
             //We also create want to ignore some of the lists as they should start out empty.
@@ -32,7 +38,17 @@ namespace CoreTest
                                           .Without(p => p.HTMLBodyElements)
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
-                                          .Without(p => p.LeftMenuItems));
+                                          .Without(p=> p.LeftMenuItems)
+            //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
+                                          .With(p => p.Environment, "ESDCProd"));
+            //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
+            //that the keys are deterministic.
+            fixture.Register<IDictionary<string,ICDTSEnvironmentElementProxy>>(() =>
+            {
+                var keys = new[] {"Akamai", "ESDCProd", "Prod", "NonProd", "QAT"};
+                var values = fixture.Create<Generator<ICDTSEnvironmentElementProxy>>();
+                return keys.Zip(values, Tuple.Create).ToDictionary(x => x.Item1, x => x.Item2);
+            });
         }
     }
 

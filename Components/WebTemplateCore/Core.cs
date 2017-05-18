@@ -8,7 +8,6 @@ using System.Web;
 using System.Globalization;
 using System.Linq;
 using System.Web.Caching;
-using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -96,7 +95,6 @@ namespace GoC.WebTemplate
         public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy)
         {
             _configProxy = configProxy;
-            _currentEnvironment = _configProxy.CurrentEnvironment;
             _settings = new JsonSerializerSettings
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
@@ -165,7 +163,6 @@ namespace GoC.WebTemplate
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
 
-        #region Properties
 
         private string _cdnPath;
         private string _staticFilesPath;
@@ -205,34 +202,25 @@ namespace GoC.WebTemplate
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNEnvironment => _currentEnvironment.Env;
+        public string CDNEnvironment => _configProxy.CDTSEnvironments[Environment].Env;
 
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
+        /// Set by application via web.config
         /// </summary>
-        public string LocalPath => _currentEnvironment.LocalPath;
+        public string LocalPath => _configProxy.CDTSEnvironments[Environment].LocalPath;
 
         /// <summary>
         /// URL from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNURL => _currentEnvironment.Path;
+        public string CDNURL => _configProxy.CDTSEnvironments[Environment].Path;
 
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
-        public string CDNPath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(_cdnPath))
-                {
-                    _cdnPath = BuildCDNPath();
-                }
-                return _cdnPath;
-            }
-        }
+        public string CDNPath => BuildCDNPath();
 
         /// <summary>
         /// Used to override the Contact links in Footer
@@ -1232,7 +1220,6 @@ namespace GoC.WebTemplate
         private static readonly object lockObject = new object();
 
         private readonly JsonSerializerSettings _settings;
-        private readonly ICDTSEnvironmentElementProxy _currentEnvironment;
 
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
