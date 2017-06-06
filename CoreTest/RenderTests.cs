@@ -70,13 +70,12 @@ namespace CoreTest
             ICurrentRequestProxy currentRequestProxy)
         {
 
-            configurationProxy.SubTheme.Returns("foo");
 
             //Because of the wayh the core object is initialized in the constructor we'll occasionally  
             //have to create it ourselves.
             var sut = new Core(currentRequestProxy, configurationProxy);
 
-            sut.RenderRefTop().ToString().Should().Contain("\"subTheme\":\"foo\"");
+            sut.RenderRefTop().ToString().Should().Contain($"\"subTheme\":\"{configurationProxy.SubTheme}\"");
         }
         [Theory, AutoNSubstituteData]
         public void CdnEnvRenderedProperly(ICDTSEnvironmentElementProxy elementProxy,

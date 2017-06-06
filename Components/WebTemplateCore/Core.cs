@@ -15,8 +15,18 @@ using Newtonsoft.Json.Serialization;
 
 // ReSharper disable once CheckNamespace
 
+
+
 namespace GoC.WebTemplate
 {
+    public class PreFooter
+    {
+        public string CdnEnv { get; set; }
+        public string VersionIdentifier { get; set; }
+        public string DateModified { get; set; }
+        public bool ShowPostContent { get; set; }
+       
+    }
     public class Core
     {
 
