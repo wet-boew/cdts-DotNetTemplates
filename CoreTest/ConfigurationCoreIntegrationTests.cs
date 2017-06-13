@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using GoC.WebTemplate;
 using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
@@ -14,56 +15,44 @@ namespace CoreTest
     {
 
         [Theory, AutoNSubstituteData]
-        public void SearchBoxShownByDefault(ICurrentRequestProxy fakeCurrentRequestProxy)
+        public void SearchBoxShownByDefault(IDictionary<string, ICDTSEnvironment> environments,
+            ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(), environments);
             var json = sut.RenderAppTop();
             json.ToString().Should().Contain("\"search\":true");
         }
 
         [Theory, AutoNSubstituteData]
-        public void SiteMenuShownByDefault(ICurrentRequestProxy fakeCurrentRequestProxy)
+        public void SiteMenuShownByDefault(IDictionary<string, ICDTSEnvironment> environments,
+            ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(), environments);
             var json = sut.RenderAppTop();
             json.ToString().Should().Contain("\"siteMenu\":true");
         }
 
         [Theory, AutoNSubstituteData]
-        public void GlobalNavFalseByDefault(ICurrentRequestProxy fakeCurrentRequestProxy)
+        public void GlobalNavFalseByDefault(IDictionary<string, ICDTSEnvironment> environments,
+            ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(),environments);
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("\"globalNav\":false");
         }
 
 
-        [Theory, AutoNSubstituteDataAttribute]
+        [Theory, AutoNSubstituteData]
 
-        public void LeavingSecureSiteWarningElementCapitilizationFix(ICurrentRequestProxy fakeCurrentRequestProxy)
+        public void LeavingSecureSiteWarningElementCapitilizationFix(IDictionary<string, ICDTSEnvironment> environments,
+            ICurrentRequestProxy fakeCurrentRequestProxy)
         {
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy());
+            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(), environments);
             sut.LeavingSecureSiteWarning.RedirectURL.Should().Be("foo");
         }
 
-        [Theory, AutoNSubstituteData]
-        public void CDNUrlDefaultsToValueSetInConfig(ICurrentRequestProxy fakeRequestProxy)
-        {
-            //AKAMAI is selected as the environment in the  config file.
-            var sut = new Core(fakeRequestProxy, new ConfigurationProxy());
-            sut.CDNURL.Should().Be("{0}:{1}:{2}");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void CDNPathShouldBeBasedOnEnvironment(ICurrentRequestProxy fakeRequestProxy)
-        {
-            //AKAMAI is selected as the environment in the  config file.
-            var sut = new Core(fakeRequestProxy, new ConfigurationProxy());
-            sut.Environment = Core.CDTSEnvironments.ESDCPROD.ToString();
-            sut.CDNURL.Should().Be("{0}:{1}:{2}:{3}");
-        }
     }
 }

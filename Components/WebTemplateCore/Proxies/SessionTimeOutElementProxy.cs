@@ -1,4 +1,6 @@
-namespace GoC.WebTemplate.ConfigSections
+using GoC.WebTemplate.ConfigSections;
+
+namespace WebTemplateCore.Proxies
 {
     public class SessionTimeOutElementProxy : ISessionTimeOutElementProxy {
         private readonly SessionTimeOutElement _sessionTimeOutElement;

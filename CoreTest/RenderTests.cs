@@ -1,17 +1,387 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using FluentAssertions;
 using GoC.WebTemplate;
-using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 using Ploeh.AutoFixture.Xunit2;
+using WebTemplateCore.JSONSerializationObjects;
 using Xunit;
 
 namespace CoreTest
 {
+    public class DeserializeEnvironmentsTest
+    {
 
+        [Fact]
+        public void Foo()
+        {
+            var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
+            env.Count.Should().Be(6);
+        }
+    }
+    public class CDNPathGeneratorTests
+    {
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCSADETestAppHTTPSGCWeb([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                CDN = "esdcnonprod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = true,
+                IsSSLModifiable = true
+            };
+
+            sut.WebTemplateTheme = "GCWeb";
+            sut.UseHTTPS = true;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"https://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/GCWeb/{sut.WebTemplateVersion}/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCSADETestAppHTTPGCIntranet([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                CDN = "esdcnonprod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = true,
+                IsSSLModifiable = true
+            };
+
+            sut.WebTemplateTheme = "GCIntranet";
+            sut.UseHTTPS = false;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"http://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+        }
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCSADETestRnHTTPSGCWeb([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                CDN = "esdcnonprod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = true,
+                IsSSLModifiable = true
+            };
+
+            sut.WebTemplateTheme = "GCWeb";
+            sut.WebTemplateVersion = string.Empty;
+            sut.UseHTTPS = true;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be("https://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/GCWeb/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCSADETestRnHTTPGCIntranet([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                CDN = "esdcnonprod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = true,
+                IsSSLModifiable = true
+            };
+
+            sut.WebTemplateTheme = "GCIntranet";
+            sut.WebTemplateVersion = string.Empty;
+            sut.UseHTTPS = false;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be("http://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/GCIntranet/cdts/compiled/");
+        }
+
+
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCProdTestRnHTTPS([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = false,
+                IsSSLModifiable = true
+            };
+
+            sut.WebTemplateVersion = string.Empty;
+            sut.UseHTTPS = true;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"https://templates.service.gc.ca/rn/cls/wet/GCIntranet/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCProdTestRnHTTP([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = false,
+                IsSSLModifiable = true
+            };
+
+            sut.WebTemplateVersion = string.Empty;
+            sut.UseHTTPS = false;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be("http://templates.service.gc.ca/rn/cls/wet/GCIntranet/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCProdTestAppHTTPS([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = false,
+                IsSSLModifiable = true
+            };
+
+            sut.UseHTTPS = true;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"https://templates.service.gc.ca/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData]
+
+        public void ESDCProdTestAppHTTP([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = false,
+                IsSSLModifiable = true
+            };
+
+            sut.UseHTTPS = false;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"http://templates.service.gc.ca/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+        }
+        [Theory, AutoNSubstituteData]
+
+        public void ProdSSLUrlTestApp([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = false,
+                IsSSLModifiable = false
+            };
+
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"https://ssl-templates.services.gc.ca/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+        }
+
+
+        [Theory, AutoNSubstituteData]
+        public void ProdSSLUrlTestRun([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = false,
+                IsThemeModifiable = false,
+                IsSSLModifiable = false
+            };
+
+            sut.WebTemplateVersion = string.Empty;
+
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"https://ssl-templates.services.gc.ca/rn/cls/wet/GCIntranet/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void AkamaiURLTestRun([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = true,
+                IsThemeModifiable = false,
+                IsSSLModifiable = false
+            };
+
+            sut.WebTemplateVersion = string.Empty;
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be("https://www.canada.ca/etc/designs/canada/cdts/GCWeb/rn/cdts/compiled/");
+        }
+
+        [Theory, AutoNSubstituteData] public void AkamaiURLTestApp([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+
+            var currentEnv = new CDTSEnvironment
+            {
+                Path = "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{3}cdts/compiled/",
+                CDN = "prod",
+                IsVersionRNCombined = true,
+                IsThemeModifiable = false,
+                IsSSLModifiable = false
+            };
+
+            environments[sut.Environment] = currentEnv;
+
+            sut.CDNPath.Should()
+                .Be($"https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{sut.WebTemplateVersion}/cdts/compiled/");
+        }
+
+    }
+
+    public class CDNPathValidationTests
+    {
+            
+        [Theory, AutoNSubstituteData]
+        public void ThrowExceptionIfThemeIsSetButEnvironmentDoesNotAllowIt([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = environments[sut.Environment];
+
+            sut.WebTemplateTheme = "GCWeb";
+            currentEnv.IsThemeModifiable = false;
+
+            Action test = () =>
+            {
+                var unused = sut.CDNPath;
+            };
+            test.ShouldThrow<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void DoNotThrowExceptionIfThemeIsNotSetAndNotModifiable([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = environments[sut.Environment];
+
+            sut.WebTemplateTheme = string.Empty;
+            currentEnv.IsThemeModifiable = false;
+
+            Action test = () =>
+            {
+                var unused = sut.CDNPath;
+            };
+            test.ShouldNotThrow<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void ThrowExceptionIfThemeIsModifiableButNotSet([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = environments[sut.Environment];
+
+            sut.WebTemplateTheme = string.Empty;
+            currentEnv.IsThemeModifiable = true;
+
+            Action test = () =>
+            {
+                var unused = sut.CDNPath;
+            };
+            test.ShouldThrow<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void DoNotThrowExceptionIfThemeIsSetAndModifiable([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = environments[sut.Environment];
+            sut.WebTemplateTheme = "GCWeb";
+            currentEnv.IsThemeModifiable = true;
+
+            sut.UseHTTPS = null;
+            Action test = () =>
+            {
+                var unused = sut.CDNPath;
+            };
+            test.ShouldNotThrow<InvalidOperationException>();
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void ThrowExceptionIfHTTPSIsNonModifiableButUseHTTPSIsSet([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = environments[sut.Environment];
+            currentEnv.IsSSLModifiable = false;
+            sut.UseHTTPS = true;
+
+            Action test = () =>
+            {
+                var unused = sut.CDNPath;
+            };
+            test.ShouldThrow<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void DoNotThrowExceptionIfHTTPSIsNonModifiableAndUseHTTPSIsNull([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            Core sut)
+        {
+            var currentEnv = environments[sut.Environment];
+            currentEnv.IsSSLModifiable = false;
+            sut.UseHTTPS = null;
+
+            Action test = () =>
+            {
+                var unused = sut.CDNPath;
+            };
+            test.ShouldNotThrow<InvalidOperationException>();
+        }
+
+        }
     /// <summary>
     /// Tests that test the Core object in isolation.
     /// </summary>
@@ -32,16 +402,19 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void LocalPathDoesNotRendersWhenNull([Frozen]IConfigurationProxy proxy, Core sut)
+        public void LocalPathDoesNotRendersWhenNull([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            [Frozen]IConfigurationProxy proxy, Core sut)
         {
-            proxy.CDTSEnvironments[proxy.Environment].LocalPath.ReturnsNull();
+            environments[sut.Environment].LocalPath.ReturnsNull();
             sut.RenderRefTop().ToString().Should().NotContain("localPath");
         }
 
         [Theory, AutoNSubstituteData]
-        public void LocalPathFormatsCorrectly([Frozen]IConfigurationProxy proxy, Core sut)
+        public void LocalPathFormatsCorrectly([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            [Frozen]IConfigurationProxy proxy,
+            Core sut)
         {
-            proxy.CDTSEnvironments[Arg.Any<string>()].LocalPath.Returns("{0}:{1}");
+            environments[sut.Environment].LocalPath.Returns("{0}:{1}");
             sut.RenderRefTop().ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
         }
 
@@ -66,28 +439,31 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void WebSubThemeRenderedProperly(IConfigurationProxy configurationProxy,
-            ICurrentRequestProxy currentRequestProxy)
+        public void WebSubThemeRenderedProperly(Core sut)
         {
 
-
-            //Because of the wayh the core object is initialized in the constructor we'll occasionally  
-            //have to create it ourselves.
-            var sut = new Core(currentRequestProxy, configurationProxy);
-
-            sut.RenderRefTop().ToString().Should().Contain($"\"subTheme\":\"{configurationProxy.SubTheme}\"");
+            sut.RenderRefTop().ToString().Should().Contain($"\"subTheme\":\"{sut.WebTemplateSubTheme}\"");
         }
+        /*
+        //Current different types of environments
+              "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{0}/cdts/compiled/",
+              "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+              "Path": "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+              "Path": "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
+        */
         [Theory, AutoNSubstituteData]
-        public void CdnEnvRenderedProperly(ICDTSEnvironmentElementProxy elementProxy,
+        public void CdnEnvRenderedProperly(IDictionary<string, ICDTSEnvironment> environments, 
+            CDTSEnvironment environment,
             IConfigurationProxy configurationProxy,
             ICurrentRequestProxy currentRequestProxy)
         {
-
-            elementProxy.Env.Returns("prod");
-            configurationProxy.CDTSEnvironments[Arg.Any<string>()].Returns(elementProxy);
             //Because of the wayh the core object is initialized in the constructor we'll occasionally  
             //have to create it ourselves.
-            var sut = new Core(currentRequestProxy, configurationProxy);
+            var sut = new Core(currentRequestProxy, configurationProxy, environments);
+            
+            environment.CDN = "prod";
+            environments[sut.Environment] = environment;
+
             sut.RenderRefTop().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
 

@@ -1,32 +1,57 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Text;
 using System.Net;
 using System.Web;
-using System.Globalization;
 using System.Linq;
 using System.Web.Caching;
 using GoC.WebTemplate.Proxies;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-
+using WebTemplateCore.JSONSerializationObjects;
 
 // ReSharper disable once CheckNamespace
-
-
-
 namespace GoC.WebTemplate
 {
-    public class PreFooter
+    public static class JsonSerializationHelper
     {
-        public string CdnEnv { get; set; }
-        public string VersionIdentifier { get; set; }
-        public string DateModified { get; set; }
-        public bool ShowPostContent { get; set; }
-       
+        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver(),
+            NullValueHandling = NullValueHandling.Ignore
+        };
+
+        public static HtmlString SerializeToJson(object obj)
+        {
+            return new HtmlString(JsonConvert.SerializeObject(obj, Settings));
+        }
+
+        //Because of how JSonDesrialization works we need to have a container class for the environments.
+        private class EnvironmentContainer
+        {
+            public List<CDTSEnvironment> Environments { get; set; }
+        }
+        public static IDictionary<string, ICDTSEnvironment> DeserializeEnvironments(string filename) 
+        {
+            using (var file = File.OpenText(filename))
+            using (var reader = new JsonTextReader(file))
+            {
+                var serializer = new JsonSerializer{
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    NullValueHandling = NullValueHandling.Ignore
+                };
+                var environments = serializer.Deserialize<EnvironmentContainer>(reader);
+                return environments.Environments.Cast<ICDTSEnvironment>().ToDictionary(x => x.Name, x => x);
+
+            }
+        }
+
     }
+
     public class Core
     {
 
@@ -47,15 +72,11 @@ namespace GoC.WebTemplate
         }
 
         private readonly IConfigurationProxy _configProxy;
-
-        private HtmlString SerializeToJson(object obj)
-        {
-            return new HtmlString(JsonConvert.SerializeObject(obj, _settings));
-        }
+        private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
 
         public HtmlString RenderTransactionalTop()
         {
-            return SerializeToJson(new Top
+            return JsonSerializationHelper.SerializeToJson(new Top
             {
 
                 CdnEnv = CDNEnvironment,
@@ -72,7 +93,7 @@ namespace GoC.WebTemplate
         }
         public HtmlString RenderTop()
         {
-            return SerializeToJson(new Top
+            return JsonSerializationHelper.SerializeToJson(new Top
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
@@ -88,7 +109,7 @@ namespace GoC.WebTemplate
 
         public HtmlString RenderRefTop()
         {
-            return SerializeToJson(new RefTop
+            return JsonSerializationHelper.SerializeToJson(new RefTop
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
@@ -140,34 +161,16 @@ namespace GoC.WebTemplate
             yahoomail
         }; //NOTE: The item names must match the parameter names expected by the Closure Template for this to work
 
-        /// <summary>
-        /// Enum that represents the environments available with the CDTSs
-        /// </summary>
-        /// <remarks>
-        /// Must be uppercase for logic to work
-        /// The CDNURL and CDNEnv is decided based on these values
-        /// </remarks>
-        public enum CDTSEnvironments
-        {
-            AKAMAI,
-            ESDCPROD,
-            ESDCNNONPROD,
-            ESDCQA
-        };
-
         // ReSharper restore InconsistentNaming
 
         #endregion
 
 
-        public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy)
+        public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy, IDictionary<string,ICDTSEnvironment> cdtsEnvironments)
         {
             _configProxy = configProxy;
-            _settings = new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                NullValueHandling = NullValueHandling.Ignore
-            };
+            _cdtsEnvironments = cdtsEnvironments;
+
 
             //Set properties
             WebTemplateVersion = _configProxy.Version;
@@ -175,7 +178,6 @@ namespace GoC.WebTemplate
             WebTemplateSubTheme = _configProxy.SubTheme;
 
             Environment = _configProxy.Environment;
-            UseHTTPS = _configProxy.UseHTTPS;
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
@@ -225,23 +227,16 @@ namespace GoC.WebTemplate
             ShowGlobalNav = _configProxy.ShowGlobalNav;
             CustomSearch = _configProxy.CustomSearch;
 
-
-
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
 
-
-        private string _cdnPath;
         private string _staticFilesPath;
 
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
         /// </summary>
-        public string AssemblyVersion
-        {
-            get { return Assembly.GetExecutingAssembly().GetName().Version.ToString(); }
-        }
+        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         /// <summary>
         /// Represents the Application Title setting information
@@ -282,37 +277,25 @@ namespace GoC.WebTemplate
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNEnvironment
-        {
-            get { return _configProxy.CDTSEnvironments[Environment].Env; }
-        }
+         public string CDNEnvironment => _cdtsEnvironments[Environment].CDN;
 
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
         /// Set by application via web.config
         /// </summary>
-        public string LocalPath
-        {
-            get { return _configProxy.CDTSEnvironments[Environment].LocalPath; }
-        }
+        public string LocalPath => _cdtsEnvironments[Environment].LocalPath;
 
         /// <summary>
         /// URL from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNURL
-        {
-            get { return _configProxy.CDTSEnvironments[Environment].Path; }
-        }
+        public string CDNURL => _cdtsEnvironments[Environment].Path;
 
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
-        public string CDNPath
-        {
-            get { return BuildCDNPath(); }
-        }
+        public string CDNPath => BuildCDNPath();
 
         /// <summary>
         /// Used to override the Contact links in Footer
@@ -320,11 +303,7 @@ namespace GoC.WebTemplate
         /// </summary>
         public string ContactLinkURL { get; set; }
 
-        private List<Link> BuildContactLinks()
-        {
-                return new List<Link> {new Link {Href = ContactLinkURL}};
-        }
-
+        private List<Link> BuildContactLinks() => new List<Link> {new Link {Href = ContactLinkURL}};
 
 
         /// <summary>
@@ -465,10 +444,7 @@ namespace GoC.WebTemplate
         /// Used by generate paths, determine language etc...
         /// Set by Template
         /// </summary>
-        public string TwoLetterCultureLanguage
-        {
-            get { return Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName; }
-        }
+        public string TwoLetterCultureLanguage => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
         private string _headerTitle;
         /// <summary>
@@ -527,7 +503,7 @@ namespace GoC.WebTemplate
         /// Determines if the communication between the browser and the CDTS should be encrypted
         /// Set by application via web.config or programmatically
         /// </summary>
-        public bool UseHTTPS { get; set; }
+        public bool? UseHTTPS { get; set; }
 
         /// <summary>
         /// Determines if the jQuery files should be loaded from google or from the CDN
@@ -626,15 +602,9 @@ namespace GoC.WebTemplate
         }
 
 
-        private string GetStringForJson(string str)
-        {
-            return string.IsNullOrWhiteSpace(str) ? null : str;
-        }
+        private string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
 
-        private string GetFormattedJsonString(string formatStr, params object[] strs)
-        {
-            return string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
-        }
+        private string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
 
         private List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
         {
@@ -656,14 +626,11 @@ namespace GoC.WebTemplate
 
         #region Renderers
 
-        public HtmlString RenderHeaderTitle()
-        {
-            return new HtmlString(HeaderTitle);
-        }
+        public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
         public HtmlString RenderAppFooter()
         {
-            return SerializeToJson(new AppFooter
+            return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = GetStringForJson(WebTemplateSubTheme),
@@ -682,7 +649,7 @@ namespace GoC.WebTemplate
         {
             CheckIfBothSignInAndSignOutAreSet();
 
-            return SerializeToJson(new AppTop
+            return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = ApplicationTitle.Text,
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
@@ -831,7 +798,7 @@ namespace GoC.WebTemplate
             //showShare: false
             //showShare: ["email", "facebook", "linkedin", "twitter"]
 
-            if (ShowSharePageLink == true && (SharePageMediaSites.Count > 0))
+            if (ShowSharePageLink && (SharePageMediaSites.Count > 0))
             {
                 sb.Append("showShare: [");
 
@@ -973,7 +940,7 @@ namespace GoC.WebTemplate
                                 MenuItem mi = (MenuItem) lk;
 
                                 //the following if statement needs to be here for backward compatibility OpenInNewWindow is only available to MenuItems not Link
-                                if (mi.OpenInNewWindow == true)
+                                if (mi.OpenInNewWindow)
                                 {
                                     sb.Append(", newWindow: true");
                                 }
@@ -1144,38 +1111,58 @@ namespace GoC.WebTemplate
         /// <returns>String, the complete path to the cdn</returns>
         private string BuildCDNPath()
         {
-            string https = string.Empty;
 
-            if (UseHTTPS == true)
+            var currentEnv = _cdtsEnvironments[Environment];
+
+
+            if (!currentEnv.IsThemeModifiable && !string.IsNullOrWhiteSpace(WebTemplateTheme))
             {
-                https = "s";
+                throw new InvalidOperationException($"{Environment} does not allow a theme to be set");
             }
 
-            if (string.Compare(Environment, CDTSEnvironments.AKAMAI.ToString(), StringComparison.OrdinalIgnoreCase) == 0)
-                if (string.IsNullOrEmpty(WebTemplateVersion))
+            if (currentEnv.IsThemeModifiable && string.IsNullOrWhiteSpace(WebTemplateTheme))
+            {
+                throw new InvalidOperationException("No environment is set");
+            }
+
+            if (!currentEnv.IsSSLModifiable && UseHTTPS.HasValue)
+            {
+                throw new InvalidOperationException($"Cannot use HTTPS flag when theme doesn't allow it {nameof(currentEnv.IsSSLModifiable)} is false");
+            }
+
+            var https = string.Empty;
+            if (currentEnv.IsSSLModifiable)
+            {
+                https = UseHTTPS.Value ? "s" : string.Empty;
+            }
+
+            var theme = string.Empty;
+            if (currentEnv.IsThemeModifiable)
+            {
+                theme = WebTemplateTheme;
+            }
+
+            var run = string.Empty;
+            var version = string.Empty;
+            if (string.IsNullOrWhiteSpace(WebTemplateVersion))
+            {
+                if (currentEnv.IsVersionRNCombined)
                 {
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, WebTemplateTheme, "rn");
+                    version = "rn/";
                 }
                 else
                 {
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, WebTemplateTheme,
-                        WebTemplateVersion);
-                }
-            else //Using ESDC CDTS (SSL)
-            {
-                if (string.IsNullOrEmpty(WebTemplateVersion))
-                {
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, "rn", WebTemplateTheme,
-                        WebTemplateVersion);
-                }
-                else
-                {
-                    //the extra "/" at the end is added after the version, since this adds a folder to the original path
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, "app", WebTemplateTheme,
-                        string.Concat(WebTemplateVersion, "/"));
+                    run = "rn";
                 }
             }
-            return _cdnPath;
+            else
+            {
+                version = WebTemplateVersion + "/";
+                run = "app";
+            }
+
+
+            return string.Format(CultureInfo.InvariantCulture, currentEnv.Path, https, run, theme, version);
         }
 
         /// <summary>
@@ -1186,7 +1173,6 @@ namespace GoC.WebTemplate
         /// <returns>The URL to be used for the language toggle link</returns>
         private string BuildLanguageLinkURL(string queryString)
         {
-            string urlPath = string.Empty;
             System.Collections.Specialized.NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
 
             //Set the value of the "GoCTemplateCulture" parameter

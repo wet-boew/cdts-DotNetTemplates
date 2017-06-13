@@ -25,7 +25,7 @@ namespace GoC.WebTemplate
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.WebTemplateCore = new Core(new CurrentRequestProxy(), new ConfigurationProxy());
+            this.WebTemplateCore = new Core(new CurrentRequestProxy(), new ConfigurationProxy(), new Dictionary<string, ICDTSEnvironment>());
         }
 
         public Core WebTemplateCore { get; set; }

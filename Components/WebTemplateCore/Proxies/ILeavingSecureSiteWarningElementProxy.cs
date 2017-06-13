@@ -1,4 +1,4 @@
-namespace GoC.WebTemplate.ConfigSections
+namespace WebTemplateCore.Proxies
 {
     public interface ILeavingSecureSiteWarningElementProxy
     {

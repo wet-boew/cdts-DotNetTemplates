@@ -58,10 +58,6 @@ namespace GoC.WebTemplate
             set { this["sessionTimeOut"] = value; }
         }
 
-        // Create a "cdtsEnvironments collection."
-        [ConfigurationProperty("cdtsEnvironments")]
-        public CDTSEnvironmentCollection CDTSEnvironments => base["cdtsEnvironments"] as CDTSEnvironmentCollection;
-
         // Create a "leavingSecureSiteWarning element."
         [ConfigurationProperty("leavingSecureSiteWarning")]
         public LeavingSecureSiteWarningElement LeavingSecureSiteWarning
@@ -110,15 +106,6 @@ namespace GoC.WebTemplate
             set { this["environment"] = value; }
         }
 
-        /// <summary>
-        /// use Https
-        /// </summary>
-        [ConfigurationProperty("useHTTPS", DefaultValue = true, IsRequired = true)]
-        public Boolean useHTTPS
-        {
-            get { return (Boolean)this["useHTTPS"]; }
-            set { this["useHTTPS"] = value; }
-        }
         /// <summary>
         /// LoadJQueryFromGoogle
         /// </summary>
@@ -199,6 +186,16 @@ namespace GoC.WebTemplate
         {
             get { return (Boolean)this["showFeatures"]; }
             set { this["showFeatures"] = value; }
+        }
+
+        /// <summary>
+        /// StaticFilesLocation
+        /// </summary>
+        [ConfigurationProperty("useHTTPS", IsRequired = false)]
+        public string UseHttps
+        {
+            get { return (string)this["useHTTPS"]; }
+            set { this["useHTTPS"] = value; }
         }
 
         /// <summary>

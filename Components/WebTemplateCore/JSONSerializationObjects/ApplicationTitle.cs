@@ -1,7 +1,6 @@
-using System;
 using Newtonsoft.Json;
 
-namespace GoC.WebTemplate
+namespace WebTemplateCore.JSONSerializationObjects
 {
     /// <summary>
     /// The settings object for the Application title that will be displayed in the header above the top menu

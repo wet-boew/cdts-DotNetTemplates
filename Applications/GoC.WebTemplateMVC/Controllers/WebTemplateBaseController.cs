@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Globalization;
 using System.Threading;
@@ -83,7 +84,7 @@ namespace GoC.WebTemplate
             }
 
             //Core needs to be created here to pass in the proper culture 
-            this.WebTemplateCore = new Core(new CurrentRequestProxy(),new ConfigurationProxy());
+            this.WebTemplateCore = new Core(new CurrentRequestProxy(),new ConfigurationProxy(), new Dictionary<string, ICDTSEnvironment>());
 
             return base.BeginExecuteCore(callback, state);
         }

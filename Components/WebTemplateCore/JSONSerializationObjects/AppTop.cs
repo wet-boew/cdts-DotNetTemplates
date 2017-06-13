@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using GoC.WebTemplate;
 
-namespace GoC.WebTemplate
+namespace WebTemplateCore.JSONSerializationObjects
 {
     /// <summary>
     /// Used to serialize to JSON for the application template in the wet.builder.appTop call
