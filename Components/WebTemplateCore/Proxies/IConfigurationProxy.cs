@@ -84,5 +84,7 @@ namespace GoC.WebTemplate.Proxies
         /// StaticFilesLocation
         /// </summary>
         string StaticFilesLocation { get;  }
+
+        bool? UseHttps { get; }
     }
 }

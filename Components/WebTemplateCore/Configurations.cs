@@ -79,7 +79,7 @@ namespace GoC.WebTemplate
         /// <summary>
         /// theme
         /// </summary>
-        [ConfigurationProperty("theme", IsRequired = true)]
+        [ConfigurationProperty("theme", IsRequired = false)]
         public string Theme
         {
             get { return (string)this["theme"]; }
@@ -192,9 +192,9 @@ namespace GoC.WebTemplate
         /// StaticFilesLocation
         /// </summary>
         [ConfigurationProperty("useHTTPS", IsRequired = false)]
-        public string UseHttps
+        public bool? UseHttps
         {
-            get { return (string)this["useHTTPS"]; }
+            get { return (bool?)this["useHTTPS"]; }
             set { this["useHTTPS"] = value; }
         }
 

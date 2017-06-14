@@ -38,5 +38,6 @@ namespace GoC.WebTemplate.Proxies
         public string SubTheme => Configurations.Settings.SubTheme;
         public string Theme => Configurations.Settings.Theme;
         public string Version => Configurations.Settings.Version;
+        public bool? UseHttps => Configurations.Settings.UseHttps;
     }
 }

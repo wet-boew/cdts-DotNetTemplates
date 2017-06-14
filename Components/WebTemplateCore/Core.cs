@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Threading;
@@ -8,50 +9,14 @@ using System.Text;
 using System.Net;
 using System.Web;
 using System.Linq;
-using System.Web.Caching;
 using GoC.WebTemplate.Proxies;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using WebTemplateCore.JSONSerializationObjects;
+using WebTemplateCore.Proxies;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
 {
-    public static class JsonSerializationHelper
-    {
-        private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            NullValueHandling = NullValueHandling.Ignore
-        };
-
-        public static HtmlString SerializeToJson(object obj)
-        {
-            return new HtmlString(JsonConvert.SerializeObject(obj, Settings));
-        }
-
-        //Because of how JSonDesrialization works we need to have a container class for the environments.
-        private class EnvironmentContainer
-        {
-            public List<CDTSEnvironment> Environments { get; set; }
-        }
-        public static IDictionary<string, ICDTSEnvironment> DeserializeEnvironments(string filename) 
-        {
-            using (var file = File.OpenText(filename))
-            using (var reader = new JsonTextReader(file))
-            {
-                var serializer = new JsonSerializer{
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    NullValueHandling = NullValueHandling.Ignore
-                };
-                var environments = serializer.Deserialize<EnvironmentContainer>(reader);
-                return environments.Environments.Cast<ICDTSEnvironment>().ToDictionary(x => x.Name, x => x);
-
-            }
-        }
-
-    }
-
     public class Core
     {
 
@@ -71,6 +36,7 @@ namespace GoC.WebTemplate
             return new HtmlString("localPath: '" + String.Format(LocalPath, WebTemplateTheme, WebTemplateVersion) + "'");
         }
 
+        private readonly ICacheProxy _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
 
@@ -166,8 +132,12 @@ namespace GoC.WebTemplate
         #endregion
 
 
-        public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy, IDictionary<string,ICDTSEnvironment> cdtsEnvironments)
+        public Core(ICurrentRequestProxy currentRequest,
+            ICacheProxy cacheProxy,
+            IConfigurationProxy configProxy,
+            IDictionary<string,ICDTSEnvironment> cdtsEnvironments)
         {
+            _cacheProxy = cacheProxy;
             _configProxy = configProxy;
             _cdtsEnvironments = cdtsEnvironments;
 
@@ -177,6 +147,7 @@ namespace GoC.WebTemplate
             WebTemplateTheme = _configProxy.Theme;
             WebTemplateSubTheme = _configProxy.SubTheme;
 
+            UseHTTPS = _configProxy.UseHttps;
             Environment = _configProxy.Environment;
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
@@ -1122,12 +1093,17 @@ namespace GoC.WebTemplate
 
             if (currentEnv.IsThemeModifiable && string.IsNullOrWhiteSpace(WebTemplateTheme))
             {
-                throw new InvalidOperationException("No environment is set");
+                throw new InvalidOperationException($"{Environment} requires a theme to be set");
             }
 
             if (!currentEnv.IsSSLModifiable && UseHTTPS.HasValue)
             {
-                throw new InvalidOperationException($"Cannot use HTTPS flag when theme doesn't allow it {nameof(currentEnv.IsSSLModifiable)} is false");
+                throw new InvalidOperationException($"{Environment} does not allow useHTTPS to be toggled");
+            }
+
+            if (currentEnv.IsSSLModifiable && !UseHTTPS.HasValue)
+            {
+                throw new InvalidOperationException($"{Environment} requires useHTTPS to be true or false not null.");
             }
 
             var https = string.Empty;
@@ -1205,14 +1181,12 @@ namespace GoC.WebTemplate
         /// <returns>A string containing the content of the file.</returns>
         public HtmlString LoadStaticFile(string fileName)
         {
-            string info;
-            CacheDependency cacheDep;
-            string filePath = string.Empty;
-            string cacheKey = string.Concat(Constants.CACHE_KEY_STATICFILES_PREFIX, ".", fileName);
+            var cacheKey = string.Concat(Constants.CACHE_KEY_STATICFILES_PREFIX, ".", fileName);
 
             // Attempt to lookup from cache
-            info = (string) HttpRuntime.Cache.Get(cacheKey);
-            if ((info != null))
+            Debug.Assert(_cacheProxy != null, "Cache proxy cannot be null");
+            var info = _cacheProxy.GetFromCache<string>(cacheKey);
+            if (info != null)
             {
                 // Object was found in cache, simply return it and get out!
                 return new HtmlString(info);
@@ -1222,44 +1196,92 @@ namespace GoC.WebTemplate
             lock (lockObject)
             {
                 //---[ Attempt to get from cache again now that we are locked
-                info = (string) HttpRuntime.Cache.Get(cacheKey);
-                if ((info != null))
+                info = _cacheProxy.GetFromCache<string>(cacheKey);
+                if (info != null)
                 {
                     // Once again, object was found in cache, simply return it and get out!
                     return new HtmlString(info);
                 }
 
                 //---[ If we get here, we really have to load the data
+                string filePath;
                 if (StaticFilesPath.StartsWith("~"))
                 {
-                    filePath = System.IO.Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
+                    filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
                         fileName);
                 }
                 else
                 {
-                    filePath = System.IO.Path.Combine(StaticFilesPath, fileName);
+                    filePath = Path.Combine(StaticFilesPath, fileName);
                 }
 
                 try
                 {
-                    info = System.IO.File.ReadAllText(filePath);
+                    info = File.ReadAllText(filePath);
                     //---[ Now that the data is loaded, add it to the cache
-                    cacheDep = new CacheDependency(filePath);
-
-                    HttpRuntime.Cache.Insert(cacheKey, info, cacheDep, Cache.NoAbsoluteExpiration,
-                        Cache.NoSlidingExpiration);
+                    _cacheProxy.SaveToCache(cacheKey, filePath, info);
                 }
-                catch (System.IO.DirectoryNotFoundException)
+                catch (DirectoryNotFoundException)
                 {
                     info = string.Empty;
                 }
-                catch (System.IO.FileNotFoundException)
+                catch (FileNotFoundException)
                 {
                     info = string.Empty;
                 }
             }
             return new HtmlString(info);
         }
+
+
+    }
+
+    public class CDTSEnvironmentLoader
+    {
+        private readonly ICacheProxy _cacheProxy;
+
+        public CDTSEnvironmentLoader(ICacheProxy cacheProxy)
+        {
+            _cacheProxy = cacheProxy;
+        }
+        private static readonly object EnvironmentsLockObject = new object();
+        /// <summary>
+        /// Loads the CDTSEnvironments either from file or from the HTTPruntime.Cache 
+        /// </summary>
+        /// <param name="filename">The filename to use, we are using CDTSEnvironments.json</param>
+        /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
+        public IDictionary<string, ICDTSEnvironment> LoadCDTSEnvironments(string filename)
+        {
+            Debug.Assert(_cacheProxy != null, "CacheProxy Cannot be null");
+            var environments = _cacheProxy.GetFromCache<IDictionary<string,ICDTSEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
+            if (environments != null)
+            {
+                return environments;
+            }
+
+            lock (EnvironmentsLockObject)
+            {
+                environments = _cacheProxy.GetFromCache<IDictionary<string,ICDTSEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
+                if (environments != null)
+                {
+                    return environments;
+                }
+
+                //If the path is relative we need to map it.
+                if (filename.StartsWith("~"))
+                {
+                    //We might want to decouple this.
+                    filename = HttpContext.Current.Server.MapPath(filename);
+                }
+
+                //We don't catch exceptions because this file needs to exist. 
+                //So we want the app to crash if it isn't.
+                environments = JsonSerializationHelper.DeserializeEnvironments(filename);
+                _cacheProxy.SaveToCache(Constants.CACHE_KEY_ENVIRONMENTS,filename, environments);
+            }
+            return environments;
+        }
+        
     }
 }
 

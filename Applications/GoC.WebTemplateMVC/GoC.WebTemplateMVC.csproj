@@ -87,7 +87,7 @@
     <Compile Include="Controllers\WebTemplateBaseController.cs" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="CDTSEnvironments.json" />
-    <None Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
+    <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -134,7 +134,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
-    <None Include="Views\TestWebTemplatePage\TestPage.cshtml" />
+    <Content Include="Views\TestWebTemplatePage\TestPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu_Layout.cshtml" />
@@ -155,13 +155,13 @@
     <Content Include="Web.config.install.xdt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\TestWebTemplatePage\HelloWorldTransactional.cshtml" />
+    <Content Include="Views\TestWebTemplatePage\HelloWorldTransactional.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Views\TestWebTemplatePage\HelloWorldLeftMenu.cshtml" />
+    <Content Include="Views\TestWebTemplatePage\HelloWorldLeftMenu.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -82,7 +82,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoNsubstituteDataAttribute.cs" />
+    <Compile Include="CDNPathGeneratorTests.cs" />
+    <Compile Include="CDNPathValidationTests.cs" />
     <Compile Include="ConfigurationCoreIntegrationTests.cs" />
+    <Compile Include="DeserializeEnvironmentsTest.cs" />
     <Compile Include="ProxyTests.cs" />
     <Compile Include="RenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

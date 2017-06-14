@@ -4,6 +4,8 @@ using GoC.WebTemplate;
 using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
 using NSubstitute;
+using WebTemplateCore.JSONSerializationObjects;
+using WebTemplateCore.Proxies;
 using Xunit;
 
 namespace CoreTest
@@ -16,30 +18,33 @@ namespace CoreTest
 
         [Theory, AutoNSubstituteData]
         public void SearchBoxShownByDefault(IDictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(), environments);
+            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
             var json = sut.RenderAppTop();
             json.ToString().Should().Contain("\"search\":true");
         }
 
         [Theory, AutoNSubstituteData]
         public void SiteMenuShownByDefault(IDictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(), environments);
+            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
             var json = sut.RenderAppTop();
             json.ToString().Should().Contain("\"siteMenu\":true");
         }
 
         [Theory, AutoNSubstituteData]
         public void GlobalNavFalseByDefault(IDictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(),environments);
+            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(),environments);
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("\"globalNav\":false");
         }
@@ -48,9 +53,10 @@ namespace CoreTest
         [Theory, AutoNSubstituteData]
 
         public void LeavingSecureSiteWarningElementCapitilizationFix(IDictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
         {
-            var sut = new Core(fakeCurrentRequestProxy, new ConfigurationProxy(), environments);
+            var sut = new Core(fakeCurrentRequestProxy,fakeCacheProxy, new ConfigurationProxy(), environments);
             sut.LeavingSecureSiteWarning.RedirectURL.Should().Be("foo");
         }
 

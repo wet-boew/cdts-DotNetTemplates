@@ -51,12 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Proxies\CacheProxy.cs" />
+    <Compile Include="Proxies\ICacheProxy.cs" />
+    <Compile Include="JsonSerializationHelper.cs" />
     <Compile Include="JSONSerializationObjects\AppFooter.cs" />
     <Compile Include="JSONSerializationObjects\ApplicationTitle.cs" />
     <Compile Include="JSONSerializationObjects\AppTop.cs" />
     <Compile Include="JSONSerializationObjects\Breadcrumb.cs" />
     <Compile Include="JSONSerializationObjects\CDTSEnvironment.cs" />
-    <Compile Include="ICDTSEnvironment.cs" />
+    <Compile Include="JSONSerializationObjects\ICDTSEnvironment.cs" />
     <Compile Include="JSONSerializationObjects\LanguageLink.cs" />
     <Compile Include="JSONSerializationObjects\LeavingSecureSiteWarning.cs" />
     <Compile Include="JSONSerializationObjects\PreFooter.cs" />

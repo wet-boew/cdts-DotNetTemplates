@@ -2,10 +2,11 @@
 //{1} is RN/APP Switch
 //{2} is Theme
 //{3} is Version or RN is IsVersionRNCombined is true
+//Name must be uppercase since that's how strings are read from the config file 
 {
   "Environments": [
     {
-      "Name": "Akamai",
+      "Name": "AKAMAI",
       "Path": "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{3}cdts/compiled/",
       "CDN": "prod",
       "IsVersionRnCombined": true,
@@ -13,7 +14,7 @@
       "IsSSLModifiable": false
     },
     {
-      "Name": "Prod_SSL",
+      "Name": "PROD_SSL",
       "Path": "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
       "CDN": "prod",
       "IsVersionRnCombined": false,
@@ -21,7 +22,7 @@
       "IsSSLModifiable": false
     },
     {
-      "Name": "Prod_Unsecure",
+      "Name": "PROD_UNSECURE",
       "Path": "http://templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
       "CDN": "prod",
       "IsVersionRnCombined": false,
@@ -29,7 +30,7 @@
       "IsSSLModifiable": false
     },
     {
-      "Name": "ESDC_Prod",
+      "Name": "ESDC_PROD",
       "Path": "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
       "SubTheme": "esdc",
       "CDN": "esdcprod",
