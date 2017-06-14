@@ -87,6 +87,14 @@
     <Compile Include="Controllers\WebTemplateBaseController.cs" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="CDTSEnvironments.json" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-fr.html" />
     <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
   </ItemGroup>
   <ItemGroup>
