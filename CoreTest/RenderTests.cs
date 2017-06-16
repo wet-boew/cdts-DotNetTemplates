@@ -187,7 +187,7 @@ namespace CoreTest
         public void ShouldNotEncodeURL(Core sut)
         {
             sut.ContactLinkURL = "http://localhost:8080/foo.html";
-            var htmlstring = sut.RenderFooterLinks(false);
+            var htmlstring = sut.RenderFooter();
             htmlstring.ToString().Should().Contain("http://localhost:8080/foo.html");
         }
 
@@ -204,7 +204,9 @@ namespace CoreTest
         public void ExceptionWhenCallingRenderFooterLinks(Core sut)
         {
             sut.ContactLinkURL = null;
-            Action execute = () => sut.RenderFooterLinks(false);
+            Action execute = () => {
+                var ignore = sut.RenderFooter();
+            };
             execute.ShouldNotThrow<NullReferenceException>();
 
         }

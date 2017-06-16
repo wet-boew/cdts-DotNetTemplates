@@ -73,14 +73,7 @@
     <!-- Write closure template -->
     <script type="text/javascript">
     var defFooter = document.getElementById("def-footer");
-    defFooter.outerHTML = wet.builder.footer({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-        showFooter: false,
-        @ViewBag.WebTemplateCore.RenderFeatures()
-        @ViewBag.WebTemplateCore.RenderFooterLinks(true)
-        @ViewBag.WebTemplateCore.RenderLocalPath()
-        });
+        defFooter.outerHTML = wet.builder.footer(@ViewBag.WebTemplateCore.RenderTransactionalFooter());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">

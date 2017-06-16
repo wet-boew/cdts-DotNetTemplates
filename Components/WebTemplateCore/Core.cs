@@ -10,7 +10,6 @@ using System.Net;
 using System.Web;
 using System.Linq;
 using GoC.WebTemplate.Proxies;
-using Newtonsoft.Json;
 using WebTemplateCore.JSONSerializationObjects;
 using WebTemplateCore.Proxies;
 
@@ -673,6 +672,37 @@ namespace GoC.WebTemplate
             });
         }
 
+        public HtmlString RenderFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Footer
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                ShowFeatures = ShowFeatures,
+                ShowFooter = true,
+                ContactLinks = BuildContactLinks(),
+                PrivacyLink = null,
+                TermsLink = null
+
+            });
+        }
+
+        public HtmlString RenderTransactionalFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Footer
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                ShowFeatures = ShowFeatures,
+                ShowFooter = false,
+                ContactLinks = BuildContactLinks(),
+                PrivacyLink = GetStringForJson(PrivacyLinkURL),
+                TermsLink = GetStringForJson(TermsConditionsLinkURL)
+
+            });
+
+        }
+
         private string BuildVersionIdentifier()
         {
             if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
@@ -707,57 +737,6 @@ namespace GoC.WebTemplate
                     Href = LanguageLink.Href
                 }
             };
-        }
-        public HtmlString RenderFooterLinks(bool transactionalMode)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (transactionalMode)
-            {
-                //contact, terms, privacy links
-                RenderLinksList(sb, LinkTypes.contactLinks, BuildContactLinks());
-                RenderTermsConditionsLink(sb);
-                RenderPrivacyLink(sb);
-            }
-            else
-            {
-                //contact, news, about links
-                RenderLinksList(sb, LinkTypes.contactLinks, BuildContactLinks());
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent a list of links for:
-        ///   - Contact Us
-        ///   - About Us
-        ///   - News
-        /// The list of links is provided by the application
-        /// </summary>
-        /// <param name="sb"></param>
-        /// <param name="linkType"></param>
-        /// <param name="links"></param>
-        /// <returns>string in the format expected by the Closure Templates to generate the list of links</returns>
-        /// <example>contactLinks: [{ href: '#', text: 'CLink 1' }, { href: '#', text: 'CLink 2', acronym: 'Con' }]</example>
-        private void RenderLinksList(StringBuilder sb, LinkTypes linkType, List<Link> links)
-        {
-
-            //contactLinks: [{ href: '#', text: 'CLink 1' }, { href: '#', text: 'CLink 2', acronym: 'Con' }]
-            if (links != null && links.Count > 0)
-            {
-                sb.Append(linkType);
-                sb.Append(": [");
-                // TO DO  check Linq
-                foreach (Link lk in links)
-                {
-                    sb.Append("{href: '");
-                    sb.Append(lk.Href);
-                    sb.Append("', text: '");
-                    sb.Append(WebUtility.HtmlEncode(lk.Text));
-                    sb.Append("'},");
-                }
-                sb.Append("],");
-            }
         }
 
         /// <summary>
@@ -814,27 +793,10 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the features/activities
-        /// </summary>
-        /// <remarks></remarks>
-        /// <returns>string in the format expected by the Closure Templates to generate the features</returns>
-        /// <example>
-        /// showFeatures: true
-        /// </example>
-        public string RenderFeatures()
-        {
-
-            //showFeatures: true,
-            return ShowFeatures
-                ? "showFeatures: true,"
-                : "showFeatures: false,";
-        }
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the left side menu
         /// </summary>
-        // ReSharper restore InconsistentNaming
         /// <returns>
         /// string in the format expected by the Closure Templates to generate the left menu
         /// </returns>
@@ -994,31 +956,6 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the terms and conditions link in transaction mode only
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to manage the terms and conditions link in transaction mode only</returns>
-        private void RenderTermsConditionsLink(StringBuilder sb)
-        {
-            if (!string.IsNullOrEmpty(TermsConditionsLinkURL))
-            {
-                sb.Append("termsLink: \"" + TermsConditionsLinkURL + "\",");
-            }
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the privacy notice link in transaction mode only
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to manage the privacy notice link in transaction mode only</returns>
-        private void RenderPrivacyLink(StringBuilder sb)
-        {
-            if (!string.IsNullOrEmpty(TermsConditionsLinkURL))
-            {
-                sb.Append("privacyLink: \"" + PrivacyLinkURL + "\",");
-            }
-        }
-
         #endregion
 
         /// <summary>
@@ -1054,6 +991,8 @@ namespace GoC.WebTemplate
             var https = string.Empty;
             if (currentEnv.IsSSLModifiable)
             {
+                //We've already checked to see if this is null before here so ignore this in resharper
+                // ReSharper disable once PossibleInvalidOperationException
                 https = UseHTTPS.Value ? "s" : string.Empty;
             }
 
@@ -1115,7 +1054,7 @@ namespace GoC.WebTemplate
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
         /// </summary>
         /// <remarks></remarks>
-        private static readonly object lockObject = new object();
+        private static readonly object LockObject = new object();
 
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
@@ -1128,6 +1067,7 @@ namespace GoC.WebTemplate
 
             // Attempt to lookup from cache
             Debug.Assert(_cacheProxy != null, "Cache proxy cannot be null");
+            // ReSharper disable once InconsistentlySynchronizedField
             var info = _cacheProxy.GetFromCache<string>(cacheKey);
             if (info != null)
             {
@@ -1136,7 +1076,7 @@ namespace GoC.WebTemplate
             }
 
             // ---[ If we get here, the object was not found in the cache, we'll have to load it.
-            lock (lockObject)
+            lock (LockObject)
             {
                 //---[ Attempt to get from cache again now that we are locked
                 info = _cacheProxy.GetFromCache<string>(cacheKey);
@@ -1150,6 +1090,7 @@ namespace GoC.WebTemplate
                 string filePath;
                 if (StaticFilesPath.StartsWith("~"))
                 {
+                    // ReSharper disable once AssignNullToNotNullAttribute
                     filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
                         fileName);
                 }
@@ -1177,54 +1118,6 @@ namespace GoC.WebTemplate
         }
 
 
-    }
-
-    public class CDTSEnvironmentLoader
-    {
-        private readonly ICacheProxy _cacheProxy;
-
-        public CDTSEnvironmentLoader(ICacheProxy cacheProxy)
-        {
-            _cacheProxy = cacheProxy;
-        }
-        private static readonly object EnvironmentsLockObject = new object();
-        /// <summary>
-        /// Loads the CDTSEnvironments either from file or from the HTTPruntime.Cache 
-        /// </summary>
-        /// <param name="filename">The filename to use, we are using CDTSEnvironments.json</param>
-        /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
-        public IDictionary<string, ICDTSEnvironment> LoadCDTSEnvironments(string filename)
-        {
-            Debug.Assert(_cacheProxy != null, "CacheProxy Cannot be null");
-            var environments = _cacheProxy.GetFromCache<IDictionary<string,ICDTSEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
-            if (environments != null)
-            {
-                return environments;
-            }
-
-            lock (EnvironmentsLockObject)
-            {
-                environments = _cacheProxy.GetFromCache<IDictionary<string,ICDTSEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
-                if (environments != null)
-                {
-                    return environments;
-                }
-
-                //If the path is relative we need to map it.
-                if (filename.StartsWith("~"))
-                {
-                    //We might want to decouple this.
-                    filename = HttpContext.Current.Server.MapPath(filename);
-                }
-
-                //We don't catch exceptions because this file needs to exist. 
-                //So we want the app to crash if it isn't.
-                environments = JsonSerializationHelper.DeserializeEnvironments(filename);
-                _cacheProxy.SaveToCache(Constants.CACHE_KEY_ENVIRONMENTS,filename, environments);
-            }
-            return environments;
-        }
-        
     }
 }
 

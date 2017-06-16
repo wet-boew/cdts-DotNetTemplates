@@ -51,6 +51,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CDTSEnvironmentLoader.cs" />
+    <Compile Include="Footer.cs" />
+    <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
+    <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
+    <Compile Include="JSONSerializationObjects\ShareList.cs" />
+    <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
     <Compile Include="Proxies\CacheProxy.cs" />
     <Compile Include="Proxies\ICacheProxy.cs" />
     <Compile Include="JsonSerializationHelper.cs" />

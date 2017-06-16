@@ -62,13 +62,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.footer({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderFeatures() %>
-                <%= WebTemplateCore.RenderFooterLinks(false) %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defFooter.outerHTML = wet.builder.footer( <%= WebTemplateCore.RenderFooter() %>);
         </script>
         <!-- Write closure template -->
             <script type="text/javascript">
