@@ -52,14 +52,7 @@
             <!-- Write closure template -->
             <script type="text/javascript">
                 var defPreFooter = document.getElementById("def-preFooter");
-                defPreFooter.outerHTML = wet.builder.preFooter({
-                    cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                    <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                    showPostContent: <%= WebTemplateCore.ShowPostContent.ToString().ToLower() %>,
-                    <%= WebTemplateCore.RenderFeedbackLink() %>
-                    <%= WebTemplateCore.RenderSharePageMediaSites() %>
-                    <%= WebTemplateCore.RenderScreenIdentifier() %>
-                });
+                defPreFooter.outerHTML = wet.builder.preFooter( <%= WebTemplateCore.RenderPreFooter() %>);
             </script>
         </main>
         <div id="def-footer">

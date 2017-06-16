@@ -48,14 +48,7 @@
             </div>
             <script type="text/javascript">
                 var defPreFooter = document.getElementById("def-preFooter");
-                defPreFooter.outerHTML = wet.builder.preFooter({
-                    cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                    <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                    showPostContent: false,
-                    showFeedback: false,
-                    showShare: false,
-                    <%= WebTemplateCore.RenderScreenIdentifier() %>
-                });
+                defPreFooter.outerHTML = wet.builder.preFooter(<%= WebTemplateCore.RenderTransactionalPreFooter() %>);
             </script>
         </main>
 

@@ -49,14 +49,7 @@
                 </div>
                 <script type="text/javascript">
                     var defPreFooter = document.getElementById("def-preFooter");
-                    defPreFooter.outerHTML = wet.builder.preFooter({
-                        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-                        @ViewBag.WebTemplateCore.RenderDateModifiedVersionIdentifier()
-                        showPostContent: false,
-                        showFeedback: false,
-                        showShare: false,
-                        @ViewBag.WebTemplateCore.RenderScreenIdentifier()
-                    });
+                    defPreFooter.outerHTML = wet.builder.preFooter(@ViewBag.WebTemplateCore.RenderTransactionalPreFooter());
                 </script>
             </main>
             <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">

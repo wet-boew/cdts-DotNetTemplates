@@ -26,7 +26,6 @@ namespace GoC.WebTemplate
                 ? new HtmlString("jqueryEnv: \"external\",")
                 : null;
         }
-
         public HtmlString RenderLocalPath()
         {
             if (string.IsNullOrWhiteSpace(LocalPath))
@@ -40,49 +39,7 @@ namespace GoC.WebTemplate
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
 
-        public HtmlString RenderTransactionalTop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new Top
-            {
 
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                IntranetTitle = new List<ApplicationTitle> {ApplicationTitle},
-                Search = ShowSearch,
-                LngLinks = BuildLanguageLinkList(),
-                SiteMenu = false,
-                Breadcrumbs = BuildBreadcrumbs(),
-                ShowPreContent = false,
-                LocalPath = BuildLocalPath()
-
-            });
-        }
-        public HtmlString RenderTop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new Top
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                IntranetTitle = new List<ApplicationTitle> {ApplicationTitle},
-                Search = ShowSearch,
-                LngLinks = BuildLanguageLinkList(),
-                SiteMenu = true,
-                ShowPreContent = ShowPreContent,
-                Breadcrumbs = BuildBreadcrumbs(),
-                LocalPath = BuildLocalPath()
-            });
-        }
-
-        public HtmlString RenderRefTop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new RefTop
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                JqueryEnv =  LoadJQueryFromGoogle ? "external" : null,
-                LocalPath = BuildLocalPath()
-            });
-        }
 
         private string BuildLocalPath()
         {
@@ -615,7 +572,6 @@ namespace GoC.WebTemplate
             });
         }
 
-
         public HtmlString RenderAppTop()
         {
             CheckIfBothSignInAndSignOutAreSet();
@@ -639,6 +595,109 @@ namespace GoC.WebTemplate
             });
         }
 
+        public HtmlString RenderTransactionalTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Top
+            {
+
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                IntranetTitle = new List<ApplicationTitle> { ApplicationTitle },
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                SiteMenu = false,
+                Breadcrumbs = BuildBreadcrumbs(),
+                ShowPreContent = false,
+                LocalPath = BuildLocalPath()
+
+            });
+        }
+
+        public HtmlString RenderTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Top
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                IntranetTitle = new List<ApplicationTitle> { ApplicationTitle },
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                SiteMenu = true,
+                ShowPreContent = ShowPreContent,
+                Breadcrumbs = BuildBreadcrumbs(),
+                LocalPath = BuildLocalPath()
+            });
+        }
+
+        public HtmlString RenderRefTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new RefTop
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                JqueryEnv = LoadJQueryFromGoogle ? "external" : null,
+                LocalPath = BuildLocalPath()
+            });
+        }
+
+
+        public HtmlString RenderPreFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new PreFooter
+            {
+                CdnEnv = CDNEnvironment,
+                DateModified = BuildDateModified(),
+                VersionIdentifier = BuildVersionIdentifier(),
+                ShowPostContent = ShowPostContent,
+                ShowFeedback = new FeedbackLink
+                {
+                    Show = ShowFeedbackLink,
+                    URL = FeedbackLinkURL
+                },
+                ShowShare = new ShareList
+                {
+                    Show = ShowSharePageLink,
+                    Enums = SharePageMediaSites
+                },
+                ScreenIdentifier = GetStringForJson(ScreenIdentifier)
+            });
+        }
+
+
+        public HtmlString RenderTransactionalPreFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new PreFooter
+            {
+                CdnEnv = CDNEnvironment,
+                DateModified = BuildDateModified(),
+                VersionIdentifier = BuildVersionIdentifier(),
+                ShowPostContent = false,
+                ShowFeedback = new FeedbackLink {Show = false},
+                ShowShare = new ShareList { Show = false},
+                ScreenIdentifier = GetStringForJson(ScreenIdentifier)
+            });
+        }
+
+        private string BuildVersionIdentifier()
+        {
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
+                !string.IsNullOrEmpty(VersionIdentifier))
+            {
+                return VersionIdentifier;
+            }
+            return null;
+        }
+
+        private string BuildDateModified()
+        {
+
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
+                !string.IsNullOrEmpty(VersionIdentifier))
+            {
+                return null;
+            }
+            return DateModified.ToString("yyyy-MM-dd");
+        }
 
 
         private List<LanguageLink> BuildLanguageLinkList()
@@ -654,7 +713,6 @@ namespace GoC.WebTemplate
                 }
             };
         }
-
         public HtmlString RenderFooterLinks(bool transactionalMode)
         {
             StringBuilder sb = new StringBuilder();
@@ -673,6 +731,8 @@ namespace GoC.WebTemplate
             }
             return new HtmlString(sb.ToString());
         }
+
+
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent a list of links for:

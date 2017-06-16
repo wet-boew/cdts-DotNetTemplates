@@ -49,16 +49,9 @@
                 </div>
                 <!-- Write closure template -->
                 <script type="text/javascript">
-    var defPreFooter = document.getElementById("def-preFooter");
-    defPreFooter.outerHTML = wet.builder.preFooter({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        @ViewBag.WebTemplateCore.RenderDateModifiedVersionIdentifier()
-        showPostContent: @ViewBag.WebTemplateCore.ShowPostContent.ToString().ToLower(),
-        @ViewBag.WebTemplateCore.RenderFeedbackLink()
-        @ViewBag.WebTemplateCore.RenderSharePageMediaSites()
-        @ViewBag.WebTemplateCore.RenderScreenIdentifier()
-    });
-                </script>
+                    var defPreFooter = document.getElementById("def-preFooter");
+                    defPreFooter.outerHTML = wet.builder.preFooter(@ViewBag.WebTemplateCore.RenderPreFooter());
+                 </script>
             </main>
             <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
                 <!-- Write closure fall-back static file -->

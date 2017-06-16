@@ -90,7 +90,7 @@ namespace CoreTest
                 var unused = sut.CDNPath;
             };
             test.ShouldThrow<InvalidOperationException>()
-                .WithMessage($"{sut.Environment} does not allow HTTPS to be toggled");
+                .WithMessage($"{sut.Environment} does not allow useHTTPS to be toggled");
         }
 
         [Theory, AutoNSubstituteData]

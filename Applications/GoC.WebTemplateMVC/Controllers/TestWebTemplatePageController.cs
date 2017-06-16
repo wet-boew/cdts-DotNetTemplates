@@ -232,7 +232,8 @@ namespace GoC.WebTemplateMVC.Controllers
         { 
             //BASIC SETTINGS ====================================
            // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
-            WebTemplateCore.Environment = "akamai";
+            WebTemplateCore.Environment = "PROD_SSL";
+            WebTemplateCore.UseHTTPS = null;
             WebTemplateCore.WebTemplateSubTheme = "esdc";
             WebTemplateCore.HeaderTitle = "Sample Page";
 

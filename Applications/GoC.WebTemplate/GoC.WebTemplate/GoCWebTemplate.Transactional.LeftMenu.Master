@@ -51,14 +51,7 @@
                     </div>
                     <script type="text/javascript">
                         var defPreFooter = document.getElementById("def-preFooter");
-                        defPreFooter.outerHTML = wet.builder.preFooter({
-                            cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                            <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                            showPostContent: false,
-                            showFeedback: false,
-                            showShare: false,
-                            <%= WebTemplateCore.RenderScreenIdentifier() %>
-                        });
+                        defPreFooter.outerHTML = wet.builder.preFooter( <%= WebTemplateCore.RenderTransactionalPreFooter() %> );
                     </script>
                 </main>
                  <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
@@ -82,14 +75,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.footer({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                showFooter: false,
-                <%= WebTemplateCore.RenderFeatures() %>
-                <%= WebTemplateCore.RenderFooterLinks(true) %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defFooter.outerHTML = wet.builder.footer(<%= WebTemplateCore.RenderTransactionalPreFooter() %>);
         </script>
         <!-- Write closure template -->
         <script type="text/javascript">

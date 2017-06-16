@@ -30,7 +30,7 @@ namespace GoC.WebTemplate
             WebTemplateCore = new Core(new CurrentRequestProxy(),
                 new CacheProxy(),
                 new ConfigurationProxy(),
-                new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments("CDTSEnvironments.json"));
+                new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments(@"~\CDTSEnvironments.json"));
         }
 
         public Core WebTemplateCore { get; set; }
