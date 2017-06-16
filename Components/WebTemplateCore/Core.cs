@@ -39,8 +39,6 @@ namespace GoC.WebTemplate
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
 
-
-
         private string BuildLocalPath()
         {
             return GetFormattedJsonString(LocalPath, WebTemplateTheme,WebTemplateVersion);
@@ -529,7 +527,6 @@ namespace GoC.WebTemplate
             }
         }
 
-
         private string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
 
         private string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
@@ -640,7 +637,6 @@ namespace GoC.WebTemplate
             });
         }
 
-
         public HtmlString RenderPreFooter()
         {
             return JsonSerializationHelper.SerializeToJson(new PreFooter
@@ -662,7 +658,6 @@ namespace GoC.WebTemplate
                 ScreenIdentifier = GetStringForJson(ScreenIdentifier)
             });
         }
-
 
         public HtmlString RenderTransactionalPreFooter()
         {
@@ -732,8 +727,6 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-
-
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent a list of links for:
         ///   - Contact Us
@@ -765,86 +758,6 @@ namespace GoC.WebTemplate
                 }
                 sb.Append("],");
             }
-        }
-
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the feedback link
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the feedback link</returns>
-        /// <example>
-        /// /// showFeedback: false
-        /// or
-        /// showFeedback: +url provided
-        /// or
-        /// empty string.  this will diplay the button with the default url
-        /// </example>
-        public HtmlString RenderFeedbackLink()
-        {
-            string feedbackJSon = string.Empty;
-
-            if (ShowFeedbackLink)
-            {
-                if (!string.IsNullOrEmpty(FeedbackLinkURL))
-                {
-                    feedbackJSon = string.Concat("showFeedback: \"", FeedbackLinkURL, "\",");
-                }
-            }
-            else
-            {
-                feedbackJSon = "showFeedback: false,";
-            }
-
-            return new HtmlString(feedbackJSon);
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to display the screen identifier
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the screen identifier</returns>
-        /// <example>
-        /// screenIdentifier: "asdfasdf-asdf323"
-        /// </example>
-        public HtmlString RenderScreenIdentifier()
-        {
-            return !string.IsNullOrEmpty(ScreenIdentifier)
-                ? new HtmlString(string.Concat("screenIdentifier: \"", ScreenIdentifier, "\","))
-                : null;
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the Share Page links
-        /// </summary>
-        /// <remarks>If the application did not supply the Share Page items, the Share Page link will not be displayed</remarks>
-        /// <returns>string in the format expected by the Closure Templates to generate the Share Page link</returns>
-        /// <example>
-        /// /// showShare: false
-        /// or
-        /// showShare: ["email", "facebook", "linkedin", "twitter"]
-        /// </example>
-        public HtmlString RenderSharePageMediaSites()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            //showShare: false
-            //showShare: ["email", "facebook", "linkedin", "twitter"]
-
-            if (ShowSharePageLink && (SharePageMediaSites.Count > 0))
-            {
-                sb.Append("showShare: [");
-
-                foreach (SocialMediaSites site in SharePageMediaSites)
-                {
-                    sb.Append(string.Concat(" '", site, "', "));
-                }
-                sb.Append("],");
-            }
-            else // don't display the feedback link
-            {
-                sb.Append("showShare: false,");
-            }
-
-            return new HtmlString(sb.ToString());
         }
 
         /// <summary>
@@ -1081,34 +994,6 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the date modified or version identifier displayed on screen
-        /// </summary>
-        /// <remarks>only 1 of the 2 can be displayed, if XX is provided then xx will be displayed, ignoting the other property</remarks>
-        /// <returns>
-        /// string in the format expected by the Closure Templates to manage the date modified or version identifier
-        /// </returns>
-        public HtmlString RenderDateModifiedVersionIdentifier()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(VersionIdentifier))
-            {
-                sb.Append("versionIdentifier: \"");
-                sb.Append(VersionIdentifier.Trim());
-                sb.Append("\",");
-            }
-            else
-            {
-                sb.Append("dateModified: \"");
-                sb.Append(DateModified.ToString("yyyy-MM-dd"));
-                    // format for english and french are identical, else would need if.
-                sb.Append("\",");
-            }
-
-            return new HtmlString(sb.ToString());
-        }
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to manage the terms and conditions link in transaction mode only
@@ -1231,8 +1116,6 @@ namespace GoC.WebTemplate
         /// </summary>
         /// <remarks></remarks>
         private static readonly object lockObject = new object();
-
-        private readonly JsonSerializerSettings _settings;
 
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
