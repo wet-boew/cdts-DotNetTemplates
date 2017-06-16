@@ -19,42 +19,11 @@ namespace GoC.WebTemplate
     public class Core
     {
 
-        public HtmlString RenderjQuery()
-        {
-            return LoadJQueryFromGoogle
-                ? new HtmlString("jqueryEnv: \"external\",")
-                : null;
-        }
-        public HtmlString RenderLocalPath()
-        {
-            if (string.IsNullOrWhiteSpace(LocalPath))
-            {
-                return null;
-            }
-            return new HtmlString("localPath: '" + String.Format(LocalPath, WebTemplateTheme, WebTemplateVersion) + "'");
-        }
-
         private readonly ICacheProxy _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
 
-        private string BuildLocalPath()
-        {
-            return GetFormattedJsonString(LocalPath, WebTemplateTheme,WebTemplateVersion);
-        }
-
-        #region Enums
-
-        /// <summary>
-        /// Enum that represents the context of the list of links
-        /// </summary>
-        /// <remarks>The enum item name must match the parameter name expected by the Closure Template for the template to work.  The enum item name is used by the template as the paramter name when calling the Closure Template.</remarks>
         // ReSharper disable InconsistentNaming
-        public enum LinkTypes
-        {
-            contactLinks
-        };
-
         /// <summary>
         /// Enum that represents the social sites to be displayed when the user clicks the "Share this Page" link.
         /// The list of accepted sites can be found here: http://wet-boew.github.io/v4.0-ci/docs/ref/share/share-en.html
@@ -80,11 +49,7 @@ namespace GoC.WebTemplate
             twitter,
             yahoomail
         }; //NOTE: The item names must match the parameter names expected by the Closure Template for this to work
-
         // ReSharper restore InconsistentNaming
-
-        #endregion
-
 
         public Core(ICurrentRequestProxy currentRequest,
             ICacheProxy cacheProxy,
@@ -176,20 +141,6 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
-        public List<Breadcrumb> BuildBreadcrumbs()
-        {
-            if (Breadcrumbs == null || !Breadcrumbs.Any())
-            {
-                return null;
-            }
-
-            return Breadcrumbs.Select(b => new Breadcrumb
-            {
-                Href = b.Href,
-                Acronym = b.Acronym,
-                Title = GetStringForJson(b.Title)
-            }).ToList();
-        }
 
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
@@ -380,19 +331,22 @@ namespace GoC.WebTemplate
         {
             get
             {
-                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
+                if (!WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (string.IsNullOrWhiteSpace(_headerTitle))
-                    {
-                        return "- Canada.ca";
-                    }
-                    if (_headerTitle.EndsWith(" - Canada.ca"))
-                    {
-                        return _headerTitle;
-                    }
-                    return _headerTitle + " - Canada.ca";
+                    return _headerTitle;
                 }
-                return _headerTitle;
+
+                if (string.IsNullOrWhiteSpace(_headerTitle))
+                {
+                    return "- Canada.ca";
+                }
+
+                if (_headerTitle.EndsWith(" - Canada.ca"))
+                {
+                    return _headerTitle;
+                }
+
+                return _headerTitle + " - Canada.ca";
             }
             set
             {
@@ -513,6 +467,25 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
 
+        private string BuildLocalPath()
+        {
+            return GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
+        }
+
+        public List<Breadcrumb> BuildBreadcrumbs()
+        {
+            if (Breadcrumbs == null || !Breadcrumbs.Any())
+            {
+                return null;
+            }
+
+            return Breadcrumbs.Select(b => new Breadcrumb
+            {
+                Href = b.Href,
+                Acronym = b.Acronym,
+                Title = GetStringForJson(b.Title)
+            }).ToList();
+        }
         public List<FooterLink> BuildCustomFooterLinks
         {
             get
@@ -547,8 +520,6 @@ namespace GoC.WebTemplate
                 throw new InvalidOperationException("Unable to show sign in and sign out link together");
             }
         }
-
-        #region Renderers
 
         public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
@@ -703,6 +674,40 @@ namespace GoC.WebTemplate
 
         }
 
+        public HtmlString RenderRefFooter()
+        {
+            if (LeavingSecureSiteWarning.Enabled && 
+                !string.IsNullOrEmpty(LeavingSecureSiteWarning.RedirectURL))
+            {
+                return RenderSecureSiteWarningRefFooter();
+            }
+            return JsonSerializationHelper.SerializeToJson(new RefFooter
+            {
+                CdnEnv = CDNEnvironment,
+                ExitScript = false,
+                JqueryEnv = BuildJqueryEnv(), 
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
+            });
+        }
+
+        private string BuildJqueryEnv() => LoadJQueryFromGoogle ? "external" : null;
+
+        private HtmlString RenderSecureSiteWarningRefFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new RefFooter
+            {
+                CdnEnv = CDNEnvironment,
+                ExitScript = true,
+                DisplayModal = LeavingSecureSiteWarning.DisplayModalWindow,
+                ExitURL = LeavingSecureSiteWarning.RedirectURL,
+                ExitMsg = WebUtility.HtmlEncode(LeavingSecureSiteWarning.Message),
+                ExitDomains = GetStringForJson(LeavingSecureSiteWarning.ExcludedDomains),
+                JqueryEnv = BuildJqueryEnv(),
+                LocalPath= GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
+            });
+
+        }
+
         private string BuildVersionIdentifier()
         {
             if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
@@ -793,7 +798,6 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the left side menu
         /// </summary>
@@ -881,58 +885,9 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the leaving secure site warning
-        /// </summary>
-        /// <returns>
-        /// string in the format expected by the Closure Templates to manage the leaving secure site warning
-        /// </returns>
-        public HtmlString RenderLeavingSecureSiteWarning()
-        {
-            StringBuilder sb = new StringBuilder();
+        public HtmlString RenderHtmlHeaderElements() => RenderHtmlElements(HTMLHeaderElements);
 
-            //exitScript: true,
-            //displayModal: true,
-            //exitURL: "http://www.google.ca"
-            //exitMsg: "You are about to leave a secure site, do you wish to continue?"
-
-            if (LeavingSecureSiteWarning.Enabled && !string.IsNullOrEmpty(LeavingSecureSiteWarning.RedirectURL))
-            {
-                sb.Append("exitScript: true,");
-                if (LeavingSecureSiteWarning.DisplayModalWindow == false)
-                {
-                    sb.Append(" displayModal: false,");
-                }
-                sb.Append(" exitURL: \"");
-                sb.Append(LeavingSecureSiteWarning.RedirectURL);
-                sb.Append("\",");
-                sb.Append(" exitMsg: \"");
-                sb.Append(WebUtility.HtmlEncode(LeavingSecureSiteWarning.Message));
-                sb.Append("\",");
-                if (!string.IsNullOrEmpty(LeavingSecureSiteWarning.ExcludedDomains))
-                {
-                    sb.Append("exitDomains: \"");
-                    sb.Append(LeavingSecureSiteWarning.ExcludedDomains);
-                    sb.Append("\",");
-                }
-            }
-            else
-            {
-                sb.Append("exitScript: false,");
-            }
-
-            return new HtmlString(sb.ToString());
-        }
-
-        public HtmlString RenderHtmlHeaderElements()
-        {
-            return RenderHtmlElements(HTMLHeaderElements);
-        }
-
-        public HtmlString RenderHtmlBodyElements()
-        {
-            return RenderHtmlElements(HTMLBodyElements);
-        }
+        public HtmlString RenderHtmlBodyElements() => RenderHtmlElements(HTMLBodyElements);
 
         /// <summary>
         /// Adds a string(html tag) to be included in the page
@@ -944,19 +899,14 @@ namespace GoC.WebTemplate
         /// </returns>
         private HtmlString RenderHtmlElements(List<string> tags)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            if (tags.Count > 0)
+            foreach (var tag in tags)
             {
-                foreach (string tag in tags)
-                {
-                    sb.Append(tag + "\r\n");
-                }
+                sb.AppendLine(tag);
             }
             return new HtmlString(sb.ToString());
         }
-
-        #endregion
 
         /// <summary>
         /// Builds the path to the cdn based on the environment set in the config. The path is based on the url of the environment, theme and version
@@ -1120,4 +1070,6 @@ namespace GoC.WebTemplate
 
     }
 }
+
+
 

@@ -89,6 +89,7 @@
     <Compile Include="Proxies\LeaveSecureSiteWarningElementProxy.cs" />
     <Compile Include="Proxies\SessionTimeOutElementProxy.cs" />
     <Compile Include="JSONSerializationObjects\RefTop.cs" />
+    <Compile Include="RefFooter.cs" />
     <Compile Include="SessionTimeout.cs" />
     <Compile Include="JSONSerializationObjects\Top.cs" />
   </ItemGroup>

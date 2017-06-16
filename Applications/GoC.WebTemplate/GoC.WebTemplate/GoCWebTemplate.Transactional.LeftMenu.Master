@@ -79,12 +79,7 @@
         </script>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refFooter({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                <%= WebTemplateCore.RenderLeavingSecureSiteWarning() %>
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refFooter(<%= WebTemplateCore.RenderRefFooter()%>));
         </script>
         <%= WebTemplateCore.RenderHtmlBodyElements() %>
     </body>

@@ -86,6 +86,7 @@
     <Compile Include="CDNPathValidationTests.cs" />
     <Compile Include="ConfigurationCoreIntegrationTests.cs" />
     <Compile Include="DeserializeEnvironmentsTest.cs" />
+    <Compile Include="PrefooterSerializationTests.cs" />
     <Compile Include="ProxyTests.cs" />
     <Compile Include="RenderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
