@@ -16,7 +16,25 @@ namespace CoreTest
     /// </summary>
     public class RenderTests 
     {
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleTop(Core sut)
+        {
+            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
+            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        }
 
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleTransacationalTop(Core sut)
+        {
+            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
+            sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        }
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleAppTop(Core sut)
+        {
+            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
+            sut.RenderAppTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        }
         [Theory, AutoNSubstituteData]
         public void DoNotRenderBreadCrumbsByDefault(Core sut)
         {

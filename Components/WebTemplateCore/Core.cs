@@ -546,6 +546,7 @@ namespace GoC.WebTemplate
             return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = ApplicationTitle.Text,
+                IntranetTitle = new List<Link> { IntranetTitle },
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
                 Secure = ShowSecure,
@@ -562,6 +563,8 @@ namespace GoC.WebTemplate
             });
         }
 
+        public Link IntranetTitle { get; set; }
+
         public HtmlString RenderTransactionalTop()
         {
             return JsonSerializationHelper.SerializeToJson(new Top
@@ -569,7 +572,7 @@ namespace GoC.WebTemplate
 
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
-                IntranetTitle = new List<ApplicationTitle> { ApplicationTitle },
+                IntranetTitle = new List<Link> { IntranetTitle },
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 SiteMenu = false,
@@ -586,7 +589,7 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
-                IntranetTitle = new List<ApplicationTitle> { ApplicationTitle },
+                IntranetTitle = new List<Link> { IntranetTitle },
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 SiteMenu = true,
