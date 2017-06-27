@@ -9,7 +9,7 @@ namespace WebTemplateCore.JSONSerializationObjects
     internal class AppTop
     {
         public List<Link> IntranetTitle { get; set; }
-        public string AppURL { get; set; }
+        public string AppUrl { get; set; }
         public string MenuPath { get; set; }
         public string CdnEnv { get; set; }
         public string AppName { get; set;  }

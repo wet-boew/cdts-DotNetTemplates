@@ -17,6 +17,13 @@ namespace CoreTest
     public class RenderTests 
     {
         [Theory, AutoNSubstituteData]
+        public void AppUrl(Core sut)
+        {
+            sut.ApplicationTitle.URL = "ApplicationURL";
+            sut.RenderAppTop().ToString().Should().Contain("\"appUrl\":\"ApplicationURL\"");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void IntranetTitleTop(Core sut)
         {
             sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};

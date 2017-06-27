@@ -546,6 +546,7 @@ namespace GoC.WebTemplate
             return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = ApplicationTitle.Text,
+                AppUrl = ApplicationTitle.URL,
                 IntranetTitle = new List<Link> { IntranetTitle },
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
