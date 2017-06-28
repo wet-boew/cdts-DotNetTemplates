@@ -1,7 +1,4 @@
 ﻿************************************************************************************************************
-v4.0.24.4 2017-05-05
-- Fixed a bug where the search box was not showing up
-************************************************************************************************************
 v4.0.24.3 2017-04-27
 - Fixed a bug where the user was unable to set the environment programmatically
 - Fixed a bug where the GCIntranet sample page wasn't working in WebForms
