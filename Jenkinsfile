@@ -1,3 +1,3 @@
-node {
- echo 'Test'
+pipeline {
+ echo "test"
 }
