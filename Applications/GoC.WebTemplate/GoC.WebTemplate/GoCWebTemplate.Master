@@ -12,21 +12,16 @@
         <title><%= WebTemplateCore.RenderHeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport"/>
         <!-- Load closure template scripts -->
-        <script type="text/javascript" src="<%= string.Concat(WebTemplateCore.CDNPath, "soyutils.js")  %>"></script> 
-        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", WebTemplateCore.CDNPath, WebTemplateCore.TwoLetterCultureLanguage)  %>"></script> 
-        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}plugins-{1}.js", WebTemplateCore.CDNPath, WebTemplateCore.TwoLetterCultureLanguage)  %>"></script> 
+        <script type="text/javascript" src="<%= string.Concat(WebTemplateCore.CDNPath, "soyutils.js")  %>"></script>
+        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", WebTemplateCore.CDNPath, WebTemplateCore.TwoLetterCultureLanguage)  %>"></script>
+        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}plugins-{1}.js", WebTemplateCore.CDNPath, WebTemplateCore.TwoLetterCultureLanguage)  %>"></script>
         <noscript>
             <!-- Write closure fall-back static file -->
             <%= WebTemplateCore.LoadStaticFile("refTop.html") %>
         </noscript>
          <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
         </script>
 
         <%= WebTemplateCore.RenderHtmlHeaderElements() %>
@@ -34,27 +29,19 @@
         <!-- GoC.WebTemplate.Core Version <%= WebTemplateCore.AssemblyVersion %> -->
     </head>
     <body vocab="http://schema.org/" typeof="WebPage">
-        <%= WebTemplateCore.RenderSessionTimeoutControl() %>                
+        <%= WebTemplateCore.RenderSessionTimeoutControl() %>
         <div id="def-top">
             <!-- Write closure fall-back static file -->
-            <%= WebTemplateCore.LoadStaticFile(string.Concat("top-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>            
+            <%= WebTemplateCore.LoadStaticFile(string.Concat("top-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>
         </div>
         <!-- Write closure template -->
         <script type="text/javascript">
             var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.top({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderApplicationTitle() %>
-                <%= WebTemplateCore.RenderSearch() %>
-                <%= WebTemplateCore.RenderLanguageLink() %>
-                showPreContent: <%= WebTemplateCore.ShowPreContent.ToString().ToLower() %>,
-                <%= WebTemplateCore.RenderBreadcrumbsList() %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.RenderTop() %>);
         </script>
+
         <main role="main" property="mainContentOfPage" class="container">
-             
+
             <!-- the main content -->
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
             <!-- end main content -->
@@ -65,14 +52,7 @@
             <!-- Write closure template -->
             <script type="text/javascript">
                 var defPreFooter = document.getElementById("def-preFooter");
-                defPreFooter.outerHTML = wet.builder.preFooter({
-                    cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                    <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                    showPostContent: <%= WebTemplateCore.ShowPostContent.ToString().ToLower() %>,
-                    <%= WebTemplateCore.RenderFeedbackLink() %>
-                    <%= WebTemplateCore.RenderSharePageMediaSites() %>
-                    <%= WebTemplateCore.RenderScreenIdentifier() %>
-                });
+                defPreFooter.outerHTML = wet.builder.preFooter( <%= WebTemplateCore.RenderPreFooter() %>);
             </script>
         </main>
         <div id="def-footer">
@@ -82,22 +62,11 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.footer({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderFeatures() %>
-                <%= WebTemplateCore.RenderFooterLinks(false) %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defFooter.outerHTML = wet.builder.footer( <%= WebTemplateCore.RenderFooter() %>);
         </script>
         <!-- Write closure template -->
             <script type="text/javascript">
-                document.write(wet.builder.refFooter({
-                    cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                    <%= WebTemplateCore.RenderLeavingSecureSiteWarning() %>
-                    <%= WebTemplateCore.RenderjQuery()%>
-                    <%= WebTemplateCore.RenderLocalPath() %>
-                }));
+                document.write(wet.builder.refFooter(<%= WebTemplateCore.RenderRefFooter() %>));
             </script>
         <%= WebTemplateCore.RenderHtmlBodyElements() %>
     </body>

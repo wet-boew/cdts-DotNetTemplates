@@ -51,20 +51,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AppFooter.cs" />
-    <Compile Include="ApplicationTitle.cs" />
-    <Compile Include="AppTop.cs" />
-    <Compile Include="Breadcrumb.cs" />
-    <Compile Include="ConfigSections\CDTSEnvironmentElementProxy.cs" />
-    <Compile Include="ConfigSections\CDTSEnvironmentCollection.cs" />
-    <Compile Include="ConfigSections\CDTSEnvironmentElement.cs" />
-    <Compile Include="ConfigSections\ICDTSEnvironmentElementProxy.cs" />
-    <Compile Include="ConfigSections\ILeavingSecureSiteWarningElementProxy.cs" />
-    <Compile Include="ConfigSections\ISessionTimeOutElementProxy.cs" />
-    <Compile Include="ConfigSections\LeaveSecureSiteWarningElementProxy.cs" />
-    <Compile Include="ConfigSections\SessionTimeOutElementProxy.cs" />
-    <Compile Include="LanguageLink.cs" />
-    <Compile Include="LeavingSecureSiteWarning.cs" />
+    <Compile Include="CDTSEnvironmentLoader.cs" />
+    <Compile Include="Footer.cs" />
+    <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
+    <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
+    <Compile Include="JSONSerializationObjects\ShareList.cs" />
+    <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
+    <Compile Include="Proxies\CacheProxy.cs" />
+    <Compile Include="Proxies\ICacheProxy.cs" />
+    <Compile Include="JsonSerializationHelper.cs" />
+    <Compile Include="JSONSerializationObjects\AppFooter.cs" />
+    <Compile Include="JSONSerializationObjects\ApplicationTitle.cs" />
+    <Compile Include="JSONSerializationObjects\AppTop.cs" />
+    <Compile Include="JSONSerializationObjects\Breadcrumb.cs" />
+    <Compile Include="JSONSerializationObjects\CDTSEnvironment.cs" />
+    <Compile Include="JSONSerializationObjects\ICDTSEnvironment.cs" />
+    <Compile Include="JSONSerializationObjects\LanguageLink.cs" />
+    <Compile Include="JSONSerializationObjects\LeavingSecureSiteWarning.cs" />
+    <Compile Include="JSONSerializationObjects\PreFooter.cs" />
     <Compile Include="Proxies\ConfigurationProxy.cs" />
     <Compile Include="Configurations.cs" />
     <Compile Include="ConfigSections\CustomStringComparer.cs" />
@@ -74,13 +78,20 @@
     <Compile Include="Core.cs" />
     <Compile Include="Proxies\IConfigurationProxy.cs" />
     <Compile Include="Proxies\CurrentRequestProxy.cs" />
-    <Compile Include="FooterLink.cs" />
+    <Compile Include="JSONSerializationObjects\FooterLink.cs" />
     <Compile Include="Proxies\ICurrentRequestProxy.cs" />
-    <Compile Include="Link.cs" />
+    <Compile Include="JSONSerializationObjects\Link.cs" />
     <Compile Include="MenuItem.cs" />
     <Compile Include="MenuSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxies\ILeavingSecureSiteWarningElementProxy.cs" />
+    <Compile Include="Proxies\ISessionTimeOutElementProxy.cs" />
+    <Compile Include="Proxies\LeaveSecureSiteWarningElementProxy.cs" />
+    <Compile Include="Proxies\SessionTimeOutElementProxy.cs" />
+    <Compile Include="JSONSerializationObjects\RefTop.cs" />
+    <Compile Include="RefFooter.cs" />
     <Compile Include="SessionTimeout.cs" />
+    <Compile Include="JSONSerializationObjects\Top.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

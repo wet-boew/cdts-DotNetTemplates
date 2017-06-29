@@ -18,7 +18,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowSecure = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.LeftMenuItems = new List<MenuSection>
             {
@@ -56,7 +55,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -71,7 +69,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowSecure = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -85,7 +82,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.ShowSignInLink = true;
             WebTemplateCore.SignInLinkURL = "about//blank";
@@ -100,7 +96,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.ShowSignOutLink = true;
             WebTemplateCore.SignOutLinkURL = "about//blank";
@@ -116,7 +111,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowSearch = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -130,7 +124,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowSiteMenu = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -146,7 +139,6 @@ namespace GoC.WebTemplateMVC.Controllers
                 "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
 
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -163,7 +155,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.SignInLinkURL = "about//blank";
             WebTemplateCore.ShowSignInLink = true;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -180,7 +171,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false;
 
             return View("HelloWorld");
@@ -194,7 +184,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false; 
             return View("HelloWorld");
         }
@@ -206,7 +195,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = null;
             WebTemplateCore.ShowPostContent = false; 
             WebTemplateCore.CustomFooterLinks = new List<FooterLink>
             {
@@ -233,7 +221,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowGlobalNav = false;
-            WebTemplateCore.ContactLinks = new List<Link> { new Link {Href = "#"} };
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.TermsConditionsLinkURL = "#";
             WebTemplateCore.PrivacyLinkURL = "#";
@@ -245,7 +232,8 @@ namespace GoC.WebTemplateMVC.Controllers
         { 
             //BASIC SETTINGS ====================================
            // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
-            WebTemplateCore.Environment = "akamai";
+            WebTemplateCore.Environment = "PROD_SSL";
+            WebTemplateCore.UseHTTPS = null;
             WebTemplateCore.WebTemplateSubTheme = "esdc";
             WebTemplateCore.HeaderTitle = "Sample Page";
 
@@ -288,15 +276,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "CDN Sample", "Content Delivery Network Sample"));
 
-            //FOOTER Links SECTIONS ====================================
-            WebTemplateCore.ContactLinks.Add(new Link("http://www.cnn.com", "C'Link 4"));
-            WebTemplateCore.ContactLinks.Add(new Link("http://www.tsn.com", "CLink 5"));
-
-            WebTemplateCore.NewsLinks.Add(new Link("#", "NLink3"));
-            WebTemplateCore.NewsLinks.Add(new Link("#", "NLink5"));
-
-            WebTemplateCore.AboutLinks.Add(new Link("#", "ALink6"));
-            WebTemplateCore.AboutLinks.Add(new Link("#", "ALink7"));
             
             //Share this page LINK ====================================
             WebTemplateCore.ShowSharePageLink = true;

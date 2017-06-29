@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GoC.WebTemplate.ConfigSections;
+using WebTemplateCore.Proxies;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Proxies
@@ -12,7 +13,6 @@ namespace GoC.WebTemplate.Proxies
         string SignOutLinkURL { get; }
         string SignInLinkURL { get; }
         ISessionTimeOutElementProxy SessionTimeOut { get;  }
-        IDictionary<string,ICDTSEnvironmentElementProxy> CDTSEnvironments { get; }
         ILeavingSecureSiteWarningElementProxy LeavingSecureSiteWarning { get;  }
 
         /// <summary>
@@ -34,11 +34,6 @@ namespace GoC.WebTemplate.Proxies
         /// cdts environment to use
         /// </summary>
         string Environment { get;  }
-
-        /// <summary>
-        /// use Https
-        /// </summary>
-        bool UseHTTPS { get;  }
 
         /// <summary>
         /// LoadJQueryFromGoogle
@@ -89,5 +84,7 @@ namespace GoC.WebTemplate.Proxies
         /// StaticFilesLocation
         /// </summary>
         string StaticFilesLocation { get;  }
+
+        bool? UseHttps { get; }
     }
 }

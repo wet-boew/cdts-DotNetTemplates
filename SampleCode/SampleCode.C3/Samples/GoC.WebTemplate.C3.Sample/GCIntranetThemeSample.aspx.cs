@@ -13,6 +13,6 @@ using System.Web.UI.WebControls;
             this.WebTemplateMaster.WebTemplateCore.WebTemplateSubTheme = "ESDC";
             this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
             this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";
-            this.WebTemplateMaster.WebTemplateCore.Environment = GoC.WebTemplate.Core.CDTSEnvironments.ESDCPROD.ToString();
+            this.WebTemplateMaster.WebTemplateCore.Environment = "ESDC_PROD";
         }
     }

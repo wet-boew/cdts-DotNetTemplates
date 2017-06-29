@@ -15,6 +15,7 @@ namespace GoC.WebTemplate
         public const string SESSION_CULTURE_KEY = "GoC.Template.Culture";
 
         public const string CACHE_KEY_STATICFILES_PREFIX = "GoC.Template.CacheKey";
+        public const string CACHE_KEY_ENVIRONMENTS = "GoC.Template.Environments";
         // ReSharper restore InconsistentNaming
     }
 }

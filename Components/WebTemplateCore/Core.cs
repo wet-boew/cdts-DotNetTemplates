@@ -1,40 +1,29 @@
 ﻿using System;
 using System.Reflection;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Threading;
 using System.Text;
 using System.Net;
 using System.Web;
-using System.Globalization;
 using System.Linq;
-using System.Web.Caching;
 using GoC.WebTemplate.Proxies;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-
+using WebTemplateCore.JSONSerializationObjects;
+using WebTemplateCore.Proxies;
 
 // ReSharper disable once CheckNamespace
-
 namespace GoC.WebTemplate
 {
     public class Core
     {
+
+        private readonly ICacheProxy _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
+        private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
 
-        #region Enums
-
-        /// <summary>
-        /// Enum that represents the context of the list of links
-        /// </summary>
-        /// <remarks>The enum item name must match the parameter name expected by the Closure Template for the template to work.  The enum item name is used by the template as the paramter name when calling the Closure Template.</remarks>
         // ReSharper disable InconsistentNaming
-        public enum LinkTypes
-        {
-            contactLinks,
-            newsLinks,
-            aboutLinks
-        };
-
         /// <summary>
         /// Enum that represents the social sites to be displayed when the user clicks the "Share this Page" link.
         /// The list of accepted sites can be found here: http://wet-boew.github.io/v4.0-ci/docs/ref/share/share-en.html
@@ -60,43 +49,25 @@ namespace GoC.WebTemplate
             twitter,
             yahoomail
         }; //NOTE: The item names must match the parameter names expected by the Closure Template for this to work
-
-        /// <summary>
-        /// Enum that represents the environments available with the CDTSs
-        /// </summary>
-        /// <remarks>
-        /// Must be uppercase for logic to work
-        /// The CDNURL and CDNEnv is decided based on these values
-        /// </remarks>
-        public enum CDTSEnvironments
-        {
-            AKAMAI,
-            ESDCPROD,
-            ESDCNNONPROD,
-            ESDCQA
-        };
-
         // ReSharper restore InconsistentNaming
 
-        #endregion
-
-
-        public Core(ICurrentRequestProxy currentRequest, IConfigurationProxy configProxy)
+        public Core(ICurrentRequestProxy currentRequest,
+            ICacheProxy cacheProxy,
+            IConfigurationProxy configProxy,
+            IDictionary<string,ICDTSEnvironment> cdtsEnvironments)
         {
+            _cacheProxy = cacheProxy;
             _configProxy = configProxy;
-            _settings = new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                NullValueHandling = NullValueHandling.Ignore
-            };
+            _cdtsEnvironments = cdtsEnvironments;
+
 
             //Set properties
             WebTemplateVersion = _configProxy.Version;
             WebTemplateTheme = _configProxy.Theme;
             WebTemplateSubTheme = _configProxy.SubTheme;
 
+            UseHTTPS = _configProxy.UseHttps;
             Environment = _configProxy.Environment;
-            UseHTTPS = _configProxy.UseHTTPS;
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
@@ -113,7 +84,7 @@ namespace GoC.WebTemplate
                 AdditionalData = _configProxy.SessionTimeOut.AdditionalData
             };
 
-            //Set Top section options        
+            //Set Top section options
             LanguageLink = new LanguageLink
             {
                 Href = BuildLanguageLinkURL(currentRequest.QueryString)
@@ -139,18 +110,6 @@ namespace GoC.WebTemplate
                 ExcludedDomains = _configProxy.LeavingSecureSiteWarning.ExcludedDomains
             };
 
-            HTMLHeaderElements = new List<string>();
-            HTMLBodyElements = new List<string>();
-            //We don't want to break the API so we must set these obsolete collections until the next build.
-#pragma warning disable 618
-            ContactLinks = new List<Link>();
-            NewsLinks = new List<Link>();
-            AboutLinks = new List<Link>();
-#pragma warning restore 618
-            Breadcrumbs = new List<Breadcrumb>();
-            SharePageMediaSites = new List<SocialMediaSites>();
-            LeftMenuItems = new List<MenuSection>();
-
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
@@ -158,57 +117,16 @@ namespace GoC.WebTemplate
             ShowGlobalNav = _configProxy.ShowGlobalNav;
             CustomSearch = _configProxy.CustomSearch;
 
-
-
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
 
-        #region Properties
-
-        private string _cdnPath;
         private string _staticFilesPath;
 
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
         /// </summary>
         public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-        /// <summary>
-        /// Represents the list of links to override the About links in Footer
-        /// Set by application programmatically
-        /// </summary>
-        [Obsolete("This will be removed in next release of Web Templates")]
-        public List<Link> AboutLinks { get; set;  }
-
-        /// <summary>
-        /// The title that will be displayed in the header above the top menu.
-        /// Set programmatically.
-        /// Being replaced with <see cref="GoC.WebTemplate.ApplicationTitle.Text"/>
-        /// </summary>
-        /// <remarks>only available for intranet themes and Application Template Themes</remarks>
-        [Obsolete("Please use ApplicationTitle.Text this will dissapear in v4.0.25")]
-        public string ApplicationTitle_Text
-        {
-            get { return ApplicationTitle.Text; }
-            set { ApplicationTitle.Text = value; }
-        }
-
-        /// <summary>
-        /// The url of the title that will be displayed in the header above the top menu.
-        /// Set programmatically
-        /// </summary>
-        /// <remarks>
-        /// only available for intranet themes
-        /// value is optional, if no value is supplied the theme will determine the url
-        /// Being replaced with <see cref="GoC.WebTemplate.ApplicationTitle.URL"/>
-        /// </remarks>
-        [Obsolete("Please use ApplicationTitle.URL this will dissapear in v4.0.25")]
-        public string ApplicationTitle_URL
-        {
-            get { return ApplicationTitle.URL; }
-            set { ApplicationTitle.URL = value; }
-        }
 
         /// <summary>
         /// Represents the Application Title setting information
@@ -221,13 +139,8 @@ namespace GoC.WebTemplate
         /// Represents the list of links for the Breadcrumbs
         /// Set by application programmatically
         /// </summary>
-        public List<Breadcrumb> Breadcrumbs { get; set; }
+        public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
-        public List<Breadcrumb> BuildBreadcrumbs => Breadcrumbs?.Select(b => new Breadcrumb {
-            Href = b.Href,
-            Acronym = b.Acronym,
-            Title = GetStringForJson(b.Title)
-        }).ToList();
 
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
@@ -240,19 +153,19 @@ namespace GoC.WebTemplate
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNEnvironment => _configProxy.CDTSEnvironments[Environment].Env;
+         public string CDNEnvironment => _cdtsEnvironments[Environment].CDN;
 
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
         /// Set by application via web.config
         /// </summary>
-        public string LocalPath => _configProxy.CDTSEnvironments[Environment].LocalPath;
+        public string LocalPath => _cdtsEnvironments[Environment].LocalPath;
 
         /// <summary>
         /// URL from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNURL => _configProxy.CDTSEnvironments[Environment].Path;
+        public string CDNURL => _cdtsEnvironments[Environment].Path;
 
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
@@ -261,33 +174,12 @@ namespace GoC.WebTemplate
         public string CDNPath => BuildCDNPath();
 
         /// <summary>
-        /// Represents the list of links to override the Contact links in Footer
+        /// Used to override the Contact links in Footer
         /// Set by application programmatically
-        /// This is deprecated please use <see cref="ContactLinkURL"/>
         /// </summary>
-        [Obsolete("This will be removed in next release of Web Templates, please use ContactLinkURL")]
-        public List<Link> ContactLinks { get; set; }
-
         public string ContactLinkURL { get; set; }
 
-        private List<Link> FigureOutContactLinkURL()
-        {
-            if (ContactLinkURL != null)
-            {
-                return new List<Link> {new Link {Href = ContactLinkURL}};
-            }
-
-                //Disable obsolete warning since we need to call an obsolete method.
-#pragma warning disable 618
-            if (ContactLinks != null && ContactLinks.Any())
-            {
-                //This is obsolete I don't really care if it's performant right now it'll be gone soon.
-                return new List<Link> { new Link { Href = ContactLinks.First().Href} };
-            }
-#pragma warning restore 618
-            return null;
-        }
-
+        private List<Link> BuildContactLinks() => new List<Link> {new Link {Href = ContactLinkURL}};
 
 
         /// <summary>
@@ -295,14 +187,14 @@ namespace GoC.WebTemplate
         /// will be used to add metatags, css, js etc.
         /// Set by application programmatically
         /// </summary>
-        public List<string> HTMLHeaderElements { get; set; }
+        public List<string> HTMLHeaderElements { get; set; } = new List<string>();
 
         /// <summary>
         /// Represents the list of html elements to add at the end of the body tag
         /// will be used to add metatags, css, js etc.
         /// Set by application programmatically
         /// </summary>
-        public List<string> HTMLBodyElements { get; set; }
+        public List<string> HTMLBodyElements { get; set; } = new List<string>();
 
         /// <summary>
         /// Represents the date modified displayed just above the footer
@@ -318,105 +210,11 @@ namespace GoC.WebTemplate
         public bool ShowFeatures { get; set; }
 
         /// <summary>
-        /// Determines if the a warning should be displayed if the user navigates outside the secure session
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.Enabled"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.Enabled this will dissapear in v4.0.25")]
-        public bool LeavingSecureSiteWarning_Enabled
-        {
-            get { return LeavingSecureSiteWarning.Enabled; }
-            set { LeavingSecureSiteWarning.Enabled = value; }
-        }
-
-
-        /// <summary>
-        /// Determines if the popup window should be displayed with the warning message if the user navigates outside the secure session
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.DisplayModalWindow"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.DisplayModalWindow this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public bool LeavingSecureSiteWarning_DisplayModalWindow
-        {
-            get { return LeavingSecureSiteWarning.DisplayModalWindow; }
-            set { LeavingSecureSiteWarning.DisplayModalWindow = value; }
-        }
-
-        /// <summary>
-        /// URL to redirect to when sercuresitewarning is enabled and user clicked a link that leaves the secure session
-        /// Set by application via web.config
-        /// Can be set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.RedirectURL"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.RedirectURL this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string leavingSecureSiteWarning_RedirectURL
-        {
-            get { return LeavingSecureSiteWarning.RedirectURL; }
-            set { LeavingSecureSiteWarning.RedirectURL = value; }
-        }
-
-        /// <summary>
-        /// A comma delimited list of domains that would be excluded from raising the warning
-        /// Set by application via web.config
-        /// Can be set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.ExcludedDomains"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.ExcludedDomains this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string leavingSecureSiteWarning_ExcludedDomains
-        {
-            get { return LeavingSecureSiteWarning.ExcludedDomains; }
-            set { LeavingSecureSiteWarning.ExcludedDomains = value; }
-        }
-
-        /// <summary>
-        /// The warning message to be displayed to the user when clicking a link that leaves the secure session
-        /// Set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LeavingSecureSiteWarning.Message"/>
-        /// </summary>
-        [Obsolete("Please use LeavingSecureSiteWarning.Message this will dissapear in v4.0.25")]
-        public string LeavingSecureSiteWarning_Message
-        {
-            get { return LeavingSecureSiteWarning.Message; }
-            set { LeavingSecureSiteWarning.Message = value; }
-        }
-
-        /// <summary>
-        /// URL to be used for the feedback link
-        /// Set by application via web.config
-        /// or programmatically
-        /// Being replaced with <see cref="FeedbackLinkURL"/>
-        /// </summary>
-        [Obsolete("Please use FeedbackLink.URL this will dissapear in v4.0.25")]
-        public string FeedbackLink_URL
-        {
-            get { return FeedbackLinkURL; }
-            set { FeedbackLinkURL = value; }
-        }
-
-        /// <summary>
         /// URL to be used for the feedback link
         /// Set by application via web.config
         /// or programmatically
         /// </summary>
         public string FeedbackLinkURL { get; set; }
-
-        /// <summary>
-        /// URL to be used for the Privacy link in transactional mode
-        /// Set by application programmatically
-        /// Being replaced with <see cref="PrivacyLinkURL"/>
-        /// </summary>
-        [Obsolete("Please use PrivacyLink.URL this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string PrivacyLink_URL
-        {
-            get { return PrivacyLinkURL; }
-            set { PrivacyLinkURL = value; }
-        }
 
         /// <summary>
         /// URL to be used for the Privacy link in transactional mode
@@ -427,65 +225,19 @@ namespace GoC.WebTemplate
         /// <summary>
         /// URL to be used for the Terms & Conditions link in transactional mode
         /// Set by application programmatically
-        /// Being replaced with <see cref="TermsConditionsLinkURL"/>
-        /// </summary>
-        [Obsolete("Please use TermsConditionsLink.URL this will dissapear in v4.0.25")]
-        // ReSharper disable once InconsistentNaming
-        public string TermsConditionsLink_URL
-        {
-            get { return TermsConditionsLinkURL; }
-            set { TermsConditionsLinkURL = value; }
-        }
-
-        /// <summary>
-        /// URL to be used for the Terms & Conditions link in transactional mode
-        /// Set by application programmatically
         /// </summary>
         public string TermsConditionsLinkURL { get; set; }
 
+        /// <summary>
+        /// Used to override the langauge link
+        /// </summary>
         public LanguageLink LanguageLink { get; set; }
-
-        /// <summary>
-        /// URL to be used for the language toggle
-        /// Set/built by Template
-        /// Can be set by application programmatically
-        /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.URL"/>
-        /// </summary>
-        [Obsolete("Please use LanguageLink.URL this will dissapear in v4.0.25")]
-        public string LanguageLink_URL
-        {
-            get { return LanguageLink.Href; }
-            set { LanguageLink.Href = value; }
-        }
-
-        /// <summary>
-        /// Read only property, used to populate the Lang attribute of the language toggle link
-        /// Value is defaulted by Template
-        /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.Lang"/>
-        /// </summary>
-        [Obsolete("Please use LanguageLink.Lang this will dissapear in v4.0.25")]
-        public string LanguageLink_Lang => LanguageLink.Lang;
-
-        /// <summary>
-        /// Read only property, used to populate the text attribute of the language toggle link
-        /// Value is defaulted by Template
-        /// Being replaced with <see cref="GoC.WebTemplate.LanguageLink.Text"/>
-        /// </summary>
-        [Obsolete("Please use LanguageLink.Text this will dissapear in v4.0.25")]
-        public string LanguageLink_Text => LanguageLink.Text;
 
         // ReSharper restore InconsistentNaming
         /// <summary>
         /// Represents a list of menu items
         /// </summary>
-        public List<MenuSection> LeftMenuItems { get; set; }
-
-        /// <summary>
-        /// Represents the list of links to override the News links in Footer
-        /// Set by application programmatically
-        /// </summary>
-        [Obsolete("This will be removed in next release of Web Templates")]
-        public List<Link> NewsLinks { get; set; }
+        public List<MenuSection> LeftMenuItems { get; set; } = new List<MenuSection>();
 
         /// <summary>
         /// A unique string to identify a web page. Used by user to identify the screen where an issue occured.
@@ -538,7 +290,7 @@ namespace GoC.WebTemplate
         /// Representes the list of items to be displayed in the Share Page window
         /// Set by application programmatically
         /// </summary>
-        public List<SocialMediaSites> SharePageMediaSites { get; set; }
+        public List<SocialMediaSites> SharePageMediaSites { get; set; } = new List<SocialMediaSites>();
 
         /// <summary>
         /// Determines the path to the location of the staticback up files
@@ -572,26 +324,29 @@ namespace GoC.WebTemplate
 
         private string _headerTitle;
         /// <summary>
-        /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per 
+        /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per
         /// Set by application programmatically
         /// </summary>
         public string HeaderTitle
         {
             get
             {
-                if (WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
+                if (!WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
                 {
-                    if (string.IsNullOrWhiteSpace(_headerTitle))
-                    {
-                        return "- Canada.ca";
-                    }
-                    if (_headerTitle.EndsWith(" - Canada.ca"))
-                    {
-                        return _headerTitle;
-                    }
-                    return _headerTitle + " - Canada.ca";
+                    return _headerTitle;
                 }
-                return _headerTitle;
+
+                if (string.IsNullOrWhiteSpace(_headerTitle))
+                {
+                    return "- Canada.ca";
+                }
+
+                if (_headerTitle.EndsWith(" - Canada.ca"))
+                {
+                    return _headerTitle;
+                }
+
+                return _headerTitle + " - Canada.ca";
             }
             set
             {
@@ -627,7 +382,7 @@ namespace GoC.WebTemplate
         /// Determines if the communication between the browser and the CDTS should be encrypted
         /// Set by application via web.config or programmatically
         /// </summary>
-        public bool UseHTTPS { get; set; }
+        public bool? UseHTTPS { get; set; }
 
         /// <summary>
         /// Determines if the jQuery files should be loaded from google or from the CDN
@@ -650,7 +405,7 @@ namespace GoC.WebTemplate
         public bool ShowGlobalNav { get; set; }
 
         /// <summary>
-        /// Determines if the Site Menu is to appear at the top of the page. 
+        /// Determines if the Site Menu is to appear at the top of the page.
         /// If set to false only a blue band will be seen.
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
@@ -711,29 +466,42 @@ namespace GoC.WebTemplate
         /// Only available in the Application Template
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
-        
-        public List<FooterLink> BuildCustomFooterLinks => CustomFooterLinks?.Select(fl => new FooterLink
+
+        private string BuildLocalPath()
         {
-            Href = fl.Href,
-            NewWindow = fl.NewWindow,
-            Text = GetStringForJson(fl.Text)
-        }).ToList();
-
-
-        #endregion
-
-
-
-
-        private string GetStringForJson(string str)
-        {
-            return string.IsNullOrWhiteSpace(str) ? null : str;
+            return GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
         }
 
-        private string GetFormattedJsonString(string formatStr, params object[] strs)
+        public List<Breadcrumb> BuildBreadcrumbs()
         {
-            return string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
+            if (Breadcrumbs == null || !Breadcrumbs.Any())
+            {
+                return null;
+            }
+
+            return Breadcrumbs.Select(b => new Breadcrumb
+            {
+                Href = b.Href,
+                Acronym = b.Acronym,
+                Title = GetStringForJson(b.Title)
+            }).ToList();
         }
+        public List<FooterLink> BuildCustomFooterLinks
+        {
+            get
+            {
+                return CustomFooterLinks?.Select(fl => new FooterLink
+                {
+                    Href = fl.Href,
+                    NewWindow = fl.NewWindow,
+                    Text = GetStringForJson(fl.Text)
+                }).ToList();
+            }
+        }
+
+        private string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
+
+        private string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
 
         private List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
         {
@@ -753,37 +521,33 @@ namespace GoC.WebTemplate
             }
         }
 
-        #region Renderers
-
         public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
         public HtmlString RenderAppFooter()
         {
-
-            var appFooter = new AppFooter
+            return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = GetStringForJson(WebTemplateSubTheme),
                 ShowFeatures = ShowFeatures,
                 TermsLink = GetStringForJson(TermsConditionsLinkURL),
                 PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                ContactLinks = FigureOutContactLinkURL(),
+                ContactLinks = BuildContactLinks(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 GlobalNav = ShowGlobalNav,
                 FooterSections = BuildCustomFooterLinks
-            };
-
-            return new HtmlString(JsonConvert.SerializeObject(appFooter, _settings));
+            });
         }
-
 
         public HtmlString RenderAppTop()
         {
             CheckIfBothSignInAndSignOutAreSet();
 
-            var appTop = new AppTop
+            return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = ApplicationTitle.Text,
+                AppUrl = ApplicationTitle.URL,
+                IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
                 Secure = ShowSecure,
@@ -792,17 +556,184 @@ namespace GoC.WebTemplate
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 ShowPreContent = ShowPreContent,
-                Breadcrumbs = BuildBreadcrumbs,
+                Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 SiteMenu = ShowSiteMenu,
-                MenuPath = CustomSiteMenuURL, 
-                CustomSearch = GetStringForJson(CustomSearch)
-            };
-
-            return new HtmlString(JsonConvert.SerializeObject(appTop, _settings));
+                MenuPath = CustomSiteMenuURL,
+                CustomSearch = CustomSearch
+            });
         }
 
+        public Link IntranetTitle { get; set; }
 
+        public HtmlString RenderTransactionalTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Top
+            {
+
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                IntranetTitle = BuildIntranentTitleList(),
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                SiteMenu = false,
+                Breadcrumbs = BuildBreadcrumbs(),
+                ShowPreContent = false,
+                LocalPath = BuildLocalPath()
+
+            });
+        }
+
+        public HtmlString RenderTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Top
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                IntranetTitle = BuildIntranentTitleList(),
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                SiteMenu = true,
+                ShowPreContent = ShowPreContent,
+                Breadcrumbs = BuildBreadcrumbs(),
+                LocalPath = BuildLocalPath()
+            });
+        }
+
+        public HtmlString RenderRefTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new RefTop
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                JqueryEnv = LoadJQueryFromGoogle ? "external" : null,
+                LocalPath = BuildLocalPath()
+            });
+        }
+
+        public HtmlString RenderPreFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new PreFooter
+            {
+                CdnEnv = CDNEnvironment,
+                DateModified = BuildDateModified(),
+                VersionIdentifier = BuildVersionIdentifier(),
+                ShowPostContent = ShowPostContent,
+                ShowFeedback = new FeedbackLink
+                {
+                    Show = ShowFeedbackLink,
+                    URL = FeedbackLinkURL
+                },
+                ShowShare = new ShareList
+                {
+                    Show = ShowSharePageLink,
+                    Enums = SharePageMediaSites
+                },
+                ScreenIdentifier = GetStringForJson(ScreenIdentifier)
+            });
+        }
+
+        public HtmlString RenderTransactionalPreFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new PreFooter
+            {
+                CdnEnv = CDNEnvironment,
+                DateModified = BuildDateModified(),
+                VersionIdentifier = BuildVersionIdentifier(),
+                ShowPostContent = false,
+                ShowFeedback = new FeedbackLink {Show = false},
+                ShowShare = new ShareList { Show = false},
+                ScreenIdentifier = GetStringForJson(ScreenIdentifier)
+            });
+        }
+
+        public HtmlString RenderFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Footer
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                ShowFeatures = ShowFeatures,
+                ShowFooter = true,
+                ContactLinks = BuildContactLinks(),
+                PrivacyLink = null,
+                TermsLink = null
+
+            });
+        }
+
+        public HtmlString RenderTransactionalFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Footer
+            {
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                ShowFeatures = ShowFeatures,
+                ShowFooter = false,
+                ContactLinks = BuildContactLinks(),
+                PrivacyLink = GetStringForJson(PrivacyLinkURL),
+                TermsLink = GetStringForJson(TermsConditionsLinkURL)
+
+            });
+
+        }
+
+        public HtmlString RenderRefFooter()
+        {
+            if (LeavingSecureSiteWarning.Enabled && 
+                !string.IsNullOrEmpty(LeavingSecureSiteWarning.RedirectURL))
+            {
+                return RenderSecureSiteWarningRefFooter();
+            }
+            return JsonSerializationHelper.SerializeToJson(new RefFooter
+            {
+                CdnEnv = CDNEnvironment,
+                ExitScript = false,
+                JqueryEnv = BuildJqueryEnv(), 
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
+            });
+        }
+
+        private string BuildJqueryEnv() => LoadJQueryFromGoogle ? "external" : null;
+
+        private HtmlString RenderSecureSiteWarningRefFooter()
+        {
+            return JsonSerializationHelper.SerializeToJson(new RefFooter
+            {
+                CdnEnv = CDNEnvironment,
+                ExitScript = true,
+                DisplayModal = LeavingSecureSiteWarning.DisplayModalWindow,
+                ExitURL = LeavingSecureSiteWarning.RedirectURL,
+                ExitMsg = WebUtility.HtmlEncode(LeavingSecureSiteWarning.Message),
+                ExitDomains = GetStringForJson(LeavingSecureSiteWarning.ExcludedDomains),
+                JqueryEnv = BuildJqueryEnv(),
+                LocalPath= GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
+            });
+
+        }
+
+        private string BuildVersionIdentifier()
+        {
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
+                !string.IsNullOrEmpty(VersionIdentifier))
+            {
+                return VersionIdentifier;
+            }
+            return null;
+        }
+
+        private string BuildDateModified()
+        {
+
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
+                !string.IsNullOrEmpty(VersionIdentifier))
+            {
+                return null;
+            }
+            return DateModified.ToString("yyyy-MM-dd");
+        }
+
+        private List<Link> BuildIntranentTitleList() => IntranetTitle == null ? null : new List<Link> { IntranetTitle };
 
         private List<LanguageLink> BuildLanguageLinkList()
         {
@@ -818,243 +749,6 @@ namespace GoC.WebTemplate
             };
         }
 
-        public HtmlString RenderFooterLinks(bool transactionalMode)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (transactionalMode)
-            {
-                //contact, terms, privacy links
-                RenderLinksList(sb, LinkTypes.contactLinks, FigureOutContactLinkURL());
-                RenderTermsConditionsLink(sb);
-                RenderPrivacyLink(sb);
-            }
-            else
-            {
-                //contact, news, about links
-                RenderLinksList(sb, LinkTypes.contactLinks, FigureOutContactLinkURL());
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent a list of links for:
-        ///   - Contact Us
-        ///   - About Us
-        ///   - News
-        /// The list of links is provided by the application
-        /// </summary>
-        /// <param name="sb"></param>
-        /// <param name="linkType"></param>
-        /// <param name="links"></param>
-        /// <returns>string in the format expected by the Closure Templates to generate the list of links</returns>
-        /// <example>contactLinks: [{ href: '#', text: 'CLink 1' }, { href: '#', text: 'CLink 2', acronym: 'Con' }]</example>
-        private void RenderLinksList(StringBuilder sb, LinkTypes linkType, List<Link> links)
-        {
-
-            //contactLinks: [{ href: '#', text: 'CLink 1' }, { href: '#', text: 'CLink 2', acronym: 'Con' }]
-            if (links != null && links.Count > 0)
-            {
-                sb.Append(linkType);
-                sb.Append(": [");
-                // TO DO  check Linq
-                foreach (Link lk in links)
-                {
-                    sb.Append("{href: '");
-                    sb.Append(lk.Href);
-                    sb.Append("', text: '");
-                    sb.Append(WebUtility.HtmlEncode(lk.Text));
-                    sb.Append("'},");
-                }
-                sb.Append("],");
-            }
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the application title that is displayed above the top menu
-        /// The text and url for the title is provided programmatically by the consumer
-        /// Will only be displayed if the text is supplied
-        /// if no URL is provided the theme/subtheme will provide a default value
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the application title content</returns>
-        /// <example>//intranetTitle: [{href: "http://hrsdc.prv/eng/iit/index.shtml", text: "IITB"}]</example>
-        public HtmlString RenderApplicationTitle()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (!string.IsNullOrEmpty(ApplicationTitle.Text))
-            {
-                //intranetTitle: [{href: "http://hrsdc.prv/eng/iit/index.shtml", text: "IITB"}],
-                sb.Append("intranetTitle: [{");
-                if (!string.IsNullOrEmpty(ApplicationTitle.URL))
-                {
-                    sb.Append(string.Concat(" href: \"", ApplicationTitle.URL, "\","));
-                }
-                sb.Append(string.Concat(" text: \"", ApplicationTitle.Text, "\""));
-                sb.Append(" }],");
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the breadcrumb links
-        /// The list of breadcrumbs is provided by the application
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the breadcrumb content</returns>
-        /// <example>breadcrumbs: [{ title: 'Home', href: 'http://www.canada.ca/en/index.htm' }, { title: 'CDN Sample', acronym: 'Content Delivery Network Sample' }]</example>
-        public HtmlString RenderBreadcrumbsList()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            //breadcrumbs: [{ title: 'Home', href: 'http://www.canada.ca/en/index.htm' }, { title: 'CDN Sample', acronym: 'Content Delivery Network Sample' }]
-
-            if (Breadcrumbs != null && Breadcrumbs.Count > 0)
-            {
-                sb.Append("breadcrumbs: [");
-                // TO DO  check Linq
-                foreach (Breadcrumb lk in Breadcrumbs)
-                {
-                    sb.Append("{title: '");
-                    sb.Append(WebUtility.HtmlEncode(lk.Title));
-                    if (string.IsNullOrEmpty(lk.Href) == false)
-                    {
-                        sb.Append("', href: '");
-                        sb.Append(lk.Href);
-                    }
-
-                    if (string.IsNullOrEmpty(lk.Acronym) == false)
-                    {
-                        sb.Append("', acronym: '");
-                        sb.Append(WebUtility.HtmlEncode(lk.Acronym));
-                    }
-                    sb.Append("'},");
-                }
-                sb.Append("],");
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the feedback link
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the feedback link</returns>
-        /// <example>
-        /// /// showFeedback: false
-        /// or
-        /// showFeedback: +url provided
-        /// or
-        /// empty string.  this will diplay the button with the default url
-        /// </example>
-        public HtmlString RenderFeedbackLink()
-        {
-            string feedbackJSon = string.Empty;
-
-            if (ShowFeedbackLink)
-            {
-                if (!string.IsNullOrEmpty(FeedbackLinkURL))
-                {
-                    feedbackJSon = string.Concat("showFeedback: \"", FeedbackLinkURL, "\",");
-                }
-            }
-            else
-            {
-                feedbackJSon = "showFeedback: false,";
-            }
-
-            return new HtmlString(feedbackJSon);
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to display the screen identifier
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the screen identifier</returns>
-        /// <example>
-        /// screenIdentifier: "asdfasdf-asdf323"
-        /// </example>
-        public HtmlString RenderScreenIdentifier()
-        {
-            return !string.IsNullOrEmpty(ScreenIdentifier)
-                ? new HtmlString(string.Concat("screenIdentifier: \"", ScreenIdentifier, "\","))
-                : null;
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to display or not the search control
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to generate the search control</returns>
-        /// <example>
-        /// /// search: false
-        /// or
-        /// search: true
-        /// </example>
-        public string RenderSearch()
-        {
-            return ShowSearch
-                ? "search: true,"
-                : "search: false,";
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to retrieve the jQuery files from google or cdts
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to retrieve the jQuery files from google or cdts
-        /// jqueryEnv: 'external' gets files from Google
-        /// if false, the string (including the parameter name) will be empty
-        /// </returns>
-        /// <example>
-        /// jqueryEnv: 'external'
-        /// </example>
-        public HtmlString RenderjQuery()
-        {
-            return LoadJQueryFromGoogle
-                ? new HtmlString("jqueryEnv: \"external\",")
-                : null;
-        }
-
-        public HtmlString RenderLocalPath()
-        {
-            if (string.IsNullOrWhiteSpace(LocalPath))
-            {
-                return null;
-            }
-            return new HtmlString("localPath: '" + String.Format(LocalPath, WebTemplateTheme, WebTemplateVersion) + "'");
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the Share Page links
-        /// </summary>
-        /// <remarks>If the application did not supply the Share Page items, the Share Page link will not be displayed</remarks>
-        /// <returns>string in the format expected by the Closure Templates to generate the Share Page link</returns>
-        /// <example>
-        /// /// showShare: false
-        /// or
-        /// showShare: ["email", "facebook", "linkedin", "twitter"]
-        /// </example>
-        public HtmlString RenderSharePageMediaSites()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            //showShare: false
-            //showShare: ["email", "facebook", "linkedin", "twitter"]
-
-            if (ShowSharePageLink == true && (SharePageMediaSites.Count > 0))
-            {
-                sb.Append("showShare: [");
-
-                foreach (SocialMediaSites site in SharePageMediaSites)
-                {
-                    sb.Append(string.Concat(" '", site, "', "));
-                }
-                sb.Append("],");
-            }
-            else // don't display the feedback link
-            {
-                sb.Append("showShare: false,");
-            }
-
-            return new HtmlString(sb.ToString());
-        }
-
         /// <summary>
         /// Builds the html of the WET Session Timeout control that provides session timeout and inactivity functionality.
         /// For more documentation: https://wet-boew.github.io/v4.0-ci/demos/session-timeout/session-timeout-en.html
@@ -1066,42 +760,42 @@ namespace GoC.WebTemplate
             StringBuilder sb = new StringBuilder();
             //<span class='wb-sessto' data-wb-sessto='{"inactivity": 5000, "reactionTime": 30000, "sessionalive": 10000, "logouturl": "http://www.tsn.com", "refreshCallbackUrl": "http://www.cnn.com", "refreshOnClick": "33", "refreshLimit": 2, "method": "555", "additionalData": "666"}'></span>
 
-            if (this.SessionTimeout.Enabled)
+            if (SessionTimeout.Enabled)
             {
                 sb.Append("<span class='wb-sessto' data-wb-sessto='{");
                 sb.Append("\"inactivity\": ");
-                sb.Append(this.SessionTimeout.Inactivity);
+                sb.Append(SessionTimeout.Inactivity);
                 sb.Append(", \"reactionTime\": ");
-                sb.Append(this.SessionTimeout.ReactionTime);
+                sb.Append(SessionTimeout.ReactionTime);
                 sb.Append(", \"sessionalive\": ");
-                sb.Append(this.SessionTimeout.SessionAlive);
+                sb.Append(SessionTimeout.SessionAlive);
                 sb.Append(", \"logouturl\": \"");
-                sb.Append(this.SessionTimeout.LogoutUrl);
+                sb.Append(SessionTimeout.LogoutUrl);
                 sb.Append("\"");
-                if (!string.IsNullOrEmpty(this.SessionTimeout.RefreshCallbackUrl))
+                if (!string.IsNullOrEmpty(SessionTimeout.RefreshCallbackUrl))
                 {
                     sb.Append(", \"refreshCallbackUrl\": \"");
-                    sb.Append(this.SessionTimeout.RefreshCallbackUrl);
+                    sb.Append(SessionTimeout.RefreshCallbackUrl);
                     sb.Append("\"");
                 }
                 sb.Append(", \"refreshOnClick\": ");
-                sb.Append(this.SessionTimeout.RefreshOnClick.ToString().ToLower());
+                sb.Append(SessionTimeout.RefreshOnClick.ToString().ToLower());
 
-                if (this.SessionTimeout.RefreshLimit > 0)
+                if (SessionTimeout.RefreshLimit > 0)
                 {
                     sb.Append(", \"refreshLimit\": ");
-                    sb.Append(this.SessionTimeout.RefreshLimit);
+                    sb.Append(SessionTimeout.RefreshLimit);
                 }
-                if (!string.IsNullOrEmpty(this.SessionTimeout.Method))
+                if (!string.IsNullOrEmpty(SessionTimeout.Method))
                 {
                     sb.Append(", \"method\": \"");
-                    sb.Append(this.SessionTimeout.Method);
+                    sb.Append(SessionTimeout.Method);
                     sb.Append("\"");
                 }
-                if (!string.IsNullOrEmpty(this.SessionTimeout.AdditionalData))
+                if (!string.IsNullOrEmpty(SessionTimeout.AdditionalData))
                 {
                     sb.Append(", \"additionalData\": \"");
-                    sb.Append(this.SessionTimeout.AdditionalData);
+                    sb.Append(SessionTimeout.AdditionalData);
                     sb.Append("\"");
                 }
                 sb.Append("}'></span>");
@@ -1110,58 +804,8 @@ namespace GoC.WebTemplate
         }
 
         /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the features/activities
-        /// </summary>
-        /// <remarks></remarks>
-        /// <returns>string in the format expected by the Closure Templates to generate the features</returns>
-        /// <example>
-        /// showFeatures: true
-        /// </example>
-        public string RenderFeatures()
-        {
-
-            //showFeatures: true,
-            return ShowFeatures
-                ? "showFeatures: true,"
-                : "showFeatures: false,";
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to display the language toggle link
-        /// </summary>
-        /// <remarks></remarks>
-        /// <returns>string in the format expected by the Closure Templates to generate the language toggle link</returns>
-        /// <example>
-        /// lngLinks: [{ lang: 'fr', href: '?GoCTemplateCulture=fr-CA', text: 'Français'}],
-        /// </example>
-        public HtmlString RenderLanguageLink()
-        {
-            //lngLinks: [{ lang: 'fr', href: '?GoCTemplateCulture=fr-CA', text: 'Français'}],
-            StringBuilder sb = new StringBuilder();
-
-            if (ShowLanguageLink)
-            {
-                sb.Append("lngLinks: [{");
-                sb.Append(" lang: '");
-                sb.Append(LanguageLink.Lang);
-                sb.Append("',");
-
-                sb.Append(" href: '");
-                sb.Append(LanguageLink.Href);
-                sb.Append("',");
-
-                sb.Append(" text: '");
-                sb.Append(LanguageLink.Text);
-                sb.Append("'");
-                sb.Append("}],");
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the left side menu
         /// </summary>
-        // ReSharper restore InconsistentNaming
         /// <returns>
         /// string in the format expected by the Closure Templates to generate the left menu
         /// </returns>
@@ -1171,10 +815,10 @@ namespace GoC.WebTemplate
 
             // sectionName: 'Section menu', menuLinks: [{ href: '#', text: 'Link 1' }, { href: '#', text: 'Link 2' }]"
 
-            if (this.LeftMenuItems.Count > 0)
+            if (LeftMenuItems.Count > 0)
             {
                 sb.Append("sections: [");
-                foreach (MenuSection menuSection in this.LeftMenuItems)
+                foreach (MenuSection menuSection in LeftMenuItems)
                 {
                     //add section name
                     sb.Append(" {sectionName: '");
@@ -1211,7 +855,7 @@ namespace GoC.WebTemplate
                                 MenuItem mi = (MenuItem) lk;
 
                                 //the following if statement needs to be here for backward compatibility OpenInNewWindow is only available to MenuItems not Link
-                                if (mi.OpenInNewWindow == true)
+                                if (mi.OpenInNewWindow)
                                 {
                                     sb.Append(", newWindow: true");
                                 }
@@ -1246,58 +890,9 @@ namespace GoC.WebTemplate
             return new HtmlString(sb.ToString());
         }
 
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the leaving secure site warning
-        /// </summary>
-        /// <returns>
-        /// string in the format expected by the Closure Templates to manage the leaving secure site warning
-        /// </returns>
-        public HtmlString RenderLeavingSecureSiteWarning()
-        {
-            StringBuilder sb = new StringBuilder();
+        public HtmlString RenderHtmlHeaderElements() => RenderHtmlElements(HTMLHeaderElements);
 
-            //exitScript: true,
-            //displayModal: true,
-            //exitURL: "http://www.google.ca"
-            //exitMsg: "You are about to leave a secure site, do you wish to continue?"
-
-            if (LeavingSecureSiteWarning.Enabled && !string.IsNullOrEmpty(LeavingSecureSiteWarning.RedirectURL))
-            {
-                sb.Append("exitScript: true,");
-                if (LeavingSecureSiteWarning.DisplayModalWindow == false)
-                {
-                    sb.Append(" displayModal: false,");
-                }
-                sb.Append(" exitURL: \"");
-                sb.Append(LeavingSecureSiteWarning.RedirectURL);
-                sb.Append("\",");
-                sb.Append(" exitMsg: \"");
-                sb.Append(WebUtility.HtmlEncode(LeavingSecureSiteWarning.Message));
-                sb.Append("\",");
-                if (!string.IsNullOrEmpty(LeavingSecureSiteWarning.ExcludedDomains))
-                {
-                    sb.Append("exitDomains: \"");
-                    sb.Append(LeavingSecureSiteWarning.ExcludedDomains);
-                    sb.Append("\",");
-                }
-            }
-            else
-            {
-                sb.Append("exitScript: false,");
-            }
-
-            return new HtmlString(sb.ToString());
-        }
-
-        public HtmlString RenderHtmlHeaderElements()
-        {
-            return RenderHtmlElements(this.HTMLHeaderElements);
-        }
-
-        public HtmlString RenderHtmlBodyElements()
-        {
-            return RenderHtmlElements(this.HTMLBodyElements);
-        }
+        public HtmlString RenderHtmlBodyElements() => RenderHtmlElements(HTMLBodyElements);
 
         /// <summary>
         /// Adds a string(html tag) to be included in the page
@@ -1309,72 +904,14 @@ namespace GoC.WebTemplate
         /// </returns>
         private HtmlString RenderHtmlElements(List<string> tags)
         {
-            StringBuilder sb = new StringBuilder();
+            var sb = new StringBuilder();
 
-            if (tags.Count > 0)
+            foreach (var tag in tags)
             {
-                foreach (string tag in tags)
-                {
-                    sb.Append(tag + "\r\n");
-                }
+                sb.AppendLine(tag);
             }
             return new HtmlString(sb.ToString());
         }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the date modified or version identifier displayed on screen
-        /// </summary>
-        /// <remarks>only 1 of the 2 can be displayed, if XX is provided then xx will be displayed, ignoting the other property</remarks>
-        /// <returns>
-        /// string in the format expected by the Closure Templates to manage the date modified or version identifier
-        /// </returns>
-        public HtmlString RenderDateModifiedVersionIdentifier()
-        {
-            StringBuilder sb = new StringBuilder();
-
-            if (DateTime.Compare(this.DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(this.VersionIdentifier))
-            {
-                sb.Append("versionIdentifier: \"");
-                sb.Append(this.VersionIdentifier.Trim());
-                sb.Append("\",");
-            }
-            else
-            {
-                sb.Append("dateModified: \"");
-                sb.Append(this.DateModified.ToString("yyyy-MM-dd"));
-                    // format for english and french are identical, else would need if.
-                sb.Append("\",");
-            }
-
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the terms and conditions link in transaction mode only
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to manage the terms and conditions link in transaction mode only</returns>
-        private void RenderTermsConditionsLink(StringBuilder sb)
-        {
-            if (!string.IsNullOrEmpty(TermsConditionsLinkURL))
-            {
-                sb.Append("termsLink: \"" + TermsConditionsLinkURL + "\",");
-            }
-        }
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to manage the privacy notice link in transaction mode only
-        /// </summary>
-        /// <returns>string in the format expected by the Closure Templates to manage the privacy notice link in transaction mode only</returns>
-        private void RenderPrivacyLink(StringBuilder sb)
-        {
-            if (!string.IsNullOrEmpty(TermsConditionsLinkURL))
-            {
-                sb.Append("privacyLink: \"" + PrivacyLinkURL + "\",");
-            }
-        }
-
-        #endregion
 
         /// <summary>
         /// Builds the path to the cdn based on the environment set in the config. The path is based on the url of the environment, theme and version
@@ -1382,40 +919,65 @@ namespace GoC.WebTemplate
         /// <returns>String, the complete path to the cdn</returns>
         private string BuildCDNPath()
         {
-            string https = string.Empty;
 
-            if (UseHTTPS == true)
+            var currentEnv = _cdtsEnvironments[Environment];
+
+
+            if (!currentEnv.IsThemeModifiable && !string.IsNullOrWhiteSpace(WebTemplateTheme))
             {
-                https = "s";
+                throw new InvalidOperationException($"{Environment} does not allow a theme to be set");
             }
 
-            if (string.Compare(Environment, CDTSEnvironments.AKAMAI.ToString(), true) == 0)
+            if (currentEnv.IsThemeModifiable && string.IsNullOrWhiteSpace(WebTemplateTheme))
             {
-                if (string.IsNullOrEmpty(WebTemplateVersion))
+                throw new InvalidOperationException($"{Environment} requires a theme to be set");
+            }
+
+            if (!currentEnv.IsSSLModifiable && UseHTTPS.HasValue)
+            {
+                throw new InvalidOperationException($"{Environment} does not allow useHTTPS to be toggled");
+            }
+
+            if (currentEnv.IsSSLModifiable && !UseHTTPS.HasValue)
+            {
+                throw new InvalidOperationException($"{Environment} requires useHTTPS to be true or false not null.");
+            }
+
+            var https = string.Empty;
+            if (currentEnv.IsSSLModifiable)
+            {
+                //We've already checked to see if this is null before here so ignore this in resharper
+                // ReSharper disable once PossibleInvalidOperationException
+                https = UseHTTPS.Value ? "s" : string.Empty;
+            }
+
+            var theme = string.Empty;
+            if (currentEnv.IsThemeModifiable)
+            {
+                theme = WebTemplateTheme;
+            }
+
+            var run = string.Empty;
+            var version = string.Empty;
+            if (string.IsNullOrWhiteSpace(WebTemplateVersion))
+            {
+                if (currentEnv.IsVersionRNCombined)
                 {
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, WebTemplateTheme, "rn");
+                    version = "rn/";
                 }
                 else
                 {
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, WebTemplateTheme,
-                        WebTemplateVersion);
+                    run = "rn";
                 }
             }
-            else //Using ESDC CDTS (SSL)
+            else
             {
-                if (string.IsNullOrEmpty(WebTemplateVersion))
-                {
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, "rn", WebTemplateTheme,
-                        WebTemplateVersion);
-                }
-                else
-                {
-                    //the extra "/" at the end is added after the version, since this adds a folder to the original path
-                    _cdnPath = string.Format(CultureInfo.InvariantCulture, CDNURL, https, "app", WebTemplateTheme,
-                        string.Concat(WebTemplateVersion, "/"));
-                }
+                version = WebTemplateVersion + "/";
+                run = "app";
             }
-            return _cdnPath;
+
+
+            return string.Format(CultureInfo.InvariantCulture, currentEnv.Path, https, run, theme, version);
         }
 
         /// <summary>
@@ -1426,11 +988,10 @@ namespace GoC.WebTemplate
         /// <returns>The URL to be used for the language toggle link</returns>
         private string BuildLanguageLinkURL(string queryString)
         {
-            string urlPath = string.Empty;
             System.Collections.Specialized.NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
 
             //Set the value of the "GoCTemplateCulture" parameter
-            if (this.TwoLetterCultureLanguage.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
+            if (TwoLetterCultureLanguage.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
             {
                 nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY, Constants.FRENCH_CULTURE);
             }
@@ -1448,9 +1009,7 @@ namespace GoC.WebTemplate
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
         /// </summary>
         /// <remarks></remarks>
-        private static readonly object lockObject = new object();
-
-        private readonly JsonSerializerSettings _settings;
+        private static readonly object LockObject = new object();
 
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
@@ -1459,61 +1018,63 @@ namespace GoC.WebTemplate
         /// <returns>A string containing the content of the file.</returns>
         public HtmlString LoadStaticFile(string fileName)
         {
-            string info;
-            CacheDependency cacheDep;
-            string filePath = string.Empty;
-            string cacheKey = string.Concat(Constants.CACHE_KEY_STATICFILES_PREFIX, ".", fileName);
+            var cacheKey = string.Concat(Constants.CACHE_KEY_STATICFILES_PREFIX, ".", fileName);
 
             // Attempt to lookup from cache
-            info = (string) HttpRuntime.Cache.Get(cacheKey);
-            if ((info != null))
+            Debug.Assert(_cacheProxy != null, "Cache proxy cannot be null");
+            // ReSharper disable once InconsistentlySynchronizedField
+            var info = _cacheProxy.GetFromCache<string>(cacheKey);
+            if (info != null)
             {
                 // Object was found in cache, simply return it and get out!
                 return new HtmlString(info);
             }
 
             // ---[ If we get here, the object was not found in the cache, we'll have to load it.
-            lock (lockObject)
+            lock (LockObject)
             {
                 //---[ Attempt to get from cache again now that we are locked
-                info = (string) HttpRuntime.Cache.Get(cacheKey);
-                if ((info != null))
+                info = _cacheProxy.GetFromCache<string>(cacheKey);
+                if (info != null)
                 {
                     // Once again, object was found in cache, simply return it and get out!
                     return new HtmlString(info);
                 }
 
                 //---[ If we get here, we really have to load the data
+                string filePath;
                 if (StaticFilesPath.StartsWith("~"))
                 {
-                    filePath = System.IO.Path.Combine(System.Web.HttpContext.Current.Server.MapPath(StaticFilesPath),
+                    // ReSharper disable once AssignNullToNotNullAttribute
+                    filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
                         fileName);
                 }
                 else
                 {
-                    filePath = System.IO.Path.Combine(StaticFilesPath, fileName);
+                    filePath = Path.Combine(StaticFilesPath, fileName);
                 }
 
                 try
                 {
-                    info = System.IO.File.ReadAllText(filePath);
+                    info = File.ReadAllText(filePath);
                     //---[ Now that the data is loaded, add it to the cache
-                    cacheDep = new CacheDependency(filePath);
-
-                    HttpRuntime.Cache.Insert(cacheKey, info, cacheDep, Cache.NoAbsoluteExpiration,
-                        Cache.NoSlidingExpiration);
+                    _cacheProxy.SaveToCache(cacheKey, filePath, info);
                 }
-                catch (System.IO.DirectoryNotFoundException)
+                catch (DirectoryNotFoundException)
                 {
                     info = string.Empty;
                 }
-                catch (System.IO.FileNotFoundException)
+                catch (FileNotFoundException)
                 {
                     info = string.Empty;
                 }
             }
             return new HtmlString(info);
         }
+
+
     }
 }
+
+
 

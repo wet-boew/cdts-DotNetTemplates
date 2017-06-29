@@ -6,6 +6,8 @@ using GoC.WebTemplate.ConfigSections;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
 using Ploeh.AutoFixture.Xunit2;
+using WebTemplateCore.JSONSerializationObjects;
+using WebTemplateCore.Proxies;
 using Xunit;
 using Xunit.Sdk;
 
@@ -36,21 +38,28 @@ namespace CoreTest
             //to set properties, instead of just using the properties
                                           .Without(p => p.HTMLHeaderElements)
                                           .Without(p => p.HTMLBodyElements)
-                                          .Without(p => p.ContactLinks)
-                                          .Without(p => p.NewsLinks)
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
                                           .Without(p=> p.LeftMenuItems)
+            //We Don't want to set a theme because we are defaulting environments to have themes not modifiable
+                                          .Without(p => p.WebTemplateTheme)
             //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
-                                          .With(p => p.Environment, "ESDCProd"));
+                                          .With(p => p.Environment, "ITEM1")
+            //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false
+                                          .With(p => p.UseHTTPS, null));
+            //Default to environments not having any fields be modifiable so that we are in a good known state to start
+            fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsSSLModifiable, false)
+                                                      .With(p => p.IsThemeModifiable, false)
+                                                      .With(p => p.IsVersionRNCombined, false));
             //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
             //that the keys are deterministic.
-            fixture.Register<IDictionary<string,ICDTSEnvironmentElementProxy>>(() =>
-            {
-                var keys = new[] {"Akamai", "ESDCProd", "Prod", "NonProd", "QAT"};
-                var values = fixture.Create<Generator<ICDTSEnvironmentElementProxy>>();
-                return keys.Zip(values, Tuple.Create).ToDictionary(x => x.Item1, x => x.Item2);
-            });
+            fixture.Register<IDictionary<string, ICDTSEnvironment>>(() =>
+             {
+                 var keys = new[] { "ITEM1", "ITEM2", "ITEM3" };
+                 var values = fixture.Create<Generator<ICDTSEnvironment>>();
+                 return keys.Zip(values, Tuple.Create).ToDictionary(x => x.Item1, x => x.Item2);
+             });
+
         }
     }
 

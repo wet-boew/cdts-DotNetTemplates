@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using GoC.WebTemplate;
 
-namespace GoC.WebTemplate
+namespace WebTemplateCore.JSONSerializationObjects
 {
     /// <summary>
     /// Used to serialize to JSON for the application template in the wet.builder.appTop call
     /// </summary>
     internal class AppTop
     {
-        
+        public List<Link> IntranetTitle { get; set; }
+        public string AppUrl { get; set; }
         public string MenuPath { get; set; }
         public string CdnEnv { get; set; }
         public string AppName { get; set;  }

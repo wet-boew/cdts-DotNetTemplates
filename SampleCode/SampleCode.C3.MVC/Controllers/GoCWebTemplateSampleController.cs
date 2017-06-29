@@ -17,7 +17,8 @@ namespace SampleCode.C3.MVC.Controllers
         {
             //specify a title for this page
             this.WebTemplateCore.HeaderTitle = "My Title";
-
+            this.WebTemplateCore.ApplicationTitle.Text = "Custom Title";
+            this.WebTemplateCore.ApplicationTitle.URL = "FOO/Bar";
             //specify the metatags
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta charset='UTF-8'>");
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta name='singer' content='Elvis'>");
@@ -259,7 +260,7 @@ namespace SampleCode.C3.MVC.Controllers
 
             this.WebTemplateCore.WebTemplateTheme = "GCIntranet";
             this.WebTemplateCore.WebTemplateSubTheme = "ESDC";
-            this.WebTemplateCore.Environment = GoC.WebTemplate.Core.CDTSEnvironments.ESDCPROD.ToString();
+            this.WebTemplateCore.Environment = "ESDC_PROD";
             this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
             this.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";  
                         

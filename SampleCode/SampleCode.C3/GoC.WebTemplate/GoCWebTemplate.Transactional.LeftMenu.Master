@@ -21,12 +21,7 @@
         </noscript>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
         </script>
          <%= WebTemplateCore.RenderHtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->
@@ -42,17 +37,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.top({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderApplicationTitle() %>
-                <%= WebTemplateCore.RenderSearch() %>
-                <%= WebTemplateCore.RenderLanguageLink() %>
-                siteMenu: false,
-                <%= WebTemplateCore.RenderBreadcrumbsList() %>
-                showPreContent: false,
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.RenderTransactionalTop() %>);
         </script>
         <div class="container">
 	        <div class="row">
@@ -66,14 +51,7 @@
                     </div>
                     <script type="text/javascript">
                         var defPreFooter = document.getElementById("def-preFooter");
-                        defPreFooter.outerHTML = wet.builder.preFooter({
-                            cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                            <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                            showPostContent: false,
-                            showFeedback: false,
-                            showShare: false,
-                            <%= WebTemplateCore.RenderScreenIdentifier() %>
-                        });
+                        defPreFooter.outerHTML = wet.builder.preFooter( <%= WebTemplateCore.RenderTransactionalPreFooter() %> );
                     </script>
                 </main>
                  <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
@@ -97,23 +75,11 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.footer({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                showFooter: false,
-                <%= WebTemplateCore.RenderFeatures() %>
-                <%= WebTemplateCore.RenderFooterLinks(true) %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defFooter.outerHTML = wet.builder.footer(<%= WebTemplateCore.RenderTransactionalFooter() %>);
         </script>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refFooter({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                <%= WebTemplateCore.RenderLeavingSecureSiteWarning() %>
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refFooter(<%= WebTemplateCore.RenderRefFooter()%>));
         </script>
         <%= WebTemplateCore.RenderHtmlBodyElements() %>
     </body>

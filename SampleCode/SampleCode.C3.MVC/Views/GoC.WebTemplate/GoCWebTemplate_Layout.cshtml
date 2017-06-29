@@ -20,12 +20,7 @@
     </noscript>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refTop({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderjQuery()
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-        }));
+        document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderRefTop()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
     <!-- GoC.WebTemplate Version MVC @ViewBag.WebTemplateVersion -->
@@ -40,16 +35,7 @@
     <!-- Write closure template -->
     <script type="text/javascript">
         var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.top({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderApplicationTitle()
-            @ViewBag.WebTemplateCore.RenderSearch()
-            @ViewBag.WebTemplateCore.RenderLanguageLink()
-            showPreContent: @ViewBag.WebTemplateCore.ShowPreContent.ToString().ToLower(),
-            @ViewBag.WebTemplateCore.RenderBreadcrumbsList()
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        defTop.outerHTML = wet.builder.top(@ViewBag.WebTemplateCore.RenderTop());
     </script>
     <main role="main" property="mainContentOfPage" class="container">
         <!-- the main content -->
@@ -62,14 +48,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defPreFooter = document.getElementById("def-preFooter");
-            defPreFooter.outerHTML = wet.builder.preFooter({
-                cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-                @ViewBag.WebTemplateCore.RenderDateModifiedVersionIdentifier()
-                showPostContent: @ViewBag.WebTemplateCore.ShowPostContent.ToString().ToLower(),
-                @ViewBag.WebTemplateCore.RenderFeedbackLink()
-                @ViewBag.WebTemplateCore.RenderSharePageMediaSites()
-                @ViewBag.WebTemplateCore.RenderScreenIdentifier()
-            });
+            defPreFooter.outerHTML = wet.builder.preFooter(@ViewBag.WebTemplateCore.RenderPreFooter());
         </script>
     </main>
     <div id="def-footer">
@@ -79,22 +58,11 @@
     <!-- Write closure template -->
     <script type="text/javascript">
     var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.footer({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-            @ViewBag.WebTemplateCore.RenderFeatures()
-            @ViewBag.WebTemplateCore.RenderFooterLinks(false)
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-    });
+        defFooter.outerHTML = wet.builder.footer(@ViewBag.WebTemplateCore.RenderFooter());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refFooter({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            @ViewBag.WebTemplateCore.RenderLeavingSecureSiteWarning()
-            @ViewBag.WebTemplateCore.RenderjQuery()
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-        }));
+        document.write(wet.builder.refFooter(@ViewBag.WebTemplateCore.RenderRefFooter()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlBodyElements()
 </body>

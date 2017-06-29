@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Globalization;
 using System.Threading;
@@ -7,6 +8,8 @@ using System.Reflection;
 using System.Web.Caching;
 using System.Web;
 using GoC.WebTemplate.Proxies;
+using WebTemplateCore.JSONSerializationObjects;
+using WebTemplateCore.Proxies;
 
 namespace GoC.WebTemplate
 {
@@ -83,7 +86,10 @@ namespace GoC.WebTemplate
             }
 
             //Core needs to be created here to pass in the proper culture 
-            this.WebTemplateCore = new Core(new CurrentRequestProxy(),new ConfigurationProxy());
+            WebTemplateCore = new Core(new CurrentRequestProxy(),
+                                       new CacheProxy(),
+                                       new ConfigurationProxy(),
+                                       new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments("~/CDTSEnvironments.json"));
 
             return base.BeginExecuteCore(callback, state);
         }

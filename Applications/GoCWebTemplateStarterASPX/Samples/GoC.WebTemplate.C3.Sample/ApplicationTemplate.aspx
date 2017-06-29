@@ -19,24 +19,31 @@
     <p>There is also a left menu version of this template it's available by using the <code class="wb-prettify">GoCWebTemplate.Application.LeftMenu_Layout.cshtml</code> layout for your page.</p>
     <p>The Left Menu is implmented in the same way as the Left Menu for the other templates. See <a href="LeftSideMenuSample.aspx">Left Side Menu Sample</a> on how to implement this.</p>
 </div>
-
-<h2>Application Name</h2>
+    
+<h2>Application Title</h2>
+    <p>This setting lets you set your application title and url</p>
+<h3>Application Name</h3>
 <p>
     This setting determines the title for your site. Set programmatically by the <code class="wb-prettify">ApplicationName.Title</code>
     property of the web template
 </p>
+<h3>Application URL</h3>
+<p>
+    This setting determines the url for your site. Set programmatically by the <code class="wb-prettify">ApplicationName.URL</code>
+    property of the web template
+</p>
 
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
     <pre>//Set the name of the web application
 WebTemplateCore.ApplicationTitle.Text ="Application Name"; 
+WebTemplateCore.ApplicationTitle.URL = "http://canada.ca";
 </pre>
 </div>
-
 
 <h2>Change Language Link</h2>
 <p>You can set a custom link for changing the language of your application</p>
 <p>This can be set programmatically using the <code class="wb-prettify">LanguageLink.Href</code> property</p>
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //Set the link to be used for changing languages.
 WebTemplateCore.LanguageLink.Href = "about:blank";
@@ -55,7 +62,7 @@ WebTemplateCore.LanguageLink.Href = "about:blank";
     <li><code class="wb-prettify">Text</code> the text to display on the link</li>
     <li><code class="wb-prettify">NewWindow</code> a flag to specify if this link opens in a new tab, defaults to false</li>
 </ul>
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
 <pre>
 WebTemplateCore.FooterLinks.Add(new FooterLink {
     Href = "about:blank",
@@ -74,7 +81,7 @@ WebTemplateCore.FooterLinks.Add(new FooterLink {
 <h2>Custom Search</h2>
 <p>This setting allows you to override the default search behaviour.</p>
 <p><code class="wb-prettify">CustomSearch</code> You need to contact the CDTS team to enable this option, as it needs to be added to the CDTS Template.</p>
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
 <pre>
 //Use the SDS Custom Search from the templates
 WebTemplateCore.CustomSearch ="SDS"; 
@@ -85,7 +92,7 @@ WebTemplateCore.CustomSearch ="SDS";
 <p>his will be used by the Principal Publisher to insert GoC activities and initiatives into your page. By default this is ALWAYS shown on all pages. You will need authorization from the Principal Publisher to not include this content in your web asset.</p>
 <p> If you receive such authorization then you can programmatically turn this off using the <code class="wb-prettify">ShowFeatures</code> or in the web.config</p>
 
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
 <pre>
 //Turn off the features in the footer 
 WebTemplateCore.ShowFeatures = true; 
@@ -99,7 +106,7 @@ WebTemplateCore.ShowFeatures = true;
     <p>Setting this to true will override the default footer, custom footer links, and transactional footer</p>
 </div>
 
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
 <pre>
 //Show the Global Navigation in the footer 
 WebTemplateCore.ShowGlobalNav = true; 
@@ -109,17 +116,30 @@ WebTemplateCore.ShowGlobalNav = true;
 <h2>Hide Search</h2>
 <p>This setting allows you to hide or show the search bar on the page.</p>
 <p>The setting <code class="wb-prettify">ShowSearch</code> can be set programmatically or in the web.config.  This setting defaults to true.  </p>
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
 <pre>
 //Use ShowSearch to hide the search field on the page.
 WebTemplateCore.ShowSearch = false; 
 </pre>
 </div>
 
+<h2>Intranet Title</h2>
+<p>This setting is used to display a custom intranet title. Before proceeding please ensure you have permission from your department, TBS or Principal Publisher. This variable does not conform to the C&IA specifications document</p>
+
+<div class="wb-prettify all-pre lang-c# linenums">
+<pre>
+//Use ShowSearch to hide the search field on the page.
+WebTemplateMaster.WebTemplateCore.IntranetTitle = new Link {
+  Href = "foo.bar",
+  Text = "Intranet Title"
+}; 
+</pre>
+</div>
+
 <h2>Pre-Content</h2>
 <p> This will be used by Principal Publisher to insert content into the pre content space of your page. By default this is ALWAYS shown on all pages. You will need authorization from the Principal Publisher to not include this content in your web asset</p>
 <p>If you recieve such authorization then you can turn off the pre-content programmatically using the <code class="wb-prettify">ShowPreContent</code> flag or in the web.config.</p>
-    <div class="wb-prettify all-pre lang-c# linenums">
+    <div class="wb-prettify all-pre lang-vb linenums">
 <pre>//show or hide the pages pre-content 
 WebTemplateCore.ShowPreContent = false; 
 </pre>
@@ -133,12 +153,15 @@ WebTemplateCore.ShowPreContent = false;
         <code class="wb-prettify">CustomSiteMenuURL</code> this variable is used to display a custom menu.
         <p>Although you don't need to we suggest you contact the cdts team to enable this option. if you have done this before then simply provide the url to your valid menu file to enable this option. </p>
 
-        <p>You can copy the format in the sample custom menu file provided below in our sample.</p>
-        <a href="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html">https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html</a>
+              <p>You can copy the format in the sample custom menu file provided below in our sample.</p>
+        <p>For the GCIntranet Theme use: <a href="https://ssl-templates.services.gc.ca/app/cls/wet/gcintranet/v4_0_25/cdts/custommenu-en.html">https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_25/cdts/custommenu-en.html</a> </p>
+        <p>For the GCWeb Theme use: <a href="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_25/cdts/custommenu-en.html">https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_25/cdts/custommenu-en.html</a>
+            </p>
+
     </li>
 </ul>
 
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
     <pre>//show or hide the site menu
 WebTemplateCore.ShowSiteMenu = true; 
 //set the custom site menu url
@@ -151,7 +174,7 @@ WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls
     <code class="wb-prettify">ShowSecure</code> is a boolean variable that is used to either show or hide the secure icon
 </p>
 
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
     <pre>//Show the lock icons
 WebTemplateCore.ShowSecure = true; 
 </pre>
@@ -174,7 +197,7 @@ WebTemplateCore.ShowSecure = true;
     </li>
 </ul>
 
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //Show the sign in button
 WebTemplateCore.ShowSignInLink = true; 
@@ -188,7 +211,7 @@ WebTemplateCore.SignInLinkURL = "about:blank";
     <li> <code class="wb-prettify">ShowSignOutLink</code> is a boolean variable that is used to either show or hide the Sign Out Button </li>
     <li> <code class="wb-prettify">ShowSignOutURL</code> is the location of your sign out service. </li>
 </ul>
-<div class="wb-prettify all-pre lang-c# linenums">
+<div class="wb-prettify all-pre lang-vb linenums">
     <pre>//Show the sign out button
 WebTemplateCore.ShowSignOutLink = true; 
 //The URL to your applications sign out service.

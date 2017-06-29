@@ -20,12 +20,7 @@
     </noscript>
     <!-- Write closure template -->
     <script type="text/javascript">
-    document.write(wet.builder.refTop({
-        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-        subTheme: "@ViewBag.WebTemplateCore.WebTemplateSubTheme",
-        @ViewBag.WebTemplateCore.RenderjQuery()
-        @ViewBag.WebTemplateCore.RenderLocalPath()
-    }));
+        document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderRefTop()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
     <!-- GoC.WebTemplate Version MVC @ViewBag.WebTemplateVersion -->
@@ -55,14 +50,7 @@
                 <!-- Write closure template -->
                 <script type="text/javascript">
                     var defPreFooter = document.getElementById("def-preFooter");
-                    defPreFooter.outerHTML = wet.builder.preFooter({
-                        cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-                        @ViewBag.WebTemplateCore.RenderDateModifiedVersionIdentifier()
-                        showPostContent: @ViewBag.WebTemplateCore.ShowPostContent.ToString().ToLower(),
-                        @ViewBag.WebTemplateCore.RenderFeedbackLink()
-                        @ViewBag.WebTemplateCore.RenderSharePageMediaSites()
-                        @ViewBag.WebTemplateCore.RenderScreenIdentifier()
-                    });
+                    defPreFooter.outerHTML = wet.builder.preFooter(@ViewBag.WebTemplateCore.RenderPreFooter());
                 </script>
             </main>
             <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
@@ -89,12 +77,7 @@
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refFooter({
-            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment",
-            @ViewBag.WebTemplateCore.RenderLeavingSecureSiteWarning()
-            @ViewBag.WebTemplateCore.RenderjQuery()
-            @ViewBag.WebTemplateCore.RenderLocalPath()
-        }));
+        document.write(wet.builder.refFooter(@ViewBag.WebTemplateCore.RenderRefFooter()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlBodyElements()
 </body>

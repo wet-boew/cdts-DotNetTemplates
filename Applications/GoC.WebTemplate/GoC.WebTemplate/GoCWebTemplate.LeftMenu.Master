@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GoCWebTemplate.Master.cs" Inherits="GoC.WebTemplate.WebTemplateMasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GoCWebTemplate.Transactional.Master" Inherits="GoC.WebTemplate.WebTemplateMasterPage" %>
 <!DOCTYPE html>
 
 <!--[if lt IE 9]><html class="no-js lt-ie9" lang="<%= WebTemplateCore.TwoLetterCultureLanguage %>" dir="ltr"><![endif]-->
@@ -21,12 +21,7 @@
         </noscript>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
         </script>
          <%= WebTemplateCore.RenderHtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->
@@ -42,16 +37,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.top({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderApplicationTitle() %>
-                <%= WebTemplateCore.RenderSearch() %>
-                <%= WebTemplateCore.RenderLanguageLink() %>
-                showPreContent: <%= WebTemplateCore.ShowPreContent.ToString().ToLower() %>,
-                <%= WebTemplateCore.RenderBreadcrumbsList() %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.RenderTop() %>;
         </script>
         <div class="container">
 	        <div class="row">
@@ -66,14 +52,7 @@
                     <!-- Write closure template -->
                     <script type="text/javascript">
                         var defPreFooter = document.getElementById("def-preFooter");
-                        defPreFooter.outerHTML = wet.builder.preFooter({
-                            cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                            <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                            showPostContent: <%= WebTemplateCore.ShowPostContent.ToString().ToLower() %>,
-                            <%= WebTemplateCore.RenderFeedbackLink() %>
-                            <%= WebTemplateCore.RenderSharePageMediaSites() %>
-                            <%= WebTemplateCore.RenderScreenIdentifier() %>
-                        });
+                        defPreFooter.outerHTML = wet.builder.preFooter(<%= WebTemplateCore.RenderPreFooter() %>);
                     </script>
                 </main>
         	    <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
@@ -96,22 +75,11 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.footer({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderFeatures() %>
-                <%= WebTemplateCore.RenderFooterLinks(false) %>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            });
+            defFooter.outerHTML = wet.builder.footer( <%= WebTemplateCore.RenderFooter() %>);
         </script>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refFooter({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                <%= WebTemplateCore.RenderLeavingSecureSiteWarning() %>
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refFooter(<%= WebTemplateCore.RenderRefFooter() %>));
         </script>
         <%= WebTemplateCore.RenderHtmlBodyElements() %>
     </body>

@@ -14,6 +14,8 @@ using System.Text;
 using System.Web.Caching;
 using System.Reflection;
 using GoC.WebTemplate.Proxies;
+using WebTemplateCore.JSONSerializationObjects;
+using WebTemplateCore.Proxies;
 
 // TODO
 //consider debug logging?
@@ -25,7 +27,10 @@ namespace GoC.WebTemplate
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.WebTemplateCore = new Core(new CurrentRequestProxy(), new ConfigurationProxy());
+            WebTemplateCore = new Core(new CurrentRequestProxy(),
+                new CacheProxy(),
+                new ConfigurationProxy(),
+                new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments(@"~\CDTSEnvironments.json"));
         }
 
         public Core WebTemplateCore { get; set; }
