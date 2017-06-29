@@ -1,5 +1,13 @@
 ﻿************************************************************************************************************
-v4.0.24.3 2017-04-27
+4.0.25.1 - 2017-06-28
+- Added a URL to the title in the Application Template 
+- Added an Intranet Title to the Application Template
+- Removed items marked obsolete in 4.0.25.1 release
+- Added XSDs for configurations in web.config files
+- Moved the Environment Configuration to CDTSEnvironments.json
+- Added checks to make sure the environment is configured incorrectly
+************************************************************************************************************
+4.0.24.3 2017-04-27
 - Fixed a bug where the user was unable to set the environment programmatically
 - Fixed a bug where the GCIntranet sample page wasn't working in WebForms
 ************************************************************************************************************

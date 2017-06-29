@@ -260,7 +260,7 @@ namespace SampleCode.C3.MVC.Controllers
 
             this.WebTemplateCore.WebTemplateTheme = "GCIntranet";
             this.WebTemplateCore.WebTemplateSubTheme = "ESDC";
-            this.WebTemplateCore.Environment = GoC.WebTemplate.Core.CDTSEnvironments.ESDCPROD.ToString();
+            this.WebTemplateCore.Environment = "ESDC_PROD";
             this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
             this.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";  
                         

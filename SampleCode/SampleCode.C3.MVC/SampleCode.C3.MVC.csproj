@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplateMVC, Version=4.0.24.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.4\Lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+    <Reference Include="GoC.WebTemplateMVC, Version=4.0.25.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.25.1\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -87,8 +87,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebTemplateCore, Version=1.0.6334.19645, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.24.4\Lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6389.20052, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.25.1\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -111,8 +111,8 @@
     <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\refTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />
@@ -124,8 +124,8 @@
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\refTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />
@@ -182,21 +182,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.LeftMenu_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
+    <Content Include="CDTSEnvironments.json" />
+    <None Include="WebTemplateMVC.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

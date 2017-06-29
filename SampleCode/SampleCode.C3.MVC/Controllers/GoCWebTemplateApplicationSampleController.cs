@@ -17,7 +17,7 @@ namespace SampleCode.C3.MVC.Controllers
             WebTemplateCore.ShowGlobalNav = false;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.CustomSiteMenuURL =
-                "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
+                "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_25/cdts/ajax/custommenu-eng.html";
             WebTemplateCore.SignOutLinkURL = "about:blank";
             WebTemplateCore.ShowSignOutLink = true;
 
