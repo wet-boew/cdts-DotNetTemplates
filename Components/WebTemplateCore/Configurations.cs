@@ -9,6 +9,13 @@ namespace GoC.WebTemplate
     {
         public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
 
+        [ConfigurationProperty("xmlns", IsRequired = false)]
+        public string XmlNameSpace
+        {
+            get { return (string) this["xmlns"]; }
+            set { this["xmlns"] = value; }
+        }
+
         [ConfigurationProperty("customSearch")]
         public string CustomSearch
         {
