@@ -74,7 +74,7 @@
   <Target Name="NuGet">
     
     <!--First copy the nuspec template files to the package dir -->
-    <Copy SourceFiles="$(WebTemplateProjectDir)\Web.config.install.xdt" DestinationFolder="$(ReleaseTemplateDir)\Content\" />
+    <Copy SourceFiles="$(WebTemplateProjectDir)\Web.config.install.xdt;$(WebTemplateProjectDir)\WebTemplateMVC.xsd;$(WebTemplateProjectDir)\CDTSEnvironments.json" DestinationFolder="$(ReleaseTemplateDir)\Content\" />
 
      <!--Get the version number of the main FV assembly to insert into the nuspec files--> 
     <GetAssemblyIdentity AssemblyFiles="$(ReleaseTemplateDir)\Lib\Net45\GoC.WebTemplateMVC.dll">
