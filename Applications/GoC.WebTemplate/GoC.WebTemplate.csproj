@@ -82,6 +82,7 @@
     </None>
     <None Include="WebTemplateWebForms.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>

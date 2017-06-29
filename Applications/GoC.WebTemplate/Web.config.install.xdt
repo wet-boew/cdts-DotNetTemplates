@@ -10,6 +10,7 @@
   <GoC.WebTemplate xdt:Transform="Remove"></GoC.WebTemplate>
 
   <GoC.WebTemplate xdt:Transform="Insert"
+  xmlns="http://tempuri.org/WebTemplateWebForms.xsd"
    version="v4_0_25"
    subTheme=""
    environment="Akamai"
