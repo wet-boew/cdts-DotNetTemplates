@@ -17,6 +17,27 @@ namespace CoreTest
     public class RenderTests 
     {
         [Theory, AutoNSubstituteData]
+        public void IntranetTitleShouldNotRenderWhenNullInTop(Core sut)
+        {
+            sut.IntranetTitle = null;
+            sut.RenderTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+
+        }
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleShouldNotRenderWhenNullInAppTop(Core sut)
+        {
+            sut.IntranetTitle = null;
+            sut.RenderAppTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+
+        }
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleShouldNotRenderWhenNullInTransactionalTop(Core sut)
+        {
+            sut.IntranetTitle = null;
+            sut.RenderTransactionalTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+
+        }
+        [Theory, AutoNSubstituteData]
         public void AppUrl(Core sut)
         {
             sut.ApplicationTitle.URL = "ApplicationURL";

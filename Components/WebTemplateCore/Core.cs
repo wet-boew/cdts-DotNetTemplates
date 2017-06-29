@@ -547,7 +547,7 @@ namespace GoC.WebTemplate
             {
                 AppName = ApplicationTitle.Text,
                 AppUrl = ApplicationTitle.URL,
-                IntranetTitle = new List<Link> { IntranetTitle },
+                IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
                 Secure = ShowSecure,
@@ -573,7 +573,7 @@ namespace GoC.WebTemplate
 
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
-                IntranetTitle = new List<Link> { IntranetTitle },
+                IntranetTitle = BuildIntranentTitleList(),
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 SiteMenu = false,
@@ -590,7 +590,7 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
-                IntranetTitle = new List<Link> { IntranetTitle },
+                IntranetTitle = BuildIntranentTitleList(),
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
                 SiteMenu = true,
@@ -733,6 +733,7 @@ namespace GoC.WebTemplate
             return DateModified.ToString("yyyy-MM-dd");
         }
 
+        private List<Link> BuildIntranentTitleList() => IntranetTitle == null ? null : new List<Link> { IntranetTitle };
 
         private List<LanguageLink> BuildLanguageLinkList()
         {

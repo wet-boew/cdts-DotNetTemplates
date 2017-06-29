@@ -7,9 +7,8 @@
   </configSections>
   <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
 
-  <GoC.WebTemplate xdt:Transform="Remove"></GoC.WebTemplate>
 
-  <GoC.WebTemplate xdt:Transform="Insert"
+  <GoC.WebTemplate xdt:Transform="Replace"
   xmlns="http://tempuri.org/WebTemplateWebForms.xsd"
    version="v4_0_25"
    subTheme=""
