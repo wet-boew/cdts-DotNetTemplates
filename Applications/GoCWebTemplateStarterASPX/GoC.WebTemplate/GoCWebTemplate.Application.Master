@@ -21,12 +21,7 @@
         </noscript>
          <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop({
-                cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                subTheme: "<%= WebTemplateCore.WebTemplateSubTheme %>",
-                <%= WebTemplateCore.RenderjQuery()%>
-                <%= WebTemplateCore.RenderLocalPath() %>
-            }));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
         </script>
 
         <%= WebTemplateCore.RenderHtmlHeaderElements() %>
@@ -56,14 +51,7 @@
             <!-- Write closure template -->
             <script type="text/javascript">
                 var defPreFooter = document.getElementById("def-preFooter");
-                defPreFooter.outerHTML = wet.builder.preFooter({
-                    cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                    <%= WebTemplateCore.RenderDateModifiedVersionIdentifier() %>
-                    showPostContent: <%= WebTemplateCore.ShowPostContent.ToString().ToLower() %>,
-                    <%= WebTemplateCore.RenderFeedbackLink() %>
-                    <%= WebTemplateCore.RenderSharePageMediaSites() %>
-                    <%= WebTemplateCore.RenderScreenIdentifier() %>
-                });
+                defPreFooter.outerHTML = wet.builder.preFooter(<%= WebTemplateCore.RenderPreFooter() %>);
             </script>
         </main>
         <div id="def-footer">
@@ -77,12 +65,7 @@
         </script>
         <!-- Write closure template -->
             <script type="text/javascript">
-                document.write(wet.builder.refFooter({
-                    cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>",
-                    <%= WebTemplateCore.RenderLeavingSecureSiteWarning() %>
-                    <%= WebTemplateCore.RenderjQuery()%>
-                    <%= WebTemplateCore.RenderLocalPath() %>
-                }));
+                document.write(wet.builder.refFooter(<%= WebTemplateCore.RenderRefFooter()%>));
             </script>
         <%= WebTemplateCore.RenderHtmlBodyElements() %>
     </body>
