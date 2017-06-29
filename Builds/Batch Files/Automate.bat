@@ -1,7 +1,9 @@
-@echo off
-echo "Copy Static View Files"
-copy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3\GoC.WebTemplate c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterASPX\GoC.WebTemplate /Y
-copy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3.MVC\Views\GoC.WebTemplate c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterMVC\Views\GoC.WebTemplate /Y
+echo "Copy Static files, views, and controllers "
+xcopy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3\GoC.WebTemplate c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterASPX\GoC.WebTemplate /Y /S
+xcopy C:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3\Samples c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterASPX\Samples /Y /S
+xcopy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3.MVC\Views c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterMVC\Views /Y /S
+xcopy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3.MVC\Controllers c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterMVC\Controllers /Y /S
+
 echo "Copy web.configs"
 copy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3\Web.config c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterASPX\Web.config /Y
 copy c:\workspaces\DotNetTemplates\SampleCode\SampleCode.C3.MVC\Web.config c:\workspaces\DotNetTemplates\Applications\GoCWebTemplateStarterMVC\Web.config /Y
