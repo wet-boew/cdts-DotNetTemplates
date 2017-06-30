@@ -35,12 +35,12 @@
         refreshOnClick="false"
         refreshLimit="120000"
         method=""
-        additionalData=""></sessionTimeOut>
+        additionalData=""/>
 
       <leavingSecureSiteWarning
         enabled="false"
         displayModalWindow="true"
         redirectURL=""
-        excludedDomains=""></leavingSecureSiteWarning>
+        excludedDomains=""/>
     </GoC.WebTemplate>
  </configuration>
