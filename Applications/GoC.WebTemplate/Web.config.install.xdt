@@ -7,7 +7,8 @@
   </configSections>
   <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
 
-
+  <GoC.WebTemplate xdt:Transform="Remove"/>
+  <GoC.WebTemplate xmlns="http://tempuri.org/WebTemplateWebForms.xsd" xdt:Transform="InsertIfMissing"/>
   <GoC.WebTemplate xdt:Transform="Replace"
   xmlns="http://tempuri.org/WebTemplateWebForms.xsd"
    version="v4_0_25"
@@ -34,13 +35,13 @@
       refreshOnClick="false"
       refreshLimit="120000"
       method=""
-      additionalData=""></sessionTimeOut>
+      additionalData=""/>
 
     <leavingSecureSiteWarning
 	    enabled="false"
       displayModalWindow="true"
 	    redirectURL=""
-	    excludedDomains=""></leavingSecureSiteWarning>
+	    excludedDomains=""/>
   </GoC.WebTemplate>
 
 </configuration>
