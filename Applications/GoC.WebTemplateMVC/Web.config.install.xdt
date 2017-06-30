@@ -7,6 +7,7 @@
    </configSections>
    <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
   
+  <GoC.WebTemplate xdt:Transform="InsertIfMissing"/>
     <GoC.WebTemplate xdt:Transform="Replace"
    xmlns="http://tempuri.org/WebTemplateMVC.xsd"
    version="v4_0_25"
