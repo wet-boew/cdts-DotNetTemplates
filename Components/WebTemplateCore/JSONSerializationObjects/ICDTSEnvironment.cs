@@ -7,8 +7,9 @@ namespace WebTemplateCore.JSONSerializationObjects
         string CDN { get; set; }
         string SubTheme { get; set; }
         bool IsVersionRNCombined { get; set; }
-        bool IsThemeModifiable { get; set; }
         bool IsSSLModifiable { get; set; }
         string LocalPath { get; set; }
+        string Theme { get; set; }
+        string AppendToTitle { get; set; }
     }
 }

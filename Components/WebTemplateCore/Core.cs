@@ -63,7 +63,6 @@ namespace GoC.WebTemplate
 
             //Set properties
             WebTemplateVersion = _configProxy.Version;
-            WebTemplateTheme = _configProxy.Theme;
             WebTemplateSubTheme = _configProxy.SubTheme;
 
             UseHTTPS = _configProxy.UseHttps;
@@ -149,29 +148,41 @@ namespace GoC.WebTemplate
         /// </summary>
         public string Environment { get; set; }
 
+        public ICDTSEnvironment CurrentEnvironment => _cdtsEnvironments[Environment];
         /// <summary>
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-         public string CDNEnvironment => _cdtsEnvironments[Environment].CDN;
+         public string CDNEnvironment => CurrentEnvironment.CDN;
 
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
         /// Set by application via web.config
         /// </summary>
-        public string LocalPath => _cdtsEnvironments[Environment].LocalPath;
+        public string LocalPath => CurrentEnvironment.LocalPath;
 
         /// <summary>
         /// URL from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-        public string CDNURL => _cdtsEnvironments[Environment].Path;
+        public string CDNURL => CurrentEnvironment.Path;
+
+        /// <summary>
+        /// Represents the Theme to use to build the age. ex: GCWeb
+        /// Set by application via web.config or programmatically
+        /// </summary>
+        public string WebTemplateTheme => CurrentEnvironment.Theme;
 
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
         public string CDNPath => BuildCDNPath();
+
+        /// <summary>
+        /// Text to append to HeaderTitle
+        /// </summary>
+        public string AppendToTitle => CurrentEnvironment.AppendToTitle;
 
         /// <summary>
         /// Used to override the Contact links in Footer
@@ -331,22 +342,23 @@ namespace GoC.WebTemplate
         {
             get
             {
-                if (!WebTemplateTheme.Equals("gcweb", StringComparison.InvariantCultureIgnoreCase))
+
+                if (string.IsNullOrWhiteSpace(AppendToTitle))
                 {
                     return _headerTitle;
                 }
 
                 if (string.IsNullOrWhiteSpace(_headerTitle))
                 {
-                    return "- Canada.ca";
+                    return AppendToTitle;
                 }
 
-                if (_headerTitle.EndsWith(" - Canada.ca"))
+                if (_headerTitle.EndsWith(AppendToTitle))
                 {
                     return _headerTitle;
                 }
 
-                return _headerTitle + " - Canada.ca";
+                return _headerTitle + AppendToTitle;
             }
             set
             {
@@ -366,11 +378,7 @@ namespace GoC.WebTemplate
         /// </summary>
         public string WebTemplateVersion { get; set; }
 
-        /// <summary>
-        /// Represents the Theme to use to build the age. ex: GCWeb
-        /// Set by application via web.config or programmatically
-        /// </summary>
-        public string WebTemplateTheme { get; set; }
+
 
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
@@ -923,16 +931,6 @@ namespace GoC.WebTemplate
             var currentEnv = _cdtsEnvironments[Environment];
 
 
-            if (!currentEnv.IsThemeModifiable && !string.IsNullOrWhiteSpace(WebTemplateTheme))
-            {
-                throw new InvalidOperationException($"{Environment} does not allow a theme to be set");
-            }
-
-            if (currentEnv.IsThemeModifiable && string.IsNullOrWhiteSpace(WebTemplateTheme))
-            {
-                throw new InvalidOperationException($"{Environment} requires a theme to be set");
-            }
-
             if (!currentEnv.IsSSLModifiable && UseHTTPS.HasValue)
             {
                 throw new InvalidOperationException($"{Environment} does not allow useHTTPS to be toggled");
@@ -951,11 +949,6 @@ namespace GoC.WebTemplate
                 https = UseHTTPS.Value ? "s" : string.Empty;
             }
 
-            var theme = string.Empty;
-            if (currentEnv.IsThemeModifiable)
-            {
-                theme = WebTemplateTheme;
-            }
 
             var run = string.Empty;
             var version = string.Empty;
@@ -977,7 +970,7 @@ namespace GoC.WebTemplate
             }
 
 
-            return string.Format(CultureInfo.InvariantCulture, currentEnv.Path, https, run, theme, version);
+            return string.Format(CultureInfo.InvariantCulture, currentEnv.Path, https, run, WebTemplateTheme, version);
         }
 
         /// <summary>
