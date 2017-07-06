@@ -258,9 +258,9 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult GCIntranetThemeSample()
         {
 
-            this.WebTemplateCore.WebTemplateTheme = "GCIntranet";
             this.WebTemplateCore.WebTemplateSubTheme = "ESDC";
             this.WebTemplateCore.Environment = "ESDC_PROD";
+            this.WebTemplateCore.UseHTTPS = true;
             this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
             this.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";  
                         
