@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.WebTemplateMaster.WebTemplateCore.WebTemplateSubTheme = "ESDC";
+            this.WebTemplateMaster.WebTemplateCore.WebTemplateSubTheme = "esdc";
             this.WebTemplateMaster.WebTemplateCore.UseHTTPS = true;
             this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
             this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";

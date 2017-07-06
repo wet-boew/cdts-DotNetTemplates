@@ -15,7 +15,15 @@ namespace CoreTest
     /// </summary>
     public class ConfigurationCoreIntegrationTests
     {
-
+        [Theory, AutoNSubstituteData]
+        public void SubThemeSetProgrammticallyOverridesWebConfig(IDictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy,
+            ICurrentRequestProxy fakeCurrentRequestProxy)
+        {
+            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
+            sut.WebTemplateSubTheme = "foobar";
+            sut.RenderTop().ToString().Should().Contain("\"subTheme\":\"foobar\"");
+        }
         [Theory, AutoNSubstituteData]
         public void SearchBoxShownByDefault(IDictionary<string, ICDTSEnvironment> environments,
             ICacheProxy fakeCacheProxy,
