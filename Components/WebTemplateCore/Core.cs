@@ -568,7 +568,8 @@ namespace GoC.WebTemplate
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 SiteMenu = ShowSiteMenu,
                 MenuPath = CustomSiteMenuURL,
-                CustomSearch = CustomSearch
+                CustomSearch = CustomSearch,
+                TopSecMenu = LeftMenuItems.Any()
             });
         }
 
@@ -587,7 +588,8 @@ namespace GoC.WebTemplate
                 SiteMenu = false,
                 Breadcrumbs = BuildBreadcrumbs(),
                 ShowPreContent = false,
-                LocalPath = BuildLocalPath()
+                LocalPath = BuildLocalPath(),
+                TopSecMenu = LeftMenuItems.Any()
 
             });
         }
@@ -604,7 +606,8 @@ namespace GoC.WebTemplate
                 SiteMenu = true,
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
-                LocalPath = BuildLocalPath()
+                LocalPath = BuildLocalPath(),
+                TopSecMenu = LeftMenuItems.Any()
             });
         }
 

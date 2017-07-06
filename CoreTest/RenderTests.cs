@@ -16,6 +16,52 @@ namespace CoreTest
     /// </summary>
     public class RenderTests 
     {
+
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuTrueInTopWhenLeftMenuItems(Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection
+            {
+                Link = "foo",
+                Name = "bar"
+            });
+            sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":true");
+        }
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuTrueInAppTopWhenLeftMenuItems(Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection
+            {
+                Link = "foo",
+                Name = "bar"
+            });
+            sut.RenderAppTop().ToString().Should().Contain("\"topSecMenu\":true");
+        }
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuTrueInTransactionalTopWhenLeftMenuItems(Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection
+            {
+                Link = "foo",
+                Name = "bar"
+            });
+            sut.RenderTransactionalTop().ToString().Should().Contain("\"topSecMenu\":true");
+        }
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuFalseInTopWhenLeftMenuItems(Core sut)
+        {
+            sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":false");
+        }
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuFalseInAppTopWhenLeftMenuItems(Core sut)
+        {
+            sut.RenderAppTop().ToString().Should().Contain("\"topSecMenu\":false");
+        }
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuFalseInTransactionalTopWhenLeftMenuItems(Core sut)
+        {
+            sut.RenderTransactionalTop().ToString().Should().Contain("\"topSecMenu\":false");
+        }
         [Theory, AutoNSubstituteData]
         public void IntranetTitleShouldNotRenderWhenNullInTop(Core sut)
         {
