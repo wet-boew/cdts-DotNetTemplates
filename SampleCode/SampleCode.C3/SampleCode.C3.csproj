@@ -58,13 +58,13 @@
       <HintPath>..\..\packages\GoC.Components.Crypto.2.6\Lib\Net40\Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate, Version=4.0.25.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.25.1\lib\Net45\GoC.WebTemplate.dll</HintPath>
+    <Reference Include="GoC.WebTemplate, Version=4.0.25.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.25.3\lib\Net45\GoC.WebTemplate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.25.1\lib\Net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.25.3\lib\Net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -87,8 +87,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebTemplateCore, Version=1.0.6389.20043, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.25.1\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6396.19480, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.25.3\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -109,8 +109,8 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\refTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />

@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoC.WebTemplate;
-using GoC.WebTemplate.ConfigSections;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
 using Xunit;
 using Xunit.Sdk;
 
@@ -41,15 +39,12 @@ namespace CoreTest
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
                                           .Without(p=> p.LeftMenuItems)
-            //We Don't want to set a theme because we are defaulting environments to have themes not modifiable
-                                          .Without(p => p.WebTemplateTheme)
             //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
                                           .With(p => p.Environment, "ITEM1")
             //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false
                                           .With(p => p.UseHTTPS, null));
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
             fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsSSLModifiable, false)
-                                                      .With(p => p.IsThemeModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));
             //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
             //that the keys are deterministic.

@@ -31,5 +31,6 @@ namespace WebTemplateCore.JSONSerializationObjects
         public string SubTheme { get; set; }
         public bool ShowPreContent { get; set; }
         public string LocalPath { get; set; }
+        public bool TopSecMenu { get; set; }
     }
 }

@@ -18,18 +18,16 @@ namespace CoreTest
             var currentEnv = new CDTSEnvironment
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
-                CDN = "esdcnonprod",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = true,
-                IsSSLModifiable = true
+                IsSSLModifiable = true,
+                Theme = "gcweb",
             };
 
-            sut.WebTemplateTheme = "GCWeb";
             sut.UseHTTPS = true;
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"https://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/GCWeb/{sut.WebTemplateVersion}/cdts/compiled/");
+                .Be($"https://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/{sut.WebTemplateTheme}/{sut.WebTemplateVersion}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
@@ -40,18 +38,16 @@ namespace CoreTest
             var currentEnv = new CDTSEnvironment
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
-                CDN = "esdcnonprod",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = true,
-                IsSSLModifiable = true
+                IsSSLModifiable = true,
+                Theme ="gcintranet",
             };
 
-            sut.WebTemplateTheme = "GCIntranet";
             sut.UseHTTPS = false;
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"http://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+                .Be($"http://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/{sut.WebTemplateTheme}/{sut.WebTemplateVersion}/cdts/compiled/");
         }
         [Theory, AutoNSubstituteData]
 
@@ -61,19 +57,17 @@ namespace CoreTest
             var currentEnv = new CDTSEnvironment
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
-                CDN = "esdcnonprod",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = true,
-                IsSSLModifiable = true
+                IsSSLModifiable = true,
+                Theme ="gcweb"
             };
 
-            sut.WebTemplateTheme = "GCWeb";
             sut.WebTemplateVersion = string.Empty;
             sut.UseHTTPS = true;
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be("https://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/GCWeb/cdts/compiled/");
+                .Be($"https://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/{sut.WebTemplateTheme}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
@@ -84,19 +78,17 @@ namespace CoreTest
             var currentEnv = new CDTSEnvironment
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
-                CDN = "esdcnonprod",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = true,
-                IsSSLModifiable = true
+                IsSSLModifiable = true,
+                Theme = "GCIntranet"
             };
 
-            sut.WebTemplateTheme = "GCIntranet";
             sut.WebTemplateVersion = string.Empty;
             sut.UseHTTPS = false;
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be("http://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/GCIntranet/cdts/compiled/");
+                .Be($"http://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/{sut.WebTemplateTheme}/cdts/compiled/");
         }
 
 
@@ -108,10 +100,9 @@ namespace CoreTest
         {
             var currentEnv = new CDTSEnvironment
             {
-                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = false,
                 IsSSLModifiable = true
             };
 
@@ -120,7 +111,7 @@ namespace CoreTest
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"https://templates.service.gc.ca/rn/cls/wet/GCIntranet/cdts/compiled/");
+                .Be($"https://templates.service.gc.ca/rn/cls/wet/{sut.WebTemplateTheme}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
@@ -130,10 +121,9 @@ namespace CoreTest
         {
             var currentEnv = new CDTSEnvironment
             {
-                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = false,
                 IsSSLModifiable = true
             };
 
@@ -142,7 +132,7 @@ namespace CoreTest
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be("http://templates.service.gc.ca/rn/cls/wet/GCIntranet/cdts/compiled/");
+                .Be($"http://templates.service.gc.ca/rn/cls/wet/{sut.WebTemplateTheme}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
@@ -152,10 +142,9 @@ namespace CoreTest
         {
             var currentEnv = new CDTSEnvironment
             {
-                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = false,
                 IsSSLModifiable = true
             };
 
@@ -163,7 +152,7 @@ namespace CoreTest
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"https://templates.service.gc.ca/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+                .Be($"https://templates.service.gc.ca/app/cls/wet/{sut.WebTemplateTheme}/{sut.WebTemplateVersion}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
@@ -173,10 +162,9 @@ namespace CoreTest
         {
             var currentEnv = new CDTSEnvironment
             {
-                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = false,
                 IsSSLModifiable = true
             };
 
@@ -184,7 +172,7 @@ namespace CoreTest
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"http://templates.service.gc.ca/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+                .Be($"http://templates.service.gc.ca/app/cls/wet/{sut.WebTemplateTheme}/{sut.WebTemplateVersion}/cdts/compiled/");
         }
         [Theory, AutoNSubstituteData]
 
@@ -193,17 +181,16 @@ namespace CoreTest
         {
             var currentEnv = new CDTSEnvironment
             {
-                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = false,
                 IsSSLModifiable = false
             };
 
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"https://ssl-templates.services.gc.ca/app/cls/wet/GCIntranet/{sut.WebTemplateVersion}/cdts/compiled/");
+                .Be($"https://ssl-templates.services.gc.ca/app/cls/wet/{sut.WebTemplateTheme}/{sut.WebTemplateVersion}/cdts/compiled/");
         }
 
 
@@ -213,10 +200,9 @@ namespace CoreTest
         {
             var currentEnv = new CDTSEnvironment
             {
-                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsThemeModifiable = false,
                 IsSSLModifiable = false
             };
 
@@ -225,7 +211,7 @@ namespace CoreTest
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"https://ssl-templates.services.gc.ca/rn/cls/wet/GCIntranet/cdts/compiled/");
+                .Be($"https://ssl-templates.services.gc.ca/rn/cls/wet/{sut.WebTemplateTheme}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
@@ -235,10 +221,9 @@ namespace CoreTest
 
             var currentEnv = new CDTSEnvironment
             {
-                Path = "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = true,
-                IsThemeModifiable = false,
                 IsSSLModifiable = false
             };
 
@@ -246,7 +231,7 @@ namespace CoreTest
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be("https://www.canada.ca/etc/designs/canada/cdts/GCWeb/rn/cdts/compiled/");
+                .Be($"https://www.canada.ca/etc/designs/canada/cdts/{sut.WebTemplateTheme}/rn/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData] public void AkamaiURLTestApp([Frozen]IDictionary<string, ICDTSEnvironment> environments,
@@ -255,17 +240,16 @@ namespace CoreTest
 
             var currentEnv = new CDTSEnvironment
             {
-                Path = "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{3}cdts/compiled/",
-                CDN = "prod",
+                Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
+                Theme = "gcweb",
                 IsVersionRNCombined = true,
-                IsThemeModifiable = false,
                 IsSSLModifiable = false
             };
 
             environments[sut.Environment] = currentEnv;
 
             sut.CDNPath.Should()
-                .Be($"https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{sut.WebTemplateVersion}/cdts/compiled/");
+                .Be($"https://www.canada.ca/etc/designs/canada/cdts/{sut.WebTemplateTheme}/{sut.WebTemplateVersion}/cdts/compiled/");
         }
 
     }
