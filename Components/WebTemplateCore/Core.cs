@@ -489,8 +489,8 @@ namespace GoC.WebTemplate
 
             return Breadcrumbs.Select(b => new Breadcrumb
             {
-                Href = b.Href,
-                Acronym = b.Acronym,
+                Href = GetStringForJson(b.Href),
+                Acronym = GetStringForJson(b.Acronym),
                 Title = GetStringForJson(b.Title)
             }).ToList();
         }

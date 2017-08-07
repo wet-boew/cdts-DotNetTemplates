@@ -18,6 +18,27 @@ namespace CoreTest
     {
 
         [Theory, AutoNSubstituteData]
+        public void BreadCrumbEmptyAcronymShouldNotRender(Core sut)
+        {
+            sut.Breadcrumbs.Add(new Breadcrumb
+            {
+                Title="Foo.bar",
+                Acronym=""
+            });
+            sut.RenderTop().ToString().Should().NotContain("\"acronym\":\"\"");
+        }
+        [Theory, AutoNSubstituteData]
+        public void BreadCrumbEmptyHrefShouldNotRender(Core sut)
+        {
+            sut.Breadcrumbs.Add(new Breadcrumb
+            {
+                Title="Foo.bar",
+                Href =""
+            });
+            sut.RenderTop().ToString().Should().NotContain("\"href\":\"\"");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void TopSecMenuTrueInTopWhenLeftMenuItems(Core sut)
         {
             sut.LeftMenuItems.Add(new MenuSection
