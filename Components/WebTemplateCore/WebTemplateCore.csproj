@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CDTSEnvironmentLoader.cs" />
-    <Compile Include="Footer.cs" />
+    <Compile Include="JSONSerializationObjects\Footer.cs" />
     <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
     <Compile Include="JSONSerializationObjects\ShareList.cs" />
@@ -81,16 +81,16 @@
     <Compile Include="JSONSerializationObjects\FooterLink.cs" />
     <Compile Include="Proxies\ICurrentRequestProxy.cs" />
     <Compile Include="JSONSerializationObjects\Link.cs" />
-    <Compile Include="MenuItem.cs" />
-    <Compile Include="MenuSection.cs" />
+    <Compile Include="JSONSerializationObjects\MenuItem.cs" />
+    <Compile Include="JSONSerializationObjects\MenuSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Proxies\ILeavingSecureSiteWarningElementProxy.cs" />
     <Compile Include="Proxies\ISessionTimeOutElementProxy.cs" />
     <Compile Include="Proxies\LeaveSecureSiteWarningElementProxy.cs" />
     <Compile Include="Proxies\SessionTimeOutElementProxy.cs" />
     <Compile Include="JSONSerializationObjects\RefTop.cs" />
-    <Compile Include="RefFooter.cs" />
-    <Compile Include="SessionTimeout.cs" />
+    <Compile Include="JSONSerializationObjects\RefFooter.cs" />
+    <Compile Include="JSONSerializationObjects\SessionTimeout.cs" />
     <Compile Include="JSONSerializationObjects\Top.cs" />
   </ItemGroup>
   <ItemGroup>

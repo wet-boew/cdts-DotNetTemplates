@@ -1,4 +1,4 @@
-namespace GoC.WebTemplate
+namespace WebTemplateCore.JSONSerializationObjects
 {
     public class RefFooter
     {

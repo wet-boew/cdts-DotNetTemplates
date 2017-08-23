@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using GoC.WebTemplate;
 
-namespace GoC.WebTemplate
+namespace WebTemplateCore.JSONSerializationObjects
 {
     public class Footer
     {
