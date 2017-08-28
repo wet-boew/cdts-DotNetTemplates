@@ -188,9 +188,9 @@ namespace GoC.WebTemplate
         /// Used to override the Contact links in Footer
         /// Set by application programmatically
         /// </summary>
-        public string ContactLinkURL { get; set; }
+        public Link ContactLink { get; set; }
 
-        private List<Link> BuildContactLinks() => new List<Link> {new Link {Href = ContactLinkURL}};
+        private List<Link> BuildContactLinks() => new List<Link> {ContactLink};   
 
 
         /// <summary>

@@ -23,7 +23,6 @@ namespace SampleCode.C3.MVC.Controllers
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta charset='UTF-8'>");
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta name='singer' content='Elvis'>");
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta http-equiv='default-style' content='sample'>");
-
             //specify the date modified
             this.WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
             //or for using the current date
@@ -102,7 +101,7 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult FooterLinksSample()
         {
             //Contact Links
-            this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
+            this.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/","Contact Us");
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -178,7 +177,7 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult TransactionalSample()
         {
             //Contact Links
-            this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
+            this.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
             //set the Terms and Condition Link
             this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
