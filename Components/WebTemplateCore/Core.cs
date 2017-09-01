@@ -429,6 +429,13 @@ namespace GoC.WebTemplate
         public string CustomSiteMenuURL { get; set; }
 
         /// <summary>
+        /// The link to use for the App Settings in the AppTop
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
+        public string AppSettingsURL { get; set; }
+
+        /// <summary>
         /// The link to use for the sign in button, will only appear if <see cref="ShowSignInLink"/> is set to true
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
@@ -567,6 +574,7 @@ namespace GoC.WebTemplate
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 SiteMenu = ShowSiteMenu,
+                AppSettings= BuildHideableHrefOnlyLink(AppSettingsURL, true),
                 MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch,
                 TopSecMenu = LeftMenuItems.Any()
