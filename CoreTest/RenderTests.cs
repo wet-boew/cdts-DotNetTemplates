@@ -17,6 +17,30 @@ namespace CoreTest
     public class RenderTests 
     {
 
+
+        [Theory, AutoNSubstituteData]
+        public void AppSettingsLinkRendersWhenPresent(Core sut)
+        {
+            //Setup
+            var testurl = "http://tempuri.com";
+            sut.AppSettingsURL = testurl;
+            //Test
+            var results = sut.RenderAppTop();
+            //Verify
+            results.ToString().Should().Contain("\"appSettings\":[{\"href\":\"" + testurl + "\"}]");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void AppSettingsLinkShouldNotRendersWhenPresent(Core sut)
+        {
+            //Setup           
+            sut.AppSettingsURL = null;
+            //Test
+            var results = sut.RenderAppTop();
+            //Verify
+            results.ToString().Should().NotContain("\"appSettings\"");
+        }
+
         [Theory, AutoNSubstituteData]
         public void ContactLinksShouldNotBeEmptyWhenValueIsSet(Core sut)
         {
