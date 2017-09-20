@@ -636,7 +636,7 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = CDNEnvironment,
                 DateModified = BuildDateModified(),
-                VersionIdentifier = BuildVersionIdentifier(),
+                VersionIdentifier = GetStringForJson(VersionIdentifier),
                 ShowPostContent = ShowPostContent,
                 ShowFeedback = new FeedbackLink
                 {
@@ -658,7 +658,7 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = CDNEnvironment,
                 DateModified = BuildDateModified(),
-                VersionIdentifier = BuildVersionIdentifier(),
+                VersionIdentifier = GetStringForJson(VersionIdentifier),
                 ShowPostContent = false,
                 ShowFeedback = new FeedbackLink {Show = false},
                 ShowShare = new ShareList { Show = false},
@@ -731,21 +731,11 @@ namespace GoC.WebTemplate
 
         }
 
-        private string BuildVersionIdentifier()
-        {
-            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(VersionIdentifier))
-            {
-                return VersionIdentifier;
-            }
-            return null;
-        }
-
+        
         private string BuildDateModified()
         {
 
-            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(VersionIdentifier))
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0)
             {
                 return null;
             }
