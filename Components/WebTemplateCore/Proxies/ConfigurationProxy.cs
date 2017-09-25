@@ -11,7 +11,6 @@ namespace GoC.WebTemplate.Proxies
     {
         public string CustomSearch => Configurations.Settings.CustomSearch;
         public string CustomSiteMenuURL => Configurations.Settings.CustomSiteMenuURL;
-        public bool ShowGlobalNav => Configurations.Settings.ShowGlobalNav;
         public bool ShowSiteMenu => Configurations.Settings.ShowSiteMenu;
         public string SignOutLinkURL => Configurations.Settings.SignOutLinkURL;
         public string SignInLinkURL => Configurations.Settings.SignInLinkURL;

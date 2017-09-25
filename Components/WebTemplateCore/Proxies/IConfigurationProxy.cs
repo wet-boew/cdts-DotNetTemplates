@@ -8,7 +8,6 @@ namespace GoC.WebTemplate.Proxies
     public interface IConfigurationProxy
     {
         string CustomSearch { get; }
-        bool ShowGlobalNav { get; }
         bool ShowSiteMenu { get; }
         string SignOutLinkURL { get; }
         string SignInLinkURL { get; }

@@ -51,6 +51,7 @@ namespace GoC.WebTemplate
         }
 
         [ConfigurationProperty("showGlobalNav")]
+        [Obsolete("no longer used. Will be removed in a future release.")]
         public bool ShowGlobalNav
         {
             get { return (bool) this["showGlobalNav"]; }

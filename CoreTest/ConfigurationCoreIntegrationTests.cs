@@ -47,19 +47,6 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void GlobalNavFalseByDefault(IDictionary<string, ICDTSEnvironment> environments,
-            ICacheProxy fakeCacheProxy,
-            ICurrentRequestProxy fakeCurrentRequestProxy)
-        {
-            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(),environments);
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("\"globalNav\":false");
-        }
-
-
-        [Theory, AutoNSubstituteData]
-
         public void LeavingSecureSiteWarningElementCapitilizationFix(IDictionary<string, ICDTSEnvironment> environments,
             ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)

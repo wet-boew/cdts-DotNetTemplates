@@ -99,20 +99,6 @@ WebTemplateCore.ShowFeatures = true;
 </pre>
 </div>
 
-<h2>Global Nav</h2>
-<p>This setting determines if the global navigation menu for Canada.ca is displayed in the footer.</p>
-<p>This is set programmatically by the <code class="wb-prettify">ShowGlobalNav</code> property of the application template and can also be set in the web.config </p>
-<div class="alert alert-warning">
-    <p>Setting this to true will override the default footer, custom footer links, and transactional footer</p>
-</div>
-
-<div class="wb-prettify all-pre lang-vb linenums">
-<pre>
-//Show the Global Navigation in the footer 
-WebTemplateCore.ShowGlobalNav = true; 
-</pre>
-</div>
-
 <h2>Hide Search</h2>
 <p>This setting allows you to hide or show the search bar on the page.</p>
 <p>The setting <code class="wb-prettify">ShowSearch</code> can be set programmatically or in the web.config.  This setting defaults to true.  </p>

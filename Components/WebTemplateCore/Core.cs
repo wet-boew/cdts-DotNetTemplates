@@ -113,7 +113,6 @@ namespace GoC.WebTemplate
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
             ShowSiteMenu = _configProxy.ShowSiteMenu;
-            ShowGlobalNav = _configProxy.ShowGlobalNav;
             CustomSearch = _configProxy.CustomSearch;
 
         }
@@ -410,6 +409,7 @@ namespace GoC.WebTemplate
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
         /// </summary>
+        [Obsolete("no longer used. Will be removed in a future release.")]
         public bool ShowGlobalNav { get; set; }
 
         /// <summary>
@@ -549,7 +549,6 @@ namespace GoC.WebTemplate
                 PrivacyLink = GetStringForJson(PrivacyLinkURL),
                 ContactLinks = BuildContactLinks(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                GlobalNav = ShowGlobalNav,
                 FooterSections = BuildCustomFooterLinks
             });
         }
