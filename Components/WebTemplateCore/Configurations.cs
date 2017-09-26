@@ -44,6 +44,7 @@ namespace GoC.WebTemplate
         }
         
         [ConfigurationProperty("showSiteMenu", DefaultValue= true) ]
+        [Obsolete("no longer used. Will be removed in a future release.")]
         public bool ShowSiteMenu
         {
             get { return (bool) this["showSiteMenu"];  }

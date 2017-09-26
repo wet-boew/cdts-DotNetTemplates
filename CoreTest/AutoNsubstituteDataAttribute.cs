@@ -22,10 +22,8 @@ namespace CoreTest
         public void Customize(IFixture fixture)
         {
             //Tell autofixture to ignore certain properties as they get set by the configuration file in the constructor
-            //In particular ignore the sitemenu since we want it to default to true;
-            fixture.Customize<Core>(c => c.Without(p => p.ShowSiteMenu)
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.
-                                          .Without(p => p.ShowSignOutLink)
+            fixture.Customize<Core>(c => c.Without(p => p.ShowSignOutLink)
                                           .Without(p => p.ShowSignInLink)
             //We want custom search to start out as default(string)
                                           .Without(p => p.CustomSearch) 

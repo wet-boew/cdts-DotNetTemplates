@@ -132,9 +132,8 @@ WebTemplateCore.ShowPreContent = false;
 </div>
 
 <h2>Site Menu</h2>
-<p>The site menu can be hidden or overridden using the following settings</p>
+<p>The site menu can be customized using the following setting</p>
 <ul>
-    <li><code class="wb-prettify">ShowSiteMenu</code> is used to hide the site menu. This defaults to true. can be set in web.config</li>
     <li>
         <code class="wb-prettify">CustomSiteMenuURL</code> this variable is used to display a custom menu.
         <p>Although you don't need to we suggest you contact the cdts team to enable this option. if you have done this before then simply provide the url to your valid menu file to enable this option. </p>
@@ -148,8 +147,7 @@ WebTemplateCore.ShowPreContent = false;
 </ul>
 
 <div class="wb-prettify all-pre lang-vb linenums">
-    <pre>//show or hide the site menu
-WebTemplateCore.ShowSiteMenu = true; 
+    <pre>
 //set the custom site menu url
 WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
 </pre>

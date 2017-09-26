@@ -13,7 +13,6 @@ namespace WebTemplateCore.JSONSerializationObjects
         public bool ShowPreContent { get; set; }
         public List<Breadcrumb> Breadcrumbs { get; set; }
         public string LocalPath { get; set; }
-        public bool SiteMenu { get; set; }
         public bool TopSecMenu { get; set; }
     }
 }

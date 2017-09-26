@@ -54,6 +54,7 @@
       <xs:attribute name="signOutLinkURL" type="xs:string" use="optional" />
       <xs:attribute name="signInLinkURL" type="xs:string" use="optional" />
       <xs:attribute name="customSiteMenuURL" type="xs:string" use="optional" />
+      <!-- obsolete will be removed in future version-->
       <xs:attribute name="showSiteMenu" type="xs:boolean" use="optional" />
       <!-- obsolete will be removed in future version-->
       <xs:attribute name="showGlobalNav" type="xs:boolean" use="optional" />

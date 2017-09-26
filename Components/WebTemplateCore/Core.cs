@@ -112,7 +112,6 @@ namespace GoC.WebTemplate
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            ShowSiteMenu = _configProxy.ShowSiteMenu;
             CustomSearch = _configProxy.CustomSearch;
 
         }
@@ -418,6 +417,7 @@ namespace GoC.WebTemplate
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
         /// </summary>
+        [Obsolete("no longer used. Will be removed in a future release.")]
         public bool ShowSiteMenu { get; set; }
 
         /// <summary>
@@ -572,7 +572,6 @@ namespace GoC.WebTemplate
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                SiteMenu = ShowSiteMenu,
                 AppSettings= BuildHideableHrefOnlyLink(AppSettingsURL, true),
                 MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch,
@@ -592,7 +591,6 @@ namespace GoC.WebTemplate
                 IntranetTitle = BuildIntranentTitleList(),
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
-                SiteMenu = false,
                 Breadcrumbs = BuildBreadcrumbs(),
                 ShowPreContent = false,
                 LocalPath = BuildLocalPath(),
@@ -610,7 +608,6 @@ namespace GoC.WebTemplate
                 IntranetTitle = BuildIntranentTitleList(),
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
-                SiteMenu = true,
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = BuildLocalPath(),
