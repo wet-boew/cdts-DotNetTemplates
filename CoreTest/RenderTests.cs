@@ -267,7 +267,16 @@ namespace CoreTest
         public void HandleEmptyContactLinkList(Core sut)
         {
             sut.ContactLink = null;
-            sut.RenderAppFooter().ToString().Should().NotContain("\"contactLinks\":[{}]");
+            sut.RenderAppFooter().ToString().Should().NotContain("\"contactLink\":");
+            sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\":{[]}");//TODO: Review this check, should probably just check that contactLinks is not there
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void HandleContactLinkValue(Core sut)
+        {
+            sut.ContactLink = new Link() { Href="http://testvalue" };
+            sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":\"http://testvalue\"");
+            sut.RenderFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
         }
 
         [Theory, AutoNSubstituteData]

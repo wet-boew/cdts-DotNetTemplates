@@ -183,13 +183,12 @@ namespace GoC.WebTemplate
         public string AppendToTitle => CurrentEnvironment.AppendToTitle;
 
         /// <summary>
-        /// Used to override the Contact links in Footer
+        /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter
         /// Set by application programmatically
         /// </summary>
         public Link ContactLink { get; set; }
 
-        private List<Link> BuildContactLinks() => new List<Link> {ContactLink};   
-
+        private List<Link> BuildContactLinks() => new List<Link> { ContactLink };
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -547,7 +546,7 @@ namespace GoC.WebTemplate
                 ShowFeatures = ShowFeatures,
                 TermsLink = GetStringForJson(TermsConditionsLinkURL),
                 PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                ContactLinks = BuildContactLinks(),
+                ContactLink = GetStringForJson(ContactLink?.Href),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
                 FooterSections = BuildCustomFooterLinks
             });

@@ -12,6 +12,9 @@ public partial class ApplicationTemplate : GoC.WebTemplate.BasePage
             this.WebTemplateMaster.WebTemplateCore.ShowPreContent = false;
             this.WebTemplateMaster.WebTemplateCore.ShowSecure = true;
             this.WebTemplateMaster.WebTemplateCore.ShowSearch = true;
+
+        this.WebTemplateMaster.WebTemplateCore.ContactLink = new Link() {Href="http://travel.gc.ca/"};
+
         this.WebTemplateMaster.WebTemplateCore.Breadcrumbs = new List<Breadcrumb>
             {
                 new Breadcrumb{ Href = "https://www.canada.ca/en.html", Title = "GoC", Acronym = "Government of Canada"  },
