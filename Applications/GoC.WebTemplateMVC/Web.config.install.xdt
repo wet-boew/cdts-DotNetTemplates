@@ -21,7 +21,6 @@
     <GoC.WebTemplate xdt:Transform="Replace"
    xmlns="http://tempuri.org/WebTemplateMVC.xsd"
    version="v4_0_25"
-   subTheme=""
    environment="Akamai"
    loadJQueryFromGoogle="false"
    showPreContent="true"

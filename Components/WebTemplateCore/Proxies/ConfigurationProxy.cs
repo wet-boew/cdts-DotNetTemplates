@@ -33,7 +33,6 @@ namespace GoC.WebTemplate.Proxies
         public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
         public bool ShowFeatures => Configurations.Settings.ShowFeatures;
         public string StaticFilesLocation => Configurations.Settings.StaticFilesLocation;
-        public string SubTheme => Configurations.Settings.SubTheme;
         public string Theme => Configurations.Settings.Theme;
         public string Version => Configurations.Settings.Version;
         public bool? UseHttps => Configurations.Settings.UseHttps;

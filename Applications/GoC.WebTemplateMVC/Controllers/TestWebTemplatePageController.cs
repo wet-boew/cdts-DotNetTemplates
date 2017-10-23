@@ -217,7 +217,6 @@ namespace GoC.WebTemplateMVC.Controllers
            // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
             WebTemplateCore.Environment = "PROD_SSL";
             WebTemplateCore.UseHTTPS = null;
-            WebTemplateCore.WebTemplateSubTheme = "esdc";
             WebTemplateCore.HeaderTitle = "Sample Page";
 
             WebTemplateCore.ScreenIdentifier = "897987sadfjkkla--33";

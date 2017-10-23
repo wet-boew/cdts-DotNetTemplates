@@ -4,6 +4,7 @@ using GoC.WebTemplate;
 using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
 using NSubstitute;
+using Ploeh.AutoFixture.Xunit2;
 using WebTemplateCore.JSONSerializationObjects;
 using WebTemplateCore.Proxies;
 using Xunit;
@@ -16,12 +17,14 @@ namespace CoreTest
     public class ConfigurationCoreIntegrationTests
     {
         [Theory, AutoNSubstituteData]
-        public void SubThemeSetProgrammticallyOverridesWebConfig(IDictionary<string, ICDTSEnvironment> environments,
+        public void SubThemeSetFromCDTSEnvironments([Frozen]ICDTSEnvironment fakeEnvironment,
+            IDictionary<string, ICDTSEnvironment> environments,
             ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
         {
+            fakeEnvironment.SubTheme = "foobar";
+            
             var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
-            sut.WebTemplateSubTheme = "foobar";
             sut.RenderTop().ToString().Should().Contain("\"subTheme\":\"foobar\"");
         }
         [Theory, AutoNSubstituteData]

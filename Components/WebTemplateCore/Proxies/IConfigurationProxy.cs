@@ -23,10 +23,6 @@ namespace GoC.WebTemplate.Proxies
         /// </summary>
         string Theme { get;  }
 
-        /// <summary>
-        /// subTheme
-        /// </summary>
-        string SubTheme { get;  }
 
         /// <summary>
         /// cdts environment to use

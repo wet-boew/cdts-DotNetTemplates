@@ -95,15 +95,6 @@ namespace GoC.WebTemplate
             set { this["theme"] = value; }
         }
 
-        /// <summary>
-        /// subTheme
-        /// </summary>
-        [ConfigurationProperty("subTheme")]
-        public string SubTheme
-        {
-            get { return (string)this["subTheme"]; }
-            set { this["subTheme"] = value; }
-        }
 
         /// <summary>
         /// cdts environment to use
