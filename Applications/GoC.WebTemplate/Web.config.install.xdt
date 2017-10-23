@@ -6,7 +6,16 @@
     <section name="GoC.WebTemplate" type="GoC.WebTemplate.Configurations" xdt:Locator="Match(name)" xdt:Transform="InsertIfMissing" />
   </configSections>
   <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
-
+  
+    <system.webServer xdt:Transform="InsertIfMissing">
+        <httpProtocol xdt:Transform="InsertIfMissing">
+            <customHeaders xdt:Transform="InsertIfMissing">
+                <add name="X-FRAME-OPTIONS" value="DENY" xdt:Transform="InsertIfMissing"/>
+                <add name="Content-Security-Policy" value="frame-ancestors 'none'" xdt:Transform="InsertIfMissing"/>
+            </customHeaders>
+        </httpProtocol>
+    </system.webServer>
+  
   <GoC.WebTemplate xdt:Transform="Remove"/>
   <GoC.WebTemplate xmlns="http://tempuri.org/WebTemplateWebForms.xsd" xdt:Transform="InsertIfMissing"/>
   <GoC.WebTemplate xdt:Transform="Replace"
