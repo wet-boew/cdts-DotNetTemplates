@@ -307,14 +307,14 @@ namespace CoreTest
         
     }
 
-    public class RenderRefTop
+    public class RenderRefTopTests
     {
         [Theory, AutoNSubstituteData]
         public void LocalPathDoesNotRendersWhenNull([Frozen]IDictionary<string, ICDTSEnvironment> environments,
             [Frozen]IConfigurationProxy proxy, Core sut)
         {
             environments[sut.Environment].LocalPath.ReturnsNull();
-            sut.RenderRefTop().ToString().Should().NotContain("localPath");
+            sut.RenderRefTop(false).ToString().Should().NotContain("localPath");
         }
 
         [Theory, AutoNSubstituteData]
@@ -323,33 +323,41 @@ namespace CoreTest
             Core sut)
         {
             environments[sut.Environment].LocalPath.Returns("{0}:{1}");
-            sut.RenderRefTop().ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
+            sut.RenderRefTop(false).ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
         }
         [Theory, AutoNSubstituteData]
         public void LocalPathRendersWhenNotNull(Core sut)
         {
             sut.LocalPath.Returns("foo");
-            sut.RenderRefTop().ToString().Should().Contain("\"localPath\":\"foo\"");
+            sut.RenderRefTop(false).ToString().Should().Contain("\"localPath\":\"foo\"");
         }
         [Theory, AutoNSubstituteData]
         public void JQueryExternalRendersWhenLoadJQueryFromGoogleIsTrue(Core sut)
         {
             sut.LoadJQueryFromGoogle = true;
 
-            sut.RenderRefTop().ToString().Should().Contain("\"jqueryEnv\":\"external\"");
+            sut.RenderRefTop(false).ToString().Should().Contain("\"jqueryEnv\":\"external\"");
         }
         [Theory, AutoNSubstituteData]
         public void JQueryExternalDoesNotRenderWhenLoadJQueryFromGoogleIsFalse(Core sut)
         {
             sut.LoadJQueryFromGoogle = false;
 
-            sut.RenderRefTop().ToString().Should().NotContain("jqueryEnv");
+            sut.RenderRefTop(false).ToString().Should().NotContain("jqueryEnv");
         }
         [Theory, AutoNSubstituteData]
         public void WebSubThemeRenderedProperly(Core sut)
         {
 
-            sut.RenderRefTop().ToString().Should().Contain($"\"subTheme\":\"{sut.WebTemplateSubTheme}\"");
+            sut.RenderRefTop(false).ToString().Should().Contain($"\"subTheme\":\"{sut.WebTemplateSubTheme}\"");
+        }
+
+        [Theory]
+        [InlineAutoNSubstituteData(true)]
+        [InlineAutoNSubstituteData(false)]
+        public void IsApplicationSetFromParam(bool isApplication, Core sut)
+        {
+            sut.RenderRefTop(isApplication).ToString().Should().Contain($"\"isApplication\":{isApplication.ToString().ToLower()}");
         }
         
         /*
@@ -364,7 +372,7 @@ namespace CoreTest
             Core sut)
         {
             environments[sut.Environment].CDN = "prod";
-            sut.RenderRefTop().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
+            sut.RenderRefTop(false).ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
         
         

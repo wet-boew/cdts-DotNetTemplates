@@ -591,14 +591,15 @@ namespace GoC.WebTemplate
             });
         }
 
-        public HtmlString RenderRefTop()
+        public HtmlString RenderRefTop(bool isApplication)
         {
             return JsonSerializationHelper.SerializeToJson(new RefTop
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
                 JqueryEnv = LoadJQueryFromGoogle ? "external" : null,
-                LocalPath = BuildLocalPath()
+                LocalPath = BuildLocalPath(),
+                IsApplication = isApplication
             });
         }
 
