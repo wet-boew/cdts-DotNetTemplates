@@ -16,7 +16,6 @@ namespace WebTemplateCore.JSONSerializationObjects
         public string CustomSearch { get; set; }
         public List<LanguageLink> LngLinks { get; set; }
         public List<Link> AppSettings { get; set; }
-        public bool Secure { get; set; }
         /// <summary>
         /// This is an array but it should only have one item in it. 
         /// </summary>

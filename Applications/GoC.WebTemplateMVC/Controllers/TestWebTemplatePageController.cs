@@ -15,7 +15,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowSecure = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.LeftMenuItems = new List<MenuSection>
@@ -40,7 +39,6 @@ namespace GoC.WebTemplateMVC.Controllers
         public ActionResult HelloWorld()
         {
             WebTemplateCore.ApplicationTitle.Text = "Application Web Template";
-            WebTemplateCore.ShowSecure = true;
             WebTemplateCore.Breadcrumbs = null;
             return View();
         }
@@ -64,7 +62,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowSecure = true;
             WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");

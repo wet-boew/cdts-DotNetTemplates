@@ -12,7 +12,7 @@ namespace WebTemplateCore.JSONSerializationObjects
         /// Set programmatically
         /// </summary>
         /// <remarks>only available for intranet themes, and Application Template</remarks>
-        public string Text { get; set; }
+        public string Text { get; set;  }
 
         /// <summary>
         /// The url of the title that will be displayed in the header above the top menu.

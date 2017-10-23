@@ -434,13 +434,6 @@ namespace GoC.WebTemplate
 
 
         /// <summary>
-        /// Displays the secure icon next to the applicaiton name in the header.
-        /// Set by application programmatically
-        /// Only available in the Application Template
-        /// </summary>
-        public bool ShowSecure { get; set; }
-
-        /// <summary>
         /// Displays the sign in link set.
         /// <see cref="SignInLinkURL"/> must not be null or whitespace
         /// <see cref="ShowSignOutLink"/> must not be set at the same time.
@@ -547,7 +540,6 @@ namespace GoC.WebTemplate
                 IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
-                Secure = ShowSecure,
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
                 Search = ShowSearch,
