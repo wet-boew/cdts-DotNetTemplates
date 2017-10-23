@@ -11,13 +11,8 @@ using Xunit;
 
 namespace CoreTest
 {
-    /// <summary>
-    /// Tests that test the Core object in isolation.
-    /// </summary>
-    public class RenderTests 
+    public class RenderAppTopTests
     {
-
-
         [Theory, AutoNSubstituteData]
         public void AppSettingsLinkRendersWhenPresent(Core sut)
         {
@@ -29,7 +24,7 @@ namespace CoreTest
             //Verify
             results.ToString().Should().Contain("\"appSettings\":[{\"href\":\"" + testurl + "\"}]");
         }
-
+        
         [Theory, AutoNSubstituteData]
         public void AppSettingsLinkShouldNotRendersWhenPresent(Core sut)
         {
@@ -40,48 +35,7 @@ namespace CoreTest
             //Verify
             results.ToString().Should().NotContain("\"appSettings\"");
         }
-
-        [Theory, AutoNSubstituteData]
-        public void ContactLinksShouldNotBeEmptyWhenValueIsSet(Core sut)
-        {
-            sut.ContactLink = new Link("foo","bar");
-            sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\":[{}]")
-                .And.Contain("\"contactLinks\":[{\"href\":\"foo\",\"text\":\"bar\"}]");
-
-        }
-
-
-        [Theory, AutoNSubstituteData]
-        public void BreadCrumbEmptyAcronymShouldNotRender(Core sut)
-        {
-            sut.Breadcrumbs.Add(new Breadcrumb
-            {
-                Title="Foo.bar",
-                Acronym=""
-            });
-            sut.RenderTop().ToString().Should().NotContain("\"acronym\":\"\"");
-        }
-        [Theory, AutoNSubstituteData]
-        public void BreadCrumbEmptyHrefShouldNotRender(Core sut)
-        {
-            sut.Breadcrumbs.Add(new Breadcrumb
-            {
-                Title="Foo.bar",
-                Href =""
-            });
-            sut.RenderTop().ToString().Should().NotContain("\"href\":\"\"");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void TopSecMenuTrueInTopWhenLeftMenuItems(Core sut)
-        {
-            sut.LeftMenuItems.Add(new MenuSection
-            {
-                Link = "foo",
-                Name = "bar"
-            });
-            sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":true");
-        }
+        
         [Theory, AutoNSubstituteData]
         public void TopSecMenuTrueInAppTopWhenLeftMenuItems(Core sut)
         {
@@ -92,38 +46,13 @@ namespace CoreTest
             });
             sut.RenderAppTop().ToString().Should().Contain("\"topSecMenu\":true");
         }
-        [Theory, AutoNSubstituteData]
-        public void TopSecMenuTrueInTransactionalTopWhenLeftMenuItems(Core sut)
-        {
-            sut.LeftMenuItems.Add(new MenuSection
-            {
-                Link = "foo",
-                Name = "bar"
-            });
-            sut.RenderTransactionalTop().ToString().Should().Contain("\"topSecMenu\":true");
-        }
-        [Theory, AutoNSubstituteData]
-        public void TopSecMenuFalseInTopWhenLeftMenuItems(Core sut)
-        {
-            sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":false");
-        }
+        
         [Theory, AutoNSubstituteData]
         public void TopSecMenuFalseInAppTopWhenLeftMenuItems(Core sut)
         {
             sut.RenderAppTop().ToString().Should().Contain("\"topSecMenu\":false");
         }
-        [Theory, AutoNSubstituteData]
-        public void TopSecMenuFalseInTransactionalTopWhenLeftMenuItems(Core sut)
-        {
-            sut.RenderTransactionalTop().ToString().Should().Contain("\"topSecMenu\":false");
-        }
-        [Theory, AutoNSubstituteData]
-        public void IntranetTitleShouldNotRenderWhenNullInTop(Core sut)
-        {
-            sut.IntranetTitle = null;
-            sut.RenderTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
-
-        }
+        
         [Theory, AutoNSubstituteData]
         public void IntranetTitleShouldNotRenderWhenNullInAppTop(Core sut)
         {
@@ -131,118 +60,29 @@ namespace CoreTest
             sut.RenderAppTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
 
         }
-        [Theory, AutoNSubstituteData]
-        public void IntranetTitleShouldNotRenderWhenNullInTransactionalTop(Core sut)
-        {
-            sut.IntranetTitle = null;
-            sut.RenderTransactionalTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
 
-        }
         [Theory, AutoNSubstituteData]
         public void AppUrl(Core sut)
         {
             sut.ApplicationTitle.URL = "ApplicationURL";
             sut.RenderAppTop().ToString().Should().Contain("\"appUrl\":\"ApplicationURL\"");
         }
-
-        [Theory, AutoNSubstituteData]
-        public void IntranetTitleTop(Core sut)
-        {
-            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
-            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void IntranetTitleTransacationalTop(Core sut)
-        {
-            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
-            sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
-        }
+        
         [Theory, AutoNSubstituteData]
         public void IntranetTitleAppTop(Core sut)
         {
             sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
             sut.RenderAppTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
         }
-        [Theory, AutoNSubstituteData]
-        public void DoNotRenderBreadCrumbsByDefault(Core sut)
-        {
-            sut.RenderTop().ToString().Should().NotContain("\"breadcrumbs\"");
-        }
-
+        
+        
         [Theory, AutoNSubstituteData]
         public void RenderCustomSearchWhenSet(Core sut)
         {
             sut.CustomSearch="Foo";
             sut.RenderAppTop().ToString().Should().Contain("\"customSearch\":\"Foo\"");
         }
-
-        [Theory, AutoNSubstituteData]
-        public void LocalPathDoesNotRendersWhenNull([Frozen]IDictionary<string, ICDTSEnvironment> environments,
-            [Frozen]IConfigurationProxy proxy, Core sut)
-        {
-            environments[sut.Environment].LocalPath.ReturnsNull();
-            sut.RenderRefTop().ToString().Should().NotContain("localPath");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void LocalPathFormatsCorrectly([Frozen]IDictionary<string, ICDTSEnvironment> environments,
-            [Frozen]IConfigurationProxy proxy,
-            Core sut)
-        {
-            environments[sut.Environment].LocalPath.Returns("{0}:{1}");
-            sut.RenderRefTop().ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
-        }
-
-
-        public void LocalPathRendersWhenNotNull(Core sut)
-        {
-            sut.RenderRefTop().ToString().Should().Contain("localPath");
-        }
-        [Theory, AutoNSubstituteData]
-        public void JQueryExternalRendersWhenLoadJQueryFromGoogleIsTrue(Core sut)
-        {
-            sut.LoadJQueryFromGoogle = true;
-
-            sut.RenderRefTop().ToString().Should().Contain("\"jqueryEnv\":\"external\"");
-        }
-        [Theory, AutoNSubstituteData]
-        public void JQueryExternalDoesNotRenderWhenLoadJQueryFromGoogleIsFalse(Core sut)
-        {
-            sut.LoadJQueryFromGoogle = false;
-
-            sut.RenderRefTop().ToString().Should().NotContain("jqueryEnv");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void WebSubThemeRenderedProperly(Core sut)
-        {
-
-            sut.RenderRefTop().ToString().Should().Contain($"\"subTheme\":\"{sut.WebTemplateSubTheme}\"");
-        }
-        /*
-        //Current different types of environments
-              "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{0}/cdts/compiled/",
-              "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-              "Path": "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
-              "Path": "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
-        */
-        [Theory, AutoNSubstituteData]
-        public void CdnEnvRenderedProperly([Frozen]IDictionary<string, ICDTSEnvironment> environments, 
-            Core sut)
-        {
-            environments[sut.Environment].CDN = "prod";
-            sut.RenderRefTop().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void ShouldNotEncodeURL(Core sut)
-        {
-            sut.ContactLink = new Link("http://localhost:8080/foo.html",string.Empty);
-            var htmlstring = sut.RenderFooter();
-            htmlstring.ToString().Should().Contain("http://localhost:8080/foo.html");
-        }
-
+        
         [Theory, AutoNSubstituteData]
         public void CustomSearchIsRendered(Core sut)
         {
@@ -253,33 +93,6 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void ExceptionWhenCallingRenderFooterLinks(Core sut)
-        {
-            sut.ContactLink = null;
-            Action execute = () => {
-                var ignore = sut.RenderFooter();
-            };
-            execute.ShouldNotThrow<NullReferenceException>();
-
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void HandleEmptyContactLinkList(Core sut)
-        {
-            sut.ContactLink = null;
-            sut.RenderAppFooter().ToString().Should().NotContain("\"contactLink\":");
-            sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\":{[]}");//TODO: Review this check, should probably just check that contactLinks is not there
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void HandleContactLinkValue(Core sut)
-        {
-            sut.ContactLink = new Link() { Href="http://testvalue" };
-            sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":\"http://testvalue\"");
-            sut.RenderFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
-        }
-
-        [Theory, AutoNSubstituteData]
         public void RenderAppTopMustNotCrashWithNullBreadCrumbs(Core sut)
         {
             sut.Breadcrumbs = null;
@@ -287,97 +100,14 @@ namespace CoreTest
             Action execute = () => sut.RenderAppTop();
             execute.ShouldNotThrow<ArgumentNullException>();
         }
-
-        [Theory, AutoNSubstituteData]
-        public void DoNotAddCanadaCaToTitlesIfItIsAlreadyThere([Frozen] IDictionary<string, ICDTSEnvironment> environments,
-            ICDTSEnvironment env,
-            Core sut)
-        {
-
-            env.AppendToTitle.Returns(" - Canada.ca");
-            environments[sut.Environment] = env;
-
-            sut.HeaderTitle = "Foo - Canada.ca";
-            sut.HeaderTitle.Should().Be("Foo - Canada.ca");
-        }
-        [Theory, AutoNSubstituteData]
-        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen] IDictionary<string, ICDTSEnvironment> environments,
-            ICDTSEnvironment env,
-            Core sut)
-        {
-            env.AppendToTitle.Returns(" - Canada.ca");
-            environments[sut.Environment] = env;
-            sut.HeaderTitle = "Foo";
-
-            sut.HeaderTitle.Should().Be("Foo - Canada.ca");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen] IDictionary<string, ICDTSEnvironment> environments,
-            ICDTSEnvironment env,
-            Core sut)
-        {
-            env.AppendToTitle.Returns(" - Canada.ca");
-            environments[sut.Environment] = env;
-
-            sut.HeaderTitle = null;
-
-            sut.HeaderTitle.Should().Be(" - Canada.ca");
-        }
-        [Theory, AutoNSubstituteData]
-        public void DontAddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen] IDictionary<string, ICDTSEnvironment> environments,
-            ICDTSEnvironment env,
-            Core sut)
-        {
-            env.AppendToTitle.Returns("");
-            environments[sut.Environment] = env;
-
-            sut.HeaderTitle = "Foo";
-
-            sut.HeaderTitle.Should().Be("Foo");
-        }
-
+        
         [Theory, AutoNSubstituteData]
         public void SiteMenuPathShouldNotRenderWhenNull(Core sut)
         {
             var json = sut.RenderAppTop();
             json.ToString().Should().NotContain("menuPath");
         }
-
-
-        [Theory, AutoNSubstituteData]
-        public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
-        {
-            sut.PrivacyLinkURL = null;
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().NotContain("privacyLink");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
-        {
-            sut.PrivacyLinkURL = "http://foo.bar";
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("privacyLink");
-        }
-
-
-        [Theory, AutoNSubstituteData]
-        public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
-        {
-            sut.TermsConditionsLinkURL = null;
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().NotContain("termsLink");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void TermsLinkRenderedWhenURLIsProvided(Core sut)
-        {
-            sut.TermsConditionsLinkURL = "http://foo.bar";
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("termsLink");
-        }
-
+        
         [Theory, AutoNSubstituteData]
         public void SignInLinkNotRenderedWhenFlagisFalse(Core sut)
         {
@@ -425,24 +155,274 @@ namespace CoreTest
             // ReSharper disable once MustUseReturnValue
             Action act = () =>  sut.RenderAppTop();
             act.ShouldThrow<InvalidOperationException>();
+        } 
+        
+    }
+
+    public class RenderFooterTests
+    {
+        
+        [Theory, AutoNSubstituteData]
+        public void ContactLinksShouldNotBeEmptyWhenValueIsSet(Core sut)
+        {
+            sut.ContactLink = new Link("foo","bar");
+            sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\":[{}]")
+                .And.Contain("\"contactLinks\":[{\"href\":\"foo\",\"text\":\"bar\"}]");
+
+        }
+       
+        [Theory, AutoNSubstituteData]
+        public void ShouldNotEncodeURL(Core sut)
+        {
+            sut.ContactLink = new Link("http://localhost:8080/foo.html",string.Empty);
+            var htmlstring = sut.RenderFooter();
+            htmlstring.ToString().Should().Contain("http://localhost:8080/foo.html");
+        }
+        [Theory, AutoNSubstituteData]
+        public void ExceptionWhenCallingRenderFooterLinks(Core sut)
+        {
+            sut.ContactLink = null;
+            Action execute = () => {
+                var ignore = sut.RenderFooter();
+            };
+            execute.ShouldNotThrow<NullReferenceException>();
+
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void HandleEmptyContactLinkList(Core sut)
+        {
+            sut.ContactLink = null;
+            sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\"");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void HandleContactLinkValue(Core sut)
+        {
+            sut.ContactLink = new Link() { Href="http://testvalue" };
+            sut.RenderFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
+        }
+    }
+
+    public class RenderTopTests
+    {
+        
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleShouldNotRenderWhenNullInTop(Core sut)
+        {
+            sut.IntranetTitle = null;
+            sut.RenderTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void BreadCrumbEmptyAcronymShouldNotRender(Core sut)
+        {
+            sut.Breadcrumbs.Add(new Breadcrumb
+            {
+                Title="Foo.bar",
+                Acronym=""
+            });
+            sut.RenderTop().ToString().Should().NotContain("\"acronym\":\"\"");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void BreadCrumbEmptyHrefShouldNotRender(Core sut)
+        {
+            sut.Breadcrumbs.Add(new Breadcrumb
+            {
+                Title="Foo.bar",
+                Href =""
+            });
+            sut.RenderTop().ToString().Should().NotContain("\"href\":\"\"");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuTrueInTopWhenLeftMenuItems(Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection
+            {
+                Link = "foo",
+                Name = "bar"
+            });
+            sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":true");
+        }
+         
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuFalseInTopWhenLeftMenuItems(Core sut)
+        {
+            sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":false");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleTop(Core sut)
+        {
+            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
+            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        }
+        
+        
+        [Theory, AutoNSubstituteData]
+        public void DoNotRenderBreadCrumbsByDefault(Core sut)
+        {
+            sut.RenderTop().ToString().Should().NotContain("\"breadcrumbs\"");
+        }
+        
+        
+       
+    }
+
+    public class TransactionalTopTests
+    {
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuTrueInTransactionalTopWhenLeftMenuItems(Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection
+            {
+                Link = "foo",
+                Name = "bar"
+            });
+            sut.RenderTransactionalTop().ToString().Should().Contain("\"topSecMenu\":true");
+        }
+       
+        [Theory, AutoNSubstituteData]
+        public void TopSecMenuFalseInTransactionalTopWhenLeftMenuItems(Core sut)
+        {
+            sut.RenderTransactionalTop().ToString().Should().Contain("\"topSecMenu\":false");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleShouldNotRenderWhenNullInTransactionalTop(Core sut)
+        {
+            sut.IntranetTitle = null;
+            sut.RenderTransactionalTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+
+        }
+        [Theory, AutoNSubstituteData]
+        public void IntranetTitleTransacationalTop(Core sut)
+        {
+            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
+            sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        }
+        
+        
+    }
+
+    public class RenderRefTop
+    {
+        [Theory, AutoNSubstituteData]
+        public void LocalPathDoesNotRendersWhenNull([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            [Frozen]IConfigurationProxy proxy, Core sut)
+        {
+            environments[sut.Environment].LocalPath.ReturnsNull();
+            sut.RenderRefTop().ToString().Should().NotContain("localPath");
         }
 
         [Theory, AutoNSubstituteData]
-        public void RenderLeftMenuTest( Core sut)
+        public void LocalPathFormatsCorrectly([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+            [Frozen]IConfigurationProxy proxy,
+            Core sut)
         {
-            sut.LeftMenuItems.Add(new MenuSection("SectionName", "SectionLink", new[] {new Link("Href", "Text")}));
+            environments[sut.Environment].LocalPath.Returns("{0}:{1}");
+            sut.RenderRefTop().ToString().Should().Contain($"\"localPath\":\"{sut.WebTemplateTheme}:{sut.WebTemplateVersion}");
+        }
+        [Theory, AutoNSubstituteData]
+        public void LocalPathRendersWhenNotNull(Core sut)
+        {
+            sut.LocalPath.Returns("foo");
+            sut.RenderRefTop().ToString().Should().Contain("\"localPath\":\"foo\"");
+        }
+        [Theory, AutoNSubstituteData]
+        public void JQueryExternalRendersWhenLoadJQueryFromGoogleIsTrue(Core sut)
+        {
+            sut.LoadJQueryFromGoogle = true;
 
-            var result = sut.RenderLeftMenu();
+            sut.RenderRefTop().ToString().Should().Contain("\"jqueryEnv\":\"external\"");
+        }
+        [Theory, AutoNSubstituteData]
+        public void JQueryExternalDoesNotRenderWhenLoadJQueryFromGoogleIsFalse(Core sut)
+        {
+            sut.LoadJQueryFromGoogle = false;
 
-            result.ToString().Should().Be("sections: [ {sectionName: 'SectionName', sectionLink: 'SectionLink', menuLinks: [{href: 'Href', text: 'Text'},]},]");
+            sut.RenderRefTop().ToString().Should().NotContain("jqueryEnv");
+        }
+        [Theory, AutoNSubstituteData]
+        public void WebSubThemeRenderedProperly(Core sut)
+        {
+
+            sut.RenderRefTop().ToString().Should().Contain($"\"subTheme\":\"{sut.WebTemplateSubTheme}\"");
+        }
+        
+        /*
+        //Current different types of environments
+              "https://www.canada.ca/etc/designs/canada/cdts/GCWeb/{0}/cdts/compiled/",
+              "https://ssl-templates.services.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+              "Path": "http{0}://templates.service.gc.ca/{1}/cls/wet/GCIntranet/{3}cdts/compiled/",
+              "Path": "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
+        */
+        [Theory, AutoNSubstituteData]
+        public void CdnEnvRenderedProperly([Frozen]IDictionary<string, ICDTSEnvironment> environments, 
+            Core sut)
+        {
+            environments[sut.Environment].CDN = "prod";
+            sut.RenderRefTop().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
+        }
+        
+        
+    }
+
+    public class RenderAppFooterTests
+    {
+        [Theory, AutoNSubstituteData]
+        public void HandleEmptyContactLinkList(Core sut)
+        {
+            sut.ContactLink = null;
+            sut.RenderAppFooter().ToString().Should().NotContain("\"contactLink\":");
+        } 
+        
+        [Theory, AutoNSubstituteData]
+        public void HandleContactLinkValue(Core sut)
+        {
+            sut.ContactLink = new Link() { Href="http://testvalue" };
+            sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":\"http://testvalue\"");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
+        {
+            sut.PrivacyLinkURL = null;
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().NotContain("privacyLink");
         }
 
         [Theory, AutoNSubstituteData]
-        public void RenderEmptyLeftMenu(Core sut)
+        public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
         {
-            var result = sut.RenderLeftMenu();
-            result.ToString().Should().BeEmpty();
+            sut.PrivacyLinkURL = "http://foo.bar";
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("privacyLink");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
+        {
+            sut.TermsConditionsLinkURL = null;
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().NotContain("termsLink");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void TermsLinkRenderedWhenURLIsProvided(Core sut)
+        {
+            sut.TermsConditionsLinkURL = "http://foo.bar";
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("termsLink");
+        }
+        
+    }
+
+    public class RenderPreFooterTests
+    {
+
         [Theory, AutoNSubstituteData]
         public void RenderPreFooterTest(Core sut)
         {
@@ -468,6 +448,81 @@ namespace CoreTest
             var result = sut.RenderPreFooter();
 
             result.ToString().Should().Be("{\"cdnEnv\":\"\",\"showPostContent\":false,\"showFeedback\":\"test feedback url\",\"showShare\":true}");
+        }
+        
+    }
+    /// <summary>
+    /// Tests that test the Core object in isolation.
+    /// </summary>
+    public class RenderTests 
+    {
+
+        [Theory, AutoNSubstituteData]
+        public void DoNotAddCanadaCaToTitlesIfItIsAlreadyThere([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            ICDTSEnvironment env,
+            Core sut)
+        {
+
+            env.AppendToTitle.Returns(" - Canada.ca");
+            environments[sut.Environment] = env;
+
+            sut.HeaderTitle = "Foo - Canada.ca";
+            sut.HeaderTitle.Should().Be("Foo - Canada.ca");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            ICDTSEnvironment env,
+            Core sut)
+        {
+            env.AppendToTitle.Returns(" - Canada.ca");
+            environments[sut.Environment] = env;
+            sut.HeaderTitle = "Foo";
+
+            sut.HeaderTitle.Should().Be("Foo - Canada.ca");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            ICDTSEnvironment env,
+            Core sut)
+        {
+            env.AppendToTitle.Returns(" - Canada.ca");
+            environments[sut.Environment] = env;
+
+            sut.HeaderTitle = null;
+
+            sut.HeaderTitle.Should().Be(" - Canada.ca");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void DontAddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen] IDictionary<string, ICDTSEnvironment> environments,
+            ICDTSEnvironment env,
+            Core sut)
+        {
+            env.AppendToTitle.Returns("");
+            environments[sut.Environment] = env;
+
+            sut.HeaderTitle = "Foo";
+
+            sut.HeaderTitle.Should().Be("Foo");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderLeftMenuTest( Core sut)
+        {
+            sut.LeftMenuItems.Add(new MenuSection("SectionName", "SectionLink", new[] {new Link("Href", "Text")}));
+
+            var result = sut.RenderLeftMenu();
+
+            result.ToString().Should().Be("sections: [ {sectionName: 'SectionName', sectionLink: 'SectionLink', menuLinks: [{href: 'Href', text: 'Text'},]},]");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderEmptyLeftMenu(Core sut)
+        {
+            var result = sut.RenderLeftMenu();
+            result.ToString().Should().BeEmpty();
         }
 
     }
