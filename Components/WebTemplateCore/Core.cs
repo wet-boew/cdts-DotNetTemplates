@@ -66,7 +66,8 @@ namespace GoC.WebTemplate
             WebTemplateSubTheme = _configProxy.SubTheme;
 
             UseHTTPS = _configProxy.UseHttps;
-            Environment = _configProxy.Environment;
+            //Normalizing to match with the value we read from the configuration file.
+            Environment = _configProxy.Environment.ToUpper();
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
