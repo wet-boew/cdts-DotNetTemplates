@@ -116,7 +116,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowFeatures = false;
-            WebTemplateCore.ShowSiteMenu = false;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }

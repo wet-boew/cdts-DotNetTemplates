@@ -404,23 +404,6 @@ namespace GoC.WebTemplate
         public string CustomSearch { get; set; }
 
         /// <summary>
-        /// Determines if the Global Nav bar in the footer is to be displayed.
-        /// Set by application programmatically or in the Web.Config
-        /// Only available in the Application Template
-        /// </summary>
-        [Obsolete("no longer used. Will be removed in a future release.")]
-        public bool ShowGlobalNav { get; set; }
-
-        /// <summary>
-        /// Determines if the Site Menu is to appear at the top of the page.
-        /// If set to false only a blue band will be seen.
-        /// Set by application programmatically or in the Web.Config
-        /// Only available in the Application Template
-        /// </summary>
-        [Obsolete("no longer used. Will be removed in a future release.")]
-        public bool ShowSiteMenu { get; set; }
-
-        /// <summary>
         /// A custom site menu to be used in place of the standard canada.ca site menu
         /// This defaults to null (use standard menu)
         /// Set by application programmatically or in the Web.Config
