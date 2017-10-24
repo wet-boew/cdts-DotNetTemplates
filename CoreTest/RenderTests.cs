@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using GoC.WebTemplate;
 using GoC.WebTemplate.Proxies;
@@ -13,6 +14,32 @@ namespace CoreTest
 {
     public class RenderAppTopTests
     {
+
+        [Theory, AutoNSubstituteData]
+        public void AppNameAndAppURLRenderedWhenThemeIsGCIntranet([Frozen] ICDTSEnvironment fakeEnvironment, Core sut)
+        {
+
+            fakeEnvironment.Theme = "GCIntranet";
+            sut.ApplicationTitle.Text = "foo";
+            sut.ApplicationTitle.Href = "bar";
+
+
+            sut.RenderAppTop().ToString()
+               .Should().Contain("\"appName\":\"foo\"", "\"appUrl\":\"bar\"");
+        }
+        
+        [Theory, AutoNSubstituteData]
+        public void AppNameAndAppURLRenderedWhenThemeIsGCWeb([Frozen] ICDTSEnvironment fakeEnvironment, Core sut)
+        {
+
+            fakeEnvironment.Theme = "GCWeb";
+            sut.ApplicationTitle.Text = "foo";
+            sut.ApplicationTitle.Href = "bar";
+
+
+            sut.RenderAppTop().ToString()
+                .Should().Contain("\"appName\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        }
         [Theory, AutoNSubstituteData]
         public void AppSettingsLinkRendersWhenPresent(Core sut)
         {
@@ -64,7 +91,7 @@ namespace CoreTest
         [Theory, AutoNSubstituteData]
         public void AppUrl(Core sut)
         {
-            sut.ApplicationTitle.URL = "ApplicationURL";
+            sut.ApplicationTitle.Href = "ApplicationURL";
             sut.RenderAppTop().ToString().Should().Contain("\"appUrl\":\"ApplicationURL\"");
         }
         

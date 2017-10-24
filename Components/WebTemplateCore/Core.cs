@@ -133,7 +133,7 @@ namespace GoC.WebTemplate
         /// Set Programmatically
         /// </summary>
         /// <remarks>Usable in Intranet Themes and Application Template</remarks>
-        public ApplicationTitle ApplicationTitle { get; } = new ApplicationTitle();
+        public Link ApplicationTitle { get; } = new Link();
 
         /// <summary>
         /// Represents the list of links for the Breadcrumbs
@@ -534,10 +534,17 @@ namespace GoC.WebTemplate
         {
             CheckIfBothSignInAndSignOutAreSet();
 
-            return JsonSerializationHelper.SerializeToJson(new AppTop
+            //For v4.0.26.x we have to render this section differently depending on the theme, 
+            //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
+            return WebTemplateTheme.ToLower() == "gcweb" ? RenderGCWebAppTop() : RenderGCIntranetApptop();
+        }
+
+        private HtmlString RenderGCIntranetApptop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new GCIntranetAppTop
             {
                 AppName = ApplicationTitle.Text,
-                AppUrl = ApplicationTitle.URL,
+                AppUrl = ApplicationTitle.Href,
                 IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
@@ -548,7 +555,28 @@ namespace GoC.WebTemplate
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                AppSettings= BuildHideableHrefOnlyLink(AppSettingsURL, true),
+                AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
+                MenuPath = CustomSiteMenuURL,
+                CustomSearch = CustomSearch,
+                TopSecMenu = LeftMenuItems.Any()
+            });
+        }
+
+        private HtmlString RenderGCWebAppTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new GCWebAppTop
+            {
+                AppName = new List<Link> {ApplicationTitle},
+                SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
+                SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                ShowPreContent = ShowPreContent,
+                Breadcrumbs = BuildBreadcrumbs(),
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
+                AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
                 MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch,
                 TopSecMenu = LeftMenuItems.Any()

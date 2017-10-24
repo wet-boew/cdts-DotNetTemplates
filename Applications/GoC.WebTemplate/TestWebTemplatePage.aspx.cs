@@ -13,7 +13,7 @@ namespace GoC.WebTemplate
         protected void Page_Load(object sender, EventArgs e)
         {
             this.WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
-            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.URL = "http://www.pinkbike.com";
+            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";
             this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "YUP";
             this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "Sample Page";
             this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");

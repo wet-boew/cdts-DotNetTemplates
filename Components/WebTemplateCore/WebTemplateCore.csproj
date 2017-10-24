@@ -61,7 +61,6 @@
     <Compile Include="Proxies\ICacheProxy.cs" />
     <Compile Include="JsonSerializationHelper.cs" />
     <Compile Include="JSONSerializationObjects\AppFooter.cs" />
-    <Compile Include="JSONSerializationObjects\ApplicationTitle.cs" />
     <Compile Include="JSONSerializationObjects\AppTop.cs" />
     <Compile Include="JSONSerializationObjects\Breadcrumb.cs" />
     <Compile Include="JSONSerializationObjects\CDTSEnvironment.cs" />
