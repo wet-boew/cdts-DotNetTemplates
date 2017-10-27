@@ -1,38 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Globalization;
 
 namespace GoC.WebTemplate
 {
-    public partial class TestWebTemplatePage : GoC.WebTemplate.BasePage
+    public partial class TestWebTemplatePage : BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
-            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";
-            this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "YUP";
-            this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "Sample Page";
-            this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
-            this.WebTemplateMaster.WebTemplateCore.DateModified = Convert.ToDateTime("9 january 2015");
-            this.WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
-            this.WebTemplateMaster.WebTemplateCore.ShowFeatures = true;
-            this.WebTemplateMaster.WebTemplateCore.ShowSearch = true;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = false;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 20001;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
-            this.WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
-            this.WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
-            this.WebTemplateMaster.WebTemplateCore.ShowSharePageLink = true;
-            this.WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            this.WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
-            this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = false;
-            this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;            
-            this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
-            this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "webform1.aspx";
+            WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
+            WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";
+            WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "YUP";
+            WebTemplateMaster.WebTemplateCore.HeaderTitle = "Sample Page";
+            WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
+            WebTemplateMaster.WebTemplateCore.DateModified = Convert.ToDateTime("9 january 2015");
+            WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
+            WebTemplateMaster.WebTemplateCore.ShowFeatures = true;
+            WebTemplateMaster.WebTemplateCore.ShowSearch = true;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = false;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 20001;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
+            WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
+            WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateMaster.WebTemplateCore.ShowSharePageLink = true;
+            WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
+            WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = false;
+            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;            
+            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
+            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "webform1.aspx";
         }
     }
 }

@@ -459,6 +459,13 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
 
+        /// <summary>
+        /// Custom Links for the top Menu added for MSCAs (Currently) use only. 
+        /// Set by application programmatically
+        /// Only available in the Application Template
+        /// </summary>
+        public List<MenuLink> MenuLinks { get; set; }
+        
         private string BuildLocalPath()
         {
             return GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
@@ -533,10 +540,19 @@ namespace GoC.WebTemplate
         public HtmlString RenderAppTop()
         {
             CheckIfBothSignInAndSignOutAreSet();
+            CheckIfCustomMenuURLAndMenuLinkAreBothSet();
 
             //For v4.0.26.x we have to render this section differently depending on the theme, 
             //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
             return WebTemplateTheme.ToLower() == "gcweb" ? RenderGCWebAppTop() : RenderGCIntranetApptop();
+        }
+
+        private void CheckIfCustomMenuURLAndMenuLinkAreBothSet()
+        {
+            if (CustomSiteMenuURL != null && MenuLinks != null && MenuLinks.Any())
+            {
+                throw new InvalidOperationException("Unable to have both a custom menu url and dynamically generated menu at the same time");
+            }
         }
 
         private HtmlString RenderGCIntranetApptop()
@@ -558,7 +574,8 @@ namespace GoC.WebTemplate
                 AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
                 MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch,
-                TopSecMenu = LeftMenuItems.Any()
+                TopSecMenu = LeftMenuItems.Any(),
+                MenuLinks = MenuLinks
             });
         }
 
@@ -579,7 +596,8 @@ namespace GoC.WebTemplate
                 AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
                 MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch,
-                TopSecMenu = LeftMenuItems.Any()
+                TopSecMenu = LeftMenuItems.Any(),
+                MenuLinks = MenuLinks
             });
         }
 

@@ -55,13 +55,16 @@
     <Compile Include="JSONSerializationObjects\Footer.cs" />
     <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
+    <Compile Include="JSONSerializationObjects\GCWebAppTop.cs" />
+    <Compile Include="JSONSerializationObjects\MenuLink.cs" />
     <Compile Include="JSONSerializationObjects\ShareList.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
+    <Compile Include="JSONSerializationObjects\SubLink.cs" />
     <Compile Include="Proxies\CacheProxy.cs" />
     <Compile Include="Proxies\ICacheProxy.cs" />
     <Compile Include="JsonSerializationHelper.cs" />
     <Compile Include="JSONSerializationObjects\AppFooter.cs" />
-    <Compile Include="JSONSerializationObjects\AppTop.cs" />
+    <Compile Include="JSONSerializationObjects\GCIntranetAppTop.cs" />
     <Compile Include="JSONSerializationObjects\Breadcrumb.cs" />
     <Compile Include="JSONSerializationObjects\CDTSEnvironment.cs" />
     <Compile Include="JSONSerializationObjects\ICDTSEnvironment.cs" />

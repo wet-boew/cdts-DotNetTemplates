@@ -68,6 +68,7 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
+    <Content Include="TestApplicationTemplatePage.aspx" />
     <Content Include="Web.config.install.xdt" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
@@ -133,6 +134,7 @@
       <DependentUpon>GoCWebTemplate.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestApplicationTemplatePage.aspx.cs" />
     <Compile Include="TestWebTemplatePage.aspx.cs">
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
