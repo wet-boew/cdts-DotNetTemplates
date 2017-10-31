@@ -6,6 +6,9 @@ namespace GoC.WebTemplate
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            WebTemplateMaster.WebTemplateCore.ContactLink = new Link();
+            WebTemplateMaster.WebTemplateCore.ContactLink.Text = string.Empty;
+            WebTemplateMaster.WebTemplateCore.ContactLink.Href = "http://tempuri.com";
             WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "YUP";

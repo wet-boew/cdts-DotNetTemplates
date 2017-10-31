@@ -12,6 +12,9 @@ namespace GoC.WebTemplate
     protected void Page_Load(object sender, EventArgs e)
     {
 
+      WebTemplateMaster.WebTemplateCore.ContactLink.Href = "foo";
+      WebTemplateMaster.WebTemplateCore.ContactLink.Text = string.Empty;
+      
       WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://tempuri.com";
       WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "Test page";
       WebTemplateMaster.WebTemplateCore.MenuLinks = new List<MenuLink>
