@@ -7,7 +7,21 @@ namespace CoreTest.RenderTests
 {
   public class RenderFooterTests
   {
-        
+
+    [Theory, AutoNSubstituteData]
+    public void ContactLinksShoulNotRenderWhenNull(Core sut)
+    {
+      sut.ContactLink = null;
+      sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\"");
+    }
+    
+    [Theory, AutoNSubstituteData]
+    public void ContactLinksShoulNotRenderWhenEmpty(Core sut)
+    {
+      sut.ContactLink = new Link();
+      sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\"");
+    }
+    
     [Theory, AutoNSubstituteData]
     public void ContactLinksShouldNotBeEmptyWhenValueIsSet(Core sut)
     {

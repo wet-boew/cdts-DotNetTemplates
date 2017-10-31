@@ -191,7 +191,14 @@ namespace GoC.WebTemplate
         /// </summary>
         public Link ContactLink { get; set; }
 
-        private List<Link> BuildContactLinks() => ContactLink == null?null:new List<Link> { ContactLink };
+        private List<Link> BuildContactLinks()
+        {
+            if (ContactLink == null || String.IsNullOrWhiteSpace(ContactLink.Href))
+            {
+                return null;
+            }
+            return  new List<Link> {ContactLink};
+        }
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
