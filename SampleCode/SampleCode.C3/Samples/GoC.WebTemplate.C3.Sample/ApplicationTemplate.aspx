@@ -40,6 +40,16 @@ WebTemplateCore.ApplicationTitle.URL = "http://canada.ca";
 </pre>
 </div>
 
+    
+<h2>Application Settings</h2>
+<p>You can set a custom link for accessing the settings page of your application</p>
+<p>This can be set programmatically using the <code class="wb-prettify">AppSettingsURL</code> property</p>
+<div class="wb-prettify all-pre lang-vb linenums">
+    <pre>//Set the name of the web application
+WebTemplateCore.AppSettingsURL ="http://canada.ca"; 
+</pre>
+</div>
+
 <h2>Change Language Link</h2>
 <p>You can set a custom link for changing the language of your application</p>
 <p>This can be set programmatically using the <code class="wb-prettify">LanguageLink.Href</code> property</p>
@@ -137,7 +147,8 @@ WebTemplateCore.ShowPreContent = false;
 </div>
 
 <h2>Site Menu</h2>
-<p>The site menu can be customized using the following setting</p>
+<p>The site menu can be customized using the following settings</p>
+<h3>Custom Site Menu URL</h3>
 <ul>
     <li>
         <code class="wb-prettify">CustomSiteMenuURL</code> this variable is used to display a custom menu.
@@ -154,20 +165,43 @@ WebTemplateCore.ShowPreContent = false;
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //set the custom site menu url
-WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
+WebTemplateMaster.WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
 </pre>
 </div>
 
-<h2>Secure Icon</h2>
-<p>
-    <code class="wb-prettify">ShowSecure</code> is a boolean variable that is used to either show or hide the secure icon
-</p>
-
+    <h3>Menu Links</h3>
+    <ul>
+        <li><code class="wb-prettify">MenuLinks</code> this variable is used to render a dynamically generated menu.</li>
+    </ul>
+    
 <div class="wb-prettify all-pre lang-vb linenums">
-    <pre>//Show the lock icons
-WebTemplateCore.ShowSecure = true; 
+    <pre>
+//set the custom site menu url
+WebTemplateMaster.WebTemplateCore.MenuLinks = new List&lt;MenuLink&gt;
+{
+
+    //Add a top level menu item with no drop down
+    new MenuLink {
+      Href = "Foo", Text = "Item 1",
+    },
+    //Add a top level menu item with two items in the drop down.
+    new MenuLink { 
+      Text = "Item 2", SubLinks = new List&lt;SubLink&gt; {
+        new SubLink {
+           Href = "Foo", Text = "SubLink 1"
+        }, 
+        //Add a placeholder menu item
+        new SubLink {
+          Text = "SubLink 2"
+        }
+      }
+    } 
+
+};
 </pre>
 </div>
+    
+
 
 <h2>Sign In & Out</h2>
 <p>You are able to specify the visibility of and the url for sign in and sign out buttons on the application menu.</p>

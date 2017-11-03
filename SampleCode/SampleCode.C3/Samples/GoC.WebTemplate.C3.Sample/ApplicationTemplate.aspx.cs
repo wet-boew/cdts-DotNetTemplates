@@ -10,7 +10,6 @@ public partial class ApplicationTemplate : GoC.WebTemplate.BasePage
             this.WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "Application Name";
             this.WebTemplateMaster.WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             this.WebTemplateMaster.WebTemplateCore.ShowPreContent = false;
-            this.WebTemplateMaster.WebTemplateCore.ShowSecure = true;
             this.WebTemplateMaster.WebTemplateCore.ShowSearch = true;
 
         this.WebTemplateMaster.WebTemplateCore.ContactLink = new Link() {Href="http://travel.gc.ca/"};
@@ -37,5 +36,6 @@ public partial class ApplicationTemplate : GoC.WebTemplate.BasePage
 
             WebTemplateMaster.WebTemplateCore.SignInLinkURL = "about:blank";
             WebTemplateMaster.WebTemplateCore.ShowSignInLink = true;
+            WebTemplateMaster.WebTemplateCore.AppSettingsURL = "http://tempuri.com";
         }
     }

@@ -18,7 +18,7 @@ namespace SampleCode.C3.MVC.Controllers
             //specify a title for this page
             this.WebTemplateCore.HeaderTitle = "My Title";
             this.WebTemplateCore.ApplicationTitle.Text = "Custom Title";
-            this.WebTemplateCore.ApplicationTitle.URL = "FOO/Bar";
+            this.WebTemplateCore.ApplicationTitle.Href = "FOO/Bar";
             //specify the metatags
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta charset='UTF-8'>");
             this.WebTemplateCore.HTMLHeaderElements.Add("<meta name='singer' content='Elvis'>");
@@ -257,11 +257,10 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult GCIntranetThemeSample()
         {
 
-            this.WebTemplateCore.WebTemplateSubTheme = "esdc";
             this.WebTemplateCore.Environment = "ESDC_PROD";
             this.WebTemplateCore.UseHTTPS = true;
             this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
-            this.WebTemplateCore.ApplicationTitle.URL = "http://iservice.prv/eng/index.shtml";  
+            this.WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";  
                         
             return View();
         }

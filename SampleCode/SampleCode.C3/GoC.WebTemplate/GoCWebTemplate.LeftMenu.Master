@@ -21,7 +21,7 @@
         </noscript>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop(isApplication: false) %>));
         </script>
          <%= WebTemplateCore.RenderHtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->
@@ -37,7 +37,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.RenderTop() %>;
+            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.RenderTop() %>);
         </script>
         <div class="container">
 	        <div class="row">
