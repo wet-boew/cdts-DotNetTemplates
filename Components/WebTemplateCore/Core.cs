@@ -68,8 +68,6 @@ namespace GoC.WebTemplate
             //Normalizing to match with the value we read from the configuration file.
             Environment = _configProxy.Environment.ToUpper();
             
-            WebTemplateSubTheme = _cdtsEnvironments[Environment].SubTheme;
-            
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
@@ -390,7 +388,7 @@ namespace GoC.WebTemplate
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
         /// </summary>
-        public string WebTemplateSubTheme { get; }
+        public string WebTemplateSubTheme => this._cdtsEnvironments[this.Environment].SubTheme;
 
         /// <summary>
         /// Determines if the communication between the browser and the CDTS should be encrypted
