@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoC.WebTemplate;
+using GoC.WebTemplate.Proxies;
+using NSubstitute;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoNSubstitute;
 using Ploeh.AutoFixture.Xunit2;
@@ -21,16 +23,22 @@ namespace CoreTest
     public class CoreCustomization : ICustomization {
         public void Customize(IFixture fixture)
         {
+            fixture.Customize<IConfigurationProxy>(c => c.FromFactory(() =>
+            {
+                var config = Substitute.For<IConfigurationProxy>();
+                //Set Proxy Configurations here
+                config.Environment.Returns("ITEM1");
+                return config;
+            }));
             //Tell autofixture to ignore certain properties as they get set by the configuration file in the constructor
-            //In particular ignore the sitemenu since we want it to default to true;
-            fixture.Customize<Core>(c => c.Without(p => p.ShowSiteMenu)
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.
-                                          .Without(p => p.ShowSignOutLink)
+            fixture.Customize<Core>(c => c.Without(p => p.ShowSignOutLink)
                                           .Without(p => p.ShowSignInLink)
             //We want custom search to start out as default(string)
                                           .Without(p => p.CustomSearch) 
             //The Site Menu URL should be null
                                           .Without(p => p.CustomSiteMenuURL)
+                                          .Without(p => p.MenuLinks)
             //We also create want to ignore some of the lists as they should start out empty.
             //Normally you don't need to ignore so much but this object breaks normal .Net conventions by using the constructor
             //to set properties, instead of just using the properties

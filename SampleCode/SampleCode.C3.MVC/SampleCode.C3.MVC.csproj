@@ -45,8 +45,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplateMVC, Version=4.0.25.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.25.5-RC1\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+    <Reference Include="GoC.WebTemplateMVC, Version=4.0.26.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.26.1\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -87,8 +87,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebTemplateCore, Version=1.0.6444.26321, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.25.5-RC1\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6523.17635, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.26.1\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -111,8 +111,8 @@
     <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\refTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />

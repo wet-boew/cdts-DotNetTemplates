@@ -29,7 +29,7 @@
 
     <h2>Contact Link</h2>
     <p>The Contact Link located at the bottom of the page.</p>
-    <p>Set programmatically via the <code class="wb-prettify">"ContactLinkURL"</code> property of the Web Template.</p>
+    <p>Set programmatically via the <code class="wb-prettify">"ContactLink"</code> property of the Web Template.</p>
 
     <div class="wb-prettify all-pre lang-vb linenums">
     <h3>C# Code Sample</h3>
@@ -54,7 +54,7 @@ this.WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
 this.WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "SP-3485-01";
 
 //Specify the Contact Link
-this.WebTemplateCore.ContactLinkURL = "http://travel.gc.ca/";
+this.WebTemplateCore.ContactLink = new Link() {Href="http://travel.gc.ca/"};
 </pre>
 </div>
    <!-- #include virtual="SamplesNavigation.html" -->

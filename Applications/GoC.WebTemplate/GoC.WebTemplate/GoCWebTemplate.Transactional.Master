@@ -21,7 +21,7 @@
         </noscript>
         <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop() %>));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop(isApplication: false) %>));
         </script>
         <%= WebTemplateCore.RenderHtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->

@@ -1,12 +1,16 @@
+using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using GoC.WebTemplate;
+using Newtonsoft.Json.Serialization;
 
 namespace WebTemplateCore.JSONSerializationObjects
 {
+
     /// <summary>
     /// Used to serialize to JSON for the application template in the wet.builder.appTop call
     /// </summary>
-    internal class AppTop
+    internal class GCIntranetAppTop
     {
         public List<Link> IntranetTitle { get; set; }
         public string AppUrl { get; set; }
@@ -15,9 +19,7 @@ namespace WebTemplateCore.JSONSerializationObjects
         public string AppName { get; set;  }
         public string CustomSearch { get; set; }
         public List<LanguageLink> LngLinks { get; set; }
-        public bool SiteMenu { get; set; }
-
-        public bool Secure { get; set; }
+        public List<Link> AppSettings { get; set; }
         /// <summary>
         /// This is an array but it should only have one item in it. 
         /// </summary>
@@ -32,5 +34,6 @@ namespace WebTemplateCore.JSONSerializationObjects
         public bool ShowPreContent { get; set; }
         public string LocalPath { get; set; }
         public bool TopSecMenu { get; set; }
+        public List<MenuLink> MenuLinks { get; set; }
     }
 }

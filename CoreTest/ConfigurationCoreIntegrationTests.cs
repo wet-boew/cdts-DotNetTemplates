@@ -4,6 +4,7 @@ using GoC.WebTemplate;
 using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
 using NSubstitute;
+using Ploeh.AutoFixture.Xunit2;
 using WebTemplateCore.JSONSerializationObjects;
 using WebTemplateCore.Proxies;
 using Xunit;
@@ -16,12 +17,14 @@ namespace CoreTest
     public class ConfigurationCoreIntegrationTests
     {
         [Theory, AutoNSubstituteData]
-        public void SubThemeSetProgrammticallyOverridesWebConfig(IDictionary<string, ICDTSEnvironment> environments,
+        public void SubThemeSetFromCDTSEnvironments([Frozen]ICDTSEnvironment fakeEnvironment,
+            IDictionary<string, ICDTSEnvironment> environments,
             ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
         {
+            fakeEnvironment.SubTheme = "foobar";
+            
             var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
-            sut.WebTemplateSubTheme = "foobar";
             sut.RenderTop().ToString().Should().Contain("\"subTheme\":\"foobar\"");
         }
         [Theory, AutoNSubstituteData]
@@ -36,30 +39,6 @@ namespace CoreTest
         }
 
         [Theory, AutoNSubstituteData]
-        public void SiteMenuShownByDefault(IDictionary<string, ICDTSEnvironment> environments,
-            ICacheProxy fakeCacheProxy,
-            ICurrentRequestProxy fakeCurrentRequestProxy)
-        {
-            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
-            var json = sut.RenderAppTop();
-            json.ToString().Should().Contain("\"siteMenu\":true");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void GlobalNavFalseByDefault(IDictionary<string, ICDTSEnvironment> environments,
-            ICacheProxy fakeCacheProxy,
-            ICurrentRequestProxy fakeCurrentRequestProxy)
-        {
-            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(),environments);
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("\"globalNav\":false");
-        }
-
-
-        [Theory, AutoNSubstituteData]
-
         public void LeavingSecureSiteWarningElementCapitilizationFix(IDictionary<string, ICDTSEnvironment> environments,
             ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)

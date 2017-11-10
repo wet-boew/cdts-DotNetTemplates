@@ -44,6 +44,7 @@ namespace GoC.WebTemplate
         }
         
         [ConfigurationProperty("showSiteMenu", DefaultValue= true) ]
+        [Obsolete("no longer used. Will be removed in a future release.")]
         public bool ShowSiteMenu
         {
             get { return (bool) this["showSiteMenu"];  }
@@ -51,6 +52,7 @@ namespace GoC.WebTemplate
         }
 
         [ConfigurationProperty("showGlobalNav")]
+        [Obsolete("no longer used. Will be removed in a future release.")]
         public bool ShowGlobalNav
         {
             get { return (bool) this["showGlobalNav"]; }
@@ -93,15 +95,6 @@ namespace GoC.WebTemplate
             set { this["theme"] = value; }
         }
 
-        /// <summary>
-        /// subTheme
-        /// </summary>
-        [ConfigurationProperty("subTheme")]
-        public string SubTheme
-        {
-            get { return (string)this["subTheme"]; }
-            set { this["subTheme"] = value; }
-        }
 
         /// <summary>
         /// cdts environment to use

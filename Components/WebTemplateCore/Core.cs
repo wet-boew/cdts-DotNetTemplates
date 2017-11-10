@@ -63,10 +63,11 @@ namespace GoC.WebTemplate
 
             //Set properties
             WebTemplateVersion = _configProxy.Version;
-            WebTemplateSubTheme = _configProxy.SubTheme;
 
             UseHTTPS = _configProxy.UseHttps;
-            Environment = _configProxy.Environment;
+            //Normalizing to match with the value we read from the configuration file.
+            Environment = _configProxy.Environment.ToUpper();
+            
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
@@ -112,8 +113,6 @@ namespace GoC.WebTemplate
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            ShowSiteMenu = _configProxy.ShowSiteMenu;
-            ShowGlobalNav = _configProxy.ShowGlobalNav;
             CustomSearch = _configProxy.CustomSearch;
 
         }
@@ -132,7 +131,7 @@ namespace GoC.WebTemplate
         /// Set Programmatically
         /// </summary>
         /// <remarks>Usable in Intranet Themes and Application Template</remarks>
-        public ApplicationTitle ApplicationTitle { get; } = new ApplicationTitle();
+        public Link ApplicationTitle { get; } = new Link();
 
         /// <summary>
         /// Represents the list of links for the Breadcrumbs
@@ -185,13 +184,19 @@ namespace GoC.WebTemplate
         public string AppendToTitle => CurrentEnvironment.AppendToTitle;
 
         /// <summary>
-        /// Used to override the Contact links in Footer
+        /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter
         /// Set by application programmatically
         /// </summary>
         public Link ContactLink { get; set; }
 
-        private List<Link> BuildContactLinks() => new List<Link> {ContactLink};   
-
+        private List<Link> BuildContactLinks()
+        {
+            if (ContactLink == null || String.IsNullOrWhiteSpace(ContactLink.Href))
+            {
+                return null;
+            }
+            return  new List<Link> {ContactLink};
+        }
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -382,9 +387,8 @@ namespace GoC.WebTemplate
 
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
-        /// Set by application via web.config or programmatically
         /// </summary>
-        public string WebTemplateSubTheme { get; set; }
+        public string WebTemplateSubTheme => this._cdtsEnvironments[this.Environment].SubTheme;
 
         /// <summary>
         /// Determines if the communication between the browser and the CDTS should be encrypted
@@ -406,27 +410,19 @@ namespace GoC.WebTemplate
         public string CustomSearch { get; set; }
 
         /// <summary>
-        /// Determines if the Global Nav bar in the footer is to be displayed.
-        /// Set by application programmatically or in the Web.Config
-        /// Only available in the Application Template
-        /// </summary>
-        public bool ShowGlobalNav { get; set; }
-
-        /// <summary>
-        /// Determines if the Site Menu is to appear at the top of the page.
-        /// If set to false only a blue band will be seen.
-        /// Set by application programmatically or in the Web.Config
-        /// Only available in the Application Template
-        /// </summary>
-        public bool ShowSiteMenu { get; set; }
-
-        /// <summary>
         /// A custom site menu to be used in place of the standard canada.ca site menu
         /// This defaults to null (use standard menu)
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
         /// </summary>
         public string CustomSiteMenuURL { get; set; }
+
+        /// <summary>
+        /// The link to use for the App Settings in the AppTop
+        /// Set by application programmatically or in the Web.Config
+        /// Only available in the Application Template
+        /// </summary>
+        public string AppSettingsURL { get; set; }
 
         /// <summary>
         /// The link to use for the sign in button, will only appear if <see cref="ShowSignInLink"/> is set to true
@@ -442,13 +438,6 @@ namespace GoC.WebTemplate
         /// </summary>
         public string SignOutLinkURL { get; set; }
 
-
-        /// <summary>
-        /// Displays the secure icon next to the applicaiton name in the header.
-        /// Set by application programmatically
-        /// Only available in the Application Template
-        /// </summary>
-        public bool ShowSecure { get; set; }
 
         /// <summary>
         /// Displays the sign in link set.
@@ -475,6 +464,13 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; }
 
+        /// <summary>
+        /// Custom Links for the top Menu added for MSCAs (Currently) use only. 
+        /// Set by application programmatically
+        /// Only available in the Application Template
+        /// </summary>
+        public List<MenuLink> MenuLinks { get; set; }
+        
         private string BuildLocalPath()
         {
             return GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
@@ -540,9 +536,8 @@ namespace GoC.WebTemplate
                 ShowFeatures = ShowFeatures,
                 TermsLink = GetStringForJson(TermsConditionsLinkURL),
                 PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                ContactLinks = BuildContactLinks(),
+                ContactLink = GetStringForJson(ContactLink?.Href),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                GlobalNav = ShowGlobalNav,
                 FooterSections = BuildCustomFooterLinks
             });
         }
@@ -550,15 +545,30 @@ namespace GoC.WebTemplate
         public HtmlString RenderAppTop()
         {
             CheckIfBothSignInAndSignOutAreSet();
+            CheckIfCustomMenuURLAndMenuLinkAreBothSet();
 
-            return JsonSerializationHelper.SerializeToJson(new AppTop
+            //For v4.0.26.x we have to render this section differently depending on the theme, 
+            //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
+            return WebTemplateTheme.ToLower() == "gcweb" ? RenderGCWebAppTop() : RenderGCIntranetApptop();
+        }
+
+        private void CheckIfCustomMenuURLAndMenuLinkAreBothSet()
+        {
+            if (CustomSiteMenuURL != null && MenuLinks != null && MenuLinks.Any())
+            {
+                throw new InvalidOperationException("Unable to have both a custom menu url and dynamically generated menu at the same time");
+            }
+        }
+
+        private HtmlString RenderGCIntranetApptop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new GCIntranetAppTop
             {
                 AppName = ApplicationTitle.Text,
-                AppUrl = ApplicationTitle.URL,
+                AppUrl = ApplicationTitle.Href,
                 IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
-                Secure = ShowSecure,
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
                 Search = ShowSearch,
@@ -566,10 +576,33 @@ namespace GoC.WebTemplate
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                SiteMenu = ShowSiteMenu,
+                AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
                 MenuPath = CustomSiteMenuURL,
                 CustomSearch = CustomSearch,
-                TopSecMenu = LeftMenuItems.Any()
+                TopSecMenu = LeftMenuItems.Any(),
+                MenuLinks = MenuLinks
+            });
+        }
+
+        private HtmlString RenderGCWebAppTop()
+        {
+            return JsonSerializationHelper.SerializeToJson(new GCWebAppTop
+            {
+                AppName = new List<Link> {ApplicationTitle},
+                SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
+                SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
+                CdnEnv = CDNEnvironment,
+                SubTheme = WebTemplateSubTheme,
+                Search = ShowSearch,
+                LngLinks = BuildLanguageLinkList(),
+                ShowPreContent = ShowPreContent,
+                Breadcrumbs = BuildBreadcrumbs(),
+                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
+                AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
+                MenuPath = CustomSiteMenuURL,
+                CustomSearch = CustomSearch,
+                TopSecMenu = LeftMenuItems.Any(),
+                MenuLinks = MenuLinks
             });
         }
 
@@ -585,7 +618,6 @@ namespace GoC.WebTemplate
                 IntranetTitle = BuildIntranentTitleList(),
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
-                SiteMenu = false,
                 Breadcrumbs = BuildBreadcrumbs(),
                 ShowPreContent = false,
                 LocalPath = BuildLocalPath(),
@@ -603,7 +635,6 @@ namespace GoC.WebTemplate
                 IntranetTitle = BuildIntranentTitleList(),
                 Search = ShowSearch,
                 LngLinks = BuildLanguageLinkList(),
-                SiteMenu = true,
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = BuildLocalPath(),
@@ -611,14 +642,15 @@ namespace GoC.WebTemplate
             });
         }
 
-        public HtmlString RenderRefTop()
+        public HtmlString RenderRefTop(bool isApplication)
         {
             return JsonSerializationHelper.SerializeToJson(new RefTop
             {
                 CdnEnv = CDNEnvironment,
                 SubTheme = WebTemplateSubTheme,
                 JqueryEnv = LoadJQueryFromGoogle ? "external" : null,
-                LocalPath = BuildLocalPath()
+                LocalPath = BuildLocalPath(),
+                IsApplication = isApplication
             });
         }
 
@@ -628,7 +660,7 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = CDNEnvironment,
                 DateModified = BuildDateModified(),
-                VersionIdentifier = BuildVersionIdentifier(),
+                VersionIdentifier = GetStringForJson(VersionIdentifier),
                 ShowPostContent = ShowPostContent,
                 ShowFeedback = new FeedbackLink
                 {
@@ -650,7 +682,7 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = CDNEnvironment,
                 DateModified = BuildDateModified(),
-                VersionIdentifier = BuildVersionIdentifier(),
+                VersionIdentifier = GetStringForJson(VersionIdentifier),
                 ShowPostContent = false,
                 ShowFeedback = new FeedbackLink {Show = false},
                 ShowShare = new ShareList { Show = false},
@@ -723,21 +755,11 @@ namespace GoC.WebTemplate
 
         }
 
-        private string BuildVersionIdentifier()
-        {
-            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(VersionIdentifier))
-            {
-                return VersionIdentifier;
-            }
-            return null;
-        }
-
+        
         private string BuildDateModified()
         {
 
-            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0 &&
-                !string.IsNullOrEmpty(VersionIdentifier))
+            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0)
             {
                 return null;
             }

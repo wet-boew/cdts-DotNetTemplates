@@ -43,7 +43,7 @@
       "AppendToTitle":  "" 
     },
     {
-      "Name": "ESDC_GCIntranet_SADE",
+      "Name": "ESDC_GCINTRANET_SADE",
       "Path": "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
       "Theme": "gcintranet", 
       "SubTheme": "esdc",
@@ -53,7 +53,7 @@
       "AppendToTitle":  "" 
     },
     {
-      "Name": "ESDC_GCIntranet_QA",
+      "Name": "ESDC_GCINTRANET_QA",
       "Path": "http{0}://cdn-canada.services.gc.qat/{1}/cls/wet/{2}/{3}cdts/compiled/",
       "Theme": "gcintranet", 
       "SubTheme": "esdc",

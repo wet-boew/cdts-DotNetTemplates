@@ -1,4 +1,12 @@
 ﻿************************************************************************************************************
+4.0.26.1 - 2017-11-09 
+- Removed ShowSecure flag from Core object
+- Added an AppSettingsURL property to the Core object
+- Removed ShowSiteMenu property in Core Object
+- Fixed a bug where the subtheme wasn't being set
+- Fixed a bug where the subtheme wasn't being read from CDTSEnvironments.json
+- Added the MenuLinks property to the core object allowing users to dynamically generate an application menu
+************************************************************************************************************
 4.0.25.1 - 2017-06-28
 - Added a URL to the title in the Application Template 
 - Added an Intranet Title to the Application Template
