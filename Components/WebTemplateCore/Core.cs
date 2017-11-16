@@ -621,7 +621,8 @@ namespace GoC.WebTemplate
                 Breadcrumbs = BuildBreadcrumbs(),
                 ShowPreContent = false,
                 LocalPath = BuildLocalPath(),
-                TopSecMenu = LeftMenuItems.Any()
+                TopSecMenu = LeftMenuItems.Any(), 
+                SiteMenu = false
 
             });
         }
@@ -638,7 +639,8 @@ namespace GoC.WebTemplate
                 ShowPreContent = ShowPreContent,
                 Breadcrumbs = BuildBreadcrumbs(),
                 LocalPath = BuildLocalPath(),
-                TopSecMenu = LeftMenuItems.Any()
+                TopSecMenu = LeftMenuItems.Any(),
+                SiteMenu = true
             });
         }
 
