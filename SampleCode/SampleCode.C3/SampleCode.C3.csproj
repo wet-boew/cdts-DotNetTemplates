@@ -58,13 +58,13 @@
       <HintPath>..\..\packages\GoC.Components.Crypto.2.6\Lib\Net40\Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate, Version=4.0.26.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.2\lib\Net45\GoC.WebTemplate.dll</HintPath>
+    <Reference Include="GoC.WebTemplate, Version=4.0.26.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.3\lib\Net45\GoC.WebTemplate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.2\lib\Net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.3\lib\Net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -87,8 +87,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebTemplateCore, Version=1.0.6529.27874, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.2\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6535.15512, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.3\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
