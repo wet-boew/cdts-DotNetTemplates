@@ -24,6 +24,16 @@
       "AppendToTitle":  "" 
     },
     {
+      "Name": "PROD_SSL_ECCCSUB",
+      "Path": "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+      "Theme": "gcintranet", 
+      "SubTheme":  "eccc", 
+      "CDN": "prod",
+      "IsVersionRnCombined": false,
+      "IsSSLModifiable": false,
+      "AppendToTitle":  "" 
+    },
+    {
       "Name": "PROD_UNSECURE",
       "Path": "http://templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
       "Theme": "gcintranet", 
