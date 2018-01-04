@@ -388,7 +388,7 @@ namespace GoC.WebTemplate
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
         /// </summary>
-        public string WebTemplateSubTheme => this._cdtsEnvironments[this.Environment].SubTheme;
+        public string WebTemplateSubTheme => _cdtsEnvironments[Environment].SubTheme;
 
         /// <summary>
         /// Determines if the communication between the browser and the CDTS should be encrypted
@@ -564,8 +564,7 @@ namespace GoC.WebTemplate
         {
             return JsonSerializationHelper.SerializeToJson(new GCIntranetAppTop
             {
-                AppName = ApplicationTitle.Text,
-                AppUrl = ApplicationTitle.Href,
+                AppName = new List<Link> {ApplicationTitle},
                 IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
@@ -586,7 +585,7 @@ namespace GoC.WebTemplate
 
         private HtmlString RenderGCWebAppTop()
         {
-            return JsonSerializationHelper.SerializeToJson(new GCWebAppTop
+            return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = new List<Link> {ApplicationTitle},
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),

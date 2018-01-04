@@ -76,24 +76,14 @@ namespace CoreTest.RenderTests
       act.ShouldThrow<InvalidOperationException>();
     }  
     
-    [Theory, AutoNSubstituteData]
-    public void AppNameAndAppURLRenderedWhenThemeIsGCIntranet([Frozen] ICDTSEnvironment fakeEnvironment, Core sut)
-    {
-
-      fakeEnvironment.Theme = "GCIntranet";
-      sut.ApplicationTitle.Text = "foo";
-      sut.ApplicationTitle.Href = "bar";
-
-
-      sut.RenderAppTop().ToString()
-        .Should().Contain("\"appName\":\"foo\"", "\"appUrl\":\"bar\"");
-    }
         
-    [Theory, AutoNSubstituteData]
-    public void AppNameAndAppURLRenderedWhenThemeIsGCWeb([Frozen] ICDTSEnvironment fakeEnvironment, Core sut)
+    [Theory]
+    [InlineAutoNSubstituteData("GCWeb")]
+    [InlineAutoNSubstituteData("GCTheme")]
+    public void AppNameAndAppURLRenderedSameBetweenGCWebandGCIntranet(string theme, [Frozen] ICDTSEnvironment fakeEnvironment, Core sut)
     {
 
-      fakeEnvironment.Theme = "GCWeb";
+      fakeEnvironment.Theme = theme;
       sut.ApplicationTitle.Text = "foo";
       sut.ApplicationTitle.Href = "bar";
 
@@ -147,13 +137,6 @@ namespace CoreTest.RenderTests
       sut.IntranetTitle = null;
       sut.RenderAppTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
 
-    }
-
-    [Theory, AutoNSubstituteData]
-    public void AppUrl(Core sut)
-    {
-      sut.ApplicationTitle.Href = "ApplicationURL";
-      sut.RenderAppTop().ToString().Should().Contain("\"appUrl\":\"ApplicationURL\"");
     }
         
     [Theory, AutoNSubstituteData]
