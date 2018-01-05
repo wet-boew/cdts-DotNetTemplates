@@ -76,6 +76,7 @@
     <Content Include="CDTSEnvironments.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

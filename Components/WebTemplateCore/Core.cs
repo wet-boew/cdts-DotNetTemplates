@@ -61,13 +61,18 @@ namespace GoC.WebTemplate
             _cdtsEnvironments = cdtsEnvironments;
 
 
-            //Set properties
+            SetDefaultValues(currentRequest);
+        }
+
+        private void SetDefaultValues(ICurrentRequestProxy currentRequest)
+        {
+//Set properties
             WebTemplateVersion = _configProxy.Version;
 
             UseHTTPS = _configProxy.UseHttps;
             //Normalizing to match with the value we read from the configuration file.
             Environment = _configProxy.Environment.ToUpper();
-            
+
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
@@ -114,7 +119,6 @@ namespace GoC.WebTemplate
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
             CustomSearch = _configProxy.CustomSearch;
-
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -191,7 +195,7 @@ namespace GoC.WebTemplate
 
         private List<Link> BuildContactLinks()
         {
-            if (ContactLink == null || String.IsNullOrWhiteSpace(ContactLink.Href))
+            if (string.IsNullOrWhiteSpace(ContactLink?.Href))
             {
                 return null;
             }
@@ -738,6 +742,13 @@ namespace GoC.WebTemplate
             });
         }
 
+        private HtmlString RenderCDNEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly {CdnEnv = CDNEnvironment});
+
+        public HtmlString RenderServerTop() => RenderCDNEnvOnly();
+        public HtmlString RenderServerBottom() => RenderCDNEnvOnly();
+        public HtmlString RenderServerRefTop() => RenderCDNEnvOnly();
+        public HtmlString RenderServerRefFooter() => RenderCDNEnvOnly();
+
         private string BuildJqueryEnv() => LoadJQueryFromGoogle ? "external" : null;
 
         private HtmlString RenderSecureSiteWarningRefFooter()
@@ -1092,6 +1103,11 @@ namespace GoC.WebTemplate
         }
 
 
+    }
+
+    public class CDNEnvOnly
+    {
+        public string CdnEnv { get; set; }
     }
 }
 
