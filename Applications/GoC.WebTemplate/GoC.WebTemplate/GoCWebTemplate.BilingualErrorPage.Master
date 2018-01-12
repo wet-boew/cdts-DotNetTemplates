@@ -20,7 +20,7 @@
         </noscript>
          <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.serverrefTop(<%= WebTemplateCore.RenderServerRefTop() %>));
+            document.write(wet.builder.serverRefTop(<%= WebTemplateCore.RenderServerRefTop() %>));
         </script>
 
         <%= WebTemplateCore.RenderHtmlHeaderElements() %>
