@@ -263,7 +263,7 @@ namespace SampleCode.C3.MVC.Controllers
             this.WebTemplateCore.UseHTTPS = true;
             this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
             this.WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";  
-                        
+            
             return View();
         }
 	}
