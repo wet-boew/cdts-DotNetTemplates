@@ -60,6 +60,7 @@
     <Compile Include="JSONSerializationObjects\ShareList.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
     <Compile Include="JSONSerializationObjects\SubLink.cs" />
+    <Compile Include="JSONSerializationObjects\UnilingualPreFooter.cs" />
     <Compile Include="Proxies\CacheProxy.cs" />
     <Compile Include="Proxies\ICacheProxy.cs" />
     <Compile Include="JsonSerializationHelper.cs" />
