@@ -177,6 +177,8 @@
   <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage_Layout.cshtml" />
     <Content Include="Views\Test\BilingualErrorPage.cshtml" />
+    <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage_Layout.cshtml" />
+    <Content Include="Views\Test\UnilingualErrorPage.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

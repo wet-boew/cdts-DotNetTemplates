@@ -9,7 +9,13 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult BilingualErrorPage()
         {
-            WebTemplateCore.HeaderTitle = "English | Francais";
+            WebTemplateCore.HeaderTitle = "Bilingual Error Test Page";
+            return View();
+        }
+
+        public ActionResult UnilingualErrorPage()
+        {
+            WebTemplateCore.HeaderTitle = "Unilingual Error Test Page";
             return View();
         }
     }

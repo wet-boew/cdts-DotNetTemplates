@@ -13,47 +13,56 @@
     <!-- Load closure template scripts -->
     <script type="text/javascript" src="@string.Concat(ViewBag.WebTemplateCore.CDNPath, "soyutils.js")"></script>
     <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", ViewBag.WebTemplateCore.CDNPath, ViewBag.WebTemplateCore.TwoLetterCultureLanguage)"></script>
+    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}plugins-{1}.js", ViewBag.WebTemplateCore.CDNPath, ViewBag.WebTemplateCore.TwoLetterCultureLanguage)"></script>
     <noscript>
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile("serverRefTop.html")
+        @ViewBag.WebTemplateCore.LoadStaticFile("refTop.html")
     </noscript>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderServerRefTop()));
+        document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderRefTop(isApplication : false)));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
     <!-- GoC.WebTemplate Version MVC @ViewBag.WebTemplateVersion -->
     <!-- GoC.WebTemplate.Core Version @ViewBag.WebTemplateCore.AssemblyVersion -->
 </head>
-
 <body vocab="http://schema.org/" typeof="WebPage">
     @ViewBag.WebTemplateCore.RenderSessionTimeoutControl()
     <div id="def-top">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile("serverTop.html")
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("top-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
         var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.serverTop(@ViewBag.WebTemplateCore.RenderServerTop());
+        defTop.outerHTML = wet.builder.top(@ViewBag.WebTemplateCore.RenderTop());
     </script>
     <main role="main" property="mainContentOfPage" class="container">
         <!-- the main content -->
         @RenderBody()
         <!-- end main content -->
+        <div id="def-preFooter">
+            <!-- Write closure fall-back static file -->
+            @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("preFooter-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        </div>
+        <!-- Write closure template -->
+        <script type="text/javascript">
+            var defPreFooter = document.getElementById("def-preFooter");
+            defPreFooter.outerHTML = wet.builder.preFooter(@ViewBag.WebTemplateCore.RenderUnilingualPreFooter());
+        </script>
     </main>
     <div id="def-footer">
         <!-- Write closure fall-back static file -->
-        @ViewBag.WebTemplateCore.LoadStaticFile("serverBottom.html");
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("footer-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
     </div>
     <!-- Write closure template -->
     <script type="text/javascript">
     var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.serverBottom(@ViewBag.WebTemplateCore.RenderServerBottom());
+        defFooter.outerHTML = wet.builder.footer(@ViewBag.WebTemplateCore.RenderFooter());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refFooter(@ViewBag.WebTemplateCore.RenderServerRefFooter()));
+        document.write(wet.builder.refFooter(@ViewBag.WebTemplateCore.RenderRefFooter()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlBodyElements()
 </body>

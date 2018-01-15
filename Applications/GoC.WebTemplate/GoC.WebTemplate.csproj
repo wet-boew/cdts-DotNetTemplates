@@ -70,6 +70,7 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
     <Content Include="TestApplicationTemplatePage.aspx" />
     <Content Include="TestErrorPage.aspx" />
+    <Content Include="TestUnilingualErrorPage.aspx" />
     <Content Include="TransactionalTemplateTestPage.aspx" />
     <Content Include="Web.config.install.xdt" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
@@ -78,6 +79,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,6 +148,13 @@
     </Compile>
     <Compile Include="TestErrorPage.aspx.designer.cs">
       <DependentUpon>TestErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestUnilingualErrorPage.aspx.cs">
+      <DependentUpon>TestUnilingualErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestUnilingualErrorPage.aspx.designer.cs">
+      <DependentUpon>TestUnilingualErrorPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestWebTemplatePage.aspx.cs">
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>

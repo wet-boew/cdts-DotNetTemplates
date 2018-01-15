@@ -659,6 +659,14 @@ namespace GoC.WebTemplate
             });
         }
 
+        public HtmlString RenderUnilingualPreFooter() {
+            return JsonSerializationHelper.SerializeToJson(new UnilingualPreFooter
+            {
+                CdnEnv = CDNEnvironment,
+                PageDetails = false
+            });
+        }
+
         public HtmlString RenderPreFooter()
         {
             return JsonSerializationHelper.SerializeToJson(new PreFooter

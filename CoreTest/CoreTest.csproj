@@ -102,6 +102,7 @@
     <Compile Include="RenderTests\RenderTests.cs" />
     <Compile Include="RenderTests\RenderTopTests.cs" />
     <Compile Include="RenderTests\RenderTransactionalTopTests.cs" />
+    <Compile Include="RenderTests\RenderUnilingualPreFooter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CDTSEnvironments.json">
