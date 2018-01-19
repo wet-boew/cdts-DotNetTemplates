@@ -976,18 +976,18 @@ namespace GoC.WebTemplate
             var currentEnv = _cdtsEnvironments[Environment];
 
 
-            if (!currentEnv.IsSSLModifiable && UseHTTPS.HasValue)
+            if (!currentEnv.IsEncryptionModifiable && UseHTTPS.HasValue)
             {
                 throw new InvalidOperationException($"{Environment} does not allow useHTTPS to be toggled");
             }
 
-            if (currentEnv.IsSSLModifiable && !UseHTTPS.HasValue)
+            if (currentEnv.IsEncryptionModifiable && !UseHTTPS.HasValue)
             {
                 throw new InvalidOperationException($"{Environment} requires useHTTPS to be true or false not null.");
             }
 
             var https = string.Empty;
-            if (currentEnv.IsSSLModifiable)
+            if (currentEnv.IsEncryptionModifiable)
             {
                 //We've already checked to see if this is null before here so ignore this in resharper
                 // ReSharper disable once PossibleInvalidOperationException

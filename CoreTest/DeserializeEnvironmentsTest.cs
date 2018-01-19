@@ -27,7 +27,7 @@ namespace CoreTest
                 Theme = "gcweb",
                 CDN = "prod",
                 IsVersionRNCombined = true,
-                IsSSLModifiable = false,
+                IsEncryptionModifiable = false,
                 AppendToTitle = " - Canada.ca"
 
 
@@ -45,7 +45,7 @@ namespace CoreTest
                 Theme = "gcintranet",
                 CDN = "prod",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = false,
+                IsEncryptionModifiable = false,
                 AppendToTitle = ""
 
 

@@ -11,7 +11,7 @@
       "Theme": "gcweb", 
       "CDN": "prod",
       "IsVersionRnCombined": true,
-      "IsSSLModifiable": false,
+      "IsEncryptionModifiable": false,
       "AppendToTitle":  "- Canada.ca" 
     },
     {
@@ -20,7 +20,7 @@
       "Theme": "gcintranet", 
       "CDN": "prod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": false,
+      "IsEncryptionModifiable": false,
       "AppendToTitle":  "" 
     },
     {
@@ -30,7 +30,7 @@
       "SubTheme":  "eccc", 
       "CDN": "prod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": false,
+      "IsEncryptionModifiable": false,
       "AppendToTitle":  "" 
     },
     {
@@ -39,7 +39,7 @@
       "Theme": "gcintranet", 
       "CDN": "prod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": false,
+      "IsEncryptionModifiable": false,
       "AppendToTitle":  "" 
     },
     {
@@ -49,7 +49,7 @@
       "SubTheme": "esdc",
       "CDN": "esdcprod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "" 
     },
     {
@@ -59,7 +59,7 @@
       "SubTheme": "",
       "CDN": "esdcnonprod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "" 
     },
     {
@@ -69,7 +69,7 @@
       "SubTheme": "",
       "CDN": "esdcqat",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "" 
     },
     {
@@ -79,7 +79,7 @@
       "SubTheme": "esdc",
       "CDN": "esdcnonprod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "" 
     },
     {
@@ -89,7 +89,7 @@
       "SubTheme": "esdc",
       "CDN": "esdcqat",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "" 
     },
     {
@@ -99,7 +99,7 @@
       "SubTheme": "",
       "CDN": "esdcnonprod",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "- Canada.ca" 
     },
     {
@@ -109,7 +109,7 @@
       "SubTheme": "",
       "CDN": "esdcqat",
       "IsVersionRnCombined": false,
-      "IsSSLModifiable": true,
+      "IsEncryptionModifiable": true,
       "AppendToTitle":  "- Canada.ca" 
     }
   ]
