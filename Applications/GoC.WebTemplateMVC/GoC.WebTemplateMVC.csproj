@@ -94,10 +94,20 @@
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverRefTop.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
     <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
   </ItemGroup>
   <ItemGroup>

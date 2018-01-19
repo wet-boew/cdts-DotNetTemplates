@@ -68,6 +68,15 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverRefTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
     <Content Include="TestApplicationTemplatePage.aspx" />
     <Content Include="TestErrorPage.aspx" />
     <Content Include="TestUnilingualErrorPage.aspx" />
