@@ -9,5 +9,5 @@
 
 
 
-public partial class ErrorSample {
+public partial class UnilingualErrorSample {
 }

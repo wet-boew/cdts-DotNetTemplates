@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-    public partial class ErrorSample : GoC.WebTemplate.BasePage
+    public partial class UnilingualErrorSample : GoC.WebTemplate.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {

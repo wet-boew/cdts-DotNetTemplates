@@ -199,7 +199,11 @@ namespace SampleCode.C3.MVC.Controllers
             return View();
         }
 
-        public ActionResult ErrorSample() 
+        public ActionResult UnilingualErrorSample() 
+        {
+            return View();
+        }
+        public ActionResult BilingualErrorSample() 
         {
             return View();
         }

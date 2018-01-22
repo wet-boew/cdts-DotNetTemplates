@@ -142,7 +142,8 @@
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\AddJSandCSSFilesSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\BaseSettingsSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\BreadcrumbSample.aspx" />
-    <Content Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\BilingualErrorSample.aspx" />
+    <Content Include="Samples\GoC.WebTemplate.C3.Sample\UnilingualErrorSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePageSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\FeedbackandShareThisPageSample.aspx" />
     <Content Include="Samples\GoC.WebTemplate.C3.Sample\LeavingSecureSiteSample.aspx" />
@@ -196,12 +197,19 @@
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BreadcrumbSample.aspx.designer.cs">
       <DependentUpon>BreadcrumbSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx.cs">
-      <DependentUpon>ErrorSample.aspx</DependentUpon>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BilingualErrorSample.aspx.cs">
+      <DependentUpon>BilingualErrorSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ErrorSample.aspx.designer.cs">
-      <DependentUpon>ErrorSample.aspx</DependentUpon>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\BilingualErrorSample.aspx.designer.cs">
+      <DependentUpon>BilingualErrorSample.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\UnilingualErrorSample.aspx.cs">
+      <DependentUpon>UnilingualErrorSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\GoC.WebTemplate.C3.Sample\UnilingualErrorSample.aspx.designer.cs">
+      <DependentUpon>UnilingualErrorSample.aspx</DependentUpon>
     </Compile>
     <Compile Include="Samples\GoC.WebTemplate.C3.Sample\ExtendedBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>

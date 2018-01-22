@@ -168,7 +168,7 @@
     <Content Include="Views\GoCWebTemplateSample\LeftSideMenuSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\SessionTimeoutSample.cshtml" />
     <Content Include="Views\GoCWebTemplateSample\TransactionalSample.cshtml" />
-    <Content Include="Views\GoCWebTemplateSample\ErrorSample.cshtml" />
+    <Content Include="Views\GoCWebTemplateSample\UnilingualErrorSample.cshtml" />
     <Content Include="Views\GoCWebTemplateExtendedCtrlSample\ExtendedCtrlSample.cshtml" />
     <Content Include="Views\Shared\_SamplesNavigation.cshtml" />
   </ItemGroup>
@@ -200,6 +200,7 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="CDTSEnvironments.json" />
+    <Content Include="Views\GoCWebTemplateSample\BilingualErrorSample.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
     </None>
