@@ -13,7 +13,6 @@
     <!-- Load closure template scripts -->
     <script type="text/javascript" src="@string.Concat(ViewBag.WebTemplateCore.CDNPath, "soyutils.js")"></script>
     <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", ViewBag.WebTemplateCore.CDNPath, ViewBag.WebTemplateCore.TwoLetterCultureLanguage)"></script>
-    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}plugins-{1}.js", ViewBag.WebTemplateCore.CDNPath, ViewBag.WebTemplateCore.TwoLetterCultureLanguage)"></script>
     <noscript>
         <!-- Write closure fall-back static file -->
         @ViewBag.WebTemplateCore.LoadStaticFile("refTop.html")
