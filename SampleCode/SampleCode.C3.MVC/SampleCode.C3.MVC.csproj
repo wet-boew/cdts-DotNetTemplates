@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GoC.WebTemplateMVC, Version=4.0.27.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.27.1-RC-1\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.27.1\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -87,8 +87,8 @@
       <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="WebTemplateCore, Version=1.0.6596.28068, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.27.1-RC-1\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6596.29139, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.MVC.4.0.27.1\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -191,6 +191,9 @@
     <Content Include="Views\GoCWebTemplateApplicationSample\StandardPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\GoCWebTemplateSample\BilingualErrorSample.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional_Layout.cshtml" />
@@ -200,7 +203,6 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="CDTSEnvironments.json" />
-    <Content Include="Views\GoCWebTemplateSample\BilingualErrorSample.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
     </None>

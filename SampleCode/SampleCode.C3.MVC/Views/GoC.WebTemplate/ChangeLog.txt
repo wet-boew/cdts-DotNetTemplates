@@ -1,4 +1,11 @@
 ﻿************************************************************************************************************
+4.0.27.1 - 2018-01-22
+ 
+ - Added Bilingual Error Master/Layout Page
+ - Added Unilingual Error Master/Layout Page
+ - Added `Acronym` property to `IntranetTitle`
+ - Removed the Plugins-(en|fr).js files from the Master and Layout Pages. 
+************************************************************************************************************
 4.0.26.3 - 2017-11-22 
 - Added eccc GCIntranet Environment
 ************************************************************************************************************
