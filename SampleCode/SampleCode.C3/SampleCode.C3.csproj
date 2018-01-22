@@ -58,13 +58,13 @@
       <HintPath>..\..\packages\GoC.Components.Crypto.2.6\Lib\Net40\Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate, Version=4.0.26.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.3\lib\Net45\GoC.WebTemplate.dll</HintPath>
+    <Reference Include="GoC.WebTemplate, Version=4.0.27.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.27.1-RC-1\lib\Net45\GoC.WebTemplate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.3\lib\Net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.27.1-RC-1\lib\Net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
@@ -87,8 +87,8 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebTemplateCore, Version=1.0.6535.15512, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.26.3\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6596.28058, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.27.1-RC-1\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -103,6 +103,11 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
@@ -116,6 +121,11 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverRefTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splash.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splashTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-en.html" />
@@ -297,10 +307,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
     <Content Include="CDTSEnvironments.json" />
