@@ -47,8 +47,8 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void IntranetTitleTop(Core sut)
         {
-            sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
-            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+            sut.IntranetTitle = new Link { Text = "foo", Href = "bar", Acronym = "plat" };
+            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
         }
 
 

@@ -17,7 +17,7 @@ namespace CoreTest
             Core sut)
         {
             var currentEnv = environments[sut.Environment];
-            currentEnv.IsSSLModifiable = false;
+            currentEnv.IsEncryptionModifiable = false;
             sut.UseHTTPS = true;
 
             Action test = () =>
@@ -33,7 +33,7 @@ namespace CoreTest
             Core sut)
         {
             var currentEnv = environments[sut.Environment];
-            currentEnv.IsSSLModifiable = false;
+            currentEnv.IsEncryptionModifiable = false;
             sut.UseHTTPS = null;
 
             Action test = () =>
@@ -48,7 +48,7 @@ namespace CoreTest
             Core sut)
         {
             var currentEnv = environments[sut.Environment];
-            currentEnv.IsSSLModifiable = true;
+            currentEnv.IsEncryptionModifiable = true;
             sut.UseHTTPS = null;
 
             Action test = () =>

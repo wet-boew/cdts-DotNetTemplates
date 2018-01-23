@@ -33,8 +33,8 @@ namespace CoreTest.RenderTests
     [Theory, AutoNSubstituteData]
     public void IntranetTitleTransacationalTop(Core sut)
     {
-      sut.IntranetTitle = new Link {Text = "foo", Href = "bar"};
-      sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
+        sut.IntranetTitle = new Link { Text = "foo", Href = "bar", Acronym = "plat" };
+        sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
     }
         
         

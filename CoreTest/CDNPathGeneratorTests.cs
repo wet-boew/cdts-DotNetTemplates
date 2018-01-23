@@ -19,7 +19,7 @@ namespace CoreTest
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true,
+                IsEncryptionModifiable = true,
                 Theme = "gcweb",
             };
 
@@ -39,7 +39,7 @@ namespace CoreTest
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true,
+                IsEncryptionModifiable = true,
                 Theme ="gcintranet",
             };
 
@@ -58,7 +58,7 @@ namespace CoreTest
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true,
+                IsEncryptionModifiable = true,
                 Theme ="gcweb"
             };
 
@@ -79,7 +79,7 @@ namespace CoreTest
             {
                 Path = "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true,
+                IsEncryptionModifiable = true,
                 Theme = "GCIntranet"
             };
 
@@ -103,7 +103,7 @@ namespace CoreTest
                 Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true
+                IsEncryptionModifiable = true
             };
 
             sut.WebTemplateVersion = string.Empty;
@@ -124,7 +124,7 @@ namespace CoreTest
                 Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true
+                IsEncryptionModifiable = true
             };
 
             sut.WebTemplateVersion = string.Empty;
@@ -145,7 +145,7 @@ namespace CoreTest
                 Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true
+                IsEncryptionModifiable = true
             };
 
             sut.UseHTTPS = true;
@@ -165,7 +165,7 @@ namespace CoreTest
                 Path = "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = true
+                IsEncryptionModifiable = true
             };
 
             sut.UseHTTPS = false;
@@ -184,7 +184,7 @@ namespace CoreTest
                 Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = false
+                IsEncryptionModifiable = false
             };
 
             environments[sut.Environment] = currentEnv;
@@ -203,7 +203,7 @@ namespace CoreTest
                 Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = false,
-                IsSSLModifiable = false
+                IsEncryptionModifiable = false
             };
 
             sut.WebTemplateVersion = string.Empty;
@@ -224,7 +224,7 @@ namespace CoreTest
                 Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = true,
-                IsSSLModifiable = false
+                IsEncryptionModifiable = false
             };
 
             sut.WebTemplateVersion = string.Empty;
@@ -243,7 +243,7 @@ namespace CoreTest
                 Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
                 Theme = "gcweb",
                 IsVersionRNCombined = true,
-                IsSSLModifiable = false
+                IsEncryptionModifiable = false
             };
 
             environments[sut.Environment] = currentEnv;

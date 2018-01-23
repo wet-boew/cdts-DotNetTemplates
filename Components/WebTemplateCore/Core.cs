@@ -61,13 +61,18 @@ namespace GoC.WebTemplate
             _cdtsEnvironments = cdtsEnvironments;
 
 
-            //Set properties
+            SetDefaultValues(currentRequest);
+        }
+
+        private void SetDefaultValues(ICurrentRequestProxy currentRequest)
+        {
+//Set properties
             WebTemplateVersion = _configProxy.Version;
 
             UseHTTPS = _configProxy.UseHttps;
             //Normalizing to match with the value we read from the configuration file.
             Environment = _configProxy.Environment.ToUpper();
-            
+
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
             SessionTimeout = new SessionTimeout
@@ -114,7 +119,6 @@ namespace GoC.WebTemplate
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
             CustomSearch = _configProxy.CustomSearch;
-
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -191,7 +195,7 @@ namespace GoC.WebTemplate
 
         private List<Link> BuildContactLinks()
         {
-            if (ContactLink == null || String.IsNullOrWhiteSpace(ContactLink.Href))
+            if (string.IsNullOrWhiteSpace(ContactLink?.Href))
             {
                 return null;
             }
@@ -388,7 +392,7 @@ namespace GoC.WebTemplate
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
         /// </summary>
-        public string WebTemplateSubTheme => this._cdtsEnvironments[this.Environment].SubTheme;
+        public string WebTemplateSubTheme => _cdtsEnvironments[Environment].SubTheme;
 
         /// <summary>
         /// Determines if the communication between the browser and the CDTS should be encrypted
@@ -564,8 +568,7 @@ namespace GoC.WebTemplate
         {
             return JsonSerializationHelper.SerializeToJson(new GCIntranetAppTop
             {
-                AppName = ApplicationTitle.Text,
-                AppUrl = ApplicationTitle.Href,
+                AppName = new List<Link> {ApplicationTitle},
                 IntranetTitle = BuildIntranentTitleList(),
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
                 SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
@@ -586,7 +589,7 @@ namespace GoC.WebTemplate
 
         private HtmlString RenderGCWebAppTop()
         {
-            return JsonSerializationHelper.SerializeToJson(new GCWebAppTop
+            return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = new List<Link> {ApplicationTitle},
                 SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
@@ -653,6 +656,14 @@ namespace GoC.WebTemplate
                 JqueryEnv = LoadJQueryFromGoogle ? "external" : null,
                 LocalPath = BuildLocalPath(),
                 IsApplication = isApplication
+            });
+        }
+
+        public HtmlString RenderUnilingualPreFooter() {
+            return JsonSerializationHelper.SerializeToJson(new UnilingualPreFooter
+            {
+                CdnEnv = CDNEnvironment,
+                PageDetails = false
             });
         }
 
@@ -738,6 +749,13 @@ namespace GoC.WebTemplate
                 LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
             });
         }
+
+        private HtmlString RenderCDNEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly {CdnEnv = CDNEnvironment});
+
+        public HtmlString RenderServerTop() => RenderCDNEnvOnly();
+        public HtmlString RenderServerBottom() => RenderCDNEnvOnly();
+        public HtmlString RenderServerRefTop() => RenderCDNEnvOnly();
+        public HtmlString RenderServerRefFooter() => RenderCDNEnvOnly();
 
         private string BuildJqueryEnv() => LoadJQueryFromGoogle ? "external" : null;
 
@@ -958,18 +976,18 @@ namespace GoC.WebTemplate
             var currentEnv = _cdtsEnvironments[Environment];
 
 
-            if (!currentEnv.IsSSLModifiable && UseHTTPS.HasValue)
+            if (!currentEnv.IsEncryptionModifiable && UseHTTPS.HasValue)
             {
                 throw new InvalidOperationException($"{Environment} does not allow useHTTPS to be toggled");
             }
 
-            if (currentEnv.IsSSLModifiable && !UseHTTPS.HasValue)
+            if (currentEnv.IsEncryptionModifiable && !UseHTTPS.HasValue)
             {
                 throw new InvalidOperationException($"{Environment} requires useHTTPS to be true or false not null.");
             }
 
             var https = string.Empty;
-            if (currentEnv.IsSSLModifiable)
+            if (currentEnv.IsEncryptionModifiable)
             {
                 //We've already checked to see if this is null before here so ignore this in resharper
                 // ReSharper disable once PossibleInvalidOperationException
@@ -1093,6 +1111,11 @@ namespace GoC.WebTemplate
         }
 
 
+    }
+
+    public class CDNEnvOnly
+    {
+        public string CdnEnv { get; set; }
     }
 }
 

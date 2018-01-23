@@ -52,7 +52,7 @@ namespace CoreTest
             //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false
                                           .With(p => p.UseHTTPS, null));
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
-            fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsSSLModifiable, false)
+            fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));
             //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
             //that the keys are deterministic.
