@@ -466,7 +466,7 @@ namespace GoC.WebTemplate
         /// Set by application programmatically
         /// Only available in the Application Template
         /// </summary>
-        public List<FooterLink> CustomFooterLinks { get; set; }
+        public List<FooterLink> CustomFooterLinks { get; set; } = new List<FooterLink>();
 
         /// <summary>
         /// Custom Links for the top Menu added for MSCAs (Currently) use only. 
