@@ -15,6 +15,24 @@ namespace GoC.WebTemplate
 {
     public class WebTemplateBaseController : Controller
     {
+        
+        public WebTemplateBaseController() : this(new CurrentRequestProxy(),
+                                       new CacheProxy(),
+                                       new ConfigurationProxy(),
+                                       new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments("~/CDTSEnvironments.json"))
+        {
+         
+        }
+
+        public WebTemplateBaseController(ICurrentRequestProxy currentRequestProxy, ICacheProxy cacheProxy, IConfigurationProxy configurationProxy, IDictionary<string, ICDTSEnvironment> cdtsEnvironments)
+        {
+            WebTemplateCore = new Core(currentRequestProxy,
+                                   cacheProxy,
+                                   configurationProxy,
+                                   cdtsEnvironments);
+        
+        }
+
         /// <summary>
         /// Method is overridden to allows us to add the web template data/info to the viewbag
         /// </summary>
@@ -84,12 +102,7 @@ namespace GoC.WebTemplate
                 Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(culture);
                 Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture(culture);
             }
-
-            //Core needs to be created here to pass in the proper culture 
-            WebTemplateCore = new Core(new CurrentRequestProxy(),
-                                       new CacheProxy(),
-                                       new ConfigurationProxy(),
-                                       new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments("~/CDTSEnvironments.json"));
+            
 
             return base.BeginExecuteCore(callback, state);
         }
