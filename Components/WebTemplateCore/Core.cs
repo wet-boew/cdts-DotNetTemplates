@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Threading;
 using System.Text;
 using System.Net;
 using System.Web;
 using System.Linq;
+using System.Threading;
 using GoC.WebTemplate.Proxies;
 using WebTemplateCore.JSONSerializationObjects;
 using WebTemplateCore.Proxies;
@@ -92,7 +92,7 @@ namespace GoC.WebTemplate
             //Set Top section options
             LanguageLink = new LanguageLink
             {
-                Href = BuildLanguageLinkURL(currentRequest.QueryString)
+                Href = CoreBuilder.BuildLanguageLinkURL(currentRequest.QueryString)
             };
             ShowPreContent = _configProxy.ShowPreContent;
             ShowSearch = _configProxy.ShowShearch;
@@ -1016,31 +1016,6 @@ namespace GoC.WebTemplate
 
 
             return string.Format(CultureInfo.InvariantCulture, currentEnv.Path, https, run, WebTemplateTheme, version);
-        }
-
-        /// <summary>
-        /// Builds the URL to be used by the English/francais link at the top of the page for the language toggle.
-        /// The method will add or update the "GoCTemplateCulture" querystring parameter with the culture to be set
-        /// The language toggle link, posts back to the same page, and the InitializedCulture method of the BasePage is responsible for setting the culture with the provided value
-        /// </summary>
-        /// <returns>The URL to be used for the language toggle link</returns>
-        private string BuildLanguageLinkURL(string queryString)
-        {
-            System.Collections.Specialized.NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
-
-            //Set the value of the "GoCTemplateCulture" parameter
-            if (TwoLetterCultureLanguage.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
-            {
-                nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY, Constants.FRENCH_CULTURE);
-            }
-            else
-            {
-                nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY, Constants.ENGLISH_CULTURE);
-            }
-
-            string url = string.Concat("?", nameValues.ToString());
-
-            return url;
         }
 
         /// <summary>
