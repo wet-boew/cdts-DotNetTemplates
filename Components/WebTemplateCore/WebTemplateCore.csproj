@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="CDTSEnvironmentLoader.cs" />
     <Compile Include="CoreBuilder.cs" />
+    <Compile Include="CoreRenderer.cs" />
     <Compile Include="JSONSerializationObjects\Footer.cs" />
     <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />

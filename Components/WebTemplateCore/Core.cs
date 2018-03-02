@@ -2,12 +2,8 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
-using System.Text;
-using System.Net;
 using System.Web;
-using System.Linq;
 using System.Threading;
 using GoC.WebTemplate.Proxies;
 using WebTemplateCore.JSONSerializationObjects;
@@ -22,6 +18,10 @@ namespace GoC.WebTemplate
         private readonly ICacheProxy _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
+        private CoreBuilder _builder;
+        private CoreRenderer _renderer;
+        internal CoreBuilder Builder => _builder ?? (_builder = new CoreBuilder(this));
+        private CoreRenderer Render => _renderer ?? (_renderer = new CoreRenderer(this));
 
         // ReSharper disable InconsistentNaming
         /// <summary>
@@ -180,7 +180,7 @@ namespace GoC.WebTemplate
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
-        public string CDNPath => BuildCDNPath();
+        public string CDNPath => Builder.BuildCDNPath();
 
         /// <summary>
         /// Text to append to HeaderTitle
@@ -192,15 +192,6 @@ namespace GoC.WebTemplate
         /// Set by application programmatically
         /// </summary>
         public Link ContactLink { get; set; }
-
-        private List<Link> BuildContactLinks()
-        {
-            if (string.IsNullOrWhiteSpace(ContactLink?.Href))
-            {
-                return null;
-            }
-            return  new List<Link> {ContactLink};
-        }
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -475,280 +466,31 @@ namespace GoC.WebTemplate
         /// </summary>
         public List<MenuLink> MenuLinks { get; set; }
         
-        private string BuildLocalPath()
-        {
-            return GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion);
-        }
-
-        public List<Breadcrumb> BuildBreadcrumbs()
-        {
-            if (Breadcrumbs == null || !Breadcrumbs.Any())
-            {
-                return null;
-            }
-
-            return Breadcrumbs.Select(b => new Breadcrumb
-            {
-                Href = GetStringForJson(b.Href),
-                Acronym = GetStringForJson(b.Acronym),
-                Title = GetStringForJson(b.Title)
-            }).ToList();
-        }
-        public List<FooterLink> BuildCustomFooterLinks
-        {
-            get
-            {
-                return CustomFooterLinks?.Select(fl => new FooterLink
-                {
-                    Href = fl.Href,
-                    NewWindow = fl.NewWindow,
-                    Text = GetStringForJson(fl.Text)
-                }).ToList();
-            }
-        }
-
-        private string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
-
-        private string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
-
-        private List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
-        {
-
-            if (!showLink || string.IsNullOrWhiteSpace(href))
-            {
-                return null;
-            }
-            return new List<Link> {new Link {Href = href, Text = null}};
-        }
-
-        private void CheckIfBothSignInAndSignOutAreSet()
-        {
-            if (ShowSignInLink && ShowSignOutLink)
-            {
-                throw new InvalidOperationException("Unable to show sign in and sign out link together");
-            }
-        }
-
         public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
-        public HtmlString RenderAppFooter()
-        {
-            return JsonSerializationHelper.SerializeToJson(new AppFooter
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = GetStringForJson(WebTemplateSubTheme),
-                ShowFeatures = ShowFeatures,
-                TermsLink = GetStringForJson(TermsConditionsLinkURL),
-                PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                ContactLink = GetStringForJson(ContactLink?.Href),
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                FooterSections = BuildCustomFooterLinks
-            });
-        }
+        public HtmlString RenderAppFooter() => Render.RenderAppFooter();
 
-        public HtmlString RenderAppTop()
-        {
-            CheckIfBothSignInAndSignOutAreSet();
-            CheckIfCustomMenuURLAndMenuLinkAreBothSet();
-
-            //For v4.0.26.x we have to render this section differently depending on the theme, 
-            //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
-            return WebTemplateTheme.ToLower() == "gcweb" ? RenderGCWebAppTop() : RenderGCIntranetApptop();
-        }
-
-        private void CheckIfCustomMenuURLAndMenuLinkAreBothSet()
-        {
-            if (CustomSiteMenuURL != null && MenuLinks != null && MenuLinks.Any())
-            {
-                throw new InvalidOperationException("Unable to have both a custom menu url and dynamically generated menu at the same time");
-            }
-        }
-
-        private HtmlString RenderGCIntranetApptop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new GCIntranetAppTop
-            {
-                AppName = new List<Link> {ApplicationTitle},
-                IntranetTitle = BuildIntranentTitleList(),
-                SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
-                SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                Search = ShowSearch,
-                LngLinks = BuildLanguageLinkList(),
-                ShowPreContent = ShowPreContent,
-                Breadcrumbs = BuildBreadcrumbs(),
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
-                MenuPath = CustomSiteMenuURL,
-                CustomSearch = CustomSearch,
-                TopSecMenu = LeftMenuItems.Any(),
-                MenuLinks = MenuLinks
-            });
-        }
-
-        private HtmlString RenderGCWebAppTop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new AppTop
-            {
-                AppName = new List<Link> {ApplicationTitle},
-                SignIn = BuildHideableHrefOnlyLink(SignInLinkURL, ShowSignInLink),
-                SignOut = BuildHideableHrefOnlyLink(SignOutLinkURL, ShowSignOutLink),
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                Search = ShowSearch,
-                LngLinks = BuildLanguageLinkList(),
-                ShowPreContent = ShowPreContent,
-                Breadcrumbs = BuildBreadcrumbs(),
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion),
-                AppSettings = BuildHideableHrefOnlyLink(AppSettingsURL, true),
-                MenuPath = CustomSiteMenuURL,
-                CustomSearch = CustomSearch,
-                TopSecMenu = LeftMenuItems.Any(),
-                MenuLinks = MenuLinks
-            });
-        }
+        public HtmlString RenderAppTop() => Render.RenderAppTop();
 
         public Link IntranetTitle { get; set; }
 
-        public HtmlString RenderTransactionalTop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new Top
-            {
+        public HtmlString RenderTransactionalTop() => Render.RenderTransactionalTop();
 
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                IntranetTitle = BuildIntranentTitleList(),
-                Search = ShowSearch,
-                LngLinks = BuildLanguageLinkList(),
-                Breadcrumbs = BuildBreadcrumbs(),
-                ShowPreContent = false,
-                LocalPath = BuildLocalPath(),
-                TopSecMenu = LeftMenuItems.Any(), 
-                SiteMenu = false
+        public HtmlString RenderTop() => Render.RenderTop();
 
-            });
-        }
+        public HtmlString RenderRefTop(bool isApplication) => Render.RenderRefTop(isApplication);
 
-        public HtmlString RenderTop()
-        {
-            return JsonSerializationHelper.SerializeToJson(new Top
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                IntranetTitle = BuildIntranentTitleList(),
-                Search = ShowSearch,
-                LngLinks = BuildLanguageLinkList(),
-                ShowPreContent = ShowPreContent,
-                Breadcrumbs = BuildBreadcrumbs(),
-                LocalPath = BuildLocalPath(),
-                TopSecMenu = LeftMenuItems.Any(),
-                SiteMenu = true
-            });
-        }
+        public HtmlString RenderUnilingualPreFooter() => Render.RenderUnilingualPreFooter();
 
-        public HtmlString RenderRefTop(bool isApplication)
-        {
-            return JsonSerializationHelper.SerializeToJson(new RefTop
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                JqueryEnv = LoadJQueryFromGoogle ? "external" : null,
-                LocalPath = BuildLocalPath(),
-                IsApplication = isApplication
-            });
-        }
+        public HtmlString RenderPreFooter() => Render.RenderPreFooter();
 
-        public HtmlString RenderUnilingualPreFooter() {
-            return JsonSerializationHelper.SerializeToJson(new UnilingualPreFooter
-            {
-                CdnEnv = CDNEnvironment,
-                PageDetails = false
-            });
-        }
+        public HtmlString RenderTransactionalPreFooter() => Render.RenderTransactionalPreFooter();
 
-        public HtmlString RenderPreFooter()
-        {
-            return JsonSerializationHelper.SerializeToJson(new PreFooter
-            {
-                CdnEnv = CDNEnvironment,
-                DateModified = BuildDateModified(),
-                VersionIdentifier = GetStringForJson(VersionIdentifier),
-                ShowPostContent = ShowPostContent,
-                ShowFeedback = new FeedbackLink
-                {
-                    Show = ShowFeedbackLink,
-                    URL = FeedbackLinkURL
-                },
-                ShowShare = new ShareList
-                {
-                    Show = ShowSharePageLink,
-                    Enums = SharePageMediaSites
-                },
-                ScreenIdentifier = GetStringForJson(ScreenIdentifier)
-            });
-        }
+        public HtmlString RenderFooter() => Render.RenderFooter();
 
-        public HtmlString RenderTransactionalPreFooter()
-        {
-            return JsonSerializationHelper.SerializeToJson(new PreFooter
-            {
-                CdnEnv = CDNEnvironment,
-                DateModified = BuildDateModified(),
-                VersionIdentifier = GetStringForJson(VersionIdentifier),
-                ShowPostContent = false,
-                ShowFeedback = new FeedbackLink {Show = false},
-                ShowShare = new ShareList { Show = false},
-                ScreenIdentifier = GetStringForJson(ScreenIdentifier)
-            });
-        }
+        public HtmlString RenderTransactionalFooter() => Render.RenderTransactionalFooter();
 
-        public HtmlString RenderFooter()
-        {
-            return JsonSerializationHelper.SerializeToJson(new Footer
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                ShowFeatures = ShowFeatures,
-                ShowFooter = true,
-                ContactLinks = BuildContactLinks(),
-                PrivacyLink = null,
-                TermsLink = null
-
-            });
-        }
-
-        public HtmlString RenderTransactionalFooter()
-        {
-            return JsonSerializationHelper.SerializeToJson(new Footer
-            {
-                CdnEnv = CDNEnvironment,
-                SubTheme = WebTemplateSubTheme,
-                ShowFeatures = ShowFeatures,
-                ShowFooter = false,
-                ContactLinks = BuildContactLinks(),
-                PrivacyLink = GetStringForJson(PrivacyLinkURL),
-                TermsLink = GetStringForJson(TermsConditionsLinkURL)
-
-            });
-
-        }
-
-        public HtmlString RenderRefFooter()
-        {
-            if (LeavingSecureSiteWarning.Enabled && 
-                !string.IsNullOrEmpty(LeavingSecureSiteWarning.RedirectURL))
-            {
-                return RenderSecureSiteWarningRefFooter();
-            }
-            return JsonSerializationHelper.SerializeToJson(new RefFooter
-            {
-                CdnEnv = CDNEnvironment,
-                ExitScript = false,
-                JqueryEnv = BuildJqueryEnv(), 
-                LocalPath = GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
-            });
-        }
+        public HtmlString RenderRefFooter() => Render.RenderRefFooter();
 
         private HtmlString RenderCDNEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly {CdnEnv = CDNEnvironment});
 
@@ -757,104 +499,13 @@ namespace GoC.WebTemplate
         public HtmlString RenderServerRefTop() => RenderCDNEnvOnly();
         public HtmlString RenderServerRefFooter() => RenderCDNEnvOnly();
 
-        private string BuildJqueryEnv() => LoadJQueryFromGoogle ? "external" : null;
-
-        private HtmlString RenderSecureSiteWarningRefFooter()
-        {
-            return JsonSerializationHelper.SerializeToJson(new RefFooter
-            {
-                CdnEnv = CDNEnvironment,
-                ExitScript = true,
-                DisplayModal = LeavingSecureSiteWarning.DisplayModalWindow,
-                ExitURL = LeavingSecureSiteWarning.RedirectURL,
-                ExitMsg = WebUtility.HtmlEncode(LeavingSecureSiteWarning.Message),
-                ExitDomains = GetStringForJson(LeavingSecureSiteWarning.ExcludedDomains),
-                JqueryEnv = BuildJqueryEnv(),
-                LocalPath= GetFormattedJsonString(LocalPath, WebTemplateTheme, WebTemplateVersion)
-            });
-
-        }
-
-        
-        private string BuildDateModified()
-        {
-
-            if (DateTime.Compare(DateModified, DateTime.MinValue) == 0)
-            {
-                return null;
-            }
-            return DateModified.ToString("yyyy-MM-dd");
-        }
-
-        private List<Link> BuildIntranentTitleList() => IntranetTitle == null ? null : new List<Link> { IntranetTitle };
-
-        private List<LanguageLink> BuildLanguageLinkList()
-        {
-            if (!ShowLanguageLink)
-            {
-                return null;
-            }
-
-            return new List<LanguageLink> {
-                new LanguageLink {
-                    Href = LanguageLink.Href
-                }
-            };
-        }
-
         /// <summary>
         /// Builds the html of the WET Session Timeout control that provides session timeout and inactivity functionality.
         /// For more documentation: https://wet-boew.github.io/v4.0-ci/demos/session-timeout/session-timeout-en.html
         /// </summary>
         /// <returns>The html of the WET session timeout control
         /// </returns>
-        public HtmlString RenderSessionTimeoutControl()
-        {
-            StringBuilder sb = new StringBuilder();
-            //<span class='wb-sessto' data-wb-sessto='{"inactivity": 5000, "reactionTime": 30000, "sessionalive": 10000, "logouturl": "http://www.tsn.com", "refreshCallbackUrl": "http://www.cnn.com", "refreshOnClick": "33", "refreshLimit": 2, "method": "555", "additionalData": "666"}'></span>
-
-            if (SessionTimeout.Enabled)
-            {
-                sb.Append("<span class='wb-sessto' data-wb-sessto='{");
-                sb.Append("\"inactivity\": ");
-                sb.Append(SessionTimeout.Inactivity);
-                sb.Append(", \"reactionTime\": ");
-                sb.Append(SessionTimeout.ReactionTime);
-                sb.Append(", \"sessionalive\": ");
-                sb.Append(SessionTimeout.SessionAlive);
-                sb.Append(", \"logouturl\": \"");
-                sb.Append(SessionTimeout.LogoutUrl);
-                sb.Append("\"");
-                if (!string.IsNullOrEmpty(SessionTimeout.RefreshCallbackUrl))
-                {
-                    sb.Append(", \"refreshCallbackUrl\": \"");
-                    sb.Append(SessionTimeout.RefreshCallbackUrl);
-                    sb.Append("\"");
-                }
-                sb.Append(", \"refreshOnClick\": ");
-                sb.Append(SessionTimeout.RefreshOnClick.ToString().ToLower());
-
-                if (SessionTimeout.RefreshLimit > 0)
-                {
-                    sb.Append(", \"refreshLimit\": ");
-                    sb.Append(SessionTimeout.RefreshLimit);
-                }
-                if (!string.IsNullOrEmpty(SessionTimeout.Method))
-                {
-                    sb.Append(", \"method\": \"");
-                    sb.Append(SessionTimeout.Method);
-                    sb.Append("\"");
-                }
-                if (!string.IsNullOrEmpty(SessionTimeout.AdditionalData))
-                {
-                    sb.Append(", \"additionalData\": \"");
-                    sb.Append(SessionTimeout.AdditionalData);
-                    sb.Append("\"");
-                }
-                sb.Append("}'></span>");
-            }
-            return new HtmlString(sb.ToString());
-        }
+        public HtmlString RenderSessionTimeoutControl() => Render.RenderSessionTimeoutControl();
 
         /// <summary>
         /// Builds a string with the format required by the closure templates, to represent the left side menu
@@ -862,162 +513,12 @@ namespace GoC.WebTemplate
         /// <returns>
         /// string in the format expected by the Closure Templates to generate the left menu
         /// </returns>
-        public HtmlString RenderLeftMenu()
-        {
-            StringBuilder sb = new StringBuilder();
+        public HtmlString RenderLeftMenu() => Render.RenderLeftMenu();
 
-            // sectionName: 'Section menu', menuLinks: [{ href: '#', text: 'Link 1' }, { href: '#', text: 'Link 2' }]"
+        public HtmlString RenderHtmlHeaderElements() => Render.RenderHtmlElements(HTMLHeaderElements);
 
-            if (LeftMenuItems.Count > 0)
-            {
-                sb.Append("sections: [");
-                foreach (MenuSection menuSection in LeftMenuItems)
-                {
-                    //add section name
-                    sb.Append(" {sectionName: '");
-                    sb.Append(WebUtility.HtmlEncode(menuSection.Name));
-                    sb.Append("',");
-
-                    //add section link
-                    if (!string.IsNullOrEmpty(menuSection.Link))
-                    {
-                        sb.Append(" sectionLink: '");
-                        sb.Append(WebUtility.HtmlEncode(menuSection.Link));
-                        sb.Append("',");
-                        if (menuSection.OpenInNewWindow)
-                        {
-                            sb.Append("newWindow: true,");
-                        }
-                    }
-
-                    //add menu items
-                    if (menuSection.Items.Count > 0)
-                    {
-                        sb.Append(" menuLinks: [");
-                        foreach (Link lk in menuSection.Items)
-                        {
-                            sb.Append("{href: '");
-                            sb.Append(lk.Href);
-                            sb.Append("', text: '");
-                            sb.Append(WebUtility.HtmlEncode(lk.Text));
-                            sb.Append("'");
-
-                            //Add 3rd level sub items, Note: Template is limiting to 3 levels even if Core allows more
-                            if (lk is MenuItem)
-                            {
-                                MenuItem mi = (MenuItem) lk;
-
-                                //the following if statement needs to be here for backward compatibility OpenInNewWindow is only available to MenuItems not Link
-                                if (mi.OpenInNewWindow)
-                                {
-                                    sb.Append(", newWindow: true");
-                                }
-
-                                if (mi.SubItems.Count > 0)
-                                {
-                                    sb.Append(", subLinks: [");
-                                    foreach (MenuItem sublk in mi.SubItems)
-                                    {
-                                        sb.Append("{subhref: '");
-                                        sb.Append(sublk.Href);
-                                        sb.Append("', subtext: '");
-                                        sb.Append(WebUtility.HtmlEncode(sublk.Text));
-                                        sb.Append("',");
-                                        if (sublk.OpenInNewWindow)
-                                        {
-                                            sb.Append(" newWindow: true");
-                                        }
-                                        sb.Append("},");
-                                    }
-                                    sb.Append("]");
-                                }
-                            }
-                            sb.Append("},");
-                        }
-                        sb.Append("]");
-                    }
-                    sb.Append("},");
-                }
-                sb.Append("]");
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        public HtmlString RenderHtmlHeaderElements() => RenderHtmlElements(HTMLHeaderElements);
-
-        public HtmlString RenderHtmlBodyElements() => RenderHtmlElements(HTMLBodyElements);
-
-        /// <summary>
-        /// Adds a string(html tag) to be included in the page
-        /// This is our way off letting the developer add metatags, css and js to their pages.
-        /// </summary>
-        /// <remarks>we are accepting a string with no validation, therefore it is up to the developer to provide a valid string/html tag</remarks>
-        /// <returns>
-        /// string hopefully a valid html tag
-        /// </returns>
-        private HtmlString RenderHtmlElements(List<string> tags)
-        {
-            var sb = new StringBuilder();
-
-            foreach (var tag in tags)
-            {
-                sb.AppendLine(tag);
-            }
-            return new HtmlString(sb.ToString());
-        }
-
-        /// <summary>
-        /// Builds the path to the cdn based on the environment set in the config. The path is based on the url of the environment, theme and version
-        /// </summary>
-        /// <returns>String, the complete path to the cdn</returns>
-        private string BuildCDNPath()
-        {
-
-            var currentEnv = _cdtsEnvironments[Environment];
-
-
-            if (!currentEnv.IsEncryptionModifiable && UseHTTPS.HasValue)
-            {
-                throw new InvalidOperationException($"{Environment} does not allow useHTTPS to be toggled");
-            }
-
-            if (currentEnv.IsEncryptionModifiable && !UseHTTPS.HasValue)
-            {
-                throw new InvalidOperationException($"{Environment} requires useHTTPS to be true or false not null.");
-            }
-
-            var https = string.Empty;
-            if (currentEnv.IsEncryptionModifiable)
-            {
-                //We've already checked to see if this is null before here so ignore this in resharper
-                // ReSharper disable once PossibleInvalidOperationException
-                https = UseHTTPS.Value ? "s" : string.Empty;
-            }
-
-
-            var run = string.Empty;
-            var version = string.Empty;
-            if (string.IsNullOrWhiteSpace(WebTemplateVersion))
-            {
-                if (currentEnv.IsVersionRNCombined)
-                {
-                    version = "rn/";
-                }
-                else
-                {
-                    run = "rn";
-                }
-            }
-            else
-            {
-                version = WebTemplateVersion + "/";
-                run = "app";
-            }
-
-
-            return string.Format(CultureInfo.InvariantCulture, currentEnv.Path, https, run, WebTemplateTheme, version);
-        }
-
+        public HtmlString RenderHtmlBodyElements() => Render.RenderHtmlElements(HTMLBodyElements);
+        
         /// <summary>
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
         /// </summary>
