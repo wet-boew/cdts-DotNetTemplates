@@ -88,6 +88,7 @@ namespace GoC.WebTemplate
                 Method = _configProxy.SessionTimeOut.Method,
                 AdditionalData = _configProxy.SessionTimeOut.AdditionalData
             };
+            SessionTimeout.CheckWithServerSessionTimout(currentRequest.Session);
 
             //Set Top section options
             LanguageLink = new LanguageLink
