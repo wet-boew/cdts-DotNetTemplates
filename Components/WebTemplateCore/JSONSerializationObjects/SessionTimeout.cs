@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.SessionState;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
@@ -41,6 +42,22 @@ namespace GoC.WebTemplate
         public int RefreshLimit { get; set; }
         public string Method { get; set; }
         public string AdditionalData { get; set; }
-        
+
+        /// <summary>
+        /// Will check that the timeouts set are equalto or lower than the server session timeout
+        /// It will override SessionAlive, Inactivity and ReactionTime if it fails the check
+        /// </summary>
+        /// <param name="session">current session</param>
+        public void CheckWithServerSessionTimout(HttpSessionState session)
+        {
+            const int min = 60000; //one min in millisections
+            if (Enabled && session != null && session.Timeout * min < SessionAlive)
+            {
+                while (session.Timeout <= 1) session.Timeout++; // one min will force the popup instantly so increase the session
+                SessionAlive = session.Timeout * min;
+                Inactivity = SessionAlive - min;
+                ReactionTime = min;
+            }
+        }
     }
 }

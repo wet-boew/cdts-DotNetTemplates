@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.IO;
+using System.Web;
+using System.Web.SessionState;
 using FluentAssertions;
 using GoC.WebTemplate;
-using GoC.WebTemplate.ConfigSections;
 using GoC.WebTemplate.Proxies;
-using NSubstitute;
 using Ploeh.AutoFixture.Xunit2;
 using WebTemplateCore.JSONSerializationObjects;
 using WebTemplateCore.Proxies;
@@ -47,5 +48,31 @@ namespace CoreTest
             sut.LeavingSecureSiteWarning.RedirectURL.Should().Be("foo");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void SessionStateTimeoutDoesOverride(Dictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy)
+        {
+            //build a fake session
+            var context = new HttpContext(new HttpRequest("foo", "http://www.text.com", "cue"), new HttpResponse(new StringWriter()));
+            var sessionContainer = new HttpSessionStateContainer("id", new SessionStateItemCollection(),
+                new HttpStaticObjectsCollection(), 10, true,
+                HttpCookieMode.AutoDetect,
+                SessionStateMode.InProc, false);
+            SessionStateUtility.AddHttpSessionStateToContext(context, sessionContainer);
+            HttpContext.Current = context;
+            HttpContext.Current.Session["SessionVar"] = 123;
+
+            //test
+            var sut = new Core(new CurrentRequestProxy(), fakeCacheProxy, new ConfigurationProxy(), environments);
+            sut.SessionTimeout.SessionAlive.Should().Be(HttpContext.Current.Session.Timeout * 60000);
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void SessionStateTimeoutDoesNotOverride(Dictionary<string, ICDTSEnvironment> environments,
+            ICacheProxy fakeCacheProxy, ICurrentRequestProxy fakeCurrentRequestProxy)
+        {
+            var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
+            sut.SessionTimeout.SessionAlive.Should().Be(1200000);
+        }
     }
 }
