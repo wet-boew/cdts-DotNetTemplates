@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoFixture.Xunit2;
 using FluentAssertions;
 using GoC.WebTemplate;
 using NSubstitute;
-using Ploeh.AutoFixture.Xunit2;
+//using Ploeh.AutoFixture.Xunit2;
 using WebTemplateCore.JSONSerializationObjects;
 using Xunit;
 

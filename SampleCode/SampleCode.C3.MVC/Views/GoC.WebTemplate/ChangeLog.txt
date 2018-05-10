@@ -1,5 +1,6 @@
 ﻿************************************************************************************************************
 4.0.27.2 - 2018-03-12
+
 Modernizing the code and improving the testablity of the core.
 - Including SampleCode page
 - Ensuring SessionTimout is less than SessionState.Timeout with override
