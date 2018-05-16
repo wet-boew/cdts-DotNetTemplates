@@ -20,7 +20,7 @@ namespace CoreTest
         public void AKAMAIDeserialize()
         {
             var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
-            env["AKAMAI"].ShouldBeEquivalentTo(new CDTSEnvironment
+            env["AKAMAI"].Should().BeEquivalentTo(new CDTSEnvironment
             {
                 Name = "AKAMAI",
                 Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
@@ -38,7 +38,7 @@ namespace CoreTest
         public void PRODSSLDeserialize()
         {
             var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
-            env["PROD_SSL"].ShouldBeEquivalentTo(new CDTSEnvironment
+            env["PROD_SSL"].Should().BeEquivalentTo(new CDTSEnvironment
             {
                 Name = "PROD_SSL",
                 Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
