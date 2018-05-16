@@ -45,7 +45,7 @@ namespace CoreTest.RenderTests
       Action execute = () => {
         var ignore = sut.RenderFooter();
       };
-      execute.ShouldNotThrow<NullReferenceException>();
+      execute.Should().NotThrow<NullReferenceException>();
 
     }
         
