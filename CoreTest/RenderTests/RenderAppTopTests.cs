@@ -168,6 +168,13 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void AppSearchIsNullByDefault(Core sut)
+        {
+            var json = sut.RenderAppTop();
+            json.ToString().Should().NotContain("\"Search\"");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void RenderAppTopMustNotCrashWithNullBreadCrumbs(Core sut)
         {
             sut.Breadcrumbs = null;
