@@ -119,7 +119,7 @@ namespace GoC.WebTemplate
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSearch = _configProxy.CustomSearch;
+            CustomSearch = _configProxy.CustomSearch.Equals(string.Empty) ? null : _configProxy.CustomSearch;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
