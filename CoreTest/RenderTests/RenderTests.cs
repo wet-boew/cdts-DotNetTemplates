@@ -87,5 +87,12 @@ namespace CoreTest.RenderTests
             result.ToString().Should().BeEmpty();
         }
 
+        [Theory, AutoNSubstituteData]
+        public void RenderSessionTimeoutControl(Core sut)
+        {
+            sut.SessionTimeout.Enabled = true;
+            var result = sut.RenderSessionTimeoutControl();
+            result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionAlive", "logoutUrl", "refreshCallbackUrl", "refreshOnClick","refreshLimit","method","additionalData");
+        }
     }
 }
