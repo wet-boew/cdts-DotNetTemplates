@@ -22,7 +22,6 @@
         document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderRefTop(isApplication : true)));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
-    @RenderSection("CustomStyles", required: false)
     <!-- GoC.WebTemplate Version MVC @ViewBag.WebTemplateVersion -->
     <!-- GoC.WebTemplate.Core Version @ViewBag.WebTemplateCore.AssemblyVersion -->
 </head>
@@ -80,6 +79,5 @@
         document.write(wet.builder.refFooter(@ViewBag.WebTemplateCore.RenderRefFooter()));
     </script>
     @ViewBag.WebTemplateCore.RenderHtmlBodyElements()
-    @RenderSection("CustomScripts", required: false)
 </body>
 </html>
