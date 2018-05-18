@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
+using Newtonsoft.Json;
 using WebTemplateCore.JSONSerializationObjects;
 
 // ReSharper disable once CheckNamespace
@@ -185,50 +186,14 @@ namespace GoC.WebTemplate
 
         internal HtmlString RenderSessionTimeoutControl()
         {
-            StringBuilder sb = new StringBuilder();
-            //<span class='wb-sessto' data-wb-sessto='{"inactivity": 5000, "reactionTime": 30000, "sessionalive": 10000, "logouturl": "http://www.tsn.com", "refreshCallbackUrl": "http://www.cnn.com", "refreshOnClick": "33", "refreshLimit": 2, "method": "555", "additionalData": "666"}'></span>
+            HtmlString jsonSessionTimeout = null;
 
             if (_core.SessionTimeout.Enabled)
             {
-                sb.Append("<span class='wb-sessto' data-wb-sessto='{");
-                sb.Append("\"inactivity\": ");
-                sb.Append(_core.SessionTimeout.Inactivity);
-                sb.Append(", \"reactionTime\": ");
-                sb.Append(_core.SessionTimeout.ReactionTime);
-                sb.Append(", \"sessionalive\": ");
-                sb.Append(_core.SessionTimeout.SessionAlive);
-                sb.Append(", \"logouturl\": \"");
-                sb.Append(_core.SessionTimeout.LogoutUrl);
-                sb.Append("\"");
-                if (!string.IsNullOrEmpty(_core.SessionTimeout.RefreshCallbackUrl))
-                {
-                    sb.Append(", \"refreshCallbackUrl\": \"");
-                    sb.Append(_core.SessionTimeout.RefreshCallbackUrl);
-                    sb.Append("\"");
-                }
-                sb.Append(", \"refreshOnClick\": ");
-                sb.Append(_core.SessionTimeout.RefreshOnClick.ToString().ToLower());
-
-                if (_core.SessionTimeout.RefreshLimit > 0)
-                {
-                    sb.Append(", \"refreshLimit\": ");
-                    sb.Append(_core.SessionTimeout.RefreshLimit);
-                }
-                if (!string.IsNullOrEmpty(_core.SessionTimeout.Method))
-                {
-                    sb.Append(", \"method\": \"");
-                    sb.Append(_core.SessionTimeout.Method);
-                    sb.Append("\"");
-                }
-                if (!string.IsNullOrEmpty(_core.SessionTimeout.AdditionalData))
-                {
-                    sb.Append(", \"additionalData\": \"");
-                    sb.Append(_core.SessionTimeout.AdditionalData);
-                    sb.Append("\"");
-                }
-                sb.Append("}'></span>");
+                jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_core.SessionTimeout);
             }
-            return new HtmlString(sb.ToString());
+
+            return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
         }
 
         internal HtmlString RenderLeftMenu()
