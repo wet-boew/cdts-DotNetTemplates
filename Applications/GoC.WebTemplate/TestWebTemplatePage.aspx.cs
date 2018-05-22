@@ -16,7 +16,6 @@ namespace GoC.WebTemplate
             WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
             WebTemplateMaster.WebTemplateCore.DateModified = Convert.ToDateTime("9 january 2015");
             WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
-            WebTemplateMaster.WebTemplateCore.ShowFeatures = true;
             WebTemplateMaster.WebTemplateCore.ShowSearch = true;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = false;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 20001;
