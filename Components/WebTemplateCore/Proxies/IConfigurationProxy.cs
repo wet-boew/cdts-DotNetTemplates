@@ -68,12 +68,7 @@ namespace GoC.WebTemplate.Proxies
         /// ShowLanguageLink
         /// </summary>
         bool ShowLanguageLink { get; }
-
-        /// <summary>
-        /// ShowFeatures
-        /// </summary>
-        bool ShowFeatures { get;  }
-
+        
         /// <summary>
         /// StaticFilesLocation
         /// </summary>

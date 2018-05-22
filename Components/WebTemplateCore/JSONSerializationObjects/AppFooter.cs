@@ -10,7 +10,6 @@ namespace WebTemplateCore.JSONSerializationObjects
     internal class AppFooter
     {
         public string CdnEnv { get; set; }
-        public bool ShowFeatures { get; set; }
         public List<FooterLink> FooterSections { get; set;  }
         public string ContactLink { get; set; }
         public string TermsLink { get; set; }

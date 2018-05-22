@@ -178,15 +178,6 @@ namespace GoC.WebTemplate
             get { return (Boolean)this["showLanguageLink"]; }
             set { this["showLanguageLink"] = value; }
         }
-        /// <summary>
-        /// ShowFeatures
-        /// </summary>
-        [ConfigurationProperty("showFeatures", DefaultValue = false, IsRequired = true)]
-        public Boolean ShowFeatures
-        {
-            get { return (Boolean)this["showFeatures"]; }
-            set { this["showFeatures"] = value; }
-        }
 
         /// <summary>
         /// StaticFilesLocation
