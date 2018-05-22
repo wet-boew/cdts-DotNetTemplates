@@ -13,7 +13,6 @@ namespace SampleCode.C3.MVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.CustomSiteMenuURL =
                 "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_25/cdts/ajax/custommenu-eng.html";
