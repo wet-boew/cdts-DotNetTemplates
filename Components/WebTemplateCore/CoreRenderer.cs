@@ -24,7 +24,6 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = _core.CDNEnvironment,
                 SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
-                ShowFeatures = _core.ShowFeatures,
                 TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
                 PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
                 ContactLink = _core.Builder.GetStringForJson(_core.ContactLink?.Href),
@@ -144,7 +143,6 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = _core.CDNEnvironment,
                 SubTheme = _core.WebTemplateSubTheme,
-                ShowFeatures = _core.ShowFeatures,
                 ShowFooter = true,
                 ContactLinks = _core.Builder.BuildContactLinks(),
                 PrivacyLink = null,
@@ -159,7 +157,6 @@ namespace GoC.WebTemplate
             {
                 CdnEnv = _core.CDNEnvironment,
                 SubTheme = _core.WebTemplateSubTheme,
-                ShowFeatures = _core.ShowFeatures,
                 ShowFooter = false,
                 ContactLinks = _core.Builder.BuildContactLinks(),
                 PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),

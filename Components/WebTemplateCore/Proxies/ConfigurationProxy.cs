@@ -31,7 +31,6 @@ namespace GoC.WebTemplate.Proxies
         public bool ShowShearch => Configurations.Settings.ShowShearch;
         public bool ShowSharePageLink => Configurations.Settings.ShowSharePageLink;
         public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
-        public bool ShowFeatures => Configurations.Settings.ShowFeatures;
         public string StaticFilesLocation => Configurations.Settings.StaticFilesLocation;
         public string Theme => Configurations.Settings.Theme;
         public string Version => Configurations.Settings.Version;
