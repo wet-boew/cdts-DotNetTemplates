@@ -105,9 +105,6 @@ namespace GoC.WebTemplate
             ShowLanguageLink = _configProxy.ShowLanguageLink;
             ShowSharePageLink = _configProxy.ShowSharePageLink;
 
-            //Set Footer section options
-            ShowFeatures = _configProxy.ShowFeatures;
-
             LeavingSecureSiteWarning = new LeavingSecureSiteWarning
             {
                 Enabled = _configProxy.LeavingSecureSiteWarning.Enabled,
@@ -219,6 +216,7 @@ namespace GoC.WebTemplate
         /// Set by application via web.config
         /// or Set by application programmatically
         /// </summary>
+        [Obsolete]
         public bool ShowFeatures { get; set; }
 
         /// <summary>

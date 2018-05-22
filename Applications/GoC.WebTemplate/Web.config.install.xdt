@@ -30,7 +30,6 @@
    showLanguageLink="true"
    showSharePageLink="true"
    showSearch="true"
-   showFeatures="true"
    staticFilesLocation="~\GoC.WebTemplate\StaticFallbackFiles">
 
     <sessionTimeOut
