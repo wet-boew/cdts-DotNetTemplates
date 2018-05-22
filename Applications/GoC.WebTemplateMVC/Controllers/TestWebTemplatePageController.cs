@@ -15,7 +15,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.LeftMenuItems = new List<MenuSection>
             {
@@ -50,7 +49,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -62,7 +60,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -74,7 +71,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.ShowSignInLink = true;
             WebTemplateCore.SignInLinkURL = "about//blank";
@@ -87,7 +83,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.ShowSignOutLink = true;
             WebTemplateCore.SignOutLinkURL = "about//blank";
@@ -100,7 +95,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowSearch = false;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
@@ -112,7 +106,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
@@ -123,7 +116,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.CustomSiteMenuURL =
                 "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
 
@@ -136,7 +128,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.CustomSiteMenuURL =
                 "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
 
@@ -156,7 +147,6 @@ namespace GoC.WebTemplateMVC.Controllers
             };
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false;
 
             return View("HelloWorld");
@@ -168,7 +158,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false; 
             return View("HelloWorld");
         }
@@ -178,7 +167,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.ShowPostContent = false; 
             WebTemplateCore.CustomFooterLinks = new List<FooterLink>
             {
@@ -203,8 +191,6 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowFeatures = false;
-            WebTemplateCore.ShowFeatures = false;
             WebTemplateCore.TermsConditionsLinkURL = "#";
             WebTemplateCore.PrivacyLinkURL = "#";
             return View("HelloWorld");
@@ -233,9 +219,7 @@ namespace GoC.WebTemplateMVC.Controllers
            // this.WebTemplateCore.LanguageLink_URL = "../lang.aspx";
 
          //   this.WebTemplateCore.LanguageLink_URL = "../TestWebTemplatePage/ChangeCulture?GoCTemplateCulture=fr-CA";
-
-            WebTemplateCore.ShowFeatures = true;
-
+         
             WebTemplateCore.ShowFeedbackLink = true;
 
             WebTemplateCore.ShowSearch = true;
