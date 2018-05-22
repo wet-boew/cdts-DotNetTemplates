@@ -98,17 +98,6 @@ WebTemplateCore.CustomSearch ="SDS";
 </pre>
 </div>
 
-<h3>Features</h3>
-<p>his will be used by the Principal Publisher to insert GoC activities and initiatives into your page. By default this is ALWAYS shown on all pages. You will need authorization from the Principal Publisher to not include this content in your web asset.</p>
-<p> If you receive such authorization then you can programmatically turn this off using the <code class="wb-prettify">ShowFeatures</code> or in the web.config</p>
-
-<div class="wb-prettify all-pre lang-vb linenums">
-<pre>
-//Turn off the features in the footer 
-WebTemplateCore.ShowFeatures = true; 
-</pre>
-</div>
-
 <h2>Hide Search</h2>
 <p>This setting allows you to hide or show the search bar on the page.</p>
 <div class="alert alert-warning">
