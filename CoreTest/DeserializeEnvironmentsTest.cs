@@ -10,10 +10,10 @@ namespace CoreTest
     {
 
         [Fact]
-        public void FileHasEightEnvironments()
+        public void FileHasElevenEnvironments()
         {
             var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
-            env.Count.Should().Be(8);
+            env.Count.Should().Be(11);
         }
 
         [Fact]
@@ -29,8 +29,6 @@ namespace CoreTest
                 IsVersionRNCombined = true,
                 IsEncryptionModifiable = false,
                 AppendToTitle = " - Canada.ca"
-
-
             });
         }
 
@@ -47,8 +45,6 @@ namespace CoreTest
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = false,
                 AppendToTitle = ""
-
-
             });
         }
     }
