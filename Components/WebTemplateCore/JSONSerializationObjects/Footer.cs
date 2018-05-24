@@ -12,5 +12,6 @@ namespace WebTemplateCore.JSONSerializationObjects
         public string PrivacyLink { get; set; }
         public string TermsLink { get; set; } 
         public string LocalPath { get; set; }
+        public bool ShowFeatures => false;
     }
 }
