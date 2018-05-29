@@ -28,7 +28,7 @@ namespace GoC.WebTemplateMVC.Controllers
                             Text = "Menu Item 2"
                         }
                     } ,
-                    Link = "#", 
+                    Link = "#",
                     Name  = "MenuSection",
                     OpenInNewWindow = false
                 }
@@ -42,7 +42,7 @@ namespace GoC.WebTemplateMVC.Controllers
             return View();
         }
 
-        public ActionResult StandardPage ()
+        public ActionResult StandardPage()
         {
             WebTemplateCore.AppSettingsURL = "http://tempuri.com";
             WebTemplateCore.ApplicationTitle.Text = "Application Name";
@@ -66,7 +66,7 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult SignIn()
         {
-            
+
             WebTemplateCore.ApplicationTitle.Text = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
@@ -78,7 +78,7 @@ namespace GoC.WebTemplateMVC.Controllers
         }
         public ActionResult SignOut()
         {
-            
+
             WebTemplateCore.ApplicationTitle.Text = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
@@ -117,7 +117,7 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.CustomSiteMenuURL =
-                "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
+               "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/" + WebTemplateCore.WebTemplateVersion + "/cdts/ajax/appmenu-en.html";
 
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
@@ -129,7 +129,7 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.CustomSiteMenuURL =
-                "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/v4_0_24/cdts/custommenu-en.html";
+               "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/" + WebTemplateCore.WebTemplateVersion + "/cdts/ajax/appmenu-en.html";
 
             WebTemplateCore.SignInLinkURL = "about//blank";
             WebTemplateCore.ShowSignInLink = true;
@@ -158,7 +158,7 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowPostContent = false; 
+            WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
         public ActionResult CustomFooter()
@@ -167,7 +167,7 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowPostContent = false; 
+            WebTemplateCore.ShowPostContent = false;
             WebTemplateCore.CustomFooterLinks = new List<FooterLink>
             {
                 new FooterLink {Href= "#", Text= "Link 1"},
@@ -186,7 +186,7 @@ namespace GoC.WebTemplateMVC.Controllers
 
         public ActionResult TransactionalFooterCustomLinks()
         {
-            
+
             WebTemplateCore.ApplicationTitle.Text = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
@@ -198,9 +198,9 @@ namespace GoC.WebTemplateMVC.Controllers
         //
         // GET: /TestWebTemplatePage/
         public ActionResult TestPage()
-        { 
+        {
             //BASIC SETTINGS ====================================
-           // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
+            // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
             WebTemplateCore.Environment = "PROD_SSL";
             WebTemplateCore.UseHTTPS = null;
             WebTemplateCore.HeaderTitle = "Sample Page";
@@ -216,10 +216,10 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
 
             //this.WebTemplateCore.LanguageLink_URL = "http://www.tsn.com";
-           // this.WebTemplateCore.LanguageLink_URL = "../lang.aspx";
+            // this.WebTemplateCore.LanguageLink_URL = "../lang.aspx";
 
-         //   this.WebTemplateCore.LanguageLink_URL = "../TestWebTemplatePage/ChangeCulture?GoCTemplateCulture=fr-CA";
-         
+            //   this.WebTemplateCore.LanguageLink_URL = "../TestWebTemplatePage/ChangeCulture?GoCTemplateCulture=fr-CA";
+
             WebTemplateCore.ShowFeedbackLink = true;
 
             WebTemplateCore.ShowSearch = true;
@@ -242,7 +242,7 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "CDN Sample", "Content Delivery Network Sample"));
 
-            
+
             //Share this page LINK ====================================
             WebTemplateCore.ShowSharePageLink = true;
 
@@ -254,7 +254,7 @@ namespace GoC.WebTemplateMVC.Controllers
             MenuSection leftmen = new MenuSection();
 
             leftmen.Name = "menu aslfkjsaklj";
-            
+
             leftmen.Items.Add(new Link("http://www.tsn.ca", "aaa"));
             leftmen.Items.Add(new Link("http://www.cnn.ca", "bbb"));
 
@@ -270,10 +270,10 @@ namespace GoC.WebTemplateMVC.Controllers
             //this.WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            WebTemplateCore.LeftMenuItems.Add(new MenuSection("l'index Section B", "http://www.pinkbike.com", new [] { 
-                                                                                new MenuItem("http://www.rds.ca", "RDS", true, new [] { 
-                                                                                    new MenuItem("http://www.rds.ca", "sub 1", true), 
-                                                                                    new MenuItem("http://www.lapresse.com", "sub 2") }), 
+            WebTemplateCore.LeftMenuItems.Add(new MenuSection("l'index Section B", "http://www.pinkbike.com", new[] {
+                                                                                new MenuItem("http://www.rds.ca", "RDS", true, new [] {
+                                                                                    new MenuItem("http://www.rds.ca", "sub 1", true),
+                                                                                    new MenuItem("http://www.lapresse.com", "sub 2") }),
                                                                                 new Link("http://www.lapresse.com", "L'a Presse") }));
 
             // GoC.WebTemplate.MenuSection leftMenu = new GoC.WebTemplate.MenuSection();
@@ -326,7 +326,7 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.HTMLBodyElements.Add(sb.ToString());
 
             //this.WebTemplateCore.HTMLBodyElements.Add("<script type='text/javascript' src='./GoC.WebTemplate/blabla.js'></script>");
-            
+
             return View();
         }
 
@@ -339,7 +339,7 @@ namespace GoC.WebTemplateMVC.Controllers
         //{
         //    return RedirectToAction("Index");
         //}
-       
+
         //public FileStreamResult FileResutTest()
         //{
         //    string name = "C://sf-ml/me.txt";
