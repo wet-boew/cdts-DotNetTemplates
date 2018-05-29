@@ -117,6 +117,7 @@ namespace GoC.WebTemplate
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
             CustomSearch = _configProxy.CustomSearch.Equals(string.Empty) ? null : _configProxy.CustomSearch;
+            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }

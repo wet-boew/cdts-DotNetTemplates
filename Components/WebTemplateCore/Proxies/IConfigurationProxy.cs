@@ -75,5 +75,6 @@ namespace GoC.WebTemplate.Proxies
         string StaticFilesLocation { get;  }
 
         bool? UseHttps { get; }
+        string CustomSiteMenuURL { get; }
     }
 }
