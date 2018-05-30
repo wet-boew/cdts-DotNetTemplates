@@ -40,8 +40,8 @@ namespace CoreTest
             //We want custom search to start out as default(string)
                                           .Without(p => p.CustomSearch)
                                           //The Site Menu URL should be null
-                                          .Without(p => p.CustomSiteMenuURL)
-                                          .Without(p => p.MenuLinks)
+                                          .With(p => p.CustomSiteMenuURL, null)
+                                          .With(p => p.MenuLinks, null)
             //We also create want to ignore some of the lists as they should start out empty.
             //Normally you don't need to ignore so much but this object breaks normal .Net conventions by using the constructor
             //to set properties, instead of just using the properties
