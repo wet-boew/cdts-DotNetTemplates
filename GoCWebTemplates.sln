@@ -48,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec Files", "NuSpec File
 	ProjectSection(SolutionItems) = preProject
 		Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate.Core.nuspec = Builds\NuSpec Files\GoC.WebTemplate.Core.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate.MVC.nuspec = Builds\NuSpec Files\GoC.WebTemplate.MVC.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate.nuspec = Builds\NuSpec Files\GoC.WebTemplate.nuspec
 	EndProjectSection
@@ -58,6 +59,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GoCWebTemplates", "GoCWebTe
 	ProjectSection(SolutionItems) = preProject
 		..\Workspaces\AlainBelleville\buildScripts\GoCWebTemplate\BuildNuGetPackage-Server.proj = ..\Workspaces\AlainBelleville\buildScripts\GoCWebTemplate\BuildNuGetPackage-Server.proj
 		Builds\BuildScripts\GoCWebTemplates\NugetPackageASPX.proj = Builds\BuildScripts\GoCWebTemplates\NugetPackageASPX.proj
+		Builds\BuildScripts\GoCWebTemplates\NugetPackageCore.proj = Builds\BuildScripts\GoCWebTemplates\NugetPackageCore.proj
 		Builds\BuildScripts\GoCWebTemplates\NugetPackageMVC.proj = Builds\BuildScripts\GoCWebTemplates\NugetPackageMVC.proj
 	EndProjectSection
 EndProject

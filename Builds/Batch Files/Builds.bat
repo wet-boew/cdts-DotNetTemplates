@@ -39,7 +39,7 @@ IF %M%==11 GOTO BUILD_SOLUTION
 IF %M%==10 GOTO EOF
 
 
-:NUGET_MVC
+:NUGET_CORE
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :ASKING_QUESTIONS
