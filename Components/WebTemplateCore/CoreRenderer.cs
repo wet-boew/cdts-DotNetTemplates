@@ -206,7 +206,7 @@ namespace GoC.WebTemplate
                 {
                     sectionName = WebUtility.HtmlEncode(menu.Name),
                     sectionLink = _core.Builder.GetStringForJson(menu.Link),
-                    newWindow = menu.OpenInNewWindow,
+                    newWindow = menu.OpenInNewWindow ? true : null, //so json won't render object on false
                     menuLinks = new List<object>() //can't be null
                 };
 
@@ -227,7 +227,7 @@ namespace GoC.WebTemplate
                         {
                             href = item.Href,
                             text = item.Text,
-                            newWindow = item.OpenInNewWindow,
+                            newWindow = item.OpenInNewWindow ? true : null, //so json won't render object on false
                             subLinks = item.SubItems.Any() ? new List<object>() : null
                         };
 
@@ -237,7 +237,7 @@ namespace GoC.WebTemplate
                             {
                                 subHref = subMenuItem.Href,
                                 subText = subMenuItem.Text,
-                                newWindow = subMenuItem.OpenInNewWindow
+                                newWindow = subMenuItem.OpenInNewWindow ? true : null //so json won't render object on false
                             });
                         }
 
