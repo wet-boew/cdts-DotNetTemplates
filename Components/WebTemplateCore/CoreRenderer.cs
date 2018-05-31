@@ -195,83 +195,60 @@ namespace GoC.WebTemplate
 
         internal HtmlString RenderLeftMenu()
         {
-            StringBuilder sb = new StringBuilder();
+            if (!_core.LeftMenuItems.Any())
+                return new HtmlString(string.Empty);
 
-            // sectionName: 'Section menu', menuLinks: [{ href: '#', text: 'Link 1' }, { href: '#', text: 'Link 2' }]"
+            var leftMenuForSerialization = new { sections = new List<object>() };
 
-            if (_core.LeftMenuItems.Count > 0)
+            foreach (var menu in _core.LeftMenuItems)
             {
-                sb.Append("sections: [");
-                foreach (MenuSection menuSection in _core.LeftMenuItems)
+                var menuForSerialization = new
                 {
-                    //add section name
-                    sb.Append(" {sectionName: '");
-                    sb.Append(WebUtility.HtmlEncode(menuSection.Name));
-                    sb.Append("',");
+                    sectionName = WebUtility.HtmlEncode(menu.Name),
+                    sectionLink = _core.Builder.GetStringForJson(menu.Link),
+                    newWindow = menu.OpenInNewWindow ? true : null, //so json won't render object on false
+                    menuLinks = new List<object>() //can't be null
+                };
 
-                    //add section link
-                    if (!string.IsNullOrEmpty(menuSection.Link))
+                foreach (var menuItem in menu.Items)
+                {
+                    var item = menuItem as MenuItem;
+                    if (item == null)
                     {
-                        sb.Append(" sectionLink: '");
-                        sb.Append(WebUtility.HtmlEncode(menuSection.Link));
-                        sb.Append("',");
-                        if (menuSection.OpenInNewWindow)
+                        menuForSerialization.menuLinks.Add(new
                         {
-                            sb.Append("newWindow: true,");
-                        }
+                            href = menuItem.Href,
+                            text = menuItem.Text
+                        });
                     }
-
-                    //add menu items
-                    if (menuSection.Items.Count > 0)
+                    else
                     {
-                        sb.Append(" menuLinks: [");
-                        foreach (Link lk in menuSection.Items)
+                        var subMenuForSerialization = new
                         {
-                            sb.Append("{href: '");
-                            sb.Append(lk.Href);
-                            sb.Append("', text: '");
-                            sb.Append(WebUtility.HtmlEncode(lk.Text));
-                            sb.Append("'");
+                            href = item.Href,
+                            text = item.Text,
+                            newWindow = item.OpenInNewWindow ? true : null, //so json won't render object on false
+                            subLinks = item.SubItems.Any() ? new List<object>() : null
+                        };
 
-                            //Add 3rd level sub items, Note: Template is limiting to 3 levels even if Core allows more
-                            if (lk is MenuItem)
+                        foreach (var subMenuItem in item.SubItems)
+                        {
+                            subMenuForSerialization.subLinks.Add(new
                             {
-                                MenuItem mi = (MenuItem)lk;
-
-                                //the following if statement needs to be here for backward compatibility OpenInNewWindow is only available to MenuItems not Link
-                                if (mi.OpenInNewWindow)
-                                {
-                                    sb.Append(", newWindow: true");
-                                }
-
-                                if (mi.SubItems.Count > 0)
-                                {
-                                    sb.Append(", subLinks: [");
-                                    foreach (MenuItem sublk in mi.SubItems)
-                                    {
-                                        sb.Append("{subhref: '");
-                                        sb.Append(sublk.Href);
-                                        sb.Append("', subtext: '");
-                                        sb.Append(WebUtility.HtmlEncode(sublk.Text));
-                                        sb.Append("',");
-                                        if (sublk.OpenInNewWindow)
-                                        {
-                                            sb.Append(" newWindow: true");
-                                        }
-                                        sb.Append("},");
-                                    }
-                                    sb.Append("]");
-                                }
-                            }
-                            sb.Append("},");
+                                subHref = subMenuItem.Href,
+                                subText = subMenuItem.Text,
+                                newWindow = subMenuItem.OpenInNewWindow ? true : null //so json won't render object on false
+                            });
                         }
-                        sb.Append("]");
+
+                        menuForSerialization.menuLinks.Add(subMenuForSerialization);
                     }
-                    sb.Append("},");
                 }
-                sb.Append("]");
+
+                leftMenuForSerialization.sections.Add(menuForSerialization);
             }
-            return new HtmlString(sb.ToString());
+
+            return JsonSerializationHelper.SerializeToJson(leftMenuForSerialization);
         }
 
         /// <summary>
