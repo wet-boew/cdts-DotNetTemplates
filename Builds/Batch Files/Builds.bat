@@ -52,7 +52,7 @@ echo Building WebForms solution
 call :BUILD_SOLUTION
 echo navigating to %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
-call :ASKING_QUESTIONS
+call :ASKING_DEPENDAND_QUESTIONS
 echo Building NuGet Package
 call "%msBuildDir%\msbuild.exe" NugetPackageASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
 call :RESET_VARIABLES
@@ -61,7 +61,7 @@ call :RETURN_TO_MENU
 :NUGET_MVC
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
-call :ASKING_QUESTIONS
+call :ASKING_DEPENDAND_QUESTIONS
 call "%msBuildDir%\msbuild.exe"  NugetPackageMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
