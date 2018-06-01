@@ -46,11 +46,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec Files", "NuSpec Files", "{C85CB8C7-06EF-44A7-A3B3-F48B6A8B9B78}"
 	ProjectSection(SolutionItems) = preProject
+		Builds\NuSpec Files\GoC.WebTemplate-Components.nuspec = Builds\NuSpec Files\GoC.WebTemplate-Components.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate-MVC.nuspec = Builds\NuSpec Files\GoC.WebTemplate-MVC.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate-WebForms.nuspec = Builds\NuSpec Files\GoC.WebTemplate-WebForms.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec
-		Builds\NuSpec Files\GoC.WebTemplate.Core.nuspec = Builds\NuSpec Files\GoC.WebTemplate.Core.nuspec
-		Builds\NuSpec Files\GoC.WebTemplate.MVC.nuspec = Builds\NuSpec Files\GoC.WebTemplate.MVC.nuspec
-		Builds\NuSpec Files\GoC.WebTemplate.nuspec = Builds\NuSpec Files\GoC.WebTemplate.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildScripts", "BuildScripts", "{00395D06-74E7-4699-BD42-48CE0B69606E}"
