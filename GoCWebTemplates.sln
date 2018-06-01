@@ -48,9 +48,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuSpec Files", "NuSpec File
 	ProjectSection(SolutionItems) = preProject
 		Builds\NuSpec Files\GoC.WebTemplate-Components.nuspec = Builds\NuSpec Files\GoC.WebTemplate-Components.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate-MVC.nuspec = Builds\NuSpec Files\GoC.WebTemplate-MVC.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate-MVC.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate-MVC.Sample.nuspec
 		Builds\NuSpec Files\GoC.WebTemplate-WebForms.nuspec = Builds\NuSpec Files\GoC.WebTemplate-WebForms.nuspec
-		Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.MVC.Sample.nuspec
-		Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate.C3.Sample.nuspec
+		Builds\NuSpec Files\GoC.WebTemplate-WebForms.Sample.nuspec = Builds\NuSpec Files\GoC.WebTemplate-WebForms.Sample.nuspec
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildScripts", "BuildScripts", "{00395D06-74E7-4699-BD42-48CE0B69606E}"
