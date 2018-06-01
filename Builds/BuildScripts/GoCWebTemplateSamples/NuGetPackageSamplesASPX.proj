@@ -20,7 +20,7 @@
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
     <!-- Release Folder Template -->
-    <ReleaseTemplateDir>$(ReleaseRootDir)\Goc.WebTemplate.C3.Sample</ReleaseTemplateDir>
+    <ReleaseTemplateDir>$(ReleaseRootDir)\Goc.WebTemplate-WebForms.Sample</ReleaseTemplateDir>
     <!-- Binaries Folder -->
     <OutBinariesDir>$(WebTemplateProjectDir)bin</OutBinariesDir>
     <!-- Content Folder -->
@@ -52,7 +52,7 @@
     </ItemGroup>
 
     <!--Copy the XDT file to the content dir -->
-    <Copy SourceFiles="$(NuGetSpecDir)GoC.WebTemplate.C3.Sample.nuspec" DestinationFolder="$(ReleaseTemplateDir)\" />
+    <Copy SourceFiles="$(NuGetSpecDir)GoC.WebTemplate-WebForms.Sample.nuspec" DestinationFolder="$(ReleaseTemplateDir)\" />
 
     <!--This copy the content to the package dir -->
     <Copy SourceFiles="@(ReleaseFilesContent)" DestinationFolder="$(ReleaseTemplateDir)\Content\Samples\Goc.WebTemplate.C3.Sample%(RecursiveDir)"/>
@@ -77,32 +77,32 @@
      <!--insert the version number into the nuspec files--> 
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate.C3.Sample\GoC.WebTemplate.C3.Sample.nuspec"
+      XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate-WebForms.Sample\GoC.WebTemplate-WebForms.Sample.nuspec"
       XPath="/package/metadata/version"
       Value="$(PreRelease)" />
 
      <!--insert the release notes--> 
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate.C3.Sample\GoC.WebTemplate.C3.Sample.nuspec"
+      XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate-WebForms.Sample\GoC.WebTemplate-WebForms.Sample.nuspec"
       XPath="/package/metadata/releaseNotes"
       Value="$(releaseNotes)" />
 
      <!--insert the dependency version number--> 
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate.C3.Sample\GoC.WebTemplate.C3.Sample.nuspec"
+      XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate-WebForms.Sample\GoC.WebTemplate-WebForms.Sample.nuspec"
       XPath="/package/metadata/dependencies/dependency/@version"
       Value="$(dependencyVersionNumber)" />
     
     <!-- 3. create package -->
-    <Exec WorkingDirectory="$(ReleaseRootDir)" Command="$(NuGetDir)nuget.exe pack $(ReleaseTemplateDir)\GoC.WebTemplate.C3.Sample.nuspec" />
+    <Exec WorkingDirectory="$(ReleaseRootDir)" Command="$(NuGetDir)nuget.exe pack $(ReleaseTemplateDir)\GoC.WebTemplate-WebForms.Sample.nuspec" />
 
   </Target>
 
   <!-- Cleanup the Release folder -->
   <Target Name="CleanUpReleaseFolder">
-    <RemoveDir Directories="$(ReleaseRootDir)\Goc.WebTemplate.C3.Sample"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\Goc.WebTemplate-WebForms.Sample"/>
   </Target>
 
 </Project>
