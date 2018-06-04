@@ -62,6 +62,7 @@
     <Compile Include="JSONSerializationObjects\MenuLink.cs" />
     <Compile Include="JSONSerializationObjects\ShareList.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
+    <Compile Include="JSONSerializationObjects\SplashInfo.cs" />
     <Compile Include="JSONSerializationObjects\SubLink.cs" />
     <Compile Include="JSONSerializationObjects\UnilingualPreFooter.cs" />
     <Compile Include="Proxies\CacheProxy.cs" />

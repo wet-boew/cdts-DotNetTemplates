@@ -353,5 +353,19 @@ namespace GoC.WebTemplate
             });
 
         }
+
+        internal HtmlString RenderSplashInfo()
+        {
+            return JsonSerializationHelper.SerializeToJson(new 
+            {
+                CdnEnv = _core.CDNEnvironment,
+                indexEng = _core.SplashPageInfo.EnglishHomeUrl,
+                indexFra = _core.SplashPageInfo.FrenchHomeUrl,
+                termsEng = _core.Builder.GetStringForJson(_core.SplashPageInfo.EnglishTermsUrl),
+                termsFra = _core.Builder.GetStringForJson(_core.SplashPageInfo.FrenchTermsUrl),
+                nameEng = _core.SplashPageInfo.EnglishName,
+                nameFra = _core.SplashPageInfo.FrenchName
+            });
+        }
     }
 }

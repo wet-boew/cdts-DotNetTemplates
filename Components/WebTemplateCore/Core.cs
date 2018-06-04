@@ -452,6 +452,12 @@ namespace GoC.WebTemplate
         public bool ShowSignOutLink { get; set; }
 
         /// <summary>
+        /// Info for Spash page
+        /// Only applicable to Splash Layout/Master
+        /// </summary>
+        public SplashPageInfo SplashPageInfo { get; set; } = new SplashPageInfo();
+
+        /// <summary>
         /// Custom links if null uses standard links if not null overrides the existing footer links
         /// Set by application programmatically
         /// Only available in the Application Template
@@ -517,7 +523,9 @@ namespace GoC.WebTemplate
         public HtmlString RenderHtmlHeaderElements() => Render.RenderHtmlElements(HTMLHeaderElements);
 
         public HtmlString RenderHtmlBodyElements() => Render.RenderHtmlElements(HTMLBodyElements);
-        
+
+        public HtmlString RenderSplashInfo() => Render.RenderSplashInfo();
+
         /// <summary>
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
         /// </summary>
@@ -585,6 +593,7 @@ namespace GoC.WebTemplate
             return new HtmlString(info);
         }
 
+        
 
     }
 
