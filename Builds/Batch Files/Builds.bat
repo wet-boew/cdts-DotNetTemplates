@@ -43,7 +43,7 @@ IF %M%==10 GOTO EOF
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :ASKING_QUESTIONS
-call "%msBuildDir%\msbuild.exe"  NugetPackageCore.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageCore.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageCore.proj /p:VisualStudioVersion=14.0;VersionNumber="%VersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageCore.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -54,7 +54,7 @@ echo navigating to %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :ASKING_DEPENDAND_QUESTIONS
 echo Building NuGet Package
-call "%msBuildDir%\msbuild.exe" NugetPackageASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
+call "%msBuildDir%\msbuild.exe" NugetPackageASPX.proj /p:VisualStudioVersion=14.0;VersionNumber="%VersionNumber%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageASPX.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -62,7 +62,7 @@ call :RETURN_TO_MENU
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplates\
 call :ASKING_DEPENDAND_QUESTIONS
-call "%msBuildDir%\msbuild.exe"  NugetPackageMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageMVC.proj /p:VisualStudioVersion=14.0;VersionNumber="%VersionNumber%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NugetPackageMVC.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -70,7 +70,7 @@ call :RETURN_TO_MENU
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplateSamples\
 call :ASKING_DEPENDAND_QUESTIONS
-call "%msBuildDir%\msbuild.exe"  NuGetPackageSamplesASPX.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesASPX.log
+call "%msBuildDir%\msbuild.exe"  NuGetPackageSamplesASPX.proj /p:VisualStudioVersion=14.0;VersionNumber="%VersionNumber%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesASPX.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -78,7 +78,7 @@ call :RETURN_TO_MENU
 call :BUILD_SOLUTION
 cd %TFSWorkingFolder%\Builds\BuildScripts\GoCWebTemplateSamples\
 call :ASKING_DEPENDAND_QUESTIONS
-call "%msBuildDir%\msbuild.exe"  NugetPackageSamplesMVC.proj /p:VisualStudioVersion=14.0;PreRelease="%PreRelease%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesMVC.log
+call "%msBuildDir%\msbuild.exe"  NugetPackageSamplesMVC.proj /p:VisualStudioVersion=14.0;VersionNumber="%VersionNumber%";DependencyVersionNumber="%DependencyVersionNumber%";ReleaseNotes="%ReleaseNotes%" /l:FileLogger,Microsoft.Build.Engine;logfile=c:\Temp\NuGetPackageSamplesMVC.log
 call :RESET_VARIABLES
 call :RETURN_TO_MENU
 
@@ -101,7 +101,7 @@ GOTO :EOF
 
 :RESET_VARIABLES
 set "VersionNumber="
-set "PreRelease="
+set "Version="
 set "DependencyVersionNumber="
 set "ReleaseNotes="
 GOTO :EOF
@@ -110,7 +110,7 @@ GOTO :EOF
 set /p IsVersionNumberUpdated= Did you update the version # in the AssemblyInfo and ChangeLog files (Y-Yes N-No)? 
 if /I "%IsVersionNumberUpdated%" NEQ "Y" goto :EXITSPOT
 if /I "%IsVersionNumberUpdated%" == "" goto :EXITSPOT
-set /p PreRelease= If this is a pre-release, enter build # :
+set /p VersionNumber= please enter the version # and the build # if it is a pre-release:
 set /p ReleaseNotes= Enter Release Notes :
 GOTO :EOF
 
@@ -118,7 +118,7 @@ GOTO :EOF
 set /p IsVersionNumberUpdated= Did you update the version # in the AssemblyInfo and ChangeLog files (Y-Yes N-No)? 
 if /I "%IsVersionNumberUpdated%" NEQ "Y" goto :EXITSPOT
 if /I "%IsVersionNumberUpdated%" == "" goto :EXITSPOT
-set /p PreRelease= If this is a pre-release, enter build # :
+set /p VersionNumber= please enter the version # and the build # if it is a pre-release:
 set /p DependencyVersionNumber= Enter dependency version # of the  WebTemplate :
 set /p ReleaseNotes= Enter Release Notes :
 GOTO :EOF
