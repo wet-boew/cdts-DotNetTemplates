@@ -205,6 +205,8 @@
     <Content Include="Views\Test\BilingualErrorPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage_Layout.cshtml" />
     <Content Include="Views\Test\UnilingualErrorPage.cshtml" />
+    <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.SplashPage_Layout.cshtml" />
+    <Content Include="Views\TestWebTemplatePage\SplashPage.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -206,7 +206,7 @@ namespace GoC.WebTemplate
                 {
                     sectionName = WebUtility.HtmlEncode(menu.Name),
                     sectionLink = _core.Builder.GetStringForJson(menu.Link),
-                    newWindow = menu.OpenInNewWindow ? true : null, //so json won't render object on false
+                    newWindow = menu.OpenInNewWindow ? true : (bool?)null, //so json won't render object on false
                     menuLinks = new List<object>() //can't be null
                 };
 
@@ -227,7 +227,7 @@ namespace GoC.WebTemplate
                         {
                             href = item.Href,
                             text = item.Text,
-                            newWindow = item.OpenInNewWindow ? true : null, //so json won't render object on false
+                            newWindow = item.OpenInNewWindow ? true : (bool?)null, //so json won't render object on false
                             subLinks = item.SubItems.Any() ? new List<object>() : null
                         };
 
@@ -237,7 +237,7 @@ namespace GoC.WebTemplate
                             {
                                 subHref = subMenuItem.Href,
                                 subText = subMenuItem.Text,
-                                newWindow = subMenuItem.OpenInNewWindow ? true : null //so json won't render object on false
+                                newWindow = subMenuItem.OpenInNewWindow ? true : (bool?)null //so json won't render object on false
                             });
                         }
 
@@ -329,6 +329,20 @@ namespace GoC.WebTemplate
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion)
             });
 
+        }
+
+        internal HtmlString RenderSplashInfo()
+        {
+            return JsonSerializationHelper.SerializeToJson(new 
+            {
+                CdnEnv = _core.CDNEnvironment,
+                indexEng = _core.SplashPageInfo.EnglishHomeUrl,
+                indexFra = _core.SplashPageInfo.FrenchHomeUrl,
+                termsEng = _core.Builder.GetStringForJson(_core.SplashPageInfo.EnglishTermsUrl),
+                termsFra = _core.Builder.GetStringForJson(_core.SplashPageInfo.FrenchTermsUrl),
+                nameEng = _core.SplashPageInfo.EnglishName,
+                nameFra = _core.SplashPageInfo.FrenchName
+            });
         }
     }
 }
