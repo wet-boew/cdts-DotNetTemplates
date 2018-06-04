@@ -61,25 +61,13 @@
 
   <!-- Make NuGet package-->
   <Target Name="NuGet">
-
-    <!-- Get the version number of the main FV assembly to insert into the nuspec files -->
-    <GetAssemblyIdentity AssemblyFiles="$(OutBinariesDir)\SampleCode.C3.dll">
-      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
-    </GetAssemblyIdentity>
-
-    <PropertyGroup>      
-      <PreRelease
-          Condition="$(PreRelease) != ''">%(AsmInfo.Version)-$(PreRelease)</PreRelease>
-      <PreRelease
-          Condition="$(PreRelease) == ''">%(AsmInfo.Version)</PreRelease>
-    </PropertyGroup>
         
      <!--insert the version number into the nuspec files--> 
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
       XmlFileName="$(ReleaseRootDir)\Goc.WebTemplate-WebForms.Sample\GoC.WebTemplate-WebForms.Sample.nuspec"
       XPath="/package/metadata/version"
-      Value="$(PreRelease)" />
+      Value="$(VersionNumber)" />
 
      <!--insert the release notes--> 
     <XmlUpdate
