@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -117,6 +117,7 @@ namespace GoC.WebTemplate
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
             CustomSearch = _configProxy.CustomSearch.Equals(string.Empty) ? null : _configProxy.CustomSearch;
+            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL.Equals(string.Empty) ? null : _configProxy.CustomSiteMenuURL;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
