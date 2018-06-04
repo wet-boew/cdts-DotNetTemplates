@@ -66,24 +66,12 @@
   <!-- Make NuGet package-->
   <Target Name="NuGet">
     
-     <!--Get the version number of the main FV assembly to insert into the nuspec files--> 
-    <GetAssemblyIdentity AssemblyFiles="$(ReleaseTemplateDir)\Lib\Net45\WebTemplateCore.dll">
-      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
-    </GetAssemblyIdentity>
-
-    <PropertyGroup>
-      <PreRelease
-          Condition="$(PreRelease) != ''">%(AsmInfo.Version)-$(PreRelease)</PreRelease>
-      <PreRelease
-          Condition="$(PreRelease) == ''">%(AsmInfo.Version)</PreRelease>
-    </PropertyGroup>
-    
     <!-- insert the version number into the nuspec files -->
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
       XmlFileName="$(ReleaseRootDir)\GoCWebTemplate-Components\GoC.WebTemplate-Components.nuspec"
       XPath="/package/metadata/version"
-      Value="$(PreRelease)" />
+      Value="$(VersionNumber)" />
 
     <!--insert the release notes-->
     <XmlUpdate
