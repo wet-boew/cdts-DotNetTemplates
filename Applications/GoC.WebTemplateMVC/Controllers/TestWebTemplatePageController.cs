@@ -329,6 +329,16 @@ namespace GoC.WebTemplateMVC.Controllers
 
             return View();
         }
+        public ActionResult SplashPage()
+        {
+            WebTemplateCore.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
+            WebTemplateCore.SplashPageInfo.FrenchHomeUrl = "http://www.canada.ca/fr/index.html";
+            WebTemplateCore.SplashPageInfo.EnglishTermsUrl = "http://www.canada.ca/en/transparency/terms.html";
+            WebTemplateCore.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
+            WebTemplateCore.SplashPageInfo.EnglishName = "[My web asset]";
+            WebTemplateCore.SplashPageInfo.FrenchName = "[Mon actif web]";
+            return View();
+        }
 
         //public RedirectResult RedirectTest()
         //{

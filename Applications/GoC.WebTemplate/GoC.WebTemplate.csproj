@@ -79,6 +79,7 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
     <Content Include="TestApplicationTemplatePage.aspx" />
     <Content Include="TestErrorPage.aspx" />
+    <Content Include="TestSplashTemplate.aspx" />
     <Content Include="TestUnilingualErrorPage.aspx" />
     <Content Include="TransactionalTemplateTestPage.aspx" />
     <Content Include="Web.config.install.xdt" />
@@ -89,6 +90,7 @@
     </Content>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -157,6 +159,13 @@
     </Compile>
     <Compile Include="TestErrorPage.aspx.designer.cs">
       <DependentUpon>TestErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestSplashTemplate.aspx.cs">
+      <DependentUpon>TestSplashTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestSplashTemplate.aspx.designer.cs">
+      <DependentUpon>TestSplashTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestUnilingualErrorPage.aspx.cs">
       <DependentUpon>TestUnilingualErrorPage.aspx</DependentUpon>

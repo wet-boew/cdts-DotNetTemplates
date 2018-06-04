@@ -115,6 +115,7 @@
     <Compile Include="RenderTests\RenderFooterTests.cs" />
     <Compile Include="RenderTests\RenderPreFooterTests.cs" />
     <Compile Include="RenderTests\RenderRefTopTests.cs" />
+    <Compile Include="RenderTests\RenderSplashInfoTests.cs" />
     <Compile Include="RenderTests\RenderTests.cs" />
     <Compile Include="RenderTests\RenderTopTests.cs" />
     <Compile Include="RenderTests\RenderTransactionalTopTests.cs" />
