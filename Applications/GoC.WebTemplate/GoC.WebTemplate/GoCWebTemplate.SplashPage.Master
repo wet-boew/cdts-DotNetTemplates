@@ -39,5 +39,6 @@
 				contentSplash.innerHTML = wet.builder.splash(<%= WebTemplateCore.RenderSplashInfo() %>);										
 			</script>
 	    </div>
+        <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
     </body>
 </html>
