@@ -108,47 +108,42 @@
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverRefTop.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
-    <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\refTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-fr.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-en.html" />
-    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\refTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-en.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-fr.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverRefTop.html" />
+    <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\splash.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\splashTop.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\top-en.html" />
@@ -157,6 +152,11 @@
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
+    <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
