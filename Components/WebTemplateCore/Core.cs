@@ -190,7 +190,7 @@ namespace GoC.WebTemplate
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter
         /// Set by application programmatically
         /// </summary>
-        public Link ContactLink { get; set; }
+        public Link ContactLink { get; set; } = new Link();
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
