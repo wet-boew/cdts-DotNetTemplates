@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Transactional.Master" AutoEventWireup="true" CodeBehind="TestWebTemplatePage.aspx.cs" Inherits="GoC.WebTemplate.TestWebTemplatePage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="TestWebTemplatePage.aspx.cs" Inherits="GoC.WebTemplate.TestWebTemplatePage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
     <h1>Your Content</h1>
