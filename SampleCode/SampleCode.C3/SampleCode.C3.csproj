@@ -315,16 +315,16 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
+    <Content Include="CDTSEnvironments.json" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
-    <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
-    <Content Include="CDTSEnvironments.json" />
     <None Include="WebTemplateWebForms.xsd">
       <SubType>Designer</SubType>
     </None>
