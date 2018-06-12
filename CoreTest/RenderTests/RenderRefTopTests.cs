@@ -15,15 +15,20 @@ namespace CoreTest.RenderTests
   {
     [Theory, AutoNSubstituteData]
     public void LocalPathDoesNotRendersWhenNull([Frozen]IDictionary<string, ICDTSEnvironment> environments,
-      [Frozen]IConfigurationProxy proxy, Core sut)
-    {
-      environments[sut.Environment].LocalPath.ReturnsNull();
+#pragma warning disable xUnit1026 // proxy needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
+      [Frozen]IConfigurationProxy proxy,
+#pragma warning restore xUnit1026
+      Core sut)
+        {
+            environments[sut.Environment].LocalPath.ReturnsNull();
       sut.RenderRefTop(false).ToString().Should().NotContain("localPath");
     }
 
     [Theory, AutoNSubstituteData]
     public void LocalPathFormatsCorrectly([Frozen]IDictionary<string, ICDTSEnvironment> environments,
+#pragma warning disable xUnit1026 // // proxy needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
       [Frozen]IConfigurationProxy proxy,
+#pragma warning restore xUnit1026
       Core sut)
     {
       environments[sut.Environment].LocalPath.Returns("{0}:{1}");

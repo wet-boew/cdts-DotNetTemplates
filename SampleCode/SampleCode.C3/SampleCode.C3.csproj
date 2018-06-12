@@ -54,10 +54,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Crypto, Version=2.6.5697.24416, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.Components.Crypto.2.6\Lib\Net40\Crypto.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="GoC.WebTemplate, Version=4.0.28.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\GoC.WebTemplate.4.0.28.1-RC3\lib\Net45\GoC.WebTemplate.dll</HintPath>
       <Private>True</Private>
@@ -65,10 +61,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\GoC.WebTemplate.4.0.28.1-RC3\lib\Net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NLog.4.3.5\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />

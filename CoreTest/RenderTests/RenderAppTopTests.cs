@@ -249,7 +249,10 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void LanguageLinkRepersentsOpositeOfThreadCulture([Frozen]ICDTSEnvironment fakeEnvironment,
+        public void LanguageLinkRepersentsOpositeOfThreadCulture(
+#pragma warning disable xUnit1026 // fakeEnvirnment needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
+            [Frozen]ICDTSEnvironment fakeEnvironment,
+#pragma warning restore xUnit1026 
             IDictionary<string, ICDTSEnvironment> environments,
             ICacheProxy fakeCacheProxy,
             ICurrentRequestProxy fakeCurrentRequestProxy)
