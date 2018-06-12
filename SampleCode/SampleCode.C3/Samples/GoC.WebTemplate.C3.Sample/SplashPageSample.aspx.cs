@@ -12,12 +12,12 @@ public partial class SplashPageSample : GoC.WebTemplate.BasePage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //If not using the webtemplate master page you must pass GoC.WebTemplate.Proxies.CurrentRequestProxy and 
-            //GoC.WebTemplate.Proxies.ConfigurationProxy objects to the core.
-            this.WebTemplateCore = new Core(new CurrentRequestProxy(),
-                                            new CacheProxy(),
-                                            new ConfigurationProxy(), 
-                                            new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments("~/CDTSEnvironments.json"));
-        }
-        public GoC.WebTemplate.Core WebTemplateCore { get; set; }
+        WebTemplateMaster.WebTemplateCore.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
+        WebTemplateMaster.WebTemplateCore.SplashPageInfo.FrenchHomeUrl = "http://www.canada.ca/fr/index.html";
+        WebTemplateMaster.WebTemplateCore.SplashPageInfo.EnglishTermsUrl = "http://www.canada.ca/en/transparency/terms.html";
+        WebTemplateMaster.WebTemplateCore.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
+        WebTemplateMaster.WebTemplateCore.SplashPageInfo.EnglishName = "[My web asset]";
+        WebTemplateMaster.WebTemplateCore.SplashPageInfo.FrenchName = "[Mon actif web]";
+    }
+        
     }
