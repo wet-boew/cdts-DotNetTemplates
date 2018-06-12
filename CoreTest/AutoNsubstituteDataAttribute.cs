@@ -78,7 +78,7 @@ namespace CoreTest
     public class AutoNSubstituteDataAttribute : AutoDataAttribute
     {
         public AutoNSubstituteDataAttribute()
-            : base(new Fixture().Customize(new WebTemplateCustomization()))
+            : base(() => new Fixture().Customize(new WebTemplateCustomization()))
         {
         }
     }
