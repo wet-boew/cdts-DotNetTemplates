@@ -1,6 +1,6 @@
 ﻿************************************************************************************************************
-4.0.28.1 - 2018-05-18 
-NOTE: THIS IS THE LAST SUPPORTED VERSION UNDER THIS NUGET PACKAGE NAME - please refer to the wiki for future updates
+1.28.0 (4.0.28.1) - 2018-05-18 
+- Updated build packages to separate core object for testing
 - Various bug fixes
 - Adding Splash Page Master & Layout
 - Included optional RenderSection to MVC layouts
