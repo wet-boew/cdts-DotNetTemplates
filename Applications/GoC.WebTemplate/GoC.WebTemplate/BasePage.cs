@@ -1,27 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Threading;
 using System.Globalization;
-using GoC.WebTemplate;
 
+// ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate
 {
-    public partial class BasePage : System.Web.UI.Page
+    public class BasePage : System.Web.UI.Page
     {
-        public GoC.WebTemplate.WebTemplateMasterPage WebTemplateMaster
+        public WebTemplateMasterPage WebTemplateMaster
         {
             get
             {
-                System.Web.UI.MasterPage temp = base.Master;
+                // ReSharper disable once SuggestVarOrType_SimpleTypes - needs to be declared
+                System.Web.UI.MasterPage temp = Master;
 
-                while (! (temp is GoC.WebTemplate.WebTemplateMasterPage))
+                while (!(temp is WebTemplateMasterPage))
                 {
-                    temp = temp.Master;
+                    try
+                    {
+                        // ReSharper disable once PossibleNullReferenceException - handled by try
+                        temp = temp.Master;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Please refrence a WebTemplate Master Page in the .aspx", ex);
+                    }
 
                 }
-                return (GoC.WebTemplate.WebTemplateMasterPage)temp;
+                return (WebTemplateMasterPage)temp;
             }
         }
 
@@ -36,11 +42,11 @@ namespace GoC.WebTemplate
         protected override void InitializeCulture()
         {
             //Get culture from Querystring
-            string culture = this.Request.QueryString.Get(Constants.QUERYSTRING_CULTURE_KEY);
+            var culture = Request.QueryString.Get(Constants.QUERYSTRING_CULTURE_KEY);
 
             if ((string.IsNullOrEmpty(culture)))
             {
-                if (this.Context.Session != null)
+                if (Context.Session != null)
                 {
                     //culture not found in querystring, check session
                     culture = Convert.ToString(Session[Constants.SESSION_CULTURE_KEY], CultureInfo.CurrentCulture);
@@ -49,7 +55,7 @@ namespace GoC.WebTemplate
                     {
                         //culture not found in session, use default language
                         culture = Constants.ENGLISH_CULTURE;
-                        this.Session[Constants.SESSION_CULTURE_KEY] = culture;
+                        Session[Constants.SESSION_CULTURE_KEY] = culture;
                     }
                 }
                 else
@@ -62,16 +68,17 @@ namespace GoC.WebTemplate
                 //culture found in querystring, use it
                 culture = culture.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.CurrentCultureIgnoreCase) ? Constants.ENGLISH_CULTURE : Constants.FRENCH_CULTURE;
 
-                if (this.Context.Session != null) this.Session[Constants.SESSION_CULTURE_KEY] = culture;
+                if (Context.Session != null)
+                    Session[Constants.SESSION_CULTURE_KEY] = culture;
             }
 
             //If we have a culture, set it
             if (!string.IsNullOrEmpty(culture))
             {
-                Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.GetCultureInfo(culture);
-                Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture(culture);
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
+                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
                 base.InitializeCulture();
-            }             
+            }
         }
     }
 }
