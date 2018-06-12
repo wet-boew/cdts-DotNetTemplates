@@ -47,7 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GoC.WebTemplateMVC, Version=1.28.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.28.0-RC3\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.28.0-RC4\lib\Net45\GoC.WebTemplateMVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -94,7 +94,7 @@
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="WebTemplateCore, Version=1.28.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.28.0-RC3\Lib\Net45\WebTemplateCore.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.28.0-RC4\Lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -200,6 +200,9 @@
     <Content Include="Views\GoCWebTemplateSample\BilingualErrorSample.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CDTSEnvironments.json" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional_Layout.cshtml" />
@@ -209,7 +212,6 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
-    <Content Include="CDTSEnvironments.json" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
     </None>
