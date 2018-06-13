@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GoC.WebTemplate</RootNamespace>
     <AssemblyName>GoC.WebTemplate</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
@@ -24,6 +24,7 @@
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <UseGlobalApplicationHostFile />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,6 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -51,16 +53,14 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GoC.WebTemplate\ChangeLog.txt" />
@@ -68,17 +68,57 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\preFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\refTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\appFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\appTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\preFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\refTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverBottom.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverRefTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\serverTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splash.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splashTop.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
     <Content Include="TestApplicationTemplatePage.aspx" />
     <Content Include="TestErrorPage.aspx" />
+    <Content Include="TestSplashTemplate.aspx" />
     <Content Include="TestUnilingualErrorPage.aspx" />
     <Content Include="TransactionalTemplateTestPage.aspx" />
     <Content Include="Web.config.install.xdt" />
@@ -89,6 +129,7 @@
     </Content>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -101,36 +142,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\prefooter-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\refTop.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenu-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\footer-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\prefooter-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\refTop.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenu-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\secMenuTop-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splash.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\splashTop.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\top-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
     <Content Include="TestWebTemplatePage.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -157,6 +168,13 @@
     </Compile>
     <Compile Include="TestErrorPage.aspx.designer.cs">
       <DependentUpon>TestErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestSplashTemplate.aspx.cs">
+      <DependentUpon>TestSplashTemplate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestSplashTemplate.aspx.designer.cs">
+      <DependentUpon>TestSplashTemplate.aspx</DependentUpon>
     </Compile>
     <Compile Include="TestUnilingualErrorPage.aspx.cs">
       <DependentUpon>TestUnilingualErrorPage.aspx</DependentUpon>

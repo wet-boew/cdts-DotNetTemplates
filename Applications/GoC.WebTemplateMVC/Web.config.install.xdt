@@ -20,7 +20,7 @@
     <GoC.WebTemplate xmlns="http://tempuri.org/WebTemplateMVC.xsd" xdt:Transform="InsertIfMissing" />
     <GoC.WebTemplate xdt:Transform="Replace"
    xmlns="http://tempuri.org/WebTemplateMVC.xsd"
-   version="v4_0_27"
+   version="v4_0_28"
    environment="Akamai"
    loadJQueryFromGoogle="false"
    showPreContent="true"
@@ -30,7 +30,6 @@
    showLanguageLink="true"
    showSharePageLink="true"
    showSearch="true"
-   showFeatures="true"
    staticFilesLocation="~\Views\GoC.WebTemplate\StaticFallbackFiles">
 
       <sessionTimeOut

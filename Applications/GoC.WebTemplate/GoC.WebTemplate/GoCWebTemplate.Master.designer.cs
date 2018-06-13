@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GoC.WebTemplate {
-    
-    
-    public partial class WebTemplateMasterPage {
-        
+namespace GoC.WebTemplate
+{
+
+
+    public partial class WebTemplateMasterPage
+    {
+
         /// <summary>
         /// MainContent control.
         /// </summary>

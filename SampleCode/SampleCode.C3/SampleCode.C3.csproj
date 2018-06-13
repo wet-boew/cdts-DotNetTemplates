@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SampleCode.C3</RootNamespace>
     <AssemblyName>SampleCode.C3</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -54,21 +54,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Crypto, Version=2.6.5697.24416, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.Components.Crypto.2.6\Lib\Net40\Crypto.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="GoC.WebTemplate, Version=4.0.27.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.27.2-RC1\lib\Net45\GoC.WebTemplate.dll</HintPath>
+    <Reference Include="GoC.WebTemplate, Version=4.0.28.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.28.1-RC4\lib\Net45\GoC.WebTemplate.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.27.2-RC1\lib\Net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\NLog.4.3.5\lib\net45\NLog.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.28.1-RC4\lib\Net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -79,16 +71,16 @@
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="WebTemplateCore, Version=1.0.6649.22700, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate.4.0.27.2-RC1\lib\Net45\WebTemplateCore.dll</HintPath>
+    <Reference Include="WebTemplateCore, Version=1.0.6737.19157, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate.4.0.28.1-RC4\lib\Net45\WebTemplateCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -314,11 +306,11 @@
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
+    <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />

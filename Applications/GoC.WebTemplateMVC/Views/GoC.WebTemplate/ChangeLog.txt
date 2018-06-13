@@ -1,4 +1,12 @@
 ﻿************************************************************************************************************
+4.0.28.1 - 2018-05-18 
+NOTE: THIS IS THE LAST SUPPORTED VERSION UNDER THIS NUGET PACKAGE NAME - please refer to the wiki for future updates
+- Various bug fixes
+- Adding Splash Page Master & Layout
+- Included optional RenderSection to MVC layouts
+- Update project to .NET 4.6.1
+- Removing ShowFeatures (not supported anymore)
+************************************************************************************************************
 4.0.27.2 - 2018-03-12
 Modernizing the code and improving the testablity of the core.
 - Including SampleCode page

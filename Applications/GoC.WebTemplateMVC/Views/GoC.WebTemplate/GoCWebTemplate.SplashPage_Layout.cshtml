@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<!--[if lt IE 9]><html class="no-js lt-ie9" lang="@ViewBag.WebTemplateCore.TwoLetterCultureLanguage" dir="ltr"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="@ViewBag.WebTemplateCore.TwoLetterCultureLanguage" dir="ltr">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+        wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+    <title>@ViewBag.WebTemplateCore.RenderHeaderTitle()</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <!-- Load closure template scripts -->
+    <script type="text/javascript" src="@string.Concat(ViewBag.WebTemplateCore.CDNPath, "soyutils.js")"></script>
+    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", ViewBag.WebTemplateCore.CDNPath, ViewBag.WebTemplateCore.TwoLetterCultureLanguage)"></script>
+    <noscript>
+        <!-- Write closure fall-back static file -->
+        @ViewBag.WebTemplateCore.LoadStaticFile("refTop.html")
+    </noscript>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+        document.write(wet.builder.splashTop({
+            cdnEnv: "@ViewBag.WebTemplateCore.CDNEnvironment"
+        }));
+    </script>
+    @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
+    @RenderSection("CustomStyles", required: false)
+</head>
+<body class="splash" vocab="http://schema.org/" typeof="WebPage">
+    <div id="splashContent">
+        <!-- Write closure fall-back static file -->
+        @ViewBag.WebTemplateCore.LoadStaticFile("splash.html")
+        <!-- Write closure template -->
+        <script type="text/javascript">
+            var contentSplash = document.getElementById("splashContent");
+            contentSplash.innerHTML = wet.builder.splash(@ViewBag.WebTemplateCore.RenderSplashInfo());
+        </script>
+    </div>
+    @RenderBody()
+</body>
+</html>

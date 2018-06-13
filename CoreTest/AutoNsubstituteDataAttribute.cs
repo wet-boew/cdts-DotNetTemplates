@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoFixture;
+using AutoFixture.AutoNSubstitute;
+using AutoFixture.Xunit2;
 using GoC.WebTemplate;
 using GoC.WebTemplate.Proxies;
 using NSubstitute;
-using Ploeh.AutoFixture;
-using Ploeh.AutoFixture.AutoNSubstitute;
-using Ploeh.AutoFixture.Xunit2;
+//using Ploeh.AutoFixture;
+//using Ploeh.AutoFixture.AutoNSubstitute;
+//using Ploeh.AutoFixture.Xunit2;
 using WebTemplateCore.JSONSerializationObjects;
 using Xunit;
 using Xunit.Sdk;
@@ -35,10 +38,10 @@ namespace CoreTest
             fixture.Customize<Core>(c => c.Without(p => p.ShowSignOutLink)
                                           .Without(p => p.ShowSignInLink)
             //We want custom search to start out as default(string)
-                                          .Without(p => p.CustomSearch) 
-            //The Site Menu URL should be null
-                                          .Without(p => p.CustomSiteMenuURL)
-                                          .Without(p => p.MenuLinks)
+                                          .Without(p => p.CustomSearch)
+                                          //The Site Menu URL should be null
+                                          .With(p => p.CustomSiteMenuURL, null)
+                                          .With(p => p.MenuLinks, null)
             //We also create want to ignore some of the lists as they should start out empty.
             //Normally you don't need to ignore so much but this object breaks normal .Net conventions by using the constructor
             //to set properties, instead of just using the properties
@@ -46,11 +49,17 @@ namespace CoreTest
                                           .Without(p => p.HTMLBodyElements)
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
-                                          .Without(p=> p.LeftMenuItems)
+                                          .Without(p => p.LeftMenuItems)
             //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
                                           .With(p => p.Environment, "ITEM1")
             //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false
-                                          .With(p => p.UseHTTPS, null));
+                                          .With(p => p.UseHTTPS, null)
+            //Default set ShowPostContent to false so Autofixture doesn't alternate the value to true in RenderPreFooterTest, 
+            //and RenderPreFooterWithNullsTest.
+                                          .With(p => p.ShowPostContent, false)
+            //Default set _core.ShowSharePageLink to true so Autofixture doesn't alternate the value to true in RenderPreFooterTest, 
+            //and RenderPreFooterWithNullsTest.
+                                          .With(p => p.ShowSharePageLink, true));
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
             fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));
@@ -69,7 +78,7 @@ namespace CoreTest
     public class AutoNSubstituteDataAttribute : AutoDataAttribute
     {
         public AutoNSubstituteDataAttribute()
-            : base(new Fixture().Customize(new WebTemplateCustomization()))
+            : base(() => new Fixture().Customize(new WebTemplateCustomization()))
         {
         }
     }

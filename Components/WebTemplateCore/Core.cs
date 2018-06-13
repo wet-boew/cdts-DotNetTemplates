@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -105,9 +105,6 @@ namespace GoC.WebTemplate
             ShowLanguageLink = _configProxy.ShowLanguageLink;
             ShowSharePageLink = _configProxy.ShowSharePageLink;
 
-            //Set Footer section options
-            ShowFeatures = _configProxy.ShowFeatures;
-
             LeavingSecureSiteWarning = new LeavingSecureSiteWarning
             {
                 Enabled = _configProxy.LeavingSecureSiteWarning.Enabled,
@@ -119,7 +116,8 @@ namespace GoC.WebTemplate
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSearch = _configProxy.CustomSearch;
+            CustomSearch = _configProxy.CustomSearch.Equals(string.Empty) ? null : _configProxy.CustomSearch;
+            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL.Equals(string.Empty) ? null : _configProxy.CustomSiteMenuURL;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -192,7 +190,7 @@ namespace GoC.WebTemplate
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter
         /// Set by application programmatically
         /// </summary>
-        public Link ContactLink { get; set; }
+        public Link ContactLink { get; set; } = new Link();
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
@@ -219,6 +217,7 @@ namespace GoC.WebTemplate
         /// Set by application via web.config
         /// or Set by application programmatically
         /// </summary>
+        [Obsolete]
         public bool ShowFeatures { get; set; }
 
         /// <summary>
@@ -454,6 +453,12 @@ namespace GoC.WebTemplate
         public bool ShowSignOutLink { get; set; }
 
         /// <summary>
+        /// Info for Spash page
+        /// Only applicable to Splash Layout/Master
+        /// </summary>
+        public SplashPageInfo SplashPageInfo { get; set; } = new SplashPageInfo();
+
+        /// <summary>
         /// Custom links if null uses standard links if not null overrides the existing footer links
         /// Set by application programmatically
         /// Only available in the Application Template
@@ -519,7 +524,9 @@ namespace GoC.WebTemplate
         public HtmlString RenderHtmlHeaderElements() => Render.RenderHtmlElements(HTMLHeaderElements);
 
         public HtmlString RenderHtmlBodyElements() => Render.RenderHtmlElements(HTMLBodyElements);
-        
+
+        public HtmlString RenderSplashInfo() => Render.RenderSplashInfo();
+
         /// <summary>
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
         /// </summary>
@@ -587,6 +594,7 @@ namespace GoC.WebTemplate
             return new HtmlString(info);
         }
 
+        
 
     }
 
