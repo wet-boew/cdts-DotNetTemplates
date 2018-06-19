@@ -116,6 +116,7 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
+    <Content Include="TestApplicationLeftMenuPage.aspx" />
     <Content Include="TestApplicationTemplatePage.aspx" />
     <Content Include="TestErrorPage.aspx" />
     <Content Include="TestSplashTemplate.aspx" />
@@ -159,6 +160,13 @@
       <DependentUpon>GoCWebTemplate.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestApplicationLeftMenuPage.aspx.cs">
+      <DependentUpon>TestApplicationLeftMenuPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestApplicationLeftMenuPage.aspx.designer.cs">
+      <DependentUpon>TestApplicationLeftMenuPage.aspx</DependentUpon>
+    </Compile>
     <Compile Include="TestApplicationTemplatePage.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
