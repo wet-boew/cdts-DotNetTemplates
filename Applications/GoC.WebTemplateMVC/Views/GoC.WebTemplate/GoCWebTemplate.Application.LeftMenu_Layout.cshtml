@@ -60,9 +60,9 @@
             <!-- Write closure template -->
             <script type="text/javascript">
                 var secondarymenu = document.getElementById("wb-sec");
-                secondarymenu.innerHTML = wet.builder.secmenu({
+                secondarymenu.innerHTML = wet.builder.secmenu(
                     @ViewBag.WebTemplateCore.RenderLeftMenu()
-                });
+                );
             </script>
         </div>
     </div>
