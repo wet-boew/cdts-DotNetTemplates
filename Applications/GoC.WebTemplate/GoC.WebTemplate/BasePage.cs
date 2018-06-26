@@ -26,7 +26,7 @@ namespace GoC.WebTemplate
                 }
                 catch (Exception ex)
                 {
-                    throw new ArgumentNullException("Please refrence a WebTemplate Master Page in the .aspx", ex);
+                    throw new ArgumentNullException("Please reference a WebTemplate Master Page in the .aspx", ex);
                 }
             }
         }
