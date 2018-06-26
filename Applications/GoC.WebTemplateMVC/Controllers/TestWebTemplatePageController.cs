@@ -31,8 +31,7 @@ namespace GoC.WebTemplateMVC.Controllers
                     Link = "#",
                     Name  = "MenuSection",
                     OpenInNewWindow = false
-                },
-                new MenuSection("Principale", new [] { new MenuItem("linka", "Secondaire", new [] { new MenuItem("linkb", "Tertiaire") }) })
+                }
             };
             return View("HelloWorldLeftMenu");
         }
