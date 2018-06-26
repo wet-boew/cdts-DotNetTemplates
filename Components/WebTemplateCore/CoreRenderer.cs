@@ -336,7 +336,7 @@ namespace GoC.WebTemplate
         {
             return JsonSerializationHelper.SerializeToJson(new 
             {
-                CdnEnv = _core.CDNEnvironment,
+                cdnEnv = _core.CDNEnvironment,
                 indexEng = _core.SplashPageInfo.EnglishHomeUrl,
                 indexFra = _core.SplashPageInfo.FrenchHomeUrl,
                 termsEng = _core.Builder.GetStringForJson(_core.SplashPageInfo.EnglishTermsUrl),
