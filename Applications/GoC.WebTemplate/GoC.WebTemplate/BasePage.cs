@@ -11,23 +11,23 @@ namespace GoC.WebTemplate
         {
             get
             {
-                // ReSharper disable once SuggestVarOrType_SimpleTypes - needs to be declared
-                System.Web.UI.MasterPage temp = Master;
-
-                while (!(temp is WebTemplateMasterPage))
+                try
                 {
-                    try
+                    // ReSharper disable once SuggestVarOrType_SimpleTypes - needs to be declared
+                    System.Web.UI.MasterPage temp = Master;
+
+                    while (!(temp is WebTemplateMasterPage))
                     {
                         // ReSharper disable once PossibleNullReferenceException - handled by try
                         temp = temp.Master;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Please refrence a WebTemplate Master Page in the .aspx", ex);
-                    }
 
+                    }
+                    return (WebTemplateMasterPage)temp;
                 }
-                return (WebTemplateMasterPage)temp;
+                catch (Exception ex)
+                {
+                    throw new ArgumentNullException("Please refrence a WebTemplate Master Page in the .aspx", ex);
+                }
             }
         }
 

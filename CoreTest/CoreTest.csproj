@@ -120,6 +120,7 @@
     <Compile Include="RenderTests\RenderTopTests.cs" />
     <Compile Include="RenderTests\RenderTransactionalTopTests.cs" />
     <Compile Include="RenderTests\RenderUnilingualPreFooter.cs" />
+    <Compile Include="WebFormsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CDTSEnvironments.json">
@@ -134,6 +135,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Applications\GoC.WebTemplate\GoC.WebTemplate.csproj">
+      <Project>{26FD115A-4321-4AA5-B8A0-72C061AC0491}</Project>
+      <Name>GoC.WebTemplate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Components\WebTemplateCore\WebTemplateCore.csproj">
       <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
       <Name>WebTemplateCore</Name>
