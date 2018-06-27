@@ -93,7 +93,7 @@
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
       XmlFileName="$(ReleaseRootDir)\GocWebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
-      XPath="/package/metadata/dependencies/dependency/@version"
+      XPath="/package/metadata/dependencies/dependency[@id='GoC.WebTemplate-Components']/@version"
       Value="$(dependencyVersionNumber)" />
 
     <!-- 3. create package -->    
