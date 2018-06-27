@@ -1,4 +1,9 @@
 ﻿************************************************************************************************************
+1.28.1 - 2018-06-27
+- Fix left menu render issues
+- Adding dependancies to NuGet packages
+- Various bug fixes
+************************************************************************************************************
 1.28.0 (4.0.28.1) - 2018-05-18
 - Updated build packages to separate core object for testing
 - Various bug fixes
