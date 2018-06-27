@@ -12,8 +12,8 @@ namespace GoC.WebTemplate
         public SessionTimeout(bool enabled, 
                              int inactivity,
                              int reactionTime,
-                             int sessionAlive,
-                             string logoutUrl,
+                             int sessionalive,
+                             string logouturl,
                              string refreshCallbackUrl,
                              bool refreshOnClick,
                              int refreshLimit,
@@ -23,8 +23,8 @@ namespace GoC.WebTemplate
             Enabled = enabled;
             Inactivity = inactivity;
             ReactionTime = reactionTime;
-            SessionAlive = sessionAlive;
-            LogoutUrl = logoutUrl;            
+            Sessionalive = sessionalive;
+            Logouturl = logouturl;            
             RefreshCallbackUrl = refreshCallbackUrl;
             RefreshOnClick = refreshOnClick;
             RefreshLimit = refreshLimit;
@@ -35,8 +35,8 @@ namespace GoC.WebTemplate
         public bool Enabled { get; set; }
         public int Inactivity { get; set; }
         public int ReactionTime { get; set; }
-        public int SessionAlive { get; set; }
-        public string LogoutUrl { get; set; }
+        public int Sessionalive { get; set; }
+        public string Logouturl { get; set; }
         public string RefreshCallbackUrl { get; set; }
         public bool RefreshOnClick { get; set; }
         public int RefreshLimit { get; set; }
@@ -45,17 +45,17 @@ namespace GoC.WebTemplate
 
         /// <summary>
         /// Will check that the timeouts set are equalto or lower than the server session timeout
-        /// It will override SessionAlive, Inactivity and ReactionTime if it fails the check
+        /// It will override Sessionalive, Inactivity and ReactionTime if it fails the check
         /// </summary>
         /// <param name="session">current session</param>
         public void CheckWithServerSessionTimout(HttpSessionState session)
         {
             const int min = 60000; //one min in millisections
-            if (Enabled && session != null && session.Timeout * min < SessionAlive)
+            if (Enabled && session != null && session.Timeout * min < Sessionalive)
             {
                 while (session.Timeout <= 1) session.Timeout++; // one min will force the popup instantly so increase the session
-                SessionAlive = session.Timeout * min;
-                Inactivity = SessionAlive - min;
+                Sessionalive = session.Timeout * min;
+                Inactivity = Sessionalive - min;
                 ReactionTime = min;
             }
         }
