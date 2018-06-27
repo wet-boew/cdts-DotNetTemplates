@@ -11,7 +11,7 @@
     <copyright>Copyright 2018</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
-      <dependency id="Newtonsoft.Json" version="9.0.1" />
+      <dependency id="Newtonsoft.Json" version="11.0.2" />
     </dependencies>
   </metadata>
 </package>
