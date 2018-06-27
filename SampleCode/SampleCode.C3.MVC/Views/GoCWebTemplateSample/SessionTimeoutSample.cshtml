@@ -24,7 +24,7 @@
     <li><code class="wb-prettify">inactivity</code>: inactivity period of time after which the modal dialog will appear (default 20 minutes)</li>
     <li><code class="wb-prettify">reactionTime</code>: period of time the user has to perform an action once the modal dialog is displayed (default 3 minutes)</li>
     <li><code class="wb-prettify">sessionalive</code>: period of time for the session to stay alive until the modal dialog appears (default 20 minutes)</li>
-    <li><code class="wb-prettify">logoutUrl</code>: URL that users are sent to when the session has expired.  This page can be invisible to the user and should perform any necessary clean up code.</li>
+    <li><code class="wb-prettify">logouturl</code>: URL that users are sent to when the session has expired.  This page can be invisible to the user and should perform any necessary clean up code.</li>
     <li><code class="wb-prettify">refreshCallbackUrl</code>: URL used to perform an ajax request to determine the validity of the session. This page is invisible to the user and will return "true" is the server session is still valid, and "false" if it is expired or no longer valid.</li>
     <li><code class="wb-prettify">refreshOnClick</code>: Determines if clicking on the web page should reset the inactivity timeout and perform an ajax request (if a refreshCallbackUrl has been specified).</li>
     <li><code class="wb-prettify">refreshLimit</code>: Sets the amount of time that must pass before an ajax request can be made</li>
@@ -43,7 +43,7 @@
 <p>In this sample we have:</p>
 <ul>
     <li>Set the server session timeout to 1 minute</li>
-    <li>Set the <code class="wb-prettify">Inactivity and SessionAlive</code> to 30 seconds. This means the popup will be displayed every 30 seconds.</li>
+    <li>Set the <code class="wb-prettify">Inactivity and Sessionalive</code> to 30 seconds. This means the popup will be displayed every 30 seconds.</li>
     <li>Set the <code class="wb-prettify">reactionTime</code> to 10 second. This gives the user 10 seconds to make a selection once the pop up is displayed</li>
     <li>Set the <code class="wb-prettify">logoutURL</code> to "logout.aspx".  This page will clean up the session and redirect the user to another page, simulating a proper logout flow.</li>
     <li>Set the <code class="wb-prettify">refreshCallbackUrl</code> to "SessionValidity.aspx".  This page ensures the server session is still valid and return "true" if it is and "false" if the session is expired or no longer valid.</li>
@@ -57,8 +57,8 @@
 this.WebTemplateCore.SessionTimeout_Enabled = true;
 this.WebTemplateCore.SessionTimeout.Inactivity = 30000;
 this.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-this.WebTemplateCore.SessionTimeout.SessionAlive = 30000;
-this.WebTemplateCore.SessionTimeout.LogoutUrl = "Logout.aspx";            
+this.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
+this.WebTemplateCore.SessionTimeout.Logouturl = "Logout.aspx";            
 this.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
 this.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
 this.WebTemplateCore.SessionTimeout.RefreshLimit = 3;

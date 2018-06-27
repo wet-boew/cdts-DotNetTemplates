@@ -92,7 +92,7 @@ namespace CoreTest.RenderTests
         {
             sut.SessionTimeout.Enabled = true;
             var result = sut.RenderSessionTimeoutControl();
-            result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionAlive", "logoutUrl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData");
+            result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionalive", "logouturl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData");
         }
     }
 }

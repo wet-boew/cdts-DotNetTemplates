@@ -228,8 +228,8 @@ namespace GoC.WebTemplateMVC.Controllers
             WebTemplateCore.SessionTimeout.Enabled = true;
             WebTemplateCore.SessionTimeout.Inactivity = 20000;
             WebTemplateCore.SessionTimeout.ReactionTime = 20001;
-            WebTemplateCore.SessionTimeout.SessionAlive = 20002;
-            WebTemplateCore.SessionTimeout.LogoutUrl = "20003";
+            WebTemplateCore.SessionTimeout.Sessionalive = 20002;
+            WebTemplateCore.SessionTimeout.Logouturl = "20003";
             WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
             WebTemplateCore.SessionTimeout.RefreshOnClick = false;
             WebTemplateCore.SessionTimeout.RefreshLimit = 20007;
