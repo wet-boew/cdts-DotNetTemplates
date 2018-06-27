@@ -77,7 +77,7 @@ namespace CoreTest.RenderTests
 
             var result = sut.RenderLeftMenu();
 
-            result.ToString().Should().Be("{\"sections\":[{\"sectionName\":\"SectionName\",\"sectionLink\":\"SectionLink\",\"menuLinks\":[{\"href\":\"Href\",\"text\":\"Text\"},{\"href\":\"Href\",\"text\":\"Text\",\"subLinks\":[{\"subHref\":\"subHerf\",\"subText\":\"subText\"}]},{\"href\":\"Herf\",\"text\":\"Text\",\"newWindow\":true}]}]}");
+            result.ToString().Should().Be("{\"sections\":[{\"sectionName\":\"SectionName\",\"sectionLink\":\"SectionLink\",\"menuLinks\":[{\"href\":\"Href\",\"text\":\"Text\"},{\"href\":\"Href\",\"text\":\"Text\",\"subLinks\":[{\"subhref\":\"subHerf\",\"subtext\":\"subText\"}]},{\"href\":\"Herf\",\"text\":\"Text\",\"newWindow\":true}]}]}");
         }
         
         [Theory, AutoNSubstituteData]
