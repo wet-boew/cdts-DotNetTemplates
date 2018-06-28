@@ -12,6 +12,7 @@
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
       <dependency id="GoC.WebTemplate-Components" version="1.28.0"/>
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.6"/>
     </dependencies>
   </metadata>
 </package>

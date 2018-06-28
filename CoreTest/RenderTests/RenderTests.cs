@@ -77,7 +77,7 @@ namespace CoreTest.RenderTests
 
             var result = sut.RenderLeftMenu();
 
-            result.ToString().Should().Be("{\"sections\":[{\"sectionName\":\"SectionName\",\"sectionLink\":\"SectionLink\",\"menuLinks\":[{\"href\":\"Href\",\"text\":\"Text\"},{\"href\":\"Href\",\"text\":\"Text\",\"subLinks\":[{\"subHref\":\"subHerf\",\"subText\":\"subText\"}]},{\"href\":\"Herf\",\"text\":\"Text\",\"newWindow\":true}]}]}");
+            result.ToString().Should().Be("{\"sections\":[{\"sectionName\":\"SectionName\",\"sectionLink\":\"SectionLink\",\"menuLinks\":[{\"href\":\"Href\",\"text\":\"Text\"},{\"href\":\"Href\",\"text\":\"Text\",\"subLinks\":[{\"subhref\":\"subHerf\",\"subtext\":\"subText\"}]},{\"href\":\"Herf\",\"text\":\"Text\",\"newWindow\":true}]}]}");
         }
         
         [Theory, AutoNSubstituteData]
@@ -92,7 +92,7 @@ namespace CoreTest.RenderTests
         {
             sut.SessionTimeout.Enabled = true;
             var result = sut.RenderSessionTimeoutControl();
-            result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionAlive", "logoutUrl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData");
+            result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionalive", "logouturl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData");
         }
     }
 }

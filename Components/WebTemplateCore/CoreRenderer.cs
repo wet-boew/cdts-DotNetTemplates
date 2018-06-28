@@ -200,6 +200,7 @@ namespace GoC.WebTemplate
 
             var leftMenuForSerialization = new { sections = new List<object>() };
 
+            // capitalization on anonymous types matters here, CDTS will reject the json objects if not done right
             foreach (var menu in _core.LeftMenuItems)
             {
                 var menuForSerialization = new
@@ -235,8 +236,8 @@ namespace GoC.WebTemplate
                         {
                             subMenuForSerialization.subLinks.Add(new
                             {
-                                subHref = subMenuItem.Href,
-                                subText = subMenuItem.Text,
+                                subhref = subMenuItem.Href,
+                                subtext = subMenuItem.Text,
                                 newWindow = subMenuItem.OpenInNewWindow ? true : (bool?)null //so json won't render object on false
                             });
                         }
@@ -335,7 +336,7 @@ namespace GoC.WebTemplate
         {
             return JsonSerializationHelper.SerializeToJson(new 
             {
-                CdnEnv = _core.CDNEnvironment,
+                cdnEnv = _core.CDNEnvironment,
                 indexEng = _core.SplashPageInfo.EnglishHomeUrl,
                 indexFra = _core.SplashPageInfo.FrenchHomeUrl,
                 termsEng = _core.Builder.GetStringForJson(_core.SplashPageInfo.EnglishTermsUrl),

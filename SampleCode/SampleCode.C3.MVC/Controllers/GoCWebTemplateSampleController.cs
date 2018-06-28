@@ -165,8 +165,8 @@ namespace SampleCode.C3.MVC.Controllers
             this.WebTemplateCore.SessionTimeout.Enabled = true;
             this.WebTemplateCore.SessionTimeout.Inactivity = 30000;
             this.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            this.WebTemplateCore.SessionTimeout.SessionAlive = 30000;
-            this.WebTemplateCore.SessionTimeout.LogoutUrl = "Logout";
+            this.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
+            this.WebTemplateCore.SessionTimeout.Logouturl = "Logout";
             this.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity";
             this.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
             this.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
