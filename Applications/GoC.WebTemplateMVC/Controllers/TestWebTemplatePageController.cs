@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Globalization;
-using GoC.WebTemplate;
 
-namespace GoC.WebTemplateMVC.Controllers
+namespace GoC.WebTemplate.MVC.Controllers
 {
     public class TestWebTemplatePageController : WebTemplateBaseController
     {

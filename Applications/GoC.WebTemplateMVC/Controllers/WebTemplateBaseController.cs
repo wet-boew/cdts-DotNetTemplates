@@ -8,7 +8,8 @@ using GoC.WebTemplate.Proxies;
 using WebTemplateCore.JSONSerializationObjects;
 using WebTemplateCore.Proxies;
 
-namespace GoC.WebTemplate
+// ReSharper disable once CheckNamespace
+namespace GoC.WebTemplate.MVC
 {
     public class WebTemplateBaseController : Controller
     {
