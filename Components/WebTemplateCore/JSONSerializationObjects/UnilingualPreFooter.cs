@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace WebTemplateCore.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
     public class UnilingualPreFooter 
     {

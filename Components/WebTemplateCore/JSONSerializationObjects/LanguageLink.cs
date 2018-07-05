@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     //We don't inherit from link as the Text is readonly and not settable
     public class LanguageLink  

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Configuration;
-using GoC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.Components.ConfigSections;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class Configurations : ConfigurationSection
     {

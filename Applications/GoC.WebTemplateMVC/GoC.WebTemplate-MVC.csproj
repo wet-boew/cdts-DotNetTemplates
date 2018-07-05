@@ -178,9 +178,9 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Components\WebTemplateCore\WebTemplateCore.csproj">
+    <ProjectReference Include="..\..\Components\WebTemplateCore\GoC.WebTemplate-Components.csproj">
       <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
-      <Name>WebTemplateCore</Name>
+      <Name>GoC.WebTemplate-Components</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

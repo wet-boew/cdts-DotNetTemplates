@@ -2,7 +2,7 @@ using System.Web;
 using System.Web.SessionState;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate.Proxies
+namespace GoC.WebTemplate.Components.Proxies
 {
     public class CurrentRequestProxy : ICurrentRequestProxy
     {

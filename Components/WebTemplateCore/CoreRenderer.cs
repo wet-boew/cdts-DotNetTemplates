@@ -4,11 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
-using Newtonsoft.Json;
-using WebTemplateCore.JSONSerializationObjects;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     internal class CoreRenderer
     {

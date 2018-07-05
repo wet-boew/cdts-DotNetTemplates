@@ -4,9 +4,10 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class CoreBuilder
     {

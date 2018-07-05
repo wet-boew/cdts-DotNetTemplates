@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics;
 using Newtonsoft.Json;
 
-namespace WebTemplateCore.JSONSerializationObjects.CustomJsonConverters
+namespace GoC.WebTemplate.Components.JSONSerializationObjects.CustomJsonConverters
 {
     internal class FeedbackLinkConverter : JsonConverter
     {

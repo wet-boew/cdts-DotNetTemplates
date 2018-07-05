@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate-WebForms", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate-MVC", "Applications\GoC.WebTemplateMVC\GoC.WebTemplate-MVC.csproj", "{EC1904AE-61D0-4C51-B431-8682EC4C6C42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebTemplateCore", "Components\WebTemplateCore\WebTemplateCore.csproj", "{A9ACE274-5F6A-4634-A40A-E775F5B81B90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate-Components", "Components\WebTemplateCore\GoC.WebTemplate-Components.csproj", "{A9ACE274-5F6A-4634-A40A-E775F5B81B90}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleCode", "SampleCode", "{2CFB095F-7524-496B-9618-3134660376AA}"
 EndProject
