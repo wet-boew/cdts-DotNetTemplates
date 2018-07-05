@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applications", "Application
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{E5D96498-3C33-4E87-96D1-EF220E63BBE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate", "Applications\GoC.WebTemplate\GoC.WebTemplate.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate-WebForms", "Applications\GoC.WebTemplate\GoC.WebTemplate-WebForms.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplateMVC", "Applications\GoC.WebTemplateMVC\GoC.WebTemplateMVC.csproj", "{EC1904AE-61D0-4C51-B431-8682EC4C6C42}"
 EndProject

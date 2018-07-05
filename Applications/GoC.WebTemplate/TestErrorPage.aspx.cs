@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
     public partial class TestErrorPage : BasePage
     {

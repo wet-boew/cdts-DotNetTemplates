@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using WebTemplateCore.JSONSerializationObjects;
 
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
   
   public class TestApplicationTemplatePage : BasePage

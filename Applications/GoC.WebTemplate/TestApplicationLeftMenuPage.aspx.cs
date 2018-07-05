@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 { 
-public partial class TestApplicationLeftMenuPage : GoC.WebTemplate.BasePage
+public partial class TestApplicationLeftMenuPage : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

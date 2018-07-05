@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
     public partial class TestSplashTemplate : BasePage
     {
