@@ -1,6 +1,4 @@
-using GoC.WebTemplate;
-
-namespace WebTemplateCore.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
     public class CDTSEnvironment : ICDTSEnvironment
     {

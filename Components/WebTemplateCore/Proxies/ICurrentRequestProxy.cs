@@ -1,9 +1,6 @@
-
-// ReSharper disable once CheckNamespace
-
 using System.Web.SessionState;
 
-namespace GoC.WebTemplate.Proxies
+namespace GoC.WebTemplate.Components.Proxies
 {
     public interface ICurrentRequestProxy
     {

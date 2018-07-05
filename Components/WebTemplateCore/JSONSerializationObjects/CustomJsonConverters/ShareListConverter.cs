@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using Newtonsoft.Json;
 
-namespace WebTemplateCore.JSONSerializationObjects.CustomJsonConverters
+namespace GoC.WebTemplate.Components.JSONSerializationObjects.CustomJsonConverters
 {
     internal class ShareListConverter : JsonConverter 
     {

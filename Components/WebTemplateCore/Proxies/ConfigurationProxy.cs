@@ -1,10 +1,4 @@
-using System.Collections.Generic;
-using System.Linq;
-using WebTemplateCore.Proxies;
-
-// ReSharper disable once CheckNamespace
-
-namespace GoC.WebTemplate.Proxies
+namespace GoC.WebTemplate.Components.Proxies
 {
 
     public class ConfigurationProxy : IConfigurationProxy

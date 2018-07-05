@@ -5,12 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Web;
 using System.Threading;
-using GoC.WebTemplate.Proxies;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class Core
     {

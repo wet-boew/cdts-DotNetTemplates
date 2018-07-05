@@ -1,7 +1,6 @@
 using System.Configuration;
 
-// ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate.ConfigSections
+namespace GoC.WebTemplate.Components.ConfigSections
 {
     public class SessionTimeOutElement : ConfigurationElement
     {
