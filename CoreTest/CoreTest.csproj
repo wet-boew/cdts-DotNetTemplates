@@ -135,9 +135,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Applications\GoC.WebTemplate\GoC.WebTemplate.csproj">
+    <ProjectReference Include="..\Applications\GoC.WebTemplate\GoC.WebTemplate-WebForms.csproj">
       <Project>{26FD115A-4321-4AA5-B8A0-72C061AC0491}</Project>
-      <Name>GoC.WebTemplate</Name>
+      <Name>GoC.WebTemplate-WebForms</Name>
     </ProjectReference>
     <ProjectReference Include="..\Components\WebTemplateCore\WebTemplateCore.csproj">
       <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
