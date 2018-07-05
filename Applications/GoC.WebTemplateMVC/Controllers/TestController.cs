@@ -1,7 +1,6 @@
 ﻿using System.Web.Mvc;
-using GoC.WebTemplate;
 
-namespace GoC.WebTemplateMVC.Controllers
+namespace GoC.WebTemplate.MVC.Controllers
 {
     public class TestController : WebTemplateBaseController
     {
