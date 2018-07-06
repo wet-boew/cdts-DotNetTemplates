@@ -4,9 +4,9 @@ using System.Web.Mvc;
 using System.Globalization;
 using System.Threading;
 using System.Reflection;
-using GoC.WebTemplate.Proxies;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.MVC

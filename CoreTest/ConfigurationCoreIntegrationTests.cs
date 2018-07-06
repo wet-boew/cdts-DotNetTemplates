@@ -4,11 +4,9 @@ using System.Web;
 using System.Web.SessionState;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using GoC.WebTemplate;
-using GoC.WebTemplate.Proxies;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 using Xunit;
 
 namespace CoreTest

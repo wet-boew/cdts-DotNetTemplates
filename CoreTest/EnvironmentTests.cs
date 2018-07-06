@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using GoC.WebTemplate;
-using NSubstitute;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Xunit;
 
 namespace CoreTest

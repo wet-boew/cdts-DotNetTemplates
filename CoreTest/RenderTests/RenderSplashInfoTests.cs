@@ -1,6 +1,5 @@
-﻿using System;
-using FluentAssertions;
-using GoC.WebTemplate;
+﻿using FluentAssertions;
+using GoC.WebTemplate.Components;
 using Xunit;
 
 namespace CoreTest.RenderTests
