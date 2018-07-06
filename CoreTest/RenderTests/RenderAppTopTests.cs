@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using FluentAssertions;
-using GoC.WebTemplate;
-using GoC.WebTemplate.Proxies;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
 using Xunit;
 using AutoFixture.Xunit2;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 
 namespace CoreTest.RenderTests
 {

@@ -7,8 +7,8 @@
 //'**********************************************************************
 using System;
 using System.Reflection;
-using GoC.WebTemplate.Proxies;
-using WebTemplateCore.Proxies;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.Proxies;
 
 // TODO
 //consider debug logging?

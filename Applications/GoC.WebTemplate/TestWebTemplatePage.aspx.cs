@@ -1,4 +1,5 @@
 ﻿using System;
+using GoC.WebTemplate.Components;
 
 namespace GoC.WebTemplate.WebForms
 {

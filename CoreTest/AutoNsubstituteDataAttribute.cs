@@ -4,13 +4,10 @@ using System.Linq;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
-using GoC.WebTemplate;
-using GoC.WebTemplate.Proxies;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 using NSubstitute;
-//using Ploeh.AutoFixture;
-//using Ploeh.AutoFixture.AutoNSubstitute;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
 using Xunit;
 using Xunit.Sdk;
 
