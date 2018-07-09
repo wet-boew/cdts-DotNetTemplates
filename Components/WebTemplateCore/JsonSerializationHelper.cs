@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using WebTemplateCore.JSONSerializationObjects;
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public static class JsonSerializationHelper
     {

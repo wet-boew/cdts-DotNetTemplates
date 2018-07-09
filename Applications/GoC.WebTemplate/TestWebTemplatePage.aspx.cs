@@ -1,6 +1,7 @@
 ﻿using System;
+using GoC.WebTemplate.Components;
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
     public partial class TestWebTemplatePage : BasePage
     {

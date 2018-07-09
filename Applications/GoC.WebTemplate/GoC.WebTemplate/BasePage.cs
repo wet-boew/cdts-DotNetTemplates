@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Globalization;
+using GoC.WebTemplate.Components;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
     public class BasePage : System.Web.UI.Page
     {

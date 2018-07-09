@@ -1,7 +1,6 @@
-using GoC.WebTemplate;
 using Newtonsoft.Json;
 
-namespace WebTemplateCore.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
   public class SubLink : Link
   {

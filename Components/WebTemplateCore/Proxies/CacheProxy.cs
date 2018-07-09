@@ -1,7 +1,7 @@
 using System.Web;
 using System.Web.Caching;
 
-namespace WebTemplateCore.Proxies
+namespace GoC.WebTemplate.Components.Proxies
 {
     public class CacheProxy : ICacheProxy
     {

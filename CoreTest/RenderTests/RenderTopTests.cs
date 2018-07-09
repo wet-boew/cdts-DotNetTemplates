@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
-using GoC.WebTemplate;
-using NSubstitute;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
+﻿using FluentAssertions;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Xunit;
 
 namespace CoreTest.RenderTests

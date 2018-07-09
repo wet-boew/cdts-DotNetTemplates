@@ -1,4 +1,4 @@
-namespace WebTemplateCore.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
     internal class RefTop
     {

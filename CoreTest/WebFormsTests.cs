@@ -2,7 +2,7 @@
 using System.Web;
 using FluentAssertions;
 using Xunit;
-using GoC.WebTemplate;
+using GoC.WebTemplate.WebForms;
 
 namespace CoreTest
 {

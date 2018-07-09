@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using WebTemplateCore.JSONSerializationObjects;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
   
   public class TestApplicationTemplatePage : BasePage

@@ -1,8 +1,7 @@
 using FluentAssertions;
-using GoC.WebTemplate;
-using WebTemplateCore.JSONSerializationObjects;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Xunit;
-using Xunit.Sdk;
 
 namespace CoreTest
 {
