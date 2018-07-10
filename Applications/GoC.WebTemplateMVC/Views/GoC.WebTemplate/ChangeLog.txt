@@ -1,4 +1,7 @@
 ﻿************************************************************************************************************
+1.29.0 - 2018-07-10
+- Updating assembly names for consistancy (using statments will need to be updated
+************************************************************************************************************
 1.28.1 - 2018-06-27
 - Fix left menu render issues
 - Adding dependancies to NuGet packages
