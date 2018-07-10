@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
-namespace SampleCode.C3.MVC.Controllers
+namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
     public class GoCWebTemplateExtendedCtrlSampleController : ExtendedBaseController
     {
@@ -13,8 +9,8 @@ namespace SampleCode.C3.MVC.Controllers
         {
             
             //call the functions/properties of the extended controller
-            ViewBag.lblSessionID = this.SessionID;
-            ViewBag.lblWeather = this.GetWeather();
+            ViewBag.lblSessionID = SessionID;
+            ViewBag.lblWeather = GetWeather();
 
             return View();
         }

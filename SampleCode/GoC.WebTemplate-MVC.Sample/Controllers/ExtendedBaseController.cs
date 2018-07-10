@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 
-namespace SampleCode.C3.MVC.Controllers
+namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
-    public class ExtendedBaseController : GoC.WebTemplate.WebTemplateBaseController
+    public class ExtendedBaseController : WebTemplateBaseController
     {
 
         protected override void EndExecuteCore(IAsyncResult asyncResult)
         {
             //Set a the common title for everypage here
-            this.WebTemplateCore.HeaderTitle = "Title set for everypage!";
+            WebTemplateCore.HeaderTitle = "Title set for everypage!";
 
             base.EndExecuteCore(asyncResult);
         }
@@ -30,9 +26,6 @@ namespace SampleCode.C3.MVC.Controllers
             return "Sunny";
         }
 
-        public string SessionID
-        {
-            get { return this.Session.SessionID; }
-        }
-	}
+        public string SessionID => Session.SessionID;
+    }
 }

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using System.Globalization;
-using GoC.WebTemplate;
+using System.Web.Mvc;
 
-namespace SampleCode.C3.MVC.Controllers
+namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
-    public class GoCWebTemplateSampleController : GoC.WebTemplate.WebTemplateBaseController
+    public class GoCWebTemplateSampleController : WebTemplateBaseController
     {
     
         //
@@ -16,36 +12,36 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult BaseSettingsSample()
         {
             //specify a title for this page
-            this.WebTemplateCore.Environment = "ESDC_PROD";
-            this.WebTemplateCore.UseHTTPS = true;
-            this.WebTemplateCore.HeaderTitle = "Setting Custom Theme";
-            this.WebTemplateCore.ApplicationTitle.Text = "Custom Title";
-            this.WebTemplateCore.ApplicationTitle.Href = "FOO/Bar";
+            WebTemplateCore.Environment = "ESDC_PROD";
+            WebTemplateCore.UseHTTPS = true;
+            WebTemplateCore.HeaderTitle = "Setting Custom Theme";
+            WebTemplateCore.ApplicationTitle.Text = "Custom Title";
+            WebTemplateCore.ApplicationTitle.Href = "FOO/Bar";
             //specify the metatags
-            this.WebTemplateCore.HTMLHeaderElements.Add("<meta charset='UTF-8'>");
-            this.WebTemplateCore.HTMLHeaderElements.Add("<meta name='singer' content='Elvis'>");
-            this.WebTemplateCore.HTMLHeaderElements.Add("<meta http-equiv='default-style' content='sample'>");
+            WebTemplateCore.HTMLHeaderElements.Add("<meta charset='UTF-8'>");
+            WebTemplateCore.HTMLHeaderElements.Add("<meta name='singer' content='Elvis'>");
+            WebTemplateCore.HTMLHeaderElements.Add("<meta http-equiv='default-style' content='sample'>");
             //specify the date modified
-            this.WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
+            WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
             //or for using the current date
-            //this.WebTemplateCore.DateModified = DateTime.Now.Date;
+            //WebTemplateCore.DateModified = DateTime.Now.Date;
 
             //specify the version identifier (Note: since the date modified is supplied the date takes precedence)
-            //this.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
+            //WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
 
             //specify a screen identifier
-            this.WebTemplateCore.ScreenIdentifier = "CALVIN ROCKS";
+            WebTemplateCore.ScreenIdentifier = "CALVIN ROCKS";
             return View();
         }
 
         public ActionResult BreadcrumbSample()
         {
             //Specify your breadcrumbs
-            this.WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.html", "Home", ""));
-            this.WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.esdc.gc.ca/en/jobs/opportunities/index.page", "Jobs", ""));
-            this.WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.esdc.gc.ca/en/jobs/opportunities/youth_students.page", "Opportunities", ""));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.html", "Home", ""));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.esdc.gc.ca/en/jobs/opportunities/index.page", "Jobs", ""));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.esdc.gc.ca/en/jobs/opportunities/youth_students.page", "Opportunities", ""));
             //Leaving the "href" parameter empty, will create the breadcrumb in text and not as a hyperlink. Useful for the last item of the breadcrumb list. 
-            this.WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "FSWEP", "Federal Student Work Experience Program"));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "FSWEP", "Federal Student Work Experience Program"));
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -54,12 +50,12 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult AddJSandCSSFilesSample()
         {
             //Add a CSS to the header
-            this.WebTemplateCore.HTMLHeaderElements.Add("<link rel='stylesheet' type='text/css' href='/Content/mystyle.css'>");
+            WebTemplateCore.HTMLHeaderElements.Add("<link rel='stylesheet' type='text/css' href='/Content/mystyle.css'>");
 
             //Add a JS to the header
-            //this.WebTemplateMaster.HTMLHeaderElements.Add("<script src='myJS.js'></script>");
+            //WebTemplateMaster.HTMLHeaderElements.Add("<script src='myJS.js'></script>");
             //or to add it to the body (bottom of page)
-            this.WebTemplateCore.HTMLBodyElements.Add("<script src='/Scripts/myJS.js'></script>");
+            WebTemplateCore.HTMLBodyElements.Add("<script src='/Scripts/myJS.js'></script>");
 
             return View();
         }
@@ -67,34 +63,34 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult FeedbackandShareThisPageSample()
         {
             //Display the FeedbackLink
-            this.WebTemplateCore.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
-            this.WebTemplateCore.FeedbackLinkURL = "http://www.aircanada.com/en/customercare/customersolutions.html";
+            WebTemplateCore.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
+            WebTemplateCore.FeedbackLinkURL = "http://www.aircanada.com/en/customercare/customersolutions.html";
 
             ////Specify the Share This Page with Media sites.
-            //this.WebTemplateCore.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
+            //WebTemplateCore.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
 
-            //this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.bitly);
-            //this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.facebook);
-            //this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.twitter);
+            //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
+            //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
 
-            this.WebTemplateCore.ShowSharePageLink = true;
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.bitly);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.linkedin);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.blogger);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.myspace);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.delicious);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.pinterest);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.digg);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.reddit);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.diigo);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.stumbleupon);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.email);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.tumblr);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.facebook);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.twitter);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.gmail);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.yahoomail);
-            this.WebTemplateCore.SharePageMediaSites.Add(GoC.WebTemplate.Core.SocialMediaSites.googleplus);
+            WebTemplateCore.ShowSharePageLink = true;
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.linkedin);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.blogger);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.myspace);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.delicious);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.pinterest);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.digg);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.reddit);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.diigo);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.stumbleupon);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.email);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.tumblr);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.gmail);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.yahoomail);
+            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.googleplus);
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -103,7 +99,7 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult FooterLinksSample()
         {
             //Contact Links
-            this.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/","Contact Us");
+            WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/","Contact Us");
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -111,35 +107,37 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult LeavingSecureSiteSample()
         {
             //note: other then the message the rest could be set in the web.config
-            this.WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
-            this.WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "Redirect";
-            this.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-            this.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+            WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
+            WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "Redirect";
+            WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+            WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
            
             return View();
         }
 
         public ActionResult LeftSideMenuSample()
         {
-            GoC.WebTemplate.MenuSection leftMenu = new GoC.WebTemplate.MenuSection();
+            var leftMenu = new MenuSection
+            {
+                Name = "Section A",
+                Link = "http://www.servicecanada.gc.ca",
+                OpenInNewWindow = true
+            };
 
             //set the header for this section of the menu
-            leftMenu.Name = "Section A";
-            leftMenu.Link = "http://www.servicecanada.gc.ca";
-            leftMenu.OpenInNewWindow = true;
             //set the links for this section of the menu
-            leftMenu.Items.Add(new GoC.WebTemplate.MenuItem("http://www.tsn.ca", "TSN", new GoC.WebTemplate.MenuItem[] { 
-                                                            new GoC.WebTemplate.MenuItem("http://www.cbc.ca", "sub 1", true), 
-                                                            new GoC.WebTemplate.MenuItem("http://www.rds.ca", "sub 2") }));
-            leftMenu.Items.Add(new GoC.WebTemplate.Link("http://www.cnn.ca", "CNN"));
+            leftMenu.Items.Add(new MenuItem("http://www.tsn.ca", "TSN", new [] { 
+                                                            new MenuItem("http://www.cbc.ca", "sub 1", true), 
+                                                            new MenuItem("http://www.rds.ca", "sub 2") }));
+            leftMenu.Items.Add(new Link("http://www.cnn.ca", "CNN"));
 
             //add section to template
-            this.WebTemplateCore.LeftMenuItems.Add(leftMenu);
+            WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            this.WebTemplateCore.LeftMenuItems.Add(new GoC.WebTemplate.MenuSection("Section B", "http://www.canada.ca", new GoC.WebTemplate.Link[] { 
-                                                                                new GoC.WebTemplate.Link("http://www.rds.ca", "RDS"), 
-                                                                                new GoC.WebTemplate.Link("http://www.lapresse.com", "La Presse") }));
+            WebTemplateCore.LeftMenuItems.Add(new MenuSection("Section B", "http://www.canada.ca", new [] { 
+                                                                                new Link("http://www.rds.ca", "RDS"), 
+                                                                                new Link("http://www.lapresse.com", "La Presse") }));
 
             return View();
         }
@@ -151,27 +149,27 @@ namespace SampleCode.C3.MVC.Controllers
 
             //Let's display what is in the session on the page
             //We will populate the session with the time
-            if (this.Session["stuff"] != null)
+            if (Session["stuff"] != null)
             {
-                ViewBag.Stuff = (this.Session["stuff"]).ToString();
+                ViewBag.Stuff = (Session["stuff"]).ToString();
             }
             else
             {
                 ViewBag.Stuff = "Data from session: It is empty, refresh page to have value";
-                this.Session.Add("stuff", string.Concat("Data from session: ", DateTime.Now.ToString()));
+                Session.Add("stuff", string.Concat("Data from session: ", DateTime.Now.ToString()));
             }
             //enable the feature
             
-            this.WebTemplateCore.SessionTimeout.Enabled = true;
-            this.WebTemplateCore.SessionTimeout.Inactivity = 30000;
-            this.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            this.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-            this.WebTemplateCore.SessionTimeout.Logouturl = "Logout";
-            this.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity";
-            this.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-            this.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
-            this.WebTemplateCore.SessionTimeout.Method = "";
-            this.WebTemplateCore.SessionTimeout.AdditionalData = "";
+            WebTemplateCore.SessionTimeout.Enabled = true;
+            WebTemplateCore.SessionTimeout.Inactivity = 30000;
+            WebTemplateCore.SessionTimeout.ReactionTime = 10000;
+            WebTemplateCore.SessionTimeout.Sessionalive = 30000;
+            WebTemplateCore.SessionTimeout.Logouturl = "Logout";
+            WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity";
+            WebTemplateCore.SessionTimeout.RefreshOnClick = false;
+            WebTemplateCore.SessionTimeout.RefreshLimit = 3;
+            WebTemplateCore.SessionTimeout.Method = "";
+            WebTemplateCore.SessionTimeout.AdditionalData = "";
 
             return View();
         }
@@ -179,11 +177,11 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult TransactionalSample()
         {
             //Contact Links
-            this.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
+            WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
             //set the Terms and Condition Link
-            this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
-            this.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
 
             return View();
         }
@@ -192,9 +190,9 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult TransactionalSample(string data1, string data2, string data4)
         {
             //set the Terms and Condition Link
-            this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
-            this.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
             //execute logic for the submit.
             return View();
         }
@@ -212,7 +210,7 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult Redirect()
         {
             //this page has no visual and will not be displayed to the user
-            string targetURL = Server.HtmlDecode(this.Request.QueryString.Get("targetUrl"));
+            string targetURL = Server.HtmlDecode(Request.QueryString.Get("targetUrl"));
 
             //add any necessary clean up code (clear session, logout user, etc...)
 
@@ -235,7 +233,7 @@ namespace SampleCode.C3.MVC.Controllers
             //This page will then redirect to the page you identify example the login page (in our case the BaseSettingsSample.aspx)
 
             //destroy users sessions
-            this.Session.Abandon();
+            Session.Abandon();
 
             //perform any other clean up that needs to occur for your application
 
@@ -269,10 +267,10 @@ namespace SampleCode.C3.MVC.Controllers
         public ActionResult GCIntranetThemeSample()
         {
 
-            this.WebTemplateCore.Environment = "ESDC_PROD";
-            this.WebTemplateCore.UseHTTPS = true;
-            this.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
-            this.WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";  
+            WebTemplateCore.Environment = "ESDC_PROD";
+            WebTemplateCore.UseHTTPS = true;
+            WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
+            WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";  
             
             return View();
         }
