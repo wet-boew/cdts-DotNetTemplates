@@ -155,7 +155,6 @@
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
-    <Content Include="Views\GoCWebTemplateSample\ChangeLog.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
