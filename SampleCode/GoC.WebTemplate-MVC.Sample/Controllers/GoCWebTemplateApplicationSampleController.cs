@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
-using GoC.WebTemplate;
+﻿using System.Web.Mvc;
 
-namespace SampleCode.C3.MVC.Controllers
+namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
     public class GoCWebTemplateApplicationSampleController : WebTemplateBaseController
     {
