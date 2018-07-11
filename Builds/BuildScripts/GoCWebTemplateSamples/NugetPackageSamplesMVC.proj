@@ -15,7 +15,7 @@
     <NuGetDir>$([System.IO.Path]::GetFullPath('..\..\')).nuget\</NuGetDir>
 
     <!-- Sample Folder directory -->
-    <WebTemplateProjectDir>$(SourceDir)SampleCode\SampleCode.C3.MVC\</WebTemplateProjectDir>
+    <WebTemplateProjectDir>$(SourceDir)SampleCode\GoC.WebTemplate-MVC.Sample\</WebTemplateProjectDir>
     <!-- Project File -->
     <WebTemplateProjectFile>$(SourceDir)GoCWebTemplates.sln</WebTemplateProjectFile>
 

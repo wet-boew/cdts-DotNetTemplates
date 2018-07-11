@@ -17,12 +17,12 @@
     <!-- Project Template Starter directory -->
     <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplate</WebTemplateProjectDir>
     <!-- Project File -->
-    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate.csproj</WebTemplateProjectFile>
+    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate-WebForms.csproj</WebTemplateProjectFile>
     
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
     <!-- Release Folder Template -->
-    <ReleaseTemplateDir>$(ReleaseRootDir)\GocWebTemplate-WebForms</ReleaseTemplateDir>
+    <ReleaseTemplateDir>$(ReleaseRootDir)\GoC.WebTemplate-WebForms</ReleaseTemplateDir>
     
     <!-- Binaries Folder -->
     <OutBinariesDir>$(WebTemplateProjectDir)\bin</OutBinariesDir>
@@ -103,7 +103,7 @@
 
   <!-- Cleanup the Release folder -->
   <Target Name="CleanUpReleaseFolder">
-    <RemoveDir Directories="$(ReleaseRootDir)\GocWebTemplate-WebForms"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-WebForms"/>
   </Target>
 
 </Project>

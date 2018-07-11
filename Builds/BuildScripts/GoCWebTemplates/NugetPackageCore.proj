@@ -17,12 +17,12 @@
     <!-- Project Template Starter directory -->
     <WebTemplateProjectDir>$(SourceDir)Components\WebTemplateCore</WebTemplateProjectDir>
     <!-- Project File -->
-    <WebTemplateProjectFile>$(WebTemplateProjectDir)\WebTemplateCore.csproj</WebTemplateProjectFile>
+    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate-Components.csproj</WebTemplateProjectFile>
     
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
     <!-- Release Folder Template -->
-    <ReleaseTemplateDir>$(ReleaseRootDir)\GoCWebTemplate-Components</ReleaseTemplateDir>
+    <ReleaseTemplateDir>$(ReleaseRootDir)\GoC.WebTemplate-Components</ReleaseTemplateDir>
     <!-- Nuget Folder -->
     <NugetRootDir>C:\temp\Nuget</NugetRootDir>
     
@@ -87,8 +87,8 @@
 
   <!-- Cleanup the Release folder -->
   <Target Name="CleanUpReleaseFolder">
-    <RemoveDir Directories="$(ReleaseRootDir)\GoCWebTemplate-Components"/>
-    <RemoveDir Directories="$(ReleaseRootDir)\GoCWebTemplate-Components"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-Components"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-Components"/>
   </Target>
 
 </Project>
