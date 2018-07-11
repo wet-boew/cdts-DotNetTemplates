@@ -55,7 +55,7 @@
     <MakeDir Directories="$(ReleaseTemplateDir)\Content"/>
 
     <ItemGroup>
-      <ReleaseFiles Include="$(OutBinariesDir)\GoC.WebTemplateMVC.dll;$(OutBinariesDir)\CDTSEnvironments.json;$(OutBinariesDir)\WebTemplateMVC.xsd"/>
+      <ReleaseFiles Include="$(OutBinariesDir)\GoC.WebTemplate.MVC.dll;$(OutBinariesDir)\CDTSEnvironments.json;$(OutBinariesDir)\WebTemplateMVC.xsd"/>
       <ReleaseFilesContent Include="$(OutContentDir)\**\*.*"  Exclude="$(WebTemplateProjectDir)\GoC.WebTemplate\**\*.cs"></ReleaseFilesContent>
     </ItemGroup>
     
