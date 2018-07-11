@@ -15,14 +15,14 @@
     <NuGetDir>$([System.IO.Path]::GetFullPath('..\..\')).nuget\</NuGetDir>
 
     <!-- Project Template Starter directory -->
-    <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplateMVC</WebTemplateProjectDir>
+    <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplate-MVC</WebTemplateProjectDir>
     <!-- Project File -->
-    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplateMVC.csproj</WebTemplateProjectFile>
+    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate-MVC.csproj</WebTemplateProjectFile>
     
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
     <!-- Release Folder Template -->
-    <ReleaseTemplateDir>$(ReleaseRootDir)\GoCWebTemplate-MVC</ReleaseTemplateDir>
+    <ReleaseTemplateDir>$(ReleaseRootDir)\GoC.WebTemplate-MVC</ReleaseTemplateDir>
     <!-- Nuget Folder -->
     <NugetRootDir>C:\temp\Nuget</NugetRootDir>
     
@@ -103,7 +103,7 @@
 
   <!-- Cleanup the Release folder -->
   <Target Name="CleanUpReleaseFolder">
-    <RemoveDir Directories="$(ReleaseRootDir)\GoCWebTemplate-MVC"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-MVC"/>
   </Target>
 
   <!-- Create zip file -->
