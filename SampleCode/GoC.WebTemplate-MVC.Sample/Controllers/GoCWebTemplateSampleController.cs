@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Globalization;
 using System.Web.Mvc;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 
 namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
