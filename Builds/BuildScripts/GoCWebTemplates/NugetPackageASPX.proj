@@ -79,20 +79,20 @@
     <!-- insert the version number into the nuspec files -->    
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GocWebTemplate-WebForms\GoC.WebTemplate-WebForms.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-WebForms\GoC.WebTemplate-WebForms.nuspec"
       XPath="/package/metadata/version"
       Value="$(VersionNumber)" />
 
     <!--insert the release notes-->
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GocWebTemplate-WebForms\GoC.WebTemplate-WebForms.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-WebForms\GoC.WebTemplate-WebForms.nuspec"
       XPath="/package/metadata/releaseNotes"
       Value="$(releaseNotes)" />
       
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GocWebTemplate-WebForms\GoC.WebTemplate-WebForms.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-WebForms\GoC.WebTemplate-WebForms.nuspec"
       XPath="/package/metadata/dependencies/dependency/@version"
       Value="$(dependencyVersionNumber)" />
     
