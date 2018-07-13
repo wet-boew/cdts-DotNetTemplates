@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GoCWebTemplate.Master.cs" Inherits="GoC.WebTemplate.WebTemplateMasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GoCWebTemplate.Master.cs" Inherits="GoC.WebTemplate.WebForms.WebTemplateMasterPage" %>
 
 <!DOCTYPE html>
 

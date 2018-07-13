@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using GoC.WebTemplate;
+using GoC.WebTemplate.WebForms;
 
-    public class ExtendedBasePage : GoC.WebTemplate.BasePage
+namespace GoC.WebTemplate.WebForm.Sample.Pages
+{
+    public class ExtendedBasePage : BasePage
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "Title set for everypage!";
+            WebTemplateMaster.WebTemplateCore.HeaderTitle = "Title set for everypage!";
         }
 
         public string GetWeather()
@@ -19,9 +18,6 @@ using GoC.WebTemplate;
             return "Sunny";
         }
 
-        public string SessionID
-        {
-            get { return this.Session.SessionID; }
-        }
-        
+        public string SessionID => Session.SessionID;
     }
+}

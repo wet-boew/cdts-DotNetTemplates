@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.Pages
 {
