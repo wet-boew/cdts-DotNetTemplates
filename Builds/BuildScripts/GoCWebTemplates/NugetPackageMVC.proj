@@ -15,7 +15,7 @@
     <NuGetDir>$([System.IO.Path]::GetFullPath('..\..\')).nuget\</NuGetDir>
 
     <!-- Project Template Starter directory -->
-    <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplate-MVC</WebTemplateProjectDir>
+    <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplateMVC</WebTemplateProjectDir>
     <!-- Project File -->
     <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate-MVC.csproj</WebTemplateProjectFile>
     
