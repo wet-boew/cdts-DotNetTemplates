@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.Pages
 {
