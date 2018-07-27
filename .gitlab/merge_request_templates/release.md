@@ -18,3 +18,6 @@
 * [ ] Zip files updated
 * [ ] NuGet package released updated
 * [ ] *If Major or Minor* Email sent to distribution list
+
+/label ~"Deployment"
+/milestone %"" 
