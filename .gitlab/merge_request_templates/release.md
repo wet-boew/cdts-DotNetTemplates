@@ -1,5 +1,5 @@
 ### Pre-Checks
-* [ ] Dependacies updated
+* [ ] Dependencies updated
 * [ ] Assembly's updated
 * [ ] Change log updated
 * [ ] Configs updated
@@ -14,9 +14,9 @@
 
 ### Post-Checks
 * [ ] Tag created + protected
-* [ ] Bages updated
+* [ ] Badges updated
 * [ ] Zip files updated
-* [ ] NuGet package released updated
+* [ ] NuGet package released/updated
 * [ ] *If Major or Minor* Email sent to distribution list
 
 /label ~"Deployment"
