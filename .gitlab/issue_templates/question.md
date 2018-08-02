@@ -1,4 +1,4 @@
-### Relitive Info
+### Relative Info
 **Version:** [#.#.#]
 **Your application:** 
 **Related feature:** 
