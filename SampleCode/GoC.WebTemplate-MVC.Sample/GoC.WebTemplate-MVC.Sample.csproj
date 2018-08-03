@@ -51,7 +51,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="GoC.WebTemplate.MVC, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.29.0-RC2\lib\Net45\GoC.WebTemplate.MVC.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.29.0-RC3\lib\Net45\GoC.WebTemplate.MVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />

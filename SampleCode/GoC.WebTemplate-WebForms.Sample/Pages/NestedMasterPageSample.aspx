@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Samples/GoC.WebTemplate.C3.Sample/NestedMasterPageSample.master" AutoEventWireup="true" CodeBehind="NestedMasterPageSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.Pages.NestedMasterPageSample1" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Pages/NestedMasterPageSample.master" AutoEventWireup="true" CodeBehind="NestedMasterPageSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.Pages.NestedMasterPageSample1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="LeftContent" runat="server">
    <h1>GoC Web Template Samples - Nested Master Page</h1>
