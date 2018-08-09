@@ -1,4 +1,6 @@
 ﻿using System;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.Pages
 {

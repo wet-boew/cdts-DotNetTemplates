@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GoCWebTemplate.Master.cs" Inherits="GoC.WebTemplate.WebTemplateMasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GoCWebTemplate.Master.cs" Inherits="GoC.WebTemplate.WebForms.WebTemplateMasterPage" %>
 <!DOCTYPE html>
 
 <!--[if lt IE 9]><html class="no-js lt-ie9" lang="<%= WebTemplateCore.TwoLetterCultureLanguage %>" dir="ltr"><![endif]-->

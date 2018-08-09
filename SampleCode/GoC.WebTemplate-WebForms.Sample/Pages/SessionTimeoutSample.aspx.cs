@@ -1,4 +1,5 @@
 ﻿using System;
+using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.Pages
 {
@@ -22,16 +23,16 @@ namespace GoC.WebTemplate.WebForm.Sample.Pages
             }
           
             //enable the sessionTimeout feature
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = true;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Inactivity = 30000;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Logouturl = "Logout.aspx";            
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Method = "";
-            this.WebTemplateMaster.WebTemplateCore.SessionTimeout.AdditionalData = "";
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = true;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.Inactivity = 30000;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.Logouturl = "Logout.aspx";            
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.Method = "";
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.AdditionalData = "";
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Inherits="GoC.WebTemplate.TestApplicationTemplatePage" Title="Application Template" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Application.Master" CodeBehind="TestApplicationTemplatePage.aspx.cs" %>
+﻿<%@ Page Inherits="GoC.WebTemplate.WebForms.TestApplicationTemplatePage" Title="Application Template" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Application.Master" CodeBehind="TestApplicationTemplatePage.aspx.cs" %>
 <asp:Content ID="MainContent" ContentPlaceHolderID="MainContent" runat="server">
 
 <h1>Hic nihil fuit, quod quaereremus.</h1>
