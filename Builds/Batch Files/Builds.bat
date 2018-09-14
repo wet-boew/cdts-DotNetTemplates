@@ -9,7 +9,7 @@ for /F "tokens=1,2 delims=#" %%a in ('"prompt #$H#$E# & echo on & for %%b in (1)
 
 ::set msBuildDir=%WINDIR%\Microsoft.NET\Framework\v4.0.30319
 set msBuildDir=%PROGRAMFILES(X86)%\MSBuild\14.0\Bin\
-set TFSWorkingFolder=c:\git\DotNetTemplates\
+set TFSWorkingFolder=c:\git\
 set NuGetDir=%TFSWorkingFolder%Builds\.nuget
 :: Customize Window
 title Nuget and GCPedia Packages
