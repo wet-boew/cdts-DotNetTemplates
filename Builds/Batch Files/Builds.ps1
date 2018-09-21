@@ -1,12 +1,11 @@
 ﻿$msbuild = 'C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe'
-$TFSWorkingFolder = "C:\git"
 $PackageDir = "c:\Temp\Release"
 
 Function BuildWebTemplate
 {
     $VersionNumber = Read-Host -Prompt 'Please enter the version number'
-    & "$msbuild" $TFSWorkingFolder\GoCWebTemplates.sln /t:Rebuild /p:Configuration=Release /p:RunOctoPack=true /p:OctoPackPackageVersion=$VersionNumber
-
+    $TFSWorkingFolder = Read-Host -Prompt 'Please enter the root directory of the project'
+    
     #Update version number for GoC.WebTemplate-WebForms
     $xmlFile = "$TFSWorkingFolder\Applications\GoC.WebTemplate\GoC.WebTemplate-WebForms.nuspec"
     $xml = [xml](Get-Content -Path $xmlFile)
@@ -42,6 +41,8 @@ Function BuildWebTemplate
     $SecondNode.version = $nodePackage.version
     $xml.Save($xmlFile)
 
+    & "$msbuild" $TFSWorkingFolder\GoCWebTemplates.sln /t:Rebuild /p:Configuration=Release /p:RunOctoPack=true /p:OctoPackPackageVersion=$VersionNumber
+    
     Copy-Item -Path "$TFSWorkingFolder\Applications\GoC.WebTemplate\bin\GoC.WebTemplate-WebForms.$VersionNumber.nupkg" -Destination $PackageDir
     Copy-Item -Path "$TFSWorkingFolder\Applications\GoC.WebTemplateMVC\bin\GoC.WebTemplate-MVC.$VersionNumber.nupkg" -Destination $PackageDir
     Copy-Item -Path "$TFSWorkingFolder\Components\WebTemplateCore\bin\Release\GoC.WebTemplate-Components.$VersionNumber.nupkg" -Destination $PackageDir
@@ -50,7 +51,7 @@ Function BuildWebTemplate
 Function BuildWebTemplateSamples
 {
     $VersionNumber = Read-Host -Prompt 'Please enter the version number'
-    & "$msbuild" $TFSWorkingFolder\GoC.WebTemplate.Samples.sln /t:Rebuild /p:Configuration=Release /p:RunOctoPack=true /p:OctoPackPackageVersion=$VersionNumber
+    $TFSWorkingFolder = Read-Host -Prompt 'Please enter the root directory of the project'
 
     #Update version number for MVC Samples
     $xmlFilePackage = "$TFSWorkingFolder\Components\WebTemplateCore\GoC.WebTemplate-Components.nuspec"
@@ -75,6 +76,8 @@ Function BuildWebTemplateSamples
     $SecondNode = $xml.selectSingleNode('//package/metadata/dependencies/dependency')
     $SecondNode.version = "$VersionNumber"
     $xml.Save($xmlFile)
+
+    & "$msbuild" $TFSWorkingFolder\GoC.WebTemplate.Samples.sln /t:Rebuild /p:Configuration=Release /p:RunOctoPack=true /p:OctoPackPackageVersion=$VersionNumber
 
     Copy-Item -Path "$TFSWorkingFolder\SampleCode\GoC.WebTemplate-MVC.Sample\bin\GoC.WebTemplate-MVC.Sample.$VersionNumber.nupkg" -Destination $PackageDir
     Copy-Item -Path "$TFSWorkingFolder\SampleCode\GoC.WebTemplate-WebForms.Sample\bin\GoC.WebTemplate-WebForms.Sample.$VersionNumber.nupkg" -Destination $PackageDir
