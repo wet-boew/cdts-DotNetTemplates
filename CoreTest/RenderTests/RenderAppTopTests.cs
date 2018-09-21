@@ -67,6 +67,30 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void SubLinks(Core sut)
+        {
+            sut.MenuLinks = new List<MenuLink>
+            {
+                new MenuLink
+                {
+                    Text = "MenuLink",
+                    SubLinks = new List<SubLink>
+                    {
+                        new SubLink
+                        {
+                            Text = "SubLinkText1",
+                            Href = "SubLinkHerf1",
+                            NewWindow = true
+                        }
+                    }
+                }
+            };
+            var result = sut.RenderAppTop();
+
+            result.ToString().Should().Contain("\"menuLinks\":[{\"subLinks\":[{\"subhref\":\"SubLinkHerf1\",\"subtext\":\"SubLinkText1\",\"newWindow\":true}],\"text\":\"MenuLink\"}]");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void ThrowExceptionIfMenuLinksAndCustomMenuURLAreBothSet(Core sut)
         {
             sut.MenuLinks = new List<MenuLink> { new MenuLink() };

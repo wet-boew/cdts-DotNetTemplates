@@ -110,6 +110,7 @@
     <Compile Include="PrefooterSerializationTests.cs" />
     <Compile Include="ProxyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderTests\RenderRefFooterTests.cs" />
     <Compile Include="RenderTests\RenderAppFooterTests.cs" />
     <Compile Include="RenderTests\RenderAppTopTests.cs" />
     <Compile Include="RenderTests\RenderFooterTests.cs" />
