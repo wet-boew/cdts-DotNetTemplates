@@ -8,14 +8,7 @@ namespace GoC.WebTemplate.Components
     public class Configurations : ConfigurationSection
     {
         public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
-
-        [ConfigurationProperty("xmlns", IsRequired = false)]
-        public string XmlNameSpace
-        {
-            get { return (string) this["xmlns"]; }
-            set { this["xmlns"] = value; }
-        }
-
+        
         [ConfigurationProperty("customSearch")]
         public string CustomSearch
         {
@@ -43,22 +36,6 @@ namespace GoC.WebTemplate.Components
             set { this["customSiteMenuURL"] = value; }
         }
         
-        [ConfigurationProperty("showSiteMenu", DefaultValue= true) ]
-        [Obsolete("no longer used. Will be removed in a future release.")]
-        public bool ShowSiteMenu
-        {
-            get { return (bool) this["showSiteMenu"];  }
-            set { this["showSiteMenu"] = value; }
-        }
-
-        [ConfigurationProperty("showGlobalNav")]
-        [Obsolete("no longer used. Will be removed in a future release.")]
-        public bool ShowGlobalNav
-        {
-            get { return (bool) this["showGlobalNav"]; }
-            set { this["showGlobalNav"] = value; }
-        }
-
         // Create a "sessionTimeOut element."
         [ConfigurationProperty("sessionTimeOut")]
         public SessionTimeOutElement SessionTimeOut
