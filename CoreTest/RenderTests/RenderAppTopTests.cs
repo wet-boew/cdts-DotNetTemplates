@@ -143,6 +143,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void TopSecMenuTrueInAppTopWhenLeftMenuItems(Core sut)
         {
+            sut.LeftMenuItems = new List<MenuSection>();
             sut.LeftMenuItems.Add(new MenuSection
             {
                 Link = "foo",
