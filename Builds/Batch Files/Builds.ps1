@@ -1,11 +1,11 @@
 ﻿$msbuild = 'C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe'
 $PackageDir = "c:\Temp\Release"
+$TFSWorkingFolder = Resolve-Path -Path "..\.."
 
 Function BuildWebTemplate
 {
     $VersionNumber = Read-Host -Prompt 'Please enter the version number'
-    $TFSWorkingFolder = Read-Host -Prompt 'Please enter the root directory of the project'
-    
+        
     #Update version number for GoC.WebTemplate-WebForms
     $xmlFile = "$TFSWorkingFolder\Applications\GoC.WebTemplate\GoC.WebTemplate-WebForms.nuspec"
     $xml = [xml](Get-Content -Path $xmlFile)
