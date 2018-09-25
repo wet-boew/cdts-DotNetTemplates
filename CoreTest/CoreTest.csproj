@@ -107,6 +107,7 @@
     <Compile Include="ConfigurationCoreIntegrationTests.cs" />
     <Compile Include="DeserializeEnvironmentsTest.cs" />
     <Compile Include="EnvironmentTests.cs" />
+    <Compile Include="LoadStaticFileTest.cs" />
     <Compile Include="PrefooterSerializationTests.cs" />
     <Compile Include="ProxyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
