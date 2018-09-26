@@ -9,6 +9,16 @@ namespace GoC.WebTemplate.Components
     {
         public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
         
+        //This section is required for deserilization of the section from the web config
+        //This property enables validation on the xml of the config section
+        //This property is no actually used in the code
+        [ConfigurationProperty("xmlns", IsRequired = false)]
+        public string XmlNameSpace
+        {
+            get { return (string) this["xmlns"]; }
+            set { this["xmlns"] = value; }
+        }
+
         [ConfigurationProperty("customSearch")]
         public string CustomSearch
         {
