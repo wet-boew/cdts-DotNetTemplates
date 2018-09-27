@@ -128,14 +128,14 @@ if (Test-Path -path $git)
 else 
 {
     Clear-Host
-    $Selection = Read-Host "Git directory could not be found. Would you like to continue without performing a git pull? (1 for YES, 2 for NO)"
+    $Selection = Read-Host "Git directory could not be found. Would you like to continue without performing a git pull? (Y-Yes N-No)"
     
-    if ($Selection -eq 1)
+    if ($Selection -eq "Y")
     {
         StartBuild
     }
 
-    if ($Selection -eq 2)
+    if ($Selection -eq "N")
     {
         exit
     }
