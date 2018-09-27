@@ -80,7 +80,6 @@
     <Compile Include="JSONSerializationObjects\PreFooter.cs" />
     <Compile Include="Proxies\ConfigurationProxy.cs" />
     <Compile Include="Configurations.cs" />
-    <Compile Include="ConfigSections\CustomStringComparer.cs" />
     <Compile Include="ConfigSections\LeavingSecureSiteWarningElement.cs" />
     <Compile Include="ConfigSections\SessionTimeOutElement.cs" />
     <Compile Include="Constants.cs" />

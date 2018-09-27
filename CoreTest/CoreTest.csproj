@@ -107,9 +107,11 @@
     <Compile Include="ConfigurationCoreIntegrationTests.cs" />
     <Compile Include="DeserializeEnvironmentsTest.cs" />
     <Compile Include="EnvironmentTests.cs" />
+    <Compile Include="LoadStaticFileTest.cs" />
     <Compile Include="PrefooterSerializationTests.cs" />
     <Compile Include="ProxyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderTests\RenderRefFooterTests.cs" />
     <Compile Include="RenderTests\RenderAppFooterTests.cs" />
     <Compile Include="RenderTests\RenderAppTopTests.cs" />
     <Compile Include="RenderTests\RenderFooterTests.cs" />
