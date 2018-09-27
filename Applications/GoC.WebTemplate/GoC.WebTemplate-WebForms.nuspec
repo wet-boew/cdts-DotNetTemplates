@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>GoC.WebTemplate-WebForms</id>
+    <version>1.28.0</version>
+    <authors>SDS</authors>
+    <owners>SDS</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Master Page and Layout File that incorporates SCWASI and the CDTS, written in C#</description>
+    <releaseNotes>Implementation of 1.28.0</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags>SCWASI CDN Template SDS SF Web Template</tags>
+    <dependencies>
+      <dependency id="GoC.WebTemplate-Components" version="1.28.0"/>
+    </dependencies>
+  </metadata>
+  <files>
+		<file src="Web.config.install.xdt" target="Content" />
+		<file src="CDTSEnvironments.json" target="Content" />
+		<file src="WebTemplateWebForms.xsd" target="Content" />
+		<file src="GoC.WebTemplate\**\*.*" target="Content\GoC.WebTemplate" exclude="GoC.WebTemplate\*.cs"/>
+		<file src="bin\GoC.WebTemplate.WebForms.dll" target="Lib\Net45" />
+		<file src="CDTSEnvironments.json" target="Lib\Net45" />
+		<file src="WebTemplateWebForms.xsd" target="Lib\Net45" />
+  </files> 	
+</package>
