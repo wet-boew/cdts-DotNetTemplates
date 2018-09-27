@@ -1,4 +1,6 @@
 ﻿$msbuild = 'C:\Program Files (x86)\MSBuild\14.0\Bin\msbuild.exe'
+$git = 'C:\Program Files\Git\git-bash.exe'
+$nuget = Resolve-Path -Path "..\..\packages\OctoPack.3.6.3\build\NuGet.exe"
 $PackageDir = "c:\Temp\Release"
 $TFSWorkingFolder = Resolve-Path -Path "..\.."
 
@@ -51,8 +53,7 @@ Function BuildWebTemplate
 Function BuildWebTemplateSamples
 {
     $VersionNumber = Read-Host -Prompt 'Please enter the version number'
-    $TFSWorkingFolder = Read-Host -Prompt 'Please enter the root directory of the project'
-
+    
     #Update version number for MVC Samples
     $xmlFilePackage = "$TFSWorkingFolder\Components\WebTemplateCore\GoC.WebTemplate-Components.nuspec"
     $xmlPackage = [xml](Get-Content -Path $xmlFilePackage)
@@ -83,29 +84,61 @@ Function BuildWebTemplateSamples
     Copy-Item -Path "$TFSWorkingFolder\SampleCode\GoC.WebTemplate-WebForms.Sample\bin\GoC.WebTemplate-WebForms.Sample.$VersionNumber.nupkg" -Destination $PackageDir
 }
 
-Clear-Host
-Write-Host .................................................
-Write-Host PRESS 1, OR 2 to select your task, or 9 to EXIT.
-Write-Host .................................................
-Write-Host .
-Write-Host 1 - Build Nuget package for GocWebTemplate Solution
-Write-Host 2 - Build Nuget package for GocWebTemplate - Samples Solution
-Write-Host 9 - EXIT
-Write-Host .
-
-$Option = Read-Host "Input Selection"
-
-if ($Option -eq 1)
+Function StartBuild
 {
-    BuildWebTemplate
+
+    Clear-Host
+    Write-Host .................................................
+    Write-Host PRESS 1, OR 2 to select your task, or 9 to EXIT.
+    Write-Host .................................................
+    Write-Host .
+    Write-Host 1 - Build Nuget package for GocWebTemplate Solution
+    Write-Host 2 - Build Nuget package for GocWebTemplate - Samples Solution
+    Write-Host 9 - EXIT
+    Write-Host .
+
+    $Option = Read-Host "Input Selection"
+
+    if ($Option -eq 1)
+    {
+        & $nuget restore $TFSWorkingFolder\GoCWebTemplates.sln
+        BuildWebTemplate
+    }
+
+    if ($Option -eq 2)
+    {
+        & $nuget restore $TFSWorkingFolder\GoC.WebTemplate.Samples.sln
+        BuildWebTemplateSamples
+    }
+
+    if ($Option -eq 9)
+    {
+        exit
+    }
+
 }
 
-if ($Option -eq 2)
+Set-Location -Path $TFSWorkingFolder
+
+if (Test-Path -path $git)
 {
-    BuildWebTemplateSamples
+    & "$git" -c "git pull"
+    StartBuild
+}
+else 
+{
+    Clear-Host
+    $Selection = Read-Host "Git directory could not be found. Would you like to continue without performing a git pull? (1 for YES, 2 for NO)"
+    
+    if ($Selection -eq 1)
+    {
+        StartBuild
+    }
+
+    if ($Selection -eq 2)
+    {
+        exit
+    }
+              
 }
 
-if ($Option -eq 9)
-{
-    exit
-}
