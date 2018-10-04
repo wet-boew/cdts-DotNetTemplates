@@ -4,7 +4,7 @@ variables:
   MSBUILD_PATH: 'C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\msbuild.exe'
   xUNIT_PATH: 'packages\\xunit.runner.console.2.3.1\\tools\\net452\\xunit.console.exe'
   DEFAULT_SLN: 'GoCWebTemplates.sln'
-  SAMPLES_SLN: 'GoC.WebTemplates.Samples.sln'
+  SAMPLES_SLN: 'GoC.WebTemplate.Samples.sln'
   
 stages:
   - buildDefaultSln
