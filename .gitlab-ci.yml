@@ -1,0 +1,30 @@
+variables:
+  TEST_FOLDER: 'CoreTest\\bin\\Release'  
+  NUGET_PATH: 'C:\\Git\\NuGet\\nuget.exe'
+  MSBUILD_PATH: 'C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\msbuild.exe'
+  xUNIT_PATH: 'packages\\xunit.runner.console.2.3.1\\tools\\net452\\xunit.console.exe'
+  
+stages:
+  - build
+  - test
+
+build_job:
+  stage: build
+  script:
+    - echo "Restoring NuGet packages..."
+    - '"%NUGET_PATH%" restore'
+    - echo "Building the solution..."
+    - '"%MSBUILD_PATH%" /p:Configuration=Release'
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - '%TEST_FOLDER%'
+      - 'packages'
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - '"%xUNIT_PATH%" %TEST_FOLDER%\\CoreTest.dll"'
+  dependencies:
+    - build_job
