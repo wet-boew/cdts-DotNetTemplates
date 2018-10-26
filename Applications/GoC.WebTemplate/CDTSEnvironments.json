@@ -1,46 +1,46 @@
-﻿//Comments aren't generally allowed but this needs to be documented here
-//{0} is HTTPS Flag
-//{1} is RN/APP Switch
-//{2} is Theme
-//{3} is Version or RN is isVersionRnCombined is true
-{
+﻿{
+  "//": "This is an unconventional way of adding comments, but this needs to be documented here",
+  "//{0}": "is HTTPS Flag",
+  "//{1}": "is RN/APP Switch",
+  "//{2}": "is Theme",
+  "//{3}": "is Version or RN is isVersionRnCombined is true",
   "environments": [
     {
       "name": "AKAMAI",
       "path": "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
-      "theme": "gcweb", 
+      "theme": "gcweb",
       "cdn": "prod",
       "isVersionRnCombined": true,
       "isEncryptionModifiable": false,
-      "appendToTitle":  " - Canada.ca" 
+      "appendToTitle": " - Canada.ca"
     },
     {
       "name": "PROD_SSL",
       "path": "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
-      "theme": "gcintranet", 
+      "theme": "gcintranet",
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle":  "" 
+      "appendToTitle": ""
     },
     {
       "name": "PROD_SSL_ECCCSUB",
       "path": "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
-      "theme": "gcintranet", 
-      "subTheme":  "eccc", 
+      "theme": "gcintranet",
+      "subTheme": "eccc",
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle":  "" 
+      "appendToTitle": ""
     },
     {
       "name": "PROD_UNSECURE",
       "path": "http://templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
-      "theme": "gcintranet", 
+      "theme": "gcintranet",
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle":  "" 
+      "appendToTitle": ""
     },
     {
       "name": "ESDC_PROD",

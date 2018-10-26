@@ -1,9 +1,9 @@
-﻿//Comments aren't generally allowed but this needs to be documented here
-//{0} is HTTPS Flag
-//{1} is RN/APP Switch
-//{2} is Theme
-//{3} is Version or RN is isVersionRnCombined is true
-{
+﻿{
+  "//": "This is an unconventional way of adding comments, but this needs to be documented here",
+  "//{0}": "is HTTPS Flag",
+  "//{1}": "is RN/APP Switch",
+  "//{2}": "is Theme",
+  "//{3}": "is Version or RN is isVersionRnCombined is true",
   "environments": [
     {
       "name": "AKAMAI",
