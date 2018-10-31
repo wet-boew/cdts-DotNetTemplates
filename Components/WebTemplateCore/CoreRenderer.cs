@@ -187,9 +187,10 @@ namespace GoC.WebTemplate.Components
             if (_core.SessionTimeout.Enabled)
             {
                 jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_core.SessionTimeout);
+                return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
             }
 
-            return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
+            return null;
         }
 
         internal HtmlString RenderLeftMenu()
