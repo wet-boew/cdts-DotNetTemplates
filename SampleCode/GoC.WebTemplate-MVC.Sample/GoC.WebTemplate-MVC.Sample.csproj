@@ -210,6 +210,7 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="CDTSEnvironments.json" />
+    <Content Include="Views\GoCWebTemplateSample\FooterLinksSample.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
     </None>
