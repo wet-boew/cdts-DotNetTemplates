@@ -25,10 +25,21 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void ContactLinksShouldNotBeEmptyWhenValueIsSet(Core sut)
         {
-            sut.ContactLink = new Link("foo", "bar");
+            sut.ContactLink = new Link
+            {
+                Href = "foo"
+            };
             sut.RenderFooter().ToString().Should().NotContain("\"contactLinks\":[{}]")
-              .And.Contain("\"contactLinks\":[{\"href\":\"foo\",\"text\":\"bar\"}]");
+              .And.Contain("\"contactLinks\":[{\"href\":\"foo\"}]");
 
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void HandleContactLinkSetText(Core sut)
+        {
+            sut.ContactLink = new Link() { Text = "LinkText" };
+            Action act = () => sut.RenderFooter();
+            act.Should().Throw<InvalidOperationException>();
         }
 
         [Theory, AutoNSubstituteData]
@@ -67,12 +78,16 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderTransactionalFooter(Core sut)
         {
-            sut.ContactLink = new Link("www.fakehref.com", "fakelinktext", "accrrrnm");
+            sut.ContactLink = new Link
+            {
+                Href = "www.fakehref.com",
+                Acronym = "accrrrnm"
+            };
             sut.PrivacyLinkURL = "dummyprivacylinkurl";
             sut.TermsConditionsLinkURL = "thisIsMyFunTemrsLink";
 
             var result = sut.RenderTransactionalFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"subTheme\":\"\",\"showFooter\":false,\"contactLinks\":[{\"href\":\"www.fakehref.com\",\"text\":\"fakelinktext\",\"acronym\":\"accrrrnm\"}],\"privacyLink\":\"dummyprivacylinkurl\",\"termsLink\":\"thisIsMyFunTemrsLink\",\"showFeatures\":false}");
+            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"subTheme\":\"\",\"showFooter\":false,\"contactLinks\":[{\"href\":\"www.fakehref.com\",\"acronym\":\"accrrrnm\"}],\"privacyLink\":\"dummyprivacylinkurl\",\"termsLink\":\"thisIsMyFunTemrsLink\",\"showFeatures\":false}");
         }
     }
 }

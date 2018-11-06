@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components;
+using System;
 using Xunit;
 
 namespace CoreTest.RenderTests
@@ -17,13 +18,29 @@ namespace CoreTest.RenderTests
     public void HandleContactLinkValue(Core sut)
     {
       sut.ContactLink = new Link() { Href="http://testvalue" };
-      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":\"http://testvalue\"");
+      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
     }
-        
+
+    [Theory, AutoNSubstituteData]
+    public void HandleContactFooterLinkValue(Core sut)
+    {
+        sut.ContactLink = new FooterLink() { Href = "http://testvalue", NewWindow = false };
+        sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"newWindow\":false,\"href\":\"http://testvalue\"}]");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void HandleContactLinkSetText(Core sut)
+    {
+        sut.ContactLink = new Link() { Text = "LinkText" };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>();
+    }
+
     [Theory, AutoNSubstituteData]
     public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
     {
       sut.PrivacyLinkURL = null;
+      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().NotContain("privacyLink");
     }
@@ -32,6 +49,7 @@ namespace CoreTest.RenderTests
     public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
     {
       sut.PrivacyLinkURL = "http://foo.bar";
+      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().Contain("privacyLink");
     }
@@ -40,6 +58,7 @@ namespace CoreTest.RenderTests
     public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
     {
       sut.TermsConditionsLinkURL = null;
+      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().NotContain("termsLink");
     }
@@ -48,6 +67,7 @@ namespace CoreTest.RenderTests
     public void TermsLinkRenderedWhenURLIsProvided(Core sut)
     {
       sut.TermsConditionsLinkURL = "http://foo.bar";
+      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().Contain("termsLink");
     }
