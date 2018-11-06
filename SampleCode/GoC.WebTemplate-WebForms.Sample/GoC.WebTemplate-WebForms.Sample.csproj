@@ -129,6 +129,7 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
     <Content Include="Pages\ApplicationTemplate.aspx" />
+    <Content Include="Pages\FooterLinksSample.aspx" />
     <Content Include="Pages\GCIntranetThemeSample.aspx" />
     <Content Include="Pages\Logout.aspx" />
     <Content Include="Pages\myJS.js" />
@@ -161,6 +162,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Pages\FooterLinksSample.aspx.cs">
+      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\FooterLinksSample.aspx.designer.cs">
+      <DependentUpon>FooterLinksSample.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\AddJSandCSSFilesSample.aspx.cs">
       <DependentUpon>AddJSandCSSFilesSample.aspx</DependentUpon>
