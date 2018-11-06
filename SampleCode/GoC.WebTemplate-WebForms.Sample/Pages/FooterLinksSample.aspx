@@ -18,7 +18,7 @@
 <h2>Custom Footer Links</h2>
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
-    protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(object sender, EventArgs e)
         {
             //Contact Links
             WebTemplateMaster.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
