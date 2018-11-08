@@ -18,8 +18,9 @@ namespace GoC.WebTemplate.WebForm.Sample.Pages
                 Response.Redirect(targetURL);
             }
             else
-            { 
+            {
                 // decide how you want to handle this situation
+                throw new ApplicationException("targetURL must be specified.");
             }            
         }
     }

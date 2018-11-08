@@ -224,7 +224,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             else
             {
                 // decide how you want to handle this situation
-                return View();
+                throw new ApplicationException("targetURL must be specified.");
             }               
         }
 
