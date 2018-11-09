@@ -76,22 +76,19 @@ this.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secur
 <div class="wb-prettify all-pre lang-vb linenums">
     <h3>C# Code Sample for your Redirect page</h3>
     <pre>
-      public ActionResult Redirect()
-      {
-         //this page has no visual and will not be displayed to the user
-         string targetURL = Server.HtmlDecode(Request.QueryString.Get("targetUrl"));
-         //add any necessary clean up code (clear session, logout user, etc...)
-         //redirect user to link they had clicked
-         if (!string.IsNullOrEmpty(targetURL))
-         {  
-             return Redirect(targetURL);
-         }
-         else
-         {
-             // decide how you want to handle this situation
-             throw new ApplicationException("targetURL must be specified.");
-         }               
-       }
+public ActionResult Redirect()
+{
+   //this page has no visual and will not be displayed to the user
+   string targetURL = Server.HtmlDecode(Request.QueryString.Get("targetUrl"));
+
+   //add any necessary clean up code (clear session, logout user, etc...)
+            
+   //redirect user to link they had clicked
+   if (!string.IsNullOrEmpty(targetURL)) return Redirect(targetURL);
+
+   // decide how you want to handle this situation
+   throw new ApplicationException("targetURL must be specified.");
+}
      </pre>
 </div>
 @Html.Partial("_SamplesNavigation")

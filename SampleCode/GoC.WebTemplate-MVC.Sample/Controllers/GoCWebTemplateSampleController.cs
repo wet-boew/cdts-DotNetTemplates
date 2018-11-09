@@ -217,15 +217,10 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             //add any necessary clean up code (clear session, logout user, etc...)
 
             //redirect user to link they had clicked
-            if (!string.IsNullOrEmpty(targetURL))
-            {  
-                return Redirect(targetURL);
-            }
-            else
-            {
-                // decide how you want to handle this situation
-                throw new ApplicationException("targetURL must be specified.");
-            }               
+            if (!string.IsNullOrEmpty(targetURL)) return Redirect(targetURL);
+
+            // decide how you want to handle this situation
+            throw new ApplicationException("targetURL must be specified.");
         }
 
         public ActionResult Logout()
