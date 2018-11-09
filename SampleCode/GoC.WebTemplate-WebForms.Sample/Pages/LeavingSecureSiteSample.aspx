@@ -34,7 +34,7 @@
     </ul>
 
     <p>Here is a local link that will not display the warning: <a href="BaseSettingsSample.aspx">Link to Local Page</a></p>
-    <p>Here is an external link that will display the warning:<a href="http://www.red-seal.ca">Link to External Page</a></p>
+    <p>Here is an external link that will display the warning:<a href="https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates/wikis/Redirect-Page">Link to External Page</a></p>
 
     <h2>Steps to implement:</h2>
     <h3>Enable the leaving secure site feature</h3>
@@ -73,21 +73,19 @@ this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You a
     <div class="wb-prettify all-pre lang-vb linenums">
         <h3>C# Code Sample for your Redirect page</h3>
         <pre>
-Protected void Page_Load(object sender, EventArgs e)
+protected void Page_Load(object sender, EventArgs e)
 {
+    //this page has no visual and will not be displayed to the user
+
     string targetURL = Server.HtmlDecode(this.Request.QueryString.Get("targetUrl"));
-            
+
     //add any necessary clean up code (clear session, logout user, etc...)
 
     //redirect user to link they had clicked
-    if (!string.IsNullOrEmpty(targetURL))
-    {
-        Response.Redirect(targetURL);
-    }
-    else
-    { 
-        // decide how you want to handle this situation
-    }          
+    if (!string.IsNullOrEmpty(targetURL)) Response.Redirect(targetURL);
+
+    // decide how you want to handle this situation
+    throw new ApplicationException("targetURL must be specified.");
 }
         </pre>
      </div>
