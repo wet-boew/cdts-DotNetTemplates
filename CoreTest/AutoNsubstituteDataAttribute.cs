@@ -47,7 +47,7 @@ namespace CoreTest
                                           .Without(p => p.Breadcrumbs)
                                           .Without(p => p.SharePageMediaSites)
                                           .Without(p => p.LeftMenuItems)
-                                          .Without(p => p.ContactLink)
+                                          .Without(p => p.ContactLinks)
             //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
                                           .With(p => p.Environment, "ITEM1")
             //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false

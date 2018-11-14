@@ -19,32 +19,16 @@ namespace GoC.WebTemplate.Components
 
         internal HtmlString RenderAppFooter()
         {
-            if (_core.CurrentEnvironment.Name == "AKAMAI")
+            return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
-                return JsonSerializationHelper.SerializeToJson(new AppFooter
-                {
-                    CdnEnv = _core.CDNEnvironment,
-                    SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
-                    TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
-                    PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
-                    ContactLink = _core.Builder.BuildContactLinks(),
-                    LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
-                    FooterSections = _core.Builder.BuildCustomFooterLinks
-                });
-            }
-            else
-            {
-                return JsonSerializationHelper.SerializeToJson(new AppFooter
-                {
-                    CdnEnv = _core.CDNEnvironment,
-                    SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
-                    TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
-                    PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
-                    LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
-                    FooterSections = _core.Builder.BuildCustomFooterLinks
-                });
-            }
-            
+                CdnEnv = _core.CDNEnvironment,
+                SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
+                TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
+                PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
+                ContactLink = (_core.CurrentEnvironment.Name == "AKAMAI") ? _core.Builder.BuildContactLinks() : null,
+                LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
+                FooterSections = _core.Builder.BuildCustomFooterLinks
+            });
         }
 
         internal HtmlString RenderAppTop()
