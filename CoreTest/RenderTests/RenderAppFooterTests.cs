@@ -1,6 +1,9 @@
-﻿using FluentAssertions;
+﻿using AutoFixture.Xunit2;
+using FluentAssertions;
 using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace CoreTest.RenderTests
@@ -15,32 +18,61 @@ namespace CoreTest.RenderTests
     } 
         
     [Theory, AutoNSubstituteData]
-    public void HandleContactLinkValue(Core sut)
+    public void HandleContactLinkValue([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
     {
-      sut.ContactLink = new Link() { Href="http://testvalue" };
-      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
+
+        sut.ContactLink = new Link() { Href="http://testvalue" };
+        sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
     }
 
     [Theory, AutoNSubstituteData]
-    public void HandleContactFooterLinkValue(Core sut)
+    public void HandleContactFooterLinkValue([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
     {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
+
         sut.ContactLink = new FooterLink() { Href = "http://testvalue", NewWindow = false };
         sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"newWindow\":false,\"href\":\"http://testvalue\"}]");
     }
 
     [Theory, AutoNSubstituteData]
-    public void HandleContactLinkSetText(Core sut)
+    public void HandleContactLinkSetTextAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
     {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
         sut.ContactLink = new Link() { Text = "LinkText" };
         Action act = () => sut.RenderAppFooter();
         act.Should().Throw<InvalidOperationException>();
     }
 
     [Theory, AutoNSubstituteData]
+    public void HandleContactLinkSetTextOtherEnvironment([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "Name"
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLink = new Link() { Text = "LinkText" };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().NotThrow();
+    }
+
+    [Theory, AutoNSubstituteData]
     public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
     {
       sut.PrivacyLinkURL = null;
-      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().NotContain("privacyLink");
     }
@@ -49,7 +81,6 @@ namespace CoreTest.RenderTests
     public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
     {
       sut.PrivacyLinkURL = "http://foo.bar";
-      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().Contain("privacyLink");
     }
@@ -58,7 +89,6 @@ namespace CoreTest.RenderTests
     public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
     {
       sut.TermsConditionsLinkURL = null;
-      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().NotContain("termsLink");
     }
@@ -67,7 +97,6 @@ namespace CoreTest.RenderTests
     public void TermsLinkRenderedWhenURLIsProvided(Core sut)
     {
       sut.TermsConditionsLinkURL = "http://foo.bar";
-      sut.ContactLink.Text = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().Contain("termsLink");
     }

@@ -40,7 +40,11 @@ namespace GoC.WebTemplate.Components
 
         internal List<Link> BuildContactLinks()
         {
-            if (!string.IsNullOrWhiteSpace(_core.ContactLink?.Text)) throw new InvalidOperationException("Unable to edit Contact Link text");
+            if (!string.IsNullOrWhiteSpace(_core.ContactLink?.Text))
+            {
+                if (_core.CurrentEnvironment.Name == "AKAMAI") throw new InvalidOperationException("Unable to edit Contact Link text in this environment");
+            }
+
             return string.IsNullOrWhiteSpace(_core.ContactLink?.Href) ? null : new List<Link> { _core.ContactLink };
         }
 

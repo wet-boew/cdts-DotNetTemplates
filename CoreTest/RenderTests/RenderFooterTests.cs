@@ -2,6 +2,9 @@
 using FluentAssertions;
 using GoC.WebTemplate.Components;
 using Xunit;
+using AutoFixture.Xunit2;
+using System.Collections.Generic;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 
 namespace CoreTest.RenderTests
 {
@@ -35,11 +38,55 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void HandleContactLinkSetText(Core sut)
+        public void HandleContactLinkSetTextAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
         {
+            var currentEnv = new CDTSEnvironment
+            {
+                Name = "AKAMAI"
+            };
+            environments[sut.Environment] = currentEnv;
             sut.ContactLink = new Link() { Text = "LinkText" };
             Action act = () => sut.RenderFooter();
             act.Should().Throw<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void HandleContactLinkSetTextOtherEnvironment([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Name = "Name"
+            };
+            environments[sut.Environment] = currentEnv;
+            sut.ContactLink = new Link() { Text = "LinkText" };
+            Action act = () => sut.RenderFooter();
+            act.Should().NotThrow();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void HandleTransactionalFooterContactLinkSetTextAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Name = "AKAMAI"
+            };
+            environments[sut.Environment] = currentEnv;
+            sut.ContactLink = new Link() { Text = "LinkText" };
+            Action act = () => sut.RenderTransactionalFooter();
+            act.Should().Throw<InvalidOperationException>();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void HandleTransactionalFooterContactLinkSetTextOtherEnvironment([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+        {
+            var currentEnv = new CDTSEnvironment
+            {
+                Name = "Name"
+            };
+            environments[sut.Environment] = currentEnv;
+            sut.ContactLink = new Link() { Text = "LinkText" };
+            Action act = () => sut.RenderTransactionalFooter();
+            act.Should().NotThrow();
         }
 
         [Theory, AutoNSubstituteData]
