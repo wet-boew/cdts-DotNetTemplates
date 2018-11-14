@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>GoC.WebTemplate-Components</id>
-    <version>1.28.0</version>
+    <version>1.29.0-RC4</version>
     <authors>SDS</authors>
     <owners>SDS</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -16,5 +16,5 @@
   </metadata>
   <files>
     <file src="bin\Release\GoC.WebTemplate.Components.dll" target="Lib\Net45" />
-  </files>              
+  </files>
 </package>

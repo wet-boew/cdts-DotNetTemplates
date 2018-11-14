@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>GoC.WebTemplate-MVC</id>
-    <version>1.28.0</version>
+    <version>1.29.0-RC4</version>
     <authors>SDS</authors>
     <owners>SDS</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,17 +11,17 @@
     <copyright>Copyright 2014</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
-      <dependency id="GoC.WebTemplate-Components" version="1.28.0"/>
-      <dependency id="Microsoft.AspNet.Mvc" version="5.2.6"/>
+      <dependency id="GoC.WebTemplate-Components" version="1.29.0-RC4" />
+      <dependency id="Microsoft.AspNet.Mvc" version="5.2.6" />
     </dependencies>
   </metadata>
   <files>
     <file src="CDTSEnvironments.json" target="Content" />
     <file src="Web.config.install.xdt" target="Content" />
-	<file src="WebTemplateMVC.xsd" target="Content" />
-	<file src="bin\GoC.WebTemplate.MVC.dll" target="Lib\Net45" />
+    <file src="WebTemplateMVC.xsd" target="Content" />
+    <file src="bin\GoC.WebTemplate.MVC.dll" target="Lib\Net45" />
     <file src="CDTSEnvironments.json" target="Lib\Net45" />
     <file src="WebTemplateMVC.xsd" target="Lib\Net45" />
-	<file src="Views\GoC.WebTemplate\**\*.*" target="Content\Views\GoC.WebTemplate"/>
-  </files> 	
+    <file src="Views\GoC.WebTemplate\**\*.*" target="Content\Views\GoC.WebTemplate" />
+  </files>
 </package>
