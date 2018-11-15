@@ -29,7 +29,7 @@ namespace CoreTest.RenderTests
         {
             sut.ContactLinks = new List<Link> { new Link() };
             Action act = () => sut.RenderFooter();
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().Throw<InvalidOperationException>().WithMessage("Href must be specified");
         }
 
         [Theory, AutoNSubstituteData]
@@ -51,7 +51,7 @@ namespace CoreTest.RenderTests
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
             Action act = () => sut.RenderFooter();
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
         }
 
         [Theory, AutoNSubstituteData]
@@ -89,7 +89,7 @@ namespace CoreTest.RenderTests
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
             Action act = () => sut.RenderTransactionalFooter();
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
         }
 
         [Theory, AutoNSubstituteData]
@@ -127,7 +127,7 @@ namespace CoreTest.RenderTests
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.RenderFooter();
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
         }
 
 
@@ -165,7 +165,7 @@ namespace CoreTest.RenderTests
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.RenderTransactionalFooter();
-            act.Should().Throw<InvalidOperationException>();
+            act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
         }
 
         [Theory, AutoNSubstituteData]
