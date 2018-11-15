@@ -19,7 +19,7 @@ namespace GoC.WebTemplate.Components
 
         internal HtmlString RenderAppFooter()
         {
-            if (_core.CurrentEnvironment.Name != "AKAMAI" && _core.ContactLinks?.Any() == true)
+            if (_core.CurrentEnvironment.Name != "AKAMAI" && _core.ContactLinks.Any())
             {
                 throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
             }
