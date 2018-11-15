@@ -19,16 +19,20 @@ namespace GoC.WebTemplate.Components
 
         internal HtmlString RenderAppFooter()
         {
-            return JsonSerializationHelper.SerializeToJson(new AppFooter
+            if (_core.CurrentEnvironment.Name == "AKAMAI")
             {
-                CdnEnv = _core.CDNEnvironment,
-                SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
-                TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
-                PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
-                ContactLink = (_core.CurrentEnvironment.Name == "AKAMAI") ? _core.Builder.BuildContactLinks() : null,
-                LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
-                FooterSections = _core.Builder.BuildCustomFooterLinks
-            });
+                return JsonSerializationHelper.SerializeToJson(new AppFooter
+                {
+                    CdnEnv = _core.CDNEnvironment,
+                    SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
+                    TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
+                    PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
+                    ContactLink = _core.Builder.BuildContactLinks(),
+                    LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
+                    FooterSections = _core.Builder.BuildCustomFooterLinks
+                });
+            }
+            else throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
         }
 
         internal HtmlString RenderAppTop()

@@ -13,8 +13,9 @@ namespace CoreTest.RenderTests
     [Theory, AutoNSubstituteData]
     public void HandleEmptyContactLinkList(Core sut)
     {
-      sut.ContactLinks = null;
-      sut.RenderAppFooter().ToString().Should().NotContain("\"contactLink\":");
+      sut.CurrentEnvironment.Name = "AKAMAI";
+      sut.ContactLinks = new List<Link>();
+      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[]");
     } 
         
     [Theory, AutoNSubstituteData]
@@ -65,7 +66,8 @@ namespace CoreTest.RenderTests
         };
         environments[sut.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-        sut.RenderAppFooter().ToString().Should().NotContain("contactLink");
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>();
     }
 
     [Theory, AutoNSubstituteData]
@@ -78,7 +80,8 @@ namespace CoreTest.RenderTests
         sut.UseHTTPS = true;
         environments[sut.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-        sut.RenderAppFooter().ToString().Should().NotContain("contactLinks");
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>();
     }
 
     [Theory, AutoNSubstituteData]
@@ -104,7 +107,7 @@ namespace CoreTest.RenderTests
         environments[sut.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() {Href = "TestLink1", Text = "Link1"}, new Link() { Href = "TestLink2", Text = "Link2" } };
         Action act = () => sut.RenderAppFooter();
-        sut.RenderAppFooter().ToString().Should().NotContain("contactLinks");
+        act.Should().Throw<InvalidOperationException>();
         }
 
     [Theory, AutoNSubstituteData]
@@ -118,12 +121,13 @@ namespace CoreTest.RenderTests
         environments[sut.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
         Action act = () => sut.RenderAppFooter();
-        sut.RenderAppFooter().ToString().Should().NotContain("contactLinks");
+        act.Should().Throw<InvalidOperationException>();
         }
 
     [Theory, AutoNSubstituteData]
     public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
     {
+      sut.CurrentEnvironment.Name = "AKAMAI";  
       sut.PrivacyLinkURL = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().NotContain("privacyLink");
@@ -132,6 +136,7 @@ namespace CoreTest.RenderTests
     [Theory, AutoNSubstituteData]
     public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
     {
+      sut.CurrentEnvironment.Name = "AKAMAI";  
       sut.PrivacyLinkURL = "http://foo.bar";
       var json = sut.RenderAppFooter();
       json.ToString().Should().Contain("privacyLink");
@@ -140,6 +145,7 @@ namespace CoreTest.RenderTests
     [Theory, AutoNSubstituteData]
     public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
     {
+      sut.CurrentEnvironment.Name = "AKAMAI";  
       sut.TermsConditionsLinkURL = null;
       var json = sut.RenderAppFooter();
       json.ToString().Should().NotContain("termsLink");
@@ -148,6 +154,7 @@ namespace CoreTest.RenderTests
     [Theory, AutoNSubstituteData]
     public void TermsLinkRenderedWhenURLIsProvided(Core sut)
     {
+      sut.CurrentEnvironment.Name = "AKAMAI";
       sut.TermsConditionsLinkURL = "http://foo.bar";
       var json = sut.RenderAppFooter();
       json.ToString().Should().Contain("termsLink");

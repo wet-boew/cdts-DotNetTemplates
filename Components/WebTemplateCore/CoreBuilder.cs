@@ -47,10 +47,7 @@ namespace GoC.WebTemplate.Components
                 if (_core.ContactLinks?.Count == 1  && !string.IsNullOrWhiteSpace(_core.ContactLinks[0]?.Text)) throw new InvalidOperationException("Unable to edit Contact Link text in this environment");
             }
 
-            foreach (Link link in _core.ContactLinks)
-            {
-                if (string.IsNullOrWhiteSpace(link.Href)) throw new InvalidOperationException("Href must be specified");
-            }
+            if (_core.ContactLinks.Any(link => string.IsNullOrWhiteSpace(link.Href))) throw new InvalidOperationException("Href must be specified");
             return _core.ContactLinks;
             
         }
