@@ -189,7 +189,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult TransactionalSample()
         {
             //Contact Links
-            WebTemplateCore.ContactLinks = new List<Link> { new Link("http://travel.gc.ca/", "Contact Us") };
+            WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
             //set the Terms and Condition Link
             WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
