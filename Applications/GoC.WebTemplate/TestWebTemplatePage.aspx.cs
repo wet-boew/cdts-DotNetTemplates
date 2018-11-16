@@ -8,7 +8,7 @@ namespace GoC.WebTemplate.WebForms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Link link = new Link() {Text = string.Empty, Href = "http://tempuri.com" };
+            Link link = new Link() { Text = (WebTemplateMaster.WebTemplateCore.Environment == "AKAMAI") ? string.Empty : "Testlink", Href = "http://tempuri.com" };
             WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link>() { link };
             WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";

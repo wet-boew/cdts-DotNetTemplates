@@ -12,9 +12,12 @@ namespace GoC.WebTemplate.WebForms
     protected void Page_Load(object sender, EventArgs e)
     {
 
-      Link link = new Link(){ Href = "foo", Text = string.Empty };
-      WebTemplateMaster.WebTemplateCore.ContactLinks.Add(link);
-            
+      if (WebTemplateMaster.WebTemplateCore.Environment == "AKAMAI")
+      {
+          Link link = new Link() { Href = "foo", Text = string.Empty };
+          WebTemplateMaster.WebTemplateCore.ContactLinks.Add(link);
+      }
+
       WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://tempuri.com";
       WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "Test page";
       WebTemplateMaster.WebTemplateCore.MenuLinks = new List<MenuLink>
