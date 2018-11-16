@@ -1,5 +1,6 @@
 ﻿using System;
 using GoC.WebTemplate.Components;
+using System.Collections.Generic;
 
 namespace GoC.WebTemplate.WebForms
 {
@@ -7,9 +8,8 @@ namespace GoC.WebTemplate.WebForms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            WebTemplateMaster.WebTemplateCore.ContactLink = new Link();
-            WebTemplateMaster.WebTemplateCore.ContactLink.Text = string.Empty;
-            WebTemplateMaster.WebTemplateCore.ContactLink.Href = "http://tempuri.com";
+            Link link = new Link() { Text = (WebTemplateMaster.WebTemplateCore.Environment == "AKAMAI") ? string.Empty : "Testlink", Href = "http://tempuri.com" };
+            WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link>() { link };
             WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "YUP";

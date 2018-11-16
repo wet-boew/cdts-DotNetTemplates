@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GoC.WebTemplate.Components.JSONSerializationObjects;
-
+using GoC.WebTemplate.Components;
 
 namespace GoC.WebTemplate.WebForms
 {
@@ -12,9 +12,12 @@ namespace GoC.WebTemplate.WebForms
     protected void Page_Load(object sender, EventArgs e)
     {
 
-      WebTemplateMaster.WebTemplateCore.ContactLink.Href = "foo";
-      WebTemplateMaster.WebTemplateCore.ContactLink.Text = string.Empty;
-      
+      if (WebTemplateMaster.WebTemplateCore.Environment == "AKAMAI")
+      {
+          Link link = new Link() { Href = "foo", Text = string.Empty };
+          WebTemplateMaster.WebTemplateCore.ContactLinks.Add(link);
+      }
+
       WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://tempuri.com";
       WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "Test page";
       WebTemplateMaster.WebTemplateCore.MenuLinks = new List<MenuLink>

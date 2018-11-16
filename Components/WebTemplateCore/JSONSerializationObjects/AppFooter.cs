@@ -10,7 +10,7 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
     {
         public string CdnEnv { get; set; }
         public List<FooterLink> FooterSections { get; set;  }
-        public string ContactLink { get; set; }
+        public List<Link> ContactLink { get; set; }
         public string TermsLink { get; set; }
         public string PrivacyLink { get; set; }
         public string SubTheme { get; set; }

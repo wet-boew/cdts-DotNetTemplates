@@ -40,7 +40,16 @@ namespace GoC.WebTemplate.Components
 
         internal List<Link> BuildContactLinks()
         {
-            return string.IsNullOrWhiteSpace(_core.ContactLink?.Href) ? null : new List<Link> { _core.ContactLink };
+            if (_core.CurrentEnvironment.Name == "AKAMAI")
+            {
+                if (_core.ContactLinks?.Count > 1) throw new InvalidOperationException("Having multiple contact links not allowed in this environment");
+
+                if (_core.ContactLinks?.Count == 1  && !string.IsNullOrWhiteSpace(_core.ContactLinks[0]?.Text)) throw new InvalidOperationException("Unable to edit Contact Link text in this environment");
+            }
+
+            if (_core.ContactLinks.Any(link => string.IsNullOrWhiteSpace(link.Href))) throw new InvalidOperationException("Href must be specified");
+            return _core.ContactLinks;
+            
         }
 
         internal string BuildLocalPath()
