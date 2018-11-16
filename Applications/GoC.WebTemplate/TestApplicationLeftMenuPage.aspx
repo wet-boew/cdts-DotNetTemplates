@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Transactional.LeftMenu.Master" AutoEventWireup="true" CodeBehind="TestApplicationLeftMenuPage.aspx.cs" Inherits="GoC.WebTemplate.WebForms.TestApplicationLeftMenuPage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Application.LeftMenu.Master" AutoEventWireup="true" CodeBehind="TestApplicationLeftMenuPage.aspx.cs" Inherits="GoC.WebTemplate.WebForms.TestApplicationLeftMenuPage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 <h1>GoC Web Template Samples - Left Side Menu</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
