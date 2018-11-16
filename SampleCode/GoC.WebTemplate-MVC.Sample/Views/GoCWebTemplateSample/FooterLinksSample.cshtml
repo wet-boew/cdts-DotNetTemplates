@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="FooterLinksSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.Pages.FooterLinksSample" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+﻿@{ 
+    Layout = "~/Views/GoC.WebTemplate/GoCWebTemplate_Layout.cshtml";
+}
 <h1>GoC Web Template Samples - Footer Links</h1>
 <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
@@ -50,5 +51,5 @@
     }
 </pre>
 </div>
-    <!-- #include virtual="SamplesNavigation.html" -->
-</asp:Content>
+
+@Html.Partial("_SamplesNavigation")
