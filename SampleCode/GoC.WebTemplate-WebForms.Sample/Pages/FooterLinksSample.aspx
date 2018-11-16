@@ -11,9 +11,9 @@
     Currently it is advisable to not implement a custom header/footer unless you have permission to do so from your department, TBS or Principal Publisher. 
     If you have permission to do so then follow the instructions for the "Application templates" in the menu on the right.</p>
 
-<h2>Contact Link</h2>
-<p>The "Contact Us" link located at the bottom of the page can be customized by populating the <code class="wb-prettify">contactLink</code></p>.
-<p>Set programmatically via the <code class="wb-prettify">"ContactLink"</code> property of the Web Template.</p>
+<h2>Contact Links</h2>
+<p>The "Contact Us" link located at the bottom of the page can be customized by populating the <code class="wb-prettify">contactLinks</code></p>.
+<p>Set programmatically via the <code class="wb-prettify">"ContactLinks"</code> property of the Web Template.</p>
 
 <h2>Custom Footer Links</h2>
 <div class="wb-prettify all-pre lang-c# linenums">
@@ -21,7 +21,7 @@
         protected void Page_Load(object sender, EventArgs e)
         {
             //Contact Links
-            WebTemplateMaster.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
+            WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link>(){ new Link("http://travel.gc.ca/", "Contact Us") };
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
         }

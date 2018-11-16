@@ -14,7 +14,7 @@ namespace GoC.WebTemplate.WebForm.Sample.Pages
         protected void Page_Load(object sender, EventArgs e)
         {
             //Contact Links
-            WebTemplateMaster.WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
+            WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link> { new Link("http://travel.gc.ca/", "Contact Us") };
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
         }

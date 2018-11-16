@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.JSONSerializationObjects;
+using System.Collections.Generic;
 
 namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
@@ -101,7 +102,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult FooterLinksSample()
         {
             //Contact Links
-            WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/","Contact Us");
+            WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -179,7 +180,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult TransactionalSample()
         {
             //Contact Links
-            WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
+            WebTemplateCore.ContactLinks = new List<Link> { new Link("http://travel.gc.ca/", "Contact Us") };
             //set the Terms and Condition Link
             WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link
