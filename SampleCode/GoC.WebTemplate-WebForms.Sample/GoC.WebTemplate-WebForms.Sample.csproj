@@ -128,28 +128,28 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
-    <Content Include="Pages\ApplicationTemplate.aspx" />
-    <Content Include="Pages\FooterLinksSample.aspx" />
-    <Content Include="Pages\GCIntranetThemeSample.aspx" />
-    <Content Include="Pages\Logout.aspx" />
-    <Content Include="Pages\myJS.js" />
-    <Content Include="Pages\AddJSandCSSFilesSample.aspx" />
-    <Content Include="Pages\BaseSettingsSample.aspx" />
-    <Content Include="Pages\BreadcrumbSample.aspx" />
-    <Content Include="Pages\BilingualErrorSample.aspx" />
-    <Content Include="Pages\UnilingualErrorSample.aspx" />
-    <Content Include="Pages\ExtendedBasePageSample.aspx" />
-    <Content Include="Pages\FeedbackandShareThisPageSample.aspx" />
-    <Content Include="Pages\LeavingSecureSiteSample.aspx" />
-    <Content Include="Pages\LeftSideMenuSample.aspx" />
-    <Content Include="Pages\mystyle.css" />
-    <Content Include="Pages\NestedMasterPageSample.aspx" />
-    <Content Include="Pages\Redirect.aspx" />
-    <Content Include="Pages\SamplesNavigation.html" />
-    <Content Include="Pages\SessionTimeoutSample.aspx" />
-    <Content Include="Pages\SessionValidity.aspx" />
-    <Content Include="Pages\SplashPageSample.aspx" />
-    <Content Include="Pages\TransactionalSample.aspx" />
+    <Content Include="SamplePages\ApplicationTemplate.aspx" />
+    <Content Include="SamplePages\FooterLinksSample.aspx" />
+    <Content Include="SamplePages\GCIntranetThemeSample.aspx" />
+    <Content Include="SamplePages\Logout.aspx" />
+    <Content Include="SamplePages\myJS.js" />
+    <Content Include="SamplePages\AddJSandCSSFilesSample.aspx" />
+    <Content Include="SamplePages\BaseSettingsSample.aspx" />
+    <Content Include="SamplePages\BreadcrumbSample.aspx" />
+    <Content Include="SamplePages\BilingualErrorSample.aspx" />
+    <Content Include="SamplePages\UnilingualErrorSample.aspx" />
+    <Content Include="SamplePages\ExtendedBasePageSample.aspx" />
+    <Content Include="SamplePages\FeedbackandShareThisPageSample.aspx" />
+    <Content Include="SamplePages\LeavingSecureSiteSample.aspx" />
+    <Content Include="SamplePages\LeftSideMenuSample.aspx" />
+    <Content Include="SamplePages\mystyle.css" />
+    <Content Include="SamplePages\NestedMasterPageSample.aspx" />
+    <Content Include="SamplePages\Redirect.aspx" />
+    <Content Include="SamplePages\SamplesNavigation.html" />
+    <Content Include="SamplePages\SessionTimeoutSample.aspx" />
+    <Content Include="SamplePages\SessionValidity.aspx" />
+    <Content Include="SamplePages\SplashPageSample.aspx" />
+    <Content Include="SamplePages\TransactionalSample.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -162,153 +162,153 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="Pages\FooterLinksSample.aspx.cs">
+    <Compile Include="SamplePages\FooterLinksSample.aspx.cs">
       <DependentUpon>FooterLinksSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\FooterLinksSample.aspx.designer.cs">
+    <Compile Include="SamplePages\FooterLinksSample.aspx.designer.cs">
       <DependentUpon>FooterLinksSample.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pages\AddJSandCSSFilesSample.aspx.cs">
+    <Compile Include="SamplePages\AddJSandCSSFilesSample.aspx.cs">
       <DependentUpon>AddJSandCSSFilesSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\AddJSandCSSFilesSample.aspx.designer.cs">
+    <Compile Include="SamplePages\AddJSandCSSFilesSample.aspx.designer.cs">
       <DependentUpon>AddJSandCSSFilesSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ApplicationTemplate.aspx.cs">
+    <Compile Include="SamplePages\ApplicationTemplate.aspx.cs">
       <DependentUpon>ApplicationTemplate.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\ApplicationTemplate.aspx.designer.cs">
+    <Compile Include="SamplePages\ApplicationTemplate.aspx.designer.cs">
       <DependentUpon>ApplicationTemplate.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BaseSettingsSample.aspx.cs">
+    <Compile Include="SamplePages\BaseSettingsSample.aspx.cs">
       <DependentUpon>BaseSettingsSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\BaseSettingsSample.aspx.designer.cs">
+    <Compile Include="SamplePages\BaseSettingsSample.aspx.designer.cs">
       <DependentUpon>BaseSettingsSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BreadcrumbSample.aspx.cs">
+    <Compile Include="SamplePages\BreadcrumbSample.aspx.cs">
       <DependentUpon>BreadcrumbSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\BreadcrumbSample.aspx.designer.cs">
+    <Compile Include="SamplePages\BreadcrumbSample.aspx.designer.cs">
       <DependentUpon>BreadcrumbSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\BilingualErrorSample.aspx.cs">
+    <Compile Include="SamplePages\BilingualErrorSample.aspx.cs">
       <DependentUpon>BilingualErrorSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\BilingualErrorSample.aspx.designer.cs">
+    <Compile Include="SamplePages\BilingualErrorSample.aspx.designer.cs">
       <DependentUpon>BilingualErrorSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\UnilingualErrorSample.aspx.cs">
+    <Compile Include="SamplePages\UnilingualErrorSample.aspx.cs">
       <DependentUpon>UnilingualErrorSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\UnilingualErrorSample.aspx.designer.cs">
+    <Compile Include="SamplePages\UnilingualErrorSample.aspx.designer.cs">
       <DependentUpon>UnilingualErrorSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ExtendedBasePage.cs">
+    <Compile Include="SamplePages\ExtendedBasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\ExtendedBasePageSample.aspx.cs">
+    <Compile Include="SamplePages\ExtendedBasePageSample.aspx.cs">
       <DependentUpon>ExtendedBasePageSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\ExtendedBasePageSample.aspx.designer.cs">
+    <Compile Include="SamplePages\ExtendedBasePageSample.aspx.designer.cs">
       <DependentUpon>ExtendedBasePageSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\FeedbackandShareThisPageSample.aspx.cs">
+    <Compile Include="SamplePages\FeedbackandShareThisPageSample.aspx.cs">
       <DependentUpon>FeedbackandShareThisPageSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\FeedbackandShareThisPageSample.aspx.designer.cs">
+    <Compile Include="SamplePages\FeedbackandShareThisPageSample.aspx.designer.cs">
       <DependentUpon>FeedbackandShareThisPageSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\GCIntranetThemeSample.aspx.cs">
+    <Compile Include="SamplePages\GCIntranetThemeSample.aspx.cs">
       <DependentUpon>GCIntranetThemeSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\GCIntranetThemeSample.aspx.designer.cs">
+    <Compile Include="SamplePages\GCIntranetThemeSample.aspx.designer.cs">
       <DependentUpon>GCIntranetThemeSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LeavingSecureSiteSample.aspx.cs">
+    <Compile Include="SamplePages\LeavingSecureSiteSample.aspx.cs">
       <DependentUpon>LeavingSecureSiteSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\LeavingSecureSiteSample.aspx.designer.cs">
+    <Compile Include="SamplePages\LeavingSecureSiteSample.aspx.designer.cs">
       <DependentUpon>LeavingSecureSiteSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LeftSideMenuSample.aspx.cs">
+    <Compile Include="SamplePages\LeftSideMenuSample.aspx.cs">
       <DependentUpon>LeftSideMenuSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\LeftSideMenuSample.aspx.designer.cs">
+    <Compile Include="SamplePages\LeftSideMenuSample.aspx.designer.cs">
       <DependentUpon>LeftSideMenuSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Logout.aspx.cs">
+    <Compile Include="SamplePages\Logout.aspx.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Logout.aspx.designer.cs">
+    <Compile Include="SamplePages\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NestedMasterPageSample.aspx.cs">
+    <Compile Include="SamplePages\NestedMasterPageSample.aspx.cs">
       <DependentUpon>NestedMasterPageSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\NestedMasterPageSample.aspx.designer.cs">
+    <Compile Include="SamplePages\NestedMasterPageSample.aspx.designer.cs">
       <DependentUpon>NestedMasterPageSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NestedMasterPageSample.master.cs">
+    <Compile Include="SamplePages\NestedMasterPageSample.master.cs">
       <DependentUpon>NestedMasterPageSample.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\NestedMasterPageSample.master.designer.cs">
+    <Compile Include="SamplePages\NestedMasterPageSample.master.designer.cs">
       <DependentUpon>NestedMasterPageSample.master</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Redirect.aspx.cs">
+    <Compile Include="SamplePages\Redirect.aspx.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Redirect.aspx.designer.cs">
+    <Compile Include="SamplePages\Redirect.aspx.designer.cs">
       <DependentUpon>Redirect.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SessionTimeoutSample.aspx.cs">
+    <Compile Include="SamplePages\SessionTimeoutSample.aspx.cs">
       <DependentUpon>SessionTimeoutSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\SessionTimeoutSample.aspx.designer.cs">
+    <Compile Include="SamplePages\SessionTimeoutSample.aspx.designer.cs">
       <DependentUpon>SessionTimeoutSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SessionValidity.aspx.cs">
+    <Compile Include="SamplePages\SessionValidity.aspx.cs">
       <DependentUpon>SessionValidity.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\SessionValidity.aspx.designer.cs">
+    <Compile Include="SamplePages\SessionValidity.aspx.designer.cs">
       <DependentUpon>SessionValidity.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SplashPageSample.aspx.cs">
+    <Compile Include="SamplePages\SplashPageSample.aspx.cs">
       <DependentUpon>SplashPageSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\SplashPageSample.aspx.designer.cs">
+    <Compile Include="SamplePages\SplashPageSample.aspx.designer.cs">
       <DependentUpon>SplashPageSample.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\TransactionalSample.aspx.cs">
+    <Compile Include="SamplePages\TransactionalSample.aspx.cs">
       <DependentUpon>TransactionalSample.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\TransactionalSample.aspx.designer.cs">
+    <Compile Include="SamplePages\TransactionalSample.aspx.designer.cs">
       <DependentUpon>TransactionalSample.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Pages\NestedMasterPageSample.master" />
+    <Content Include="SamplePages\NestedMasterPageSample.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
