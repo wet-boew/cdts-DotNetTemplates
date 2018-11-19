@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Web.Mvc;
 using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.JSONSerializationObjects;
+using System.Collections.Generic;
 
 namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
@@ -101,7 +102,16 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult FooterLinksSample()
         {
             //Contact Links
-            WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/","Contact Us");
+            WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
+
+            //The code snippet below displays an example of multiple links that have text and href being updated.
+            /*
+                WebTemplateCore.ContactLinks = new List<Link> 
+                { 
+                    new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
+                    new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 
+                };
+            */
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -179,7 +189,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult TransactionalSample()
         {
             //Contact Links
-            WebTemplateCore.ContactLink = new Link("http://travel.gc.ca/", "Contact Us");
+            WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
             //set the Terms and Condition Link
             WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
             //set the Privacy link

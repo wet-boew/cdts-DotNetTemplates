@@ -15,7 +15,7 @@ namespace GoC.WebTemplate.WebForm.Sample.Pages
             WebTemplateMaster.WebTemplateCore.ShowPreContent = false;
             WebTemplateMaster.WebTemplateCore.ShowSearch = true;
 
-            WebTemplateMaster.WebTemplateCore.ContactLink = new Link() {Href="http://travel.gc.ca/"};
+            WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link> { new Link() { Href = "http://travel.gc.ca/" } };
 
             WebTemplateMaster.WebTemplateCore.Breadcrumbs = new List<Breadcrumb>
             {
