@@ -106,7 +106,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
 
             //The code snippet below displays an example of multiple links that have text and href being updated.
             /*
-                WebTemplateCore.ContactLinks = new List&lt;Link&gt; 
+                WebTemplateCore.ContactLinks = new List<Link> 
                 { 
                     new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
                     new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 

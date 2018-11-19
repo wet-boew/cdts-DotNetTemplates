@@ -25,10 +25,10 @@
 <ul>
     <li><code class="wb-prettify">"newWindow"</code>: If you would like the link to open in a new window.</li>
 </ul>
-<p>There are limitations as to when the <code class="wb-prettify">"text"</code> and <code class="wb-prettify">"href"</code> of <code class="wb-prettify">"ContactLinks"</code> can be updated.</p>
-<p>The <code class="wb-prettify">"href"</code> can only be updated when environment is "AKAMAI" or for only "Transactional" and "Layout" templates when the environment is not "AKAMAI".</p>
-<p>The <code class="wb-prettify">"text"</code> can only be updated in the "Transactional" and "Layout" templates provided that the environment is not "AKAMAI".</p>
-<p>Multiple links can only be set if you are not using the application template and the environment is not "AKAMAI".</p>
+<p>In the AKAMAI environment, you can only change the <code class="wb-prettify">"href"</code> of ContactLinks.</p>
+<p>In the Application template, if not in the AKAMAI environment, you cannot use ContactLinks. You can use a CustomFooter instead.</p>
+<p>In Intranet (ESDC_Prod) and Extranet (PROD_SSL) you can change the <code class="wb-prettify">"href"</code> and <code class="wb-prettify">"text"</code> of ContactLinks.</p>
+<p>Multiple links can only be set if you are not using the Application template and the environment is not "AKAMAI".</p>
 
 <h2>Custom Footer Links</h2>
 <div class="wb-prettify all-pre lang-c# linenums">
