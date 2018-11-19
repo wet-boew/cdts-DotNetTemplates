@@ -1,6 +1,10 @@
 ﻿************************************************************************************************************
-1.29.0 - 2018-07-10
+1.29.0 - 2018-11-13
 - Updating assembly names for consistancy (using statments will need to be updated)
+- Fixed bug where session timeout notification appeared even when disabled
+- Added a wiki page to clearly demonstrate how the Redirect function works 
+- improve fuinctionality on contactLinks 
+- various bug fixes 
 ************************************************************************************************************
 1.28.1 - 2018-06-27
 - Fix left menu render issues
