@@ -57,11 +57,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GoC.WebTemplate.Components, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.29.0-RC4\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.29.0-RC5\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GoC.WebTemplate.WebForms, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.29.0-RC4\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.29.0-RC5\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
