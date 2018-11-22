@@ -1,6 +1,6 @@
 variables:
   TEST_FOLDER: 'CoreTest\\bin\\Release'  
-  NUGET_PATH: 'Builds\\.nuget\\nuget.exe'
+  NUGET_PATH: 'C:\\Git\\NuGet\\nuget.exe'
   MSBUILD_PATH: 'C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\msbuild.exe'
   xUNIT_PATH: 'packages\\xunit.runner.console.2.4.1\\tools\\net461\\xunit.console.exe'
   DEFAULT_SLN: 'GoCWebTemplates.sln'
