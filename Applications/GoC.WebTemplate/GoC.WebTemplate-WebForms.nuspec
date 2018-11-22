@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>GoC.WebTemplate-WebForms</id>
-    <version>1.29.0-RC5</version>
+    <version>1.29.0</version>
     <authors>SDS</authors>
     <owners>SDS</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -11,7 +11,7 @@
     <copyright>Copyright 2014</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
-      <dependency id="GoC.WebTemplate-Components" version="1.29.0-RC5" />
+      <dependency id="GoC.WebTemplate-Components" version="1.29.0" />
     </dependencies>
   </metadata>
   <files>
