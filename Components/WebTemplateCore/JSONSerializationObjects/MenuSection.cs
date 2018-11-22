@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     [Serializable]
     public class MenuSection

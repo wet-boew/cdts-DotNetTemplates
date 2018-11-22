@@ -1,5 +1,5 @@
-﻿ // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+﻿// ReSharper disable once CheckNamespace
+namespace GoC.WebTemplate.Components
 {
     public abstract class Constants
     {

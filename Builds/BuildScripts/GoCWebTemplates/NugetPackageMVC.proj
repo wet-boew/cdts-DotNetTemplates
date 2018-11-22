@@ -17,12 +17,12 @@
     <!-- Project Template Starter directory -->
     <WebTemplateProjectDir>$(SourceDir)Applications\GoC.WebTemplateMVC</WebTemplateProjectDir>
     <!-- Project File -->
-    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplateMVC.csproj</WebTemplateProjectFile>
+    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate-MVC.csproj</WebTemplateProjectFile>
     
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
     <!-- Release Folder Template -->
-    <ReleaseTemplateDir>$(ReleaseRootDir)\GoCWebTemplate-MVC</ReleaseTemplateDir>
+    <ReleaseTemplateDir>$(ReleaseRootDir)\GoC.WebTemplate-MVC</ReleaseTemplateDir>
     <!-- Nuget Folder -->
     <NugetRootDir>C:\temp\Nuget</NugetRootDir>
     
@@ -55,7 +55,7 @@
     <MakeDir Directories="$(ReleaseTemplateDir)\Content"/>
 
     <ItemGroup>
-      <ReleaseFiles Include="$(OutBinariesDir)\GoC.WebTemplateMVC.dll;$(OutBinariesDir)\CDTSEnvironments.json;$(OutBinariesDir)\WebTemplateMVC.xsd"/>
+      <ReleaseFiles Include="$(OutBinariesDir)\GoC.WebTemplate.MVC.dll;$(OutBinariesDir)\CDTSEnvironments.json;$(OutBinariesDir)\WebTemplateMVC.xsd"/>
       <ReleaseFilesContent Include="$(OutContentDir)\**\*.*"  Exclude="$(WebTemplateProjectDir)\GoC.WebTemplate\**\*.cs"></ReleaseFilesContent>
     </ItemGroup>
     
@@ -79,20 +79,20 @@
      <!-- insert the version number into the nuspec files -->
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GoCWebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
       XPath="/package/metadata/version"
       Value="$(VersionNumber)" />
 
     <!--insert the release notes-->
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GoCWebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
       XPath="/package/metadata/releaseNotes"
       Value="$(ReleaseNotes)" />
     
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GocWebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-MVC\GoC.WebTemplate-MVC.nuspec"
       XPath="/package/metadata/dependencies/dependency[@id='GoC.WebTemplate-Components']/@version"
       Value="$(dependencyVersionNumber)" />
 
@@ -103,16 +103,7 @@
 
   <!-- Cleanup the Release folder -->
   <Target Name="CleanUpReleaseFolder">
-    <RemoveDir Directories="$(ReleaseRootDir)\GoCWebTemplate-MVC"/>
-  </Target>
-
-  <!-- Create zip file -->
-  <Target Name="Zip">
-    <CreateItem Include="$(ReleaseRootDir)\**\*.*" >
-      <Output ItemName="ZipFiles" TaskParameter="Include"/>
-    </CreateItem>
-
-    <Zip ZipFileName="$(NugetRootDir)\GoCWebTemplateMVC.zip" WorkingDirectory="$(ReleaseRootDir)" Files="@(ZipFiles)" />
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-MVC"/>
   </Target>
 
 </Project>

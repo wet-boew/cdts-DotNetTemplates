@@ -1,4 +1,4 @@
-namespace WebTemplateCore.Proxies
+namespace GoC.WebTemplate.Components.Proxies
 {
     public interface ICacheProxy
     {

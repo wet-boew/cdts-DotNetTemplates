@@ -1,6 +1,6 @@
 using System.Web;
 using FluentAssertions;
-using GoC.WebTemplate.Proxies;
+using GoC.WebTemplate.Components.Proxies;
 using Xunit;
 
 namespace CoreTest

@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Globalization;
 using FluentAssertions;
-using GoC.WebTemplate;
-using GoC.WebTemplate.Proxies;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
 using Xunit;
 using AutoFixture.Xunit2;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 
 namespace CoreTest.RenderTests
 {
@@ -69,6 +67,30 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void SubLinks(Core sut)
+        {
+            sut.MenuLinks = new List<MenuLink>
+            {
+                new MenuLink
+                {
+                    Text = "MenuLink",
+                    SubLinks = new List<SubLink>
+                    {
+                        new SubLink
+                        {
+                            Text = "SubLinkText1",
+                            Href = "SubLinkHerf1",
+                            NewWindow = true
+                        }
+                    }
+                }
+            };
+            var result = sut.RenderAppTop();
+
+            result.ToString().Should().Contain("\"menuLinks\":[{\"subLinks\":[{\"subhref\":\"SubLinkHerf1\",\"subtext\":\"SubLinkText1\",\"newWindow\":true}],\"text\":\"MenuLink\"}]");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void ThrowExceptionIfMenuLinksAndCustomMenuURLAreBothSet(Core sut)
         {
             sut.MenuLinks = new List<MenuLink> { new MenuLink() };
@@ -121,6 +143,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void TopSecMenuTrueInAppTopWhenLeftMenuItems(Core sut)
         {
+            sut.LeftMenuItems = new List<MenuSection>();
             sut.LeftMenuItems.Add(new MenuSection
             {
                 Link = "foo",

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Web;
-using Newtonsoft.Json;
-using WebTemplateCore.JSONSerializationObjects;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     internal class CoreRenderer
     {
@@ -20,13 +19,18 @@ namespace GoC.WebTemplate
 
         internal HtmlString RenderAppFooter()
         {
+            if (_core.CurrentEnvironment.Name != "AKAMAI" && _core.ContactLinks.Any())
+            {
+                throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
+            }
+            
             return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = _core.CDNEnvironment,
                 SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
                 TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
                 PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
-                ContactLink = _core.Builder.GetStringForJson(_core.ContactLink?.Href),
+                ContactLink = _core.Builder.BuildContactLinks(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
                 FooterSections = _core.Builder.BuildCustomFooterLinks
             });
@@ -188,9 +192,10 @@ namespace GoC.WebTemplate
             if (_core.SessionTimeout.Enabled)
             {
                 jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_core.SessionTimeout);
+                return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
             }
 
-            return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
+            return null;
         }
 
         internal HtmlString RenderLeftMenu()

@@ -17,12 +17,12 @@
     <!-- Project Template Starter directory -->
     <WebTemplateProjectDir>$(SourceDir)Components\WebTemplateCore</WebTemplateProjectDir>
     <!-- Project File -->
-    <WebTemplateProjectFile>$(WebTemplateProjectDir)\WebTemplateCore.csproj</WebTemplateProjectFile>
+    <WebTemplateProjectFile>$(WebTemplateProjectDir)\GoC.WebTemplate-Components.csproj</WebTemplateProjectFile>
     
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
     <!-- Release Folder Template -->
-    <ReleaseTemplateDir>$(ReleaseRootDir)\GoCWebTemplate-Components</ReleaseTemplateDir>
+    <ReleaseTemplateDir>$(ReleaseRootDir)\GoC.WebTemplate-Components</ReleaseTemplateDir>
     <!-- Nuget Folder -->
     <NugetRootDir>C:\temp\Nuget</NugetRootDir>
     
@@ -53,7 +53,7 @@
     <MakeDir Directories="$(ReleaseTemplateDir)\Content"/>
 
     <ItemGroup>
-      <ReleaseFiles Include="$(OutBinariesDir)\WebTemplateCore.dll;"/>
+      <ReleaseFiles Include="$(OutBinariesDir)\GoC.WebTemplate.Components.dll;"/>
     </ItemGroup>
     
     <!--Copy the XDT file to the content dir -->
@@ -69,14 +69,14 @@
     <!-- insert the version number into the nuspec files -->
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GoCWebTemplate-Components\GoC.WebTemplate-Components.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-Components\GoC.WebTemplate-Components.nuspec"
       XPath="/package/metadata/version"
       Value="$(VersionNumber)" />
 
     <!--insert the release notes-->
     <XmlUpdate
       Namespace="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd"
-      XmlFileName="$(ReleaseRootDir)\GoCWebTemplate-Components\GoC.WebTemplate-Components.nuspec"
+      XmlFileName="$(ReleaseRootDir)\GoC.WebTemplate-Components\GoC.WebTemplate-Components.nuspec"
       XPath="/package/metadata/releaseNotes"
       Value="$(ReleaseNotes)" />
 
@@ -87,8 +87,8 @@
 
   <!-- Cleanup the Release folder -->
   <Target Name="CleanUpReleaseFolder">
-    <RemoveDir Directories="$(ReleaseRootDir)\GoCWebTemplate-Components"/>
-    <RemoveDir Directories="$(ReleaseRootDir)\GoCWebTemplate-Components"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-Components"/>
+    <RemoveDir Directories="$(ReleaseRootDir)\GoC.WebTemplate-Components"/>
   </Target>
 
 </Project>

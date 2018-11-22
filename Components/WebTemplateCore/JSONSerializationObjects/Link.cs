@@ -1,7 +1,7 @@
 ﻿using System;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     [Serializable]
     public class Link

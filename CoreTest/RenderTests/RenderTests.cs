@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using FluentAssertions;
-using GoC.WebTemplate;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using NSubstitute;
-//using Ploeh.AutoFixture.Xunit2;
-using WebTemplateCore.JSONSerializationObjects;
 using Xunit;
 
 namespace CoreTest.RenderTests
@@ -93,6 +91,72 @@ namespace CoreTest.RenderTests
             sut.SessionTimeout.Enabled = true;
             var result = sut.RenderSessionTimeoutControl();
             result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionalive", "logouturl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderServerTop(Core sut)
+        {
+            var result = sut.RenderServerTop();
+            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderServerBottom(Core sut)
+        {
+            var result = sut.RenderServerBottom();
+            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderServerRefTop(Core sut)
+        {
+            var result = sut.RenderServerRefTop();
+            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderServerRefFooter(Core sut)
+        {
+            var result = sut.RenderServerRefFooter();
+            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderHeaderTitle(Core sut)
+        {
+            sut.HeaderTitle = "MasterfullHeaderTitle";
+            var result = sut.RenderHeaderTitle();
+            result.ToString().Should().Be("MasterfullHeaderTitle");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderHtmlBodyElementsEmpty(Core sut)
+        {
+            var result = sut.RenderHtmlBodyElements();
+            result.ToString().Should().BeEmpty();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderHtmlHeaderElementsEmpty(Core sut)
+        {
+            var result = sut.RenderHtmlHeaderElements();
+            result.ToString().Should().BeEmpty();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderHtmlBodyElements(Core sut)
+        {
+            sut.HTMLBodyElements = new List<string> { "Fake Body Element", "Other Item"};
+            var result = sut.RenderHtmlBodyElements();
+            result.ToString().Should().Be("Fake Body Element\r\nOther Item\r\n");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderHtmlHeaderElements(Core sut)
+        {
+            sut.HTMLHeaderElements = new List<string> { "Fake Header Element", "Other Item" };
+            var result = sut.RenderHtmlHeaderElements();
+            result.ToString().Should().Be("Fake Header Element\r\nOther Item\r\n");
         }
     }
 }

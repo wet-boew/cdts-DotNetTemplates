@@ -1,10 +1,10 @@
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class CDTSEnvironmentLoader
     {

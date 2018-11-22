@@ -1,5 +1,9 @@
-﻿using FluentAssertions;
-using GoC.WebTemplate;
+﻿using AutoFixture.Xunit2;
+using FluentAssertions;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace CoreTest.RenderTests
@@ -7,19 +11,136 @@ namespace CoreTest.RenderTests
   public class RenderAppFooterTests
   {
     [Theory, AutoNSubstituteData]
-    public void HandleEmptyContactLinkList(Core sut)
+    public void HandleEmptyContactLinkListAkamai(Core sut)
     {
-      sut.ContactLink = null;
-      sut.RenderAppFooter().ToString().Should().NotContain("\"contactLink\":");
+      sut.CurrentEnvironment.Name = "AKAMAI";
+      sut.ContactLinks = new List<Link>();
+      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[]");
     } 
+
+    [Theory, AutoNSubstituteData]
+    public void HandleEmptyContactLinkListPRODSSL(Core sut)
+    {
+      sut.CurrentEnvironment.Name = "PROD_SSL";
+      sut.ContactLinks = new List<Link>();
+      Action act = () => sut.RenderAppFooter();
+            sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[]");
+        } 
         
     [Theory, AutoNSubstituteData]
-    public void HandleContactLinkValue(Core sut)
+    public void HandleEmptyContactLinkListESDCProd(Core sut)
     {
-      sut.ContactLink = new Link() { Href="http://testvalue" };
-      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":\"http://testvalue\"");
+      sut.CurrentEnvironment.Name = "ESDC_PROD";
+      sut.ContactLinks = new List<Link>();
+      Action act = () => sut.RenderAppFooter();
+      sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[]");
+    } 
+    [Theory, AutoNSubstituteData]
+    public void ContactLinkRendered([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
+
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "http://testvalue" } };
+        sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
     }
-        
+
+    [Theory, AutoNSubstituteData]
+    public void ContactFooterLinkRendered([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
+
+        sut.ContactLinks = new List<Link>() { new FooterLink() { Href = "http://testvalue", NewWindow = false } };
+        sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"newWindow\":false,\"href\":\"http://testvalue\"}]");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void ContactLinkSetTextAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void ContactLinkSetTextPRODSSL([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "PROD_SSL"
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void ContactLinkSetTextESDCProd([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "ESDC_PROD"
+        };
+        sut.UseHTTPS = true;
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void MultipleContactLinksAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "AKAMAI"
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void MultipleContactLinksPRODSSL([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "PROD_SSL"
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() {Href = "TestLink1", Text = "Link1"}, new Link() { Href = "TestLink2", Text = "Link2" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void MultipleContactLinksESDCProd([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
+        {
+            Name = "ESDC_PROD"
+        };
+        sut.UseHTTPS = true;
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
+    }
+
     [Theory, AutoNSubstituteData]
     public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
     {

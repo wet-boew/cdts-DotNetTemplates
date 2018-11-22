@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using GoC.WebTemplate;
 
-namespace WebTemplateCore.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
 
     /// <summary>

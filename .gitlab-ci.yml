@@ -1,0 +1,41 @@
+variables:
+  TEST_FOLDER: 'CoreTest\\bin\\Release'  
+  NUGET_PATH: 'C:\\Git\\NuGet\\nuget.exe'
+  MSBUILD_PATH: 'C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\msbuild.exe'
+  xUNIT_PATH: 'packages\\xunit.runner.console.2.4.1\\tools\\net461\\xunit.console.exe'
+  DEFAULT_SLN: 'GoCWebTemplates.sln'
+  SAMPLES_SLN: 'GoC.WebTemplate.Samples.sln'
+  
+stages:
+  - buildDefaultSln
+  - buildSamplesSln
+  - test
+
+build_default_sln:
+  stage: buildDefaultSln
+  script:
+    - echo "Restoring NuGet packages on %DEFAULT_SLN%..."
+    - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+    - echo "Building the %DEFAULT_SLN%..."
+    - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - '%TEST_FOLDER%'
+      - 'packages'
+
+build_samples_sln:
+  stage: buildSamplesSln
+  script:
+    - echo "Restoring NuGet packages on %SAMPLES_SLN%..."
+    - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+    - echo "Building the %SAMPLES_SLN%..."
+    - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests..."
+    - '"%xUNIT_PATH%" %TEST_FOLDER%\\CoreTest.dll"'
+  dependencies:
+    - build_default_sln

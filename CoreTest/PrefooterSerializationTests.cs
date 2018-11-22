@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using FluentAssertions;
-using GoC.WebTemplate;
-using WebTemplateCore.JSONSerializationObjects;
+using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Xunit;
 
 namespace CoreTest

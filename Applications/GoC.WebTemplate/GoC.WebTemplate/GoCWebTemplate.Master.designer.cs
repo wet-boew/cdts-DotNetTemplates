@@ -7,10 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.WebForms
 {
-
-
     public partial class WebTemplateMasterPage
     {
 

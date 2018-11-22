@@ -15,7 +15,7 @@
     <NuGetDir>$([System.IO.Path]::GetFullPath('..\..\')).nuget\</NuGetDir>
 
     <!-- Sample Folder directory -->
-    <WebTemplateProjectDir>$(SourceDir)SampleCode\SampleCode.C3\</WebTemplateProjectDir>
+    <WebTemplateProjectDir>$(SourceDir)SampleCode\GoC.WebTemplate-WebForms.Sample\</WebTemplateProjectDir>
 
     <!-- Release Folder -->
     <ReleaseRootDir>C:\temp\Release</ReleaseRootDir>
@@ -24,7 +24,7 @@
     <!-- Binaries Folder -->
     <OutBinariesDir>$(WebTemplateProjectDir)bin</OutBinariesDir>
     <!-- Content Folder -->
-    <OutContentDir>$(WebTemplateProjectDir)\Samples\GoC.WebTemplate.C3.Sample</OutContentDir>
+    <OutContentDir>$(WebTemplateProjectDir)\Pages</OutContentDir>
 
     <!-- Create NuGet package? -->
     <CreatePackage>1</CreatePackage>
@@ -55,7 +55,7 @@
     <Copy SourceFiles="$(NuGetSpecDir)GoC.WebTemplate-WebForms.Sample.nuspec" DestinationFolder="$(ReleaseTemplateDir)\" />
 
     <!--This copy the content to the package dir -->
-    <Copy SourceFiles="@(ReleaseFilesContent)" DestinationFolder="$(ReleaseTemplateDir)\Content\Samples\Goc.WebTemplate.C3.Sample%(RecursiveDir)"/>
+    <Copy SourceFiles="@(ReleaseFilesContent)" DestinationFolder="$(ReleaseTemplateDir)\Content\Pages%(RecursiveDir)"/>
 
   </Target>
 

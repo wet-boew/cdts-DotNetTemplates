@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class MenuItem : Link
     {

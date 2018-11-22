@@ -1,7 +1,6 @@
 ﻿using System;
 
-// ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
     [Serializable]
     public class Breadcrumb

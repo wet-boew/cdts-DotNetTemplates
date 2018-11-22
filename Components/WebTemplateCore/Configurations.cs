@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Configuration;
-using GoC.WebTemplate.ConfigSections;
+using GoC.WebTemplate.Components.ConfigSections;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class Configurations : ConfigurationSection
     {
         public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
-
+        
+        //This section is required for deserilization of the section from the web config
+        //This property enables validation on the xml of the config section
+        //This property is no actually used in the code
         [ConfigurationProperty("xmlns", IsRequired = false)]
         public string XmlNameSpace
         {
@@ -43,22 +46,6 @@ namespace GoC.WebTemplate
             set { this["customSiteMenuURL"] = value; }
         }
         
-        [ConfigurationProperty("showSiteMenu", DefaultValue= true) ]
-        [Obsolete("no longer used. Will be removed in a future release.")]
-        public bool ShowSiteMenu
-        {
-            get { return (bool) this["showSiteMenu"];  }
-            set { this["showSiteMenu"] = value; }
-        }
-
-        [ConfigurationProperty("showGlobalNav")]
-        [Obsolete("no longer used. Will be removed in a future release.")]
-        public bool ShowGlobalNav
-        {
-            get { return (bool) this["showGlobalNav"]; }
-            set { this["showGlobalNav"] = value; }
-        }
-
         // Create a "sessionTimeOut element."
         [ConfigurationProperty("sessionTimeOut")]
         public SessionTimeOutElement SessionTimeOut

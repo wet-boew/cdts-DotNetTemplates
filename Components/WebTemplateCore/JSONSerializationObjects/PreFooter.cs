@@ -1,7 +1,7 @@
+using GoC.WebTemplate.Components.JSONSerializationObjects.CustomJsonConverters;
 using Newtonsoft.Json;
-using WebTemplateCore.JSONSerializationObjects.CustomJsonConverters;
 
-namespace WebTemplateCore.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
     public class PreFooter
     {

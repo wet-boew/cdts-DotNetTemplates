@@ -3,7 +3,7 @@
 
   <configSections xdt:Transform="InsertBefore(/configuration/*[1])" />
   <configSections xdt:Locator="XPath(/configuration/configSections[last()])">
-    <section name="GoC.WebTemplate" type="GoC.WebTemplate.Configurations" xdt:Locator="Match(name)" xdt:Transform="InsertIfMissing" />
+    <section name="GoC.WebTemplate" type="GoC.WebTemplate.Components.Configurations" xdt:Locator="Match(name)" xdt:Transform="Replace" />
   </configSections>
   <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
   
@@ -20,7 +20,7 @@
   <GoC.WebTemplate xmlns="http://tempuri.org/WebTemplateWebForms.xsd" xdt:Transform="InsertIfMissing"/>
   <GoC.WebTemplate xdt:Transform="Replace"
   xmlns="http://tempuri.org/WebTemplateWebForms.xsd"
-   version="v4_0_28"
+   version="v4_0_29"
    environment="Akamai"
    loadJQueryFromGoogle="false"
    showPreContent="true"

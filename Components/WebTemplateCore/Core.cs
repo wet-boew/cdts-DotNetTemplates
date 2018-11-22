@@ -5,12 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Web;
 using System.Threading;
-using GoC.WebTemplate.Proxies;
-using WebTemplateCore.JSONSerializationObjects;
-using WebTemplateCore.Proxies;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Proxies;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate
+namespace GoC.WebTemplate.Components
 {
     public class Core
     {
@@ -190,7 +189,7 @@ namespace GoC.WebTemplate
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter
         /// Set by application programmatically
         /// </summary>
-        public Link ContactLink { get; set; } = new Link();
+        public List<Link> ContactLinks { get; set; } = new List<Link>();
 
         /// <summary>
         /// Represents the list of html elements to add to the header tag
