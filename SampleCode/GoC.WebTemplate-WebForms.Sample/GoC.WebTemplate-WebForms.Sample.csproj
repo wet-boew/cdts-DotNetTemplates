@@ -57,11 +57,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GoC.WebTemplate.Components, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.29.0-RC5\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.29.0\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="GoC.WebTemplate.WebForms, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.29.0-RC5\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.29.0\Lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -99,9 +99,11 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
+    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
