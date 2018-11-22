@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>GoC.WebTemplate-WebForms.Sample</id>
-    <version>1.28.0</version>
+    <version>1.29.0</version>
     <authors>SDS</authors>
     <owners>SDS</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -10,11 +10,11 @@
     <releaseNotes>Update to left menu sample to implement the MenuSection that can now be a link</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template Sample</tags>
-    <dependencies> 
-      <dependency id="GoC.WebTemplate-WebForms" version="1.28.0"/> 
-    </dependencies> 
+    <dependencies>
+      <dependency id="GoC.WebTemplate-WebForms" version="1.29.0" />
+    </dependencies>
   </metadata>
   <files>
-      <file src="Pages\**\*.*" target="Content\Pages"/>
-  </files>   
+    <file src="SamplePages\**\*.*" target="Content\Pages" />
+  </files>
 </package>
