@@ -22,11 +22,7 @@ namespace CDTS_Core.WebTemplateCore.JsonSerializationObjects
             set;
         }
 
-        public string ContactLink
-        {
-            get;
-            set;
-        }
+        public List<Link> ContactLink { get; set; }
 
         public string TermsLink
         {

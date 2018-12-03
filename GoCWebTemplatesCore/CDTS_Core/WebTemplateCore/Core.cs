@@ -96,11 +96,17 @@ namespace CDTS_Core.WebTemplateCore
 
         public string AppendToTitle => CurrentEnvironment.AppendToTitle;
 
-        public Link ContactLink
-        {
-            get;
-            set;
-        }
+        /// <summary>        
+        /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter        
+        /// Set by application programmatically        
+        /// </summary>        
+        public List<Link> ContactLinks { get; set; } = new List<Link>();
+
+        /// <summary>        
+        /// Info for Spash page        
+        /// Only applicable to Splash Layout/Master        
+        /// </summary>        
+        public SplashPageInfo SplashPageInfo { get; set; } = new SplashPageInfo();
 
         public List<string> HTMLHeaderElements
         {

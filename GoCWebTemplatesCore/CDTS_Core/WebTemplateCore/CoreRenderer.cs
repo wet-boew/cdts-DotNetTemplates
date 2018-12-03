@@ -25,7 +25,7 @@ namespace CDTS_Core.WebTemplateCore
             appFooter.ShowFeatures = _core.ShowFeatures;
             appFooter.TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL);
             appFooter.PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL);
-            appFooter.ContactLink = _core.Builder.GetStringForJson(_core.ContactLink?.Href);
+            appFooter.ContactLink = _core.Builder.BuildContactLinks();
             appFooter.LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion);
             appFooter.FooterSections = _core.Builder.BuildCustomFooterLinks;
             return JsonSerializationHelper.SerializeToJson(appFooter);
