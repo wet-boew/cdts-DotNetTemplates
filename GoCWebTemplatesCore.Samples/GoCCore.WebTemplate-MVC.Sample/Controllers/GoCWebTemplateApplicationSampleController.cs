@@ -19,6 +19,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             _localizer = localizer;
         }
 
+        [Route("/")]
         public ActionResult StandardPage()
         {
             WebTemplateCore.ApplicationTitle.Text = "Application Name Test";
