@@ -1,41 +1,150 @@
 variables:
   TEST_FOLDER: 'CoreTest\\bin\\Release'  
-  NUGET_PATH: 'C:\\Git\\NuGet\\nuget.exe'
-  MSBUILD_PATH: 'C:\\Program Files (x86)\\MSBuild\\14.0\\Bin\\msbuild.exe'
   xUNIT_PATH: 'packages\\xunit.runner.console.2.4.1\\tools\\net461\\xunit.console.exe'
+  VERSION_PS1: 'Builds\\version.ps1'
+  PACKAGE_PS1: 'Builds\\package.ps1'
   DEFAULT_SLN: 'GoCWebTemplates.sln'
   SAMPLES_SLN: 'GoC.WebTemplate.Samples.sln'
+  ARTIFACTORY_DEPLOY: 'https://jade-repos.intra.dev/artifactory/ca-gc-sds-libs-nuget-local/'
+  # variables from runner
+  # - NUGET_PATH
+  # - MSBUILD_PATH
+  # - CURL_PATH
+  # - RUNNER_USER_CRED
   
 stages:
-  - buildDefaultSln
-  - buildSamplesSln
+  - version
+  - build
   - test
+  - package
+  - deploy
+
+version_default_sln:
+  stage: version
+  allow_failure: true
+  only:
+    - tags
+    - master
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Components\WebTemplateCore\Properties\AssemblyInfo.cs"
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs"
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplateMVC\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'Components\WebTemplateCore\Properties\AssemblyInfo.cs'
+      - 'Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs'
+      - 'Applications\GoC.WebTemplateMVC\Properties\AssemblyInfo.cs'
+
+version_sample_sln:
+  stage: version
+  allow_failure: true
+  only:
+    - tags
+    - master
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs"
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs'
+      - 'SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs'
+
 
 build_default_sln:
-  stage: buildDefaultSln
+  stage: build
   script:
-    - echo "Restoring NuGet packages on %DEFAULT_SLN%..."
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
-    - echo "Building the %DEFAULT_SLN%..."
     - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
   artifacts:
     expire_in: 1 hour
     paths:
-      - '%TEST_FOLDER%'
+      - 'Applications\\GoC.WebTemplate\\bin'
+      - 'Applications\\GoC.WebTemplateMVC\\bin'
+      - 'Components\\WebTemplateCore\\bin\\Release'
+      - 'CoreTest\\bin\\Release'
       - 'packages'
 
-build_samples_sln:
-  stage: buildSamplesSln
+build_sample_sln:
+  stage: build
   script:
-    - echo "Restoring NuGet packages on %SAMPLES_SLN%..."
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
-    - echo "Building the %SAMPLES_SLN%..."
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'SampleCode\\GoC.WebTemplate-MVC.Sample\\bin'
+      - 'SampleCode\\GoC.WebTemplate-WebForms.Sample\\bin'
+      - 'packages'
 
-test_job:
+test_components:
   stage: test
-  script:
-    - echo "Running tests..."
-    - '"%xUNIT_PATH%" %TEST_FOLDER%\\CoreTest.dll"'
-  dependencies:
+  except:
+    - tags
+  dependencies: 
     - build_default_sln
+  script:
+    - '"%xUNIT_PATH%" %TEST_FOLDER%\\CoreTest.dll"'
+
+package_default_sln:
+  stage: package
+  dependencies: 
+    - version_default_sln
+    - build_default_sln
+  only:
+    - tags
+    - master
+  script:
+    - powershell.exe "%PACKAGE_PS1%" "Components\\WebTemplateCore" "GoC.WebTemplate-Components"
+    - '"%NUGET_PATH%" pack "Components\\WebTemplateCore\\GoC.WebTemplate-Components.nuspec"'    
+    - powershell.exe "%PACKAGE_PS1%" "Applications\\GoC.WebTemplate" "GoC.WebTemplate-WebForms"
+    - '"%NUGET_PATH%" pack "Applications\\GoC.WebTemplate\\GoC.WebTemplate-WebForms.nuspec"'     
+    - powershell.exe "%PACKAGE_PS1%" "Applications\\GoC.WebTemplateMVC" "GoC.WebTemplate-MVC"
+    - '"%NUGET_PATH%" pack "Applications\\GoC.WebTemplateMVC\\GoC.WebTemplate-MVC.nuspec"'
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - 'GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg'
+    
+package_sample_sln:
+  stage: package
+  dependencies: 
+    - version_sample_sln
+    - build_sample_sln
+  only:
+    - tags
+    - master
+  script:
+    - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-WebForms.Sample" "GoC.WebTemplate-WebForms.Sample"
+    - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-WebForms.Sample\\GoC.WebTemplate-WebForms.Sample.nuspec"'  
+    - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-MVC.Sample" "GoC.WebTemplate-MVC.Sample"
+    - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-MVC.Sample\\GoC.WebTemplate-MVC.Sample.nuspec"' 
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+ 
+deploy_default_sln:
+  stage: deploy
+  dependencies: 
+    - package_default_sln
+  only:
+    - tags
+  script:
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+
+deploy_sample_sln:
+  stage: deploy
+  dependencies: 
+    - package_sample_sln
+  only:
+    - tags
+  script:
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
