@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GoC")]
 [assembly: AssemblyProduct("GoC.WebTemplate-Components")]
-[assembly: AssemblyCopyright("Copyright © GoC 2018")]
+[assembly: AssemblyCopyright("Copyright GoC 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 //Must be CLSCompliant if it's meant to be used by vb projects 
@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.29.0")]
+[assembly: AssemblyVersion("1.29.*")]
+[assembly: AssemblyInformationalVersion("1.29.0")]
 
