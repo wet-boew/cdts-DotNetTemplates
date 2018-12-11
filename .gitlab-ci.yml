@@ -24,7 +24,6 @@ version_default_sln:
   allow_failure: true
   only:
     - tags
-    - master
   script:    
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Components\WebTemplateCore\Properties\AssemblyInfo.cs"
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs"
@@ -41,7 +40,6 @@ version_sample_sln:
   allow_failure: true
   only:
     - tags
-    - master
   script:    
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs"
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs"
@@ -94,7 +92,6 @@ package_default_sln:
     - build_default_sln
   only:
     - tags
-    - master
   script:
     - powershell.exe "%PACKAGE_PS1%" "Components\\WebTemplateCore" "GoC.WebTemplate-Components"
     - '"%NUGET_PATH%" pack "Components\\WebTemplateCore\\GoC.WebTemplate-Components.nuspec"'    
@@ -116,7 +113,6 @@ package_sample_sln:
     - build_sample_sln
   only:
     - tags
-    - master
   script:
     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-WebForms.Sample" "GoC.WebTemplate-WebForms.Sample"
     - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-WebForms.Sample\\GoC.WebTemplate-WebForms.Sample.nuspec"'  
