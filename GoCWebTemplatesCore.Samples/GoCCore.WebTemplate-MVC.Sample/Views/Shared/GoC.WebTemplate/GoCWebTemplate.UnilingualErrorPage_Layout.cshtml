@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<!--[if lt IE 9]><html class="no-js lt-ie9" lang="@ViewBag.WebTemplateCore.TwoLetterCultureLanguage" dir="ltr"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="@ViewBag.WebTemplateCore.TwoLetterCultureLanguage" dir="ltr">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+        wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+    <title>@ViewBag.WebTemplateCore.RenderHeaderTitle()</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <!-- Load closure template scripts -->
+    <script type="text/javascript" src="@string.Concat(ViewBag.WebTemplateCore.CDNPath, "soyutils.js")"></script>
+    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", ViewBag.WebTemplateCore.CDNPath, ViewBag.WebTemplateCore.TwoLetterCultureLanguage)"></script>
+    <noscript>
+        <!-- Write closure fall-back static file -->
+        @ViewBag.WebTemplateCore.LoadStaticFile("refTop.html")
+    </noscript>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+        document.write(wet.builder.refTop(@ViewBag.WebTemplateCore.RenderRefTop(isApplication : false)));
+    </script>
+    @ViewBag.WebTemplateCore.RenderHtmlHeaderElements()
+    @RenderSection("CustomStyles", required: false)
+    <!-- GoC.WebTemplate Version MVC @ViewBag.WebTemplateVersion -->
+    <!-- GoC.WebTemplate.Core Version @ViewBag.WebTemplateCore.AssemblyVersion -->
+</head>
+<body vocab="http://schema.org/" typeof="WebPage">
+    @ViewBag.WebTemplateCore.RenderSessionTimeoutControl()
+    <div id="def-top">
+        <!-- Write closure fall-back static file -->
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("top-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+    </div>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+        var defTop = document.getElementById("def-top");
+        defTop.outerHTML = wet.builder.top(@ViewBag.WebTemplateCore.RenderTop());
+    </script>
+    <main role="main" property="mainContentOfPage" class="container">
+        <!-- the main content -->
+        @RenderBody()
+        <!-- end main content -->
+        <div id="def-preFooter">
+            <!-- Write closure fall-back static file -->
+            @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("preFooter-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+        </div>
+        <!-- Write closure template -->
+        <script type="text/javascript">
+            var defPreFooter = document.getElementById("def-preFooter");
+            defPreFooter.outerHTML = wet.builder.preFooter(@ViewBag.WebTemplateCore.RenderUnilingualPreFooter());
+        </script>
+    </main>
+    <div id="def-footer">
+        <!-- Write closure fall-back static file -->
+        @ViewBag.WebTemplateCore.LoadStaticFile(string.Concat("footer-", ViewBag.WebTemplateCore.TwoLetterCultureLanguage, ".html"))
+    </div>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+    var defFooter = document.getElementById("def-footer");
+        defFooter.outerHTML = wet.builder.footer(@ViewBag.WebTemplateCore.RenderFooter());
+    </script>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+        document.write(wet.builder.refFooter(@ViewBag.WebTemplateCore.RenderRefFooter()));
+    </script>
+    @ViewBag.WebTemplateCore.RenderHtmlBodyElements()
+    @RenderSection("CustomScripts", required: false)
+</body>
+</html>
