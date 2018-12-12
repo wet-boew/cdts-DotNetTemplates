@@ -1,5 +1,5 @@
 variables:
-  TEST_FOLDER: 'CoreTest\\bin\\Release'  
+  TEST_PROJ_DLL: 'CoreTest\\bin\\Release\\CoreTest.dll'  
   xUNIT_PATH: 'packages\\xunit.runner.console.2.4.1\\tools\\net461\\xunit.console.exe'
   VERSION_PS1: 'Builds\\version.ps1'
   PACKAGE_PS1: 'Builds\\package.ps1'
@@ -58,23 +58,17 @@ build_default_sln:
   artifacts:
     expire_in: 1 hour
     paths:
-      - 'Applications\\GoC.WebTemplate\\bin'
-      - 'Applications\\GoC.WebTemplateMVC\\bin'
-      - 'Components\\WebTemplateCore\\bin\\Release'
-      - 'CoreTest\\bin\\Release'
-      - 'packages'
+      - '%TEST_PROJ_DLL%' #for test
+      - '%xUNIT_PATH%' #for test
+      - 'Applications\\GoC.WebTemplate\\bin\\GoC.WebTemplate.WebForms.dll' #for package
+      - 'Applications\\GoC.WebTemplateMVC\\bin\\GoC.WebTemplate.MVC.dll' #for package
+      - 'Components\\WebTemplateCore\\bin\\Release\\GoC.WebTemplate.Components.dll' #for package
 
 build_sample_sln:
   stage: build
   script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - 'SampleCode\\GoC.WebTemplate-MVC.Sample\\bin'
-      - 'SampleCode\\GoC.WebTemplate-WebForms.Sample\\bin'
-      - 'packages'
 
 test_components:
   stage: test
@@ -83,7 +77,7 @@ test_components:
   dependencies: 
     - build_default_sln
   script:
-    - '"%xUNIT_PATH%" %TEST_FOLDER%\\CoreTest.dll"'
+    - '"%xUNIT_PATH%" "%TEST_PROJ_DLL%"'
 
 package_default_sln:
   stage: package
