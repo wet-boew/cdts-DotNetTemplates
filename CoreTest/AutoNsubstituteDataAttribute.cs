@@ -37,8 +37,8 @@ namespace CoreTest
             //We want custom search to start out as default(string)
                                           .Without(p => p.CustomSearch)
                                           //The Site Menu URL should be null
-                                          .With(p => p.CustomSiteMenuURL, null)
-                                          .With(p => p.MenuLinks, null)
+                                          .Without(p => p.CustomSiteMenuURL)
+                                          .Without(p => p.MenuLinks)
             //We also create want to ignore some of the lists as they should start out empty.
             //Normally you don't need to ignore so much but this object breaks normal .Net conventions by using the constructor
             //to set properties, instead of just using the properties
@@ -51,7 +51,7 @@ namespace CoreTest
             //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
                                           .With(p => p.Environment, "ITEM1")
             //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false
-                                          .With(p => p.UseHTTPS, null)
+                                          .Without(p => p.UseHTTPS)
             //Default set ShowPostContent to false so Autofixture doesn't alternate the value to true in RenderPreFooterTest, 
             //and RenderPreFooterWithNullsTest.
                                           .With(p => p.ShowPostContent, false)
