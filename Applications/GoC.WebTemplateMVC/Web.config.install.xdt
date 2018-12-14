@@ -3,7 +3,8 @@
 
    <configSections xdt:Transform="InsertBefore(/configuration/*[1])" />
    <configSections xdt:Locator="XPath(/configuration/configSections[last()])">
-	<section name="GoC.WebTemplate" type="GoC.WebTemplate.Components.Configurations" xdt:Transform="InsertIfMissing" />
+     <section name="GoC.WebTemplate" xdt:Locator="Match(name)" xdt:Transform="Remove" />
+	   <section name="GoC.WebTemplate" type="GoC.WebTemplate.Components.Configurations" xdt:Transform="InsertIfMissing" />
    </configSections>
    <configSections xdt:Transform="RemoveAll" xdt:Locator="Condition(count(*)=0)" />
    
