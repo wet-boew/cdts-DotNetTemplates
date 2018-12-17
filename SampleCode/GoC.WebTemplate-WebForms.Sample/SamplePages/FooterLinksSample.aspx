@@ -31,22 +31,22 @@
 <h2>Custom Footer Links</h2>
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
-    public ActionResult FooterLinksSample()
-    {
-        //Contact Links
-        WebTemplateCore.ContactLinks = new List&lt;Link&gt; { new Link { Href = "http://travel.gc.ca/" } };
+    protected void Page_Load(object sender, EventArgs e)
+        {
+            //Contact Links
+            WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
 
-        //The code snippet below displays an example of multiple links that have text and href being updated. 
-        /*
-            WebTemplateCore.ContactLinks = new List&lt;Link&gt; 
-            { 
-                new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
-                new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 
-            };
-        */    
-        //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
-        return View();
-    }
+            //The code snippet below displays an example of multiple links that have text and href being updated. 
+            /*
+                WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link> 
+                { 
+                    new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
+                    new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 
+                };
+            */
+
+            //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
+        }
 </pre>
 </div>
     <!-- #include virtual="SamplesNavigation.html" -->
