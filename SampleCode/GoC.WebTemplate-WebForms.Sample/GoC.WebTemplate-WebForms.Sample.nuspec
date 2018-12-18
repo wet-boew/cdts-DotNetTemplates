@@ -15,6 +15,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="SamplePages\**\*.*" target="Content\Pages" />
+    <file src="SamplePages\**\*.*" target="Content\SamplePages" />
   </files>
 </package>
