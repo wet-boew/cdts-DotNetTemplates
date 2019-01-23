@@ -118,23 +118,19 @@ package_sample_sln:
       - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
       - 'GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
  
-deploy_default_sln:
+deploy:
   stage: deploy
   dependencies: 
     - package_default_sln
-  only:
-    - tags
-  script:
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
-
-deploy_sample_sln:
-  stage: deploy
-  dependencies: 
     - package_sample_sln
+  environment:
+    name: Artifactory
+    url: '%ARTIFACTORY_DEPLOY%'
   only:
     - tags
   script:
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
