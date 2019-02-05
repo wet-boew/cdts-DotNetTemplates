@@ -13,14 +13,13 @@ variables:
   # - RUNNER_USER_CRED
   
 stages:
-  - version
+  - prepare
   - build
   - test
-  - package
   - deploy
 
-version_default_sln:
-  stage: version
+version:
+  stage: prepare
   allow_failure: true
   only:
     - tags
@@ -28,29 +27,18 @@ version_default_sln:
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Components\WebTemplateCore\Properties\AssemblyInfo.cs"
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs"
     - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplateMVC\Properties\AssemblyInfo.cs"
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs"
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs"
   artifacts:
     expire_in: 1 hour
     paths:
       - 'Components\WebTemplateCore\Properties\AssemblyInfo.cs'
       - 'Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs'
       - 'Applications\GoC.WebTemplateMVC\Properties\AssemblyInfo.cs'
-
-version_sample_sln:
-  stage: version
-  allow_failure: true
-  only:
-    - tags
-  script:    
-    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs"
-    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs"
-  artifacts:
-    expire_in: 1 hour
-    paths:
       - 'SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs'
       - 'SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs'
 
-
-build_default_sln:
+build_default:
   stage: build
   script:
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
@@ -64,7 +52,7 @@ build_default_sln:
       - 'Applications\\GoC.WebTemplateMVC\\bin\\GoC.WebTemplate.MVC.dll' #for package
       - 'Components\\WebTemplateCore\\bin\\Release\\GoC.WebTemplate.Components.dll' #for package
 
-build_sample_sln:
+build_sample:
   stage: build
   script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
@@ -72,18 +60,17 @@ build_sample_sln:
 
 test_components:
   stage: test
-  except:
-    - tags
   dependencies: 
     - build_default_sln
   script:
     - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_PATH%\\CoreTest.dll"'
 
-package_default_sln:
-  stage: package
+package:
+  stage: deploy
   dependencies: 
-    - version_default_sln
+    - version
     - build_default_sln
+    - build_sample_sln
   only:
     - tags
   script:
@@ -93,21 +80,6 @@ package_default_sln:
     - '"%NUGET_PATH%" pack "Applications\\GoC.WebTemplate\\GoC.WebTemplate-WebForms.nuspec"'     
     - powershell.exe "%PACKAGE_PS1%" "Applications\\GoC.WebTemplateMVC" "GoC.WebTemplate-MVC"
     - '"%NUGET_PATH%" pack "Applications\\GoC.WebTemplateMVC\\GoC.WebTemplate-MVC.nuspec"'
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg'
-      - 'GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg'
-      - 'GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg'
-    
-package_sample_sln:
-  stage: package
-  dependencies: 
-    - version_sample_sln
-    - build_sample_sln
-  only:
-    - tags
-  script:
     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-WebForms.Sample" "GoC.WebTemplate-WebForms.Sample"
     - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-WebForms.Sample\\GoC.WebTemplate-WebForms.Sample.nuspec"'  
     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-MVC.Sample" "GoC.WebTemplate-MVC.Sample"
@@ -115,22 +87,24 @@ package_sample_sln:
   artifacts:
     expire_in: 1 day
     paths:
+      - 'GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg'
       - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
       - 'GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
  
 deploy:
   stage: deploy
   dependencies: 
-    - package_default_sln
-    - package_sample_sln
+    - package
   environment:
     name: Artifactory
     url: '%ARTIFACTORY_DEPLOY%'
   only:
     - tags
   script:
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
+    - '%CURL_PATH% -u %RUNNER_USER_CRED% -T GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg %ARTIFACTORY_DEPLOY% -k'
