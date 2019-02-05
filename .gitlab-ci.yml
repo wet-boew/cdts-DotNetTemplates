@@ -16,6 +16,7 @@ stages:
   - prepare
   - build
   - test
+  - package
   - deploy
 
 version:
@@ -66,7 +67,7 @@ test_components:
     - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_PATH%\\CoreTest.dll"'
 
 package:
-  stage: build
+  stage: package
   dependencies: 
     - version
     - build_default
