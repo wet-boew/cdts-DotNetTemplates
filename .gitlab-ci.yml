@@ -61,7 +61,7 @@ build_sample:
 test_components:
   stage: test
   dependencies: 
-    - build_default_sln
+    - build_default
   script:
     - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_PATH%\\CoreTest.dll"'
 
@@ -69,8 +69,8 @@ package:
   stage: deploy
   dependencies: 
     - version
-    - build_default_sln
-    - build_sample_sln
+    - build_default
+    - build_sample
   only:
     - tags
   script:
