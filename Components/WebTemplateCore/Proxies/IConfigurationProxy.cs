@@ -47,7 +47,14 @@ namespace GoC.WebTemplate.Components.Proxies
         /// <summary>
         /// URL used to redirect users when they click the feedback link
         /// </summary>
-        string FeedbackLinkurl { get;  }
+        string FeedbackLinkUrl { get; }
+
+        /// <summary>
+        /// URL used to redirect users when they click the feedback link
+        /// This link is specific for french if the user was already in the french culture
+        /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
+        /// </summary>
+        string FeedbackLinkUrlFr { get; }
 
         /// <summary>
         /// ShowSearch
