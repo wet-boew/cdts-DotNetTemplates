@@ -48,12 +48,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.29.0\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.30.6996.23817, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.30.0-rc1\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate.MVC, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.29.0\Lib\Net45\GoC.WebTemplate.MVC.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.MVC, Version=1.30.6996.23817, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.30.0-rc1\lib\Net45\GoC.WebTemplate.MVC.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
