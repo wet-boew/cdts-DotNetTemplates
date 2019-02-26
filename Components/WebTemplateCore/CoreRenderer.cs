@@ -116,7 +116,7 @@ namespace GoC.WebTemplate.Components
                 ShowFeedback = new FeedbackLink
                 {
                     Show = _core.ShowFeedbackLink,
-                    URL = _core.FeedbackLinkURL
+                    URL = _core.TwoLetterCultureLanguage.StartsWith(Constants.FRENCH_ACCRONYM) && !string.IsNullOrEmpty(_core.FeedbackLinkUrlFr) ? _core.FeedbackLinkUrlFr : _core.FeedbackLinkUrl
                 },
                 ShowShare = new ShareList
                 {

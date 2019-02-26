@@ -21,7 +21,8 @@ namespace GoC.WebTemplate.Components.Proxies
         public bool ShowFeedbackLink => Configurations.Settings.ShowFeedbackLink;
         public bool ShowPreContent => Configurations.Settings.ShowPreContent;
         public bool ShowPostContent => Configurations.Settings.ShowPostContent;
-        public string FeedbackLinkurl => Configurations.Settings.FeedbackLinkurl;
+        public string FeedbackLinkUrl => Configurations.Settings.FeedbackLinkUrl;
+        public string FeedbackLinkUrlFr => Configurations.Settings.FeedbackLinkUrlFr;
         public bool ShowShearch => Configurations.Settings.ShowShearch;
         public bool ShowSharePageLink => Configurations.Settings.ShowSharePageLink;
         public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
