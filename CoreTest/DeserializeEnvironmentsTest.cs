@@ -27,7 +27,8 @@ namespace CoreTest
                 CDN = "prod",
                 IsVersionRNCombined = true,
                 IsEncryptionModifiable = false,
-                AppendToTitle = " - Canada.ca"
+                AppendToTitle = " - Canada.ca",
+                FooterSectionLimit = 0
             });
         }
 
