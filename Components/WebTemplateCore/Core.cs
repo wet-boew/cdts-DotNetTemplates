@@ -211,15 +211,7 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public DateTime DateModified { get; set; }
-
-        /// <summary>
-        /// Determines if the features of the footer are to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        [Obsolete]
-        public bool ShowFeatures { get; set; }
-
+        
         /// <summary>
         /// URL to be used for the feedback link
         /// Set by application via web.config
@@ -385,8 +377,6 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public string WebTemplateVersion { get; set; }
 
-
-
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
         /// </summary>
@@ -403,8 +393,6 @@ namespace GoC.WebTemplate.Components
         /// Set by application via web.config or programmatically
         /// </summary>
         public bool LoadJQueryFromGoogle { get; set; }
-
-
 
         /// <summary>
         /// Allows for a custom search to be used in the application, you must contact CDTS to have one created.
