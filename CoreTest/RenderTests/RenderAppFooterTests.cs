@@ -174,12 +174,12 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void CustomFooterLinksCantBeUsedWithLimitOne([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+        public void CustomFooterLinksCantBeUsedWithLimit([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "TEST_LIMIT_1",
-                FooterSectionLimit = 1
+                Name = "TEST_LIMIT_3",
+                FooterSectionLimit = 3
             };
             environments[sut.Environment] = currentEnv;
             sut.CustomFooterLinks = new List<FooterLink> { new FooterLink { Href = "href", Text = "text" } };
@@ -224,22 +224,6 @@ namespace CoreTest.RenderTests
 
             Action act = () => sut.RenderAppFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage($"The maximum FooterSections allowed for this environment is {currentEnv.FooterSectionLimit}");
-        }
-        
-        [Theory, AutoNSubstituteData]
-        public void FooterSectionsRendersOneLimitOne([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
-        {
-            var currentEnv = new CDTSEnvironment
-            {
-                Name = "TEST_LIMIT_1",
-                FooterSectionLimit = 1
-            };
-            environments[sut.Environment] = currentEnv;
-            sut.FooterSections = GetTestableFooterSectionList();
-            sut.FooterSections.RemoveAt(0); //remove 1 so it renders
-
-            var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("\"footerSections\":[{\"sectionName\":\"CustomFooterSectionName2\",\"CustomFooterLinks\":[{\"newWindow\":false,\"href\":\"href2\",\"text\":\"text2\"}]}]");
         }
 
         [Theory, AutoNSubstituteData]

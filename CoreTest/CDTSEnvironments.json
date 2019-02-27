@@ -55,7 +55,7 @@
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
       "appendToTitle": "",
-      "footerSectionLimit": 1
+      "footerSectionLimit": 3
     },
     {
       "name": "ESDC_GCINTRANET_SADE",
@@ -88,7 +88,7 @@
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
       "appendToTitle": "",
-      "footerSectionLimit": 1
+      "footerSectionLimit": 3
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_QA",
@@ -99,7 +99,7 @@
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
       "appendToTitle": "",
-      "footerSectionLimit": 1
+      "footerSectionLimit": 3
     },
     {
       "name": "ESDC_GCWEB_SADE",
