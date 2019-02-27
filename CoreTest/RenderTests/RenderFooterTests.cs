@@ -238,7 +238,7 @@ namespace CoreTest.RenderTests
             sut.TermsConditionsLinkURL = "thisIsMyFunTemrsLink";
 
             var result = sut.RenderTransactionalFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"subTheme\":\"\",\"showFooter\":false,\"contactLinks\":[{\"href\":\"www.fakehref.com\",\"acronym\":\"accrrrnm\"}],\"privacyLink\":\"dummyprivacylinkurl\",\"termsLink\":\"thisIsMyFunTemrsLink\",\"showFeatures\":false}");
+            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"subTheme\":\"\",\"showFooter\":false,\"contactLinks\":[{\"href\":\"www.fakehref.com\",\"acronym\":\"accrrrnm\"}],\"privacyLink\":\"dummyprivacylinkurl\",\"termsLink\":\"thisIsMyFunTemrsLink\"}");
         }
     }
 }

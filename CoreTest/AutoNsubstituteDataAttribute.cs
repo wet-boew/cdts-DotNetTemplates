@@ -60,8 +60,8 @@ namespace CoreTest
                                           .With(p => p.ShowPostContent, false)
             //Default set _core.ShowSharePageLink to true so Autofixture doesn't alternate the value to true in RenderPreFooterTest, 
             //and RenderPreFooterWithNullsTest.
-                                          .With(p => p.ShowSharePageLink, true));
-
+                                          .With(p => p.ShowSharePageLink, true)
+                                          .With(p => p.LoadJQueryFromGoogle, false));
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
             fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));
