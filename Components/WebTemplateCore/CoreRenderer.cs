@@ -32,7 +32,8 @@ namespace GoC.WebTemplate.Components
                 PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
                 ContactLink = _core.Builder.BuildContactLinks(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
-                FooterSections = _core.Builder.BuildCustomFooterLinks
+                FooterLinks = _core.Builder.BuildCustomFooterLinks,
+                FooterSections = _core.Builder.BuildCustomFooterSections
             });
         }
 

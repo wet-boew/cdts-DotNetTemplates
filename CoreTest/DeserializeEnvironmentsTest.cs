@@ -43,7 +43,8 @@ namespace CoreTest
                 CDN = "prod",
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = false,
-                AppendToTitle = ""
+                AppendToTitle = "",
+                FooterSectionLimit = 3
             });
         }
     }

@@ -12,7 +12,8 @@
       "cdn": "prod",
       "isVersionRnCombined": true,
       "isEncryptionModifiable": false,
-      "appendToTitle": " - Canada.ca"
+      "appendToTitle": " - Canada.ca",
+      "footerSectionLimit": 0
     },
     {
       "name": "PROD_SSL",
@@ -21,7 +22,8 @@
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3
     },
     {
       "name": "PROD_SSL_ECCCSUB",
@@ -31,7 +33,8 @@
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3
     },
     {
       "name": "PROD_UNSECURE",
@@ -40,7 +43,8 @@
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3
     },
     {
       "name": "ESDC_PROD",
@@ -50,7 +54,8 @@
       "cdn": "esdcprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 1
     },
     {
       "name": "ESDC_GCINTRANET_SADE",
@@ -60,7 +65,8 @@
       "cdn": "esdcnonprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3
     },
     {
       "name": "ESDC_GCINTRANET_QA",
@@ -70,7 +76,8 @@
       "cdn": "esdcqat",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_SADE",
@@ -80,7 +87,8 @@
       "cdn": "esdcnonprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 1
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_QA",
@@ -90,7 +98,8 @@
       "cdn": "esdcqat",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 1
     },
     {
       "name": "ESDC_GCWEB_SADE",
@@ -100,7 +109,8 @@
       "cdn": "esdcnonprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": " - Canada.ca"
+      "appendToTitle": " - Canada.ca",
+      "footerSectionLimit": 0
     },
     {
       "name": "ESDC_GCWEB_QA",
@@ -110,7 +120,8 @@
       "cdn": "esdcqat",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": " - Canada.ca"
+      "appendToTitle": " - Canada.ca",
+      "footerSectionLimit": 0
     }
   ]
 }
