@@ -1,7 +1,7 @@
 ﻿// ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components
 {
-    public class FooterLink : Link
+    public class FooterLink : Link, IFooterSection
     {
         public FooterLink()
         {

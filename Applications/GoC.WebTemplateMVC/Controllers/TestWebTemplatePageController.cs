@@ -163,7 +163,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.ShowPostContent = false;
             return View("HelloWorld");
         }
-        public ActionResult CustomFooter()
+        public ActionResult CustomFooterGcWeb()
         {
             WebTemplateCore.ApplicationTitle.Text = "Application Name";
             WebTemplateCore.Breadcrumbs = null;
@@ -185,6 +185,48 @@ namespace GoC.WebTemplate.MVC.Controllers
             return View("HelloWorld");
         }
 
+        public ActionResult CustomFooterGcIntranet()
+        {
+            WebTemplateCore.ApplicationTitle.Text = "Application Name";
+            WebTemplateCore.Breadcrumbs = null;
+            WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
+            WebTemplateCore.ShowLanguageLink = true;
+            WebTemplateCore.ShowPostContent = false;
+            WebTemplateCore.FooterSections = new List<FooterSection>
+            {
+                new FooterSection
+                {
+                    SectionName = "Section 1 Custom",
+                    CustomFooterLinks = new List<FooterLink>
+                    {
+                        new FooterLink {Href= "google.ca", Text= "Link 1"},
+                        new FooterLink {Href= "#", Text= "Link 2"},
+                        new FooterLink {Href= "google.ca", Text= "Link 3", NewWindow= true},
+                    }
+                },
+                new FooterSection
+                {
+                    SectionName = "Section 2 Custom",
+                    CustomFooterLinks = new List<FooterLink>
+                    {
+                        new FooterLink {Href= "#", Text= "Link 4"},
+                        new FooterLink {Href= "#", Text= "Link 5"},
+                        new FooterLink {Href= "#", Text= "Link 6"},
+                    }
+                },
+                new FooterSection
+                {
+                    SectionName = "Section 3 Custom",
+                    CustomFooterLinks = new List<FooterLink>
+                    {
+                        new FooterLink {Href= "#", Text= "Link 7"},
+                        new FooterLink {Href= "#", Text= "Link 8"},
+                        new FooterLink {Href= "#", Text= "Link 9"},
+                    }
+                }
+            };
+            return View("HelloWorld");
+        }
 
         public ActionResult TransactionalFooterCustomLinks()
         {

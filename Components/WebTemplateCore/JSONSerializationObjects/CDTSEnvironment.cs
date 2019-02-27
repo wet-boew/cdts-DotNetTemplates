@@ -11,5 +11,6 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         public string LocalPath { get; set; }
         public string Theme { get; set; }
         public string AppendToTitle { get; set; }
+        public int FooterSectionLimit { get; set; }
     }
 }

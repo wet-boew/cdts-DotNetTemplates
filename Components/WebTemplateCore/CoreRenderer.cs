@@ -23,7 +23,8 @@ namespace GoC.WebTemplate.Components
             {
                 throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
             }
-            
+
+
             return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = _core.CDNEnvironment,
@@ -32,7 +33,7 @@ namespace GoC.WebTemplate.Components
                 PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
                 ContactLink = _core.Builder.BuildContactLinks(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
-                FooterSections = _core.Builder.BuildCustomFooterLinks
+                FooterSections = _core.Builder.BuildCustomFooterSections
             });
         }
 

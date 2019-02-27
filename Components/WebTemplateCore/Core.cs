@@ -468,9 +468,16 @@ namespace GoC.WebTemplate.Components
         /// <summary>
         /// Custom links if null uses standard links if not null overrides the existing footer links
         /// Set by application programmatically
-        /// Only available in the Application Template
+        /// Only available in the Application Template in GCWeb enviornment
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; } = new List<FooterLink>();
+
+        /// <summary>
+        /// Custom links if null uses standard links if not null overrides the existing footer links in sections with headers
+        /// Set by application programmatically
+        /// Only available in the Application Template when not in GCWEB enviornment
+        /// </summary>
+        public List<FooterSection> FooterSections { get; set; } = new List<FooterSection>();
 
         /// <summary>
         /// Custom Links for the top Menu added for MSCAs (Currently) use only. 
