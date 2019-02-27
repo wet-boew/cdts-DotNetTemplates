@@ -62,6 +62,7 @@
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
     <Compile Include="JSONSerializationObjects\AppTop.cs" />
     <Compile Include="JSONSerializationObjects\FooterSection.cs" />
+    <Compile Include="JSONSerializationObjects\IFooterSection.cs" />
     <Compile Include="JSONSerializationObjects\MenuLink.cs" />
     <Compile Include="JSONSerializationObjects\ShareList.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />

@@ -75,48 +75,41 @@ namespace GoC.WebTemplate.Components
             }).ToList();
         }
 
-        internal List<FooterLink> BuildCustomFooterLinks
+        internal List<IFooterSection> BuildCustomFooterSections
         {
             get
             {
-                //check for valid usage
-                if (!_core.CustomFooterLinks.Any())
-                    return null;
+                if (!_core.FooterSections.Any() && !_core.CustomFooterLinks.Any()) return null;
 
                 if (_core.CurrentEnvironment.FooterSectionLimit > 0)
-                    throw new InvalidOperationException(
-                        "The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
+                { // use FooterSections
+                    if (!_core.FooterSections.Any())
+                        throw new InvalidOperationException(
+                            "The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
 
-                return _core.CustomFooterLinks?.Select(fl => new FooterLink
-                {
-                    Href = fl.Href,
-                    NewWindow = fl.NewWindow,
-                    Text = GetStringForJson(fl.Text)
-                }).ToList();
-            }
-        }
+                    if (_core.FooterSections.Count > _core.CurrentEnvironment.FooterSectionLimit)
+                        throw new InvalidOperationException(
+                            $"The maximum FooterSections allowed for this environment is {_core.CurrentEnvironment.FooterSectionLimit}");
 
-        internal List<FooterSection> BuildCustomFooterSections
-        {
-            get
-            {
-                //check for valid usage
-                if (!_core.FooterSections.Any())
-                    return null;
+                    _core.FooterSections.ForEach(fs => fs.CustomFooterLinks.ForEach(fl => fl.Text = GetStringForJson(fl.Text)));
 
-                if (_core.CurrentEnvironment.FooterSectionLimit <= 0)
-                    throw new InvalidOperationException(
-                        "The FooterSections cannot be used in this enviornment, please use the CustomFooterLinks");
+                    return new List<IFooterSection>(_core.FooterSections);
+                }
+                else
+                { // use CustomFooterLinks
 
-                if (_core.FooterSections.Count > _core.CurrentEnvironment.FooterSectionLimit)
-                    throw new InvalidOperationException(
-                        $"The maximum FooterSections allowed for this environment is {_core.CurrentEnvironment.FooterSectionLimit}");
+                    if (!_core.CustomFooterLinks.Any())
+                        throw new InvalidOperationException(
+                            "The FooterSections cannot be used in this enviornment, please use the CustomFooterLinks");
 
 
-                //format text for json
-                _core.FooterSections.ForEach(fs => fs.CustomFooterLinks.ForEach(fl => fl.Text = GetStringForJson(fl.Text)));
-
-                return _core.FooterSections;
+                    return new List<IFooterSection>(_core.CustomFooterLinks.Select(fl => new FooterLink
+                    {
+                        Href = fl.Href,
+                        NewWindow = fl.NewWindow,
+                        Text = GetStringForJson(fl.Text)
+                    }));
+                }
             }
         }
 

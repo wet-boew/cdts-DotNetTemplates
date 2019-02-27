@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 namespace GoC.WebTemplate.Components
 {
     [Serializable]
-    public class FooterSection
+    public class FooterSection : IFooterSection
     {
         public FooterSection(List<FooterLink> customFooterLinks)
         {

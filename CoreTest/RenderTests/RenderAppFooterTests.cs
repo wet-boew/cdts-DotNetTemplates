@@ -193,7 +193,7 @@ namespace CoreTest.RenderTests
         {
             sut.CustomFooterLinks = new List<FooterLink> { new FooterLink { Href = "href", Text = "text" } };
             var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("\"footerLinks\":[{\"newWindow\":false,\"href\":\"href\",\"text\":\"text\"}]");
+            json.ToString().Should().Contain("\"footerSections\":[{\"newWindow\":false,\"href\":\"href\",\"text\":\"text\"}]");
         }
 
         [Theory, AutoNSubstituteData]
