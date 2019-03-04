@@ -106,13 +106,30 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             //Contact Links
             WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
 
-            //The code snippet below displays an example of multiple links that have text and href being updated.
+
+            //Footer Sections - Application, GCIntranet
             /*
-                WebTemplateCore.ContactLinks = new List<Link> 
-                { 
-                    new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
-                    new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 
-                };
+            WebTemplateCore.FooterSections = new List<FooterSection>
+            {
+                new FooterSection
+                {
+                    SectionName = "Footer Section 1",
+                    CustomFooterLinks = new List<FooterLink>
+                    {
+                        new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+                        new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+                    }
+                }
+            };
+            */
+
+            //Custom Footer Links - Application, GCWeb
+            /*
+            WebTemplateCore.CustomFooterLinks = new List<FooterLink>
+            {
+                new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+                new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+            };
             */
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)

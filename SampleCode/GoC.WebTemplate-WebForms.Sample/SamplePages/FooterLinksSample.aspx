@@ -12,7 +12,7 @@
     If you have permission to do so then follow the instructions for the "Application templates" in the menu on the right.</p>
 
 <h2>Contact Link</h2>
-<p>The "Contact Us" link located at the bottom of the page can be customized by populating the <code class="wb-prettify">ContactLinks</code>.
+<p>The "Contact Us" link located at the bottom of the page can be customized by populating the <code class="wb-prettify">ContactLinks</code>.</p>
 <p>Set programmatically via the <code class="wb-prettify">"ContactLinks"</code> property of the Web Template.</p>
 <p> <code class="wb-prettify">"ContactLinks"</code> is a List of Links and each link has three properties:</p>
 <ul>
@@ -27,18 +27,18 @@
 <p>ContactLinks cannot be used in the Application template if the environment is not AKAMAI. You can use a CustomFooter instead.</p>
 <p>The <code class="wb-prettify">"text"</code> of ContactLinks can only be updated in the Intranet (ESDC_Prod) and Extranet (PROD_SSL) environments.</p>
 <p>You can have multiple links if you are not using the Application template and the environment is not "AKAMAI".</p>
-
-<h2>Custom Footer Links</h2>
+    
+    
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
     protected void Page_Load(object sender, EventArgs e)
         {
             //Contact Links
-            WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
+            WebTemplateMaster.WebTemplateCore.ContactLinks = new List&lt;Link> { new Link { Href = "http://travel.gc.ca/" } };
 
             //The code snippet below displays an example of multiple links that have text and href being updated. 
             /*
-                WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link> 
+                WebTemplateMaster.WebTemplateCore.ContactLinks = new List&lt;Link> 
                 { 
                     new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
                     new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 
@@ -47,6 +47,49 @@
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
         }
+</pre>
+</div>
+
+<h2>Custom Footer Links</h2>
+    <p>This property allows you to add multiple links or footerlinks in the Application Template while in the GCWeb theme.</p>
+<div class="wb-prettify all-pre lang-c# linenums">
+<pre>
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        // Can only be used in the Application Template when in the GCWeb Theme
+        WebTemplateMaster.WebTemplateCore.CustomFooterLinks = new List&lt;FooterLink&gt;
+        {
+            new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+            new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+        };
+
+        //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
+    }
+</pre>
+</div>
+    
+    <h2>Footer Sections</h2>
+    <p>This property allows you to group your footer links into sections with a section title. I can only be used in the Application Template while in the GCIntranet theme, and has a max of 3 sections.</p>
+<div class="wb-prettify all-pre lang-c# linenums">
+<pre>
+    protected void Page_Load(object sender, EventArgs e)
+    {
+            //Footer Sections - Application, GCIntranet
+            WebTemplateMaster.WebTemplateCore.FooterSections = new List&lt;FooterSection>
+            {
+                new FooterSection
+                {
+                    SectionName = "Footer Section 1",
+                    CustomFooterLinks = new List&lt;FooterLink>
+                    {
+                        new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+                        new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+                    }
+                }
+            };
+
+        //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
+    }
 </pre>
 </div>
     <!-- #include virtual="SamplesNavigation.html" -->
