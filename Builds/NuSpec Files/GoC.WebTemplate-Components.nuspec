@@ -7,7 +7,7 @@
     <owners>Employment and Social Development Canada - GoC</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Core template for the MVC and ASPX WET Templates that incorporates SCWASI and the CDTS, written in C#</description>
-    <releaseNotes>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates/tags</releaseNotes>
+    <releaseNotes>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates/releases</releaseNotes>
     <copyright>Copyright GoC 2019</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
