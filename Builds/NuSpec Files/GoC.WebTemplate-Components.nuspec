@@ -3,12 +3,12 @@
   <metadata>
     <id>GoC.WebTemplate-Components</id>
     <version>1.28.0</version>
-    <authors>SDS</authors>
-    <owners>SDS</owners>
+    <authors>Solution Design Services</authors>
+    <owners>Employment and Social Development Canada - GoC</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Core template for the MVC and ASPX WET Templates that incorporates SCWASI and the CDTS, written in C#</description>
-    <releaseNotes>Implementation of 1.28.0</releaseNotes>
-    <copyright>Copyright 2018</copyright>
+    <releaseNotes>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates/tags</releaseNotes>
+    <copyright>Copyright GoC 2019</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
       <dependency id="Newtonsoft.Json" version="11.0.2" />
