@@ -40,7 +40,7 @@ namespace GoC.WebTemplate.Components
 
         internal List<Link> BuildContactLinks()
         {
-            if (_core.CurrentEnvironment.Name == "AKAMAI")
+            if (!_core.CurrentEnvironment.CanHaveMultiContactLinks)
             {
                 if (_core.ContactLinks?.Count > 1)
                     throw new InvalidOperationException("Having multiple contact links not allowed in this environment");

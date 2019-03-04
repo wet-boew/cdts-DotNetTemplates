@@ -59,7 +59,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "PROD_SSL"
+                Name = "PROD_SSL",
+                CanHaveMultiContactLinks = true
             };
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
@@ -71,7 +72,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "ESDC_PROD"
+                Name = "ESDC_PROD",
+                CanHaveMultiContactLinks = true
             };
             sut.UseHTTPS = true;
             environments[sut.Environment] = currentEnv;
@@ -97,7 +99,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "PROD_SSL"
+                Name = "PROD_SSL",
+                CanHaveMultiContactLinks = true
             };
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
@@ -109,7 +112,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "ESDC_PROD"
+                Name = "ESDC_PROD",
+                CanHaveMultiContactLinks = true
             };
             sut.UseHTTPS = true;
             environments[sut.Environment] = currentEnv;
@@ -136,7 +140,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "PROD_SSL"
+                Name = "PROD_SSL",
+                CanHaveMultiContactLinks = true
             };
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
@@ -148,7 +153,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "ESDC_PROD"
+                Name = "ESDC_PROD",
+                CanHaveMultiContactLinks = true
             };
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
@@ -173,7 +179,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "PROD_SSL"
+                Name = "PROD_SSL",
+                CanHaveMultiContactLinks = true
             };
             environments[sut.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
@@ -185,7 +192,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "ESDC_PROD"
+                Name = "ESDC_PROD",
+                CanHaveMultiContactLinks = true
             };
             sut.UseHTTPS = true;
             environments[sut.Environment] = currentEnv;
