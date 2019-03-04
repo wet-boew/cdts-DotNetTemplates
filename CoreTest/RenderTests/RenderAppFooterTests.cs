@@ -40,7 +40,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "AKAMAI"
+                Name = "AKAMAI",
+                CanHaveContactLinkInAppTemplate = true
             };
             environments[sut.Environment] = currentEnv;
 
@@ -53,7 +54,8 @@ namespace CoreTest.RenderTests
         {
             var currentEnv = new CDTSEnvironment
             {
-                Name = "AKAMAI"
+                Name = "AKAMAI",                
+                CanHaveContactLinkInAppTemplate = true
             };
             environments[sut.Environment] = currentEnv;
 
@@ -61,18 +63,19 @@ namespace CoreTest.RenderTests
             sut.RenderAppFooter().ToString().Should().Contain("\"contactLink\":[{\"newWindow\":false,\"href\":\"http://testvalue\"}]");
         }
 
-        [Theory, AutoNSubstituteData]
-        public void ContactLinkSetTextAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    [Theory, AutoNSubstituteData]
+    public void ContactLinkSetTextAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
         {
-            var currentEnv = new CDTSEnvironment
-            {
-                Name = "AKAMAI"
-            };
-            environments[sut.Environment] = currentEnv;
-            sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-            Action act = () => sut.RenderAppFooter();
-            act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
-        }
+            Name = "AKAMAI",
+            CanHaveContactLinkInAppTemplate = true
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
+    }
 
         [Theory, AutoNSubstituteData]
         public void ContactLinkSetTextPRODSSL([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
@@ -101,18 +104,19 @@ namespace CoreTest.RenderTests
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
         }
 
-        [Theory, AutoNSubstituteData]
-        public void MultipleContactLinksAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    [Theory, AutoNSubstituteData]
+    public void MultipleContactLinksAKAMAI([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
+    {
+        var currentEnv = new CDTSEnvironment
         {
-            var currentEnv = new CDTSEnvironment
-            {
-                Name = "AKAMAI"
-            };
-            environments[sut.Environment] = currentEnv;
-            sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            Action act = () => sut.RenderAppFooter();
-            act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
-        }
+            Name = "AKAMAI",
+            CanHaveContactLinkInAppTemplate = true
+        };
+        environments[sut.Environment] = currentEnv;
+        sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
+        Action act = () => sut.RenderAppFooter();
+        act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
+    }
 
         [Theory, AutoNSubstituteData]
         public void MultipleContactLinksPRODSSL([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)

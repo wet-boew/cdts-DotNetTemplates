@@ -28,7 +28,9 @@ namespace CoreTest
                 IsVersionRNCombined = true,
                 IsEncryptionModifiable = false,
                 AppendToTitle = " - Canada.ca",
-                FooterSectionLimit = 0
+                FooterSectionLimit = 0,
+                CanHaveMultiContactLinks = false,
+                CanHaveContactLinkInAppTemplate = true
             });
         }
 
@@ -45,7 +47,9 @@ namespace CoreTest
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = false,
                 AppendToTitle = "",
-                FooterSectionLimit = 3
+                FooterSectionLimit = 3,
+                CanHaveMultiContactLinks = true,
+                CanHaveContactLinkInAppTemplate = false
             });
         }
     }
