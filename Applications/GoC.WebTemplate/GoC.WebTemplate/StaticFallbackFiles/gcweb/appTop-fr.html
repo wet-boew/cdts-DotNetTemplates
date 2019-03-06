@@ -1,140 +1,79 @@
-		<ul id="wb-tphp">
-			<li class="wb-slc"><a class="wb-sl" href="#wb-cont">Passer au contenu principal</a></li>
-			<li class="wb-slc visible-sm visible-md visible-lg"><a class="wb-sl" href="#wb-info">Passer à «&#160;À propos de cette application Web&#160;»</a></li>
-			<!-- Si vous avez un pied de page personnalisé, veuillez remplacer la ligne précédente par celle-ci
-			<li class="wb-slc visible-sm visible-md visible-lg"><a class="wb-sl" href="#wb-info">Passer à «&#160;Liens connexes&#160;»</a></li>
+	<ul id="wb-tphp">
+		<li class="wb-slc"><a class="wb-sl" href="#wb-cont">Passer au contenu principal</a></li>
+		<li class="wb-slc visible-sm visible-md visible-lg"><a class="wb-sl" href="#wb-info">Passer à «&#160;À propos de cette application Web&#160;»</a></li>
+		<!-- Si vous avez un pied de page personnalisé, veuillez remplacer la ligne précédente par celle-ci
+		<li class="wb-slc visible-sm visible-md visible-lg"><a class="wb-sl" href="#wb-info">Passer à «&#160;Liens connexes&#160;»</a></li>
+		-->
+		<!-- Si vous avez un menu de section 
+		<li class="wb-slc visible-md visible-lg"><a class="wb-sl" href="#wb-sec">Passer au menu de la section</a></li>
+		-->
+	</ul>
+	<header class="gc-app">
+		<div id="wb-bnr" class="container">
+			<!-- Adjust the default language flip URL or remove this <section>
+			<section id="wb-lng" class="text-right">
+				<h2 class="wb-inv">Sélection de la langue</h2>
+				<ul class="list-inline margin-bottom-none">
+					<li><a lang="en" href="[Default URL for language flip]">English</a></li>
+				</ul>
+			</section>
 			-->
-			<!-- Si vous avez un menu de section 
-			<li class="wb-slc visible-md visible-lg"><a class="wb-sl" href="#wb-sec">Passer au menu de la section</a></li>
-			-->
-		</ul>
-		<header role="banner" class="gc-app">
-			<div id="wb-bnr" class="container">
-				<div class="row">
-					<div class="brand col-xs-9 col-sm-8 col-md-6">
-						<img src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_29/assets/sig-blk-fr.svg" alt="" />
+			<div class="row">
+				<div class="brand col-xs-5 col-md-4">
+					<a href="https://www.canada.ca/en.html">
+						<img src="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v4_0_30/assets/sig-blk-fr.svg" alt="" />
 						<span class="wb-inv"> Gouvernement du Canada / <span lang="en">Government of Canada</span></span>
-					</div>
-					<!-- Adjust the default language flip URL or remove this <section>
-					<section id="wb-lng" class="text-right col-xs-3 col-sm-4 col-md-6">
-						<h2 class="wb-inv">Sélection de la langue</h2>
-						<ul class="list-inline margin-bottom-none">
-							<li><a lang="en" href="[Default URL for language flip]">English</a></li>
-						</ul>
-					</section>
-					-->
-					<!-- Adjust this search section depending on your application search
-					<section id="wb-srch" class="text-right col-xs-3 col-sm-4 col-md-6 visible-md visible-lg">
-						<h2>Recherche</h2>
-						<form action="#" method="post" name="cse-search-box" role="search" class="form-inline">
-							<div class="form-group">
-								<label for="wb-srch-q" class="wb-inv">Recherchez le site Web</label>
-								<input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search" value="" size="27" maxlength="150" placeholder="Recherche">
-							</div>
-							<div class="form-group submit">
-								<button type="submit" id="wb-srch-sub" class="btn btn-primary btn-small" name="wb-srch-sub"><span class="glyphicon-search glyphicon"></span><span class="wb-inv">Recherche</span></button>
-							</div>
-						</form>
-					</section>
-					-->
+					</a>
 				</div>
-			</div>
-			<div class="app-bar">
-				<div class="container">
-					<div class="row">
-						<!-- If you want to use the settings or sign in/out buttons then add col-sm-7 -->
-						<section class="col-xs-12">
-							<!-- Entrez le nom et URL de votre application ci-bas -->
-							<h2 class="wb-inv">Nom de l'application Web</h2>
-							<a class="app-name" href="[URL de l'application]">[Nom de l'application]</a>
-						</section>
-						<!-- Si vous utilisez le bouton de connexion/déconnexion ou les paramètres du compte
-						<nav class="col-sm-5 hidden-xs hidden-print" role="navigation">
-							<h2 class="wb-inv">Menu des paramètres du compte</h2>
-							<ul class="app-list-account list-unstyled">
-								<li><a href="#" class="btn"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Paramètres du compte</a></li>&#32;
-								<li><a href="#" class="btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Fermer la session</a></li>
-								<li><a href="#" class="btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Ouvrir une session</a></li>
-							</ul>
-						</nav>
-						-->
-					</div>
-				</div>
-			</div>
-			<div class="app-bar-mb container visible-xs-block hidden-print">
-				<nav role="navigation">
-					<!-- Ajustez ci-bas selon si vous utilisez un champ de recherche et/ou un menu -->
-					<h2 class="wb-inv">Recherche et menu</h2>
-					<ul class="app-list-main list-unstyled">
-						<li class="wb-mb-links" id="wb-glb-mn"><a href="#mb-pnl" aria-controls="mb-pnl" class="btn overlay-lnk" role="button">Menu</a><h2>Menu</h2></li>
-						<!-- If you have a search add the next list item
-						<li><a href="#app-srch-mb" title="Recherche" aria-controls="app-srch-mb" class="btn overlay-lnk" role="button"><span class="glyphicon-search glyphicon" aria-hidden="true"></span><span class="wb-inv">Recherche</span></a></li>
-						-->
-					</ul>
-					<div id="mb-pnl"></div>
-					<!-- Adjust this search section depending on your application search
-					<section id="app-srch-mb" class="wb-overlay modal-content overlay-def wb-bar-t">
-						<div class="modal-header">
-							<h3 class="modal-title">Recherche</h3>
+				<!-- Adjust this search section depending on your application search
+				<section id="wb-srch" class="col-lg-8 text-right visible-md visible-lg">
+					<h2>Recherche</h2>
+					<form action="#" method="post" name="cse-search-box" role="search" class="form-inline">
+						<div class="form-group">
+							<label for="wb-srch-q" class="wb-inv">Rechercher dans Canada.ca</label>
+							<input id="wb-srch-q" list="wb-srch-q-ac" class="wb-srch-q form-control" name="q" type="search" value="" size="34" maxlength="170" placeholder="Recherche">
 						</div>
-						<div class="modal-body">
-							<form action="#" method="post" name="cse-search-box" role="search" class="form-inline">
-								<div class="input-group">
-									<label for="app-srch-q-mb" class="wb-inv">Recherchez le site Web</label>
-									<input id="app-srch-q-mb" list="app-srch-q-ac-mb" class="app-srch-q-mb form-control" name="q" type="search" value="" size="27" maxlength="150">
-									<datalist id="app-srch-q-ac-mb"> 
-									</datalist>
-									<span class="input-group-btn"><button type="submit" id="app-srch-sub-mb" class="btn btn-primary btn-small" name="app-srch-sub-mb"><span class="glyphicon-search glyphicon"></span><span class="wb-inv">Recherche</span></button></span>
-								</div>
-							</form>
+						<div class="form-group submit">
+							<button type="submit" id="wb-srch-sub" class="btn btn-primary btn-small" name="wb-srch-sub"><span class="glyphicon-search glyphicon"></span><span class="wb-inv">Recherche</span></button>
 						</div>
-					</section>
-					-->
-				</nav>
-				<!-- Si vous utilisez le bouton de connexion/déconnexion ou les paramètres du compte
-				<nav role="navigation">
-					<h2 class="wb-inv">Menu des paramètres du compte</h2>
-					<ul class="app-list-account list-unstyled">
-						<li><a href="#" class="btn"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Paramètres du compte</a></li>&#32;
-						<li><a href="#" class="btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Fermer la session</a></li>
-						<li><a href="#" class="btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Ouvrir une session</a></li>
-					</ul>
-				</nav>
+					</form>
+				</section>
 				-->
 			</div>
-			<!-- Add this <nav> element if you have a custom menu to display menu before AJAX load kicks in.
-			<nav role="navigation" id="wb-sm" data-trgt="mb-pnl" class="wb-menu visible-md visible-lg" typeof="SiteNavigationElement">
-				<div class="pnl-strt container nvbar">
-					<h2 class="wb-inv">Menu de navigation principal</h2>
-					<div class="row">
-						<ul class="list-inline menu" role="menubar">
-							<li><a href="#" class="item">Aperçu</a></li>
-							<li><a href="#" class="item">Première section</a></li>
-							<li><a href="#s2" class="item">Deuxième section</a>
-								<ul class="sm list-unstyled" id="s2" role="menu">
-									<li><a href="#">Sous-section 1</a></li>
-									<li><a href="#">Sous-section 2</a></li>
-									<li><a href="#">Sous-section 3</a></li>
-									<li><a href="#">Sous-section 4</a></li>
-									<li class="slflnk"><a href="#">Second section - Autres</a>
-								</ul>
-							</li>
+		</div>
+		<div class="app-bar">
+			<div class="container">
+				<div class="row">
+					<!-- If you want to use the settings or sign in/out buttons then add col-sm-7 -->
+					<section class="col-xs-12">
+						<!-- Entrez le nom et URL de votre application ci-bas -->
+						<h2 class="wb-inv">Nom de l'application Web</h2>
+						<a class="app-name" href="[URL de l'application]">[Nom de l'application]</a>
+					</section>
+					<!-- Si vous utilisez le bouton de connexion/déconnexion ou les paramètres du compte
+					<nav class="col-sm-5 hidden-xs hidden-print">
+						<h2 class="wb-inv">Menu des paramètres du compte</h2>
+						<ul class="app-list-account list-unstyled">
+							<li><a href="#" class="btn"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Paramètres du compte</a></li>&#32;
+							<li><a href="#" class="btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Fermer la session</a></li>
+							<li><a href="#" class="btn"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Ouvrir une session</a></li>
 						</ul>
-					</div>
+					</nav>
+					-->
 				</div>
-			</nav>
-			-->
-			
-			<!-- Remove the whole <nav> if you want to disable breadcrumbs 
-			<nav role="navigation" id="wb-bc" property="breadcrumb">
-				<h2>Vous êtes ici :</h2>
-				<div class="container">
-					<div class="row">
-						<ol class="breadcrumb">
-							<li><a href="#">[Insérer votre fil d'Ariane ici]</a></li>
-						</ol>
-					</div>
+			</div>
+		</div>
+		
+		<!-- Remove the whole <nav> if you want to disable breadcrumbs 
+		<nav id="wb-bc" property="breadcrumb">
+			<h2>Vous êtes ici :</h2>
+			<div class="container">
+				<div class="row">
+					<ol class="breadcrumb">
+						<li><a href="#">[Insérer votre fil d'Ariane ici]</a></li>
+					</ol>
 				</div>
-			</nav> 
-			-->
-		</header>
+			</div>
+		</nav> 
+		-->
+	</header>
