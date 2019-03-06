@@ -16,7 +16,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="CDTSEnvironments.json" target="Content" />
     <file src="Web.config.install.xdt" target="Content" />
     <file src="WebTemplateMVC.xsd" target="Content" />
     <file src="bin\GoC.WebTemplate.MVC.dll" target="Lib\Net45" />
