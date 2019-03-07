@@ -40,16 +40,19 @@ namespace GoC.WebTemplate.Components
 
         internal List<Link> BuildContactLinks()
         {
-            if (_core.CurrentEnvironment.Name == "AKAMAI")
+            if (!_core.CurrentEnvironment.CanHaveMultiContactLinks)
             {
-                if (_core.ContactLinks?.Count > 1) throw new InvalidOperationException("Having multiple contact links not allowed in this environment");
+                if (_core.ContactLinks?.Count > 1)
+                    throw new InvalidOperationException("Having multiple contact links not allowed in this environment");
 
-                if (_core.ContactLinks?.Count == 1  && !string.IsNullOrWhiteSpace(_core.ContactLinks[0]?.Text)) throw new InvalidOperationException("Unable to edit Contact Link text in this environment");
+                if (_core.ContactLinks?.Count == 1 && !string.IsNullOrWhiteSpace(_core.ContactLinks[0]?.Text))
+                    throw new InvalidOperationException("Unable to edit Contact Link text in this environment");
             }
 
-            if (_core.ContactLinks.Any(link => string.IsNullOrWhiteSpace(link.Href))) throw new InvalidOperationException("Href must be specified");
+            if (_core.ContactLinks.Any(link => string.IsNullOrWhiteSpace(link.Href)))
+                throw new InvalidOperationException("Href must be specified");
             return _core.ContactLinks;
-            
+
         }
 
         internal string BuildLocalPath()
@@ -71,22 +74,49 @@ namespace GoC.WebTemplate.Components
                 Title = GetStringForJson(b.Title)
             }).ToList();
         }
-        internal List<FooterLink> BuildCustomFooterLinks
+
+        internal List<IFooterSection> BuildCustomFooterSections
         {
             get
             {
-                return _core.CustomFooterLinks?.Select(fl => new FooterLink
-                {
-                    Href = fl.Href,
-                    NewWindow = fl.NewWindow,
-                    Text = GetStringForJson(fl.Text)
-                }).ToList();
+                if (!_core.FooterSections.Any() && !_core.CustomFooterLinks.Any()) return null;
+
+                if (_core.CurrentEnvironment.FooterSectionLimit > 0)
+                { // use FooterSections
+                    if (!_core.FooterSections.Any())
+                        throw new InvalidOperationException(
+                            "The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
+
+                    if (_core.FooterSections.Count > _core.CurrentEnvironment.FooterSectionLimit)
+                        throw new InvalidOperationException(
+                            $"The maximum FooterSections allowed for this environment is {_core.CurrentEnvironment.FooterSectionLimit}");
+
+                    _core.FooterSections.ForEach(fs => fs.CustomFooterLinks.ForEach(fl => fl.Text = GetStringForJson(fl.Text)));
+
+                    return new List<IFooterSection>(_core.FooterSections);
+                }
+                else
+                { // use CustomFooterLinks
+
+                    if (!_core.CustomFooterLinks.Any())
+                        throw new InvalidOperationException(
+                            "The FooterSections cannot be used in this enviornment, please use the CustomFooterLinks");
+
+
+                    return new List<IFooterSection>(_core.CustomFooterLinks.Select(fl => new FooterLink
+                    {
+                        Href = fl.Href,
+                        NewWindow = fl.NewWindow,
+                        Text = GetStringForJson(fl.Text)
+                    }));
+                }
             }
         }
 
         internal List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
         {
-            if (!showLink || string.IsNullOrWhiteSpace(href)) return null;
+            if (!showLink || string.IsNullOrWhiteSpace(href))
+                return null;
             return new List<Link> { new Link { Href = href, Text = null } };
         }
         internal string BuildJqueryEnv() => _core.LoadJQueryFromGoogle ? "external" : null;
@@ -140,7 +170,7 @@ namespace GoC.WebTemplate.Components
                 // ReSharper disable once PossibleInvalidOperationException
                 https = _core.UseHTTPS.Value ? "s" : string.Empty;
             }
-            
+
             var run = string.Empty;
             var version = string.Empty;
             if (string.IsNullOrWhiteSpace(_core.WebTemplateVersion))
@@ -169,6 +199,6 @@ namespace GoC.WebTemplate.Components
 
         internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
 
-#endregion
+        #endregion
     }
 }

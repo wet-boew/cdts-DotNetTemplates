@@ -100,7 +100,8 @@ namespace GoC.WebTemplate.Components
             //Set preFooter section options
             ShowPostContent = _configProxy.ShowPostContent;
             ShowFeedbackLink = _configProxy.ShowFeedbackLink;
-            FeedbackLinkURL = _configProxy.FeedbackLinkurl;
+            FeedbackLinkUrl = _configProxy.FeedbackLinkUrl;
+            FeedbackLinkUrlFr = _configProxy.FeedbackLinkUrlFr;
             ShowLanguageLink = _configProxy.ShowLanguageLink;
             ShowSharePageLink = _configProxy.ShowSharePageLink;
 
@@ -210,21 +211,20 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public DateTime DateModified { get; set; }
-
-        /// <summary>
-        /// Determines if the features of the footer are to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        [Obsolete]
-        public bool ShowFeatures { get; set; }
-
+        
         /// <summary>
         /// URL to be used for the feedback link
         /// Set by application via web.config
         /// or programmatically
         /// </summary>
-        public string FeedbackLinkURL { get; set; }
+        public string FeedbackLinkUrl { get; set; }
+
+        /// <summary>
+        /// URL to be used for the feedback link when in french culture
+        /// Set by application via web.config or programmatically
+        /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
+        /// </summary>
+        public string FeedbackLinkUrlFr { get; set; }
 
         /// <summary>
         /// URL to be used for the Privacy link in transactional mode
@@ -377,8 +377,6 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public string WebTemplateVersion { get; set; }
 
-
-
         /// <summary>
         /// Represents the sub Theme to use to build the age. ex: esdc
         /// </summary>
@@ -395,8 +393,6 @@ namespace GoC.WebTemplate.Components
         /// Set by application via web.config or programmatically
         /// </summary>
         public bool LoadJQueryFromGoogle { get; set; }
-
-
 
         /// <summary>
         /// Allows for a custom search to be used in the application, you must contact CDTS to have one created.
@@ -460,9 +456,16 @@ namespace GoC.WebTemplate.Components
         /// <summary>
         /// Custom links if null uses standard links if not null overrides the existing footer links
         /// Set by application programmatically
-        /// Only available in the Application Template
+        /// Only available in the Application Template in GCWeb enviornment
         /// </summary>
         public List<FooterLink> CustomFooterLinks { get; set; } = new List<FooterLink>();
+
+        /// <summary>
+        /// Custom links if null uses standard links if not null overrides the existing footer links in sections with headers
+        /// Set by application programmatically
+        /// Only available in the Application Template when not in GCWEB enviornment
+        /// </summary>
+        public List<FooterSection> FooterSections { get; set; } = new List<FooterSection>();
 
         /// <summary>
         /// Custom Links for the top Menu added for MSCAs (Currently) use only. 

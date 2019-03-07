@@ -19,11 +19,12 @@ namespace GoC.WebTemplate.Components
 
         internal HtmlString RenderAppFooter()
         {
-            if (_core.CurrentEnvironment.Name != "AKAMAI" && _core.ContactLinks.Any())
+            if (!_core.CurrentEnvironment.CanHaveContactLinkInAppTemplate && _core.ContactLinks.Any())
             {
                 throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
             }
-            
+
+
             return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = _core.CDNEnvironment,
@@ -32,7 +33,7 @@ namespace GoC.WebTemplate.Components
                 PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
                 ContactLink = _core.Builder.BuildContactLinks(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
-                FooterSections = _core.Builder.BuildCustomFooterLinks
+                FooterSections = _core.Builder.BuildCustomFooterSections
             });
         }
 
@@ -116,7 +117,7 @@ namespace GoC.WebTemplate.Components
                 ShowFeedback = new FeedbackLink
                 {
                     Show = _core.ShowFeedbackLink,
-                    URL = _core.FeedbackLinkURL
+                    URL = _core.TwoLetterCultureLanguage.StartsWith(Constants.FRENCH_ACCRONYM) && !string.IsNullOrEmpty(_core.FeedbackLinkUrlFr) ? _core.FeedbackLinkUrlFr : _core.FeedbackLinkUrl
                 },
                 ShowShare = new ShareList
                 {

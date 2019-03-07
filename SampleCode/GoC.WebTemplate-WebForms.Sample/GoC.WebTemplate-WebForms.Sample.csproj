@@ -56,17 +56,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.29.0\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7004.17083, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.30.0-rc3\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate.WebForms, Version=1.29.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.29.0\Lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.WebForms, Version=1.30.7004.17084, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.30.0-rc3\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
@@ -99,11 +99,9 @@
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\secMenuTop-fr.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverBottom.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverRefTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-en.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop-fr.html" />
-    <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\serverTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splash.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\splashTop.html" />
     <Content Include="GoC.WebTemplate\StaticFallbackFiles\gcintranet\top-en.html" />
@@ -313,9 +311,7 @@
     <Content Include="SamplePages\NestedMasterPageSample.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />

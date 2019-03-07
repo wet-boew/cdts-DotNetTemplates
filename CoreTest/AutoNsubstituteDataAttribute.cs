@@ -30,6 +30,7 @@ namespace CoreTest
                 config.Environment.Returns("ITEM1");
                 return config;
             }));
+
             //Tell autofixture to ignore certain properties as they get set by the configuration file in the constructor
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.
             fixture.Customize<Core>(c => c.Without(p => p.ShowSignOutLink)
@@ -48,6 +49,8 @@ namespace CoreTest
                                           .Without(p => p.SharePageMediaSites)
                                           .Without(p => p.LeftMenuItems)
                                           .Without(p => p.ContactLinks)
+                                          .Without(p => p.CustomFooterLinks)
+                                          .Without(p => p.FooterSections)
             //Default to the ESDCProd environment if we let autofixture build this it would be the property name and a GUID
                                           .With(p => p.Environment, "ITEM1")
             //Default to UseHTTPS being Null since we are going to set the environments to default to IsSSLModifiable to false
@@ -57,7 +60,8 @@ namespace CoreTest
                                           .With(p => p.ShowPostContent, false)
             //Default set _core.ShowSharePageLink to true so Autofixture doesn't alternate the value to true in RenderPreFooterTest, 
             //and RenderPreFooterWithNullsTest.
-                                          .With(p => p.ShowSharePageLink, true));
+                                          .With(p => p.ShowSharePageLink, true)
+                                          .With(p => p.LoadJQueryFromGoogle, false));
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
             fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));

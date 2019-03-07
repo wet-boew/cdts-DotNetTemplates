@@ -11,5 +11,8 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         string LocalPath { get; set; }
         string Theme { get; set; }
         string AppendToTitle { get; set; }
+        int FooterSectionLimit { get; set; }
+        bool CanHaveMultiContactLinks { get; set; }
+        bool CanHaveContactLinkInAppTemplate { get; set; }
     }
 }

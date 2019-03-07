@@ -27,7 +27,10 @@ namespace CoreTest
                 CDN = "prod",
                 IsVersionRNCombined = true,
                 IsEncryptionModifiable = false,
-                AppendToTitle = " - Canada.ca"
+                AppendToTitle = " - Canada.ca",
+                FooterSectionLimit = 0,
+                CanHaveMultiContactLinks = false,
+                CanHaveContactLinkInAppTemplate = true
             });
         }
 
@@ -43,7 +46,10 @@ namespace CoreTest
                 CDN = "prod",
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = false,
-                AppendToTitle = ""
+                AppendToTitle = "",
+                FooterSectionLimit = 3,
+                CanHaveMultiContactLinks = true,
+                CanHaveContactLinkInAppTemplate = false
             });
         }
     }

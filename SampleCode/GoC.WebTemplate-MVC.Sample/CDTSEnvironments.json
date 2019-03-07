@@ -12,7 +12,10 @@
       "cdn": "prod",
       "isVersionRnCombined": true,
       "isEncryptionModifiable": false,
-      "appendToTitle": " - Canada.ca"
+      "appendToTitle": " - Canada.ca",
+      "footerSectionLimit": 0,
+      "canHaveMultiContactLinks": false,
+      "canHaveContactLinkInAppTemplate": true
     },
     {
       "name": "PROD_SSL",
@@ -21,7 +24,10 @@
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "PROD_SSL_ECCCSUB",
@@ -31,7 +37,10 @@
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "PROD_UNSECURE",
@@ -40,7 +49,10 @@
       "cdn": "prod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": false,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "ESDC_PROD",
@@ -50,7 +62,10 @@
       "cdn": "esdcprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "ESDC_GCINTRANET_SADE",
@@ -60,7 +75,10 @@
       "cdn": "esdcnonprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "ESDC_GCINTRANET_QA",
@@ -70,7 +88,10 @@
       "cdn": "esdcqat",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_SADE",
@@ -80,7 +101,10 @@
       "cdn": "esdcnonprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_QA",
@@ -90,7 +114,10 @@
       "cdn": "esdcqat",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": ""
+      "appendToTitle": "",
+      "footerSectionLimit": 3,
+      "canHaveMultiContactLinks": true,
+      "canHaveContactLinkInAppTemplate": false
     },
     {
       "name": "ESDC_GCWEB_SADE",
@@ -100,7 +127,10 @@
       "cdn": "esdcnonprod",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": " - Canada.ca"
+      "appendToTitle": " - Canada.ca",
+      "footerSectionLimit": 0,
+      "canHaveMultiContactLinks": false,
+      "canHaveContactLinkInAppTemplate": true
     },
     {
       "name": "ESDC_GCWEB_QA",
@@ -110,7 +140,10 @@
       "cdn": "esdcqat",
       "isVersionRnCombined": false,
       "isEncryptionModifiable": true,
-      "appendToTitle": " - Canada.ca"
+      "appendToTitle": " - Canada.ca",
+      "footerSectionLimit": 0,
+      "canHaveMultiContactLinks": false,
+      "canHaveContactLinkInAppTemplate": true
     }
   ]
 }

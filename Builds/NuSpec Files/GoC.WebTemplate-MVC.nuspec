@@ -3,12 +3,12 @@
   <metadata>
     <id>GoC.WebTemplate-MVC</id>
     <version>1.28.0</version>
-    <authors>SDS</authors>
-    <owners>SDS</owners>
+    <authors>Solution Design Services</authors>
+    <owners>Employment and Social Development Canada - GoC</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MVC Layout File that incorporates SCWASI and the CDTS, written in C#</description>
-    <releaseNotes>Implementation of 1.25.0</releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <releaseNotes>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates/releases</releaseNotes>
+    <copyright>Copyright GoC 2019</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template</tags>
     <dependencies>
       <dependency id="GoC.WebTemplate-Components" version="1.28.0"/>
