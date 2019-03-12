@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
 using System.Web;
 using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Newtonsoft.Json;
@@ -42,22 +44,28 @@ namespace GoC.WebTemplate.Components
         /// Deserialize the CDTSEnvironment objects, this is public incase someone wants to implement their
         /// own caching implementation
         /// </summary>
-        /// <param name="filename">The filename to use, we are using CDTSEnvironments.json</param>
         /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
-        public static IDictionary<string, ICDTSEnvironment> DeserializeEnvironments(string filename) 
+        public static IDictionary<string, ICDTSEnvironment> DeserializeEnvironments()
         {
-            using (var file = File.OpenText(filename))
-            using (var reader = new JsonTextReader(file))
-            {
-                var serializer = new JsonSerializer{
-                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                    NullValueHandling = NullValueHandling.Ignore
-                };
-                var environments = serializer.Deserialize<EnvironmentContainer>(reader);
-                return environments.Environments.Cast<ICDTSEnvironment>().ToDictionary(x => x.Name, x => x);
+            const string resouceName = @"GoC.WebTemplate.Components.CDTSEnvironments.json";
 
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resouceName))
+            {
+                if (stream == null)
+                    throw new MissingManifestResourceException($"Can not fine resource {resouceName}.");
+
+                using (var reader = new StreamReader(stream))
+                using (var jsonReader = new JsonTextReader(reader))
+                {
+                    var serializer = new JsonSerializer
+                    {
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                        NullValueHandling = NullValueHandling.Ignore
+                    };
+                    var environments = serializer.Deserialize<EnvironmentContainer>(jsonReader);
+                    return environments.Environments.Cast<ICDTSEnvironment>().ToDictionary(x => x.Name, x => x);
+                }
             }
         }
-
     }
 }

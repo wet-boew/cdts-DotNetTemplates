@@ -127,9 +127,6 @@
     <Content Include="Web.config.install.xdt" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
-    <EmbeddedResource Include="CDTSEnvironments.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
