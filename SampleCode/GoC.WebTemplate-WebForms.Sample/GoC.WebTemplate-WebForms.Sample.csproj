@@ -56,12 +56,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7004.17083, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.30.0-rc3\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7010.19019, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.30.1-b261.1\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="GoC.WebTemplate.WebForms, Version=1.30.7004.17084, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.30.0-rc3\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.WebForms, Version=1.30.7010.19019, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.30.1-b261.1\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -323,7 +323,6 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
-    <Content Include="CDTSEnvironments.json" />
     <None Include="WebTemplateWebForms.xsd">
       <SubType>Designer</SubType>
     </None>
