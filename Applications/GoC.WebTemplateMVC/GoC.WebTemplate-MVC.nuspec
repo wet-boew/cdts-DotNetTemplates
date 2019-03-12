@@ -19,7 +19,6 @@
     <file src="Web.config.install.xdt" target="Content" />
     <file src="WebTemplateMVC.xsd" target="Content" />
     <file src="bin\GoC.WebTemplate.MVC.dll" target="Lib\Net45" />
-    <file src="CDTSEnvironments.json" target="Lib\Net45" />
     <file src="WebTemplateMVC.xsd" target="Lib\Net45" />
     <file src="Views\GoC.WebTemplate\**\*.*" target="Content\Views\GoC.WebTemplate" />
   </files>

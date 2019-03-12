@@ -19,7 +19,6 @@
     <file src="WebTemplateWebForms.xsd" target="Content" />
     <file src="GoC.WebTemplate\**\*.*" target="Content\GoC.WebTemplate" exclude="GoC.WebTemplate\*.cs" />
     <file src="bin\GoC.WebTemplate.WebForms.dll" target="Lib\Net45" />
-    <file src="CDTSEnvironments.json" target="Lib\Net45" />
     <file src="WebTemplateWebForms.xsd" target="Lib\Net45" />
   </files>
 </package>
