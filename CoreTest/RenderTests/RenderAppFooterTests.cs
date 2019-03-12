@@ -242,8 +242,8 @@ namespace CoreTest.RenderTests
             sut.FooterSections = GetTestableFooterSectionList();
 
             var json = sut.RenderAppFooter();
-            json.ToString().Should().Contain("\"footerSections\":[{\"sectionName\":\"CustomFooterSectionName\",\"CustomFooterLinks\":[{");
-            json.ToString().Should().Contain("\"sectionName\":\"CustomFooterSectionName2\",\"CustomFooterLinks\":[{");
+            json.ToString().Should().Contain("\"footerSections\":[{\"sectionName\":\"CustomFooterSectionName\",\"customFooterLinks\":[{");
+            json.ToString().Should().Contain("\"sectionName\":\"CustomFooterSectionName2\",\"customFooterLinks\":[{");
         }
 
         private List<FooterSection> GetTestableFooterSectionList()

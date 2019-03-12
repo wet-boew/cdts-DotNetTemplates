@@ -130,9 +130,6 @@
     <Compile Include="WebFormsTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CDTSEnvironments.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

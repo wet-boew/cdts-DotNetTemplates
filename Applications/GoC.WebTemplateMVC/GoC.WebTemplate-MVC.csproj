@@ -99,9 +99,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\WebTemplateBaseController.cs" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
-    <EmbeddedResource Include="CDTSEnvironments.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-en.html" />

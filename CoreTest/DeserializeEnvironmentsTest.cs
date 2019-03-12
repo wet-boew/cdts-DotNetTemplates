@@ -11,14 +11,14 @@ namespace CoreTest
         [Fact]
         public void FileHasElevenEnvironments()
         {
-            var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
+            var env = JsonSerializationHelper.DeserializeEnvironments();
             env.Count.Should().Be(11);
         }
 
         [Fact]
         public void AKAMAIDeserialize()
         {
-            var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
+            var env = JsonSerializationHelper.DeserializeEnvironments();
             env["AKAMAI"].Should().BeEquivalentTo(new CDTSEnvironment
             {
                 Name = "AKAMAI",
@@ -37,7 +37,7 @@ namespace CoreTest
         [Fact]
         public void PRODSSLDeserialize()
         {
-            var env = JsonSerializationHelper.DeserializeEnvironments("CDTSEnvironments.json");
+            var env = JsonSerializationHelper.DeserializeEnvironments();
             env["PROD_SSL"].Should().BeEquivalentTo(new CDTSEnvironment
             {
                 Name = "PROD_SSL",

@@ -46,7 +46,7 @@ namespace GoC.WebTemplate.Components
 
                 //We don't catch exceptions because this file needs to exist. 
                 //So we want the app to crash if it isn't.
-                environments = JsonSerializationHelper.DeserializeEnvironments(filename);
+                environments = JsonSerializationHelper.DeserializeEnvironments();
                 _cacheProxy.SaveToCache(Constants.CACHE_KEY_ENVIRONMENTS,filename, environments);
             }
             return environments;
