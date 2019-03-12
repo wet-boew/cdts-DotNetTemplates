@@ -20,7 +20,7 @@ namespace GoC.WebTemplate.Components
 
         public string SectionName { get; set; }
 
-        [JsonProperty(PropertyName="CustomFooterLinks")]
+        [JsonProperty(PropertyName="customFooterLinks")]
         public List<FooterLink> CustomFooterLinks { get; set; }
     }
 }
