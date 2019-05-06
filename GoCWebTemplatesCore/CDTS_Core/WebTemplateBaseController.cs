@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Options;
 
@@ -96,10 +97,18 @@ namespace CDTS_Core
 
             if (!string.IsNullOrEmpty(originaltext))
             {
-                
+                RouteValueDictionary finalRoutes = new RouteValueDictionary();
+
+                foreach (var item in this.Request.Query.Keys)
+                {
+                    if (item != "GoCTemplateCulture")
+                    {
+                        finalRoutes.Add(item, this.Request.Query[item]);
+                    }
+                }
+
                 var routeValues = context.RouteData.Values;
-              
-                context.Result = new RedirectToActionResult(routeValues["action"].ToString(), routeValues["controller"].ToString(), null);
+                context.Result = new RedirectToActionResult(routeValues["action"].ToString(), routeValues["controller"].ToString(), finalRoutes);
 
                 context.HttpContext.Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(Thread.CurrentThread.CurrentCulture)),
                     new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true }); //Set the Language Cookie so .Net Core can process it with it's middleware.
@@ -112,7 +121,7 @@ namespace CDTS_Core
                 Href = CoreBuilder.BuildLanguageLinkURL(new CurrentRequestProxy(this.Request).QueryString)
             };
 
-            
+
 
             base.OnActionExecuting(context);
         }
