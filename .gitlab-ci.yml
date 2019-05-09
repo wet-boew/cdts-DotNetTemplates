@@ -66,6 +66,18 @@ test_components:
   script:
     - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_PATH%\\CoreTest.dll"'
 
+code_quality:
+  stage: test
+  allow_failure: true
+  script:
+    - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+    - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:RunCodeAnalysis=true'
+    - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+    - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:RunCodeAnalysis=true'
+  except:
+    - tags
+    - master
+
 package:
   stage: package
   dependencies: 
