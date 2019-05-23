@@ -13,8 +13,8 @@ namespace GoC.WebTemplate.Components.Proxies
         public bool Enabled => _sessionTimeOutElement.Enabled;
         public int Inactivity => _sessionTimeOutElement.Inactivity;
         public int ReactionTime => _sessionTimeOutElement.ReactionTime;
-        public int Sessionalive => _sessionTimeOutElement.Sessionalive;
-        public string Logouturl => _sessionTimeOutElement.Logouturl;
+        public int Sessionalive => _sessionTimeOutElement.SessionAlive;
+        public string Logouturl => _sessionTimeOutElement.LogoutUrl;
         public string RefreshCallbackUrl => _sessionTimeOutElement.RefreshCallbackUrl;
         public bool RefreshOnClick => _sessionTimeOutElement.RefreshOnClick;
         public int RefreshLimit => _sessionTimeOutElement.RefreshLimit;

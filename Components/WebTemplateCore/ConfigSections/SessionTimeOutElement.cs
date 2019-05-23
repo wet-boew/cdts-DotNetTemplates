@@ -42,22 +42,22 @@ namespace GoC.WebTemplate.Components.ConfigSections
         /// period of time for the session to stay alive until the modal dialog appears (default 20 minutes).
         /// </summary>
         /// <remarks>time provided in milliseconds</remarks>
-        [ConfigurationProperty("sessionalive", DefaultValue = 1200000, IsRequired = false)]
+        [ConfigurationProperty("sessionAlive", DefaultValue = 1200000, IsRequired = false)]
         [IntegerValidator(MinValue = 1000)]
-        public int Sessionalive
+        public int SessionAlive
         {
-            get { return (int)this["sessionalive"]; }
-            set { this["sessionalive"] = value; }
+            get { return (int)this["sessionAlive"]; }
+            set { this["sessionAlive"] = value; }
         }
 
         /// <summary>
         /// URL that users are sent to when the session has expired.
         /// </summary>
-        [ConfigurationProperty("logouturl", IsRequired = true)]
-        public string Logouturl
+        [ConfigurationProperty("logoutUrl", IsRequired = true)]
+        public string LogoutUrl
         {
-            get { return (string)this["logouturl"]; }
-            set { this["logouturl"] = value; }
+            get { return (string)this["logoutUrl"]; }
+            set { this["logoutUrl"] = value; }
         }
 
         /// <summary>

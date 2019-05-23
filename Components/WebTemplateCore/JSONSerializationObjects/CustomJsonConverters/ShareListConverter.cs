@@ -10,6 +10,7 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects.CustomJsonConverte
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var share = value as ShareList;
+            if (serializer == null) throw new ArgumentException("The property serializer is required.");
             //this converter should never be on a type that's not a ShareList so just throw exceptions.
             Debug.Assert(share != null, "share != null");
             if (share.Show)

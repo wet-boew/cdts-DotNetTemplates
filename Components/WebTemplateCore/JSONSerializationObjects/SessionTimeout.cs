@@ -12,8 +12,8 @@ namespace GoC.WebTemplate.Components
         public SessionTimeout(bool enabled, 
                              int inactivity,
                              int reactionTime,
-                             int sessionalive,
-                             string logouturl,
+                             int sessionAlive,
+                             string logoutUrl,
                              string refreshCallbackUrl,
                              bool refreshOnClick,
                              int refreshLimit,
@@ -23,8 +23,8 @@ namespace GoC.WebTemplate.Components
             Enabled = enabled;
             Inactivity = inactivity;
             ReactionTime = reactionTime;
-            Sessionalive = sessionalive;
-            Logouturl = logouturl;            
+            Sessionalive = sessionAlive;
+            Logouturl = logoutUrl;            
             RefreshCallbackUrl = refreshCallbackUrl;
             RefreshOnClick = refreshOnClick;
             RefreshLimit = refreshLimit;

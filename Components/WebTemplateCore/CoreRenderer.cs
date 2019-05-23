@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Web;
 using GoC.WebTemplate.Components.JSONSerializationObjects;
+using System.Globalization;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components
@@ -46,7 +47,7 @@ namespace GoC.WebTemplate.Components
 
             //For v4.0.26.x we have to render this section differently depending on the theme, 
             //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
-            return _core.WebTemplateTheme.ToLower() == "gcweb" ? RenderGCWebAppTop() : RenderGCIntranetApptop();
+            return _core.WebTemplateTheme.Equals("gcweb", StringComparison.OrdinalIgnoreCase) ? RenderGCWebAppTop() : RenderGCIntranetApptop();
         }
 
         internal HtmlString RenderTransactionalTop()
@@ -117,7 +118,7 @@ namespace GoC.WebTemplate.Components
                 ShowFeedback = new FeedbackLink
                 {
                     Show = _core.ShowFeedbackLink,
-                    URL = _core.TwoLetterCultureLanguage.StartsWith(Constants.FRENCH_ACCRONYM) && !string.IsNullOrEmpty(_core.FeedbackLinkUrlFr) ? _core.FeedbackLinkUrlFr : _core.FeedbackLinkUrl
+                    URL = _core.TwoLetterCultureLanguage.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_core.FeedbackLinkUrlFr) ? _core.FeedbackLinkUrlFr : _core.FeedbackLinkUrl
                 },
                 ShowShare = new ShareList
                 {
@@ -193,7 +194,7 @@ namespace GoC.WebTemplate.Components
             if (_core.SessionTimeout.Enabled)
             {
                 jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_core.SessionTimeout);
-                return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
+                return new HtmlString(string.Format(CultureInfo.InvariantCulture, "<span class='wb-sessto' data-wb-sessto='{0}'></span>", jsonSessionTimeout));
             }
 
             return null;

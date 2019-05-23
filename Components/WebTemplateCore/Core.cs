@@ -70,7 +70,7 @@ namespace GoC.WebTemplate.Components
 
             UseHTTPS = _configProxy.UseHttps;
             //Normalizing to match with the value we read from the configuration file.
-            Environment = _configProxy.Environment.ToUpper();
+            Environment = _configProxy.Environment.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
 
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
@@ -116,8 +116,8 @@ namespace GoC.WebTemplate.Components
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSearch = _configProxy.CustomSearch.Equals(string.Empty) ? null : _configProxy.CustomSearch;
-            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL.Equals(string.Empty) ? null : _configProxy.CustomSiteMenuURL;
+            CustomSearch = string.IsNullOrEmpty(_configProxy.CustomSearch) ? null : _configProxy.CustomSearch;
+            CustomSiteMenuURL = string.IsNullOrEmpty(_configProxy.CustomSiteMenuURL) ? null : _configProxy.CustomSiteMenuURL;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -127,7 +127,7 @@ namespace GoC.WebTemplate.Components
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
         /// </summary>
-        public string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
+        public static string AssemblyVersion => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         /// <summary>
         /// Represents the Application Title setting information
@@ -352,7 +352,7 @@ namespace GoC.WebTemplate.Components
                     return AppendToTitle;
                 }
 
-                if (_headerTitle.EndsWith(AppendToTitle))
+                if (_headerTitle.EndsWith(AppendToTitle, StringComparison.CurrentCulture))
                 {
                     return _headerTitle;
                 }
@@ -567,7 +567,7 @@ namespace GoC.WebTemplate.Components
 
                 //---[ If we get here, we really have to load the data
                 string filePath;
-                if (StaticFilesPath.StartsWith("~"))
+                if (StaticFilesPath.StartsWith("~", StringComparison.OrdinalIgnoreCase))
                 {
                     // ReSharper disable once AssignNullToNotNullAttribute
                     filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),

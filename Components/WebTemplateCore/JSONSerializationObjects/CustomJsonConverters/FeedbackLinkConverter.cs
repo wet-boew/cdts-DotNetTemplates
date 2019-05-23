@@ -9,6 +9,7 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects.CustomJsonConverte
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var feedbackLink =  value as FeedbackLink;
+            if (serializer == null) throw new ArgumentException("The property serializer is required.");
             //this converter should never be on a type that's not a FeedbackLink so just throw exceptions.
             Debug.Assert(feedbackLink != null, "obj != null");
             if (feedbackLink.Show)

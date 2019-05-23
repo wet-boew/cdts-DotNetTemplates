@@ -1,5 +1,6 @@
 using GoC.WebTemplate.Components.JSONSerializationObjects;
 using GoC.WebTemplate.Components.Proxies;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web;
@@ -18,11 +19,12 @@ namespace GoC.WebTemplate.Components
         /// <summary>
         /// Loads the CDTSEnvironments either from file or from the HTTPruntime.Cache 
         /// </summary>
-        /// <param name="filename">The filename to use, we are using CDTSEnvironments.json</param>
+        /// <param name="fileName">The fileName to use, we are using CDTSEnvironments.json</param>
         /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
-        public IDictionary<string, ICDTSEnvironment> LoadCDTSEnvironments(string filename)
+        public IDictionary<string, ICDTSEnvironment> LoadCDTSEnvironments(string fileName)
         {
             Debug.Assert(_cacheProxy != null, "CacheProxy Cannot be null");
+            if (string.IsNullOrEmpty(fileName)) throw new ArgumentException("The property fileName is required.");
             var environments = _cacheProxy.GetFromCache<IDictionary<string,ICDTSEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
             if (environments != null)
             {
@@ -38,16 +40,16 @@ namespace GoC.WebTemplate.Components
                 }
 
                 //If the path is relative we need to map it.
-                if (filename.StartsWith("~"))
+                if (fileName.StartsWith("~", System.StringComparison.OrdinalIgnoreCase))
                 {
                     //We might want to decouple this.
-                    filename = HttpContext.Current.Server.MapPath(filename);
+                    fileName = HttpContext.Current.Server.MapPath(fileName);
                 }
 
                 //We don't catch exceptions because this file needs to exist. 
                 //So we want the app to crash if it isn't.
                 environments = JsonSerializationHelper.DeserializeEnvironments();
-                _cacheProxy.SaveToCache(Constants.CACHE_KEY_ENVIRONMENTS,filename, environments);
+                _cacheProxy.SaveToCache(Constants.CACHE_KEY_ENVIRONMENTS,fileName, environments);
             }
             return environments;
         }

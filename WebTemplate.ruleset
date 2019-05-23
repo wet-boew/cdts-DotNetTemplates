@@ -4,7 +4,7 @@
   <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
     <Rule Id="CA1000" Action="Error" />
     <Rule Id="CA1001" Action="Error" />
-    <Rule Id="CA1002" Action="Error" />
+    <Rule Id="CA1002" Action="Warning" />
     <Rule Id="CA1003" Action="Error" />
     <Rule Id="CA1004" Action="Error" />
     <Rule Id="CA1005" Action="Error" />
@@ -26,7 +26,7 @@
     <Rule Id="CA1023" Action="Error" />
     <Rule Id="CA1024" Action="Error" />
     <Rule Id="CA1025" Action="Error" />
-    <Rule Id="CA1026" Action="Error" />
+    <Rule Id="CA1026" Action="Warning" />
     <Rule Id="CA1027" Action="Error" />
     <Rule Id="CA1028" Action="Error" />
     <Rule Id="CA1030" Action="Error" />
@@ -53,7 +53,7 @@
     <Rule Id="CA1053" Action="Error" />
     <Rule Id="CA1054" Action="Error" />
     <Rule Id="CA1055" Action="Error" />
-    <Rule Id="CA1056" Action="Error" />
+    <Rule Id="CA1056" Action="Warning" />
     <Rule Id="CA1057" Action="Error" />
     <Rule Id="CA1058" Action="Error" />
     <Rule Id="CA1059" Action="Error" />
@@ -99,7 +99,7 @@
     <Rule Id="CA1601" Action="Error" />
     <Rule Id="CA1700" Action="Error" />
     <Rule Id="CA1701" Action="Error" />
-    <Rule Id="CA1702" Action="Error" />
+    <Rule Id="CA1702" Action="Warning" />
     <Rule Id="CA1703" Action="Error" />
     <Rule Id="CA1704" Action="Error" />
     <Rule Id="CA1707" Action="None" />
@@ -119,7 +119,7 @@
     <Rule Id="CA1722" Action="Error" />
     <Rule Id="CA1724" Action="Error" />
     <Rule Id="CA1725" Action="Error" />
-    <Rule Id="CA1726" Action="Error" />
+    <Rule Id="CA1726" Action="Warning" />
     <Rule Id="CA1800" Action="Error" />
     <Rule Id="CA1801" Action="Error" />
     <Rule Id="CA1802" Action="Error" />
@@ -216,7 +216,7 @@
     <Rule Id="CA2224" Action="Error" />
     <Rule Id="CA2225" Action="Error" />
     <Rule Id="CA2226" Action="Error" />
-    <Rule Id="CA2227" Action="Error" />
+    <Rule Id="CA2227" Action="Warning" />
     <Rule Id="CA2228" Action="Error" />
     <Rule Id="CA2229" Action="Error" />
     <Rule Id="CA2230" Action="Error" />

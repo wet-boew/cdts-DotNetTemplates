@@ -128,7 +128,7 @@ namespace GoC.WebTemplate.Components
             {
                 return null;
             }
-            return _core.DateModified.ToString("yyyy-MM-dd");
+            return _core.DateModified.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture);
         }
 
         internal List<Link> BuildIntranentTitleList() => _core.IntranetTitle == null ? null : new List<Link> { _core.IntranetTitle };
@@ -197,7 +197,7 @@ namespace GoC.WebTemplate.Components
 
         internal string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
 
-        internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
+        internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(CultureInfo.CurrentCulture, formatStr, strs);
 
         #endregion
     }

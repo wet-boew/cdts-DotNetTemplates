@@ -139,10 +139,10 @@ namespace GoC.WebTemplate.Components
             set { this["feedbackLinkUrl"] = value; }
         }
         /// <summary>
-         /// URL used to redirect users when they click the feedback link
-         /// This link is specific for french if the user was already in the french culture
-         /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
-         /// </summary>
+        /// URL used to redirect users when they click the feedback link
+        /// This link is specific for french if the user was already in the french culture
+        /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
+        /// </summary>     
         [ConfigurationProperty("feedbackLinkUrlFr", IsRequired = false)]
         public string FeedbackLinkUrlFr
         {
@@ -153,7 +153,7 @@ namespace GoC.WebTemplate.Components
         /// ShowSearch
         /// </summary>
         [ConfigurationProperty("showSearch", DefaultValue = true, IsRequired = true)]
-        public Boolean ShowShearch
+        public Boolean ShowSearch
         {
             get { return (Boolean)this["showSearch"]; }
             set { this["showSearch"] = value; }
