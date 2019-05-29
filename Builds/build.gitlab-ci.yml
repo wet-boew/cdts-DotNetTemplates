@@ -1,0 +1,19 @@
+build_default:
+  stage: build
+  script:
+    - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+    - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - '%TEST_PATH%' #for test
+      - '%xUNIT_PATH%' #for test
+      - 'Applications\\GoC.WebTemplate\\bin\\GoC.WebTemplate.WebForms.dll' #for package
+      - 'Applications\\GoC.WebTemplateMVC\\bin\\GoC.WebTemplate.MVC.dll' #for package
+      - 'Components\\WebTemplateCore\\bin\\Release\\GoC.WebTemplate.Components.dll' #for package
+
+build_sample:
+  stage: build
+  script:
+    - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+    - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'

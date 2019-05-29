@@ -1,0 +1,37 @@
+test_components:
+  stage: test
+  dependencies: 
+    - build_default
+  script:
+    - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_PATH%\\CoreTest.dll" -junit componentsTestResults.xml'
+  artifacts:
+    reports:
+      junit: componentsTestResults.xml
+
+code_quality_default:
+  stage: test
+  allow_failure: true
+  script:
+    - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+    - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=DefaultCodeAnalysisReport.xml'
+  except:
+    - tags
+    - master
+  artifacts:
+    reports:
+      codequality: Components\WebTemplateCore\DefaultCodeAnalysisReport.xml
+
+code_quality_samples:
+  stage: test
+  allow_failure: true
+  script:
+    - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+    - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=SamplesCodeAnalysisReport.xml'
+  except:
+    - tags
+    - master
+  artifacts:    
+    expire_in: 1 week
+    paths: 
+      - SampleCode\GoC.WebTemplate-MVC.Sample\SamplesCodeAnalysisReport.xml
+      - SampleCode\GoC.WebTemplate-WebForms.Sample\SamplesCodeAnalysisReport.xml

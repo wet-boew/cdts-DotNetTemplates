@@ -327,7 +327,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = false;
             WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.redseal.ca";
 
-            WebTemplateCore.LeavingSecureSiteWarning.Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
+            WebTemplateCore.LeavingSecureSiteWarning.Message = "You are about to leave a secure site, do you wish to continue?";
 
             //HTML HEADER/BODY ELEMENTS ====================================
             //this.WebTemplateCore.HTMLHeaderElements.Add("jones.css");
