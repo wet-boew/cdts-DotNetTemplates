@@ -17,9 +17,10 @@ code_quality_default:
   except:
     - tags
     - master
-  artifacts:
-    reports:
-      codequality: Components\WebTemplateCore\DefaultCodeAnalysisReport.xml
+  artifacts:    
+    expire_in: 1 week
+    paths: 
+      - Components\WebTemplateCore\DefaultCodeAnalysisReport.xml
 
 code_quality_samples:
   stage: test
