@@ -162,6 +162,15 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void PrivacyLinkRenderedNewWindow(Core sut)
+        {
+            sut.PrivacyLinkURL = "http://foo.bar";
+            sut.PrivacyLinkNewWindow = true;
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("\"newWindow\":true");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
         {
             sut.TermsConditionsLinkURL = null;
@@ -176,6 +185,16 @@ namespace CoreTest.RenderTests
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("termsLink");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void TermsLinkRendereNewWindow(Core sut)
+        {
+            sut.TermsConditionsLinkURL = "http://foo.bar";
+            sut.TermsConditionsLinkNewWindow = true;
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("\"newWindow\":true");
+        }
+
 
         [Theory, AutoNSubstituteData]
         public void CustomFooterLinksCantBeUsedWithLimit([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)
