@@ -233,10 +233,23 @@ namespace GoC.WebTemplate.Components
         public string PrivacyLinkURL { get; set; }
 
         /// <summary>
+        /// Will tell the PrivacyLinkURL to open in a new window
+        /// Set by application programmatically
+        /// </summary>
+        public bool PrivacyLinkNewWindow { get; set; }
+
+        /// <summary>
         /// URL to be used for the Terms & Conditions link in transactional mode
         /// Set by application programmatically
         /// </summary>
         public string TermsConditionsLinkURL { get; set; }
+
+        /// <summary>
+        /// Will tell the TermsConditionsLinkURL to open in a new window
+        /// Set by application programmatically
+        /// </summary>
+        public bool TermsConditionsLinkNewWindow { get; set; }
+
 
         /// <summary>
         /// Used to override the langauge link

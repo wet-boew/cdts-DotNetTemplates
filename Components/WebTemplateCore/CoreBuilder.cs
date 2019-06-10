@@ -193,6 +193,22 @@ namespace GoC.WebTemplate.Components
             return string.Format(CultureInfo.InvariantCulture, _core.CurrentEnvironment.Path, https, run, _core.WebTemplateTheme, version);
         }
 
+        internal List<FooterLink> BuildSingleListLink(string url, bool newWindow)
+        {
+            if (string.IsNullOrEmpty(url)) return null;
+
+            var link = new List<FooterLink>
+            {
+                new FooterLink
+                {
+                    Href = url,
+                    NewWindow = newWindow
+                }
+            };
+
+            return link;
+        } 
+
         #region GetJson
 
         internal string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;

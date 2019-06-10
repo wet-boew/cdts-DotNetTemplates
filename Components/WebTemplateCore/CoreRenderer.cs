@@ -30,8 +30,8 @@ namespace GoC.WebTemplate.Components
             {
                 CdnEnv = _core.CDNEnvironment,
                 SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
-                TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
-                PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
+                TermsLink = _core.Builder.BuildSingleListLink(_core.TermsConditionsLinkURL, _core.TermsConditionsLinkNewWindow),
+                PrivacyLink = _core.Builder.BuildSingleListLink(_core.PrivacyLinkURL, _core.PrivacyLinkNewWindow),
                 ContactLink = _core.Builder.BuildContactLinks(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
                 FooterSections = _core.Builder.BuildCustomFooterSections
