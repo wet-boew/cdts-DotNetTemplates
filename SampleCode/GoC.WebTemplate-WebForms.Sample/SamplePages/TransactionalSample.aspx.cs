@@ -1,4 +1,5 @@
 ﻿using System;
+using GoC.WebTemplate.Components;
 using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.SamplePages
@@ -8,9 +9,9 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
         protected void Page_Load(object sender, EventArgs e)
         {
             //set the Terms and Condition Link
-            WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateMaster.WebTemplateCore.TermsConditionsLink = new FooterLink {Href = "http://www.tsn.ca", NewWindow = true};
             //set the Privacy link
-            WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateMaster.WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca"}; // NewWindow defaults to false
         }
     }
 }

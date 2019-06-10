@@ -42,11 +42,11 @@
 
     <div class="wb-prettify all-pre lang-vb linenums">
         <h3>C# Code Sample</h3>
-        <pre>
-//set the Terms and Condition Link
-this.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
-//set the Privacy link
-this.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+        <pre>                        
+            //set the Terms and Condition Link
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
+            //set the Privacy link
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
         </pre>
     </div>
 @Html.Partial("_SamplesNavigation")

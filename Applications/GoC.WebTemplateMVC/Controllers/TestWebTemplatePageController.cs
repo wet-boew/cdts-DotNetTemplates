@@ -235,8 +235,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.TermsConditionsLinkURL = "#";
-            WebTemplateCore.PrivacyLinkURL = "#";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "#" };
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "#" };
             return View("HelloWorld");
         }
         //
@@ -279,8 +279,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.SessionTimeout.Method = "20008";
             WebTemplateCore.SessionTimeout.AdditionalData = "20009";
 
-            WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
-            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.pinkbike.com" };
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
 
             //BREADCRUMB ====================================
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));

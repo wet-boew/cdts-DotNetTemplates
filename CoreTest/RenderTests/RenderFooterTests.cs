@@ -233,20 +233,5 @@ namespace CoreTest.RenderTests
             sut.ContactLinks = new List<Link>() { new Link() { Href = "http://testvalue" } };
             sut.RenderFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
         }
-
-        [Theory, AutoNSubstituteData]
-        public void RenderTransactionalFooter(Core sut)
-        {
-            sut.ContactLinks = new List<Link>() { new Link
-            {
-                Href = "www.fakehref.com",
-                Acronym = "accrrrnm"
-            } };
-            sut.PrivacyLinkURL = "dummyprivacylinkurl";
-            sut.TermsConditionsLinkURL = "thisIsMyFunTemrsLink";
-
-            var result = sut.RenderTransactionalFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"subTheme\":\"\",\"showFooter\":false,\"contactLinks\":[{\"href\":\"www.fakehref.com\",\"acronym\":\"accrrrnm\"}],\"privacyLink\":\"dummyprivacylinkurl\",\"termsLink\":\"thisIsMyFunTemrsLink\"}");
-        }
     }
 }

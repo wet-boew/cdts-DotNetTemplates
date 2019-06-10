@@ -55,6 +55,11 @@ namespace GoC.WebTemplate.Components
 
         }
 
+        internal List<FooterLink> BuildSingleFooterLink(FooterLink link)
+        {
+            return string.IsNullOrWhiteSpace(link?.Href) ? null : new List<FooterLink> { link };
+        }
+
         internal string BuildLocalPath()
         {
             return GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion);

@@ -210,9 +210,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             //Contact Links
             WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
             //set the Terms and Condition Link
-            WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
             //set the Privacy link
-            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
 
             return View();
         }
@@ -221,9 +221,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult TransactionalSample(string data1, string data2, string data4)
         {
             //set the Terms and Condition Link
-            WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
             //set the Privacy link
-            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
             //execute logic for the submit.
             return View();
         }

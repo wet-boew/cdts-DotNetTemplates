@@ -30,8 +30,8 @@ namespace GoC.WebTemplate.Components
             {
                 CdnEnv = _core.CDNEnvironment,
                 SubTheme = _core.Builder.GetStringForJson(_core.WebTemplateSubTheme),
-                TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL),
-                PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
+                TermsLink = _core.Builder.BuildSingleFooterLink(_core.TermsConditionsLink),
+                PrivacyLink = _core.Builder.BuildSingleFooterLink(_core.PrivacyLink),
                 ContactLink = _core.Builder.BuildContactLinks(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
                 FooterSections = _core.Builder.BuildCustomFooterSections
@@ -165,9 +165,8 @@ namespace GoC.WebTemplate.Components
                 SubTheme = _core.WebTemplateSubTheme,
                 ShowFooter = false,
                 ContactLinks = _core.Builder.BuildContactLinks(),
-                PrivacyLink = _core.Builder.GetStringForJson(_core.PrivacyLinkURL),
-                TermsLink = _core.Builder.GetStringForJson(_core.TermsConditionsLinkURL)
-
+                PrivacyLink = _core.Builder.BuildSingleFooterLink(_core.PrivacyLink),
+                TermsLink = _core.Builder.BuildSingleFooterLink(_core.TermsConditionsLink)
             });
         }
 

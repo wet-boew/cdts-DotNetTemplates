@@ -33,6 +33,8 @@ deploy:
     - package_forms
     - package_mvc_sample
     - package_forms_sample
+  tags:
+    - artifactory_deploy
   environment:
     name: Artifactory
     url: '%ARTIFACTORY_DEPLOY%'

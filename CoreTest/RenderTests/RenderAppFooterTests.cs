@@ -146,9 +146,9 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
+        public void PrivacyLinkNotRenderedWhenIsNull(Core sut)
         {
-            sut.PrivacyLinkURL = null;
+            sut.PrivacyLink = null;
             var json = sut.RenderAppFooter();
             json.ToString().Should().NotContain("privacyLink");
         }
@@ -162,9 +162,17 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void PrivacyLinkRenderedNewWindow(Core sut)
+        {
+            sut.PrivacyLink = new FooterLink {Href = "http://foo.bar", NewWindow = true};
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("\"newWindow\":true");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
         {
-            sut.TermsConditionsLinkURL = null;
+            sut.TermsConditionsLink = null;
             var json = sut.RenderAppFooter();
             json.ToString().Should().NotContain("termsLink");
         }
@@ -176,6 +184,15 @@ namespace CoreTest.RenderTests
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("termsLink");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void TermsLinkRendereNewWindow(Core sut)
+        {
+            sut.TermsConditionsLink = new FooterLink { Href = "http://foo.bar", NewWindow = true };
+            var json = sut.RenderAppFooter();
+            json.ToString().Should().Contain("\"newWindow\":true");
+        }
+
 
         [Theory, AutoNSubstituteData]
         public void CustomFooterLinksCantBeUsedWithLimit([Frozen]IDictionary<string, ICDTSEnvironment> environments, Core sut)

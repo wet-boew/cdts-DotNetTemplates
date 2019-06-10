@@ -22,8 +22,8 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = false;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 20001;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
-            WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
-            WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateMaster.WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.pinkbike.com" }; 
+            WebTemplateMaster.WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
             WebTemplateMaster.WebTemplateCore.ShowSharePageLink = true;
             WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
             WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
