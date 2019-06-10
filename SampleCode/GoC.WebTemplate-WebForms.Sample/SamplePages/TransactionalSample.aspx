@@ -43,10 +43,12 @@
     <div class="wb-prettify all-pre lang-vb linenums">
         <h3>C# Code Sample</h3>
         <pre>
-//set the Terms and Condition Link
-this.WebTemplateMaster.WebTemplateCore.TermsConditionsLink.URL = "http://www.tsn.ca";
-//set the Privacy link
-this.WebTemplateMaster.WebTemplateCore.PrivacyLink.URL = "http://www.lapresse.ca";
+            //set the Terms and Condition Link
+            WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            //Optional WebTemplateMaster.WebTemplateCore.TermsConditionsLinkNewWindow = true // defaults to false
+            //set the Privacy link
+            WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            //Optional WebTemplateMaster.WebTemplateCore.TermsConditionsLinkNewWindow = true // defaults to false
         </pre>
     </div>
 <!-- #include virtual="SamplesNavigation.html" -->

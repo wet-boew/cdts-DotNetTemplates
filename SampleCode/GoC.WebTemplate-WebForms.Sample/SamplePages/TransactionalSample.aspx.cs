@@ -9,8 +9,10 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
         {
             //set the Terms and Condition Link
             WebTemplateMaster.WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            //Optional WebTemplateMaster.WebTemplateCore.TermsConditionsLinkNewWindow = true // defaults to false
             //set the Privacy link
             WebTemplateMaster.WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            //Optional WebTemplateMaster.WebTemplateCore.TermsConditionsLinkNewWindow = true // defaults to false
         }
     }
 }

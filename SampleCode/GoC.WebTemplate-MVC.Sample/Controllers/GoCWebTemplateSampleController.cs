@@ -211,8 +211,10 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
             //set the Terms and Condition Link
             WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            //Optional WebTemplateCore.TermsConditionsLinkNewWindow = true // defaults to false
             //set the Privacy link
             WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            //Optional WebTemplateCore.PrivacyLinkNewWindow = true // defaults to false
 
             return View();
         }
