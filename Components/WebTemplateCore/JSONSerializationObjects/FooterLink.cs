@@ -9,7 +9,6 @@ namespace GoC.WebTemplate.Components
         }
         public FooterLink(string href, string text, bool newWindow) : base(href, text)
         {
-
             NewWindow = newWindow;
         }
 

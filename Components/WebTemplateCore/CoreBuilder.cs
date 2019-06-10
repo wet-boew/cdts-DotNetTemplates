@@ -55,6 +55,11 @@ namespace GoC.WebTemplate.Components
 
         }
 
+        internal List<FooterLink> BuildSingleFooterLink(FooterLink link)
+        {
+            return string.IsNullOrWhiteSpace(link?.Href) ? null : new List<FooterLink> { link };
+        }
+
         internal string BuildLocalPath()
         {
             return GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion);
@@ -192,22 +197,6 @@ namespace GoC.WebTemplate.Components
 
             return string.Format(CultureInfo.InvariantCulture, _core.CurrentEnvironment.Path, https, run, _core.WebTemplateTheme, version);
         }
-
-        internal List<FooterLink> BuildSingleListLink(string url, bool newWindow)
-        {
-            if (string.IsNullOrEmpty(url)) return null;
-
-            var link = new List<FooterLink>
-            {
-                new FooterLink
-                {
-                    Href = url,
-                    NewWindow = newWindow
-                }
-            };
-
-            return link;
-        } 
 
         #region GetJson
 

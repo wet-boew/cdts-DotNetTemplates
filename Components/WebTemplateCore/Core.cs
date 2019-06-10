@@ -16,7 +16,7 @@ namespace GoC.WebTemplate.Components
 
         private readonly ICacheProxy _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
-        private readonly IDictionary<string,ICDTSEnvironment> _cdtsEnvironments;
+        private readonly IDictionary<string, ICDTSEnvironment> _cdtsEnvironments;
         private CoreBuilder _builder;
         private CoreRenderer _renderer;
         internal CoreBuilder Builder => _builder ?? (_builder = new CoreBuilder(this));
@@ -53,7 +53,7 @@ namespace GoC.WebTemplate.Components
         public Core(ICurrentRequestProxy currentRequest,
             ICacheProxy cacheProxy,
             IConfigurationProxy configProxy,
-            IDictionary<string,ICDTSEnvironment> cdtsEnvironments)
+            IDictionary<string, ICDTSEnvironment> cdtsEnvironments)
         {
             _cacheProxy = cacheProxy;
             _configProxy = configProxy;
@@ -65,7 +65,7 @@ namespace GoC.WebTemplate.Components
 
         private void SetDefaultValues(ICurrentRequestProxy currentRequest)
         {
-//Set properties
+            //Set properties
             WebTemplateVersion = _configProxy.Version;
 
             UseHTTPS = _configProxy.UseHttps;
@@ -155,7 +155,7 @@ namespace GoC.WebTemplate.Components
         /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
         /// Set by application via web.config
         /// </summary>
-         public string CDNEnvironment => CurrentEnvironment.CDN;
+        public string CDNEnvironment => CurrentEnvironment.CDN;
 
         /// <summary>
         /// The local path to be used during local testing or perfomance testing
@@ -211,7 +211,7 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public DateTime DateModified { get; set; }
-        
+
         /// <summary>
         /// URL to be used for the feedback link
         /// Set by application via web.config
@@ -230,25 +230,35 @@ namespace GoC.WebTemplate.Components
         /// URL to be used for the Privacy link in transactional mode
         /// Set by application programmatically
         /// </summary>
-        public string PrivacyLinkURL { get; set; }
+        [Obsolete("PrivacyLinkURL is being replaced with PrivacyLink, will be removed in v1.33.0")]
+        public string PrivacyLinkURL
+        {
+            get { return PrivacyLink.Href; }
+            set { PrivacyLink.Href = value; }
+        }
 
         /// <summary>
-        /// Will tell the PrivacyLinkURL to open in a new window
+        /// Configures the Privacy Link
         /// Set by application programmatically
         /// </summary>
-        public bool PrivacyLinkNewWindow { get; set; }
+        public FooterLink PrivacyLink { get; set; } = new FooterLink();
 
         /// <summary>
         /// URL to be used for the Terms & Conditions link in transactional mode
         /// Set by application programmatically
         /// </summary>
-        public string TermsConditionsLinkURL { get; set; }
+        [Obsolete("TermsConditionsLinkURL is being replaced with TermsConditionsLink, will be removed in v1.33.0")]
+        public string TermsConditionsLinkURL
+        {
+            get { return TermsConditionsLink.Href; }
+            set { TermsConditionsLink.Href = value; }
+        }
 
         /// <summary>
-        /// Will tell the TermsConditionsLinkURL to open in a new window
+        /// Configures the Terms and Conditions Link
         /// Set by application programmatically
         /// </summary>
-        public bool TermsConditionsLinkNewWindow { get; set; }
+        public FooterLink TermsConditionsLink { get; set; } = new FooterLink();
 
 
         /// <summary>
@@ -486,7 +496,7 @@ namespace GoC.WebTemplate.Components
         /// Only available in the Application Template
         /// </summary>
         public List<MenuLink> MenuLinks { get; set; }
-        
+
         public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
         public HtmlString RenderAppFooter() => Render.RenderAppFooter();
@@ -513,7 +523,7 @@ namespace GoC.WebTemplate.Components
 
         public HtmlString RenderRefFooter() => Render.RenderRefFooter();
 
-        private HtmlString RenderCDNEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly {CdnEnv = CDNEnvironment});
+        private HtmlString RenderCDNEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly { CdnEnv = CDNEnvironment });
 
         public HtmlString RenderServerTop() => RenderCDNEnvOnly();
         public HtmlString RenderServerBottom() => RenderCDNEnvOnly();
@@ -609,7 +619,7 @@ namespace GoC.WebTemplate.Components
             return new HtmlString(info);
         }
 
-        
+
 
     }
 

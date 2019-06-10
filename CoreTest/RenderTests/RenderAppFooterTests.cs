@@ -146,9 +146,9 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void PrivacyLinkNotRenderedWhenURLIsNull(Core sut)
+        public void PrivacyLinkNotRenderedWhenIsNull(Core sut)
         {
-            sut.PrivacyLinkURL = null;
+            sut.PrivacyLink = null;
             var json = sut.RenderAppFooter();
             json.ToString().Should().NotContain("privacyLink");
         }
@@ -164,8 +164,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void PrivacyLinkRenderedNewWindow(Core sut)
         {
-            sut.PrivacyLinkURL = "http://foo.bar";
-            sut.PrivacyLinkNewWindow = true;
+            sut.PrivacyLink = new FooterLink {Href = "http://foo.bar", NewWindow = true};
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("\"newWindow\":true");
         }
@@ -173,7 +172,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void TermsLinkNotRenderedWhenURLIsNull(Core sut)
         {
-            sut.TermsConditionsLinkURL = null;
+            sut.TermsConditionsLink = null;
             var json = sut.RenderAppFooter();
             json.ToString().Should().NotContain("termsLink");
         }
@@ -189,8 +188,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void TermsLinkRendereNewWindow(Core sut)
         {
-            sut.TermsConditionsLinkURL = "http://foo.bar";
-            sut.TermsConditionsLinkNewWindow = true;
+            sut.TermsConditionsLink = new FooterLink { Href = "http://foo.bar", NewWindow = true };
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("\"newWindow\":true");
         }
