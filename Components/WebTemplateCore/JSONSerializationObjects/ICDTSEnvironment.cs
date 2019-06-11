@@ -12,7 +12,7 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         string Theme { get; set; }
         string AppendToTitle { get; set; }
         int FooterSectionLimit { get; set; }
-        bool CanHaveMultiContactLinks { get; set; }
+        bool CanHaveMultipleContactLinks { get; set; }
         bool CanHaveContactLinkInAppTemplate { get; set; }
     }
 }

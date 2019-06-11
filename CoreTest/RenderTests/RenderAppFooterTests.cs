@@ -156,7 +156,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void PrivacyLinkRenderedWhenURLIsProvided(Core sut)
         {
-            sut.PrivacyLinkURL = "http://foo.bar";
+            sut.PrivacyLink = new FooterLink {Href = "http://foo.bar"};
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("privacyLink");
         }
@@ -180,7 +180,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void TermsLinkRenderedWhenURLIsProvided(Core sut)
         {
-            sut.TermsConditionsLinkURL = "http://foo.bar";
+            sut.TermsConditionsLink = new FooterLink { Href = "http://foo.bar" };
             var json = sut.RenderAppFooter();
             json.ToString().Should().Contain("termsLink");
         }

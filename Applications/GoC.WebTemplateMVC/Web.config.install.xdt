@@ -39,7 +39,7 @@
         reactionTime="180000"
         sessionAlive="1200000"
         logoutUrl="#"
-        refreshCallbackUrl="#"
+        refreshCallBackUrl="#"
         refreshOnClick="false"
         refreshLimit="120000"
         method=""

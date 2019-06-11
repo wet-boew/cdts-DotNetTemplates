@@ -11,9 +11,17 @@ test_components:
 code_quality_default:
   stage: test
   allow_failure: true
+  tags:
+    - secrets
   script:
+    - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplate\\'
+    - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
+    - 'copy %SECRETS_PATH%\\WebTemplate.snk Components\\WebTemplateCore\\'
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
     - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=DefaultCodeAnalysisReport.xml'
+    - 'del Applications\\GoC.WebTemplate\\WebTemplate.snk'
+    - 'del Applications\\GoC.WebTemplateMVC\\WebTemplate.snk'
+    - 'del Components\\WebTemplateCore\\WebTemplate.snk'
   except:
     - tags
     - master

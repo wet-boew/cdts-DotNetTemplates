@@ -23,7 +23,7 @@ namespace GoC.WebTemplate.Components.Proxies
         public bool ShowPostContent => Configurations.Settings.ShowPostContent;
         public string FeedbackLinkUrl => Configurations.Settings.FeedbackLinkUrl;
         public string FeedbackLinkUrlFr => Configurations.Settings.FeedbackLinkUrlFr;
-        public bool ShowShearch => Configurations.Settings.ShowSearch;
+        public bool ShowSearch => Configurations.Settings.ShowSearch;
         public bool ShowSharePageLink => Configurations.Settings.ShowSharePageLink;
         public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
         public string StaticFilesLocation => Configurations.Settings.StaticFilesLocation;

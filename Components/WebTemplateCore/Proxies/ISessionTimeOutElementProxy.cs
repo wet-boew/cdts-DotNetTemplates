@@ -23,20 +23,20 @@ namespace GoC.WebTemplate.Components.Proxies
         /// period of time for the session to stay alive until the modal dialog appears (default 20 minutes).
         /// </summary>
         /// <remarks>time provided in milliseconds</remarks>
-        int Sessionalive { get; }
+        int SessionAlive { get; }
 
         /// <summary>
         /// URL that users are sent to when the session has expired.
         /// </summary>
-        string Logouturl { get; }
+        string LogoutUrl { get; }
 
         /// <summary>
         /// URL used to perform an ajax request to determine the validity of the session.
         /// </summary>
-        string RefreshCallbackUrl { get; }
+        string RefreshCallBackUrl { get; }
 
         /// <summary>
-        /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallbackUrl has been specified).
+        /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallBackUrl has been specified).
         /// </summary>
         bool RefreshOnClick { get; }
 

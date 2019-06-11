@@ -79,15 +79,15 @@ namespace GoC.WebTemplate.Components
                 Enabled = _configProxy.SessionTimeOut.Enabled,
                 Inactivity = _configProxy.SessionTimeOut.Inactivity,
                 ReactionTime = _configProxy.SessionTimeOut.ReactionTime,
-                Sessionalive = _configProxy.SessionTimeOut.Sessionalive,
-                Logouturl = _configProxy.SessionTimeOut.Logouturl,
-                RefreshCallbackUrl = _configProxy.SessionTimeOut.RefreshCallbackUrl,
+                SessionAlive = _configProxy.SessionTimeOut.SessionAlive,
+                LogoutUrl = _configProxy.SessionTimeOut.LogoutUrl,
+                RefreshCallBackUrl = _configProxy.SessionTimeOut.RefreshCallBackUrl,
                 RefreshOnClick = _configProxy.SessionTimeOut.RefreshOnClick,
                 RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit,
                 Method = _configProxy.SessionTimeOut.Method,
                 AdditionalData = _configProxy.SessionTimeOut.AdditionalData
             };
-            SessionTimeout.CheckWithServerSessionTimout(currentRequest.Session);
+            SessionTimeout.CheckWithServerSessionTimeout(currentRequest.Session);
 
             //Set Top section options
             LanguageLink = new LanguageLink
@@ -95,7 +95,7 @@ namespace GoC.WebTemplate.Components
                 Href = CoreBuilder.BuildLanguageLinkURL(currentRequest.QueryString)
             };
             ShowPreContent = _configProxy.ShowPreContent;
-            ShowSearch = _configProxy.ShowShearch;
+            ShowSearch = _configProxy.ShowSearch;
 
             //Set preFooter section options
             ShowPostContent = _configProxy.ShowPostContent;

@@ -63,15 +63,15 @@ namespace GoC.WebTemplate.Components.ConfigSections
         /// <summary>
         /// URL used to perform an ajax request to determine the validity of the session.
         /// </summary>
-        [ConfigurationProperty("refreshCallbackUrl", IsRequired = false)]
-        public string RefreshCallbackUrl
+        [ConfigurationProperty("refreshCallBackUrl", IsRequired = false)]
+        public string RefreshCallBackUrl
         {
-            get { return (string)this["refreshCallbackUrl"]; }
-            set { this["refreshCallbackUrl"] = value; }
+            get { return (string)this["refreshCallBackUrl"]; }
+            set { this["refreshCallBackUrl"] = value; }
         }
 
         /// <summary>
-        /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallbackUrl has been specified).
+        /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallBackUrl has been specified).
         /// </summary>
         [ConfigurationProperty("refreshOnClick", IsRequired = false)]
         public bool RefreshOnClick

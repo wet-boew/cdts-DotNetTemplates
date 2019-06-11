@@ -59,7 +59,7 @@ namespace GoC.WebTemplate.Components.Proxies
         /// <summary>
         /// ShowSearch
         /// </summary>
-        bool ShowShearch { get;  }
+        bool ShowSearch { get;  }
 
         /// <summary>
         /// ShowSharePageLink

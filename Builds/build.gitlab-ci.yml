@@ -1,8 +1,16 @@
 build_default:
   stage: build
+  tags:
+    - secrets
   script:
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+    - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplate\\'
+    - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
+    - 'copy %SECRETS_PATH%\\WebTemplate.snk Components\\WebTemplateCore\\'
     - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
+    - 'del Applications\\GoC.WebTemplate\\WebTemplate.snk'
+    - 'del Applications\\GoC.WebTemplateMVC\\WebTemplate.snk'
+    - 'del Components\\WebTemplateCore\\WebTemplate.snk'
   artifacts:
     expire_in: 1 hour
     paths:
