@@ -11,8 +11,8 @@ namespace GoC.WebTemplate.Components.Utils
 {
     internal class CoreRenderer
     {
-        private readonly Unit _unit;
-        internal CoreRenderer(Unit unit)
+        private readonly Model _unit;
+        internal CoreRenderer(Model unit)
         {
             _unit = unit;
         }

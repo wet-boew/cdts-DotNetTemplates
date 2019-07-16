@@ -12,8 +12,8 @@ namespace GoC.WebTemplate.Components
 {
     public class CoreBuilder
     {
-        private readonly Unit _unit;
-        public CoreBuilder(Unit unit)
+        private readonly Model _unit;
+        public CoreBuilder(Model unit)
         {
             _unit = unit;
         }

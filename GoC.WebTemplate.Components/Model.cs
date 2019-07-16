@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Html;
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components
 {
-    public class Unit
+    public class Model
     {
 
         private readonly ICache _cacheProxy;
@@ -23,7 +23,7 @@ namespace GoC.WebTemplate.Components
         internal CoreBuilder Builder => _builder ?? (_builder = new CoreBuilder(this));
         private CoreRenderer Render => _renderer ?? (_renderer = new CoreRenderer(this));
         
-        public Unit(ICurrentRequest currentRequest,
+        public Model(ICurrentRequest currentRequest,
             ICache cacheProxy,
             IConfigurationProxy configProxy,
             IDictionary<string,ICdtsEnvironment> cdtsEnvironments)
