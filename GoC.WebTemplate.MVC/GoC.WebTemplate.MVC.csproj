@@ -30,6 +30,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -173,7 +174,7 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Components\WebTemplateCore\GoC.WebTemplate-Components.csproj">
+    <ProjectReference Include="..\Components\WebTemplateCore\GoC.WebTemplate-Components.csproj">
       <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
       <Name>GoC.WebTemplate-Components</Name>
     </ProjectReference>
