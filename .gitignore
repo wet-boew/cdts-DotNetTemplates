@@ -278,3 +278,6 @@ __pycache__/
 # !tools/packages.config
 /Applications/GoC.WebTemplateMVC/Views/TestWebTemplatePage/HelloWorld.cshtml
 *.swp
+
+# .NET Strongly type files
+*.snk
