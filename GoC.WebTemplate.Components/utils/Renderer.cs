@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Microsoft.AspNetCore.Html;
 using GoC.WebTemplate.Components.Entities;
+using Microsoft.AspNetCore.Html;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils

@@ -1,7 +1,3 @@
-using System.Web;
-using System.Web.SessionState;
-
-// ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils
 {
     public class CurrentRequest : ICurrentRequest

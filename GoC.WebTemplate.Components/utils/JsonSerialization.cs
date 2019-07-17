@@ -3,9 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
-using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using GoC.WebTemplate.Components.Configs;
+using Microsoft.AspNetCore.Html;
 
 namespace GoC.WebTemplate.Components.Utils
 {

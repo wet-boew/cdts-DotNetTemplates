@@ -1,5 +1,3 @@
-using System.Web.SessionState;
-
 namespace GoC.WebTemplate.Components.Utils
 {
     public interface ICurrentRequest

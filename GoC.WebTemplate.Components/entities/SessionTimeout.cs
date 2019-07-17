@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Web.SessionState;
 
-// ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate.Components
+namespace GoC.WebTemplate.Components.Entities
 { 
-     [Serializable]
     public class SessionTimeout
     {
         public SessionTimeout() { }

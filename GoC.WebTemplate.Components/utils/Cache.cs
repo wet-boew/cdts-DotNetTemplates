@@ -1,6 +1,3 @@
-using System.Web;
-using System.Web.Caching;
-
 namespace GoC.WebTemplate.Components.Utils
 {
     public class Cache : ICache

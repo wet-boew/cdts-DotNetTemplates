@@ -9,7 +9,6 @@ using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Configs;
 using Microsoft.AspNetCore.Html;
 
-// ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components
 {
     public class Model
@@ -38,7 +37,6 @@ namespace GoC.WebTemplate.Components
 
         private void SetDefaultValues(ICurrentRequest currentRequest)
         {
-//Set properties
             WebTemplateVersion = _configProxy.Version;
 
             UseHTTPS = _configProxy.UseHttps;
