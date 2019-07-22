@@ -511,6 +511,7 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         /// <param name="fileName">static file name to retreive</param>
         /// <returns>A string containing the content of the file.</returns>
+        [Obsolete("Could be replaced by FileContentCache, except FileContentCache doesn't Html.Encode() or use HtmlString.", false)]
         public HtmlString LoadStaticFile(string fileName)
         {
             var cacheKey = string.Concat(Constants.CACHE_KEY_STATICFILES_PREFIX, ".", fileName);

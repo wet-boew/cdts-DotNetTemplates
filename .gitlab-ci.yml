@@ -59,6 +59,10 @@ build_proj:
   script:
     - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
     - '"%MSBUILD_PATH%" GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj /p:Configuration=Release'
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj /p:Configuration=Release'
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj /p:Configuration=Release'
 
 build_sample:
   stage: build
