@@ -10,12 +10,12 @@ using GoC.WebTemplate.Components.Entities;
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components
 {
-    public class CoreBuilder
+    public class ModelBuilder
     {
-        private readonly Model _unit;
-        public CoreBuilder(Model unit)
+        private readonly Model _model;
+        public ModelBuilder(Model model)
         {
-            _unit = unit;
+            _model = model;
         }
         /// <summary>
         /// Builds the URL to be used by the English/francais link at the top of the page for the language toggle.
@@ -41,34 +41,34 @@ namespace GoC.WebTemplate.Components
 
         internal List<Link> BuildContactLinks()
         {
-            if (!_unit.CurrentEnvironment.CanHaveMultiContactLinks)
+            if (!_model.CdtsEnvironment.CanHaveMultiContactLinks)
             {
-                if (_unit.ContactLinks?.Count > 1)
+                if (_model.ContactLinks?.Count > 1)
                     throw new InvalidOperationException("Having multiple contact links not allowed in this environment");
 
-                if (_unit.ContactLinks?.Count == 1 && !string.IsNullOrWhiteSpace(_unit.ContactLinks[0]?.Text))
+                if (_model.ContactLinks?.Count == 1 && !string.IsNullOrWhiteSpace(_model.ContactLinks[0]?.Text))
                     throw new InvalidOperationException("Unable to edit Contact Link text in this environment");
             }
 
-            if (_unit.ContactLinks.Any(link => string.IsNullOrWhiteSpace(link.Href)))
+            if (_model.ContactLinks.Any(link => string.IsNullOrWhiteSpace(link.Href)))
                 throw new InvalidOperationException("Href must be specified");
-            return _unit.ContactLinks;
+            return _model.ContactLinks;
 
         }
 
         internal string BuildLocalPath()
         {
-            return GetFormattedJsonString(_unit.LocalPath, _unit.WebTemplateTheme, _unit.WebTemplateVersion);
+            return GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion);
         }
 
         internal List<Breadcrumb> BuildBreadcrumbs()
         {
-            if (_unit.Breadcrumbs == null || !_unit.Breadcrumbs.Any())
+            if (_model.Breadcrumbs == null || !_model.Breadcrumbs.Any())
             {
                 return null;
             }
 
-            return _unit.Breadcrumbs.Select(b => new Breadcrumb
+            return _model.Breadcrumbs.Select(b => new Breadcrumb
             {
                 Href = GetStringForJson(b.Href),
                 Acronym = GetStringForJson(b.Acronym),
@@ -80,31 +80,31 @@ namespace GoC.WebTemplate.Components
         {
             get
             {
-                if (!_unit.FooterSections.Any() && !_unit.CustomFooterLinks.Any()) return null;
+                if (!_model.FooterSections.Any() && !_model.CustomFooterLinks.Any()) return null;
 
-                if (_unit.CurrentEnvironment.FooterSectionLimit > 0)
+                if (_model.CdtsEnvironment.FooterSectionLimit > 0)
                 { // use FooterSections
-                    if (!_unit.FooterSections.Any())
+                    if (!_model.FooterSections.Any())
                         throw new InvalidOperationException(
                             "The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
 
-                    if (_unit.FooterSections.Count > _unit.CurrentEnvironment.FooterSectionLimit)
+                    if (_model.FooterSections.Count > _model.CdtsEnvironment.FooterSectionLimit)
                         throw new InvalidOperationException(
-                            $"The maximum FooterSections allowed for this environment is {_unit.CurrentEnvironment.FooterSectionLimit}");
+                            $"The maximum FooterSections allowed for this environment is {_model.CdtsEnvironment.FooterSectionLimit}");
 
-                    _unit.FooterSections.ForEach(fs => fs.CustomFooterLinks.ForEach(fl => fl.Text = GetStringForJson(fl.Text)));
+                    _model.FooterSections.ForEach(fs => fs.CustomFooterLinks.ForEach(fl => fl.Text = GetStringForJson(fl.Text)));
 
-                    return new List<IFooterSection>(_unit.FooterSections);
+                    return new List<IFooterSection>(_model.FooterSections);
                 }
                 else
                 { // use CustomFooterLinks
 
-                    if (!_unit.CustomFooterLinks.Any())
+                    if (!_model.CustomFooterLinks.Any())
                         throw new InvalidOperationException(
                             "The FooterSections cannot be used in this enviornment, please use the CustomFooterLinks");
 
 
-                    return new List<IFooterSection>(_unit.CustomFooterLinks.Select(fl => new FooterLink
+                    return new List<IFooterSection>(_model.CustomFooterLinks.Select(fl => new FooterLink
                     {
                         Href = fl.Href,
                         NewWindow = fl.NewWindow,
@@ -120,30 +120,30 @@ namespace GoC.WebTemplate.Components
                 return null;
             return new List<Link> { new Link { Href = href, Text = null } };
         }
-        internal string BuildJqueryEnv() => _unit.LoadJQueryFromGoogle ? "external" : null;
+        internal string BuildJqueryEnv() => _model.LoadJQueryFromGoogle ? "external" : null;
 
         internal string BuildDateModified()
         {
 
-            if (DateTime.Compare(_unit.DateModified, DateTime.MinValue) == 0)
+            if (DateTime.Compare(_model.DateModified, DateTime.MinValue) == 0)
             {
                 return null;
             }
-            return _unit.DateModified.ToString("yyyy-MM-dd");
+            return _model.DateModified.ToString("yyyy-MM-dd");
         }
 
-        internal List<Link> BuildIntranentTitleList() => _unit.IntranetTitle == null ? null : new List<Link> { _unit.IntranetTitle };
+        internal List<Link> BuildIntranentTitleList() => _model.IntranetTitle == null ? null : new List<Link> { _model.IntranetTitle };
 
         internal List<LanguageLink> BuildLanguageLinkList()
         {
-            if (!_unit.ShowLanguageLink)
+            if (!_model.ShowLanguageLink)
             {
                 return null;
             }
 
             return new List<LanguageLink> {
                 new LanguageLink {
-                    Href = _unit.LanguageLink.Href
+                    Href = _model.LanguageLink.Href
                 }
             };
         }
@@ -154,29 +154,29 @@ namespace GoC.WebTemplate.Components
         /// <returns>String, the complete path to the cdn</returns>
         internal string BuildCDNPath()
         {
-            if (!_unit.CurrentEnvironment.IsEncryptionModifiable && _unit.UseHTTPS.HasValue)
+            if (!_model.CdtsEnvironment.IsEncryptionModifiable && _model.UseHTTPS.HasValue)
             {
-                throw new InvalidOperationException($"{_unit.Environment} does not allow useHTTPS to be toggled");
+                throw new InvalidOperationException($"{_model.Environment} does not allow useHTTPS to be toggled");
             }
 
-            if (_unit.CurrentEnvironment.IsEncryptionModifiable && !_unit.UseHTTPS.HasValue)
+            if (_model.CdtsEnvironment.IsEncryptionModifiable && !_model.UseHTTPS.HasValue)
             {
-                throw new InvalidOperationException($"{_unit.Environment} requires useHTTPS to be true or false not null.");
+                throw new InvalidOperationException($"{_model.Environment} requires useHTTPS to be true or false not null.");
             }
 
             var https = string.Empty;
-            if (_unit.CurrentEnvironment.IsEncryptionModifiable)
+            if (_model.CdtsEnvironment.IsEncryptionModifiable)
             {
                 //We've already checked to see if this is null before here so ignore this in resharper
                 // ReSharper disable once PossibleInvalidOperationException
-                https = _unit.UseHTTPS.Value ? "s" : string.Empty;
+                https = _model.UseHTTPS.Value ? "s" : string.Empty;
             }
 
             var run = string.Empty;
             var version = string.Empty;
-            if (string.IsNullOrWhiteSpace(_unit.WebTemplateVersion))
+            if (string.IsNullOrWhiteSpace(_model.WebTemplateVersion))
             {
-                if (_unit.CurrentEnvironment.IsVersionRNCombined)
+                if (_model.CdtsEnvironment.IsVersionRNCombined)
                 {
                     version = "rn/";
                 }
@@ -187,11 +187,11 @@ namespace GoC.WebTemplate.Components
             }
             else
             {
-                version = _unit.WebTemplateVersion + "/";
+                version = _model.WebTemplateVersion + "/";
                 run = "app";
             }
 
-            return string.Format(CultureInfo.InvariantCulture, _unit.CurrentEnvironment.Path, https, run, _unit.WebTemplateTheme, version);
+            return string.Format(CultureInfo.InvariantCulture, _model.CdtsEnvironment.Path, https, run, _model.CdtsEnvironment.Theme, version);
         }
 
         #region GetJson

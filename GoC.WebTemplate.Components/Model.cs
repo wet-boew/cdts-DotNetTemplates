@@ -17,10 +17,10 @@ namespace GoC.WebTemplate.Components
         private readonly ICache _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICdtsEnvironment> _cdtsEnvironments;
-        private CoreBuilder _builder;
-        private CoreRenderer _renderer;
-        internal CoreBuilder Builder => _builder ?? (_builder = new CoreBuilder(this));
-        private CoreRenderer Render => _renderer ?? (_renderer = new CoreRenderer(this));
+        private ModelBuilder _builder;
+        private ModelRenderer _renderer;
+        internal ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
+        public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
         
         public Model(ICurrentRequest currentRequest,
             ICache cacheProxy,
@@ -63,7 +63,7 @@ namespace GoC.WebTemplate.Components
             //Set Top section options
             LanguageLink = new LanguageLink
             {
-                Href = CoreBuilder.BuildLanguageLinkURL(currentRequest.QueryString)
+                Href = ModelBuilder.BuildLanguageLinkURL(currentRequest.QueryString)
             };
             ShowPreContent = _configProxy.ShowPreContent;
             ShowSearch = _configProxy.ShowShearch;
@@ -121,41 +121,13 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public string Environment { get; set; }
 
-        public ICdtsEnvironment CurrentEnvironment => _cdtsEnvironments[Environment];
-        /// <summary>
-        /// CDNEnv from the cdtsEnvironments node of the web.config, for the specified environment
-        /// Set by application via web.config
-        /// </summary>
-         public string CDNEnvironment => CurrentEnvironment.CDN;
-
-        /// <summary>
-        /// The local path to be used during local testing or perfomance testing
-        /// Set by application via web.config
-        /// </summary>
-        public string LocalPath => CurrentEnvironment.LocalPath;
-
-        /// <summary>
-        /// URL from the cdtsEnvironments node of the web.config, for the specified environment
-        /// Set by application via web.config
-        /// </summary>
-        public string CDNURL => CurrentEnvironment.Path;
-
-        /// <summary>
-        /// Represents the Theme to use to build the age. ex: GCWeb
-        /// Set by application via web.config or programmatically
-        /// </summary>
-        public string WebTemplateTheme => CurrentEnvironment.Theme;
-
+        public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Environment];
+        
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
         public string CDNPath => Builder.BuildCDNPath();
-
-        /// <summary>
-        /// Text to append to HeaderTitle
-        /// </summary>
-        public string AppendToTitle => CurrentEnvironment.AppendToTitle;
 
         /// <summary>
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter
@@ -284,7 +256,7 @@ namespace GoC.WebTemplate.Components
             get
             {
                 return _staticFilesPath ??
-                       (_staticFilesPath = string.Concat(_configProxy.StaticFilesLocation, "/", WebTemplateTheme));
+                       (_staticFilesPath = string.Concat(_configProxy.StaticFilesLocation, "/", CdtsEnvironment.Theme));
             }
             set { _staticFilesPath = value; }
         }
@@ -313,22 +285,22 @@ namespace GoC.WebTemplate.Components
             get
             {
 
-                if (string.IsNullOrWhiteSpace(AppendToTitle))
+                if (string.IsNullOrWhiteSpace(CdtsEnvironment.AppendToTitle))
                 {
                     return _headerTitle;
                 }
 
                 if (string.IsNullOrWhiteSpace(_headerTitle))
                 {
-                    return AppendToTitle;
+                    return CdtsEnvironment.AppendToTitle;
                 }
 
-                if (_headerTitle.EndsWith(AppendToTitle))
+                if (_headerTitle.EndsWith(CdtsEnvironment.AppendToTitle))
                 {
                     return _headerTitle;
                 }
 
-                return _headerTitle + AppendToTitle;
+                return _headerTitle + CdtsEnvironment.AppendToTitle;
             }
             set
             {
@@ -445,60 +417,7 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public List<MenuLink> MenuLinks { get; set; }
         
-        public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
-
-        public HtmlString RenderAppFooter() => Render.RenderAppFooter();
-
-        public HtmlString RenderAppTop() => Render.RenderAppTop();
-
         public Link IntranetTitle { get; set; }
-
-        public HtmlString RenderTransactionalTop() => Render.RenderTransactionalTop();
-
-        public HtmlString RenderTop() => Render.RenderTop();
-
-        public HtmlString RenderRefTop(bool isApplication) => Render.RenderRefTop(isApplication);
-
-        public HtmlString RenderUnilingualPreFooter() => Render.RenderUnilingualPreFooter();
-
-        public HtmlString RenderPreFooter() => Render.RenderPreFooter();
-
-        public HtmlString RenderTransactionalPreFooter() => Render.RenderTransactionalPreFooter();
-
-        public HtmlString RenderFooter() => Render.RenderFooter();
-
-        public HtmlString RenderTransactionalFooter() => Render.RenderTransactionalFooter();
-
-        public HtmlString RenderRefFooter() => Render.RenderRefFooter();
-
-        private HtmlString RenderCDNEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly {CdnEnv = CDNEnvironment});
-
-        public HtmlString RenderServerTop() => RenderCDNEnvOnly();
-        public HtmlString RenderServerBottom() => RenderCDNEnvOnly();
-        public HtmlString RenderServerRefTop() => RenderCDNEnvOnly();
-        public HtmlString RenderServerRefFooter() => RenderCDNEnvOnly();
-
-        /// <summary>
-        /// Builds the html of the WET Session Timeout control that provides session timeout and inactivity functionality.
-        /// For more documentation: https://wet-boew.github.io/v4.0-ci/demos/session-timeout/session-timeout-en.html
-        /// </summary>
-        /// <returns>The html of the WET session timeout control
-        /// </returns>
-        public HtmlString RenderSessionTimeoutControl() => Render.RenderSessionTimeoutControl();
-
-        /// <summary>
-        /// Builds a string with the format required by the closure templates, to represent the left side menu
-        /// </summary>
-        /// <returns>
-        /// string in the format expected by the Closure Templates to generate the left menu
-        /// </returns>
-        public HtmlString RenderLeftMenu() => Render.RenderLeftMenu();
-
-        public HtmlString RenderHtmlHeaderElements() => Render.RenderHtmlElements(HTMLHeaderElements);
-
-        public HtmlString RenderHtmlBodyElements() => Render.RenderHtmlElements(HTMLBodyElements);
-
-        public HtmlString RenderSplashInfo() => Render.RenderSplashInfo();
 
         /// <summary>
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
