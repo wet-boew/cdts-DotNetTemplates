@@ -199,12 +199,6 @@
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Components\WebTemplateCore\GoC.WebTemplate-Components.csproj">
-      <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
-      <Name>GoC.WebTemplate-Components</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

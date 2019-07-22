@@ -3,12 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Components", "Components", "{E5D96498-3C33-4E87-96D1-EF220E63BBE9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate-Components", "Components\WebTemplateCore\GoC.WebTemplate-Components.csproj", "{A9ACE274-5F6A-4634-A40A-E775F5B81B90}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{CEB338B9-C37F-44A1-A4D9-D1A71D6F822C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTest", "CoreTest\CoreTest.csproj", "{D95157C2-E029-476E-AA6F-E8878D487C2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components", "GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj", "{A2F753B1-CE70-4455-8F5D-79866FBFC567}"
@@ -19,16 +13,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.MVC", "GoC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.WebForms", "GoC.WebTemplate.WebForms\GoC.WebTemplate.WebForms.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Test", "GoC.WebTemplate.Components.Test\GoC.WebTemplate.Components.Test.csproj", "{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A9ACE274-5F6A-4634-A40A-E775F5B81B90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D95157C2-E029-476E-AA6F-E8878D487C2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,13 +41,13 @@ Global
 		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Release|Any CPU.Build.0 = Release|Any CPU
+		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A9ACE274-5F6A-4634-A40A-E775F5B81B90} = {E5D96498-3C33-4E87-96D1-EF220E63BBE9}
-		{D95157C2-E029-476E-AA6F-E8878D487C2F} = {CEB338B9-C37F-44A1-A4D9-D1A71D6F822C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2B7D4491-D851-4561-BB21-DF27490D6B66}

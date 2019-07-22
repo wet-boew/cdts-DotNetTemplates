@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace GoC.WebTemplate.Components.Entities
-{ 
+{
     public class SessionTimeout
     {
         public SessionTimeout() { }
 
-        public SessionTimeout(bool enabled, 
+        public SessionTimeout(bool enabled,
                              int inactivity,
                              int reactionTime,
                              int sessionalive,
@@ -21,7 +21,7 @@ namespace GoC.WebTemplate.Components.Entities
             Inactivity = inactivity;
             ReactionTime = reactionTime;
             Sessionalive = sessionalive;
-            Logouturl = logouturl;            
+            Logouturl = logouturl;
             RefreshCallbackUrl = refreshCallbackUrl;
             RefreshOnClick = refreshOnClick;
             RefreshLimit = refreshLimit;
@@ -45,15 +45,19 @@ namespace GoC.WebTemplate.Components.Entities
         /// It will override Sessionalive, Inactivity and ReactionTime if it fails the check
         /// </summary>
         /// <param name="session">current session</param>
-        public void CheckWithServerSessionTimout(HttpSessionState session)
+        public void CheckWithServerSessionTimout(ISession session)
         {
             const int min = 60000; //one min in millisections
-            if (Enabled && session != null && session.Timeout * min < Sessionalive)
+            if (Enabled && session != null && session.IsAvailable &&
+                session.TryGetValue("timeout", out byte[] temp) &&
+                int.TryParse(temp.ToString(), out int timeout) &&
+                timeout * min < Sessionalive)
             {
-                while (session.Timeout <= 1) session.Timeout++; // one min will force the popup instantly so increase the session
-                Sessionalive = session.Timeout * min;
+                while (timeout <= 1) timeout++; // one min will force the popup instantly so increase the session
+                Sessionalive = timeout * min;
                 Inactivity = Sessionalive - min;
                 ReactionTime = min;
+
             }
         }
     }

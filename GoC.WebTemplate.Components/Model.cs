@@ -538,16 +538,17 @@ namespace GoC.WebTemplate.Components
 
                 //---[ If we get here, we really have to load the data
                 string filePath;
-                if (StaticFilesPath.StartsWith("~"))
-                {
-                    // ReSharper disable once AssignNullToNotNullAttribute
-                    filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
-                        fileName);
-                }
-                else
-                {
+                // todo implement in designated base component
+                //if (StaticFilesPath.StartsWith("~"))
+                //{
+                //    // ReSharper disable once AssignNullToNotNullAttribute
+                //    filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
+                //        fileName);
+                //}
+                //else
+                //{
                     filePath = Path.Combine(StaticFilesPath, fileName);
-                }
+                //}
 
                 try
                 {

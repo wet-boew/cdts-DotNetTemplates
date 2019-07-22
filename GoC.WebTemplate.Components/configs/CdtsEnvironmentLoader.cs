@@ -35,12 +35,13 @@ namespace GoC.WebTemplate.Components.Configs
                     return environments;
                 }
 
-                //If the path is relative we need to map it.
-                if (filename.StartsWith("~"))
-                {
-                    //We might want to decouple this.
-                    filename = HttpContext.Current.Server.MapPath(filename);
-                }
+                // Todo: Comment out until moved to appropreate project
+                ////If the path is relative we need to map it.
+                //if (filename.StartsWith("~"))
+                //{
+                //    //We might want to decouple this.
+                //    filename = HttpContext.Current.Server.MapPath(filename);
+                //}
 
                 //We don't catch exceptions because this file needs to exist. 
                 //So we want the app to crash if it isn't.

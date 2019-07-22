@@ -139,12 +139,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Components\WebTemplateCore\GoC.WebTemplate-Components.csproj">
-      <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
-      <Name>GoC.WebTemplate-Components</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
