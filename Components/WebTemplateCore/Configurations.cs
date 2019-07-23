@@ -19,12 +19,6 @@ namespace GoC.WebTemplate.Components
             set { this["xmlns"] = value; }
         }
 
-        [ConfigurationProperty("customSearch")]
-        public string CustomSearch
-        {
-            get { return (string) this["customSearch"]; }
-            set { this["customSearch"] = value; }
-        }
         [ConfigurationProperty("signOutLinkURL")]
         public string SignOutLinkURL
         {
