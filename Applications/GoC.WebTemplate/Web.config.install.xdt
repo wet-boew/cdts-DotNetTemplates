@@ -21,7 +21,7 @@
   <GoC.WebTemplate xmlns="http://tempuri.org/WebTemplateWebForms.xsd" xdt:Transform="InsertIfMissing"/>
   <GoC.WebTemplate xdt:Transform="Replace"
   xmlns="http://tempuri.org/WebTemplateWebForms.xsd"
-   version="v4_0_30"
+   version="v4_0_31"
    environment="Akamai"
    loadJQueryFromGoogle="false"
    showPreContent="true"
