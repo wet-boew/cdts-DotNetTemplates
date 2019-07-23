@@ -3,7 +3,6 @@ namespace GoC.WebTemplate.Components.Proxies
 
     public class ConfigurationProxy : IConfigurationProxy
     {
-        public string CustomSearch => Configurations.Settings.CustomSearch;
         public string CustomSiteMenuURL => Configurations.Settings.CustomSiteMenuURL;
         public string SignOutLinkURL => Configurations.Settings.SignOutLinkURL;
         public string SignInLinkURL => Configurations.Settings.SignInLinkURL;
