@@ -8,6 +8,6 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
     /// </summary>
     internal class GCIntranetAppTop : AppTop
     {
-        public List<Link> IntranetTitle { get; set; }
+        public List<IntranetTitle> IntranetTitle { get; set; }
     }
 }
