@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.JSONSerializationObjects;
 using Xunit;
 
 namespace CoreTest.RenderTests
@@ -33,7 +34,7 @@ namespace CoreTest.RenderTests
     [Theory, AutoNSubstituteData]
     public void IntranetTitleTransacationalTop(Core sut)
     {
-        sut.IntranetTitle = new Link { Text = "foo", Href = "bar", Acronym = "plat" };
+        sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
         sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
     }
         

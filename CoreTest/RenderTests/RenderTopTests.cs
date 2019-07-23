@@ -53,11 +53,9 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void IntranetTitleTop(Core sut)
         {
-            sut.IntranetTitle = new Link { Text = "foo", Href = "bar", Acronym = "plat" };
-            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
+            sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat", BoldText="boldtext"};
+            sut.RenderTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"boldText\":\"boldtext\"}]");
         }
-
-
 
         [Theory, AutoNSubstituteData]
         public void TopSecMenuFalseInTopWhenLeftMenuItems(Core sut)
@@ -75,5 +73,6 @@ namespace CoreTest.RenderTests
             });
             sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":true");
         }
+
     }
 }

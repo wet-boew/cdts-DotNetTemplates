@@ -136,7 +136,7 @@ namespace GoC.WebTemplate.Components
             return _core.DateModified.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture);
         }
 
-        internal List<Link> BuildIntranentTitleList() => _core.IntranetTitle == null ? null : new List<Link> { _core.IntranetTitle };
+        internal List<IntranetTitle> BuildIntranentTitleList() => _core.IntranetTitle == null ? null : new List<IntranetTitle> { _core.IntranetTitle };
 
         internal List<LanguageLink> BuildLanguageLinkList()
         {

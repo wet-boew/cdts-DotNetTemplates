@@ -503,7 +503,7 @@ namespace GoC.WebTemplate.Components
 
         public HtmlString RenderAppTop() => Render.RenderAppTop();
 
-        public Link IntranetTitle { get; set; }
+        public IntranetTitle IntranetTitle { get; set; }
 
         public HtmlString RenderTransactionalTop() => Render.RenderTransactionalTop();
 

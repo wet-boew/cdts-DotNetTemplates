@@ -282,7 +282,7 @@ namespace GoC.WebTemplate.Components
             return JsonSerializationHelper.SerializeToJson(new GCIntranetAppTop
             {
                 AppName = new List<Link> { _core.ApplicationTitle },
-                IntranetTitle = _core.Builder.BuildIntranentTitleList(),
+                IntranetTitle = _core.IntranetTitle == null ? null : new List<Link> { _core.IntranetTitle }, //_core.Builder.BuildIntranentTitleList(),
                 SignIn = _core.Builder.BuildHideableHrefOnlyLink(_core.SignInLinkURL, _core.ShowSignInLink),
                 SignOut = _core.Builder.BuildHideableHrefOnlyLink(_core.SignOutLinkURL, _core.ShowSignOutLink),
                 CdnEnv = _core.CDNEnvironment,
