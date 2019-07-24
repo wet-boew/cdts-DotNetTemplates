@@ -37,7 +37,7 @@
     var defTop = document.getElementById("def-top");
     defTop.outerHTML = wet.builder.top( @ViewBag.WebTemplateCore.RenderTransactionalTop());
 </script>
-    <main role="main" property="mainContentOfPage" class="container">
+    <main role="main" property="mainContentOfPage" class="container" typeof="WebPageElement">
         <!-- the main content -->
         @RenderBody()
         <!-- end main content -->

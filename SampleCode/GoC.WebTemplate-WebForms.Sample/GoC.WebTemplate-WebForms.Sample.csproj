@@ -57,11 +57,11 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7143.25461, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.31.0-b305\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7144.18263, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.31.0-b304\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.WebForms, Version=1.30.7143.25462, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.31.0-b305\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.WebForms, Version=1.30.7144.18263, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.31.0-b304\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
