@@ -27,7 +27,7 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         public string Method { get; set; }
 
         /// <summary>
-        /// Used to create hidden form inputs.
+        /// Optional. Used to create hidden form inputs.
         /// </summary>
         [JsonConverter(typeof(HiddenInputConverter))]
         public List<KeyValuePair<string, string>> HiddenInput { get; set; }

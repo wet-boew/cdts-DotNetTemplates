@@ -23,10 +23,10 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.CustomSearch = new CustomSearch
             {
                 Action = "http://hrsdc.prv/cgi-bin/recherche-search/Intraweb/index.aspx",
-                Id = "0001",
-                Method = "",
+                // Id = "0001", optional
+                Method = "get", // 'get' or 'post'
                 Placeholder = "Search ESDC IntraWeb",
-                HiddenInput = new List<KeyValuePair<string, string>>
+                HiddenInput = new List<KeyValuePair<string, string>> //optional
                 {
                     new KeyValuePair<string, string>("GoCTemplateCulture", "en-CA"),
                     new KeyValuePair<string, string>("p1", "gc")
