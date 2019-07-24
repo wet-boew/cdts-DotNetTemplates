@@ -26,9 +26,9 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = true;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.Inactivity = 30000;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.Logouturl = "Logout.aspx";            
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.SessionAlive = 30000;
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.LogoutUrl = "Logout.aspx";            
+            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "SessionValidity.aspx";
             WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
             WebTemplateMaster.WebTemplateCore.SessionTimeout.Method = "";

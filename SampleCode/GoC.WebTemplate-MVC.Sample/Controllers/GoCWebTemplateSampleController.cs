@@ -194,9 +194,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.SessionTimeout.Enabled = true;
             WebTemplateCore.SessionTimeout.Inactivity = 30000;
             WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-            WebTemplateCore.SessionTimeout.Logouturl = "Logout";
-            WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity";
+            WebTemplateCore.SessionTimeout.SessionAlive = 30000;
+            WebTemplateCore.SessionTimeout.LogoutUrl = "Logout";
+            WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "SessionValidity";
             WebTemplateCore.SessionTimeout.RefreshOnClick = false;
             WebTemplateCore.SessionTimeout.RefreshLimit = 3;
             WebTemplateCore.SessionTimeout.Method = "";
@@ -287,17 +287,6 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
             WebTemplateCore.SplashPageInfo.EnglishName = "[My web asset]";
             WebTemplateCore.SplashPageInfo.FrenchName = "[Mon actif web]";
-            return View();
-        }
-
-        public ActionResult GCIntranetThemeSample()
-        {
-
-            WebTemplateCore.Environment = "ESDC_PROD";
-            WebTemplateCore.UseHTTPS = true;
-            WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
-            WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";  
-            
             return View();
         }
 	}

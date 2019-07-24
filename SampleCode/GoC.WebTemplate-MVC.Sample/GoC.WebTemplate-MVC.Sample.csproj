@@ -29,6 +29,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,13 +49,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7100.24903, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.30.2-b298-2\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7143.25461, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.31.0-b305\lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.MVC, Version=1.30.7100.24904, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.30.2-b298-2\lib\Net45\GoC.WebTemplate.MVC.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="GoC.WebTemplate.MVC, Version=1.30.7143.25462, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-MVC.1.31.0-b305\lib\Net45\GoC.WebTemplate.MVC.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -103,6 +102,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ExtendedBaseController.cs" />
+    <Compile Include="Controllers\GoCIntranetController.cs" />
     <Compile Include="Controllers\GoCWebTemplateApplicationSampleController.cs" />
     <Compile Include="Controllers\GoCWebTemplateExtendedCtrlSampleController.cs" />
     <Compile Include="Controllers\GoCWebTemplateSampleController.cs" />
@@ -114,8 +114,6 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\myJS.js" />
-    <Content Include="Content\mystyle.css" />
     <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\footer-fr.html" />
@@ -191,7 +189,7 @@
     <Content Include="Views\GoCWebTemplateSample\SplashPageSample.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\GoCWebTemplateSample\GCIntranetThemeSample.cshtml" />
+    <Content Include="Views\GoCIntranet\GCIntranetThemeSample.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GoCWebTemplateApplicationSample\StandardPage.cshtml" />

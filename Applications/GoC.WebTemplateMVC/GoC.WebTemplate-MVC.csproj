@@ -30,6 +30,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -205,6 +206,7 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.SplashPage_Layout.cshtml" />
     <Content Include="Views\TestWebTemplatePage\SplashPage.cshtml" />
     <Content Include="WebTemplate.snk" />
+    <Content Include="Views\Test\SubThemeTestPage.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
