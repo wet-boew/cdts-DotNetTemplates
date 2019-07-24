@@ -177,17 +177,22 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderCustomSearchWhenSet(Core sut)
         {
-            sut.CustomSearch = "Foo";
-            sut.RenderAppTop().ToString().Should().Contain("\"customSearch\":\"Foo\"");
-        }
 
-        [Theory, AutoNSubstituteData]
-        public void CustomSearchIsRendered(Core sut)
-        {
-            sut.CustomSearch = "foo";
+            sut.CustomSearch = new CustomSearch
+            {
+                Action = "action1",
+                Id = "id3",
+                Method = "method4",
+                Placeholder = "placeholder5",
+                HiddenInput = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("name1", "val1"),
+                    new KeyValuePair<string, string>("name2", "val2")
+                }
+            };
+
             var json = sut.RenderAppTop();
-            json.ToString().Should().Contain("\"customSearch\":\"foo\"");
-
+            json.ToString().Should().Contain("\"customSearch\":[{\"action\":\"action1\",\"placeholder\":\"placeholder5\",\"id\":\"id3\",\"method\":\"method4\",\"hiddenInput\":[{\"name\":\"name1\",\"value\":\"val1\"},{\"name\":\"name2\",\"value\":\"val2\"}]}]");
         }
 
         [Theory, AutoNSubstituteData]
