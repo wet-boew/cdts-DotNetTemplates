@@ -40,6 +40,20 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             WebTemplateMaster.WebTemplateCore.SignInLinkURL = "about:blank";
             WebTemplateMaster.WebTemplateCore.ShowSignInLink = true;
             WebTemplateMaster.WebTemplateCore.AppSettingsURL = "http://tempuri.com";
+
+
+            WebTemplateMaster.WebTemplateCore.CustomSearch = new CustomSearch
+            {
+                Action = "http://hrsdc.prv/cgi-bin/recherche-search/Intraweb/index.aspx",
+                Id = "0001",
+                Method = "",
+                Placeholder = "Search ESDC IntraWeb",
+                HiddenInput = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("GoCTemplateCulture", "en-CA"),
+                    new KeyValuePair<string, string>("p1", "gc")
+                }
+            };
         }
     }
 }
