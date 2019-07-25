@@ -89,12 +89,21 @@ WebTemplateCore.FooterLinks.Add(new FooterLink {
 
 
 <h2>Custom Search</h2>
-<p>This setting allows you to override the default search behaviour.</p>
-<p><code class="wb-prettify">CustomSearch</code> You need to contact the CDTS team to enable this option, as it needs to be added to the CDTS Template.</p>
+<p><code class="wb-prettify">CustomSearch</code> setting allows you to override the default search behaviour. Get more details in the code hints and from <a href="http://www.gcpedia.gc.ca/wiki/Centrally_Deployed_Templates_Solution_(CDTS)/Intranet#Section_top_references">CDTS documentation</a></p>
 <div class="wb-prettify all-pre lang-vb linenums">
 <pre>
-//Use the SDS Custom Search from the templates
-WebTemplateCore.CustomSearch ="SDS"; 
+WebTemplateMaster.WebTemplateCore.CustomSearch = new CustomSearch
+{
+    Action = "http://hrsdc.prv/cgi-bin/recherche-search/Intraweb/index.aspx",
+    // Id = "0001", optional
+    Method = "get", // 'get' or 'post'
+    Placeholder = "Search ESDC IntraWeb",
+    HiddenInput = new List&lt;KeyValuePair&lt;string, string&gt;&gt; //optional
+    {
+        new KeyValuePair&lt;string, string&gt;("GoCTemplateCulture", "en-CA"),
+        new KeyValuePair&lt;string, string&gt;("p1", "gc")
+    }
+};
 </pre>
 </div>
 

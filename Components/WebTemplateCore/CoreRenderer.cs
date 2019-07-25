@@ -294,7 +294,7 @@ namespace GoC.WebTemplate.Components
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
                 AppSettings = _core.Builder.BuildHideableHrefOnlyLink(_core.AppSettingsURL, true),
                 MenuPath = _core.CustomSiteMenuURL,
-                CustomSearch = _core.CustomSearch,
+                CustomSearch = new List<CustomSearch> { _core.CustomSearch },
                 TopSecMenu = _core.LeftMenuItems.Any(),
                 MenuLinks = _core.MenuLinks
             });
@@ -316,7 +316,7 @@ namespace GoC.WebTemplate.Components
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
                 AppSettings = _core.Builder.BuildHideableHrefOnlyLink(_core.AppSettingsURL, true),
                 MenuPath = _core.CustomSiteMenuURL,
-                CustomSearch = _core.CustomSearch,
+                CustomSearch = new List<CustomSearch> { _core.CustomSearch },
                 TopSecMenu = _core.LeftMenuItems.Any(),
                 MenuLinks = _core.MenuLinks
             });

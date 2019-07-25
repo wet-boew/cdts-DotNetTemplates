@@ -116,7 +116,6 @@ namespace GoC.WebTemplate.Components
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSearch = string.IsNullOrEmpty(_configProxy.CustomSearch) ? null : _configProxy.CustomSearch;
             CustomSiteMenuURL = string.IsNullOrEmpty(_configProxy.CustomSiteMenuURL) ? null : _configProxy.CustomSiteMenuURL;
         }
 
@@ -418,9 +417,9 @@ namespace GoC.WebTemplate.Components
         public bool LoadJQueryFromGoogle { get; set; }
 
         /// <summary>
-        /// Allows for a custom search to be used in the application, you must contact CDTS to have one created.
+        /// Allows for a custom search to be used in the application.
         /// </summary>
-        public string CustomSearch { get; set; }
+        public CustomSearch CustomSearch { get; set; }
 
         /// <summary>
         /// A custom site menu to be used in place of the standard canada.ca site menu

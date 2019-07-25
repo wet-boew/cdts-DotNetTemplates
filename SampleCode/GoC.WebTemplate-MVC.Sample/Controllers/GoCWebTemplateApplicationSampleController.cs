@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using GoC.WebTemplate.Components.JSONSerializationObjects;
+using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
@@ -18,6 +20,19 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.ShowSignOutLink = true;
             WebTemplateCore.AppSettingsURL = "http://tempuri.com";
 
+            WebTemplateCore.CustomSearch = new CustomSearch
+            {
+                Action = "http://hrsdc.prv/cgi-bin/recherche-search/Intraweb/index.aspx",
+                // Id = "0001", optional
+                Method = "get", // 'get' or 'post'
+                Placeholder = "Search ESDC IntraWeb",
+                HiddenInput = new List<KeyValuePair<string, string>> //optional
+                {
+                    new KeyValuePair<string, string>("GoCTemplateCulture", "en-CA"),
+                    new KeyValuePair<string, string>("p1", "gc")
+                }
+            };
+            
             return View();
         }
 
