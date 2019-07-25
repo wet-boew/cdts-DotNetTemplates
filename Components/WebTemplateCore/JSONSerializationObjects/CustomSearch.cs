@@ -31,33 +31,33 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         /// </summary>
         [JsonConverter(typeof(HiddenInputConverter))]
         public List<KeyValuePair<string, string>> HiddenInput { get; set; }
-    }
 
-    public class HiddenInputConverter : JsonConverter
-    {
-        public override bool CanConvert(Type objectType)
+        public class HiddenInputConverter : JsonConverter
         {
-            return objectType == typeof(List<KeyValuePair<string, string>>);
-        }
-
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
-        {
-            var inputs = (List<KeyValuePair<string, string>>)value;
-            var newInputs = new List<Dictionary<string, string>>();
-            foreach (var input in inputs)
+            public override bool CanConvert(Type objectType)
             {
-                newInputs.Add(new Dictionary<string, string>
+                return objectType == typeof(List<KeyValuePair<string, string>>);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                throw new NotImplementedException();
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                var inputs = (List<KeyValuePair<string, string>>)value;
+                var newInputs = new List<Dictionary<string, string>>();
+                foreach (var input in inputs)
+                {
+                    newInputs.Add(new Dictionary<string, string>
                 {
                     { "name", input.Key },
                     { "value", input.Value }
                 });
+                }
+                serializer.Serialize(writer, newInputs);
             }
-            serializer.Serialize(writer, newInputs);
         }
     }
 }
