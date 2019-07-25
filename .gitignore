@@ -350,3 +350,8 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+*.swp
+
+# Duplicate project files
+SampleCode/GoC.WebTemplate-MVC.Sample/Views/GoC.WebTemplate
+SampleCode/GoC.WebTemplate-WebForms.Sample/GoC.WebTemplate
