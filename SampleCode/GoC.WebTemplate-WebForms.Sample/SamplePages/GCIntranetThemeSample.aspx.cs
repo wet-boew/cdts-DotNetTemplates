@@ -1,4 +1,5 @@
 ﻿using System;
+using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.JSONSerializationObjects;
 using GoC.WebTemplate.WebForms;
 
@@ -13,10 +14,10 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             WebTemplateMaster.WebTemplateCore.UseHTTPS = true;
 
             //custom intranet title
-            WebTemplateMaster.WebTemplateCore.IntranetTitle = new IntranetTitle
+            WebTemplateMaster.WebTemplateCore.IntranetTitle = new Link
             {
                 Href = "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_31/cdts/samples/subtheme-esdc-en.shtml",
-                BoldText = "ESDC Sub",
+                //BoldText = "ESDC Sub",
                 Acronym = "Employment and Social Development Canada Sub Theme",
                 Text = " Custom Title"
             };
