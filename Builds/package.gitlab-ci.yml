@@ -3,6 +3,8 @@ package_components:
   dependencies: 
     - version_components
     - build_default
+  tags:
+    - nuget
   only:
     - tags
     - master
@@ -19,6 +21,8 @@ package_mvc:
   dependencies: 
     - version_mvc
     - build_default
+  tags:
+    - nuget
   only:
     - tags
     - master
@@ -35,6 +39,8 @@ package_forms:
   dependencies: 
     - version_forms
     - build_default
+  tags:
+    - nuget
   only:
     - tags
     - master
@@ -51,6 +57,8 @@ package_mvc_sample:
   dependencies: 
     - version_mvc_sample
     - build_sample
+  tags:
+    - nuget
   only:
     - tags
     - master
@@ -67,6 +75,8 @@ package_forms_sample:
   dependencies: 
     - version_froms_sample
     - build_sample
+  tags:
+    - nuget
   only:
     - tags
     - master

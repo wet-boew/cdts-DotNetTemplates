@@ -34,7 +34,8 @@ deploy:
     - package_mvc_sample
     - package_forms_sample
   tags:
-    - artifactory_deploy
+    - artifactory
+    - curl
   environment:
     name: Artifactory
     url: '%ARTIFACTORY_DEPLOY%'

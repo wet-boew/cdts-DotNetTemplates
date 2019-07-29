@@ -27,6 +27,7 @@
     <TargetFrameworkProfile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -66,7 +67,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.LeftMenu.Master" />

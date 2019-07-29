@@ -154,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
-    <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

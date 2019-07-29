@@ -2,6 +2,8 @@ build_default:
   stage: build
   tags:
     - secrets
+    - nuget
+    - msbuild
   script:
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
     - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplate\\'
@@ -22,6 +24,9 @@ build_default:
 
 build_sample:
   stage: build
+  tags:
+    - nuget
+    - msbuild
   script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'

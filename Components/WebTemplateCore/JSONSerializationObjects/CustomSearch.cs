@@ -32,7 +32,7 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         [JsonConverter(typeof(HiddenInputConverter))]
         public List<KeyValuePair<string, string>> HiddenInput { get; set; }
 
-        public class HiddenInputConverter : JsonConverter
+        internal class HiddenInputConverter : JsonConverter
         {
             public override bool CanConvert(Type objectType)
             {
@@ -51,11 +51,12 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
                 foreach (var input in inputs)
                 {
                     newInputs.Add(new Dictionary<string, string>
-                {
-                    { "name", input.Key },
-                    { "value", input.Value }
-                });
+                    {
+                        { "name", input.Key },
+                        { "value", input.Value }
+                    });
                 }
+                if (serializer != null)
                 serializer.Serialize(writer, newInputs);
             }
         }

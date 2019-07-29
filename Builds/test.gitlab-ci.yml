@@ -13,6 +13,8 @@ code_quality_default:
   allow_failure: true
   tags:
     - secrets
+    - nuget
+    - msbuild
   script:
     - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplate\\'
     - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
@@ -33,6 +35,9 @@ code_quality_default:
 code_quality_samples:
   stage: test
   allow_failure: true
+  tags:
+    - nuget
+    - msbuild
   script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=SamplesCodeAnalysisReport.xml'
