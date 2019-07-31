@@ -56,7 +56,11 @@ version:
 
 build_proj:
   stage: build
+  tags:
+    - nuget
+    - msbuild
   script:
+    # should change to restoring and building solution (once all project compile)
     - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
     - '"%MSBUILD_PATH%" GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj /p:Configuration=Release'
     - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj'
@@ -66,6 +70,9 @@ build_proj:
 
 build_sample:
   stage: build
+  tags:
+    - nuget
+    - msbuild
   script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'
