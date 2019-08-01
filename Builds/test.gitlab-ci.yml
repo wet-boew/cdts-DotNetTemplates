@@ -16,14 +16,14 @@ code_quality_default:
     - nuget
     - msbuild
   script:
-    - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplate\\'
-    - 'copy %SECRETS_PATH%\\WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
-    - 'copy %SECRETS_PATH%\\WebTemplate.snk Components\\WebTemplateCore\\'
+    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Applications\\GoC.WebTemplate\\'
+    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
+    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Components\\WebTemplateCore\\'
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
     - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=DefaultCodeAnalysisReport.xml'
-    - 'del Applications\\GoC.WebTemplate\\WebTemplate.snk'
-    - 'del Applications\\GoC.WebTemplateMVC\\WebTemplate.snk'
-    - 'del Components\\WebTemplateCore\\WebTemplate.snk'
+    - 'del Applications\\GoC.WebTemplate\\GoC.WebTemplate.snk'
+    - 'del Applications\\GoC.WebTemplateMVC\\GoC.WebTemplate.snk'
+    - 'del Components\\WebTemplateCore\\GoC.WebTemplate.snk'
   except:
     - tags
     - master

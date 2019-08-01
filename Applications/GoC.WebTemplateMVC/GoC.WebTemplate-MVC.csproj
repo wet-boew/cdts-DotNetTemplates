@@ -204,8 +204,8 @@
     <Content Include="Views\Test\UnilingualErrorPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.SplashPage_Layout.cshtml" />
     <Content Include="Views\TestWebTemplatePage\SplashPage.cshtml" />
-    <Content Include="WebTemplate.snk" />
     <Content Include="Views\Test\SubThemeTestPage.cshtml" />
+    <Content Include="GoC.WebTemplate.snk" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -223,7 +223,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>WebTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
