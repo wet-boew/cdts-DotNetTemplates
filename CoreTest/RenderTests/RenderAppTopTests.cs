@@ -196,6 +196,13 @@ namespace CoreTest.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void RenderCustomSearchNotSet(Core sut)
+        {
+            var json = sut.RenderAppTop();
+            json.ToString().Should().NotContain("customSearch");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void AppSearchIsNullByDefault(Core sut)
         {
             var json = sut.RenderAppTop();
