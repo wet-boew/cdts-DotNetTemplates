@@ -42,8 +42,8 @@ deploy:
   only:
     - tags
   script:
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg -k'
-    - '%CURL_PATH% -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg  -k'
+    - '"%CURL_PATH%" -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg -k'
+    - '"%CURL_PATH%" -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg -k'
+    - '"%CURL_PATH%" -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg -k'
+    - '"%CURL_PATH%" -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg -k'
+    - '"%CURL_PATH%" -u %RUNNER_USER_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg  -k'
