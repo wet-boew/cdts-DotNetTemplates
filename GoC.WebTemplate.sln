@@ -13,10 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.MVC", "GoC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.WebForms", "GoC.WebTemplate.WebForms\GoC.WebTemplate.WebForms.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Test", "GoC.WebTemplate.Components.Test\GoC.WebTemplate.Components.Test.csproj", "{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}"
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Core", "GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj", "{2C7963D7-2550-4B44-A6FE-378985896501}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Test", "GoC.WebTemplate.Components.Test\GoC.WebTemplate.Components.Test.csproj", "{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Core", "GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj", "{2C7963D7-2550-4B44-A6FE-378985896501}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Framework", "GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj", "{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Core.Tests", "GoC.WebTemplate.Components.Core.Tests\GoC.WebTemplate.Components.Core.Tests.csproj", "{D28D5034-50CC-491D-86F7-673CBBF1C3A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Framework.Tests", "GoC.WebTemplate.Components.Framework.Tests\GoC.WebTemplate.Components.Framework.Tests.csproj", "{24E78526-57FC-4085-9FD0-0434E4498307}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -56,6 +61,14 @@ Global
 		{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D28D5034-50CC-491D-86F7-673CBBF1C3A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D28D5034-50CC-491D-86F7-673CBBF1C3A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D28D5034-50CC-491D-86F7-673CBBF1C3A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D28D5034-50CC-491D-86F7-673CBBF1C3A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24E78526-57FC-4085-9FD0-0434E4498307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24E78526-57FC-4085-9FD0-0434E4498307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24E78526-57FC-4085-9FD0-0434E4498307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24E78526-57FC-4085-9FD0-0434E4498307}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
