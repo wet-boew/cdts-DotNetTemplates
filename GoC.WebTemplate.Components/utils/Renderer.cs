@@ -28,7 +28,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.Builder.GetStringForJson(_model.WebTemplateSubTheme),
+                SubTheme = _model.Builder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
                 TermsLink = _model.Builder.GetStringForJson(_model.TermsConditionsLinkURL),
                 PrivacyLink = _model.Builder.GetStringForJson(_model.PrivacyLinkURL),
                 ContactLink = _model.Builder.BuildContactLinks(),
@@ -55,7 +55,7 @@ namespace GoC.WebTemplate.Components.Utils
             {
 
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
                 Search = _model.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Top
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
                 Search = _model.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
@@ -90,7 +90,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new RefTop
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 JqueryEnv = _model.LoadJQueryFromGoogle ? "external" : null,
                 LocalPath = _model.Builder.BuildLocalPath(),
                 IsApplication = isApplication
@@ -114,11 +114,7 @@ namespace GoC.WebTemplate.Components.Utils
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = _model.ShowPostContent,
-                ShowFeedback = new FeedbackLink
-                {
-                    Show = _model.ShowFeedbackLink,
-                    URL = _model.TwoLetterCultureLanguage.StartsWith(Constants.FRENCH_ACCRONYM) && !string.IsNullOrEmpty(_model.FeedbackLinkUrlFr) ? _model.FeedbackLinkUrlFr : _model.FeedbackLinkUrl
-                },
+                ShowFeedback = _model.FeedbackLink,
                 ShowShare = new ShareList
                 {
                     Show = _model.ShowSharePageLink,
@@ -147,7 +143,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Footer
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = true,
                 ContactLinks = _model.Builder.BuildContactLinks(),
                 PrivacyLink = null,
@@ -161,7 +157,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Footer
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = false,
                 ContactLinks = _model.Builder.BuildContactLinks(),
                 PrivacyLink = _model.Builder.GetStringForJson(_model.PrivacyLinkURL),
@@ -286,7 +282,7 @@ namespace GoC.WebTemplate.Components.Utils
                 SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.SignInLinkURL, _model.ShowSignInLink),
                 SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.SignOutLinkURL, _model.ShowSignOutLink),
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 Search = _model.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
@@ -308,7 +304,7 @@ namespace GoC.WebTemplate.Components.Utils
                 SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.SignInLinkURL, _model.ShowSignInLink),
                 SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.SignOutLinkURL, _model.ShowSignOutLink),
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.WebTemplateSubTheme,
+                SubTheme = _model.CdtsEnvironment.SubTheme,
                 Search = _model.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,

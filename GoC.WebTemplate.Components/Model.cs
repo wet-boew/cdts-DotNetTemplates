@@ -70,9 +70,12 @@ namespace GoC.WebTemplate.Components
 
             //Set preFooter section options
             ShowPostContent = _configProxy.ShowPostContent;
-            ShowFeedbackLink = _configProxy.ShowFeedbackLink;
-            FeedbackLinkUrl = _configProxy.FeedbackLinkUrl;
-            FeedbackLinkUrlFr = _configProxy.FeedbackLinkUrlFr;
+            FeedbackLink = new FeedbackLink
+            {
+                Show = _configProxy.ShowFeedbackLink,
+                Url = _configProxy.FeedbackLinkUrl,
+                UrlFr = _configProxy.FeedbackLinkUrlFr
+            };
             ShowLanguageLink = _configProxy.ShowLanguageLink;
             ShowSharePageLink = _configProxy.ShowSharePageLink;
 
@@ -156,18 +159,10 @@ namespace GoC.WebTemplate.Components
         public DateTime DateModified { get; set; }
         
         /// <summary>
-        /// URL to be used for the feedback link
-        /// Set by application via web.config
-        /// or programmatically
-        /// </summary>
-        public string FeedbackLinkUrl { get; set; }
-
-        /// <summary>
-        /// URL to be used for the feedback link when in french culture
+        /// Poperties to be used for the feedback link
         /// Set by application via web.config or programmatically
-        /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
         /// </summary>
-        public string FeedbackLinkUrlFr { get; set; }
+        public FeedbackLink FeedbackLink { get; set; }
 
         /// <summary>
         /// URL to be used for the Privacy link in transactional mode
@@ -211,12 +206,6 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public bool ShowPostContent { get; set; }
 
-        /// <summary>
-        /// Determines if the FeedBack link of the footer is to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        public bool ShowFeedbackLink { get; set; }
 
         /// <summary>
         /// Determines if the language toggle link  is to be displayed
@@ -273,6 +262,7 @@ namespace GoC.WebTemplate.Components
         /// Used by generate paths, determine language etc...
         /// Set by Template
         /// </summary>
+        [Obsolete("Not used")]
         public string TwoLetterCultureLanguage => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
         private string _headerTitle;
@@ -319,11 +309,6 @@ namespace GoC.WebTemplate.Components
         /// Set by application via web.config or programmatically
         /// </summary>
         public string WebTemplateVersion { get; set; }
-
-        /// <summary>
-        /// Represents the sub Theme to use to build the age. ex: esdc
-        /// </summary>
-        public string WebTemplateSubTheme => _cdtsEnvironments[Environment].SubTheme;
 
         /// <summary>
         /// Determines if the communication between the browser and the CDTS should be encrypted
