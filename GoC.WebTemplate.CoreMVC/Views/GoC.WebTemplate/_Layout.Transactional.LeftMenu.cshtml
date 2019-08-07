@@ -1,0 +1,86 @@
+﻿@{
+    GoC.WebTemplate.Components.Model WebTemplateModel = (GoC.WebTemplate.Components.Model)ViewData["WebTemplateModel"];
+}
+<!DOCTYPE html>
+
+<!--[if lt IE 9]><html class="no-js lt-ie9" lang="@WebTemplateModel.TwoLetterCultureLanguage" dir="ltr"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="@WebTemplateModel.TwoLetterCultureLanguage" dir="ltr">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
+        wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+    <title>@WebTemplateModel.RenderHeaderTitle()</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+    <!-- Load closure template scripts -->
+    <script type="text/javascript" src="@string.Concat(WebTemplateModel.CDNPath, "soyutils.js")"></script>
+    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)"></script>
+    <noscript>
+        <!-- Write closure fall-back static file -->
+        @WebTemplateModel.LoadStaticFile("refTop.html")
+    </noscript>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+        document.write(wet.builder.refTop(@WebTemplateModel.RenderRefTop(isApplication : false)));
+    </script>
+    @WebTemplateModel.RenderHtmlHeaderElements()
+    @RenderSection("CustomStyles", required: false)
+</head>
+<body vocab="http://schema.org/" typeof="WebPage">
+    @WebTemplateModel.RenderSessionTimeoutControl()
+    <div id="def-top">
+        <!-- Write closure fall-back static file -->
+        @WebTemplateModel.LoadStaticFile(string.Concat("transactTop-", WebTemplateModel.TwoLetterCultureLanguage, ".html"))
+    </div>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+    var defTop = document.getElementById("def-top");
+    defTop.outerHTML = wet.builder.top( @WebTemplateModel.RenderTransactionalTop());
+    </script>
+    <div class="container">
+        <div class="row">
+            <main property="mainContentOfPage" class="col-md-9 col-md-push-3" role="main">
+                <!-- the main content -->
+                @RenderBody()
+                <!-- end main content -->
+                <div id="def-preFooter">
+                    <!-- Write closure fall-back static file -->
+                    @WebTemplateModel.LoadStaticFile(string.Concat("preFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html"))
+                </div>
+                <script type="text/javascript">
+                    var defPreFooter = document.getElementById("def-preFooter");
+                    defPreFooter.outerHTML = wet.builder.preFooter(@WebTemplateModel.RenderTransactionalPreFooter());
+                </script>
+            </main>
+            <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
+                <!-- Write closure fall-back static file -->
+                @WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html"))
+            </nav>
+            <!-- Write closure template -->
+            <script type="text/javascript">
+                var secondarymenu = document.getElementById("wb-sec");
+                secondarymenu.innerHTML = wet.builder.secmenu(
+                    @WebTemplateModel.RenderLeftMenu()
+                );
+            </script>
+        </div>
+    </div>
+
+    <div id="def-footer">
+        <!-- Write closure fall-back static file -->
+        @WebTemplateModel.LoadStaticFile(string.Concat("transactFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html"))
+    </div>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+    var defFooter = document.getElementById("def-footer");
+        defFooter.outerHTML = wet.builder.footer(@WebTemplateModel.RenderTransactionalFooter());
+    </script>
+    <!-- Write closure template -->
+    <script type="text/javascript">
+        document.write(wet.builder.refFooter(@WebTemplateModel.RenderRefFooter()));
+    </script>
+    @WebTemplateModel.RenderHtmlBodyElements()
+    @RenderSection("CustomScripts", required: false)
+</body>
+</html>

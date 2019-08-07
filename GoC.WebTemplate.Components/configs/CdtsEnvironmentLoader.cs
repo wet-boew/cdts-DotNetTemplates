@@ -17,10 +17,9 @@ namespace GoC.WebTemplate.Components.Configs
         private static readonly object EnvironmentsLockObject = new object();
         /// <summary>
         /// Loads the CDTSEnvironments either from file or from the HTTPruntime.Cache 
-        /// </summary>
-        /// <param name="filename">The filename to use, we are using CDTSEnvironments.json</param>
+        /// </summary
         /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
-        public IDictionary<string, ICdtsEnvironment> LoadCDTSEnvironments(string filename)
+        public IDictionary<string, ICdtsEnvironment> LoadCDTSEnvironments()
         {
             Debug.Assert(_cacheProxy != null, "CacheProxy Cannot be null");
             var environments = _cacheProxy.GetFromCache<IDictionary<string,ICdtsEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
@@ -31,6 +30,7 @@ namespace GoC.WebTemplate.Components.Configs
 
             lock (EnvironmentsLockObject)
             {
+                var filename = "~/configs/CdtsEnvironments.json";
                 environments = _cacheProxy.GetFromCache<IDictionary<string,ICdtsEnvironment>>(Constants.CACHE_KEY_ENVIRONMENTS);
                 if (environments != null)
                 {
