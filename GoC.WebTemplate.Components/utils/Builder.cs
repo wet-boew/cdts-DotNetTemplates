@@ -41,7 +41,7 @@ namespace GoC.WebTemplate.Components
 
         internal List<Link> BuildContactLinks()
         {
-            if (!_model.CdtsEnvironment.CanHaveMultiContactLinks)
+            if (!_model.CdtsEnvironment.CanHaveMultipleContactLinks)
             {
                 if (_model.ContactLinks?.Count > 1)
                     throw new InvalidOperationException("Having multiple contact links not allowed in this environment");
@@ -54,6 +54,11 @@ namespace GoC.WebTemplate.Components
                 throw new InvalidOperationException("Href must be specified");
             return _model.ContactLinks;
 
+        }
+
+        internal List<FooterLink> BuildSingleFooterLink(FooterLink link)
+        {
+            return string.IsNullOrWhiteSpace(link?.Href) ? null : new List<FooterLink> { link };
         }
 
         internal string BuildLocalPath()
@@ -129,10 +134,15 @@ namespace GoC.WebTemplate.Components
             {
                 return null;
             }
-            return _model.DateModified.ToString("yyyy-MM-dd");
+            return _model.DateModified.ToString("yyyy-MM-dd", CultureInfo.CurrentCulture);
         }
 
-        internal List<Link> BuildIntranentTitleList() => _model.IntranetTitle == null ? null : new List<Link> { _model.IntranetTitle };
+        internal List<IntranetTitle> BuildIntranentTitleList()
+        {
+            if (_model.IntranetTitle == null) return null;
+
+            return new List<IntranetTitle> { _model.IntranetTitle };
+        }
 
         internal List<LanguageLink> BuildLanguageLinkList()
         {
@@ -198,7 +208,7 @@ namespace GoC.WebTemplate.Components
 
         internal string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
 
-        internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(formatStr, strs);
+        internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(CultureInfo.CurrentCulture, formatStr, strs);
 
         #endregion
     }

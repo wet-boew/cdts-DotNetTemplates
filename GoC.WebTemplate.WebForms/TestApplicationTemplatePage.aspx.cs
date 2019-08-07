@@ -29,10 +29,10 @@ namespace GoC.WebTemplate.WebForms
         new MenuLink { 
           Text = "Item 2", SubLinks = new List<SubLink> {
             new SubLink {
-               Href = "Foo", Text = "SubLink 1"
+               Href = "Foo", Text = "Sub Link 1"
             }, 
             new SubLink {
-              Text = "SubLink 2"
+              Text = "Sub Link 2"
             }
           }
         } 

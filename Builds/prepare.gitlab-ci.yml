@@ -1,0 +1,59 @@
+version_components:
+  stage: prepare
+  allow_failure: true
+  only:
+    - tags
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Components\WebTemplateCore\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'Components\WebTemplateCore\Properties\AssemblyInfo.cs'
+
+version_forms:
+  stage: prepare
+  allow_failure: true
+  only:
+    - tags
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'Applications\GoC.WebTemplate\Properties\AssemblyInfo.cs'
+
+version_mvc:
+  stage: prepare
+  allow_failure: true
+  only:
+    - tags
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "Applications\GoC.WebTemplateMVC\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'Applications\GoC.WebTemplateMVC\Properties\AssemblyInfo.cs' 
+      
+version_froms_sample:
+  stage: prepare
+  allow_failure: true
+  only:
+    - tags
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'SampleCode\GoC.WebTemplate-WebForms.Sample\Properties\AssemblyInfo.cs'    
+            
+version_mvc_sample:
+  stage: prepare
+  allow_failure: true
+  only:
+    - tags
+  script:    
+    - powershell.exe %VERSION_PS1% %CI_COMMIT_REF_NAME% "SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'SampleCode\GoC.WebTemplate-MVC.Sample\Properties\AssemblyInfo.cs'  

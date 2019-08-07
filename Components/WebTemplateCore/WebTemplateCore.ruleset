@@ -1,8 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="Rules for GoC.WebTemplate-Components" Description="Code analysis rules for GoC.WebTemplate-Components.csproj." ToolsVersion="14.0">
-  <IncludeAll Action="Warning" />
-  <Rules AnalyzerId="Microsoft.Analyzers.ManagedCodeAnalysis" RuleNamespace="Microsoft.Rules.Managed">
-    <Rule Id="CA1707" Action="None" />
-    <Rule Id="CA1709" Action="None" />
-  </Rules>
-</RuleSet>

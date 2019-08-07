@@ -8,8 +8,8 @@ namespace GoC.WebTemplate.Components.Entities
         public string SubTheme { get; set; }
         public bool ShowFooter { get; set; }
         public List<Link> ContactLinks { get; set; }
-        public string PrivacyLink { get; set; }
-        public string TermsLink { get; set; } 
+        public List<FooterLink> PrivacyLink { get; set; }
+        public List<FooterLink> TermsLink { get; set; } 
         public string LocalPath { get; set; }
     }
 }

@@ -23,15 +23,15 @@
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="sessionalive" use="optional" default="1200000">
+            <xs:attribute name="sessionAlive" use="optional" default="1200000">
               <xs:simpleType>
                 <xs:restriction base="xs:positiveInteger">
                   <xs:minInclusive value="1000" />
                 </xs:restriction>
               </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="logouturl" type="xs:string" use="required" />
-            <xs:attribute name="refreshCallbackUrl" type="xs:string" use="optional" />
+            <xs:attribute name="logoutUrl" type="xs:string" use="required" />
+            <xs:attribute name="refreshCallBackUrl" type="xs:string" use="optional" />
             <xs:attribute name="refreshOnClick" type="xs:boolean" use="optional" />
             <xs:attribute name="refreshLimit" type="xs:positiveInteger" use="optional" />
             <xs:attribute name="method" type="xs:string" use="optional"/>

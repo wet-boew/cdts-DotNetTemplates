@@ -235,8 +235,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.TermsConditionsLinkURL = "#";
-            WebTemplateCore.PrivacyLinkURL = "#";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "#" };
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "#" };
             return View("HelloWorld");
         }
         //
@@ -271,16 +271,16 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.SessionTimeout.Enabled = true;
             WebTemplateCore.SessionTimeout.Inactivity = 20000;
             WebTemplateCore.SessionTimeout.ReactionTime = 20001;
-            WebTemplateCore.SessionTimeout.Sessionalive = 20002;
-            WebTemplateCore.SessionTimeout.Logouturl = "20003";
-            WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "20005";
+            WebTemplateCore.SessionTimeout.SessionAlive = 20002;
+            WebTemplateCore.SessionTimeout.LogoutUrl = "20003";
+            WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "20005";
             WebTemplateCore.SessionTimeout.RefreshOnClick = false;
             WebTemplateCore.SessionTimeout.RefreshLimit = 20007;
             WebTemplateCore.SessionTimeout.Method = "20008";
             WebTemplateCore.SessionTimeout.AdditionalData = "20009";
 
-            WebTemplateCore.TermsConditionsLinkURL = "http://www.pinkbike.com";
-            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.pinkbike.com" };
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
 
             //BREADCRUMB ====================================
             WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
@@ -327,7 +327,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = false;
             WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.redseal.ca";
 
-            WebTemplateCore.LeavingSecureSiteWarning.Message = "Y'éou are about to leave a secure site, do you wish to continue?223";
+            WebTemplateCore.LeavingSecureSiteWarning.Message = "You are about to leave a secure site, do you wish to continue?";
 
             //HTML HEADER/BODY ELEMENTS ====================================
             //this.WebTemplateCore.HTMLHeaderElements.Add("jones.css");

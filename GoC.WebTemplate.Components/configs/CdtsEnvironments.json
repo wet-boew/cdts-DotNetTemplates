@@ -14,7 +14,7 @@
       "isEncryptionModifiable": false,
       "appendToTitle": " - Canada.ca",
       "footerSectionLimit": 0,
-      "canHaveMultiContactLinks": false,
+      "canHaveMultipleContactLinks": false,
       "canHaveContactLinkInAppTemplate": true
     },
     {
@@ -26,7 +26,7 @@
       "isEncryptionModifiable": false,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -39,7 +39,7 @@
       "isEncryptionModifiable": false,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -51,7 +51,7 @@
       "isEncryptionModifiable": false,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -64,7 +64,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -77,7 +77,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -90,7 +90,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -103,7 +103,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -116,7 +116,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": "",
       "footerSectionLimit": 3,
-      "canHaveMultiContactLinks": true,
+      "canHaveMultipleContactLinks": true,
       "canHaveContactLinkInAppTemplate": false
     },
     {
@@ -129,7 +129,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": " - Canada.ca",
       "footerSectionLimit": 0,
-      "canHaveMultiContactLinks": false,
+      "canHaveMultipleContactLinks": false,
       "canHaveContactLinkInAppTemplate": true
     },
     {
@@ -142,7 +142,7 @@
       "isEncryptionModifiable": true,
       "appendToTitle": " - Canada.ca",
       "footerSectionLimit": 0,
-      "canHaveMultiContactLinks": false,
+      "canHaveMultipleContactLinks": false,
       "canHaveContactLinkInAppTemplate": true
     }
   ]

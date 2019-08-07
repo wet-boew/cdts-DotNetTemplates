@@ -38,7 +38,7 @@
             var defTop = document.getElementById("def-top");
             defTop.outerHTML = wet.builder.appTop(<%= WebTemplateCore.RenderAppTop() %>);
         </script>
-        <main role="main" property="mainContentOfPage" class="container">
+        <main role="main" property="mainContentOfPage" class="container" typeof="WebPageElement">
              
             <!-- the main content -->
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>

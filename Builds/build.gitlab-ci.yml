@@ -1,0 +1,55 @@
+build_proj:
+  stage: build
+  tags:
+    - nuget
+    - msbuild
+  script:
+    # should change to restoring and building solution (once all project compile)
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj /p:Configuration=Release'
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj /p:Configuration=Release'
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj /p:Configuration=Release'
+
+build_sample:
+  stage: build
+  tags:
+    - nuget
+    - msbuild
+  script:
+    - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+    - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'
+
+# build_default:
+#   stage: build
+#   tags:
+#     - secrets
+#     - nuget
+#     - msbuild
+#   script:
+#     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+#     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Applications\\GoC.WebTemplate\\'
+#     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
+#     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Components\\WebTemplateCore\\'
+#     - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
+#     - 'del Applications\\GoC.WebTemplate\\GoC.WebTemplate.snk'
+#     - 'del Applications\\GoC.WebTemplateMVC\\GoC.WebTemplate.snk'
+#     - 'del Components\\WebTemplateCore\\GoC.WebTemplate.snk'
+#   artifacts:
+#     expire_in: 1 hour
+#     paths:
+#       - '%TEST_PATH%' #for test
+#       - '%xUNIT_PATH%' #for test
+#       - 'Applications\\GoC.WebTemplate\\bin\\GoC.WebTemplate.WebForms.dll' #for package
+#       - 'Applications\\GoC.WebTemplateMVC\\bin\\GoC.WebTemplate.MVC.dll' #for package
+#       - 'Components\\WebTemplateCore\\bin\\Release\\GoC.WebTemplate.Components.dll' #for package
+
+# build_sample:
+#   stage: build
+#   tags:
+#     - nuget
+#     - msbuild
+#   script:
+#     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+#     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'

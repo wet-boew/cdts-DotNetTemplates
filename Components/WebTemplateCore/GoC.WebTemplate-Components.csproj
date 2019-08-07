@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>WebTemplateCore.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\WebTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,12 +36,16 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>WebTemplateCore.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -57,12 +61,15 @@
     <Compile Include="CDTSEnvironmentLoader.cs" />
     <Compile Include="CoreBuilder.cs" />
     <Compile Include="CoreRenderer.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="JSONSerializationObjects\CustomSearch.cs" />
     <Compile Include="JSONSerializationObjects\Footer.cs" />
     <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
     <Compile Include="JSONSerializationObjects\AppTop.cs" />
     <Compile Include="JSONSerializationObjects\FooterSection.cs" />
     <Compile Include="JSONSerializationObjects\IFooterSection.cs" />
+    <Compile Include="JSONSerializationObjects\IntranetTitle.cs" />
     <Compile Include="JSONSerializationObjects\MenuLink.cs" />
     <Compile Include="JSONSerializationObjects\ShareList.cs" />
     <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
@@ -105,12 +112,15 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CDTSEnvironments.json" />
+    <None Include="GoC.WebTemplate.snk" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="WebTemplateCore.ruleset" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SecurityCodeScan.3.2.0.0\analyzers\dotnet\SecurityCodeScan.dll" />
+    <Analyzer Include="..\..\packages\SecurityCodeScan.3.2.0.0\analyzers\dotnet\YamlDotNet.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

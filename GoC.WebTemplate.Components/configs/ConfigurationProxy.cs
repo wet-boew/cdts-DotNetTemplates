@@ -3,7 +3,6 @@ namespace GoC.WebTemplate.Components.Configs
 
     public class ConfigurationProxy : IConfigurationProxy
     {
-        public string CustomSearch => Configurations.Settings.CustomSearch;
         public string CustomSiteMenuURL => Configurations.Settings.CustomSiteMenuURL;
         public string SignOutLinkURL => Configurations.Settings.SignOutLinkURL;
         public string SignInLinkURL => Configurations.Settings.SignInLinkURL;
@@ -12,7 +11,7 @@ namespace GoC.WebTemplate.Components.Configs
             => new LeaveSecureSiteWarningElementProxy(Configurations.Settings.LeavingSecureSiteWarning);
 
         //Convert to upper case to work with the enums
-        public string Environment => Configurations.Settings.Environment.ToUpper();
+        public string Environment => Configurations.Settings.Environment.ToUpperInvariant();
         public bool LoadJQueryFromGoogle => Configurations.Settings.LoadJQueryFromGoogle;
 
         public ISessionTimeOutElementProxy SessionTimeOut
@@ -23,7 +22,7 @@ namespace GoC.WebTemplate.Components.Configs
         public bool ShowPostContent => Configurations.Settings.ShowPostContent;
         public string FeedbackLinkUrl => Configurations.Settings.FeedbackLinkUrl;
         public string FeedbackLinkUrlFr => Configurations.Settings.FeedbackLinkUrlFr;
-        public bool ShowShearch => Configurations.Settings.ShowShearch;
+        public bool ShowSearch => Configurations.Settings.ShowSearch;
         public bool ShowSharePageLink => Configurations.Settings.ShowSharePageLink;
         public bool ShowLanguageLink => Configurations.Settings.ShowLanguageLink;
         public string StaticFilesLocation => Configurations.Settings.StaticFilesLocation;

@@ -29,8 +29,8 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.Builder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
-                TermsLink = _model.Builder.GetStringForJson(_model.TermsConditionsLinkURL),
-                PrivacyLink = _model.Builder.GetStringForJson(_model.PrivacyLinkURL),
+                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink),
+                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
                 ContactLink = _model.Builder.BuildContactLinks(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion),
                 FooterSections = _model.Builder.BuildCustomFooterSections
@@ -160,8 +160,8 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = false,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.GetStringForJson(_model.PrivacyLinkURL),
-                TermsLink = _model.Builder.GetStringForJson(_model.TermsConditionsLinkURL)
+                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
+                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink)
 
             });
         }
@@ -290,7 +290,7 @@ namespace GoC.WebTemplate.Components.Utils
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion),
                 AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
-                CustomSearch = _model.CustomSearch,
+                CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 MenuLinks = _model.MenuLinks
             });
@@ -312,7 +312,7 @@ namespace GoC.WebTemplate.Components.Utils
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion),
                 AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
-                CustomSearch = _model.CustomSearch,
+                CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 MenuLinks = _model.MenuLinks
             });

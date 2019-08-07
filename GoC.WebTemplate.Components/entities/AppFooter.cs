@@ -7,8 +7,8 @@ namespace GoC.WebTemplate.Components.Entities
         public string CdnEnv { get; set; }
         public List<IFooterSection> FooterSections { get; set; }
         public List<Link> ContactLink { get; set; }
-        public string TermsLink { get; set; }
-        public string PrivacyLink { get; set; }
+        public List<FooterLink> TermsLink { get; set; }
+        public List<FooterLink> PrivacyLink { get; set; }
         public string SubTheme { get; set; }
         public string LocalPath { get; set; }
     }

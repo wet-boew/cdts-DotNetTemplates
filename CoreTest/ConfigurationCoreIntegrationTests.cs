@@ -63,7 +63,7 @@ namespace CoreTest
 
             //test
             var sut = new Core(new CurrentRequestProxy(), fakeCacheProxy, new ConfigurationProxy(), environments);
-            sut.SessionTimeout.Sessionalive.Should().Be(HttpContext.Current.Session.Timeout * 60000);
+            sut.SessionTimeout.SessionAlive.Should().Be(HttpContext.Current.Session.Timeout * 60000);
         }
 
         [Theory, AutoNSubstituteData]
@@ -71,7 +71,7 @@ namespace CoreTest
             ICacheProxy fakeCacheProxy, ICurrentRequestProxy fakeCurrentRequestProxy)
         {
             var sut = new Core(fakeCurrentRequestProxy, fakeCacheProxy, new ConfigurationProxy(), environments);
-            sut.SessionTimeout.Sessionalive.Should().Be(1200000);
+            sut.SessionTimeout.SessionAlive.Should().Be(1200000);
         }
     }
 }

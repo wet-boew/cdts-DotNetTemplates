@@ -11,9 +11,9 @@ namespace GoC.WebTemplate.Components.Configs
         public bool Enabled => _sessionTimeOutElement.Enabled;
         public int Inactivity => _sessionTimeOutElement.Inactivity;
         public int ReactionTime => _sessionTimeOutElement.ReactionTime;
-        public int Sessionalive => _sessionTimeOutElement.Sessionalive;
-        public string Logouturl => _sessionTimeOutElement.Logouturl;
-        public string RefreshCallbackUrl => _sessionTimeOutElement.RefreshCallbackUrl;
+        public int SessionAlive => _sessionTimeOutElement.SessionAlive;
+        public string LogoutUrl => _sessionTimeOutElement.LogoutUrl;
+        public string RefreshCallBackUrl => _sessionTimeOutElement.RefreshCallBackUrl;
         public bool RefreshOnClick => _sessionTimeOutElement.RefreshOnClick;
         public int RefreshLimit => _sessionTimeOutElement.RefreshLimit;
         public string Method => _sessionTimeOutElement.Method;

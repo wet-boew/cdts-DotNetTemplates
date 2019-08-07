@@ -6,7 +6,7 @@ namespace GoC.WebTemplate.Components.Entities
     {
         public string CdnEnv { get; set; }
         public string SubTheme { get; set; }
-        public List<Link> IntranetTitle { get; set; }
+        public List<IntranetTitle> IntranetTitle { get; set; }
         public bool Search { get; set; }
         public List<LanguageLink> LngLinks { get; set; }
         public bool ShowPreContent { get; set; }

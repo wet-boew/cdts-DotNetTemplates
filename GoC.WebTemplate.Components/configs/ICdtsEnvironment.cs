@@ -36,7 +36,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// </summary>
         string AppendToTitle { get; set; }
         int FooterSectionLimit { get; set; }
-        bool CanHaveMultiContactLinks { get; set; }
+        bool CanHaveMultipleContactLinks { get; set; }
         bool CanHaveContactLinkInAppTemplate { get; set; }
     }
 }

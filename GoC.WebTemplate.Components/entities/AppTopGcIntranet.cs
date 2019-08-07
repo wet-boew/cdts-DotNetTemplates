@@ -4,6 +4,6 @@ namespace GoC.WebTemplate.Components.Entities
 {
     internal class AppTopGcIntranet: AppTop
     {
-        public List<Link> IntranetTitle { get; set; }
+        public List<IntranetTitle> IntranetTitle { get; set; }
     }
 }

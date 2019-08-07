@@ -194,9 +194,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.SessionTimeout.Enabled = true;
             WebTemplateCore.SessionTimeout.Inactivity = 30000;
             WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-            WebTemplateCore.SessionTimeout.Logouturl = "Logout";
-            WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity";
+            WebTemplateCore.SessionTimeout.SessionAlive = 30000;
+            WebTemplateCore.SessionTimeout.LogoutUrl = "Logout";
+            WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "SessionValidity";
             WebTemplateCore.SessionTimeout.RefreshOnClick = false;
             WebTemplateCore.SessionTimeout.RefreshLimit = 3;
             WebTemplateCore.SessionTimeout.Method = "";
@@ -210,9 +210,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             //Contact Links
             WebTemplateCore.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
             //set the Terms and Condition Link
-            WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
             //set the Privacy link
-            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
 
             return View();
         }
@@ -221,9 +221,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult TransactionalSample(string data1, string data2, string data4)
         {
             //set the Terms and Condition Link
-            WebTemplateCore.TermsConditionsLinkURL = "http://www.tsn.ca";
+            WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
             //set the Privacy link
-            WebTemplateCore.PrivacyLinkURL = "http://www.lapresse.ca";
+            WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
             //execute logic for the submit.
             return View();
         }
@@ -287,17 +287,6 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
             WebTemplateCore.SplashPageInfo.EnglishName = "[My web asset]";
             WebTemplateCore.SplashPageInfo.FrenchName = "[Mon actif web]";
-            return View();
-        }
-
-        public ActionResult GCIntranetThemeSample()
-        {
-
-            WebTemplateCore.Environment = "ESDC_PROD";
-            WebTemplateCore.UseHTTPS = true;
-            WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
-            WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";  
-            
             return View();
         }
 	}

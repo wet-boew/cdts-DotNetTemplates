@@ -29,7 +29,7 @@ namespace CoreTest
                 IsEncryptionModifiable = false,
                 AppendToTitle = " - Canada.ca",
                 FooterSectionLimit = 0,
-                CanHaveMultiContactLinks = false,
+                CanHaveMultipleContactLinks = false,
                 CanHaveContactLinkInAppTemplate = true
             });
         }
@@ -48,7 +48,7 @@ namespace CoreTest
                 IsEncryptionModifiable = false,
                 AppendToTitle = "",
                 FooterSectionLimit = 3,
-                CanHaveMultiContactLinks = true,
+                CanHaveMultipleContactLinks = true,
                 CanHaveContactLinkInAppTemplate = false
             });
         }

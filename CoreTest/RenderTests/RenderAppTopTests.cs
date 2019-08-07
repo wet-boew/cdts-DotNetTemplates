@@ -169,7 +169,7 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void IntranetTitleAppTop(Core sut)
         {
-            sut.IntranetTitle = new Link { Text = "foo", Href = "bar", Acronym = "plat" };
+            sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
             sut.RenderAppTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
         }
 
@@ -177,17 +177,29 @@ namespace CoreTest.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderCustomSearchWhenSet(Core sut)
         {
-            sut.CustomSearch = "Foo";
-            sut.RenderAppTop().ToString().Should().Contain("\"customSearch\":\"Foo\"");
+
+            sut.CustomSearch = new CustomSearch
+            {
+                Action = "action1",
+                Id = "id3",
+                Method = "method4",
+                Placeholder = "placeholder5",
+                HiddenInput = new List<KeyValuePair<string, string>>
+                {
+                    new KeyValuePair<string, string>("name1", "val1"),
+                    new KeyValuePair<string, string>("name2", "val2")
+                }
+            };
+
+            var json = sut.RenderAppTop();
+            json.ToString().Should().Contain("\"customSearch\":[{\"action\":\"action1\",\"placeholder\":\"placeholder5\",\"id\":\"id3\",\"method\":\"method4\",\"hiddenInput\":[{\"name\":\"name1\",\"value\":\"val1\"},{\"name\":\"name2\",\"value\":\"val2\"}]}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void CustomSearchIsRendered(Core sut)
+        public void RenderCustomSearchNotSet(Core sut)
         {
-            sut.CustomSearch = "foo";
             var json = sut.RenderAppTop();
-            json.ToString().Should().Contain("\"customSearch\":\"foo\"");
-
+            json.ToString().Should().NotContain("customSearch");
         }
 
         [Theory, AutoNSubstituteData]

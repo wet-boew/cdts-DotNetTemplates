@@ -27,11 +27,11 @@ namespace GoC.WebTemplate.Components.Utils
         /// <summary>
         /// Basic json serialization using the settings that work with the CDTS google closure templates
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="value"></param>
         /// <returns></returns>
-        public static HtmlString SerializeToJson(object obj)
+        public static HtmlString SerializeToJson(object value)
         {
-            return new HtmlString(JsonConvert.SerializeObject(obj, Settings));
+            return new HtmlString(JsonConvert.SerializeObject(value, Settings));
         }
 
         //Because of how JSonDesrialization works we need to have a container class for the environments.

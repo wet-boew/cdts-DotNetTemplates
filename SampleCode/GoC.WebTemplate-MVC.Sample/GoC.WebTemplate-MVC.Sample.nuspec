@@ -15,9 +15,7 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="Content\**\*.*" target="Content\Content" />
     <file src="Controllers\**\*.*" target="Content\Controllers" />
-    <file src="Scripts\**\*.*" target="Content\Scripts" />
-    <file src="Views\**\*.*" target="Content\Views" exclude="Views\GoC.WebTemplate\**\*.*;Views\GoCWebTemplateApplicationSample\**\*.*;Views\Web.config" />
+    <file src="Views\**\*.*" target="Content\Views" exclude="Views\GoC.WebTemplate\**\*.*;Views\Web.config" />
   </files>
 </package>

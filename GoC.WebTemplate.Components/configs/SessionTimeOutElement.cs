@@ -42,36 +42,36 @@ namespace GoC.WebTemplate.Components.Configs
         /// period of time for the session to stay alive until the modal dialog appears (default 20 minutes).
         /// </summary>
         /// <remarks>time provided in milliseconds</remarks>
-        [ConfigurationProperty("sessionalive", DefaultValue = 1200000, IsRequired = false)]
+        [ConfigurationProperty("sessionAlive", DefaultValue = 1200000, IsRequired = false)]
         [IntegerValidator(MinValue = 1000)]
-        public int Sessionalive
+        public int SessionAlive
         {
-            get { return (int)this["sessionalive"]; }
-            set { this["sessionalive"] = value; }
+            get { return (int)this["sessionAlive"]; }
+            set { this["sessionAlive"] = value; }
         }
 
         /// <summary>
         /// URL that users are sent to when the session has expired.
         /// </summary>
-        [ConfigurationProperty("logouturl", IsRequired = true)]
-        public string Logouturl
+        [ConfigurationProperty("logoutUrl", IsRequired = true)]
+        public string LogoutUrl
         {
-            get { return (string)this["logouturl"]; }
-            set { this["logouturl"] = value; }
+            get { return (string)this["logoutUrl"]; }
+            set { this["logoutUrl"] = value; }
         }
 
         /// <summary>
         /// URL used to perform an ajax request to determine the validity of the session.
         /// </summary>
-        [ConfigurationProperty("refreshCallbackUrl", IsRequired = false)]
-        public string RefreshCallbackUrl
+        [ConfigurationProperty("refreshCallBackUrl", IsRequired = false)]
+        public string RefreshCallBackUrl
         {
-            get { return (string)this["refreshCallbackUrl"]; }
-            set { this["refreshCallbackUrl"] = value; }
+            get { return (string)this["refreshCallBackUrl"]; }
+            set { this["refreshCallBackUrl"] = value; }
         }
 
         /// <summary>
-        /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallbackUrl has been specified).
+        /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallBackUrl has been specified).
         /// </summary>
         [ConfigurationProperty("refreshOnClick", IsRequired = false)]
         public bool RefreshOnClick

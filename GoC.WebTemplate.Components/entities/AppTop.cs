@@ -10,7 +10,7 @@ namespace GoC.WebTemplate.Components.Entities
         public List<Link> AppName { get; set; }
         public string MenuPath { get; set; }
         public string CdnEnv { get; set; }
-        public string CustomSearch { get; set; }
+        public List<CustomSearch> CustomSearch { get; set; }
         public List<LanguageLink> LngLinks { get; set; }
         public List<Link> AppSettings { get; set; }
         /// <summary>

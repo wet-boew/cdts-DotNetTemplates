@@ -2,7 +2,6 @@ namespace GoC.WebTemplate.Components.Configs
 {
     public interface IConfigurationProxy
     {
-        string CustomSearch { get; }
         string SignOutLinkURL { get; }
         string SignInLinkURL { get; }
         ISessionTimeOutElementProxy SessionTimeOut { get;  }
@@ -17,7 +16,6 @@ namespace GoC.WebTemplate.Components.Configs
         /// theme
         /// </summary>
         string Theme { get;  }
-
 
         /// <summary>
         /// cdts environment to use
@@ -59,7 +57,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// <summary>
         /// ShowSearch
         /// </summary>
-        bool ShowShearch { get;  }
+        bool ShowSearch { get;  }
 
         /// <summary>
         /// ShowSharePageLink

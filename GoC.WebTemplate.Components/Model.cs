@@ -37,11 +37,12 @@ namespace GoC.WebTemplate.Components
 
         private void SetDefaultValues(ICurrentRequest currentRequest)
         {
+            //Set properties
             WebTemplateVersion = _configProxy.Version;
 
             UseHTTPS = _configProxy.UseHttps;
             //Normalizing to match with the value we read from the configuration file.
-            Environment = _configProxy.Environment.ToUpper();
+            Environment = _configProxy.Environment.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
 
             LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
 
@@ -50,9 +51,9 @@ namespace GoC.WebTemplate.Components
                 Enabled = _configProxy.SessionTimeOut.Enabled,
                 Inactivity = _configProxy.SessionTimeOut.Inactivity,
                 ReactionTime = _configProxy.SessionTimeOut.ReactionTime,
-                Sessionalive = _configProxy.SessionTimeOut.Sessionalive,
-                Logouturl = _configProxy.SessionTimeOut.Logouturl,
-                RefreshCallbackUrl = _configProxy.SessionTimeOut.RefreshCallbackUrl,
+                SessionAlive = _configProxy.SessionTimeOut.SessionAlive,
+                LogoutUrl = _configProxy.SessionTimeOut.LogoutUrl,
+                RefreshCallBackUrl = _configProxy.SessionTimeOut.RefreshCallBackUrl,
                 RefreshOnClick = _configProxy.SessionTimeOut.RefreshOnClick,
                 RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit,
                 Method = _configProxy.SessionTimeOut.Method,
@@ -66,7 +67,7 @@ namespace GoC.WebTemplate.Components
                 Href = ModelBuilder.BuildLanguageLinkURL(currentRequest.QueryString)
             };
             ShowPreContent = _configProxy.ShowPreContent;
-            ShowSearch = _configProxy.ShowShearch;
+            ShowSearch = _configProxy.ShowSearch;
 
             //Set preFooter section options
             ShowPostContent = _configProxy.ShowPostContent;
@@ -90,8 +91,7 @@ namespace GoC.WebTemplate.Components
             //Set Application Template Specific Sections
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSearch = _configProxy.CustomSearch.Equals(string.Empty) ? null : _configProxy.CustomSearch;
-            CustomSiteMenuURL = _configProxy.CustomSiteMenuURL.Equals(string.Empty) ? null : _configProxy.CustomSiteMenuURL;
+            CustomSiteMenuURL = string.IsNullOrEmpty(_configProxy.CustomSiteMenuURL) ? null : _configProxy.CustomSiteMenuURL;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -157,24 +157,25 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public DateTime DateModified { get; set; }
-        
+
         /// <summary>
         /// Poperties to be used for the feedback link
         /// Set by application via web.config or programmatically
         /// </summary>
         public FeedbackLink FeedbackLink { get; set; }
-
+        
         /// <summary>
-        /// URL to be used for the Privacy link in transactional mode
+        /// Configures the Privacy Link
         /// Set by application programmatically
         /// </summary>
-        public string PrivacyLinkURL { get; set; }
-
+        public FooterLink PrivacyLink { get; set; } = new FooterLink();
+        
         /// <summary>
-        /// URL to be used for the Terms & Conditions link in transactional mode
+        /// Configures the Terms and Conditions Link
         /// Set by application programmatically
         /// </summary>
-        public string TermsConditionsLinkURL { get; set; }
+        public FooterLink TermsConditionsLink { get; set; } = new FooterLink();
+
 
         /// <summary>
         /// Used to override the langauge link
@@ -285,7 +286,7 @@ namespace GoC.WebTemplate.Components
                     return CdtsEnvironment.AppendToTitle;
                 }
 
-                if (_headerTitle.EndsWith(CdtsEnvironment.AppendToTitle))
+                if (_headerTitle.EndsWith(CdtsEnvironment.AppendToTitle, StringComparison.CurrentCulture))
                 {
                     return _headerTitle;
                 }
@@ -323,9 +324,9 @@ namespace GoC.WebTemplate.Components
         public bool LoadJQueryFromGoogle { get; set; }
 
         /// <summary>
-        /// Allows for a custom search to be used in the application, you must contact CDTS to have one created.
+        /// Allows for a custom search to be used in the application.
         /// </summary>
-        public string CustomSearch { get; set; }
+        public CustomSearch CustomSearch { get; set; }
 
         /// <summary>
         /// A custom site menu to be used in place of the standard canada.ca site menu
@@ -402,7 +403,7 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public List<MenuLink> MenuLinks { get; set; }
         
-        public Link IntranetTitle { get; set; }
+        public IntranetTitle IntranetTitle { get; set; }
 
         /// <summary>
         /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
@@ -473,7 +474,7 @@ namespace GoC.WebTemplate.Components
             return new HtmlString(info);
         }
 
-        
+
 
     }
 

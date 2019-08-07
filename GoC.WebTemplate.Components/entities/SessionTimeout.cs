@@ -9,9 +9,9 @@ namespace GoC.WebTemplate.Components.Entities
         public SessionTimeout(bool enabled,
                              int inactivity,
                              int reactionTime,
-                             int sessionalive,
-                             string logouturl,
-                             string refreshCallbackUrl,
+                             int sessionAlive,
+                             string logoutUrl,
+                             string refreshCallBackUrl,
                              bool refreshOnClick,
                              int refreshLimit,
                              string method,
@@ -20,9 +20,9 @@ namespace GoC.WebTemplate.Components.Entities
             Enabled = enabled;
             Inactivity = inactivity;
             ReactionTime = reactionTime;
-            Sessionalive = sessionalive;
-            Logouturl = logouturl;
-            RefreshCallbackUrl = refreshCallbackUrl;
+            SessionAlive = sessionAlive;
+            LogoutUrl = logoutUrl;            
+            RefreshCallBackUrl = refreshCallBackUrl;
             RefreshOnClick = refreshOnClick;
             RefreshLimit = refreshLimit;
             Method = method;
@@ -32,9 +32,9 @@ namespace GoC.WebTemplate.Components.Entities
         public bool Enabled { get; set; }
         public int Inactivity { get; set; }
         public int ReactionTime { get; set; }
-        public int Sessionalive { get; set; }
-        public string Logouturl { get; set; }
-        public string RefreshCallbackUrl { get; set; }
+        public int SessionAlive { get; set; }
+        public string LogoutUrl { get; set; }
+        public string RefreshCallBackUrl { get; set; }
         public bool RefreshOnClick { get; set; }
         public int RefreshLimit { get; set; }
         public string Method { get; set; }
@@ -42,7 +42,7 @@ namespace GoC.WebTemplate.Components.Entities
 
         /// <summary>
         /// Will check that the timeouts set are equalto or lower than the server session timeout
-        /// It will override Sessionalive, Inactivity and ReactionTime if it fails the check
+        /// It will override SessionAlive, Inactivity and ReactionTime if it fails the check
         /// </summary>
         /// <param name="session">current session</param>
         public void CheckWithServerSessionTimout(ISession session)
@@ -51,11 +51,11 @@ namespace GoC.WebTemplate.Components.Entities
             if (Enabled && session != null && session.IsAvailable &&
                 session.TryGetValue("timeout", out byte[] temp) &&
                 int.TryParse(temp.ToString(), out int timeout) &&
-                timeout * min < Sessionalive)
+                timeout * min < SessionAlive)
             {
                 while (timeout <= 1) timeout++; // one min will force the popup instantly so increase the session
-                Sessionalive = timeout * min;
-                Inactivity = Sessionalive - min;
+                SessionAlive = timeout * min;
+                Inactivity = SessionAlive - min;
                 ReactionTime = min;
 
             }
