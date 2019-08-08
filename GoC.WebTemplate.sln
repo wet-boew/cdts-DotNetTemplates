@@ -23,6 +23,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Framework.Tests", "GoC.WebTemplate.Components.Framework.Tests\GoC.WebTemplate.Components.Framework.Tests.csproj", "{24E78526-57FC-4085-9FD0-0434E4498307}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{545A1769-5B74-49B8-AA62-18C3C126F0E1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		.gitlab-ci.yml = .gitlab-ci.yml
+		Builds\build.gitlab-ci.yml = Builds\build.gitlab-ci.yml
+		CONTRIBUTING.md = CONTRIBUTING.md
+		Builds\package.gitlab-ci.yml = Builds\package.gitlab-ci.yml
+		Builds\package.ps1 = Builds\package.ps1
+		Builds\prepare.gitlab-ci.yml = Builds\prepare.gitlab-ci.yml
+		readme.md = readme.md
+		Builds\test.gitlab-ci.yml = Builds\test.gitlab-ci.yml
+		Builds\version.ps1 = Builds\version.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
