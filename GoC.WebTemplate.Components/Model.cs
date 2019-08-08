@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using GoC.WebTemplate.Components.Utils;
+using GoC.WebTemplate.Components.Utils.Caching;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Configs;
 using Microsoft.AspNetCore.Html;
@@ -14,7 +15,7 @@ namespace GoC.WebTemplate.Components
     public class Model
     {
 
-        private readonly ICache _cacheProxy;
+        private readonly ICacheProvider<string> _cacheProxy;
         private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string,ICdtsEnvironment> _cdtsEnvironments;
         private ModelBuilder _builder;
@@ -23,7 +24,7 @@ namespace GoC.WebTemplate.Components
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
         
         public Model(ICurrentRequest currentRequest,
-            ICache cacheProxy,
+             ICacheProvider<string> cacheProxy,
             IConfigurationProxy configProxy,
             IDictionary<string,ICdtsEnvironment> cdtsEnvironments)
         {
@@ -416,62 +417,11 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         /// <param name="fileName">static file name to retreive</param>
         /// <returns>A string containing the content of the file.</returns>
-        [Obsolete("Could be replaced by FileContentCache, except FileContentCache doesn't Html.Encode() or use HtmlString.", false)]
         public HtmlString LoadStaticFile(string fileName)
         {
-            var cacheKey = string.Concat(Constants.CACHE_KEY_STATICFILES_PREFIX, ".", fileName);
-
-            // Attempt to lookup from cache
-            Debug.Assert(_cacheProxy != null, "Cache proxy cannot be null");
-            // ReSharper disable once InconsistentlySynchronizedField
-            var info = _cacheProxy.GetFromCache<string>(cacheKey);
-            if (info != null)
-            {
-                // Object was found in cache, simply return it and get out!
-                return new HtmlString(info);
-            }
-
-            // ---[ If we get here, the object was not found in the cache, we'll have to load it.
-            lock (LockObject)
-            {
-                //---[ Attempt to get from cache again now that we are locked
-                info = _cacheProxy.GetFromCache<string>(cacheKey);
-                if (info != null)
-                {
-                    // Once again, object was found in cache, simply return it and get out!
-                    return new HtmlString(info);
-                }
-
-                //---[ If we get here, we really have to load the data
-                string filePath;
-                // todo implement in designated base component
-                //if (StaticFilesPath.StartsWith("~"))
-                //{
-                //    // ReSharper disable once AssignNullToNotNullAttribute
-                //    filePath = Path.Combine(HttpContext.Current.Server.MapPath(StaticFilesPath),
-                //        fileName);
-                //}
-                //else
-                //{
-                    filePath = Path.Combine(StaticFilesPath, fileName);
-                //}
-
-                try
-                {
-                    info = File.ReadAllText(filePath);
-                    //---[ Now that the data is loaded, add it to the cache
-                    _cacheProxy.SaveToCache(cacheKey, filePath, info);
-                }
-                catch (DirectoryNotFoundException)
-                {
-                    info = string.Empty;
-                }
-                catch (FileNotFoundException)
-                {
-                    info = string.Empty;
-                }
-            }
-            return new HtmlString(info);
+            var fileCache = new FileContentCache(_cacheProxy);
+            var content = fileCache.GetContent(fileName);
+            return new HtmlString(content);
         }
 
 

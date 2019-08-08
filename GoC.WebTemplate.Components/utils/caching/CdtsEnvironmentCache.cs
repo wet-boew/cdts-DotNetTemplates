@@ -7,6 +7,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
     public class CdtsEnvironmentCache
     {
         private readonly object _lock = new object();
+        private const string cdtsEnvironmentsFilePath = "configs/CdtsEnvironments.json";
 
         private readonly ICacheProvider<IDictionary<string, ICdtsEnvironment>> _cacheProvider;
 
@@ -15,7 +16,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
             _cacheProvider = cacheProvider;
         }
 
-        public IDictionary<string, ICdtsEnvironment> GetContent(string filename)
+        public IDictionary<string, ICdtsEnvironment> GetContent()
         {
             Debug.Assert(_cacheProvider != null, "Cache proxy cannot be null");
 
@@ -33,7 +34,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
                     {
                         // Map the path.
                         //TODO: Map the filename to the web server path or throw Exception if filename isn't absolute path or create an IPathMapper.
-                        string filePath = filename;
+                        string filePath = cdtsEnvironmentsFilePath;
 
                         // Read file content.
 

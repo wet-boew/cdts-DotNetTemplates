@@ -1,8 +1,10 @@
 ﻿using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.Utils;
+using GoC.WebTemplate.Components.Utils.Caching;
 using GoC.WebTemplate.Components.Configs;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 
 namespace GoC.WebTemplate.CoreMVC.Controllers
 {
@@ -10,11 +12,14 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
     {
         protected Model WebTemplateModel;
 
-        public WebTemplateBaseController()
-            : this(new CurrentRequest(), new Cache(), new ConfigurationProxy(), new CdtsEnvironmentLoader(new Cache()).LoadCDTSEnvironments())
+        public WebTemplateBaseController(ICacheProvider<IDictionary<string, ICdtsEnvironment>> cdtsCacheProvider, ICacheProvider<string> cacheProvider, HttpRequest httpRequest)
+            : this(new CurrentRequest(httpRequest),
+                  cacheProvider, 
+                  new ConfigurationProxy(), 
+                  new CdtsEnvironmentCache(cdtsCacheProvider).GetContent())
         { }
 
-        public WebTemplateBaseController(ICurrentRequest request, ICache cache, IConfigurationProxy configuration, IDictionary<string, ICdtsEnvironment> cdtsEnvironment)
+        public WebTemplateBaseController(ICurrentRequest request, ICacheProvider<string> cache, IConfigurationProxy configuration, IDictionary<string, ICdtsEnvironment> cdtsEnvironment)
         {
             WebTemplateModel = new Model(request, cache, configuration, cdtsEnvironment);
         }
