@@ -4,11 +4,11 @@ using System;
 
 namespace GoC.WebTemplate.Components.Core.Utils.Caching
 {
-    public class CacheProvider<T> : ICacheProvider<T>
+    public class MemoryCacheProvider<T> : ICacheProvider<T>
     {
         private readonly IMemoryCache _cache;
 
-        public CacheProvider(IMemoryCache cache)
+        public MemoryCacheProvider(IMemoryCache cache)
         {
             _cache = cache;
         }

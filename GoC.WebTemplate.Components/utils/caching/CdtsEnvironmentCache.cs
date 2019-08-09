@@ -4,14 +4,15 @@ using System.Diagnostics;
 
 namespace GoC.WebTemplate.Components.Utils.Caching
 {
-    public class CdtsEnvironmentCache
+    internal class CdtsEnvironmentCache
     {
+        private const string CdtsEnvironmentsFilePath = "configs/CdtsEnvironments.json";
+
         private readonly object _lock = new object();
-        private const string cdtsEnvironmentsFilePath = "configs/CdtsEnvironments.json";
 
-        private readonly ICacheProvider<IDictionary<string, ICdtsEnvironment>> _cacheProvider;
+        private readonly ICdtsCacheProvider _cacheProvider;
 
-        public CdtsEnvironmentCache(ICacheProvider<IDictionary<string, ICdtsEnvironment>> cacheProvider)
+        public CdtsEnvironmentCache(ICdtsCacheProvider cacheProvider)
         {
             _cacheProvider = cacheProvider;
         }
@@ -34,7 +35,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
                     {
                         // Map the path.
                         //TODO: Map the filename to the web server path or throw Exception if filename isn't absolute path or create an IPathMapper.
-                        string filePath = cdtsEnvironmentsFilePath;
+                        string filePath = CdtsEnvironmentsFilePath;
 
                         // Read file content.
 

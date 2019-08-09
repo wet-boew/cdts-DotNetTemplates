@@ -5,6 +5,8 @@ using GoC.WebTemplate.Components.Configs;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
+using GoC.WebTemplate.Components.Core.Utils.Caching;
 
 namespace GoC.WebTemplate.CoreMVC.Controllers
 {
@@ -12,16 +14,16 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
     {
         protected Model WebTemplateModel;
 
-        public WebTemplateBaseController(ICacheProvider<IDictionary<string, ICdtsEnvironment>> cdtsCacheProvider, ICacheProvider<string> cacheProvider, HttpRequest httpRequest)
+        public WebTemplateBaseController(IMemoryCache memoryCache, HttpRequest httpRequest)
             : this(new CurrentRequest(httpRequest),
-                  cacheProvider, 
+                  new FileContentMemoryCacheProvider(memoryCache), 
                   new ConfigurationProxy(), 
-                  new CdtsEnvironmentCache(cdtsCacheProvider).GetContent())
+                  new CdtsMemoryCacheProvider(memoryCache))
         { }
 
-        public WebTemplateBaseController(ICurrentRequest request, ICacheProvider<string> cache, IConfigurationProxy configuration, IDictionary<string, ICdtsEnvironment> cdtsEnvironment)
+        public WebTemplateBaseController(ICurrentRequest request, IFileContentCacheProvider fileContentCacheProvider, IConfigurationProxy configuration, ICdtsCacheProvider cdtsCacheProvider)
         {
-            WebTemplateModel = new Model(request, cache, configuration, cdtsEnvironment);
+            WebTemplateModel = new Model(request, fileContentCacheProvider, configuration, cdtsCacheProvider);
         }
 
         public override ViewResult View()

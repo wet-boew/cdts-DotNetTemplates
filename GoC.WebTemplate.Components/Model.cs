@@ -14,24 +14,23 @@ namespace GoC.WebTemplate.Components
 {
     public class Model
     {
-
-        private readonly ICacheProvider<string> _cacheProxy;
+        private readonly FileContentCache _fileContentCache;
         private readonly IConfigurationProxy _configProxy;
-        private readonly IDictionary<string,ICdtsEnvironment> _cdtsEnvironments;
+        //TODO: Should this be a CdtsContentCache? Right now, cache is only hit once and never checked again for the lifetime of Model. Is this what we expect for FileContentCache as well?
+        private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
         private ModelBuilder _builder;
         private ModelRenderer _renderer;
         internal ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
         
         public Model(ICurrentRequest currentRequest,
-             ICacheProvider<string> cacheProxy,
+            IFileContentCacheProvider fileContentCacheProvider,
             IConfigurationProxy configProxy,
-            IDictionary<string,ICdtsEnvironment> cdtsEnvironments)
+            ICdtsCacheProvider cdtsCacheProvider)
         {
-            _cacheProxy = cacheProxy;
+            _fileContentCache = new FileContentCache(fileContentCacheProvider);
             _configProxy = configProxy;
-            _cdtsEnvironments = cdtsEnvironments;
-
+            _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
 
             SetDefaultValues(currentRequest);
         }
@@ -419,8 +418,7 @@ namespace GoC.WebTemplate.Components
         /// <returns>A string containing the content of the file.</returns>
         public HtmlString LoadStaticFile(string fileName)
         {
-            var fileCache = new FileContentCache(_cacheProxy);
-            var content = fileCache.GetContent(fileName);
+            var content = _fileContentCache.GetContent(fileName);
             return new HtmlString(content);
         }
 

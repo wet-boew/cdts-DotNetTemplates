@@ -45,6 +45,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Caching\CacheExtensions.cs" />
     <Compile Include="Utils\Caching\CacheProvider.cs" />
+    <Compile Include="Utils\Caching\CdtsCacheProvider.cs" />
+    <Compile Include="Utils\Caching\FileContentCacheProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">

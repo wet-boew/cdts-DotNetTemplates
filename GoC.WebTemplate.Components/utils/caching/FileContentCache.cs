@@ -3,7 +3,7 @@ using System.IO;
 
 namespace GoC.WebTemplate.Components.Utils.Caching
 {
-    public class FileContentCache
+    internal class FileContentCache
     {
         private readonly object _lock = new object();
 
