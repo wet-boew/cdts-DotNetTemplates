@@ -1,6 +1,4 @@
 variables:
-  TEST_PATH: 'CoreTest\\bin\\Release'  
-  xUNIT_PATH: 'packages\\xunit.runner.console.2.4.1\\tools\\net461'
   VERSION_PS1: 'Builds\\version.ps1'
   PACKAGE_PS1: 'Builds\\package.ps1'
   DEFAULT_SLN: 'GoCWebTemplates.sln'
@@ -15,14 +13,14 @@ variables:
 stages:
   - prepare
   - build
- # - test
+  - test
   - package
   - deploy
 
 include:
   - local: '/Builds/prepare.gitlab-ci.yml'
   - local: '/Builds/build.gitlab-ci.yml'
-  # - local: '/Builds/test.gitlab-ci.yml'
+  - local: '/Builds/test.gitlab-ci.yml'
   # - local: '/Builds/package.gitlab-ci.yml'
 
 # deploy:

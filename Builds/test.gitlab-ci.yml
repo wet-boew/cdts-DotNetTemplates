@@ -1,36 +1,29 @@
-test_components:
+test_components_core:
   stage: test
-  dependencies: 
-    - build_default
   script:
-    - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_PATH%\\CoreTest.dll" -junit componentsTestResults.xml'
-  artifacts:
-    reports:
-      junit: componentsTestResults.xml
+    - 'dotnet test GoC.WebTemplate.Components.Core.Tests'
 
-code_quality_default:
+test_components_frame:
+  stage: test
+  script:
+    - 'dotnet test GoC.WebTemplate.Components.Framework.Tests'
+
+code_quality_components:
   stage: test
   allow_failure: true
   tags:
-    - secrets
     - nuget
     - msbuild
   script:
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Applications\\GoC.WebTemplate\\'
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Applications\\GoC.WebTemplateMVC\\'
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk Components\\WebTemplateCore\\'
-    - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
-    - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=DefaultCodeAnalysisReport.xml'
-    - 'del Applications\\GoC.WebTemplate\\GoC.WebTemplate.snk'
-    - 'del Applications\\GoC.WebTemplateMVC\\GoC.WebTemplate.snk'
-    - 'del Components\\WebTemplateCore\\GoC.WebTemplate.snk'
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=DefaultCodeAnalysisReport.xml'
   except:
     - tags
     - master
   artifacts:    
     expire_in: 1 week
     paths: 
-      - Components\WebTemplateCore\DefaultCodeAnalysisReport.xml
+      - GoC.WebTemplate.Components\DefaultCodeAnalysisReport.xml
 
 code_quality_samples:
   stage: test

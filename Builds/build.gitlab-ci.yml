@@ -1,16 +1,43 @@
-build_proj:
+build_comp:
   stage: build
   tags:
     - nuget
     - msbuild
   script:
-    # should change to restoring and building solution (once all project compile)
     - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
     - '"%MSBUILD_PATH%" GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj /p:Configuration=Release'
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'GoC.WebTemplate.Components\\bin\\Release\\netstandard2.0\\GoC.WebTemplate.Components.dll'
+
+build_comp_core:
+  stage: build
+  tags:
+    - nuget
+    - msbuild
+  script:
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
     - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj'
     - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj /p:Configuration=Release'
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'GoC.WebTemplate.Components.Core\\bin\\Release\\netcoreapp2.1\\GoC.WebTemplate.Components.Core.dll'
+    
+build_comp_frame:
+  stage: build
+  tags:
+    - nuget
+    - msbuild
+  script:
+    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
     - '"%NUGET_PATH%" restore GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj'
-    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj /p:Configuration=Release'
+    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj /p:Configuration=Release' 
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'GoC.WebTemplate.Components.Framework\\bin\\Release\\GoC.WebTemplate.Components.Framework.dll'
 
 build_sample:
   stage: build
