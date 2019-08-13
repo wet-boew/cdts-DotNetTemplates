@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
         wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-    <title>@WebTemplateModel.RenderHeaderTitle()</title>
+    <title>@WebTemplateModel.Render.HeaderTitle()</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <!-- Load closure template scripts -->
     <script type="text/javascript" src="@string.Concat(WebTemplateModel.CDNPath, "soyutils.js")"></script>
@@ -22,14 +22,14 @@
     </noscript>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refTop(@WebTemplateModel.RenderServerRefTop()));
+        document.write(wet.builder.refTop(@WebTemplateModel.Render.ServerRefTop()));
     </script>
-    @WebTemplateModel.RenderHtmlHeaderElements()
+    @WebTemplateModel.Render.HtmlHeaderElements()
     @RenderSection("CustomStyles", required: false)
 </head>
 
 <body vocab="http://schema.org/" typeof="WebPage">
-    @WebTemplateModel.RenderSessionTimeoutControl()
+    @WebTemplateModel.Render.SessionTimeoutControl()
     <div id="def-top">
         <!-- Write closure fall-back static file -->
         @WebTemplateModel.LoadStaticFile("serverTop.html")
@@ -37,7 +37,7 @@
     <!-- Write closure template -->
     <script type="text/javascript">
         var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.serverTop(@WebTemplateModel.RenderServerTop());
+        defTop.outerHTML = wet.builder.serverTop(@WebTemplateModel.Render.ServerTop());
     </script>
     <main role="main" property="mainContentOfPage" class="container">
         <!-- the main content -->
@@ -51,13 +51,13 @@
     <!-- Write closure template -->
     <script type="text/javascript">
     var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.serverBottom(@WebTemplateModel.RenderServerBottom());
+        defFooter.outerHTML = wet.builder.serverBottom(@WebTemplateModel.Render.ServerBottom());
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refFooter(@WebTemplateModel.RenderServerRefFooter()));
+        document.write(wet.builder.refFooter(@WebTemplateModel.Render.ServerRefFooter()));
     </script>
-    @WebTemplateModel.RenderHtmlBodyElements()
+    @WebTemplateModel.Render.HtmlBodyElements()
     @RenderSection("CustomScripts", required: false)
 </body>
 </html>

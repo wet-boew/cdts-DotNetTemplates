@@ -11,7 +11,7 @@
     <meta charset="utf-8" />
     <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
         wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-    <title>@WebTemplateModel.RenderHeaderTitle()</title>
+    <title>@WebTemplateModel.Render.HeaderTitle()</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <!-- Load closure template scripts -->
     <script type="text/javascript" src="@string.Concat(WebTemplateModel.CDNPath, "soyutils.js")"></script>
@@ -23,10 +23,10 @@
     <!-- Write closure template -->
     <script type="text/javascript">
         document.write(wet.builder.splashTop({
-            cdnEnv: "@WebTemplateModel.CDNEnvironment"
+            cdnEnv: "@WebTemplateModel.CdtsEnvironment.CDN"
         }));
     </script>
-    @WebTemplateModel.RenderHtmlHeaderElements()
+    @WebTemplateModel.Render.HtmlHeaderElements()
     @RenderSection("CustomStyles", required: false)
 </head>
 <body class="splash" vocab="http://schema.org/" typeof="WebPage">
@@ -36,7 +36,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var contentSplash = document.getElementById("splashContent");
-            contentSplash.innerHTML = wet.builder.splash(@WebTemplateModel.RenderSplashInfo());
+            contentSplash.innerHTML = wet.builder.splash(@WebTemplateModel.Render.SplashInfo());
         </script>
     </div>
     @RenderBody()

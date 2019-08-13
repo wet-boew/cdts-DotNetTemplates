@@ -263,7 +263,6 @@ namespace GoC.WebTemplate.Components
         /// Used by generate paths, determine language etc...
         /// Set by Template
         /// </summary>
-        [Obsolete("Not used")]
         public string TwoLetterCultureLanguage => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
         private string _headerTitle;
@@ -426,6 +425,7 @@ namespace GoC.WebTemplate.Components
 
     }
 
+    //TODO: Move this into its own file?
     public class CDNEnvOnly
     {
         public string CdnEnv { get; set; }

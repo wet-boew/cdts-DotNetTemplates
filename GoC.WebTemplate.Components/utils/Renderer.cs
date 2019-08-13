@@ -17,7 +17,7 @@ namespace GoC.WebTemplate.Components.Utils
             _model = model;
         }
 
-        internal HtmlString AppFooter()
+        public HtmlString AppFooter()
         {
             if (!_model.CdtsEnvironment.CanHaveContactLinkInAppTemplate && _model.ContactLinks.Any())
             {
@@ -37,7 +37,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString AppTop()
+        public HtmlString AppTop()
         {
             if (_model.ShowSignInLink && _model.ShowSignOutLink)
                 throw new InvalidOperationException("Unable to show sign in and sign out link together");
@@ -49,7 +49,7 @@ namespace GoC.WebTemplate.Components.Utils
             return _model.CdtsEnvironment.Theme.ToLower() == "gcweb" ? GCWebAppTop() : GCIntranetApptop();
         }
 
-        internal HtmlString TransactionalTop()
+        public HtmlString TransactionalTop()
         {
             return JsonSerializationHelper.SerializeToJson(new Top
             {
@@ -68,7 +68,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString Top()
+        public HtmlString Top()
         {
             return JsonSerializationHelper.SerializeToJson(new Top
             {
@@ -85,7 +85,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString RefTop(bool isApplication)
+        public HtmlString RefTop(bool isApplication)
         {
             return JsonSerializationHelper.SerializeToJson(new RefTop
             {
@@ -97,7 +97,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString UnilingualPreFooter()
+        public HtmlString UnilingualPreFooter()
         {
             return JsonSerializationHelper.SerializeToJson(new UnilingualPreFooter
             {
@@ -106,7 +106,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString PreFooter()
+        public HtmlString PreFooter()
         {
             return JsonSerializationHelper.SerializeToJson(new PreFooter
             {
@@ -124,7 +124,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString TransactionalPreFooter()
+        public HtmlString TransactionalPreFooter()
         {
             return JsonSerializationHelper.SerializeToJson(new PreFooter
             {
@@ -138,7 +138,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString Footer()
+        public HtmlString Footer()
         {
             return JsonSerializationHelper.SerializeToJson(new Footer
             {
@@ -152,7 +152,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString TransactionalFooter()
+        public HtmlString TransactionalFooter()
         {
             return JsonSerializationHelper.SerializeToJson(new Footer
             {
@@ -166,7 +166,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString RefFooter()
+        public HtmlString RefFooter()
         {
             if (_model.LeavingSecureSiteWarning.Enabled &&
                 !string.IsNullOrEmpty(_model.LeavingSecureSiteWarning.RedirectURL))
@@ -182,7 +182,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        internal HtmlString SessionTimeoutControl()
+        public HtmlString SessionTimeoutControl()
         {
             HtmlString jsonSessionTimeout = null;
 
@@ -195,7 +195,7 @@ namespace GoC.WebTemplate.Components.Utils
             return null;
         }
 
-        internal HtmlString LeftMenu()
+        public HtmlString LeftMenu()
         {
             if (!_model.LeftMenuItems.Any())
                 return new HtmlString(string.Empty);
@@ -262,7 +262,7 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>
         /// string hopefully a valid html tag
         /// </returns>
-        internal HtmlString HtmlElements(List<string> tags)
+        public HtmlString HtmlElements(List<string> tags)
         {
             var sb = new StringBuilder();
 
@@ -272,6 +272,20 @@ namespace GoC.WebTemplate.Components.Utils
             }
             return new HtmlString(sb.ToString());
         }
+
+        public HtmlString HtmlBodyElements() => this.HtmlElements(_model.HTMLBodyElements);
+
+        public HtmlString HtmlHeaderElements() => this.HtmlElements(_model.HTMLHeaderElements);
+
+        public HtmlString HeaderTitle() => new HtmlString(_model.HeaderTitle);
+
+        private HtmlString CdnEnvOnly() => JsonSerializationHelper.SerializeToJson(new CDNEnvOnly { CdnEnv = _model.CdtsEnvironment.CDN });
+
+        public HtmlString ServerTop() => CdnEnvOnly();
+        public HtmlString ServerBottom() => CdnEnvOnly();
+        public HtmlString ServerRefTop() => CdnEnvOnly();
+        public HtmlString ServerRefFooter() => CdnEnvOnly();
+        public HtmlString SplashTop() => CdnEnvOnly();
 
         private HtmlString GCIntranetApptop()
         {
@@ -334,7 +348,7 @@ namespace GoC.WebTemplate.Components.Utils
 
         }
 
-        internal HtmlString SplashInfo()
+        public HtmlString SplashInfo()
         {
             return JsonSerializationHelper.SerializeToJson(new 
             {
