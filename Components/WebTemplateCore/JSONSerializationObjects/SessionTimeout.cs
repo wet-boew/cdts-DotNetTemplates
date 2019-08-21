@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Web.SessionState;
 
 // ReSharper disable once CheckNamespace
@@ -35,9 +36,16 @@ namespace GoC.WebTemplate.Components
         public bool Enabled { get; set; }
         public int Inactivity { get; set; }
         public int ReactionTime { get; set; }
+
+        [JsonProperty(PropertyName = "sessionalive")]
         public int SessionAlive { get; set; }
+
+        [JsonProperty(PropertyName = "logouturl")]
         public string LogoutUrl { get; set; }
+
+        [JsonProperty(PropertyName = "refreshCallbackUrl")]
         public string RefreshCallBackUrl { get; set; }
+
         public bool RefreshOnClick { get; set; }
         public int RefreshLimit { get; set; }
         public string Method { get; set; }
