@@ -8,7 +8,7 @@ variables:
   # - NUGET_PATH
   # - MSBUILD_PATH
   # - CURL_PATH
-  # - RUNNER_USER_CRED
+  # - ARTIFACTORY_CRED
   
 stages:
   - prepare

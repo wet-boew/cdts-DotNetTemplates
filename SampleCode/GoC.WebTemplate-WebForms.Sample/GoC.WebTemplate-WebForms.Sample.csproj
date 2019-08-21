@@ -57,16 +57,15 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.30.7145.20278, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.31.0-b304-2\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.31.7157.16525, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.31.1\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.WebForms, Version=1.30.7145.20278, Culture=neutral, PublicKeyToken=5bcfbf3bc147f403, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.31.0-b304-2\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.WebForms, Version=1.31.7157.16525, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.31.1\Lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
@@ -318,11 +317,6 @@
     <Content Include="SamplePages\NestedMasterPageSample.master" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu.Master" />
@@ -332,6 +326,7 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
+    <None Include="packages.config" />
     <None Include="WebTemplateWebForms.xsd">
       <SubType>Designer</SubType>
     </None>
