@@ -1,7 +1,9 @@
 ﻿using GoC.WebTemplate.Components.Configs;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("GoC.WebTemplate.Components.Tests")]
 namespace GoC.WebTemplate.Components.Utils.Caching
 {
     internal class CdtsEnvironmentCache

@@ -1,3 +1,8 @@
+test_components:
+  stage: test
+  script:
+    - 'dotnet test GoC.WebTemplate.Components.Tests'
+
 test_components_core:
   stage: test
   script:

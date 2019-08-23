@@ -4,13 +4,13 @@ using System.Linq;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
-using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Entities;
 using NSubstitute;
 using Xunit;
 using Xunit.Sdk;
 
-namespace CoreTest
+namespace GoC.WebTemplate.Components.Test
 {
     public class WebTemplateCustomization : CompositeCustomization
     {
@@ -61,6 +61,9 @@ namespace CoreTest
             //and RenderPreFooterWithNullsTest.
                                           .With(p => p.ShowSharePageLink, true)
                                           .With(p => p.LoadJQueryFromGoogle, false));
+
+            fixture.Customize<IntranetTitle>(c => c.With(p => p.NewWindow, false));
+
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
             fixture.Customize<CdtsEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));

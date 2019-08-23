@@ -1,13 +1,12 @@
 ﻿using FluentAssertions;
-using GoC.WebTemplate.Components;
 using Xunit;
 
-namespace CoreTest.RenderTests
+namespace GoC.WebTemplate.Components.Test.RenderTests
 {
     public class RenderSplashInfoTests
     {
         [Theory, AutoNSubstituteData]
-        public void RenderSplashInfoTest(Core sut)
+        public void RenderSplashInfoTest(Model sut)
         {
             //NOTE: Only testing the RenderSplashInfo properties right now. More properties can be added later.
             sut.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
@@ -16,7 +15,7 @@ namespace CoreTest.RenderTests
             sut.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
             sut.SplashPageInfo.EnglishName = "[My web asset]";
             sut.SplashPageInfo.FrenchName = "[Mon actif web]";
-            var result = sut.RenderSplashInfo();
+            var result = sut.Render.SplashInfo();
 
             result.ToString().Should().Be("{\"cdnEnv\":\"\",\"indexEng\":\"http://www.canada.ca/en/index.html\",\"indexFra\":\"http://www.canada.ca/fr/index.html\",\"termsEng\":\"http://www.canada.ca/en/transparency/terms.html\",\"termsFra\":\"http://www.canada.ca/fr/transparence/avis.html\",\"nameEng\":\"[My web asset]\",\"nameFra\":\"[Mon actif web]\"}");
         }

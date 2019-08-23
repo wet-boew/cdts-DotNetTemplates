@@ -421,8 +421,6 @@ namespace GoC.WebTemplate.Components
             return new HtmlString(content);
         }
 
-
-
     }
 
     //TODO: Move this into its own file?

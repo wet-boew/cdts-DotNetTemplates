@@ -21,7 +21,8 @@ namespace GoC.WebTemplate.Components.Utils
                     OverrideSpecifiedNames = false
                 }
             },
-            NullValueHandling = NullValueHandling.Ignore
+            NullValueHandling = NullValueHandling.Ignore,
+            DefaultValueHandling = DefaultValueHandling.Ignore
         };
 
         /// <summary>

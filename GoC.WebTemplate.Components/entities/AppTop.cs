@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
@@ -26,6 +27,8 @@ namespace GoC.WebTemplate.Components.Entities
         public string SubTheme { get; set; }
         public bool ShowPreContent { get; set; }
         public string LocalPath { get; set; }
+
+        [JsonProperty(DefaultValueHandling=DefaultValueHandling.Include)]
         public bool TopSecMenu { get; set; }
         public List<MenuLink> MenuLinks { get; set; }
     }

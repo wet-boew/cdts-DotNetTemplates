@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.MVC", "GoC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.WebForms", "GoC.WebTemplate.WebForms\GoC.WebTemplate.WebForms.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Test", "GoC.WebTemplate.Components.Test\GoC.WebTemplate.Components.Test.csproj", "{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Core", "GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj", "{2C7963D7-2550-4B44-A6FE-378985896501}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.Components.Framework", "GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj", "{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}"
@@ -36,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Builds\test.gitlab-ci.yml = Builds\test.gitlab-ci.yml
 		Builds\version.ps1 = Builds\version.ps1
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Tests", "GoC.WebTemplate.Components.Tests\GoC.WebTemplate.Components.Tests.csproj", "{8D288002-8321-4C67-B0F2-E61A4D58D2DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +63,6 @@ Global
 		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26FD115A-4321-4AA5-B8A0-72C061AC0491}.Release|Any CPU.Build.0 = Release|Any CPU
-		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{677CCE10-B3F1-4E4C-B0C0-0203B98BC49D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2C7963D7-2550-4B44-A6FE-378985896501}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2C7963D7-2550-4B44-A6FE-378985896501}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C7963D7-2550-4B44-A6FE-378985896501}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,6 +79,10 @@ Global
 		{24E78526-57FC-4085-9FD0-0434E4498307}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24E78526-57FC-4085-9FD0-0434E4498307}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24E78526-57FC-4085-9FD0-0434E4498307}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D288002-8321-4C67-B0F2-E61A4D58D2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D288002-8321-4C67-B0F2-E61A4D58D2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D288002-8321-4C67-B0F2-E61A4D58D2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D288002-8321-4C67-B0F2-E61A4D58D2DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

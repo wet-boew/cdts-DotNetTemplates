@@ -115,8 +115,6 @@
     <Compile Include="RenderTests\RenderPreFooterTests.cs" />
     <Compile Include="RenderTests\RenderRefTopTests.cs" />
     <Compile Include="RenderTests\RenderSplashInfoTests.cs" />
-    <Compile Include="RenderTests\RenderTests.cs" />
-    <Compile Include="RenderTests\RenderTopTests.cs" />
     <Compile Include="RenderTests\RenderTransactionalTopTests.cs" />
     <Compile Include="RenderTests\RenderUnilingualPreFooter.cs" />
     <Compile Include="WebFormsTests.cs" />
@@ -135,6 +133,12 @@
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">
+      <Project>{A2F753B1-CE70-4455-8F5D-79866FBFC567}</Project>
+      <Name>GoC.WebTemplate.Components</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
