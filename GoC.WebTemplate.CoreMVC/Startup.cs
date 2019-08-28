@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GoC.WebTemplate.Components.Core;
+using GoC.WebTemplate.Components.Core.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,11 +28,9 @@ namespace GoC.WebTemplate.CoreMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddMemoryCache();
-            services.AddHttpContextAccessor();
+            services.AddModelAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

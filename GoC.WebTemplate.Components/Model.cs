@@ -14,7 +14,6 @@ namespace GoC.WebTemplate.Components
     {
         private readonly FileContentCache _fileContentCache;
         private readonly IConfigurationProxy _configProxy;
-        //TODO: Should this be a CdtsContentCache? Right now, cache is only hit once and never checked again for the lifetime of Model. Is this what we expect for FileContentCache as well?
         private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
         private ModelBuilder _builder;
         private ModelRenderer _renderer;

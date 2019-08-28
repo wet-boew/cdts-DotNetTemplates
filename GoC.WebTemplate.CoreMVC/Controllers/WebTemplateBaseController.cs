@@ -7,32 +7,18 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using GoC.WebTemplate.Components.Core.Utils.Caching;
+using GoC.WebTemplate.Components.Core.Services;
 using GoC.WebTemplate.Components.Entities;
 
 namespace GoC.WebTemplate.CoreMVC.Controllers
 {
     public class WebTemplateBaseController : Controller
     {
-        protected Model WebTemplateModel;
+        protected Model WebTemplateModel { get; }
 
-        public WebTemplateBaseController(IMemoryCache memoryCache, HttpRequest httpRequest)
-            : this(httpRequest,
-                  new FileContentMemoryCacheProvider(memoryCache), 
-                  new ConfigurationProxy(), 
-                  new CdtsMemoryCacheProvider(memoryCache))
-        { }
-
-        public WebTemplateBaseController(HttpRequest request, IFileContentCacheProvider fileContentCacheProvider, IConfigurationProxy configuration, ICdtsCacheProvider cdtsCacheProvider)
+        public WebTemplateBaseController(ModelAccessor modelAccessor)
         {
-            WebTemplateModel = new Model(fileContentCacheProvider, configuration, cdtsCacheProvider);
-
-            //set the language link according to the culture
-            WebTemplateModel.LanguageLink = new LanguageLink
-            {
-                Href = ModelBuilder.BuildLanguageLinkURL(request.QueryString.ToString())
-            };
-            //set timeout based on session
-            WebTemplateModel.SessionTimeout.CheckWithServerSessionTimeout(request.HttpContext.Session);
+            WebTemplateModel = modelAccessor.Model;
         }
 
         public override ViewResult View()
