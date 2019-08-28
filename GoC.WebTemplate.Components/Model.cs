@@ -1,8 +1,7 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+using System.Diagnostics.Contracts;
 using System.Threading;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
@@ -28,6 +27,8 @@ namespace GoC.WebTemplate.Components
             IConfigurationProxy configProxy,
             ICdtsCacheProvider cdtsCacheProvider)
         {
+            if (currentRequest == null) throw new ArgumentNullException(nameof(currentRequest));
+
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
             _configProxy = configProxy;
             _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
@@ -403,12 +404,6 @@ namespace GoC.WebTemplate.Components
         public List<MenuLink> MenuLinks { get; set; }
         
         public IntranetTitle IntranetTitle { get; set; }
-
-        /// <summary>
-        /// Arbritrary object to act as a mutex to obtain a class-scope lock accros all threads.
-        /// </summary>
-        /// <remarks></remarks>
-        private static readonly object LockObject = new object();
 
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.

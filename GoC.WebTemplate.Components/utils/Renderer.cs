@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -46,7 +48,7 @@ namespace GoC.WebTemplate.Components.Utils
 
             //For v4.0.26.x we have to render this section differently depending on the theme, 
             //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
-            return _model.CdtsEnvironment.Theme.ToLower() == "gcweb" ? GCWebAppTop() : GCIntranetApptop();
+            return _model.CdtsEnvironment.Theme.Equals("gcweb", StringComparison.OrdinalIgnoreCase) ? GCWebAppTop() : GCIntranetApptop();
         }
 
         public HtmlString TransactionalTop()
@@ -262,10 +264,11 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>
         /// string hopefully a valid html tag
         /// </returns>
-        public HtmlString HtmlElements(List<string> tags)
+        public static HtmlString HtmlElements(List<string> tags)
         {
-            var sb = new StringBuilder();
+            if (tags == null) throw new ArgumentNullException(nameof(tags));
 
+            var sb = new StringBuilder();
             foreach (var tag in tags)
             {
                 sb.AppendLine(tag);
@@ -273,9 +276,9 @@ namespace GoC.WebTemplate.Components.Utils
             return new HtmlString(sb.ToString());
         }
 
-        public HtmlString HtmlBodyElements() => this.HtmlElements(_model.HTMLBodyElements);
+        public HtmlString HtmlBodyElements() => HtmlElements(_model.HTMLBodyElements);
 
-        public HtmlString HtmlHeaderElements() => this.HtmlElements(_model.HTMLHeaderElements);
+        public HtmlString HtmlHeaderElements() => HtmlElements(_model.HTMLHeaderElements);
 
         public HtmlString HeaderTitle() => new HtmlString(_model.HeaderTitle);
 

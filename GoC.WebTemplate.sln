@@ -33,6 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		readme.md = readme.md
 		Builds\test.gitlab-ci.yml = Builds\test.gitlab-ci.yml
 		Builds\version.ps1 = Builds\version.ps1
+		WebTemplate.ruleset = WebTemplate.ruleset
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Tests", "GoC.WebTemplate.Components.Tests\GoC.WebTemplate.Components.Tests.csproj", "{8D288002-8321-4C67-B0F2-E61A4D58D2DA}"

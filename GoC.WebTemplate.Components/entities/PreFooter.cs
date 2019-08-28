@@ -37,7 +37,7 @@ namespace GoC.WebTemplate.Components.Entities
                         serializer.Serialize(writer, true);
                         return;
                     }
-                    serializer.Serialize(writer, Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM) && 
+                    serializer.Serialize(writer, Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && 
                                                  !string.IsNullOrEmpty(feedbackLink.UrlFr) ? 
                                                  feedbackLink.UrlFr : feedbackLink.Url);
                     return;

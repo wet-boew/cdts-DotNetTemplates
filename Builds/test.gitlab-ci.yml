@@ -13,23 +13,6 @@ test_components_frame:
   script:
     - 'dotnet test GoC.WebTemplate.Components.Framework.Tests'
 
-code_quality_components:
-  stage: test
-  allow_failure: true
-  tags:
-    - nuget
-    - msbuild
-  script:
-    - '"%NUGET_PATH%" restore GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
-    - '"%MSBUILD_PATH%" GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=DefaultCodeAnalysisReport.xml'
-  except:
-    - tags
-    - master
-  artifacts:    
-    expire_in: 1 week
-    paths: 
-      - GoC.WebTemplate.Components\DefaultCodeAnalysisReport.xml
-
 code_quality_samples:
   stage: test
   allow_failure: true
