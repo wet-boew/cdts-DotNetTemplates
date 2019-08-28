@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Threading;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
@@ -22,21 +21,18 @@ namespace GoC.WebTemplate.Components
         internal ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
         
-        public Model(ICurrentRequest currentRequest,
-            IFileContentCacheProvider fileContentCacheProvider,
+        public Model(IFileContentCacheProvider fileContentCacheProvider,
             IConfigurationProxy configProxy,
             ICdtsCacheProvider cdtsCacheProvider)
         {
-            if (currentRequest == null) throw new ArgumentNullException(nameof(currentRequest));
-
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
             _configProxy = configProxy;
             _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
 
-            SetDefaultValues(currentRequest);
+            SetDefaultValues();
         }
 
-        private void SetDefaultValues(ICurrentRequest currentRequest)
+        private void SetDefaultValues()
         {
             //Set properties
             WebTemplateVersion = _configProxy.Version;
@@ -59,13 +55,6 @@ namespace GoC.WebTemplate.Components
                 RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit,
                 Method = _configProxy.SessionTimeOut.Method,
                 AdditionalData = _configProxy.SessionTimeOut.AdditionalData
-            };
-            SessionTimeout.CheckWithServerSessionTimout(currentRequest.Session);
-
-            //Set Top section options
-            LanguageLink = new LanguageLink
-            {
-                Href = ModelBuilder.BuildLanguageLinkURL(currentRequest.QueryString)
             };
             ShowPreContent = _configProxy.ShowPreContent;
             ShowSearch = _configProxy.ShowSearch;

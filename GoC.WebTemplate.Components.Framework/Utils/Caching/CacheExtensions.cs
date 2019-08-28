@@ -1,9 +1,4 @@
-﻿using GoC.WebTemplate.Components.Configs;
-using GoC.WebTemplate.Components.Core.Utils.Caching;
-using GoC.WebTemplate.Components.Utils.Caching;
-using System.Collections.Generic;
-
-namespace GoC.WebTemplate.Components.Framework.Utils.Caching
+﻿namespace GoC.WebTemplate.Components.Utils.Caching
 {
     public static class CacheExtensions
     {

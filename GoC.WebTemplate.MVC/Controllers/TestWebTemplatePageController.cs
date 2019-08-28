@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Globalization;
-using GoC.WebTemplate.Components;
-using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Entities;
 
 namespace GoC.WebTemplate.MVC.Controllers
 {
@@ -33,7 +32,21 @@ namespace GoC.WebTemplate.MVC.Controllers
                     Name  = "MenuSection",
                     OpenInNewWindow = false
                 },
-                new MenuSection("Principale", new [] { new MenuItem("linka", "Secondaire", new [] { new MenuItem("linkb", "Tertiaire") }) })
+                new MenuSection{
+                    Name="Principale",
+                    Items= new List<Link> {
+                        new MenuItem{
+                            Href="linka",
+                            Text="Secondaire",
+                            SubItems= new List<MenuItem> {
+                                new MenuItem{
+                                    Href="linkb",
+                                    Text="Tertiaire"
+                                }
+                            }
+                        }
+                    }
+                }
             };
             return View("HelloWorldLeftMenu");
         }
@@ -170,7 +183,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.ShowLanguageLink = true;
             WebTemplateCore.ShowPostContent = false;
-            WebTemplateCore.CustomFooterLinks = new List<FooterLink>
+            WebTemplateCore.CustomFooterLinks = new List<Link>
             {
                 new FooterLink {Href= "#", Text= "Link 1"},
                 new FooterLink {Href= "#", Text= "Link 2"},
@@ -264,7 +277,7 @@ namespace GoC.WebTemplate.MVC.Controllers
 
             //   this.WebTemplateCore.LanguageLink_URL = "../TestWebTemplatePage/ChangeCulture?GoCTemplateCulture=fr-CA";
 
-            WebTemplateCore.ShowFeedbackLink = true;
+            WebTemplateCore.FeedbackLink.Show = true;
 
             WebTemplateCore.ShowSearch = true;
 
@@ -283,15 +296,15 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
 
             //BREADCRUMB ====================================
-            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.htm", "l'Homéêçå & gamble", "l'abc&fich"));
-            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "CDN Sample", "Content Delivery Network Sample"));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb { Href = "http://www.canada.ca/en/index.htm", Title = "l'Homéêçå & gamble", Acronym = "l'abc&fich" });
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb { Href = "", Title = "CDN Sample", Acronym = "Content Delivery Network Sample" });
 
 
             //Share this page LINK ====================================
             WebTemplateCore.ShowSharePageLink = true;
 
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.bitly);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.facebook);
 
 
             //LEFT MENU ====================================
@@ -299,8 +312,8 @@ namespace GoC.WebTemplate.MVC.Controllers
 
             leftmen.Name = "menu aslfkjsaklj";
 
-            leftmen.Items.Add(new Link("http://www.tsn.ca", "aaa"));
-            leftmen.Items.Add(new Link("http://www.cnn.ca", "bbb"));
+            leftmen.Items.Add(new Link { Href = "http://www.tsn.ca", Text = "aaa" });
+            leftmen.Items.Add(new Link { Href = "http://www.cnn.ca", Text = "bbb" });
 
             WebTemplateCore.LeftMenuItems.Add(leftmen);
 
@@ -314,11 +327,39 @@ namespace GoC.WebTemplate.MVC.Controllers
             //this.WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            WebTemplateCore.LeftMenuItems.Add(new MenuSection("l'index Section B", "http://www.pinkbike.com", new[] {
-                                                                                new MenuItem("http://www.rds.ca", "RDS", true, new [] {
-                                                                                    new MenuItem("http://www.rds.ca", "sub 1", true),
-                                                                                    new MenuItem("http://www.lapresse.com", "sub 2") }),
-                                                                                new Link("http://www.lapresse.com", "L'a Presse") }));
+            WebTemplateCore.LeftMenuItems.Add(new MenuSection
+            {
+                Name = "l'index Section B",
+                Link = "http://www.pinkbike.com",
+                Items = new List<Link>
+                {
+                    new MenuItem
+                    {
+                        Href="http://www.rds.ca",
+                        Text="RDS",
+                        NewWindow= true,
+                        SubItems = new List<MenuItem>
+                        {
+                            new MenuItem
+                            {
+                                Href="http://www.rds.ca",
+                                Text="sub 1",
+                                NewWindow= true
+                            },
+                            new MenuItem
+                            {
+                                Href="http://www.lapresse.com",
+                                Text="sub 2"
+                            }
+                        }
+                    },
+                    new Link
+                    {
+                        Href = "http://www.lapresse.com",
+                        Text = "L'a Presse"
+                    }
+                }
+            });
 
             // GoC.WebTemplate.MenuSection leftMenu = new GoC.WebTemplate.MenuSection();
 

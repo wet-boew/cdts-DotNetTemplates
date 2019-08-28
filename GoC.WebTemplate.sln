@@ -10,8 +10,14 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.CoreMVC", "GoC.WebTemplate.CoreMVC\GoC.WebTemplate.CoreMVC.csproj", "{0A83E850-F9EF-4045-9861-FD5DEB6D48D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.MVC", "GoC.WebTemplate.MVC\GoC.WebTemplate.MVC.csproj", "{EC1904AE-61D0-4C51-B431-8682EC4C6C42}"
+	ProjectSection(ProjectDependencies) = postProject
+		{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D} = {234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoC.WebTemplate.WebForms", "GoC.WebTemplate.WebForms\GoC.WebTemplate.WebForms.csproj", "{26FD115A-4321-4AA5-B8A0-72C061AC0491}"
+	ProjectSection(ProjectDependencies) = postProject
+		{234C77BE-844A-49F0-A6AE-7F7A5C82AA5D} = {234C77BE-844A-49F0-A6AE-7F7A5C82AA5D}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoC.WebTemplate.Components.Core", "GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj", "{2C7963D7-2550-4B44-A6FE-378985896501}"
 EndProject

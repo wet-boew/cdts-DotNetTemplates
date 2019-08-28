@@ -47,26 +47,5 @@ namespace GoC.WebTemplate.Components.Entities
         public int RefreshLimit { get; set; }
         public string Method { get; set; }
         public string AdditionalData { get; set; }
-
-        /// <summary>
-        /// Will check that the timeouts set are equalto or lower than the server session timeout
-        /// It will override SessionAlive, Inactivity and ReactionTime if it fails the check
-        /// </summary>
-        /// <param name="session">current session</param>
-        public void CheckWithServerSessionTimout(ISession session)
-        {
-            const int min = 60000; //one min in millisections
-            if (Enabled && session != null && session.IsAvailable &&
-                session.TryGetValue("timeout", out byte[] temp) &&
-                int.TryParse(temp.ToString(), out int timeout) &&
-                timeout * min < SessionAlive)
-            {
-                while (timeout <= 1) timeout++; // one min will force the popup instantly so increase the session
-                SessionAlive = timeout * min;
-                Inactivity = SessionAlive - min;
-                ReactionTime = min;
-
-            }
-        }
     }
 }

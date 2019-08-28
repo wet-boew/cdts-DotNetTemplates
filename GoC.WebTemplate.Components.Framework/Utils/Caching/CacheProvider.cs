@@ -1,7 +1,6 @@
-﻿using GoC.WebTemplate.Components.Utils.Caching;
-using System.Web.Caching;
+﻿using System.Web.Caching;
 
-namespace GoC.WebTemplate.Components.Framework.Utils.Caching
+namespace GoC.WebTemplate.Components.Utils.Caching
 {
     public class CacheProvider<T> : ICacheProvider<T>
     {

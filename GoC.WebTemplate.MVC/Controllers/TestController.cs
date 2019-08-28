@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Entities;
 using System.Web.Mvc;
 using GoC.WebTemplate.Components;
 

@@ -264,7 +264,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 new FooterSection
                 {
-                    CustomFooterLinks = new List<Link>
+                    CustomFooterLinks = new List<FooterLink>
                     {
                         new FooterLink { Href = "href", Text = "text" }
                     },
@@ -272,7 +272,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 },
                 new FooterSection
                 {
-                    CustomFooterLinks = new List<Link>
+                    CustomFooterLinks = new List<FooterLink>
                     {
                         new FooterLink { Href = "href2", Text = "text2" }
                     },

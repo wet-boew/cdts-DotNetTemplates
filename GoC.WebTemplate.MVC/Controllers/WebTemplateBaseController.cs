@@ -1,12 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Globalization;
 using System.Threading;
 using System.Reflection;
 using GoC.WebTemplate.Components;
-using GoC.WebTemplate.Components.JSONSerializationObjects;
-using GoC.WebTemplate.Components.Proxies;
+using GoC.WebTemplate.Components.Entities;
+using GoC.WebTemplate.Components.Utils;
+using GoC.WebTemplate.Components.Utils.Caching;
+using GoC.WebTemplate.Components.Configs;
+using System.Web;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.MVC
@@ -14,19 +16,17 @@ namespace GoC.WebTemplate.MVC
     public class WebTemplateBaseController : Controller
     {
 
-        public WebTemplateBaseController() : this(new CurrentRequestProxy(),
-            new CacheProxy(),
-                                       new ConfigurationProxy(),
-                                       new CDTSEnvironmentLoader(new CacheProxy()).LoadCDTSEnvironments("~/CDTSEnvironments.json"))
+        public WebTemplateBaseController()
+            : this(new FileContentCacheProvider(HttpRuntime.Cache),
+                  new ConfigurationProxy(),
+                  new CdtsCacheProvider(HttpRuntime.Cache))
         { }
 
-        public WebTemplateBaseController(ICurrentRequestProxy requestProxy, ICacheProxy cacheProxy, IConfigurationProxy configurationProxy, IDictionary<string, ICDTSEnvironment> cdtsEnvironments)
+        public WebTemplateBaseController(IFileContentCacheProvider fileContentCacheProvider,
+            IConfigurationProxy configProxy,
+            ICdtsCacheProvider cdtsCacheProvider)
         {
-            WebTemplateCore = new Core(requestProxy,
-                cacheProxy,
-                                   configurationProxy,
-                                   cdtsEnvironments);
-
+            WebTemplateCore = new Model(fileContentCacheProvider, configProxy, cdtsCacheProvider);
         }
 
         /// <summary>
@@ -103,14 +103,16 @@ namespace GoC.WebTemplate.MVC
             //set the language link according to the culture
             WebTemplateCore.LanguageLink = new LanguageLink
             {
-                Href = CoreBuilder.BuildLanguageLinkURL(new CurrentRequestProxy().QueryString)
+                Href = ModelBuilder.BuildLanguageLinkURL(System.Web.HttpContext.Current.Request.QueryString.ToString())
             };
-
+            //set timeout based on session
+            WebTemplateCore.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);
+            
             return base.BeginExecuteCore(callback, state);
         }
 
         #region Properties
-        protected Core WebTemplateCore { get; set; }
+        protected Model WebTemplateCore { get; set; }
         #endregion
 
     }
