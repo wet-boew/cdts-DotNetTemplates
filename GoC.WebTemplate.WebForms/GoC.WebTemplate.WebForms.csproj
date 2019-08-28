@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GoC.WebTemplate.WebForms</RootNamespace>
     <AssemblyName>GoC.WebTemplate.WebForms</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
@@ -37,7 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>..\..\WebTemplate.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\WebTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,9 +57,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -132,7 +132,7 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <Content Include="packages.config" />
-    <Content Include="GoC.WebTemplate.snk" />
+    <Content Include="..\GoC.WebTemplate.snk" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -151,7 +151,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="GoC.WebTemplate\BasePage.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
@@ -202,20 +201,16 @@
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-<<<<<<< HEAD:GoC.WebTemplate.WebForms/GoC.WebTemplate.WebForms.csproj
-  <ItemGroup />
-=======
   <ItemGroup>
-    <ProjectReference Include="..\..\Components\WebTemplateCore\GoC.WebTemplate-Components.csproj">
-      <Project>{a9ace274-5f6a-4634-a40a-e775f5b81b90}</Project>
-      <Name>GoC.WebTemplate-Components</Name>
+    <ProjectReference Include="..\GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj">
+      <Project>{234c77be-844a-49f0-a6ae-7f7a5c82aa5d}</Project>
+      <Name>GoC.WebTemplate.Components.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">
+      <Project>{a2f753b1-ce70-4455-8f5d-79866fbfc567}</Project>
+      <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\..\packages\SecurityCodeScan.3.2.0.0\analyzers\dotnet\SecurityCodeScan.dll" />
-    <Analyzer Include="..\..\packages\SecurityCodeScan.3.2.0.0\analyzers\dotnet\YamlDotNet.dll" />
-  </ItemGroup>
->>>>>>> master:Applications/GoC.WebTemplate/GoC.WebTemplate-WebForms.csproj
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -224,7 +219,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

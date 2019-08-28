@@ -1,7 +1,7 @@
 variables:
   VERSION_PS1: 'Builds\\version.ps1'
   PACKAGE_PS1: 'Builds\\package.ps1'
-  DEFAULT_SLN: 'GoCWebTemplates.sln'
+  DEFAULT_SLN: 'GoC.WebTemplate.sln'
   SAMPLES_SLN: 'GoC.WebTemplate.Samples.sln'
   ARTIFACTORY_DEPLOY: 'https://jade-repos.intra.dev/artifactory/ca-gc-sds-libs-nuget-local/'
   # variables from runner

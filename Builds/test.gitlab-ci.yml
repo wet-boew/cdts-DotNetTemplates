@@ -1,7 +1,11 @@
 test_components:
   stage: test
+  tags:
+    - secrets
   script:
+    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
     - 'dotnet test GoC.WebTemplate.Components.Tests'
+    - 'del GoC.WebTemplate.snk'
 
 test_components_core:
   stage: test

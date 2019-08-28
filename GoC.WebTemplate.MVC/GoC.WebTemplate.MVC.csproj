@@ -212,13 +212,23 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.SplashPage_Layout.cshtml" />
     <Content Include="Views\TestWebTemplatePage\SplashPage.cshtml" />
     <Content Include="Views\Test\SubThemeTestPage.cshtml" />
-    <Content Include="GoC.WebTemplate.snk" />
+    <Content Include="..\GoC.WebTemplate.snk" />
     <Content Include="Views\Test\NoCustomSearchTestPage.cshtml" />
     <None Include="packages.config" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj">
+      <Project>{234c77be-844a-49f0-a6ae-7f7a5c82aa5d}</Project>
+      <Name>GoC.WebTemplate.Components.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">
+      <Project>{a2f753b1-ce70-4455-8f5d-79866fbfc567}</Project>
+      <Name>GoC.WebTemplate.Components</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj">
@@ -238,7 +248,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

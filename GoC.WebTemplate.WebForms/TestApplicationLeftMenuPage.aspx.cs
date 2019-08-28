@@ -1,5 +1,6 @@
 ﻿using System;
-using GoC.WebTemplate.Components;
+using System.Collections.Generic;
+using GoC.WebTemplate.Components.Entities;
 
 namespace GoC.WebTemplate.WebForms
 {
@@ -16,10 +17,16 @@ namespace GoC.WebTemplate.WebForms
 
             //set the header for this section of the menu
             //set the links for this section of the menu
-            leftMenu.Items.Add(new MenuItem("http://www.tsn.ca", "TSN", new[] {
-                                                            new MenuItem("http://www.cbc.ca", "sub 1", true),
-                                                            new MenuItem("http://www.rds.ca", "sub 2") }));
-            leftMenu.Items.Add(new MenuItem("http://www.cnn.ca", "CNN"));
+            leftMenu.Items.Add(new MenuItem
+            {
+                Href = "http://www.tsn.ca",
+                Text = "TSN",
+                SubItems = new List<MenuItem> {
+                    new MenuItem{ Href = "http://www.cbc.ca", Text = "sub 1", NewWindow = true },
+                    new MenuItem{ Href = "http://www.rds.ca", Text = "sub 2" }
+                }
+            });
+            leftMenu.Items.Add(new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" });
 
             //add title 
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "My Fancy Application Title";
@@ -29,9 +36,14 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new MenuSection("Section B", new[] {
-                                                                                new MenuItem("http://www.rds.ca", "RDS"),
-                                                                                new MenuItem("http://www.lapresse.com", "La Presse") }));
+            WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new MenuSection
+            {
+                Name = "Section B",
+                Items = new List<Link> {
+                    new MenuItem { Href = "http://www.rds.ca", Text = "RDS" },
+                    new MenuItem { Href = "http://www.lapresse.com", Text = "La Presse" }
+                }
+            });
         }
     }
 }

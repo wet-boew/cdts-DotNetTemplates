@@ -1,7 +1,7 @@
 ﻿using System;
-using GoC.WebTemplate.Components;
 using System.Collections.Generic;
 using System.Globalization;
+using GoC.WebTemplate.Components.Entities;
 
 namespace GoC.WebTemplate.WebForms
 {
@@ -25,8 +25,8 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateMaster.WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.pinkbike.com" }; 
             WebTemplateMaster.WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
             WebTemplateMaster.WebTemplateCore.ShowSharePageLink = true;
-            WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.bitly);
+            WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.facebook);
             WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = false;
             WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;            
             WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are about to leave a secure site, do you wish to continue?";

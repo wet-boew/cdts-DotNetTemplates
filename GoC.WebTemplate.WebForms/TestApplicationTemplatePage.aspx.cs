@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using GoC.WebTemplate.Components.JSONSerializationObjects;
-using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.Entities;
 
 namespace GoC.WebTemplate.WebForms
 {
