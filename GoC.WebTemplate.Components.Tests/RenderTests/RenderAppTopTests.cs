@@ -4,7 +4,7 @@ using FluentAssertions;
 using Xunit;
 using AutoFixture.Xunit2;
 using GoC.WebTemplate.Components.Entities;
-using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Cdts;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {

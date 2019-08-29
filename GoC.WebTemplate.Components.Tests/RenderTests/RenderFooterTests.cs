@@ -4,8 +4,8 @@ using Xunit;
 using AutoFixture.Xunit2;
 using System.Collections.Generic;
 using GoC.WebTemplate.Components.Entities;
-using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Utils.Caching;
+using GoC.WebTemplate.Components.Configs.Cdts;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {

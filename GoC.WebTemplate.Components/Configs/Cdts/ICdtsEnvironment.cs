@@ -1,4 +1,4 @@
-namespace GoC.WebTemplate.Components.Configs
+namespace GoC.WebTemplate.Components.Configs.Cdts
 {
     public interface ICdtsEnvironment
     {

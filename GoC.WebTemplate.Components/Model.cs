@@ -7,6 +7,7 @@ using GoC.WebTemplate.Components.Utils.Caching;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Configs;
 using Microsoft.AspNetCore.Html;
+using GoC.WebTemplate.Components.Configs.Cdts;
 
 namespace GoC.WebTemplate.Components
 {

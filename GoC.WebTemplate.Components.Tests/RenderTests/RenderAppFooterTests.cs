@@ -1,6 +1,6 @@
 ﻿using AutoFixture.Xunit2;
 using FluentAssertions;
-using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils.Caching;
 using System;

@@ -5,6 +5,7 @@ using AutoFixture;
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
 using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Entities;
 using NSubstitute;
 using Xunit;

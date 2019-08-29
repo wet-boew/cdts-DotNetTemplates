@@ -1,4 +1,5 @@
 ﻿using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Utils.Caching;
 using Microsoft.Extensions.Caching.Memory;
 using System.Collections.Generic;

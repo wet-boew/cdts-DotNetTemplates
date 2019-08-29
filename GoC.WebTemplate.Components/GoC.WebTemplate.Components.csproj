@@ -9,6 +9,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CodeAnalysisRuleSet>..\WebTemplate.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <None Remove="Configs\Cdts\CdtsEnvironments.json" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <EmbeddedResource Include="Configs\Cdts\CdtsEnvironments.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.1.1" />

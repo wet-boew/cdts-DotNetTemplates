@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AutoFixture.Xunit2;
+﻿using AutoFixture.Xunit2;
 using FluentAssertions;
 using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Utils.Caching;
