@@ -9,7 +9,7 @@
         <meta charset="utf-8"/>
         <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
             wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
-        <title><%= WebTemplateCore.RenderHeaderTitle() %></title>
+        <title><%= WebTemplateCore.Render.HeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport"/>
         <!-- Load closure template scripts -->
         <script type="text/javascript" src="<%= string.Concat(WebTemplateCore.CDNPath, "soyutils.js")  %>"></script>
@@ -20,15 +20,15 @@
         </noscript>
          <!-- Write closure template -->
         <script type="text/javascript">
-            document.write(wet.builder.refTop(<%= WebTemplateCore.RenderRefTop(isApplication: false) %>));
+            document.write(wet.builder.refTop(<%= WebTemplateCore.Render.RefTop(isApplication: false) %>));
         </script>
 
-        <%= WebTemplateCore.RenderHtmlHeaderElements() %>
+        <%= WebTemplateCore.Render.HtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->
         <!-- GoC.WebTemplate.Core Version <%= WebTemplateCore.AssemblyVersion %> -->
     </head>
     <body vocab="http://schema.org/" typeof="WebPage">
-        <%= WebTemplateCore.RenderSessionTimeoutControl() %>
+        <%= WebTemplateCore.Render.SessionTimeoutControl() %>
         <div id="def-top">
             <!-- Write closure fall-back static file -->
             <%= WebTemplateCore.LoadStaticFile(string.Concat("top-", WebTemplateCore.TwoLetterCultureLanguage, ".html")) %>
@@ -36,7 +36,7 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.RenderTop() %>);
+            defTop.outerHTML = wet.builder.top(<%= WebTemplateCore.Render.Top() %>);
         </script>
 
         <main role="main" property="mainContentOfPage" class="container" typeof="WebPageElement">
@@ -51,7 +51,7 @@
             <!-- Write closure template -->
             <script type="text/javascript">
                 var defPreFooter = document.getElementById("def-preFooter");
-                defPreFooter.outerHTML = wet.builder.preFooter( <%= WebTemplateCore.RenderPreFooter() %>);
+                defPreFooter.outerHTML = wet.builder.preFooter( <%= WebTemplateCore.Render.PreFooter() %>);
             </script>
         </main>
         <div id="def-footer">
@@ -61,13 +61,13 @@
         <!-- Write closure template -->
         <script type="text/javascript">
             var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.footer( <%= WebTemplateCore.RenderFooter() %>);
+            defFooter.outerHTML = wet.builder.footer( <%= WebTemplateCore.Render.Footer() %>);
         </script>
         <!-- Write closure template -->
             <script type="text/javascript">
-                document.write(wet.builder.refFooter(<%= WebTemplateCore.RenderRefFooter() %>));
+                document.write(wet.builder.refFooter(<%= WebTemplateCore.Render.RefFooter() %>));
             </script>
-        <%= WebTemplateCore.RenderHtmlBodyElements() %>
+        <%= WebTemplateCore.Render.HtmlBodyElements() %>
     </body>
 </html>
 
