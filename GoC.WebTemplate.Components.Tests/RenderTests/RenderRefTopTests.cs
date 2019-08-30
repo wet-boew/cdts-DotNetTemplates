@@ -13,7 +13,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void LocalPathDoesNotRendersWhenNull([Frozen]ICdtsCacheProvider cdtsCacheProvider,
 #pragma warning disable xUnit1026 // proxy needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
-      [Frozen]IConfigurationProxy proxy,
+      [Frozen]WebTemplateSettings settings,
 #pragma warning restore xUnit1026
       Model sut)
         {
@@ -24,7 +24,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void LocalPathFormatsCorrectly([Frozen]ICdtsCacheProvider cdtsCacheProvider,
 #pragma warning disable xUnit1026 // // proxy needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
-            [Frozen]IConfigurationProxy proxy,
+            [Frozen]WebTemplateSettings settings,
 #pragma warning restore xUnit1026
             Model sut)
         {

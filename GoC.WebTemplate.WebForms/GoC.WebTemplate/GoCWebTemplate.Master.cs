@@ -1,7 +1,9 @@
 ﻿using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Utils.Caching;
 using System;
+using System.Configuration;
 using System.Reflection;
 using System.Web;
 
@@ -11,7 +13,12 @@ namespace GoC.WebTemplate.WebForms
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            WebTemplateCore = new Model(new FileContentCacheProvider(HttpRuntime.Cache), new ConfigurationProxy(), new CdtsCacheProvider(HttpRuntime.Cache));
+            WebTemplateCore = 
+                new Model(
+                    new FileContentCacheProvider(HttpRuntime.Cache), 
+                    new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), 
+                    new CdtsCacheProvider(HttpRuntime.Cache)
+                );
         }
 
         public Model WebTemplateCore { get; set; }

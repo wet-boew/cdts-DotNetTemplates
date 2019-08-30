@@ -23,13 +23,10 @@ namespace GoC.WebTemplate.Components.Test
     public class CoreCustomization : ICustomization {
         public void Customize(IFixture fixture)
         {
-            fixture.Customize<IConfigurationProxy>(c => c.FromFactory(() =>
-            {
-                var config = Substitute.For<IConfigurationProxy>();
-                //Set Proxy Configurations here
-                config.Environment.Returns("ITEM1");
-                return config;
-            }));
+            fixture.Customize<WebTemplateSettings>(
+                c => c.OmitAutoProperties()
+                      .With(p => p.Environment, "ITEM1")
+            );
 
             //Tell autofixture to ignore certain properties as they get set by the configuration file in the constructor
             //Tell it also to ignore show sign in and sign out flags since it'll set them both to true.

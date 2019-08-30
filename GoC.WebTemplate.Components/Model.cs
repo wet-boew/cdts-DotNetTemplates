@@ -1,33 +1,36 @@
-using System;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Threading;
+using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Cdts;
+using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
-using GoC.WebTemplate.Components.Entities;
-using GoC.WebTemplate.Components.Configs;
 using Microsoft.AspNetCore.Html;
-using GoC.WebTemplate.Components.Configs.Cdts;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
 
 namespace GoC.WebTemplate.Components
 {
     public class Model
     {
         private readonly FileContentCache _fileContentCache;
-        private readonly IConfigurationProxy _configProxy;
         private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
         private ModelBuilder _builder;
         private ModelRenderer _renderer;
+
         internal ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
-        
+
+        public WebTemplateSettings Settings { get; }
+
         public Model(IFileContentCacheProvider fileContentCacheProvider,
-            IConfigurationProxy configProxy,
+            WebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
         {
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
-            _configProxy = configProxy;
             _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
+
+            Settings = settings;
 
             SetDefaultValues();
         }
@@ -35,53 +38,53 @@ namespace GoC.WebTemplate.Components
         private void SetDefaultValues()
         {
             //Set properties
-            WebTemplateVersion = _configProxy.Version;
+            WebTemplateVersion = Settings.Version;
 
-            UseHTTPS = _configProxy.UseHttps;
+            UseHTTPS = Settings.UseHttps;
             //Normalizing to match with the value we read from the configuration file.
-            Environment = _configProxy.Environment.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
+            Environment = Settings.Environment.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
 
-            LoadJQueryFromGoogle = _configProxy.LoadJQueryFromGoogle;
+            LoadJQueryFromGoogle = Settings.LoadScriptsFromGoogle;
 
             SessionTimeout = new SessionTimeout
             {
-                Enabled = _configProxy.SessionTimeOut.Enabled,
-                Inactivity = _configProxy.SessionTimeOut.Inactivity,
-                ReactionTime = _configProxy.SessionTimeOut.ReactionTime,
-                SessionAlive = _configProxy.SessionTimeOut.SessionAlive,
-                LogoutUrl = _configProxy.SessionTimeOut.LogoutUrl,
-                RefreshCallBackUrl = _configProxy.SessionTimeOut.RefreshCallBackUrl,
-                RefreshOnClick = _configProxy.SessionTimeOut.RefreshOnClick,
-                RefreshLimit = _configProxy.SessionTimeOut.RefreshLimit,
-                Method = _configProxy.SessionTimeOut.Method,
-                AdditionalData = _configProxy.SessionTimeOut.AdditionalData
+                Enabled = Settings.SessionTimeout.Enabled,
+                Inactivity = Settings.SessionTimeout.Inactivity,
+                ReactionTime = Settings.SessionTimeout.ReactionTime,
+                SessionAlive = Settings.SessionTimeout.SessionAlive,
+                LogoutUrl = Settings.SessionTimeout.LogoutUrl,
+                RefreshCallBackUrl = Settings.SessionTimeout.RefreshCallBackUrl,
+                RefreshOnClick = Settings.SessionTimeout.RefreshOnClick,
+                RefreshLimit = Settings.SessionTimeout.RefreshLimit,
+                Method = Settings.SessionTimeout.Method,
+                AdditionalData = Settings.SessionTimeout.AdditionalData
             };
-            ShowPreContent = _configProxy.ShowPreContent;
-            ShowSearch = _configProxy.ShowSearch;
+            ShowPreContent = Settings.ShowPreContent;
+            ShowSearch = Settings.ShowSearch;
 
             //Set preFooter section options
-            ShowPostContent = _configProxy.ShowPostContent;
+            ShowPostContent = Settings.ShowPostContent;
             FeedbackLink = new FeedbackLink
             {
-                Show = _configProxy.ShowFeedbackLink,
-                Url = _configProxy.FeedbackLinkUrl,
-                UrlFr = _configProxy.FeedbackLinkUrlFr
+                Show = Settings.ShowFeedbackLink,
+                Url = Settings.FeedbackLinkUrl,
+                UrlFr = Settings.FeedbackLinkUrlFr
             };
-            ShowLanguageLink = _configProxy.ShowLanguageLink;
-            ShowSharePageLink = _configProxy.ShowSharePageLink;
+            ShowLanguageLink = Settings.ShowLanguageLink;
+            ShowSharePageLink = Settings.ShowSharePageLink;
 
             LeavingSecureSiteWarning = new LeavingSecureSiteWarning
             {
-                Enabled = _configProxy.LeavingSecureSiteWarning.Enabled,
-                DisplayModalWindow = _configProxy.LeavingSecureSiteWarning.DisplayModalWindow,
-                RedirectURL = _configProxy.LeavingSecureSiteWarning.RedirectURL,
-                ExcludedDomains = _configProxy.LeavingSecureSiteWarning.ExcludedDomains
+                Enabled = Settings.LeavingSecureSiteWarning.Enabled,
+                DisplayModalWindow = Settings.LeavingSecureSiteWarning.DisplayModalWindow,
+                RedirectURL = Settings.LeavingSecureSiteWarning.RedirectUrl,
+                ExcludedDomains = Settings.LeavingSecureSiteWarning.ExcludedDomains
             };
 
             //Set Application Template Specific Sections
-            SignOutLinkURL = _configProxy.SignOutLinkURL;
-            SignInLinkURL = _configProxy.SignInLinkURL;
-            CustomSiteMenuURL = string.IsNullOrEmpty(_configProxy.CustomSiteMenuURL) ? null : _configProxy.CustomSiteMenuURL;
+            SignOutLinkURL = Settings.SignOutLinkUrl;
+            SignInLinkURL = Settings.SignInLinkUrl;
+            CustomSiteMenuURL = string.IsNullOrEmpty(Settings.CustomSiteMenuUrl) ? null : Settings.CustomSiteMenuUrl;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -236,7 +239,7 @@ namespace GoC.WebTemplate.Components
             get
             {
                 return _staticFilesPath ??
-                       (_staticFilesPath = string.Concat(_configProxy.StaticFilesLocation, "/", CdtsEnvironment.Theme));
+                       (_staticFilesPath = string.Concat(Settings.StaticFilesLocation, "/", CdtsEnvironment.Theme));
             }
             set { _staticFilesPath = value; }
         }

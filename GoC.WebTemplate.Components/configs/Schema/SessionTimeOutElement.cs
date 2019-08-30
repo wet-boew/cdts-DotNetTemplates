@@ -1,6 +1,6 @@
 using System.Configuration;
 
-namespace GoC.WebTemplate.Components.Configs
+namespace GoC.WebTemplate.Components.Configs.Schemas
 {
     public class SessionTimeOutElement : ConfigurationElement
     {

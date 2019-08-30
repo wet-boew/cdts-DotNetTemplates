@@ -1,12 +1,11 @@
 ﻿using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Core.Utils.Caching;
 using GoC.WebTemplate.Components.Entities;
-using GoC.WebTemplate.Components.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace GoC.WebTemplate.Components.Core.Services
 {
@@ -16,10 +15,22 @@ namespace GoC.WebTemplate.Components.Core.Services
 
         public ModelAccessor(IMemoryCache memoryCache, IHttpContextAccessor httpContextAccessor)
         {
+            var configs = new GocWebTemplateConfigurationSection();
+
+            var configBuilder =
+                new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .Build();
+
+            configBuilder.GetSection("GoCWebTemplate").Bind(configs);
+
+            var settings = new WebTemplateSettings(configs);
+
             Model = 
                 new Model(
-                    new FileContentMemoryCacheProvider(memoryCache), 
-                    new ConfigurationProxy(), 
+                    new FileContentMemoryCacheProvider(memoryCache),
+                    settings, 
                     new CdtsMemoryCacheProvider(memoryCache)
                 );
 

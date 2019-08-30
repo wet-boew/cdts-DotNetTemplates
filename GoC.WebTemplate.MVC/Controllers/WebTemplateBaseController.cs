@@ -1,14 +1,16 @@
-﻿using System;
-using System.Web.Mvc;
-using System.Globalization;
-using System.Threading;
-using System.Reflection;
-using GoC.WebTemplate.Components;
+﻿using GoC.WebTemplate.Components;
+using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
-using GoC.WebTemplate.Components.Configs;
+using System;
+using System.Configuration;
+using System.Globalization;
+using System.Reflection;
+using System.Threading;
 using System.Web;
+using System.Web.Mvc;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.MVC
@@ -18,15 +20,15 @@ namespace GoC.WebTemplate.MVC
 
         public WebTemplateBaseController()
             : this(new FileContentCacheProvider(HttpRuntime.Cache),
-                  new ConfigurationProxy(),
+                  new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection),
                   new CdtsCacheProvider(HttpRuntime.Cache))
         { }
 
         public WebTemplateBaseController(IFileContentCacheProvider fileContentCacheProvider,
-            IConfigurationProxy configProxy,
+            WebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
         {
-            WebTemplateCore = new Model(fileContentCacheProvider, configProxy, cdtsCacheProvider);
+            WebTemplateCore = new Model(fileContentCacheProvider, settings, cdtsCacheProvider);
         }
 
         /// <summary>

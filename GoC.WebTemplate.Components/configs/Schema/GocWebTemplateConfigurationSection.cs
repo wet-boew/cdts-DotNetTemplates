@@ -2,44 +2,43 @@
 using System.Configuration;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate.Components.Configs
+namespace GoC.WebTemplate.Components.Configs.Schemas
 {
-    public class Configurations : ConfigurationSection
+    public class GocWebTemplateConfigurationSection : ConfigurationSection
     {
-        public static Configurations Settings { get; } = ConfigurationManager.GetSection("GoC.WebTemplate") as Configurations;
-        
         //This section is required for deserilization of the section from the web config
         //This property enables validation on the xml of the config section
         //This property is no actually used in the code
         [ConfigurationProperty("xmlns", IsRequired = false)]
         public string XmlNameSpace
         {
-            get { return (string) this["xmlns"]; }
+            get { return (string)this["xmlns"]; }
             set { this["xmlns"] = value; }
         }
 
         [ConfigurationProperty("signOutLinkURL")]
         public string SignOutLinkURL
         {
-            get { return (string) this["signOutLinkURL"];  }
+            get { return (string)this["signOutLinkURL"]; }
             set { this["signOutLinkURL"] = value; }
         }
 
         [ConfigurationProperty("signInLinkURL")]
         public string SignInLinkURL
         {
-            get { return (string) this["signInLinkURL"];  }
+            get { return (string)this["signInLinkURL"]; }
             set { this["signInLinkURL"] = value; }
         }
 
         [ConfigurationProperty("customSiteMenuURL")]
         public string CustomSiteMenuURL
         {
-            get { return (string) this["customSiteMenuURL"];  }
+            get { return (string)this["customSiteMenuURL"]; }
             set { this["customSiteMenuURL"] = value; }
         }
-        
+
         // Create a "sessionTimeOut element."
+        //TODO: Rename config and property to sessionTimeout.
         [ConfigurationProperty("sessionTimeOut")]
         public SessionTimeOutElement SessionTimeOut
         {
@@ -190,5 +189,4 @@ namespace GoC.WebTemplate.Components.Configs
             set { this["staticFilesLocation"] = value; }
         }
     }
-
 }
