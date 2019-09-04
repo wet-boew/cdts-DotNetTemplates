@@ -65,7 +65,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
         /// own caching implementation
         /// </summary>
         /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
-        private IDictionary<string, ICdtsEnvironment> DeserializeEnvironments()
+        internal IDictionary<string, ICdtsEnvironment> DeserializeEnvironments()
         {
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResouceName))
             {

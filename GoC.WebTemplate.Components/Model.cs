@@ -173,7 +173,7 @@ namespace GoC.WebTemplate.Components
         /// <summary>
         /// Used to override the langauge link
         /// </summary>
-        public LanguageLink LanguageLink { get; set; }
+        public LanguageLink LanguageLink { get; set; } = new LanguageLink();
 
         // ReSharper restore InconsistentNaming
         /// <summary>

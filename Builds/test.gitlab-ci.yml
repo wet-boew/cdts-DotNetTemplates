@@ -14,8 +14,11 @@ test_components_core:
 
 test_components_frame:
   stage: test
+  dependencies:
+    - build_sln
   script:
-    - 'dotnet test GoC.WebTemplate.Components.Framework.Tests'
+    - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_FRAME_PATH%\\GoC.WebTemplate.Components.Framework.Tests.dll"'
+
 
 code_quality_samples:
   stage: test
