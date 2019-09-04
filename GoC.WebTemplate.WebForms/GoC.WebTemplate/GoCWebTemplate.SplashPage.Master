@@ -22,7 +22,7 @@
          <!-- Write closure template -->
         <script type="text/javascript">
             document.write(wet.builder.splashTop({
-            cdnEnv: "<%= WebTemplateCore.CDNEnvironment %>"}));
+            cdnEnv: "<%= WebTemplateCore.CdtsEnvironment.CDN %>"}));
         </script>
 
         <%= WebTemplateCore.Render.HtmlHeaderElements() %>

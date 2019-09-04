@@ -39,7 +39,8 @@ namespace GoC.WebTemplate.Components.Utils.Caching
                         content = LoadFile(filePath);
 
                         //---[ Now that the data is loaded, add it to the cache
-                        _cacheProvider.SetWithCacheDependency(cacheKey, filePath, content);
+                        // TODO: disabled until filepath can be maped properly (line 34)
+                        // _cacheProvider.SetWithCacheDependency(cacheKey, filePath, content);
                     }
                 }
             }
