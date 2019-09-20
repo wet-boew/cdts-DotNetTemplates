@@ -2,7 +2,7 @@
 using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
 
-namespace GoC.WebTemplate.Components.Framework.Tests
+namespace GoC.WebTemplate.Components.Core.Tests
 {
     internal class AutoNSubstituteDataAttribute : AutoDataAttribute
     {

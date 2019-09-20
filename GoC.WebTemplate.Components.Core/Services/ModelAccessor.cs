@@ -27,21 +27,18 @@ namespace GoC.WebTemplate.Components.Core.Services
 
             var settings = new WebTemplateSettings(configs);
 
-            Model = 
-                new Model(
-                    new FileContentMemoryCacheProvider(memoryCache),
-                    settings, 
-                    new CdtsMemoryCacheProvider(memoryCache)
-                );
-
-            //set the language link according to the culture
-            Model.LanguageLink = new LanguageLink
+            Model = new Model(
+                new FileContentMemoryCacheProvider(memoryCache),
+                settings, 
+                new CdtsMemoryCacheProvider(memoryCache)
+            )
             {
-                Href = ModelBuilder.BuildLanguageLinkURL(httpContextAccessor.HttpContext.Request.QueryString.ToString())
+                //set the language link according to the culture
+                LanguageLink = new LanguageLink
+                {
+                    Href = ModelBuilder.BuildLanguageLinkURL(httpContextAccessor.HttpContext.Request.QueryString.ToString())
+                }
             };
-
-            //set timeout based on session
-            Model.SessionTimeout.CheckWithServerSessionTimeout(httpContextAccessor.HttpContext.Request.HttpContext.Session);
         }
     }
 }

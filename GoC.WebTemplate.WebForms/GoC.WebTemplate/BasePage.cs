@@ -26,7 +26,9 @@ namespace GoC.WebTemplate.WebForms
                 }
                 catch (Exception ex)
                 {
+#pragma warning disable CA1065 // Do not raise exceptions in unexpected locations
                     throw new ArgumentNullException("Please reference a WebTemplate Master Page in the .aspx", ex);
+#pragma warning restore CA1065 // Do not raise exceptions in unexpected locations
                 }
             }
         }

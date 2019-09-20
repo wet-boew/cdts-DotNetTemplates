@@ -1,4 +1,5 @@
 using GoC.WebTemplate.Components.Configs.Schemas;
+using GoC.WebTemplate.Components.Entities;
 using System;
 using System.Globalization;
 
@@ -47,7 +48,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// The objects properties are set by application via web.config
         /// or Set by application programmatically
         /// </summary>
-        public SessionTimeoutSettings SessionTimeout { get; set; }
+        public SessionTimeout SessionTimeout { get; set; }
 
         public LeavingSecureSiteSettings LeavingSecureSiteWarning { get; set; }
 
@@ -147,7 +148,7 @@ namespace GoC.WebTemplate.Components.Configs
         public WebTemplateSettings()
         {
             LeavingSecureSiteWarning = new LeavingSecureSiteSettings();
-            SessionTimeout = new SessionTimeoutSettings();
+            SessionTimeout = new SessionTimeout();
         }
 
         public WebTemplateSettings(GocWebTemplateConfigurationSection configurationSection)
@@ -169,7 +170,7 @@ namespace GoC.WebTemplate.Components.Configs
                 };
             LoadScriptsFromGoogle = configurationSection.LoadJQueryFromGoogle;
             SessionTimeout =
-                new SessionTimeoutSettings()
+                new SessionTimeout()
                 {
                     AdditionalData = configurationSection.SessionTimeOut.AdditionalData,
                     Enabled = configurationSection.SessionTimeOut.Enabled,
