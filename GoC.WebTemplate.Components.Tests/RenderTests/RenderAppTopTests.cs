@@ -234,7 +234,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
 
             sut.ShowSignInLink = true;
-            sut.SignInLinkURL = null;
+            sut.Settings.SignInLinkUrl = null;
             var json = sut.Render.AppTop();
             json.ToString().Should().NotContain("signIn");
         }
@@ -254,7 +254,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 
             sut.ShowSignOutLink = true;
             sut.ShowSignInLink = false;
-            sut.SignOutLinkURL = null;
+            sut.Settings.SignOutLinkUrl = null;
             var json = sut.Render.AppTop();
             json.ToString().Should().NotContain("signOut");
         }
@@ -273,7 +273,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void LanguageLinkRenders(Model sut)
         {
             sut.LanguageLink.Href = "foo-en.lang";
-            sut.ShowLanguageLink = true;
+            sut.Settings.ShowLanguageLink = true;
             var json = sut.Render.AppTop();
             json.ToString().Should().Contain("\"lngLinks\":[{\"href\":\"foo-en.lang\"");
         }

@@ -22,8 +22,8 @@ namespace GoC.WebTemplate.MVC.Controllers
         }
         public ActionResult SubThemeTestPage()
         {
-            WebTemplateCore.Environment = "ESDC_PROD";
-            WebTemplateCore.UseHTTPS = false;
+            WebTemplateCore.Settings.Environment = "ESDC_PROD";
+            WebTemplateCore.Settings.UseHttps = false;
             WebTemplateCore.HeaderTitle = "SubTheme Test Page";
             WebTemplateCore.IntranetTitle = new IntranetTitle
             {

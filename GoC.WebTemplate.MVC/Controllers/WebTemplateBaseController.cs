@@ -11,6 +11,7 @@ using System.Reflection;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.MVC
@@ -28,7 +29,12 @@ namespace GoC.WebTemplate.MVC
             WebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
         {
-            WebTemplateCore = new Model(fileContentCacheProvider, settings, cdtsCacheProvider);
+            WebTemplateCore = 
+                new Model(
+                    fileContentCacheProvider, 
+                    settings, 
+                    cdtsCacheProvider
+                );
         }
 
         /// <summary>
@@ -107,8 +113,9 @@ namespace GoC.WebTemplate.MVC
             {
                 Href = ModelBuilder.BuildLanguageLinkURL(System.Web.HttpContext.Current.Request.QueryString.ToString())
             };
+
             //set timeout based on session
-            WebTemplateCore.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);
+            WebTemplateCore.Settings.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);
             
             return base.BeginExecuteCore(callback, state);
         }

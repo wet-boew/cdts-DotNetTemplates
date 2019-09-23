@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace GoC.WebTemplate.CoreMVC
 {
@@ -30,6 +31,18 @@ namespace GoC.WebTemplate.CoreMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSession(
+                options =>
+                {
+                    // Set a short timeout for easy testing.
+                    //TODO: Set IdleTimeout to a useful value.
+                    options.IdleTimeout = TimeSpan.FromSeconds(10);
+                    options.Cookie.HttpOnly = true;
+                    // Make the session cookie essential
+                    options.Cookie.IsEssential = true;
+                }
+            );
+
             services.AddModelAccessor();
         }
 
@@ -48,6 +61,7 @@ namespace GoC.WebTemplate.CoreMVC
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

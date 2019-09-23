@@ -34,7 +34,7 @@ namespace GoC.WebTemplate.Components.Utils
                 TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink),
                 PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
                 ContactLink = _model.Builder.BuildContactLinks(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion),
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 FooterSections = _model.Builder.BuildCustomFooterSections
             });
         }
@@ -59,7 +59,7 @@ namespace GoC.WebTemplate.Components.Utils
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
-                Search = _model.ShowSearch,
+                Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
                 ShowPreContent = false,
@@ -77,7 +77,7 @@ namespace GoC.WebTemplate.Components.Utils
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
-                Search = _model.ShowSearch,
+                Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
@@ -93,7 +93,7 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
-                JqueryEnv = _model.LoadJQueryFromGoogle ? "external" : null,
+                JqueryEnv = _model.Settings.LoadScriptsFromGoogle ? "external" : null,
                 LocalPath = _model.Builder.BuildLocalPath(),
                 IsApplication = isApplication
             });
@@ -115,11 +115,11 @@ namespace GoC.WebTemplate.Components.Utils
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
-                ShowPostContent = _model.ShowPostContent,
+                ShowPostContent = _model.Settings.ShowPostContent,
                 ShowFeedback = _model.FeedbackLink,
                 ShowShare = new ShareList
                 {
-                    Show = _model.ShowSharePageLink,
+                    Show = _model.Settings.ShowSharePageLink,
                     Enums = _model.SharePageMediaSites
                 },
                 ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
@@ -170,8 +170,8 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString RefFooter()
         {
-            if (_model.LeavingSecureSiteWarning.Enabled &&
-                !string.IsNullOrEmpty(_model.LeavingSecureSiteWarning.RedirectURL))
+            if (_model.Settings.LeavingSecureSiteWarning.Enabled &&
+                !string.IsNullOrEmpty(_model.Settings.LeavingSecureSiteWarning.RedirectUrl))
             {
                 return SecureSiteWarningRefFooter();
             }
@@ -180,7 +180,7 @@ namespace GoC.WebTemplate.Components.Utils
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 ExitScript = false,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion)
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version)
             });
         }
 
@@ -188,9 +188,9 @@ namespace GoC.WebTemplate.Components.Utils
         {
             HtmlString jsonSessionTimeout = null;
 
-            if (_model.SessionTimeout.Enabled)
+            if (_model.Settings.SessionTimeout.Enabled)
             {
-                jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_model.SessionTimeout);
+                jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_model.Settings.SessionTimeout);
                 return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
             }
 
@@ -296,15 +296,15 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 AppName = new List<Link> { _model.ApplicationTitle },
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
-                SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.SignInLinkURL, _model.ShowSignInLink),
-                SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.SignOutLinkURL, _model.ShowSignOutLink),
+                SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
-                Search = _model.ShowSearch,
+                Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion),
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
@@ -318,15 +318,15 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = new List<Link> { _model.ApplicationTitle },
-                SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.SignInLinkURL, _model.ShowSignInLink),
-                SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.SignOutLinkURL, _model.ShowSignOutLink),
+                SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
-                Search = _model.ShowSearch,
+                Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion),
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
@@ -341,12 +341,12 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 ExitScript = true,
-                DisplayModal = _model.LeavingSecureSiteWarning.DisplayModalWindow,
-                ExitURL = _model.LeavingSecureSiteWarning.RedirectURL,
-                ExitMsg = WebUtility.HtmlEncode(_model.LeavingSecureSiteWarning.Message),
-                ExitDomains = _model.Builder.GetStringForJson(_model.LeavingSecureSiteWarning.ExcludedDomains),
+                DisplayModal = _model.Settings.LeavingSecureSiteWarning.DisplayModalWindow,
+                ExitURL = _model.Settings.LeavingSecureSiteWarning.RedirectUrl,
+                ExitMsg = WebUtility.HtmlEncode(_model.Settings.LeavingSecureSiteWarning.Message),
+                ExitDomains = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion)
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version)
             });
 
         }

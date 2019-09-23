@@ -17,7 +17,8 @@ namespace GoC.WebTemplate.WebForms
                 new Model(
                     new FileContentCacheProvider(HttpRuntime.Cache), 
                     new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), 
-                    new CdtsCacheProvider(HttpRuntime.Cache)
+                    new CdtsCacheProvider(HttpRuntime.Cache),
+                    HttpContext.Current.Request.QueryString.ToString()
                 );
         }
 

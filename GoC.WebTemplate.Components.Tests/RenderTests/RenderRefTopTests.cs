@@ -17,7 +17,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 #pragma warning restore xUnit1026
       Model sut)
         {
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment].LocalPath.ReturnsNull();
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.ReturnsNull();
             sut.Render.RefTop(false).ToString().Should().NotContain("localPath");
         }
 
@@ -28,27 +28,27 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 #pragma warning restore xUnit1026
             Model sut)
         {
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment].LocalPath.Returns("{0}:{1}");
-            sut.Render.RefTop(false).ToString().Should().Contain($"\"localPath\":\"{sut.CdtsEnvironment.SubTheme}:{sut.WebTemplateVersion}");
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.Returns("{0}:{1}");
+            sut.Render.RefTop(false).ToString().Should().Contain($"\"localPath\":\"{sut.CdtsEnvironment.SubTheme}:{sut.Settings.Version}");
         }
         [Theory, AutoNSubstituteData]
         public void LocalPathRendersWhenNotNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.LocalPath = "foo";
             sut.Render.RefTop(false).ToString().Should().Contain("\"localPath\":\"foo\"");
         }
         [Theory, AutoNSubstituteData]
         public void JQueryExternalRendersWhenLoadJQueryFromGoogleIsTrue(Model sut)
         {
-            sut.LoadJQueryFromGoogle = true;
+            sut.Settings.LoadScriptsFromGoogle = true;
 
             sut.Render.RefTop(false).ToString().Should().Contain("\"jqueryEnv\":\"external\"");
         }
         [Theory, AutoNSubstituteData]
         public void JQueryExternalDoesNotRenderWhenLoadJQueryFromGoogleIsFalse(Model sut)
         {
-            sut.LoadJQueryFromGoogle = false;
+            sut.Settings.LoadScriptsFromGoogle = false;
 
             sut.Render.RefTop(false).ToString().Should().NotContain("jqueryEnv");
         }
@@ -76,7 +76,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void CdnEnvRenderedProperly([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment].CDN = "prod";
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].CDN = "prod";
             sut.Render.RefTop(false).ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
 

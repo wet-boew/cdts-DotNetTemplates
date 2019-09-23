@@ -9,7 +9,7 @@ namespace GoC.WebTemplate.WebForms
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Link link = new Link() { Text = (WebTemplateMaster.WebTemplateCore.Environment == "AKAMAI") ? string.Empty : "Test link", Href = "http://tempuri.com" };
+            Link link = new Link() { Text = (WebTemplateMaster.WebTemplateCore.Settings.Environment == "AKAMAI") ? string.Empty : "Test link", Href = "http://tempuri.com" };
             WebTemplateMaster.WebTemplateCore.ContactLinks = new List<Link>() { link };
             WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "993jjd9-33";
             WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://www.pinkbike.com";
@@ -18,19 +18,19 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("<meta name='description' content='My Description'>");
             WebTemplateMaster.WebTemplateCore.DateModified = Convert.ToDateTime("9 january 2015", CultureInfo.CurrentCulture);
             WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
-            WebTemplateMaster.WebTemplateCore.ShowSearch = true;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = false;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 20001;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "20005";
+            WebTemplateMaster.WebTemplateCore.Settings.ShowSearch = true;
+            WebTemplateMaster.WebTemplateCore.Settings.SessionTimeout.Enabled = false;
+            WebTemplateMaster.WebTemplateCore.Settings.SessionTimeout.ReactionTime = 20001;
+            WebTemplateMaster.WebTemplateCore.Settings.SessionTimeout.RefreshCallBackUrl = "20005";
             WebTemplateMaster.WebTemplateCore.TermsConditionsLink = new FooterLink { Href = "http://www.pinkbike.com" }; 
             WebTemplateMaster.WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
-            WebTemplateMaster.WebTemplateCore.ShowSharePageLink = true;
+            WebTemplateMaster.WebTemplateCore.Settings.ShowSharePageLink = true;
             WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.bitly);
             WebTemplateMaster.WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.facebook);
-            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = false;
-            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;            
-            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are about to leave a secure site, do you wish to continue?";
-            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "webform1.aspx";
+            WebTemplateMaster.WebTemplateCore.Settings.LeavingSecureSiteWarning.Enabled = false;
+            WebTemplateMaster.WebTemplateCore.Settings.LeavingSecureSiteWarning.DisplayModalWindow = true;            
+            WebTemplateMaster.WebTemplateCore.Settings.LeavingSecureSiteWarning.Message = "You are about to leave a secure site, do you wish to continue?";
+            WebTemplateMaster.WebTemplateCore.Settings.LeavingSecureSiteWarning.RedirectUrl = "webform1.aspx";
         }
     }
 }

@@ -13,24 +13,24 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         [Theory, AutoNSubstituteData]
         public void ThrowExceptionIfHTTPSIsNonModifiableButUseHTTPSIsSet([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.IsEncryptionModifiable = false;
-            sut.UseHTTPS = true;
+            sut.Settings.UseHttps = true;
 
             Action test = () =>
             {
                 var unused = sut.CDNPath;
             };
             test.Should().Throw<InvalidOperationException>()
-                .WithMessage($"{sut.Environment} does not allow useHTTPS to be toggled");
+                .WithMessage($"{sut.Settings.Environment} does not allow useHTTPS to be toggled");
         }
 
         [Theory, AutoNSubstituteData]
         public void DoNotThrowExceptionIfHTTPSIsNonModifiableAndUseHTTPSIsNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.IsEncryptionModifiable = false;
-            sut.UseHTTPS = null;
+            sut.Settings.UseHttps = null;
 
             Action test = () =>
             {
@@ -42,16 +42,16 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         [Theory, AutoNSubstituteData]
         public void ThrowExceptionIfHTTPSIsModifiableAndUseHTTPSIsNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.IsEncryptionModifiable = true;
-            sut.UseHTTPS = null;
+            sut.Settings.UseHttps = null;
 
             Action test = () =>
             {
                 var unused = sut.CDNPath;
             };
             test.Should().Throw<InvalidOperationException>()
-                .WithMessage($"{sut.Environment} requires UseHTTPS to be true or false not null.");
+                .WithMessage($"{sut.Settings.Environment} requires UseHTTPS to be true or false not null.");
         }
 
     }

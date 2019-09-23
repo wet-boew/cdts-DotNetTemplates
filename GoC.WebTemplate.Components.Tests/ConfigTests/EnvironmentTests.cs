@@ -28,7 +28,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         public void SubThemeMustChangeWhenEnvironmentChanges([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var environments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
-            sut.Environment = "ITEM2";
+            sut.Settings.Environment = "ITEM2";
             var subTheme = "foo";
             environments["ITEM1"].SubTheme = "IncorrectSubTheme";
             environments["ITEM2"].SubTheme = subTheme;
@@ -38,6 +38,8 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         [Theory, AutoNSubstituteData]
         public void SubThemeMustReturnCorectValue([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
+            sut.Settings.Environment = "ITEM1";
+
             var environments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
             environments["ITEM1"].SubTheme = "CorrectSubTheme";
             environments["ITEM2"].SubTheme = "IncorrectSubTheme";

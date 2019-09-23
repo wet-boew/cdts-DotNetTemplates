@@ -8,7 +8,7 @@ using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Entities;
 
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate.Components
+namespace GoC.WebTemplate.Components.Utils
 {
     public class ModelBuilder
     {
@@ -63,7 +63,7 @@ namespace GoC.WebTemplate.Components
 
         internal string BuildLocalPath()
         {
-            return GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.WebTemplateVersion);
+            return GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version);
         }
 
         internal List<Breadcrumb> BuildBreadcrumbs()
@@ -125,7 +125,7 @@ namespace GoC.WebTemplate.Components
                 return null;
             return new List<Link> { new Link { Href = href, Text = null } };
         }
-        internal string BuildJqueryEnv() => _model.LoadJQueryFromGoogle ? "external" : null;
+        internal string BuildJqueryEnv() => _model.Settings.LoadScriptsFromGoogle ? "external" : null;
 
         internal string BuildDateModified()
         {
@@ -146,7 +146,7 @@ namespace GoC.WebTemplate.Components
 
         internal List<LanguageLink> BuildLanguageLinkList()
         {
-            if (!_model.ShowLanguageLink)
+            if (!_model.Settings.ShowLanguageLink)
             {
                 return null;
             }
@@ -164,14 +164,14 @@ namespace GoC.WebTemplate.Components
         /// <returns>String, the complete path to the cdn</returns>
         internal string BuildCDNPath()
         {
-            if (!_model.CdtsEnvironment.IsEncryptionModifiable && _model.UseHTTPS.HasValue)
+            if (!_model.CdtsEnvironment.IsEncryptionModifiable && _model.Settings.UseHttps.HasValue)
             {
-                throw new InvalidOperationException($"{_model.Environment} does not allow useHTTPS to be toggled");
+                throw new InvalidOperationException($"{_model.Settings.Environment} does not allow useHTTPS to be toggled");
             }
 
-            if (_model.CdtsEnvironment.IsEncryptionModifiable && !_model.UseHTTPS.HasValue)
+            if (_model.CdtsEnvironment.IsEncryptionModifiable && !_model.Settings.UseHttps.HasValue)
             {
-                throw new InvalidOperationException($"{_model.Environment} requires useHTTPS to be true or false not null.");
+                throw new InvalidOperationException($"{_model.Settings.Environment} requires useHTTPS to be true or false not null.");
             }
 
             var https = string.Empty;
@@ -179,12 +179,12 @@ namespace GoC.WebTemplate.Components
             {
                 //We've already checked to see if this is null before here so ignore this in resharper
                 // ReSharper disable once PossibleInvalidOperationException
-                https = _model.UseHTTPS.Value ? "s" : string.Empty;
+                https = _model.Settings.UseHttps.Value ? "s" : string.Empty;
             }
 
             var run = string.Empty;
             var version = string.Empty;
-            if (string.IsNullOrWhiteSpace(_model.WebTemplateVersion))
+            if (string.IsNullOrWhiteSpace(_model.Settings.Version))
             {
                 if (_model.CdtsEnvironment.IsVersionRNCombined)
                 {
@@ -197,7 +197,7 @@ namespace GoC.WebTemplate.Components
             }
             else
             {
-                version = _model.WebTemplateVersion + "/";
+                version = _model.Settings.Version + "/";
                 run = "app";
             }
 

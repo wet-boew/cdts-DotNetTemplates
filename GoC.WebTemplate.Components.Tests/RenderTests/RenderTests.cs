@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoFixture.Xunit2;
 using FluentAssertions;
+using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils.Caching;
@@ -22,7 +23,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
 
             env.AppendToTitle.Returns(" - Canada.ca");
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.HeaderTitle = "Foo - Canada.ca";
             sut.HeaderTitle.Should().Be("Foo - Canada.ca");
@@ -32,7 +33,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, ICdtsEnvironment env, Model sut)
         {
             env.AppendToTitle.Returns(" - Canada.ca");
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
             sut.HeaderTitle = "Foo";
 
             sut.HeaderTitle.Should().Be("Foo - Canada.ca");
@@ -42,7 +43,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, ICdtsEnvironment env, Model sut)
         {
             env.AppendToTitle.Returns(" - Canada.ca");
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.HeaderTitle = null;
 
@@ -55,7 +56,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Model sut)
         {
             env.AppendToTitle.Returns("");
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.HeaderTitle = "Foo";
 
@@ -96,7 +97,15 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderSessionTimeoutControl(Model sut)
         {
-            sut.SessionTimeout.Enabled = true;
+            sut.Settings.SessionTimeout.Enabled = true;
+
+            // AutoFixture sets this to false by default, but that value isn't 
+            // emitted during JSON serialization because it's a default value 
+            // on an optional property. LogoutUrl, a required property, would also
+            // fail this test if it wasn't automatically set by AutoFixture.
+            //TODO: If we intend to test for all values being emitted, even optional ones, we should set them explicitly as part of the scenario. Not with AutoFixture auto-properties.
+            sut.Settings.SessionTimeout.RefreshOnClick = true;
+
             var result = sut.Render.SessionTimeoutControl();
             result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionalive", "logouturl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData");
         }

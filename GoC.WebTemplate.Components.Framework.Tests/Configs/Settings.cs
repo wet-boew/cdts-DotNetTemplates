@@ -25,7 +25,7 @@ namespace GoC.WebTemplate.Components.Framework.Tests.Configs
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
             var sut = new Model(fileContentCacheProvider, new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), cdtsCacheProvider);
-            sut.LeavingSecureSiteWarning.RedirectURL.Should().Be("foo");
+            sut.Settings.LeavingSecureSiteWarning.RedirectUrl.Should().Be("foo");
         }
     }
 }

@@ -49,7 +49,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "AKAMAI"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
             Action act = () => sut.Render.Footer();
             act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
@@ -63,7 +63,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "PROD_SSL",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
@@ -76,8 +76,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "ESDC_PROD",
                 CanHaveMultipleContactLinks = true
             };
-            sut.UseHTTPS = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            sut.Settings.UseHttps = true;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
@@ -89,7 +89,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "AKAMAI"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
             Action act = () => sut.Render.TransactionalFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
@@ -103,7 +103,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "PROD_SSL",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
@@ -116,8 +116,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "ESDC_PROD",
                 CanHaveMultipleContactLinks = true
             };
-            sut.UseHTTPS = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            sut.Settings.UseHttps = true;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
@@ -129,7 +129,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "AKAMAI"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.Render.Footer();
             act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
@@ -144,7 +144,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "PROD_SSL",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
@@ -157,7 +157,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "ESDC_PROD",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
@@ -169,7 +169,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "AKAMAI"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.Render.TransactionalFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
@@ -183,7 +183,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "PROD_SSL",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.TransactionalFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
@@ -196,8 +196,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "ESDC_PROD",
                 CanHaveMultipleContactLinks = true
             };
-            sut.UseHTTPS = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            sut.Settings.UseHttps = true;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.TransactionalFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }

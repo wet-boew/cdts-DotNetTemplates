@@ -1,5 +1,5 @@
 // ReSharper disable once CheckNamespace
-namespace GoC.WebTemplate.Components
+namespace GoC.WebTemplate.Components.Entities
 {
     public class LeavingSecureSiteWarning
     {

@@ -48,9 +48,9 @@ namespace GoC.WebTemplate.Components.Configs
         /// The objects properties are set by application via web.config
         /// or Set by application programmatically
         /// </summary>
-        public SessionTimeout SessionTimeout { get; set; }
+        public SessionTimeout SessionTimeout { get; set; } = new SessionTimeout();
 
-        public LeavingSecureSiteSettings LeavingSecureSiteWarning { get; set; }
+        public LeavingSecureSiteSettings LeavingSecureSiteWarning { get; set; } = new LeavingSecureSiteSettings();
 
         /// <summary>
         /// Represents the Version of the CDN files to use to build the page. ex 4.0.17
@@ -147,8 +147,6 @@ namespace GoC.WebTemplate.Components.Configs
 
         public WebTemplateSettings()
         {
-            LeavingSecureSiteWarning = new LeavingSecureSiteSettings();
-            SessionTimeout = new SessionTimeout();
         }
 
         public WebTemplateSettings(GocWebTemplateConfigurationSection configurationSection)

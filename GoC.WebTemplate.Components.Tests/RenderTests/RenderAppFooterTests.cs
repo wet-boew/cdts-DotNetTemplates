@@ -18,7 +18,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "AKAMAI"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>();
             sut.Render.AppFooter().ToString().Should().Contain("\"contactLink\":[]");
         }
@@ -30,7 +30,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "PROD_SSL"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>();
             sut.Render.AppFooter().ToString().Should().Contain("\"contactLink\":[]");
         }
@@ -42,7 +42,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "ESDC_PROD"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>();
             sut.Render.AppFooter().ToString().Should().Contain("\"contactLink\":[]");
         }
@@ -54,7 +54,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "AKAMAI",
                 CanHaveContactLinkInAppTemplate = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.ContactLinks = new List<Link>() { new Link() { Href = "http://testvalue" } };
             sut.Render.AppFooter().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
@@ -69,7 +69,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "AKAMAI",
                 CanHaveContactLinkInAppTemplate = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.ContactLinks = new List<Link>() { new FooterLink() { Href = "http://testvalue", NewWindow = false } };
             sut.Render.AppFooter().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
@@ -83,7 +83,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Name = "AKAMAI",
             CanHaveContactLinkInAppTemplate = true
         };
-        new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+        new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
         Action act = () => sut.Render.AppFooter();
         act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
@@ -96,7 +96,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "PROD_SSL"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             Action act = () => sut.Render.AppFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
@@ -109,8 +109,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "ESDC_PROD"
             };
-            sut.UseHTTPS = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            sut.Settings.UseHttps = true;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             Action act = () => sut.Render.AppFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
@@ -124,7 +124,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Name = "AKAMAI",
             CanHaveContactLinkInAppTemplate = true
         };
-        new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+        new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
         Action act = () => sut.Render.AppFooter();
         act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
@@ -137,7 +137,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "PROD_SSL"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.Render.AppFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
@@ -150,8 +150,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Name = "ESDC_PROD"
             };
-            sut.UseHTTPS = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            sut.Settings.UseHttps = true;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.Render.AppFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
@@ -197,9 +197,10 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "TEST_LIMIT_3",
                 FooterSectionLimit = 3
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.CustomFooterLinks = new List<Link> { new FooterLink { Href = "href", Text = "text" } };
 
+            //Action act = () => new Utils.ModelRenderer(sut).AppFooter();
             Action act = () => sut.Render.AppFooter();
             act.Should().Throw<InvalidOperationException>().WithMessage("The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
         }
@@ -220,7 +221,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "TEST_LIMIT_0",
                 FooterSectionLimit = 0
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterSections = GetTestableFooterSectionList();
 
             Action act = () => sut.Render.AppFooter();
@@ -235,7 +236,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "TEST_LIMIT_1",
                 FooterSectionLimit = 1
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterSections = GetTestableFooterSectionList();
 
             Action act = () => sut.Render.AppFooter();
@@ -250,7 +251,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Name = "TEST_LIMIT_3",
                 FooterSectionLimit = 3
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterSections = GetTestableFooterSectionList();
 
             var json = sut.Render.AppFooter();

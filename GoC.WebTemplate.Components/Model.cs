@@ -15,6 +15,9 @@ namespace GoC.WebTemplate.Components
     {
         private readonly FileContentCache _fileContentCache;
         private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
+
+        private string _headerTitle;
+        private string _staticFilesPath;
         private ModelBuilder _builder;
         private ModelRenderer _renderer;
 
@@ -23,73 +26,38 @@ namespace GoC.WebTemplate.Components
 
         public WebTemplateSettings Settings { get; }
 
+        public Model(
+            IFileContentCacheProvider fileContentCacheProvider,
+            WebTemplateSettings settings,
+            ICdtsCacheProvider cdtsCacheProvider
+        ) : this(fileContentCacheProvider, settings, cdtsCacheProvider, string.Empty)
+        {
+        }
+
         public Model(IFileContentCacheProvider fileContentCacheProvider,
             WebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider)
+            ICdtsCacheProvider cdtsCacheProvider,
+            string queryString)
         {
+            if (fileContentCacheProvider == null) throw new ArgumentNullException(nameof(fileContentCacheProvider));
+            if (cdtsCacheProvider == null) throw new ArgumentNullException(nameof(cdtsCacheProvider));
+            Settings = settings ?? throw new ArgumentNullException(nameof(settings));
+
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
             _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
-
-            Settings = settings;
-
-            SetDefaultValues();
-        }
-
-        private void SetDefaultValues()
-        {
-            //Set properties
-            WebTemplateVersion = Settings.Version;
-
-            UseHTTPS = Settings.UseHttps;
-            //Normalizing to match with the value we read from the configuration file.
-            Environment = Settings.Environment.ToUpper(System.Globalization.CultureInfo.CurrentCulture);
-
-            LoadJQueryFromGoogle = Settings.LoadScriptsFromGoogle;
-
-            SessionTimeout = new SessionTimeout
-            {
-                Enabled = Settings.SessionTimeout.Enabled,
-                Inactivity = Settings.SessionTimeout.Inactivity,
-                ReactionTime = Settings.SessionTimeout.ReactionTime,
-                SessionAlive = Settings.SessionTimeout.SessionAlive,
-                LogoutUrl = Settings.SessionTimeout.LogoutUrl,
-                RefreshCallBackUrl = Settings.SessionTimeout.RefreshCallBackUrl,
-                RefreshOnClick = Settings.SessionTimeout.RefreshOnClick,
-                RefreshLimit = Settings.SessionTimeout.RefreshLimit,
-                Method = Settings.SessionTimeout.Method,
-                AdditionalData = Settings.SessionTimeout.AdditionalData
-            };
-            ShowPreContent = Settings.ShowPreContent;
-            ShowSearch = Settings.ShowSearch;
-
-            //Set preFooter section options
-            ShowPostContent = Settings.ShowPostContent;
+            
             FeedbackLink = new FeedbackLink
             {
-                Show = Settings.ShowFeedbackLink,
-                Url = Settings.FeedbackLinkUrl,
-                UrlFr = Settings.FeedbackLinkUrlFr
+                Show = settings.ShowFeedbackLink,
+                Url = settings.FeedbackLinkUrl,
+                UrlFr = settings.FeedbackLinkUrlFr
             };
-            ShowLanguageLink = Settings.ShowLanguageLink;
-            ShowSharePageLink = Settings.ShowSharePageLink;
 
-            LeavingSecureSiteWarning = new LeavingSecureSiteWarning
+            LanguageLink = new LanguageLink
             {
-                Enabled = Settings.LeavingSecureSiteWarning.Enabled,
-                DisplayModalWindow = Settings.LeavingSecureSiteWarning.DisplayModalWindow,
-                RedirectURL = Settings.LeavingSecureSiteWarning.RedirectUrl,
-                ExcludedDomains = Settings.LeavingSecureSiteWarning.ExcludedDomains
+                Href = ModelBuilder.BuildLanguageLinkURL(queryString)
             };
-
-            //Set Application Template Specific Sections
-            SignOutLinkURL = Settings.SignOutLinkUrl;
-            SignInLinkURL = Settings.SignInLinkUrl;
-            CustomSiteMenuURL = string.IsNullOrEmpty(Settings.CustomSiteMenuUrl) ? null : Settings.CustomSiteMenuUrl;
         }
-
-        public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
-
-        private string _staticFilesPath;
 
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
@@ -109,16 +77,8 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
+        public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Settings.Environment];
 
-        /// <summary>
-        /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
-        /// The environment provided will determine the CDTS that will be used (url and cdnenv)
-        /// Set by application via the web.config or programmatically
-        /// </summary>
-        public string Environment { get; set; }
-
-        public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Environment];
-        
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
@@ -156,13 +116,13 @@ namespace GoC.WebTemplate.Components
         /// Set by application via web.config or programmatically
         /// </summary>
         public FeedbackLink FeedbackLink { get; set; }
-        
+
         /// <summary>
         /// Configures the Privacy Link
         /// Set by application programmatically
         /// </summary>
         public FooterLink PrivacyLink { get; set; } = new FooterLink();
-        
+
         /// <summary>
         /// Configures the Terms and Conditions Link
         /// Set by application programmatically
@@ -185,42 +145,6 @@ namespace GoC.WebTemplate.Components
         /// A unique string to identify a web page. Used by user to identify the screen where an issue occured.
         /// </summary>
         public string ScreenIdentifier { get; set; }
-
-        /// <summary>
-        /// Defines the session timeout properties
-        /// The objects properties are set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        public SessionTimeout SessionTimeout { get; set; }
-
-        /// <summary>
-        /// Determines if the Post Content of the footer are to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        public bool ShowPostContent { get; set; }
-
-
-        /// <summary>
-        /// Determines if the language toggle link  is to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        public bool ShowLanguageLink { get; set; }
-
-        /// <summary>
-        /// Determines if the Share Link of the footer are to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        public bool ShowSharePageLink { get; set; }
-
-        /// <summary>
-        /// Determines if the Search control of the header are to be displayed
-        /// Set by application via web.config
-        /// or Set by application programmatically
-        /// </summary>
-        public bool ShowSearch { get; set; }
 
         /// <summary>
         /// Representes the list of items to be displayed in the Share Page window
@@ -258,7 +182,6 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public string TwoLetterCultureLanguage => Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
-        private string _headerTitle;
         /// <summary>
         /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per
         /// Set by application programmatically
@@ -298,24 +221,6 @@ namespace GoC.WebTemplate.Components
         public string VersionIdentifier { get; set; }
 
         /// <summary>
-        /// Represents the Version of the CDN files to use to build the page. ex 4.0.17
-        /// Set by application via web.config or programmatically
-        /// </summary>
-        public string WebTemplateVersion { get; set; }
-
-        /// <summary>
-        /// Determines if the communication between the browser and the CDTS should be encrypted
-        /// Set by application via web.config or programmatically
-        /// </summary>
-        public bool? UseHTTPS { get; set; }
-
-        /// <summary>
-        /// Determines if the jQuery files should be loaded from google or from the CDN
-        /// Set by application via web.config or programmatically
-        /// </summary>
-        public bool LoadJQueryFromGoogle { get; set; }
-
-        /// <summary>
         /// Allows for a custom search to be used in the application.
         /// </summary>
         public CustomSearch CustomSearch { get; set; }
@@ -334,21 +239,6 @@ namespace GoC.WebTemplate.Components
         /// Only available in the Application Template
         /// </summary>
         public string AppSettingsURL { get; set; }
-
-        /// <summary>
-        /// The link to use for the sign in button, will only appear if <see cref="ShowSignInLink"/> is set to true
-        /// Set by application programmatically or in the Web.Config
-        /// Only available in the Application Template
-        /// </summary>
-        public string SignInLinkURL { get; set; }
-
-        /// <summary>
-        /// The link to use for the sign out button, will only appear if <see cref="ShowSignOutLink"/> is set to true
-        /// Set by application programmatically or in the Web.Config
-        /// Only available in the Application Template
-        /// </summary>
-        public string SignOutLinkURL { get; set; }
-
 
         /// <summary>
         /// Displays the sign in link set.
@@ -394,7 +284,7 @@ namespace GoC.WebTemplate.Components
         /// Only available in the Application Template
         /// </summary>
         public List<MenuLink> MenuLinks { get; set; }
-        
+
         public IntranetTitle IntranetTitle { get; set; }
 
         /// <summary>
@@ -407,15 +297,5 @@ namespace GoC.WebTemplate.Components
             var content = _fileContentCache.GetContent(fileName);
             return new HtmlString(content);
         }
-
-    }
-
-    //TODO: Move this into its own file?
-    public class CDNEnvOnly
-    {
-        public string CdnEnv { get; set; }
     }
 }
-
-
-

@@ -1,8 +1,9 @@
-﻿using System.Web.SessionState;
+﻿using GoC.WebTemplate.Components.Configs;
+using System.Web.SessionState;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    public static class SessionTimoutExtention
+    public static class SessionTimeoutExtention
     {
         /// <summary>
         /// Will check that the timeouts set are equalto or lower than the server session timeout

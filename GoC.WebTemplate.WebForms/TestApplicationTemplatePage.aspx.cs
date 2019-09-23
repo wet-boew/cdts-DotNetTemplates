@@ -11,7 +11,7 @@ namespace GoC.WebTemplate.WebForms
     protected void Page_Load(object sender, EventArgs e)
     {
 
-      if (WebTemplateMaster.WebTemplateCore.Environment == "AKAMAI")
+      if (WebTemplateMaster.WebTemplateCore.Settings.Environment == "AKAMAI")
       {
           Link link = new Link() { Href = "foo", Text = string.Empty };
           WebTemplateMaster.WebTemplateCore.ContactLinks.Add(link);

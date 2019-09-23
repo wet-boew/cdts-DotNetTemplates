@@ -14,6 +14,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void RenderPreFooterTest(Model sut)
         {
             //NOTE: Only testing VersionIdentifier and ScreenIdentifier for now. More properties can be added later.
+            sut.Settings.ShowSharePageLink = true;
+            sut.Settings.ShowPostContent = false;
             sut.DateModified = Convert.ToDateTime("9 january 2015");
             sut.VersionIdentifier = "1.2.3";
             sut.ScreenIdentifier = "Test ID";
@@ -27,6 +29,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void RenderPreFooterWithNullsTest(Model sut)
         {
             //NOTE: Only testing VersionIdentifier and ScreenIdentifier for now. More properties can be added later.
+            sut.Settings.ShowSharePageLink = true;
             sut.DateModified = DateTime.MinValue;
             sut.VersionIdentifier = "  ";
             sut.ScreenIdentifier = null;
@@ -40,10 +43,10 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderPreFooterWithFeebackLinkUrlFr(Model sut)
         {
+            sut.Settings.ShowSharePageLink = true;
             sut.DateModified = DateTime.MinValue;
             sut.VersionIdentifier = "  ";
             sut.ScreenIdentifier = null;
-
             sut.FeedbackLink.Show = true;
             sut.FeedbackLink.Url = "test feedback url";
             sut.FeedbackLink.UrlFr = "test feedback french url";
@@ -56,10 +59,11 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void RenderPreFooterWithFeebackLinkUrlFrInFrenchCulture(Model sut)
         {
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Constants.FRENCH_CULTURE);
+
+            sut.Settings.ShowSharePageLink = true;
             sut.DateModified = DateTime.MinValue;
             sut.VersionIdentifier = "  ";
             sut.ScreenIdentifier = null;
-
             sut.FeedbackLink.Show = true;
             sut.FeedbackLink.Url = "test feedback url";
             sut.FeedbackLink.UrlFr = "test feedback french url";
@@ -73,6 +77,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderTransactionalPreFooter(Model sut)
         {
+            sut.Settings.ShowSharePageLink = false;
             sut.DateModified = Convert.ToDateTime("21 september 2018");
             sut.VersionIdentifier = "Version Ident 1";
             sut.ScreenIdentifier = "Screen Ident 2";
