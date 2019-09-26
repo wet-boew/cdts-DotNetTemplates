@@ -294,7 +294,7 @@ namespace GoC.WebTemplate.Components
         /// <returns>A string containing the content of the file.</returns>
         public HtmlString LoadStaticFile(string fileName)
         {
-            var content = _fileContentCache.GetContent(fileName);
+            var content = _fileContentCache.GetContent(fileName, StaticFilesPath);
             return new HtmlString(content);
         }
     }

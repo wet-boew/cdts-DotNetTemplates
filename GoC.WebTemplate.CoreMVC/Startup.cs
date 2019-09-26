@@ -1,5 +1,4 @@
-﻿using GoC.WebTemplate.Components.Core;
-using GoC.WebTemplate.Components.Core.Services;
+﻿using GoC.WebTemplate.Components.Core.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

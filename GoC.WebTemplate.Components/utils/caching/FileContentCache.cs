@@ -9,14 +9,14 @@ namespace GoC.WebTemplate.Components.Utils.Caching
     {
         private readonly object _lock = new object();
 
-        private readonly ICacheProvider<string> _cacheProvider;
+        private readonly IFileContentCacheProvider _cacheProvider;
 
-        public FileContentCache(ICacheProvider<string> cacheProvider)
+        public FileContentCache(IFileContentCacheProvider cacheProvider)
         {
             _cacheProvider = cacheProvider;
         }
 
-        public string GetContent(string filename)
+        public string GetContent(string filename, string staticFilePath)
         {
             Debug.Assert(_cacheProvider != null, "Cache proxy cannot be null");
 
@@ -33,14 +33,12 @@ namespace GoC.WebTemplate.Components.Utils.Caching
                     if (content == null)
                     {
                         // Map the path.
-                        //TODO: Map the filename to the web server path or throw Exception if filename isn't absolute path or create an IPathMapper.
-                        string filePath = filename;
+                        string filePath = _cacheProvider.GetFullFilePath(filename, staticFilePath);
 
                         content = LoadFile(filePath);
 
-                        //---[ Now that the data is loaded, add it to the cache
-                        // TODO: disabled until filepath can be maped properly (line 34)
-                        // _cacheProvider.SetWithCacheDependency(cacheKey, filePath, content);
+                        // Now that the data is loaded, add it to the cache
+                        _cacheProvider.SetWithCacheDependency(cacheKey, filePath, content);
                     }
                 }
             }

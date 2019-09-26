@@ -2,7 +2,7 @@
 using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Core.Utils.Caching;
 using GoC.WebTemplate.Components.Entities;
-using GoC.WebTemplate.Components.Utils;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
@@ -14,7 +14,7 @@ namespace GoC.WebTemplate.Components.Core.Services
     {
         public Model Model { get; }
 
-        public ModelAccessor(IMemoryCache memoryCache, IHttpContextAccessor httpContextAccessor)
+        public ModelAccessor(IMemoryCache memoryCache, IHttpContextAccessor httpContextAccessor, IHostingEnvironment hostingEnvironment)
         {
             var configs = new GocWebTemplateConfigurationSection();
 
@@ -30,7 +30,7 @@ namespace GoC.WebTemplate.Components.Core.Services
 
             Model = 
                 new Model(
-                    new FileContentMemoryCacheProvider(memoryCache),
+                    new FileContentMemoryCacheProvider(memoryCache, hostingEnvironment),
                     settings, 
                     new CdtsMemoryCacheProvider(memoryCache),
                     httpContextAccessor.HttpContext.Request.QueryString.ToString()
