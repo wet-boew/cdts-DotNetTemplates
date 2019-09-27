@@ -59,8 +59,9 @@ namespace GoC.WebTemplate.MVC
         /// </summary>
         protected virtual void PopulateViewBag()
         {
-            ViewBag.WebTemplateCore = this.WebTemplateCore;
-            ViewBag.WebTemplateVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            ViewData["WebTemplateModel"] = WebTemplateCore;
+            ViewData["WebTemplateVersion"] = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
         /// <summary>
         /// Method is executed for every action.  It is used to control the culture(language) of the site
