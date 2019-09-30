@@ -353,5 +353,5 @@ MigrationBackup/
 *.swp
 
 # Duplicate project files
-SampleCode/GoC.WebTemplate-MVC.Sample/Views/GoC.WebTemplate
-SampleCode/GoC.WebTemplate-WebForms.Sample/GoC.WebTemplate
+GoC.WebTemplate.MVC.Sample/Views/GoC.WebTemplate
+GoC.WebTemplate.WebForms.Sample/GoC.WebTemplate
