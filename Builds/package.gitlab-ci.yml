@@ -1,20 +1,20 @@
-package_components:
+package_componentsframe:
   stage: package
   dependencies: 
-    - version_components
+    - version_componentsframe
     - build_default
   tags:
     - nuget
   only:
-    - tags
-    - master
+    variables:
+      - $MAIN_VERSION != NULL
   script:
-    - powershell.exe "%PACKAGE_PS1%" "Components\\WebTemplateCore" "GoC.WebTemplate-Components"
-    - '"%NUGET_PATH%" pack "Components\\WebTemplateCore\\GoC.WebTemplate-Components.nuspec"'
+    - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.Components.Framework" "GoC.WebTemplate.Components.Framework"
+    - '"%NUGET_PATH%" pack "GoC.WebTemplate.Components.Framework\\GoC.WebTemplate.Components.Framework.nuspec"'
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate-Components.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-Components.Framework.%MAIN_VERSION%.nupkg'
 
 package_mvc:
   stage: package
@@ -24,15 +24,15 @@ package_mvc:
   tags:
     - nuget
   only:
-    - tags
-    - master
+    variables:
+      - $MAIN_VERSION != NULL
   script:       
-    - powershell.exe "%PACKAGE_PS1%" "Applications\\GoC.WebTemplateMVC" "GoC.WebTemplate-MVC"
-    - '"%NUGET_PATH%" pack "Applications\\GoC.WebTemplateMVC\\GoC.WebTemplate-MVC.nuspec"'
+    - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.MVC" "GoC.WebTemplate.MVC"
+    - '"%NUGET_PATH%" pack "GoC.WebTemplate.MVC\\GoC.WebTemplate.MVC.nuspec"'
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate-MVC.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-MVC.%MAIN_VERSION%.nupkg'
       
 package_forms:
   stage: package
@@ -42,48 +42,48 @@ package_forms:
   tags:
     - nuget
   only:
-    - tags
-    - master
+    variables:
+      - $MAIN_VERSION != NULL
   script:   
-    - powershell.exe "%PACKAGE_PS1%" "Applications\\GoC.WebTemplate" "GoC.WebTemplate-WebForms"
-    - '"%NUGET_PATH%" pack "Applications\\GoC.WebTemplate\\GoC.WebTemplate-WebForms.nuspec"'    
+    - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.WebForms" "GoC.WebTemplate.WebForms"
+    - '"%NUGET_PATH%" pack "GoC.WebTemplate.WebForms\\GoC.WebTemplate.WebForms.nuspec"'    
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate-WebForms.%CI_COMMIT_REF_NAME%.nupkg'
+      - 'GoC.WebTemplate-WebForms.%MAIN_VERSION%.nupkg'
 
-package_mvc_sample:
-  stage: package
-  dependencies: 
-    - version_mvc_sample
-    - build_sample
-  tags:
-    - nuget
-  only:
-    - tags
-    - master
-  script:      
-    - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-MVC.Sample" "GoC.WebTemplate-MVC.Sample"
-    - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-MVC.Sample\\GoC.WebTemplate-MVC.Sample.nuspec"' 
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+# package_mvc_sample:
+#   stage: package
+#   dependencies: 
+#     - version_mvc_sample
+#     - build_sample
+#   tags:
+#     - nuget
+#   only:
+#     - tags
+#     - master
+#   script:      
+#     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-MVC.Sample" "GoC.WebTemplate-MVC.Sample"
+#     - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-MVC.Sample\\GoC.WebTemplate-MVC.Sample.nuspec"' 
+#   artifacts:
+#     expire_in: 1 day
+#     paths:
+#       - 'GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
 
-package_forms_sample:
-  stage: package
-  dependencies: 
-    - version_froms_sample
-    - build_sample
-  tags:
-    - nuget
-  only:
-    - tags
-    - master
-  script:      
-    - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-WebForms.Sample" "GoC.WebTemplate-WebForms.Sample"
-    - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-WebForms.Sample\\GoC.WebTemplate-WebForms.Sample.nuspec"' 
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+# package_forms_sample:
+#   stage: package
+#   dependencies: 
+#     - version_froms_sample
+#     - build_sample
+#   tags:
+#     - nuget
+#   only:
+#     - tags
+#     - master
+#   script:      
+#     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-WebForms.Sample" "GoC.WebTemplate-WebForms.Sample"
+#     - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-WebForms.Sample\\GoC.WebTemplate-WebForms.Sample.nuspec"' 
+#   artifacts:
+#     expire_in: 1 day
+#     paths:
+#       - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
