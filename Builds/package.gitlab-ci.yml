@@ -2,7 +2,7 @@ package_componentsframe:
   stage: package
   dependencies: 
     - version_componentsframe
-    - build_default
+    - build_sln
   tags:
     - nuget
   only:
@@ -20,7 +20,7 @@ package_mvc:
   stage: package
   dependencies: 
     - version_mvc
-    - build_default
+    - build_sln
   tags:
     - nuget
   only:
@@ -38,7 +38,7 @@ package_forms:
   stage: package
   dependencies: 
     - version_forms
-    - build_default
+    - build_sln
   tags:
     - nuget
   only:

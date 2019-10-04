@@ -2,18 +2,22 @@ test_components:
   stage: test
   tags:
     - secrets
-  script:
+  before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
+  script:
     - 'dotnet test GoC.WebTemplate.Components.Tests'
+  after_script:
     - 'del GoC.WebTemplate.snk'
 
 test_components_core:
   stage: test
   tags:
     - secrets
-  script:
+  before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
+  script:
     - 'dotnet test GoC.WebTemplate.Components.Core.Tests'
+  after_script:
     - 'del GoC.WebTemplate.snk'
 
 test_components_frame:
@@ -30,8 +34,9 @@ code_quality_samples:
   tags:
     - nuget
     - msbuild
-  script:
+  before_script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+  script:
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=SamplesCodeAnalysisReport.xml'
   except:
     - tags
