@@ -30,10 +30,10 @@ deploy_mvc:
   script:
     - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.%MAIN_VERSION%.nupkg -k'
 
-deploy_webforms:
+deploy_forms:
   stage: deploy
   dependencies: 
-    - package_webforms
+    - package_forms
   tags:
     - curl
     - artifactory
