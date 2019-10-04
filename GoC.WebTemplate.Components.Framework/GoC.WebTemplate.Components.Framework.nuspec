@@ -1,0 +1,16 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>GoC.WebTemplate-Components.Framework</id>
+    <version>2.0.0</version>
+    <authors>Solution Design Services</authors>
+    <owners>Employment and Social Development Canada</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Components to the DotNetTemplates for the .NET Framework archetecture</description>
+    <copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</copyright>
+    <tags>SCWASI CDN Template SDS SF Web Framework</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\GoC.WebTemplate.Components.Framework.dll" target="lib\Net47" />
+  </files>
+</package>
