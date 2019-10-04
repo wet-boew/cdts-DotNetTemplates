@@ -7,7 +7,7 @@
     <authors>Solution Design Services</authors>
     <owners>Employment and Social Development Canada - GoC</owners>
     <projectUrl>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates</projectUrl>
-    <icon>images\icon.png</icon>
+    <iconUrl>https://gccode.ssc-spc.gc.ca/uploads/-/system/project/avatar/4622/Capture.PNG</iconUrl>
     <copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template MVC Framework</tags>
     <dependencies>
@@ -15,7 +15,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\assets\icon.png" target="images\" />
     <file src="Web.config.install.xdt" target="Content" />
     <file src="WebTemplateMVC.xsd" target="Content" />
     <file src="bin\GoC.WebTemplate.MVC.dll" target="lib\Net47" />
