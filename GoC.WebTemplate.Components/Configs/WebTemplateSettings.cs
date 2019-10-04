@@ -57,9 +57,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// Set by application via web.config or programmatically
         /// </summary>
         public string Version { get; set; }
-
-        public string Theme { get; set; }
-
+        
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
         /// The environment provided will determine the CDTS that will be used (url and cdnenv)
@@ -190,7 +188,6 @@ namespace GoC.WebTemplate.Components.Configs
             SignInLinkUrl = configurationSection.SignInLinkURL;
             SignOutLinkUrl = configurationSection.SignOutLinkURL;
             StaticFilesLocation = configurationSection.StaticFilesLocation;
-            Theme = configurationSection.Theme;
             UseHttps = configurationSection.UseHttps;
             Version = configurationSection.Version;
         }

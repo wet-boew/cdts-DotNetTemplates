@@ -65,17 +65,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
         }
 
         /// <summary>
-        /// theme
-        /// </summary>
-        [ConfigurationProperty("theme", IsRequired = false)]
-        public string Theme
-        {
-            get { return (string)this["theme"]; }
-            set { this["theme"] = value; }
-        }
-
-
-        /// <summary>
         /// cdts environment to use
         /// </summary>
         [ConfigurationProperty("environment", IsRequired = true)]
