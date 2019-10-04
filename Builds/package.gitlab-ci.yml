@@ -7,7 +7,7 @@ package_componentsframe:
     - nuget
   only:
     variables:
-      - $MAIN_VERSION != NULL
+      - $MAIN_VERSION != null
   script:
     - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.Components.Framework" "GoC.WebTemplate.Components.Framework"
     - '"%NUGET_PATH%" pack "GoC.WebTemplate.Components.Framework\\GoC.WebTemplate.Components.Framework.nuspec"'
@@ -25,7 +25,7 @@ package_mvc:
     - nuget
   only:
     variables:
-      - $MAIN_VERSION != NULL
+      - $MAIN_VERSION != null
   script:       
     - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.MVC" "GoC.WebTemplate.MVC"
     - '"%NUGET_PATH%" pack "GoC.WebTemplate.MVC\\GoC.WebTemplate.MVC.nuspec"'
@@ -43,7 +43,7 @@ package_forms:
     - nuget
   only:
     variables:
-      - $MAIN_VERSION != NULL
+      - $MAIN_VERSION != null
   script:   
     - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.WebForms" "GoC.WebTemplate.WebForms"
     - '"%NUGET_PATH%" pack "GoC.WebTemplate.WebForms\\GoC.WebTemplate.WebForms.nuspec"'    

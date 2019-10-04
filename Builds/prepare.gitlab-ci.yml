@@ -3,7 +3,7 @@ version_componentsframe:
   allow_failure: true
   only:
     variables:
-      - $MAIN_VERSION != NULL
+      - $MAIN_VERSION != null
   script:    
     - powershell.exe %VERSION_PS1% %MAIN_VERSION% "GoC.WebTemplate.Components.Framework\Properties\AssemblyInfo.cs"
   artifacts:
@@ -16,7 +16,7 @@ version_forms:
   allow_failure: true
   only:
     variables:
-      - $MAIN_VERSION != NULL
+      - $MAIN_VERSION != null
   script:    
     - powershell.exe %VERSION_PS1% %MAIN_VERSION% "GoC.WebTemplate.WebForms\Properties\AssemblyInfo.cs"
   artifacts:
@@ -29,7 +29,7 @@ version_mvc:
   allow_failure: true
   only:
     variables:
-      - $MAIN_VERSION != NULL
+      - $MAIN_VERSION != null
   script:    
     - powershell.exe %VERSION_PS1% %MAIN_VERSION% "GoC.WebTemplate.MVC\Properties\AssemblyInfo.cs"
   artifacts:
