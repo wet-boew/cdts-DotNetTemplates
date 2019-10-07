@@ -10,7 +10,7 @@ using System.Resources;
 
 namespace GoC.WebTemplate.Components.Utils.Caching
 {
-    internal class CdtsEnvironmentCache
+    public class CdtsEnvironmentCache
     {
         //Because of how JSonDesrialization works we need to have a container class for the environments.
         private class EnvironmentContainer

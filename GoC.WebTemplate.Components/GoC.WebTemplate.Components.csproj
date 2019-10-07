@@ -8,6 +8,7 @@
   
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CodeAnalysisRuleSet>..\WebTemplate.ruleset</CodeAnalysisRuleSet>
+    <NoWarn>1701;1702;CA1812</NoWarn>
   </PropertyGroup>
   
   <ItemGroup>
