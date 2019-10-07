@@ -1,0 +1,47 @@
+deploy_componentsframe:
+  stage: deploy
+  dependencies: 
+    - package_componentsframe
+  tags:
+    - curl
+    - artifactory
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  environment:
+    name: Artifactory-ComponentsFramework
+    url: '%ARTIFACTORY_DEPLOY%'
+  script:
+    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.Framework.%MAIN_VERSION%.nupkg -k'
+
+deploy_mvc:
+  stage: deploy
+  dependencies: 
+    - package_mvc
+  tags:
+    - curl
+    - artifactory
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  environment:
+    name: Artifactory-MVC
+    url: '%ARTIFACTORY_DEPLOY%'
+  script:
+    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.%MAIN_VERSION%.nupkg -k'
+
+deploy_forms:
+  stage: deploy
+  dependencies: 
+    - package_forms
+  tags:
+    - curl
+    - artifactory
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  environment:
+    name: Artifactory-WebForms
+    url: '%ARTIFACTORY_DEPLOY%'
+  script:
+    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.%MAIN_VERSION%.nupkg -k'

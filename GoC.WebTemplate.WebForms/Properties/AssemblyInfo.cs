@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("GoC.WebTemplate-WebForms")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("The WebForms Template as part of the DotNetTemplates for the .NET Framework that incorporates SCWASI and the CDTS, written in C#")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("GoC")]
-[assembly: AssemblyProduct("GoC.WebTemplate-WebForms")]
-[assembly: AssemblyCopyright("Copyright GoC 2018")]
+[assembly: AssemblyCompany("Employment and Social Development Canada")]
+[assembly: AssemblyProduct("GoC.WebTemplate.WebForms")]
+[assembly: AssemblyCopyright("Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 //
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
-[assembly: AssemblyVersion("1.31.*")]
-[assembly: AssemblyInformationalVersion("1.31.0")]
+[assembly: AssemblyVersion("2.0.*")]
+[assembly: AssemblyInformationalVersion("2.0.0")]

@@ -4,10 +4,12 @@ build_sln:
     - nuget
     - msbuild
     - secrets
-  script:
+  before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
     - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+  script:
     - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
+  after_script:
     - 'del GoC.WebTemplate.snk'
   artifacts:
     expire_in: 1 hour
@@ -15,6 +17,9 @@ build_sln:
       - 'GoC.WebTemplate.Components\\bin\\Release\\netstandard2.0\\GoC.WebTemplate.Components.dll'
       - 'GoC.WebTemplate.Components.Core\\bin\\Release\\netcoreapp2.1\\GoC.WebTemplate.Components.Core.dll'
       - 'GoC.WebTemplate.Components.Framework\\bin\\Release\\GoC.WebTemplate.Components.Framework.dll'
+      - 'GoC.WebTemplate.Components.Framework\\bin\\Release\\GoC.WebTemplate.Components.dll'
+      - 'GoC.WebTemplate.MVC\\bin\\GoC.WebTemplate.MVC.dll'
+      - 'GoC.WebTemplate.WebForms\\bin\\GoC.WebTemplate.Webforms.dll'
       - '%xUNIT_PATH%'
       - '%TEST_FRAME_PATH%'
 
@@ -23,6 +28,7 @@ build_sample:
   tags:
     - nuget
     - msbuild
-  script:
+  before_script:
     - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
+  script:
     - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:Configuration=Release'

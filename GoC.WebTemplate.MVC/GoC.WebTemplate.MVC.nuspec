@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>GoC.WebTemplate-MVC</id>
+    <version>2.0.0</version>
+    <description>The MVC Template as part of the DotNetTemplates for the .NET Framework that incorporates SCWASI and the CDTS, written in C#</description>
+    <authors>Solution Design Services</authors>
+    <owners>Employment and Social Development Canada - GoC</owners>
+    <projectUrl>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates</projectUrl>
+    <iconUrl>https://gccode.ssc-spc.gc.ca/uploads/-/system/project/avatar/4622/Capture.PNG</iconUrl>
+    <copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</copyright>
+    <tags>SCWASI CDN Template SDS SF Web Template MVC Framework</tags>
+    <dependencies>
+      <dependency id="GoC.WebTemplate-Components.Framework" version="2.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="Web.config.install.xdt" target="Content" />
+    <file src="WebTemplateMVC.xsd" target="Content" />
+    <file src="bin\GoC.WebTemplate.MVC.dll" target="lib\Net47" />
+    <file src="Views\GoC.WebTemplate\**\*.*" target="Content\Views\GoC.WebTemplate" />
+  </files>
+</package>
