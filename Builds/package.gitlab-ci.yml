@@ -87,3 +87,33 @@ package_forms:
 #     expire_in: 1 day
 #     paths:
 #       - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'
+
+package_components:
+  stage: package
+  dependencies:
+    - version_component
+    - build_sln
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  script:
+    - dotnet pack "GoC.WebTemplate.Components\\GoC.WebTemplate.Components.csproj" --no-build -c Release -output .
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - 'GoC.WebTemplate.Components.$MAIN_VERSION.nupkg'
+
+package_componentscore:
+  stage: package
+  dependencies:
+    - version_componentscore
+    - build_sln
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  script:
+    - dotnet pack "GoC.WebTemplate.Components.Core\\GoC.WebTemplate.Components.Core.csproj" --no-build -c Release -output .
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - 'GoC.WebTemplate.Components.Core.$MAIN_VERSION.nupkg'
