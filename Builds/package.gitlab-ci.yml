@@ -91,7 +91,6 @@ package_forms:
 package_components:
   stage: package
   dependencies:
-    - version_component
     - build_sln
   only:
     variables:
@@ -106,7 +105,6 @@ package_components:
 package_componentscore:
   stage: package
   dependencies:
-    - version_componentscore
     - build_sln
   only:
     variables:
