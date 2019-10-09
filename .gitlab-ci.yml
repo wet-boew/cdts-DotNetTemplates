@@ -1,5 +1,6 @@
 variables:
   VERSION_PS1: 'Builds\\version.ps1'
+  DOTNET_VERSION_PS: 'Builds\\dotnet-version.ps1'
   PACKAGE_PS1: 'Builds\\package.ps1'
   DEFAULT_SLN: 'GoC.WebTemplate.sln'
   SAMPLES_SLN: 'GoC.WebTemplate.Samples.sln'
