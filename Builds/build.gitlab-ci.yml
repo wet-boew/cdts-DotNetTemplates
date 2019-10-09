@@ -14,9 +14,9 @@ build_sln:
   artifacts:
     expire_in: 1 hour
     paths:
-      - 'GoC.WebTemplate.Components\\bin\\Release\\netstandard2.0\\GoC.WebTemplate.Components.dll'
+      - 'GoC.WebTemplate.Components\\bin\\Release'
       - 'GoC.WebTemplate.Components\\obj\\project.assets.json'
-      - 'GoC.WebTemplate.Components.Core\\bin\\Release\\netcoreapp2.1\\GoC.WebTemplate.Components.Core.dll'
+      - 'GoC.WebTemplate.Components.Core\\bin\\Release'
       - 'GoC.WebTemplate.Components.Core\\obj\\project.assets.json'
       - 'GoC.WebTemplate.Components.Framework\\bin\\Release\\GoC.WebTemplate.Components.Framework.dll'
       - 'GoC.WebTemplate.MVC\\bin\\GoC.WebTemplate.MVC.dll'
