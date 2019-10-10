@@ -13,7 +13,7 @@ package_components:
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate-Components.$MAIN_VERSION.nupkg'
+      - 'GoC.WebTemplate-Components.%MAIN_VERSION%.nupkg'
 
 package_componentscore:
   stage: package
@@ -28,7 +28,7 @@ package_componentscore:
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate-Components.Core.$MAIN_VERSION.nupkg'
+      - 'GoC.WebTemplate-Components.Core.%MAIN_VERSION%.nupkg'
       
 package_componentsframe:
   stage: package
