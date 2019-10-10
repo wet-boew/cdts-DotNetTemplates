@@ -2,20 +2,24 @@ package_components:
   stage: package
   dependencies:
     - build_sln
+    - version_components
   only:
     variables:
       - $MAIN_VERSION != null
+  before_script:
+    - dotnet restore GoC.WebTemplate.Components/GoC.WebTemplate.Components.csproj
   script:
     - dotnet pack "GoC.WebTemplate.Components\\GoC.WebTemplate.Components.csproj" --no-build -c Release -o ../
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate.Components.$MAIN_VERSION.nupkg'
+      - 'GoC.WebTemplate-Components.$MAIN_VERSION.nupkg'
 
 package_componentscore:
   stage: package
   dependencies:
     - build_sln
+    - version_componentscore
   only:
     variables:
       - $MAIN_VERSION != null
@@ -24,7 +28,7 @@ package_componentscore:
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate.Components.Core.$MAIN_VERSION.nupkg'
+      - 'GoC.WebTemplate-Components.Core.$MAIN_VERSION.nupkg'
       
 package_componentsframe:
   stage: package
