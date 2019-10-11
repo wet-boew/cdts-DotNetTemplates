@@ -5,9 +5,12 @@ test_components:
   before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:
-    - 'dotnet test GoC.WebTemplate.Components.Tests'
+    - 'dotnet test GoC.WebTemplate.Components.Tests --logger "junit;LogFilePath=ComponentsTestResults.xml"'
   after_script:
     - 'del GoC.WebTemplate.snk'
+  artifacts:
+    reports:
+      junit: GoC.WebTemplate.Components.Tests\ComponentsTestResults.xml
 
 test_components_core:
   stage: test
@@ -16,16 +19,22 @@ test_components_core:
   before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:
-    - 'dotnet test GoC.WebTemplate.Components.Core.Tests'
+    - 'dotnet test GoC.WebTemplate.Components.Core.Tests --logger "junit;LogFilePath=ComponentsCoreTestResults.xml"'
   after_script:
     - 'del GoC.WebTemplate.snk'
+  artifacts:
+    reports:
+      junit: GoC.WebTemplate.Components.Core.Tests\ComponentsCoreTestResults.xml
 
 test_components_frame:
   stage: test
   dependencies:
     - build_sln
   script:
-    - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_FRAME_PATH%\\GoC.WebTemplate.Components.Framework.Tests.dll"'
+    - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_FRAME_PATH%\\GoC.WebTemplate.Components.Framework.Tests.dll" -junit ComponentsFrameworkTestResults.xml'
+  artifacts:
+    reports:
+      junit: ComponentsFrameworkTestResults.xml
 
 
 code_quality_samples:
