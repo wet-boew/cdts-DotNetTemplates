@@ -1,7 +1,6 @@
 ﻿using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Core.Utils.Caching;
-using GoC.WebTemplate.Components.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Caching.Memory;
@@ -35,9 +34,6 @@ namespace GoC.WebTemplate.Components.Core.Services
                     new CdtsMemoryCacheProvider(memoryCache),
                     httpContextAccessor.HttpContext.Request.QueryString.ToString()
                 );
-
-            //set timeout based on session
-            Model.Settings.SessionTimeout.CheckWithServerSessionTimeout(httpContextAccessor.HttpContext.Request.HttpContext.Session);
         }
     }
 }
