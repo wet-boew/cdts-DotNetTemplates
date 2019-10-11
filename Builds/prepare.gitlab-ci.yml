@@ -1,3 +1,29 @@
+version_components:
+  stage: prepare
+  allow_failure: true
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  script:    
+    - powershell.exe %DOTNET_VERSION_PS% %MAIN_VERSION% "GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj'
+
+version_componentscore:
+  stage: prepare
+  allow_failure: true
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  script:    
+    - powershell.exe %DOTNET_VERSION_PS% %MAIN_VERSION% "GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj'
+
 version_componentsframe:
   stage: prepare
   allow_failure: true

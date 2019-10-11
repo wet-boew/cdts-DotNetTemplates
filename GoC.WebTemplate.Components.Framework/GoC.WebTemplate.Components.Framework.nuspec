@@ -10,9 +10,11 @@
     <iconUrl>https://gccode.ssc-spc.gc.ca/uploads/-/system/project/avatar/4622/Capture.PNG</iconUrl>
     <copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</copyright>
     <tags>SCWASI CDN Template SDS SF Web Framework</tags>
+    <dependencies>
+        <dependency id="GoC.WebTemplate-Components" version="2.0.0" />
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\Release\GoC.WebTemplate.Components.Framework.dll" target="lib\Net47" />
-    <file src="bin\Release\GoC.WebTemplate.Components.dll" target="lib\Net47" />
   </files>
 </package>
