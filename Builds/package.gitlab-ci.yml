@@ -19,6 +19,7 @@ package_componentscore:
   stage: package
   dependencies:
     - build_sln
+    - version_components # to extract proper dependency
     - version_componentscore
   only:
     variables:
