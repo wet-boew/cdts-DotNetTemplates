@@ -49,6 +49,23 @@ package_componentsframe:
     paths:
       - 'GoC.WebTemplate-Components.Framework.%MAIN_VERSION%.nupkg'
 
+package_coremvc:
+  stage: package
+  dependencies:
+    - build_sln
+    - version_components # to extract proper dependency
+    - version_componentscore # to extract proper dependency
+    - version_coremvc
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  script:
+    - dotnet pack "GoC.WebTemplate.CoreMVC\\GoC.WebTemplate.CoreMVC.csproj" --no-build -c Release -o ../
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - 'GoC.WebTemplate-CoreMVC.%MAIN_VERSION%.nupkg'
+
 package_mvc:
   stage: package
   dependencies: 
