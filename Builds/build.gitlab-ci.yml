@@ -19,6 +19,8 @@ build_sln:
       - 'GoC.WebTemplate.Components.Core\\bin\\Release'
       - 'GoC.WebTemplate.Components.Core\\obj\\project.assets.json'
       - 'GoC.WebTemplate.Components.Framework\\bin\\Release\\GoC.WebTemplate.Components.Framework.dll'
+      - 'GoC.WebTemplate.CoreMVC\\bin\\Release'
+      - 'GoC.WebTemplate.CoreMVC\\obj\\project.assets.json'
       - 'GoC.WebTemplate.MVC\\bin\\GoC.WebTemplate.MVC.dll'
       - 'GoC.WebTemplate.WebForms\\bin\\GoC.WebTemplate.Webforms.dll'
       - '%xUNIT_PATH%'

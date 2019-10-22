@@ -37,6 +37,19 @@ version_componentsframe:
     paths:
       - 'GoC.WebTemplate.Components.Framework\Properties\AssemblyInfo.cs'
 
+version_coremvc:
+  stage: prepare
+  allow_failure: true
+  only:
+    variables:
+      - $MAIN_VERSION != null
+  script:    
+    - powershell.exe %DOTNET_VERSION_PS% %MAIN_VERSION% "GoC.WebTemplate.CoreMVC\GoC.WebTemplate.CoreMVC.csproj"
+  artifacts:
+    expire_in: 1 hour
+    paths:
+      - 'GoC.WebTemplate.CoreMVC\GoC.WebTemplate.CoreMVC.csproj'
+
 version_forms:
   stage: prepare
   allow_failure: true
