@@ -35,23 +35,3 @@ test_components_frame:
   artifacts:
     reports:
       junit: ComponentsFrameworkTestResults.xml
-
-
-code_quality_samples:
-  stage: test
-  allow_failure: true
-  tags:
-    - nuget
-    - msbuild
-  before_script:
-    - '"%NUGET_PATH%" restore %SAMPLES_SLN%'
-  script:
-    - '"%MSBUILD_PATH%" %SAMPLES_SLN% /p:RunCodeAnalysis=true /p:CodeAnalysisLogFile=SamplesCodeAnalysisReport.xml'
-  except:
-    - tags
-    - master
-  artifacts:    
-    expire_in: 1 week
-    paths: 
-      - SampleCode\GoC.WebTemplate-MVC.Sample\SamplesCodeAnalysisReport.xml
-      - SampleCode\GoC.WebTemplate-WebForms.Sample\SamplesCodeAnalysisReport.xml
