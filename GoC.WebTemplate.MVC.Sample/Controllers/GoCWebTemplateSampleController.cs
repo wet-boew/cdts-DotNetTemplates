@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Web.Mvc;
-using GoC.WebTemplate.Components;
-using GoC.WebTemplate.Components.JSONSerializationObjects;
 using System.Collections.Generic;
+using GoC.WebTemplate.Components.Entities;
+using GoC.WebTemplate.Components;
 
 namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
@@ -15,8 +15,8 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult BaseSettingsSample()
         {
             //specify a title for this page
-            WebTemplateCore.Environment = "ESDC_PROD";
-            WebTemplateCore.UseHTTPS = true;
+            WebTemplateCore.Settings.Environment = "ESDC_PROD";
+            WebTemplateCore.Settings.UseHttps = true;
             WebTemplateCore.HeaderTitle = "Setting Custom Theme";
             WebTemplateCore.ApplicationTitle.Text = "Custom Title";
             WebTemplateCore.ApplicationTitle.Href = "FOO/Bar";
@@ -40,11 +40,11 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult BreadcrumbSample()
         {
             //Specify your breadcrumbs
-            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.canada.ca/en/index.html", "Home", ""));
-            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.esdc.gc.ca/en/jobs/opportunities/index.page", "Jobs", ""));
-            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("http://www.esdc.gc.ca/en/jobs/opportunities/youth_students.page", "Opportunities", ""));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb { Href = "http://www.canada.ca/en/index.html", Title = "Home" });
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb { Href = "http://www.esdc.gc.ca/en/jobs/opportunities/index.page", Title = "Jobs" });
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb { Href = "http://www.esdc.gc.ca/en/jobs/opportunities/youth_students.page", Title = "Opportunities" });
             //Leaving the "href" parameter empty, will create the breadcrumb in text and not as a hyperlink. Useful for the last item of the breadcrumb list. 
-            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb("", "FSWEP", "Federal Student Work Experience Program"));
+            WebTemplateCore.Breadcrumbs.Add(new Breadcrumb { Title = "FSWEP", Acronym = "Federal Student Work Experience Program" });
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -66,9 +66,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult FeedbackandShareThisPageSample()
         {
             //Display the FeedbackLink
-            WebTemplateCore.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
-            WebTemplateCore.FeedbackLinkUrl = "http://www.aircanada.com/en/customercare/customersolutions.html";
-            WebTemplateCore.FeedbackLinkUrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
+            WebTemplateCore.Settings.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
+            WebTemplateCore.Settings.FeedbackLinkUrl = "http://www.aircanada.com/en/customercare/customersolutions.html";
+            WebTemplateCore.Settings.FeedbackLinkUrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
 
 
             ////Specify the Share This Page with Media sites.
@@ -78,24 +78,24 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
             //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
 
-            WebTemplateCore.ShowSharePageLink = true;
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.linkedin);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.blogger);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.myspace);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.delicious);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.pinterest);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.digg);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.reddit);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.diigo);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.stumbleupon);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.email);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.tumblr);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.gmail);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.yahoomail);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.googleplus);
+            WebTemplateCore.Settings.ShowSharePageLink = true;
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.bitly);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.linkedin);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.blogger);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.myspace);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.delicious);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.pinterest);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.digg);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.reddit);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.diigo);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.stumbleupon);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.email);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.tumblr);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.facebook);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.twitter);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.gmail);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.yahoomail);
+            WebTemplateCore.SharePageMediaSites.Add(SocialMediaSites.googleplus);
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -138,10 +138,10 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult LeavingSecureSiteSample()
         {
             //note: other then the message the rest could be set in the web.config
-            WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
-            WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "Redirect";
-            WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-            WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+            WebTemplateCore.Settings.LeavingSecureSiteWarning.Enabled = true;
+            WebTemplateCore.Settings.LeavingSecureSiteWarning.RedirectUrl = "Redirect";
+            WebTemplateCore.Settings.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+            WebTemplateCore.Settings.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
            
             return View();
         }
@@ -157,18 +157,30 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
 
             //set the header for this section of the menu
             //set the links for this section of the menu
-            leftMenu.Items.Add(new MenuItem("http://www.tsn.ca", "TSN", new [] { 
-                                                            new MenuItem("http://www.cbc.ca", "sub 1", true), 
-                                                            new MenuItem("http://www.rds.ca", "sub 2") }));
-            leftMenu.Items.Add(new Link("http://www.cnn.ca", "CNN"));
+            leftMenu.Items.Add(new MenuItem
+            {
+                Href = "http://www.tsn.ca",
+                Text = "TSN",
+                SubItems = new List<MenuItem> {
+                    new MenuItem { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+                    new MenuItem { Href="http://www.rds.ca", Text="sub 2" } 
+                }
+            });
+            leftMenu.Items.Add(new Link { Href = "http://www.cnn.ca", Text = "CNN" });
 
             //add section to template
             WebTemplateCore.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            WebTemplateCore.LeftMenuItems.Add(new MenuSection("Section B", "http://www.canada.ca", new [] { 
-                                                                                new Link("http://www.rds.ca", "RDS"), 
-                                                                                new Link("http://www.lapresse.com", "La Presse") }));
+            WebTemplateCore.LeftMenuItems.Add(new MenuSection
+            {
+                Name = "Section B",
+                Link = "http://www.canada.ca",
+                Items = new List<Link> {
+                    new Link{ Href="http://www.rds.ca", Text="RDS" },
+                    new Link{ Href= "http://www.lapresse.com", Text="La Presse"} 
+                }
+            });
 
             return View();
         }
@@ -191,16 +203,16 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             }
             //enable the feature
             
-            WebTemplateCore.SessionTimeout.Enabled = true;
-            WebTemplateCore.SessionTimeout.Inactivity = 30000;
-            WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            WebTemplateCore.SessionTimeout.SessionAlive = 30000;
-            WebTemplateCore.SessionTimeout.LogoutUrl = "Logout";
-            WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "SessionValidity";
-            WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-            WebTemplateCore.SessionTimeout.RefreshLimit = 3;
-            WebTemplateCore.SessionTimeout.Method = "";
-            WebTemplateCore.SessionTimeout.AdditionalData = "";
+            WebTemplateCore.Settings.SessionTimeout.Enabled = true;
+            WebTemplateCore.Settings.SessionTimeout.Inactivity = 30000;
+            WebTemplateCore.Settings.SessionTimeout.ReactionTime = 10000;
+            WebTemplateCore.Settings.SessionTimeout.SessionAlive = 30000;
+            WebTemplateCore.Settings.SessionTimeout.LogoutUrl = "Logout";
+            WebTemplateCore.Settings.SessionTimeout.RefreshCallBackUrl = "SessionValidity";
+            WebTemplateCore.Settings.SessionTimeout.RefreshOnClick = false;
+            WebTemplateCore.Settings.SessionTimeout.RefreshLimit = 3;
+            WebTemplateCore.Settings.SessionTimeout.Method = "";
+            WebTemplateCore.Settings.SessionTimeout.AdditionalData = "";
 
             return View();
         }

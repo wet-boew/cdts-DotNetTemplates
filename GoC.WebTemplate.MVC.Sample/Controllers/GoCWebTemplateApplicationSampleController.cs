@@ -1,4 +1,4 @@
-﻿using GoC.WebTemplate.Components.JSONSerializationObjects;
+﻿using GoC.WebTemplate.Components.Entities;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -12,11 +12,11 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateCore.ApplicationTitle.Text = "Application Name Test";
             WebTemplateCore.Breadcrumbs = null;
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateCore.ShowLanguageLink = true;
-            WebTemplateCore.ShowPostContent = false;
+            WebTemplateCore.Settings.ShowLanguageLink = true;
+            WebTemplateCore.Settings.ShowPostContent = false;
             WebTemplateCore.CustomSiteMenuURL =
                 "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_25/cdts/ajax/custommenu-eng.html";
-            WebTemplateCore.SignOutLinkURL = "about:blank";
+            WebTemplateCore.Settings.SignOutLinkUrl = "about:blank";
             WebTemplateCore.ShowSignOutLink = true;
             WebTemplateCore.AppSettingsURL = "http://tempuri.com";
 

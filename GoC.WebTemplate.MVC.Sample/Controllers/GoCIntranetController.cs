@@ -1,4 +1,4 @@
-﻿using GoC.WebTemplate.Components.JSONSerializationObjects;
+﻿using GoC.WebTemplate.Components.Entities;
 using System.Web.Mvc;
 
 namespace GoC.WebTemplate.MVC.Sample.Controllers
@@ -8,8 +8,8 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult GCIntranetThemeSample()
         {
             //set up theme
-            WebTemplateCore.Environment = "ESDC_PROD";
-            WebTemplateCore.UseHTTPS = false;
+            WebTemplateCore.Settings.Environment = "ESDC_PROD";
+            WebTemplateCore.Settings.UseHttps = false;
 
             //custom intranet title
             WebTemplateCore.IntranetTitle = new IntranetTitle
