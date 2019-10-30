@@ -39,6 +39,29 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
 
             return View();
         }
-        
+
+
+        public IActionResult CustomJSandCSSFilesSample()
+        {
+            //Add a CSS to the header
+            WebTemplateModel.HTMLHeaderElements.Add("<link rel='stylesheet' type='text/css' href='/css/mystyle.css'>");
+
+            //Add a JS to the header
+            //WebTemplateMaster.HTMLHeaderElements.Add("<script src='/js/myJS.js'></script>");
+            //or to add it to the body (bottom of page)
+            WebTemplateModel.HTMLBodyElements.Add("<script src='/js/myJS.js'></script>");
+
+            return View();
+        }
+
+        public IActionResult BilingualErrorSample()
+        {
+            return View();
+        }
+
+        public IActionResult UnilingualErrorSample()
+        {
+            return View();
+        }
     }
 }
