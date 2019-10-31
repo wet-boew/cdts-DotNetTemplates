@@ -269,7 +269,7 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// Only available in the Application Template in GCWeb enviornment
         /// </summary>
-        public List<Link> CustomFooterLinks { get; set; } = new List<Link>();
+        public List<FooterLink> CustomFooterLinks { get; set; } = new List<FooterLink>();
 
         /// <summary>
         /// Custom links if null uses standard links if not null overrides the existing footer links in sections with headers

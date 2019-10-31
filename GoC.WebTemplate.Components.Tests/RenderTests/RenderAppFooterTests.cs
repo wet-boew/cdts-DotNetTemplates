@@ -198,7 +198,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 FooterSectionLimit = 3
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
-            sut.CustomFooterLinks = new List<Link> { new FooterLink { Href = "href", Text = "text" } };
+            sut.CustomFooterLinks = new List<FooterLink> { new FooterLink { Href = "href", Text = "text" } };
 
             //Action act = () => new Utils.ModelRenderer(sut).AppFooter();
             Action act = () => sut.Render.AppFooter();
@@ -208,7 +208,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void CustomFooterLinksRenders(Model sut)
         {
-            sut.CustomFooterLinks = new List<Link> { new FooterLink { Href = "href", Text = "text" } };
+            sut.CustomFooterLinks = new List<FooterLink> { new FooterLink { Href = "href", Text = "text" } };
             var json = sut.Render.AppFooter();
             json.ToString().Should().Contain("\"footerSections\":[{\"href\":\"href\",\"text\":\"text\"}]");
         }

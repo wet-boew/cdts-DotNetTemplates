@@ -183,7 +183,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateCore.LanguageLink.Href = "apptop-fr.html";
             WebTemplateCore.Settings.ShowLanguageLink = true;
             WebTemplateCore.Settings.ShowPostContent = false;
-            WebTemplateCore.CustomFooterLinks = new List<Link>
+            WebTemplateCore.CustomFooterLinks = new List<FooterLink>
             {
                 new FooterLink {Href= "#", Text= "Link 1"},
                 new FooterLink {Href= "#", Text= "Link 2"},
