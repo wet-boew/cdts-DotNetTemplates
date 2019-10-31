@@ -68,8 +68,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.LeftMenuItems.Add(new MenuSection
             {
-                Name = "SectionName",
-                Link = "SectionLink",
+                Text = "SectionName",
+                Href = "SectionLink",
                 Items = new List<Link> {
                     new Link { Href = "Href", Text = "Text" },
                     new MenuItem {

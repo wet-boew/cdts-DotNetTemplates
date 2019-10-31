@@ -70,8 +70,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.LeftMenuItems.Add(new MenuSection
             {
-                Link = "foo",
-                Name = "bar"
+                Href = "foo",
+                Text = "bar"
             });
             sut.Render.Top().ToString().Should().Contain("\"topSecMenu\":true");
         }

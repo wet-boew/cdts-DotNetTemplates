@@ -6,9 +6,9 @@ namespace GoC.WebTemplate.Components.Entities
 {
     public class MenuSection
     {
-        public string Name { get; set; }
-        public string Link { get; set; }
-        public bool OpenInNewWindow { get; set; }
+        public string Text { get; set; }
+        public string Href { get; set; }
+        public bool NewWindow { get; set; }
         public List<Link> Items { get; set; } = new List<Link>();
     }
 }

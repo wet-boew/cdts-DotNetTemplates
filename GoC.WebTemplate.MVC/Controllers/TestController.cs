@@ -67,7 +67,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             {
                 new MenuSection
                 {
-                    Name = "My Left Menu",
+                    Text = "My Left Menu",
                     Items = new List<Link>
                     {
                         new MenuItem

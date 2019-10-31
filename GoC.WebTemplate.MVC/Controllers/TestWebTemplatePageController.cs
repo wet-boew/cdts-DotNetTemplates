@@ -28,12 +28,12 @@ namespace GoC.WebTemplate.MVC.Controllers
                             Text = "Menu Item 2"
                         }
                     } ,
-                    Link = "#",
-                    Name  = "MenuSection",
-                    OpenInNewWindow = false
+                    Href = "#",
+                    Text  = "MenuSection",
+                    NewWindow = false
                 },
                 new MenuSection{
-                    Name="Principale",
+                    Text="Principale",
                     Items= new List<Link> {
                         new MenuItem{
                             Href="linka",
@@ -310,7 +310,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             //LEFT MENU ====================================
             MenuSection leftmen = new MenuSection();
 
-            leftmen.Name = "menu aslfkjsaklj";
+            leftmen.Text = "menu aslfkjsaklj";
 
             leftmen.Items.Add(new Link { Href = "http://www.tsn.ca", Text = "aaa" });
             leftmen.Items.Add(new Link { Href = "http://www.cnn.ca", Text = "bbb" });
@@ -329,8 +329,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             //or can be done with a 1 liner
             WebTemplateCore.LeftMenuItems.Add(new MenuSection
             {
-                Name = "l'index Section B",
-                Link = "http://www.pinkbike.com",
+                Text = "l'index Section B",
+                Href = "http://www.pinkbike.com",
                 Items = new List<Link>
                 {
                     new MenuItem

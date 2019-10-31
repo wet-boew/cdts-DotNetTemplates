@@ -144,8 +144,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.LeftMenuItems = new List<MenuSection>();
             sut.LeftMenuItems.Add(new MenuSection
             {
-                Link = "foo",
-                Name = "bar"
+                Href = "foo",
+                Text = "bar"
             });
             sut.Render.AppTop().ToString().Should().Contain("\"topSecMenu\":true");
         }

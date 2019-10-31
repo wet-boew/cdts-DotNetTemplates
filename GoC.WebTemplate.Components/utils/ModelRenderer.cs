@@ -209,9 +209,9 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 var menuForSerialization = new
                 {
-                    sectionName = WebUtility.HtmlEncode(menu.Name),
-                    sectionLink = _model.Builder.GetStringForJson(menu.Link),
-                    newWindow = menu.OpenInNewWindow,
+                    sectionName = WebUtility.HtmlEncode(menu.Text),
+                    sectionLink = _model.Builder.GetStringForJson(menu.Href),
+                    newWindow = menu.NewWindow,
                     menuLinks = new List<object>() //can't be null
                 };
 

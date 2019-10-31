@@ -10,9 +10,9 @@ namespace GoC.WebTemplate.WebForms
         {
             var leftMenu = new MenuSection
             {
-                Name = "Section A",
-                Link = "http://www.servicecanada.gc.ca",
-                OpenInNewWindow = true
+                Text = "Section A",
+                Href = "http://www.servicecanada.gc.ca",
+                NewWindow = true
             };
 
             //set the header for this section of the menu
@@ -38,7 +38,7 @@ namespace GoC.WebTemplate.WebForms
             //or can be done with a 1 liner
             WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new MenuSection
             {
-                Name = "Section B",
+                Text = "Section B",
                 Items = new List<Link> {
                     new MenuItem { Href = "http://www.rds.ca", Text = "RDS" },
                     new MenuItem { Href = "http://www.lapresse.com", Text = "La Presse" }
