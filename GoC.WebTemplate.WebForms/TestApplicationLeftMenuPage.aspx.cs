@@ -21,9 +21,9 @@ namespace GoC.WebTemplate.WebForms
             {
                 Href = "http://www.tsn.ca",
                 Text = "TSN",
-                SubItems = new List<MenuItem> {
-                    new MenuItem{ Href = "http://www.cbc.ca", Text = "sub 1", NewWindow = true },
-                    new MenuItem{ Href = "http://www.rds.ca", Text = "sub 2" }
+                SubItems = new List<Link> {
+                    new Link{ Href = "http://www.cbc.ca", Text = "sub 1", NewWindow = true },
+                    new Link{ Href = "http://www.rds.ca", Text = "sub 2" }
                 }
             });
             leftMenu.Items.Add(new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" });

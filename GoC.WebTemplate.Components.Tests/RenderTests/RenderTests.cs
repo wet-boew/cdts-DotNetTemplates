@@ -75,8 +75,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                     new MenuItem {
                         Href = "Href",
                         Text = "Text",
-                        SubItems = new List<MenuItem> {
-                            new MenuItem { Href = "subHerf", Text = "subText" }
+                        SubItems = new List<Link> {
+                            new Link { Href = "subHerf", Text = "subText" }
                         }
                     },
                     new MenuItem { Href = "Herf", Text = "Text", NewWindow = true }

@@ -38,8 +38,8 @@ namespace GoC.WebTemplate.MVC.Controllers
                         new MenuItem{
                             Href="linka",
                             Text="Secondaire",
-                            SubItems= new List<MenuItem> {
-                                new MenuItem{
+                            SubItems= new List<Link> {
+                                new Link{
                                     Href="linkb",
                                     Text="Tertiaire"
                                 }
@@ -338,15 +338,15 @@ namespace GoC.WebTemplate.MVC.Controllers
                         Href="http://www.rds.ca",
                         Text="RDS",
                         NewWindow= true,
-                        SubItems = new List<MenuItem>
+                        SubItems = new List<Link>
                         {
-                            new MenuItem
+                            new Link
                             {
                                 Href="http://www.rds.ca",
                                 Text="sub 1",
                                 NewWindow= true
                             },
-                            new MenuItem
+                            new Link
                             {
                                 Href="http://www.lapresse.com",
                                 Text="sub 2"

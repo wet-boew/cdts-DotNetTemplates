@@ -35,7 +35,9 @@ namespace GoC.WebTemplate.Components.Framework.Tests
             sut.Settings.SessionTimeout.SessionAlive.Should().Be(60000);
         }
 
+#pragma warning disable xUnit1013 // Public method should be marked as test
         public void SetHttpContextSessionTimeoutTo(int timeout)
+#pragma warning restore xUnit1013 // Public method should be marked as test
         {
             //building a fake session and setting the session timeout
             var context = new HttpContext(new HttpRequest("foo", "http://www.text.com", "cue"), new HttpResponse(new StringWriter()));

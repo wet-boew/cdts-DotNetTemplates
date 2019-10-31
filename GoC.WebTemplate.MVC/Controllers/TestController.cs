@@ -74,9 +74,9 @@ namespace GoC.WebTemplate.MVC.Controllers
                         {
                             Text = "Item 1",
                             Href = "Test/SubThemeTestPage",
-                            SubItems = new List<MenuItem>
+                            SubItems = new List<Link>
                             {
-                                new MenuItem
+                                new Link
                                 {
                                     Text = "Hello!",
                                     Href = "n/a"
