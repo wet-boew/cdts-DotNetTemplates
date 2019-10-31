@@ -106,7 +106,7 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             return View();
         }
 
-        public ActionResult FooterLinksSample()
+        public IActionResult FooterLinksSample()
         {
             //Contact Links
             WebTemplateModel.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
@@ -145,6 +145,29 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
+        }
+        
+        public IActionResult LeavingSecureSiteSample()
+        {
+            //note: other then the message the rest could be set in the web.config
+            WebTemplateModel.Settings.LeavingSecureSiteWarning.Enabled = true;
+            WebTemplateModel.Settings.LeavingSecureSiteWarning.RedirectUrl = "Redirect";
+            WebTemplateModel.Settings.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+            WebTemplateModel.Settings.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+
+            return View();
+        }
+
+        [HttpGet()]
+        public RedirectResult Redirect(string targetUrl)
+        {
+            //add any necessary clean up code (clear session, logout user, etc...)
+
+            //redirect user to link they had clicked
+            if (!string.IsNullOrEmpty(targetUrl)) return base.Redirect(targetUrl);
+
+            // decide how you want to handle this situation
+            throw new ApplicationException("targetUrl must be specified.");
         }
     }
 }
