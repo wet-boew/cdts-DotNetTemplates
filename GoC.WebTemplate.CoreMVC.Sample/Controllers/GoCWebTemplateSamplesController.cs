@@ -105,5 +105,46 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
 
             return View();
         }
+
+        public ActionResult FooterLinksSample()
+        {
+            //Contact Links
+            WebTemplateModel.ContactLinks = new List<Link> { new Link { Href = "http://travel.gc.ca/" } };
+
+            //The code snippet below displays an example of multiple links that have text and href being updated. 
+            //WebTemplateModel.Settings.Environment = "Prod_SSL";
+            //WebTemplateModel.ContactLinks = new List<Link>
+            //{
+            //    new Link { Href = "http://travel.gc.ca/", Text = "Contact Now" },
+            //    new Link { Href = "http://travel.gc.ca/", Text = "Contact Info" }
+            //};
+
+            //Footer Sections - Application, GCIntranet
+            //WebTemplateModel.Settings.Environment = "Prod_SSL";
+            //WebTemplateModel.FooterSections = new List<FooterSection>
+            //{
+            //    new FooterSection
+            //    {
+            //        SectionName = "Footer Section 1",
+            //        CustomFooterLinks = new List<FooterLink>
+            //        {
+            //            new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+            //            new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+            //        }
+            //    }
+            //};
+            //return View("FooterLinksAppSample");
+
+            //Custom Footer Links - Application, GCWeb
+            //WebTemplateModel.CustomFooterLinks = new List<Link>
+            //{
+            //    new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+            //    new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+            //};
+            //return View("FooterLinksAppSample");
+
+            //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
+            return View();
+        }
     }
 }
