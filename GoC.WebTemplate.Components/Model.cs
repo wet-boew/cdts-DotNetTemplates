@@ -46,13 +46,6 @@ namespace GoC.WebTemplate.Components
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
             _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
             
-            FeedbackLink = new FeedbackLink
-            {
-                Show = settings.ShowFeedbackLink,
-                Url = settings.FeedbackLinkUrl,
-                UrlFr = settings.FeedbackLinkUrlFr
-            };
-
             LanguageLink = new LanguageLink
             {
                 Href = ModelBuilder.BuildLanguageLinkURL(queryString)
@@ -110,13 +103,7 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public DateTime DateModified { get; set; }
-
-        /// <summary>
-        /// Poperties to be used for the feedback link
-        /// Set by application via web.config or programmatically
-        /// </summary>
-        public FeedbackLink FeedbackLink { get; set; }
-
+        
         /// <summary>
         /// Configures the Privacy Link
         /// Set by application programmatically

@@ -277,7 +277,7 @@ namespace GoC.WebTemplate.MVC.Controllers
 
             //   this.WebTemplateCore.LanguageLink_URL = "../TestWebTemplatePage/ChangeCulture?GoCTemplateCulture=fr-CA";
 
-            WebTemplateCore.FeedbackLink.Show = true;
+            WebTemplateCore.Settings.FeedbackLink.Show = true;
 
             WebTemplateCore.Settings.ShowSearch = true;
 

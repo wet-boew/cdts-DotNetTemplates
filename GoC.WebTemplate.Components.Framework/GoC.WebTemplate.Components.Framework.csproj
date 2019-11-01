@@ -61,8 +61,5 @@
       <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\GoC.WebTemplate.snk" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

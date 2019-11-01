@@ -116,7 +116,7 @@ namespace GoC.WebTemplate.Components.Utils
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = _model.Settings.ShowPostContent,
-                ShowFeedback = _model.FeedbackLink,
+                ShowFeedback = _model.Settings.FeedbackLink,
                 ShowShare = new ShareList
                 {
                     Show = _model.Settings.ShowSharePageLink,

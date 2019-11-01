@@ -98,22 +98,8 @@ namespace GoC.WebTemplate.Components.Configs
         /// </summary>
         public bool ShowPostContent { get; set; }
 
-        public bool ShowFeedbackLink { get; set; }
-
-        /// <summary>
-        /// URL used to redirect users when they click the feedback link
-        /// This link is specific for french if the user was already in the french culture
-        /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
-        /// </summary>
-        public string FeedbackLinkUrl { get; set; }
-
-        /// <summary>
-        /// URL used to redirect users when they click the feedback link
-        /// This link is specific for french if the user was already in the french culture
-        /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
-        /// </summary>
-        public string FeedbackLinkUrlFr { get; set; }
-
+        public FeedbackLink FeedbackLink { get; set; } = new FeedbackLink();
+        
         /// <summary>
         /// Determines if the Search control of the header are to be displayed
         /// Set by application via web.config
@@ -154,8 +140,9 @@ namespace GoC.WebTemplate.Components.Configs
 
             CustomSiteMenuUrl = configurationSection.CustomSiteMenuURL;
             Environment = configurationSection.Environment;
-            FeedbackLinkUrl = configurationSection.FeedbackLinkUrl;
-            FeedbackLinkUrlFr = configurationSection.FeedbackLinkUrlFr;
+            FeedbackLink.Show = configurationSection.ShowFeedbackLink;
+            FeedbackLink.Url = configurationSection.FeedbackLinkUrl;
+            FeedbackLink.UrlFr = configurationSection.FeedbackLinkUrlFr;
             LeavingSecureSiteWarning =
                 new LeavingSecureSiteSettings()
                 {
@@ -179,7 +166,6 @@ namespace GoC.WebTemplate.Components.Configs
                     RefreshOnClick = configurationSection.SessionTimeOut.RefreshOnClick,
                     SessionAlive = configurationSection.SessionTimeOut.SessionAlive
                 };
-            ShowFeedbackLink = configurationSection.ShowFeedbackLink;
             ShowLanguageLink = configurationSection.ShowLanguageLink;
             ShowPostContent = configurationSection.ShowPostContent;
             ShowPreContent = configurationSection.ShowPreContent;
