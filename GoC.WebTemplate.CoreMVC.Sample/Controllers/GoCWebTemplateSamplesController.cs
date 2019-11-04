@@ -194,9 +194,9 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
                     Text = "Section A",
                     Href = "http://www.servicecanada.gc.ca",
                     NewWindow = true,
-                    Items = new List<Link> {
+                    Items = new List<MenuItem> {
                         item,
-                        new Link { Href = "http://www.cnn.ca", Text = "CNN" }
+                        new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" }
                     }
                 }
             };
@@ -206,9 +206,9 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             {
                 Text = "Section B",
                 Href = "http://www.canada.ca",
-                Items = new List<Link> {
-                    new Link{ Href="http://www.rds.ca", Text="RDS" },
-                    new Link{ Href= "http://www.lapresse.com", Text="La Presse"}
+                Items = new List<MenuItem> {
+                    new MenuItem{ Href="http://www.rds.ca", Text="RDS" },
+                    new MenuItem{ Href= "http://www.lapresse.com", Text="La Presse"}
                 }
             });
 

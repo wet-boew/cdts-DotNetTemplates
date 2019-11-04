@@ -36,21 +36,21 @@
     <h3>C# Code Sample</h3>
     <pre>
 //specify a title for this page
-this.WebTemplateCore.HeaderTitle = "My Title";
+this.WebTemplateModel.HeaderTitle = "My Title";
 //specify the metatags
-this.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta charset='UTF-8'&gt;");
-this.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta name='singer' content='Elvis'&gt;");
-this.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta http-equiv='default-style' content='sample'&gt;");
+this.WebTemplateModel.HTMLHeaderElements.Add("&lt;meta charset='UTF-8'&gt;");
+this.WebTemplateModel.HTMLHeaderElements.Add("&lt;meta name='singer' content='Elvis'&gt;");
+this.WebTemplateModel.HTMLHeaderElements.Add("&lt;meta http-equiv='default-style' content='sample'&gt;");
 //specify a specific date modified
-this.WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
+this.WebTemplateModel.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
 //or for using the current date
-//this.WebTemplateCore.DateModified = DateTime.Now.Date;
+//this.WebTemplateModel.DateModified = DateTime.Now.Date;
 //specify the version identifier (Note: since the date modified is supplied the date takes precedence)
-this.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
+this.WebTemplateModel.VersionIdentifier = "AA927823737.00.99";
 //specify a screen identifier
-this.WebTemplateCore.ScreenIdentifier = "SP-3485-01";
+this.WebTemplateModel.ScreenIdentifier = "SP-3485-01";
 //Specify the Contact Link
-this.WebTemplateCore.ContactLink = "http://travel.gc.ca/";
+this.WebTemplateModel.ContactLink = "http://travel.gc.ca/";
         </pre>
 </div>
 @Html.Partial("_SamplesNavigation")

@@ -8,7 +8,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         protected override void EndExecuteCore(IAsyncResult asyncResult)
         {
             //Set a the common title for everypage here
-            WebTemplateCore.HeaderTitle = "Title set for everypage!";
+            WebTemplateModel.HeaderTitle = "Title set for everypage!";
 
             base.EndExecuteCore(asyncResult);
         }

@@ -17,7 +17,7 @@
 <h5>To Enable the session timeout plug in:</h5>
 <ul>
     <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.sessionTimeOut.enabled"</code> in the web.config to "true".</li>
-    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateCore.SessionTimeout.Enabled = true;"</code></li>
+    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateModel.SessionTimeout.Enabled = true;"</code></li>
 </ul>
 <p>The rest of the configuration are set in the web.config or programmatically under <code class="wb-prettify">"GoC.WebTemplate.SessionTimeout":</code></p>
 <ul>
@@ -54,16 +54,16 @@
     <h3>C# Code Sample</h3>
     <pre>
 //enable the feature
-this.WebTemplateCore.SessionTimeout_Enabled = true;
-this.WebTemplateCore.SessionTimeout.Inactivity = 30000;
-this.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-this.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-this.WebTemplateCore.SessionTimeout.Logouturl = "Logout.aspx";            
-this.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
-this.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-this.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
-this.WebTemplateCore.SessionTimeout.Method = "";
-this.WebTemplateCore.SessionTimeout.AdditionalData = "";
+this.WebTemplateModel.SessionTimeout_Enabled = true;
+this.WebTemplateModel.SessionTimeout.Inactivity = 30000;
+this.WebTemplateModel.SessionTimeout.ReactionTime = 10000;
+this.WebTemplateModel.SessionTimeout.Sessionalive = 30000;
+this.WebTemplateModel.SessionTimeout.Logouturl = "Logout.aspx";            
+this.WebTemplateModel.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
+this.WebTemplateModel.SessionTimeout.RefreshOnClick = false;
+this.WebTemplateModel.SessionTimeout.RefreshLimit = 3;
+this.WebTemplateModel.SessionTimeout.Method = "";
+this.WebTemplateModel.SessionTimeout.AdditionalData = "";
         </pre>
 </div>
 

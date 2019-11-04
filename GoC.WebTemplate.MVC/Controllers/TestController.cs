@@ -11,21 +11,21 @@ namespace GoC.WebTemplate.MVC.Controllers
 
         public ActionResult BilingualErrorPage()
         {
-            WebTemplateCore.HeaderTitle = "Bilingual Error Test Page";
+            WebTemplateModel.HeaderTitle = "Bilingual Error Test Page";
             return View();
         }
 
         public ActionResult UnilingualErrorPage()
         {
-            WebTemplateCore.HeaderTitle = "Unilingual Error Test Page";
+            WebTemplateModel.HeaderTitle = "Unilingual Error Test Page";
             return View();
         }
         public ActionResult SubThemeTestPage()
         {
-            WebTemplateCore.Settings.Environment = "ESDC_PROD";
-            WebTemplateCore.Settings.UseHttps = false;
-            WebTemplateCore.HeaderTitle = "SubTheme Test Page";
-            WebTemplateCore.IntranetTitle = new IntranetTitle
+            WebTemplateModel.Settings.Environment = "ESDC_PROD";
+            WebTemplateModel.Settings.UseHttps = false;
+            WebTemplateModel.HeaderTitle = "SubTheme Test Page";
+            WebTemplateModel.IntranetTitle = new IntranetTitle
             {
                 Acronym = "yoyo",
                 BoldText = "BOLD",
@@ -47,7 +47,7 @@ namespace GoC.WebTemplate.MVC.Controllers
 
         private void AddBasicBreadcrumbs()
         {
-            WebTemplateCore.Breadcrumbs = new List<Breadcrumb>
+            WebTemplateModel.Breadcrumbs = new List<Breadcrumb>
             {
                 new Breadcrumb
                 {
@@ -63,12 +63,12 @@ namespace GoC.WebTemplate.MVC.Controllers
 
         private void AddABasicLeftMenu()
         {
-            WebTemplateCore.LeftMenuItems = new List<MenuSection>
+            WebTemplateModel.LeftMenuItems = new List<MenuSection>
             {
                 new MenuSection
                 {
                     Text = "My Left Menu",
-                    Items = new List<Link>
+                    Items = new List<MenuItem>
                     {
                         new MenuItem
                         {

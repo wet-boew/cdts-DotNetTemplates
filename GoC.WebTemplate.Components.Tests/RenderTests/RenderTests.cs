@@ -70,8 +70,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             {
                 Text = "SectionName",
                 Href = "SectionLink",
-                Items = new List<Link> {
-                    new Link { Href = "Href", Text = "Text" },
+                Items = new List<MenuItem> {
+                    new MenuItem { Href = "Href", Text = "Text" },
                     new MenuItem {
                         Href = "Href",
                         Text = "Text",

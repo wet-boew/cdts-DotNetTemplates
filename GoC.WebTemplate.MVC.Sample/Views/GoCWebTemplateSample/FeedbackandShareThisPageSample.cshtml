@@ -10,9 +10,9 @@
 <p>To display the link</p>
 <ul>
     <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.ShowFeedbackLink"</code> in the web.config to "true".</li>
-    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateCore.ShowFeedbackLink = true;"</code></li>
+    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateModel.ShowFeedbackLink = true;"</code></li>
     <li>If you wish to redirect the user to your own pages instead of the default canada.ca page, set the key <code class="wb-prettify">"feedbackLinkUrl"</code> in the web.config to the url of your page.</li>
-    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateCore.FeedbackLinkUrl = [page];"</code></li>
+    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateModel.FeedbackLinkUrl = [page];"</code></li>
 </ul>
 
 <h2>Share This Page Link</h2>
@@ -21,7 +21,7 @@
 <p>To display the Share This Page link</p>
 <ul>
     <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.ShowSharePageLink"</code> in the web.config to "true".</li>
-    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateCore.ShowSharePageLink = true;"</code></li>
+    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateModel.ShowSharePageLink = true;"</code></li>
 </ul>
 <p>If you decide to show the link, you must provide the list of Social Media sites to be displayed to the user by programatically populating the <code class="wb-prettify">"SharePageMediaSites"</code> collection of the Web Template.</p>
 <p>If the collection <code class="wb-prettify">"SharePageMediaSites"</code> is left empty, the link will not be displayed.</p>
@@ -32,34 +32,34 @@
     <h3>C# Code Sample</h3>
     <pre>        
             //Display the FeedbackLink
-            WebTemplateCore.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
-            WebTemplateCore.FeedbackLinkUrl = "http://www.aircanada.com/en/customercare/customersolutions.html";
-            WebTemplateCore.FeedbackLinkUrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
+            WebTemplateModel.ShowFeedbackLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showFeedbackLink"
+            WebTemplateModel.FeedbackLinkUrl = "http://www.aircanada.com/en/customercare/customersolutions.html";
+            WebTemplateModel.FeedbackLinkUrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
 
             ////Specify the Share This Page with Media sites.
-            //WebTemplateCore.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
-            //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
-            //WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
+            //WebTemplateModel.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
+            //WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
+            //WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            //WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
 
-            WebTemplateCore.ShowSharePageLink = true;
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.linkedin);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.blogger);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.myspace);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.delicious);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.pinterest);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.digg);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.reddit);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.diigo);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.stumbleupon);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.email);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.tumblr);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.gmail);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.yahoomail);
-            WebTemplateCore.SharePageMediaSites.Add(Core.SocialMediaSites.googleplus);
+            WebTemplateModel.ShowSharePageLink = true;
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.linkedin);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.blogger);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.myspace);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.delicious);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.pinterest);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.digg);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.reddit);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.diigo);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.stumbleupon);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.email);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.tumblr);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.gmail);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.yahoomail);
+            WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.googleplus);
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
         </pre>

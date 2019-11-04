@@ -8,11 +8,11 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult GCIntranetThemeSample()
         {
             //set up theme
-            WebTemplateCore.Settings.Environment = "ESDC_PROD";
-            WebTemplateCore.Settings.UseHttps = false;
+            WebTemplateModel.Settings.Environment = "ESDC_PROD";
+            WebTemplateModel.Settings.UseHttps = false;
 
             //custom intranet title
-            WebTemplateCore.IntranetTitle = new IntranetTitle
+            WebTemplateModel.IntranetTitle = new IntranetTitle
             {
                 Href = "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_31/cdts/samples/subtheme-esdc-en.shtml",
                 BoldText = "ESDC Sub",
@@ -21,8 +21,8 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             };
 
             //application template title
-            WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
-            WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";
+            WebTemplateModel.ApplicationTitle.Text = "My Custom Title";
+            WebTemplateModel.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";
 
             return View();
         }
