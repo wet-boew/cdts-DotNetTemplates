@@ -9,7 +9,7 @@ package_components:
   before_script:
     - dotnet restore GoC.WebTemplate.Components/GoC.WebTemplate.Components.csproj
   script:
-    - dotnet pack "GoC.WebTemplate.Components\\GoC.WebTemplate.Components.csproj" --no-build -c Release -o ../
+    - dotnet pack "GoC.WebTemplate.Components\\GoC.WebTemplate.Components.csproj" --no-build -c Release -o .
   artifacts:
     expire_in: 1 day
     paths:
@@ -25,7 +25,7 @@ package_componentscore:
     variables:
       - $MAIN_VERSION != null
   script:
-    - dotnet pack "GoC.WebTemplate.Components.Core\\GoC.WebTemplate.Components.Core.csproj" --no-build -c Release -o ../
+    - dotnet pack "GoC.WebTemplate.Components.Core\\GoC.WebTemplate.Components.Core.csproj" --no-build -c Release -o .
   artifacts:
     expire_in: 1 day
     paths:
@@ -60,7 +60,7 @@ package_coremvc:
     variables:
       - $MAIN_VERSION != null
   script:
-    - dotnet pack "GoC.WebTemplate.CoreMVC\\GoC.WebTemplate.CoreMVC.csproj" --no-build -c Release -o ../
+    - dotnet pack "GoC.WebTemplate.CoreMVC\\GoC.WebTemplate.CoreMVC.csproj" --no-build -c Release -o .
   artifacts:
     expire_in: 1 day
     paths:
