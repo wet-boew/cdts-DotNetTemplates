@@ -53,17 +53,17 @@
 <div class="wb-prettify all-pre lang-vb linenums">
     <h3>C# Code Sample</h3>
     <pre>
-//enable the feature
-this.WebTemplateModel.SessionTimeout_Enabled = true;
-this.WebTemplateModel.SessionTimeout.Inactivity = 30000;
-this.WebTemplateModel.SessionTimeout.ReactionTime = 10000;
-this.WebTemplateModel.SessionTimeout.Sessionalive = 30000;
-this.WebTemplateModel.SessionTimeout.Logouturl = "Logout.aspx";            
-this.WebTemplateModel.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
-this.WebTemplateModel.SessionTimeout.RefreshOnClick = false;
-this.WebTemplateModel.SessionTimeout.RefreshLimit = 3;
-this.WebTemplateModel.SessionTimeout.Method = "";
-this.WebTemplateModel.SessionTimeout.AdditionalData = "";
+//enable the feature            
+WebTemplateModel.Settings.SessionTimeout.Enabled = true;
+WebTemplateModel.Settings.SessionTimeout.Inactivity = 30000;
+WebTemplateModel.Settings.SessionTimeout.ReactionTime = 10000;
+WebTemplateModel.Settings.SessionTimeout.SessionAlive = 30000;
+WebTemplateModel.Settings.SessionTimeout.LogoutUrl = "Logout";
+WebTemplateModel.Settings.SessionTimeout.RefreshCallBackUrl = "SessionValidity";
+WebTemplateModel.Settings.SessionTimeout.RefreshOnClick = false;
+WebTemplateModel.Settings.SessionTimeout.RefreshLimit = 3;
+WebTemplateModel.Settings.SessionTimeout.Method = "";
+WebTemplateModel.Settings.SessionTimeout.AdditionalData = "";
         </pre>
 </div>
 

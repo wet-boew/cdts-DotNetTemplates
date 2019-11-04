@@ -156,6 +156,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appTop-en.html" />

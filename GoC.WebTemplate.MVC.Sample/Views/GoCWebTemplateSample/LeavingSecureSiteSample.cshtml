@@ -64,12 +64,11 @@
 <div class="wb-prettify all-pre lang-vb linenums">
     <h3>C# Code Sample to enable the warning</h3>
     <pre>
-//note other then the message the rest could be set in the web.config
-this.WebTemplateModel.LeavingSecureSiteWarning.Enabled = true;
-//this.WebTemplateModel.LeavingSecureSiteWarning.DisplayModalWindow = true;
-this.WebTemplateModel.LeavingSecureSiteWarning.RedirectURL = "redirect.aspx";
-this.WebTemplateModel.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-this.WebTemplateModel.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+//note: other then the message the rest could be set in the web.config
+WebTemplateModel.Settings.LeavingSecureSiteWarning.Enabled = true;
+WebTemplateModel.Settings.LeavingSecureSiteWarning.RedirectUrl = "Redirect";
+WebTemplateModel.Settings.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+WebTemplateModel.Settings.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
         </pre>
 </div>
 
@@ -79,16 +78,17 @@ this.WebTemplateModel.LeavingSecureSiteWarning.Message = "You are leaving a secu
 public ActionResult Redirect()
 {
    //this page has no visual and will not be displayed to the user
-   string targetURL = Server.HtmlDecode(Request.QueryString.Get("targetUrl"));
+    string targetURL = Server.HtmlDecode(Request.QueryString.Get("targetUrl"));
 
-   //add any necessary clean up code (clear session, logout user, etc...)
-            
-   //redirect user to link they had clicked
-   if (!string.IsNullOrEmpty(targetURL)) return Redirect(targetURL);
+    //add any necessary clean up code (clear session, logout user, etc...)
 
-   // decide how you want to handle this situation
-   throw new ApplicationException("targetURL must be specified.");
+    //redirect user to link they had clicked
+    if (!string.IsNullOrEmpty(targetURL)) return Redirect(targetURL);
+
+    // decide how you want to handle this situation
+    throw new ApplicationException("targetURL must be specified.");
 }
      </pre>
 </div>
+
 @Html.Partial("_SamplesNavigation")

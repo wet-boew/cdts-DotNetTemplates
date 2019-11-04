@@ -70,34 +70,23 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateModel.Settings.FeedbackLink.Url = "http://www.aircanada.com/en/customercare/customersolutions.html";
             WebTemplateModel.Settings.FeedbackLink.UrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
 
-
             ////Specify the Share This Page with Media sites.
-            //WebTemplateModel.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
-
-            //WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.bitly);
-            //WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.facebook);
-            //WebTemplateModel.SharePageMediaSites.Add(Core.SocialMediaSites.twitter);
-
-            WebTemplateModel.Settings.ShowSharePageLink = true;
+            WebTemplateModel.Settings.ShowSharePageLink = true; //this could be set in the web.config, key = "GoC.WebTemplate.showSharePageLink"
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.bitly);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.linkedin);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.blogger);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.myspace);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.delicious);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.pinterest);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.digg);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.reddit);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.diigo);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.stumbleupon);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.email);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.tumblr);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.facebook);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.twitter);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.gmail);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.linkedin);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.myspace);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.pinterest);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.reddit);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.tumblr);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.twitter);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.yahoomail);
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.googleplus);
 
-            //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
         }
 
@@ -108,29 +97,25 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
 
 
             //Footer Sections - Application, GCIntranet
-            /*
-            WebTemplateModel.FooterSections = new List<FooterSection>
-            {
-                new FooterSection
-                {
-                    SectionName = "Footer Section 1",
-                    CustomFooterLinks = new List<FooterLink>
-                    {
-                        new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
-                        new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
-                    }
-                }
-            };
-            */
+            //WebTemplateModel.FooterSections = new List<FooterSection>
+            //{
+            //    new FooterSection
+            //    {
+            //        SectionName = "Footer Section 1",
+            //        CustomFooterLinks = new List<FooterLink>
+            //        {
+            //            new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+            //            new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+            //        }
+            //    }
+            //};
 
             //Custom Footer Links - Application, GCWeb
-            /*
-            WebTemplateModel.CustomFooterLinks = new List<FooterLink>
-            {
-                new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
-                new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
-            };
-            */
+            //WebTemplateModel.CustomFooterLinks = new List<FooterLink>
+            //{
+            //    new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
+            //    new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
+            //};
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
             return View();
@@ -201,8 +186,8 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
                 ViewBag.Stuff = "Data from session: It is empty, refresh page to have value";
                 Session.Add("stuff", string.Concat("Data from session: ", DateTime.Now.ToString()));
             }
-            //enable the feature
-            
+
+            //enable the feature            
             WebTemplateModel.Settings.SessionTimeout.Enabled = true;
             WebTemplateModel.Settings.SessionTimeout.Inactivity = 30000;
             WebTemplateModel.Settings.SessionTimeout.ReactionTime = 10000;

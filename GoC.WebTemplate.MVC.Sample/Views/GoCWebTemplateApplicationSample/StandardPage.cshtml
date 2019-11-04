@@ -52,7 +52,7 @@ WebTemplateModel.AppSettingsURL ="http://canada.ca";
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>
 //Set the link to be used for changing languages.
-WebTemplateMaster.WebTemplateModel.LanguageLink.Href = "about:blank";
+WebTemplateModel.LanguageLink.Href = "about:blank";
 </pre>
 </div>
 
@@ -215,9 +215,9 @@ WebTemplateModel.MenuLinks = new List&lt;MenuLink&gt;
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>
 //Show the sign in button
-WebTemplateMaster.WebTemplateModel.ShowSignInLink = true; 
+WebTemplateModel.Settings.ShowSignInLink = true; 
 //The URL to your applications sign in page.
-WebTemplateMaster.WebTemplateModel.SignInLinkURL = "about:blank"; 
+WebTemplateModel.Settings.SignInLinkUrl = "about:blank"; 
 </pre>
 </div>
 
@@ -228,15 +228,13 @@ WebTemplateMaster.WebTemplateModel.SignInLinkURL = "about:blank";
 </ul>
 <div class="wb-prettify all-pre lang-c# linenums">
     <pre>//Show the sign out button
-WebTemplateMaster.WebTemplateModel.ShowSignOutLink = true; 
+WebTemplateModel.Settings.ShowSignOutLink = true; 
 //The URL to your applications sign out service.
-WebTemplateMaster.WebTemplateModel.SignOutLinkURL = "about:blank"; 
+WebTemplateModel.Settings.SignOutLinkUrl = "about:blank"; 
 </pre>
 </div>
 
 <h2>Terms and Condition and Privacy Link</h2>
 <p>See the example at the <a href="@Url.Action("TransactionalSample","GoCWebTemplateSample")">Transactional Sample Page</a> for how to implement this.</p>
-
-
 
 @Html.Partial("_SamplesNavigation") 
