@@ -13,7 +13,7 @@ namespace GoC.WebTemplate.WebForms
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            WebTemplateCore = 
+            WebTemplateModel = 
                 new Model(
                     new FileContentCacheProvider(HttpRuntime.Cache), 
                     new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), 
@@ -22,7 +22,7 @@ namespace GoC.WebTemplate.WebForms
                 );
         }
 
-        public Model WebTemplateCore { get; set; }
+        public Model WebTemplateModel { get; set; }
 
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template

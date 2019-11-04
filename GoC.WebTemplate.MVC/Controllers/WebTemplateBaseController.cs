@@ -11,9 +11,7 @@ using System.Reflection;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 
-// ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.MVC
 {
     public class WebTemplateBaseController : Controller
@@ -29,7 +27,7 @@ namespace GoC.WebTemplate.MVC
             WebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
         {
-            WebTemplateCore = 
+            WebTemplateModel = 
                 new Model(
                     fileContentCacheProvider, 
                     settings, 
@@ -60,7 +58,7 @@ namespace GoC.WebTemplate.MVC
         protected virtual void PopulateViewBag()
         {
 
-            ViewData["WebTemplateModel"] = WebTemplateCore;
+            ViewData["WebTemplateModel"] = WebTemplateModel;
             ViewData["WebTemplateVersion"] = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
         /// <summary>
@@ -110,20 +108,17 @@ namespace GoC.WebTemplate.MVC
             }
 
             //set the language link according to the culture
-            WebTemplateCore.LanguageLink = new LanguageLink
+            WebTemplateModel.LanguageLink = new LanguageLink
             {
                 Href = ModelBuilder.BuildLanguageLinkURL(System.Web.HttpContext.Current.Request.QueryString.ToString())
             };
 
             //set timeout based on session
-            WebTemplateCore.Settings.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);
+            WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);
             
             return base.BeginExecuteCore(callback, state);
         }
 
-        #region Properties
-        protected Model WebTemplateCore { get; set; }
-        #endregion
-
+        protected Model WebTemplateModel { get; set; }
     }
 }

@@ -11,15 +11,15 @@ namespace GoC.WebTemplate.WebForms
     protected void Page_Load(object sender, EventArgs e)
     {
 
-      if (WebTemplateMaster.WebTemplateCore.Settings.Environment == "AKAMAI")
+      if (WebTemplateMaster.WebTemplateModel.Settings.Environment == "AKAMAI")
       {
           Link link = new Link() { Href = "foo", Text = string.Empty };
-          WebTemplateMaster.WebTemplateCore.ContactLinks.Add(link);
+          WebTemplateMaster.WebTemplateModel.ContactLinks.Add(link);
       }
 
-      WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://tempuri.com";
-      WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "Test page";
-      WebTemplateMaster.WebTemplateCore.MenuLinks = new List<MenuLink>
+      WebTemplateMaster.WebTemplateModel.ApplicationTitle.Href = "http://tempuri.com";
+      WebTemplateMaster.WebTemplateModel.ApplicationTitle.Text = "Test page";
+      WebTemplateMaster.WebTemplateModel.MenuLinks = new List<MenuLink>
       {
         
         new MenuLink {
