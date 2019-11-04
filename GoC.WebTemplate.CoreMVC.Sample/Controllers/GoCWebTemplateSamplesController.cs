@@ -81,9 +81,9 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
         public IActionResult FeedbackandShareThisPageSample()
         {
             //Display the FeedbackLink
-            WebTemplateModel.FeedbackLink.Show = true; //this could be set in the appsettings.json, key = "GoC.WebTemplate.showFeedbackLink"
-            WebTemplateModel.FeedbackLink.Url = "http://www.aircanada.com/en/customercare/customersolutions.html";
-            WebTemplateModel.FeedbackLink.UrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
+            WebTemplateModel.Settings.FeedbackLink.Show = true; //this could be set in the appsettings.json, key = "GoC.WebTemplate.showFeedbackLink"
+            WebTemplateModel.Settings.FeedbackLink.Url = "http://www.aircanada.com/en/customercare/customersolutions.html";
+            WebTemplateModel.Settings.FeedbackLink.UrlFr = "http://www.aircanada.com/fr/customercare/customersolutions.html"; //will be used if the CurrentUICulture is set to 'fr' / if not set, will assume FeedbackLinkUrl is bilingual
 
 
             ////Specify the Share This Page with Media sites.
@@ -136,7 +136,7 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             //return View("FooterLinksAppSample");
 
             //Custom Footer Links - Application, GCWeb
-            //WebTemplateModel.CustomFooterLinks = new List<Link>
+            //WebTemplateModel.CustomFooterLinks = new List<FooterLink>
             //{
             //    new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
             //    new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
@@ -159,7 +159,9 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
         }
 
         [HttpGet()]
+#pragma warning disable CS0114 // Member hides inherited member; missing override keyword
         public RedirectResult Redirect(string targetUrl)
+#pragma warning restore CS0114 // Member hides inherited member; missing override keyword
         {
             //add any necessary clean up code (clear session, logout user, etc...)
 
@@ -178,9 +180,9 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             {
                 Href = "http://www.tsn.ca",
                 Text = "TSN",
-                SubItems = new List<MenuItem> {
-                    new MenuItem { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
-                    new MenuItem { Href="http://www.rds.ca", Text="sub 2" }
+                SubItems = new List<Link> {
+                    new Link { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+                    new Link { Href="http://www.rds.ca", Text="sub 2" }
                 }
             };
 
@@ -189,9 +191,9 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             {
                 new MenuSection
                 {
-                    Name = "Section A",
-                    Link = "http://www.servicecanada.gc.ca",
-                    OpenInNewWindow = true,
+                    Text = "Section A",
+                    Href = "http://www.servicecanada.gc.ca",
+                    NewWindow = true,
                     Items = new List<Link> {
                         item,
                         new Link { Href = "http://www.cnn.ca", Text = "CNN" }
@@ -202,8 +204,8 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             //or can be done with a 1 liner
             WebTemplateModel.LeftMenuItems.Add(new MenuSection
             {
-                Name = "Section B",
-                Link = "http://www.canada.ca",
+                Text = "Section B",
+                Href = "http://www.canada.ca",
                 Items = new List<Link> {
                     new Link{ Href="http://www.rds.ca", Text="RDS" },
                     new Link{ Href= "http://www.lapresse.com", Text="La Presse"}
