@@ -20,10 +20,11 @@ namespace GoC.WebTemplate.MVC.Controllers
             {
                 new MenuSection
                 {
-                    Items = new List<Link> { new Link {
+                    Items = new List<MenuItem> { 
+                        new MenuItem {
                             Href = "",
                             Text = "Menu Item 1"
-                        }, new Link {
+                        }, new MenuItem {
                             Href= "#",
                             Text = "Menu Item 2"
                         }
@@ -34,7 +35,7 @@ namespace GoC.WebTemplate.MVC.Controllers
                 },
                 new MenuSection{
                     Text="Principale",
-                    Items= new List<Link> {
+                    Items= new List<MenuItem> {
                         new MenuItem{
                             Href="linka",
                             Text="Secondaire",
@@ -308,12 +309,13 @@ namespace GoC.WebTemplate.MVC.Controllers
 
 
             //LEFT MENU ====================================
-            MenuSection leftmen = new MenuSection();
+            MenuSection leftmen = new MenuSection
+            {
+                Text = "menu aslfkjsaklj"
+            };
 
-            leftmen.Text = "menu aslfkjsaklj";
-
-            leftmen.Items.Add(new Link { Href = "http://www.tsn.ca", Text = "aaa" });
-            leftmen.Items.Add(new Link { Href = "http://www.cnn.ca", Text = "bbb" });
+            leftmen.Items.Add(new MenuItem { Href = "http://www.tsn.ca", Text = "aaa" });
+            leftmen.Items.Add(new MenuItem { Href = "http://www.cnn.ca", Text = "bbb" });
 
             WebTemplateCore.LeftMenuItems.Add(leftmen);
 
@@ -331,7 +333,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             {
                 Text = "l'index Section B",
                 Href = "http://www.pinkbike.com",
-                Items = new List<Link>
+                Items = new List<MenuItem>
                 {
                     new MenuItem
                     {
@@ -353,7 +355,7 @@ namespace GoC.WebTemplate.MVC.Controllers
                             }
                         }
                     },
-                    new Link
+                    new MenuItem
                     {
                         Href = "http://www.lapresse.com",
                         Text = "L'a Presse"

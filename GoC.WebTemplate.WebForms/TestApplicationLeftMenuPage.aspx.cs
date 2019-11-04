@@ -39,7 +39,7 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new MenuSection
             {
                 Text = "Section B",
-                Items = new List<Link> {
+                Items = new List<MenuItem> {
                     new MenuItem { Href = "http://www.rds.ca", Text = "RDS" },
                     new MenuItem { Href = "http://www.lapresse.com", Text = "La Presse" }
                 }
