@@ -169,5 +169,48 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             // decide how you want to handle this situation
             throw new ApplicationException("targetUrl must be specified.");
         }
+
+        public IActionResult LeftMenuSample()
+        {
+            //set the header for this section of the menu
+            //set the links for this section of the menu
+            var item = new MenuItem
+            {
+                Href = "http://www.tsn.ca",
+                Text = "TSN",
+                SubItems = new List<MenuItem> {
+                    new MenuItem { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+                    new MenuItem { Href="http://www.rds.ca", Text="sub 2" }
+                }
+            };
+
+            //add section to template
+            WebTemplateModel.LeftMenuItems = new List<MenuSection>
+            {
+                new MenuSection
+                {
+                    Name = "Section A",
+                    Link = "http://www.servicecanada.gc.ca",
+                    OpenInNewWindow = true,
+                    Items = new List<Link> {
+                        item,
+                        new Link { Href = "http://www.cnn.ca", Text = "CNN" }
+                    }
+                }
+            };
+
+            //or can be done with a 1 liner
+            WebTemplateModel.LeftMenuItems.Add(new MenuSection
+            {
+                Name = "Section B",
+                Link = "http://www.canada.ca",
+                Items = new List<Link> {
+                    new Link{ Href="http://www.rds.ca", Text="RDS" },
+                    new Link{ Href= "http://www.lapresse.com", Text="La Presse"}
+                }
+            });
+
+            return View();
+        }
     }
 }
