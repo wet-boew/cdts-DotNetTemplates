@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = "~/Views/GoC.WebTemplate/GoCWebTemplate.Transactional_Layout.cshtml";
+    Layout = "~/Views/GoC.WebTemplate/_Layout.Transactional.cshtml";
 }
 <h1>GoC Web Template Samples - Transactional look</h1>
 <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
@@ -7,7 +7,7 @@
 <p>This sample page provides an example of a page using the Transactional Master/Layout Page of the Web Template.</p>
 
 <p>Customizing the Transactional site can be performed in the same manner as the regular GoC Web Template Master/Layout Page. However 2 items are specific to the transactional mode and that is the url for the Terms and Conditions and the Privacy links at the bottom of the page. These 2 URL can be configured programmatically.</p>
-<form action="/GoCWebTemplateSample/TransactionalSample" method="post">
+<form action="/GoCWebTemplateSamples/TransactionalSample" method="post">
     <div class="form-horizontal">
         <div class="form-group">
             <label for="data1" class="col-sm-3 control-label">Form&#32;<code>input</code></label>
@@ -43,11 +43,11 @@
 <div class="wb-prettify all-pre lang-vb linenums">
     <h3>C# Code Sample</h3>
     <pre>                        
-            //set the Terms and Condition Link
-            WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
-            //set the Privacy link
-            WebTemplateModel.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
-        </pre>
+//set the Terms and Condition Link
+WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
+//set the Privacy link
+WebTemplateModel.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
+    </pre>
 </div>
 
-@Html.Partial("_SamplesNavigation")
+<partial name="_SamplesNavigation" />

@@ -214,5 +214,28 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
 
             return View();
         }
+
+        public IActionResult TransactionalSample()
+        {
+            //set the Terms and Condition Link
+            WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
+            //set the Privacy link
+            WebTemplateModel.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
+
+            return View();
+        }
+
+        [HttpPost]
+#pragma warning disable IDE0060 // Remove unused parameter
+        public IActionResult TransactionalSample(string data1, string data2, string data4)
+#pragma warning restore IDE0060 // Remove unused parameter
+        {
+            //set the Terms and Condition Link
+            WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
+            //set the Privacy link
+            WebTemplateModel.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" }; // NewWindow defaults to false
+            //execute logic for the submit.
+            return View();
+        }
     }
 }

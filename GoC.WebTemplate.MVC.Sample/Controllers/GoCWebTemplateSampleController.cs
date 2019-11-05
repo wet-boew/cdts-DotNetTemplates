@@ -215,7 +215,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         }
                
         [HttpPost]
+#pragma warning disable IDE0060 // Remove unused parameter
         public ActionResult TransactionalSample(string data1, string data2, string data4)
+#pragma warning restore IDE0060 // Remove unused parameter
         {
             //set the Terms and Condition Link
             WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "http://www.tsn.ca", NewWindow = true };
