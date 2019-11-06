@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
+using System.Text;
 using GoC.WebTemplate.Components.Core.Services;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.CoreMVC.Controllers;
@@ -213,6 +211,60 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             });
 
             return View();
+        }
+
+        public IActionResult SessionTimeoutSample()
+        {
+            //Session is configured in the Startup.cs
+            //see https://docs.microsoft.com/en-us/aspnet/core/fundamentals/app-state?view=aspnetcore-2.1
+
+            //Let's display what is in the session on the page
+            //We will populate the session with the time
+            var key = "STUFF";
+            HttpContext.Session.TryGetValue(key, out byte[] value);
+            if (value != null)
+            {
+                ViewData[key] = value.ToString();
+            }
+            else
+            {
+                ViewData[key] = "Data from session: It is empty, refresh page to have value";
+                HttpContext.Session.Set(key, Encoding.ASCII.GetBytes(string.Concat("Data from session: ", DateTime.Now.ToString())));
+            }
+
+            //enable the feature
+            WebTemplateModel.Settings.SessionTimeout.Enabled = true;
+            WebTemplateModel.Settings.SessionTimeout.Inactivity = 30000;
+            WebTemplateModel.Settings.SessionTimeout.ReactionTime = 180000;
+            WebTemplateModel.Settings.SessionTimeout.SessionAlive = 210000;
+            WebTemplateModel.Settings.SessionTimeout.LogoutUrl = "Logout";
+            WebTemplateModel.Settings.SessionTimeout.RefreshCallBackUrl = "SessionValidity";
+            WebTemplateModel.Settings.SessionTimeout.RefreshOnClick = false;
+            WebTemplateModel.Settings.SessionTimeout.RefreshLimit = 3;
+            WebTemplateModel.Settings.SessionTimeout.Method = "";
+            WebTemplateModel.Settings.SessionTimeout.AdditionalData = "";
+
+            return View();
+        }
+
+        public void SessionValidity()
+        {
+            //Make changes here to confirm the session validity and end it if nessasarcy.
+        }
+
+        public IActionResult Logout()
+        {
+            //This sample page is referenced by the "logoutUrl" setting of the WET SessionTimeout control
+            //It will not be displayed to the user, but is used to perform session clean up and any other clean up that is required before the user is loged out of your application.
+            //This page will then redirect to the page you identify example the login page (in our case the BaseSettingsSample.aspx)
+
+            //destroy users sessions
+            HttpContext.Session.Clear();
+
+            //perform any other clean up that needs to occur for your application
+
+            //redirect to the page of your preference
+            return Redirect("BaseSettingsSample");
         }
 
         public IActionResult TransactionalSample()
