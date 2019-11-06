@@ -289,5 +289,22 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             //execute logic for the submit.
             return View();
         }
+
+        public ActionResult GCIntranetThemeSample()
+        {
+            //set up theme
+            WebTemplateModel.Settings.Environment = "PROD_SSL";
+
+            //custom intranet title
+            WebTemplateModel.IntranetTitle = new IntranetTitle
+            {
+                Href = "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_31/cdts/samples/subtheme-esdc-en.shtml",
+                BoldText = "ESDC Sub",
+                Acronym = "Employment and Social Development Canada Sub Theme",
+                Text = " Custom Title"
+            };
+
+            return View();
+        }
     }
 }
