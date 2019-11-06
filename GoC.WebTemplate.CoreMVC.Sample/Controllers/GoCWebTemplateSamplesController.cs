@@ -290,7 +290,7 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             return View();
         }
 
-        public ActionResult GCIntranetThemeSample()
+        public IActionResult GCIntranetThemeSample()
         {
             //set up theme
             WebTemplateModel.Settings.Environment = "PROD_SSL";
@@ -303,7 +303,68 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
                 Acronym = "Employment and Social Development Canada Sub Theme",
                 Text = " Custom Title"
             };
+            
+            return View();
+        }
 
+        public IActionResult ApplicationTemplateSample()
+        {
+            //Application Title
+            WebTemplateModel.ApplicationTitle.Text = "Application Name Test";
+            WebTemplateModel.ApplicationTitle.Href = "http://canada.ca";
+
+            //Application Settings
+            WebTemplateModel.AppSettingsURL = "http://tempuri.com";
+
+            //Change Language Link
+            WebTemplateModel.Settings.ShowLanguageLink = true;
+            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
+
+            //Hide Search
+            WebTemplateModel.Settings.ShowSearch = true; 
+
+            //Custom Search
+            WebTemplateModel.CustomSearch = new CustomSearch
+            {
+                Action = "http://hrsdc.prv/cgi-bin/recherche-search/Intraweb/index.aspx",
+                // Id = "0001", optional
+                Method = "get", // 'get' or 'post'
+                Placeholder = "Search ESDC IntraWeb",
+                HiddenInput = new List<KeyValuePair<string, string>> //optional
+                {
+                    new KeyValuePair<string, string>("GoCTemplateCulture", "en-CA"),
+                    new KeyValuePair<string, string>("p1", "gc")
+                }
+            };
+
+            //Pre-Post-Content
+            WebTemplateModel.Settings.ShowPostContent = false;
+            WebTemplateModel.Settings.ShowPreContent = false;
+
+            //Site Menu
+            WebTemplateModel.CustomSiteMenuURL = "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_25/cdts/ajax/custommenu-eng.html";
+
+            //WebTemplateModel.MenuLinks = new List<MenuLink>
+            //{
+            //    //Add a top level menu item with no drop down
+            //    new MenuLink { Href = "Foo", Text = "Item 1" },
+            //    //Add a top level menu item with two items in the drop down.
+            //    new MenuLink {
+            //        Text = "Item 2", 
+            //        SubLinks = new List<SubLink> {
+            //            new SubLink { Href = "Foo", Text = "SubLink 1" }, 
+            //            //Add a placeholder menu item
+            //            new SubLink { Text = "SubLink 2" }
+            //        }
+            //    }
+            //};
+
+            //Sign in & Out
+            WebTemplateModel.ShowSignOutLink = true;
+            WebTemplateModel.Settings.SignOutLinkUrl = "about:blank";
+            WebTemplateModel.ShowSignInLink = false;
+            WebTemplateModel.Settings.SignInLinkUrl = "about:blank";
+            
             return View();
         }
     }
