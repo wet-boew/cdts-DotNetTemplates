@@ -367,5 +367,17 @@ namespace GoC.WebTemplate.CoreMVC.Sample.Controllers
             
             return View();
         }
+        
+        public ActionResult SplashPageSample()
+        {
+            WebTemplateModel.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
+            WebTemplateModel.SplashPageInfo.FrenchHomeUrl = "http://www.canada.ca/fr/index.html";
+            WebTemplateModel.SplashPageInfo.EnglishTermsUrl = "http://www.canada.ca/en/transparency/terms.html";
+            WebTemplateModel.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
+            WebTemplateModel.SplashPageInfo.EnglishName = "[My web asset]";
+            WebTemplateModel.SplashPageInfo.FrenchName = "[Mon actif web]";
+
+            return View();
+        }
     }
 }
