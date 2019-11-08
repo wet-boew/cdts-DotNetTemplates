@@ -40,10 +40,10 @@ leftMenu.Items.Add(new GoC.WebTemplate.MenuItem("http://www.tsn.ca", "TSN", new 
 leftMenu.Items.Add(new GoC.WebTemplate.MenuItem("http://www.cnn.ca", "CNN"));
 
 //add section to template
-this.WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(leftMenu);
+this.WebTemplateMaster.WebTemplateModel.LeftMenuItems.Add(leftMenu);
 
 //or can be done with a 1 liner
-this.WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new GoC.WebTemplate.MenuSection("Section B", new GoC.WebTemplate.MenuItem[] { 
+this.WebTemplateMaster.WebTemplateModel.LeftMenuItems.Add(new GoC.WebTemplate.MenuSection("Section B", new GoC.WebTemplate.MenuItem[] { 
                                                     new GoC.WebTemplate.MenuItem("http://www.rds.ca", "RDS"), 
                                                     new GoC.WebTemplate.MenuItem("http://www.lapresse.com", "La Presse") }));
         </pre>
