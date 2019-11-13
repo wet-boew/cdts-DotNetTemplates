@@ -27,25 +27,40 @@
     <div class="wb-prettify all-pre lang-vb linenums">
         <h3>C# Code Sample</h3>
         <pre>
-GoC.WebTemplate.MenuSection leftMenu = new GoC.WebTemplate.MenuSection();
+var leftMenu = new MenuSection
+{
+    Text = "Section A",
+    Href = "http://www.servicecanada.gc.ca",
+    NewWindow = true
+};
 
 //set the header for this section of the menu
-leftMenu.Name = "Section A";
-leftMenu.Link = "http://www.servicecanada.gc.ca";
-leftMenu.OpenInNewWindow = true;
 //set the links for this section of the menu
-leftMenu.Items.Add(new GoC.WebTemplate.MenuItem("http://www.tsn.ca", "TSN", new GoC.WebTemplate.MenuItem[] { 
-                                                    new GoC.WebTemplate.MenuItem("http://www.cbc.ca", "sub 1", true), 
-                                                    new GoC.WebTemplate.MenuItem("http://www.rds.ca", "sub 2") }));
-leftMenu.Items.Add(new GoC.WebTemplate.MenuItem("http://www.cnn.ca", "CNN"));
+leftMenu.Items.Add(new MenuItem
+{
+    Href = "http://www.tsn.ca",
+    Text = "TSN",
+    SubItems = new List<Link> 
+    {
+        new Link { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+        new Link{ Href="http://www.rds.ca", Text="sub 2" }
+    }
+});
+leftMenu.Items.Add(new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" });
 
 //add section to template
-this.WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(leftMenu);
+WebTemplateMaster.WebTemplateModel.LeftMenuItems.Add(leftMenu);
 
 //or can be done with a 1 liner
-this.WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new GoC.WebTemplate.MenuSection("Section B", new GoC.WebTemplate.MenuItem[] { 
-                                                    new GoC.WebTemplate.MenuItem("http://www.rds.ca", "RDS"), 
-                                                    new GoC.WebTemplate.MenuItem("http://www.lapresse.com", "La Presse") }));
+WebTemplateMaster.WebTemplateModel.LeftMenuItems.Add(new MenuSection
+{
+    Text = "Section B",
+    Items = new List<MenuItem> 
+    {
+        new MenuItem { Href="http://www.rds.ca", Text="RDS" },
+        new MenuItem { Href="http://www.lapresse.com",Text= "La Presse" }
+    }
+});
         </pre>
     </div>
     <!-- #include virtual="SamplesNavigation.html" -->

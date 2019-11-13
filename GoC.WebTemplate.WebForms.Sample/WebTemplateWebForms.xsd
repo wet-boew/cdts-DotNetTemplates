@@ -54,15 +54,6 @@
       <xs:attribute name="signOutLinkURL" type="xs:string" use="optional" />
       <xs:attribute name="signInLinkURL" type="xs:string" use="optional" />
       <xs:attribute name="customSiteMenuURL" type="xs:string" use="optional" />
-      <xs:attribute name="theme" use="optional">
-        <xs:simpleType>
-          <xs:restriction base="xs:string">
-            <xs:enumeration value="gcweb" />
-            <xs:enumeration value="gcintranet" />
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
-      <xs:attribute name="subTheme" type="xs:string" use="optional"/>
       <xs:attribute name="useHTTPS" type="xs:boolean" use="optional" />
       <xs:attribute name="loadJQueryFromGoogle" type="xs:boolean" use="required" />
       <xs:attribute name="showPreContent" type="xs:boolean" use="required" />

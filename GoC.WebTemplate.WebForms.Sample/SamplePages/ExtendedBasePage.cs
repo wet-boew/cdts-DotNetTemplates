@@ -7,7 +7,7 @@ namespace GoC.WebTemplate.WebForm.Sample.Pages
     {
         protected void Page_Init(object sender, EventArgs e)
         {
-            WebTemplateMaster.WebTemplateCore.HeaderTitle = "Title set for everypage!";
+            WebTemplateMaster.WebTemplateModel.HeaderTitle = "Title set for everypage!";
         }
 
         public string GetWeather()

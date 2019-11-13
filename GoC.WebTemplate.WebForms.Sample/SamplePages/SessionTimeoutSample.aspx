@@ -17,7 +17,7 @@
     <h5>To Enable the session timeout plug in:</h5>
     <ul>
         <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.sessionTimeOut.enabled"</code> in the web.config to "true".</li>
-        <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = true;"</code></li>
+        <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateMaster.WebTemplateModel.SessionTimeout.Enabled = true;"</code></li>
     </ul>
     <p>The rest of the configuration are set in the web.config or programmatically under <code class="wb-prettify">"GoC.WebTemplate.SessionTimeout":</code></p>
     <ul>
@@ -53,17 +53,17 @@
     <div class="wb-prettify all-pre lang-vb linenums">
         <h3>C# Code Sample</h3>
         <pre>
-//enable the feature
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout_Enabled = true;
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Inactivity = 30000;
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Sessionalive = 30000;
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Logouturl = "Logout.aspx";            
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallbackUrl = "SessionValidity.aspx";
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.Method = "";
-this.WebTemplateMaster.WebTemplateCore.SessionTimeout.AdditionalData = "";
+//enable the sessionTimeout feature
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Enabled = true;
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Inactivity = 30000;
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.ReactionTime = 10000;
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.SessionAlive = 30000;
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.LogoutUrl = "Logout.aspx";            
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshCallBackUrl = "SessionValidity.aspx";
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshOnClick = false;
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshLimit = 3;
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Method = "";
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.AdditionalData = "";
         </pre>
     </div>
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using GoC.WebTemplate.Components.JSONSerializationObjects;
+using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.SamplePages
@@ -9,11 +9,10 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
         protected void Page_Load(object sender, EventArgs e)
         {
             //set up theme
-            WebTemplateMaster.WebTemplateCore.Environment = "ESDC_PROD";
-            WebTemplateMaster.WebTemplateCore.UseHTTPS = true;
+            WebTemplateMaster.WebTemplateModel.Settings.Environment = "PROD_SSL";
 
             //custom intranet title
-            WebTemplateMaster.WebTemplateCore.IntranetTitle = new IntranetTitle
+            WebTemplateMaster.WebTemplateModel.IntranetTitle = new IntranetTitle
             {
                 Href = "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_31/cdts/samples/subtheme-esdc-en.shtml",
                 BoldText = "ESDC Sub",
@@ -22,8 +21,8 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             };
 
             //application template title
-            WebTemplateMaster.WebTemplateCore.ApplicationTitle.Text = "My Custom Title";
-            WebTemplateMaster.WebTemplateCore.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";
+            WebTemplateMaster.WebTemplateModel.ApplicationTitle.Text = "My Custom Title";
+            WebTemplateMaster.WebTemplateModel.ApplicationTitle.Href = "http://iservice.prv/eng/index.shtml";
         }
     }
 }

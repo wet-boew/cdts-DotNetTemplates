@@ -7,12 +7,12 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            WebTemplateMaster.WebTemplateCore.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
-            WebTemplateMaster.WebTemplateCore.SplashPageInfo.FrenchHomeUrl = "http://www.canada.ca/fr/index.html";
-            WebTemplateMaster.WebTemplateCore.SplashPageInfo.EnglishTermsUrl = "http://www.canada.ca/en/transparency/terms.html";
-            WebTemplateMaster.WebTemplateCore.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
-            WebTemplateMaster.WebTemplateCore.SplashPageInfo.EnglishName = "[My web asset]";
-            WebTemplateMaster.WebTemplateCore.SplashPageInfo.FrenchName = "[Mon actif web]";
+            WebTemplateMaster.WebTemplateModel.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
+            WebTemplateMaster.WebTemplateModel.SplashPageInfo.FrenchHomeUrl = "http://www.canada.ca/fr/index.html";
+            WebTemplateMaster.WebTemplateModel.SplashPageInfo.EnglishTermsUrl = "http://www.canada.ca/en/transparency/terms.html";
+            WebTemplateMaster.WebTemplateModel.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
+            WebTemplateMaster.WebTemplateModel.SplashPageInfo.EnglishName = "[My web asset]";
+            WebTemplateMaster.WebTemplateModel.SplashPageInfo.FrenchName = "[Mon actif web]";
         }
         
     }

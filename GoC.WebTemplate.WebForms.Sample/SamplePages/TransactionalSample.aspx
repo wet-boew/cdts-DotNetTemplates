@@ -44,9 +44,9 @@
         <h3>C# Code Sample</h3>
         <pre>
             //set the Terms and Condition Link
-            WebTemplateMaster.WebTemplateCore.TermsConditionsLink = new FooterLink {Href = "http://www.tsn.ca", NewWindow = true};
+            WebTemplateMaster.WebTemplateModel.TermsConditionsLink = new FooterLink {Href = "http://www.tsn.ca", NewWindow = true};
             //set the Privacy link
-            WebTemplateMaster.WebTemplateCore.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca"}; // NewWindow defaults to false
+            WebTemplateMaster.WebTemplateModel.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca"}; // NewWindow defaults to false
         </pre>
     </div>
 <!-- #include virtual="SamplesNavigation.html" -->

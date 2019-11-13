@@ -1,5 +1,6 @@
 ﻿using System;
-using GoC.WebTemplate.Components;
+using System.Collections.Generic;
+using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.WebForms;
 
 namespace GoC.WebTemplate.WebForm.Sample.SamplePages
@@ -10,25 +11,38 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
         {
             var leftMenu = new MenuSection
             {
-                Name = "Section A",
-                Link = "http://www.servicecanada.gc.ca",
-                OpenInNewWindow = true
+                Text = "Section A",
+                Href = "http://www.servicecanada.gc.ca",
+                NewWindow = true
             };
 
             //set the header for this section of the menu
             //set the links for this section of the menu
-            leftMenu.Items.Add(new MenuItem("http://www.tsn.ca", "TSN", new [] { 
-                new MenuItem("http://www.cbc.ca", "sub 1", true), 
-                new MenuItem("http://www.rds.ca", "sub 2") }));
-            leftMenu.Items.Add(new MenuItem("http://www.cnn.ca", "CNN"));
+            leftMenu.Items.Add(new MenuItem
+            {
+                Href = "http://www.tsn.ca",
+                Text = "TSN",
+                SubItems = new List<Link> 
+                {
+                    new Link { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+                    new Link{ Href="http://www.rds.ca", Text="sub 2" }
+                }
+            });
+            leftMenu.Items.Add(new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" });
 
             //add section to template
-            WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(leftMenu);
+            WebTemplateMaster.WebTemplateModel.LeftMenuItems.Add(leftMenu);
 
             //or can be done with a 1 liner
-            WebTemplateMaster.WebTemplateCore.LeftMenuItems.Add(new MenuSection("Section B", new [] { 
-                new MenuItem("http://www.rds.ca", "RDS"), 
-                new MenuItem("http://www.lapresse.com", "La Presse") }));        
+            WebTemplateMaster.WebTemplateModel.LeftMenuItems.Add(new MenuSection
+            {
+                Text = "Section B",
+                Items = new List<MenuItem> 
+                {
+                    new MenuItem { Href="http://www.rds.ca", Text="RDS" },
+                    new MenuItem { Href="http://www.lapresse.com",Text= "La Presse" }
+                }
+            });        
         }
     }
 }

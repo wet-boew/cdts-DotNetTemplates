@@ -8,7 +8,7 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
         protected void Page_Load(object sender, EventArgs e)
         {
             //set the page title
-            WebTemplateMaster.WebTemplateCore.HeaderTitle = "Nested Master Page Sample";
+            WebTemplateMaster.WebTemplateModel.HeaderTitle = "Nested Master Page Sample";
         }
     }
 }

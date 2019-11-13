@@ -34,11 +34,11 @@
     protected void Page_Load(object sender, EventArgs e)
         {
             //Contact Links
-            WebTemplateMaster.WebTemplateCore.ContactLinks = new List&lt;Link> { new Link { Href = "http://travel.gc.ca/" } };
+            WebTemplateMaster.WebTemplateModel.ContactLinks = new List&lt;Link> { new Link { Href = "http://travel.gc.ca/" } };
 
             //The code snippet below displays an example of multiple links that have text and href being updated. 
             /*
-                WebTemplateMaster.WebTemplateCore.ContactLinks = new List&lt;Link> 
+                WebTemplateMaster.WebTemplateModel.ContactLinks = new List&lt;Link> 
                 { 
                     new Link { Href = "http://travel.gc.ca/", Text = "Contact Now"}, 
                     new Link { Href = "http://travel.gc.ca/", Text = "Contact Info"} 
@@ -57,7 +57,7 @@
     protected void Page_Load(object sender, EventArgs e)
     {
         // Can only be used in the Application Template when in the GCWeb Theme
-        WebTemplateMaster.WebTemplateCore.CustomFooterLinks = new List&lt;FooterLink&gt;
+        WebTemplateMaster.WebTemplateModel.CustomFooterLinks = new List&lt;FooterLink&gt;
         {
             new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 1" },
             new FooterLink { Href = "http://travel.gc.ca/", Text = "Link 2" }
@@ -75,7 +75,7 @@
     protected void Page_Load(object sender, EventArgs e)
     {
             //Footer Sections - Application, GCIntranet
-            WebTemplateMaster.WebTemplateCore.FooterSections = new List&lt;FooterSection>
+            WebTemplateMaster.WebTemplateModel.FooterSections = new List&lt;FooterSection>
             {
                 new FooterSection
                 {

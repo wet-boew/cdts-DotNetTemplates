@@ -35,8 +35,8 @@
 
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>//Set the name of the web application
-WebTemplateCore.ApplicationTitle.Text ="Application Name"; 
-WebTemplateCore.ApplicationTitle.URL = "http://canada.ca";
+WebTemplateModel.ApplicationTitle.Text ="Application Name"; 
+WebTemplateModel.ApplicationTitle.URL = "http://canada.ca";
 </pre>
 </div>
 
@@ -46,7 +46,7 @@ WebTemplateCore.ApplicationTitle.URL = "http://canada.ca";
 <p>This can be set programmatically using the <code class="wb-prettify">AppSettingsURL</code> property</p>
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>//Set the name of the web application
-WebTemplateCore.AppSettingsURL ="http://canada.ca"; 
+WebTemplateModel.AppSettingsURL ="http://canada.ca"; 
 </pre>
 </div>
 
@@ -56,7 +56,7 @@ WebTemplateCore.AppSettingsURL ="http://canada.ca";
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //Set the link to be used for changing languages.
-WebTemplateCore.LanguageLink.Href = "about:blank";
+WebTemplateModel.LanguageLink.Href = "about:blank";
 </pre>
 </div>
 
@@ -74,11 +74,11 @@ WebTemplateCore.LanguageLink.Href = "about:blank";
 </ul>
 <div class="wb-prettify all-pre lang-vb linenums">
 <pre>
-WebTemplateCore.FooterLinks.Add(new FooterLink {
+WebTemplateModel.FooterLinks.Add(new FooterLink {
     Href = "about:blank",
     Text = "Link Text 1"
 });
-WebTemplateCore.FooterLinks.Add(new FooterLink {
+WebTemplateModel.FooterLinks.Add(new FooterLink {
     Href = "about:blank",
     Text = "Link Text 2", 
     NewWindow = true
@@ -92,7 +92,7 @@ WebTemplateCore.FooterLinks.Add(new FooterLink {
 <p><code class="wb-prettify">CustomSearch</code> setting allows you to override the default search behaviour. Get more details in the code hints and from <a href="http://www.gcpedia.gc.ca/wiki/Centrally_Deployed_Templates_Solution_(CDTS)/Intranet#Section_top_references">CDTS documentation</a></p>
 <div class="wb-prettify all-pre lang-vb linenums">
 <pre>
-WebTemplateMaster.WebTemplateCore.CustomSearch = new CustomSearch
+WebTemplateMaster.WebTemplateModel.CustomSearch = new CustomSearch
 {
     Action = "http://hrsdc.prv/cgi-bin/recherche-search/Intraweb/index.aspx",
     // Id = "0001", optional
@@ -118,7 +118,7 @@ WebTemplateMaster.WebTemplateCore.CustomSearch = new CustomSearch
 <div class="wb-prettify all-pre lang-vb linenums">
 <pre>
 //Use ShowSearch to hide the search field on the page.
-WebTemplateCore.ShowSearch = false; 
+WebTemplateModel.ShowSearch = false; 
 </pre>
 </div>
 
@@ -128,7 +128,7 @@ WebTemplateCore.ShowSearch = false;
 <div class="wb-prettify all-pre lang-c# linenums">
 <pre>
 //Use ShowSearch to hide the search field on the page.
-WebTemplateMaster.WebTemplateCore.IntranetTitle = new Link {
+WebTemplateMaster.WebTemplateModel.IntranetTitle = new Link {
   Href = "foo.bar",
   Text = "Intranet Title"
 }; 
@@ -140,7 +140,7 @@ WebTemplateMaster.WebTemplateCore.IntranetTitle = new Link {
 <p>If you recieve such authorization then you can turn off the pre-content programmatically using the <code class="wb-prettify">ShowPreContent</code> flag or in the web.config.</p>
     <div class="wb-prettify all-pre lang-vb linenums">
 <pre>//show or hide the pages pre-content 
-WebTemplateCore.ShowPreContent = false; 
+WebTemplateModel.ShowPreContent = false; 
 </pre>
 </div>
 
@@ -163,7 +163,7 @@ WebTemplateCore.ShowPreContent = false;
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //set the custom site menu url
-WebTemplateMaster.WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
+WebTemplateMaster.WebTemplateModel.CustomSiteMenuURL ="https://ssl-templates.services.gc.ca/app/cls/wet/gcweb/v4_0_24/cdts/custommenu-en.html";
 </pre>
 </div>
 
@@ -175,7 +175,7 @@ WebTemplateMaster.WebTemplateCore.CustomSiteMenuURL ="https://ssl-templates.serv
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //set the custom site menu url
-WebTemplateMaster.WebTemplateCore.MenuLinks = new List&lt;MenuLink&gt;
+WebTemplateMaster.WebTemplateModel.MenuLinks = new List&lt;MenuLink&gt;
 {
 
     //Add a top level menu item with no drop down
@@ -213,7 +213,7 @@ WebTemplateMaster.WebTemplateCore.MenuLinks = new List&lt;MenuLink&gt;
 <ul>
     <li> <code class="wb-prettify">ShowSignInLink</code> is a boolean variable that is used to either show or hide the Sign In Button </li>
     <li>
-        <code class="wb-prettify">ShowSignInURL</code> is the location of your sign in page for this web application, this can also be set in the web.config.
+        <code class="wb-prettify">ShowSignInUrl</code> is the location of your sign in page for this web application, this can also be set in the web.config.
         If this is set in the web.config it should navigate to a page that is hooked into the applications localization.
     </li>
 </ul>
@@ -221,22 +221,22 @@ WebTemplateMaster.WebTemplateCore.MenuLinks = new List&lt;MenuLink&gt;
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>
 //Show the sign in button
-WebTemplateCore.ShowSignInLink = true; 
+WebTemplateModel.ShowSignInLink = true; 
 //The URL to your applications sign in page.
-WebTemplateCore.SignInLinkURL = "about:blank"; 
+WebTemplateModel.Settings.SignInLinkUrl = "about:blank"; 
 </pre>
 </div>
 
 <h3>Sign Out</h3>
 <ul>
     <li> <code class="wb-prettify">ShowSignOutLink</code> is a boolean variable that is used to either show or hide the Sign Out Button </li>
-    <li> <code class="wb-prettify">ShowSignOutURL</code> is the location of your sign out service. </li>
+    <li> <code class="wb-prettify">SignOutLinkUrl</code> is the location of your sign out service. </li>
 </ul>
 <div class="wb-prettify all-pre lang-vb linenums">
     <pre>//Show the sign out button
-WebTemplateCore.ShowSignOutLink = true; 
+WebTemplateModel.ShowSignOutLink = true; 
 //The URL to your applications sign out service.
-WebTemplateCore.SignOutLinkURL = "about:blank"; 
+WebTemplateModel.Settings.SignOutLinkUrl = "about:blank"; 
 </pre>
 </div>
 

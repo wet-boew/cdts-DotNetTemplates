@@ -23,16 +23,16 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             }
           
             //enable the sessionTimeout feature
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.Enabled = true;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.Inactivity = 30000;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.ReactionTime = 10000;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.SessionAlive = 30000;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.LogoutUrl = "Logout.aspx";            
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshCallBackUrl = "SessionValidity.aspx";
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshOnClick = false;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.RefreshLimit = 3;
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.Method = "";
-            WebTemplateMaster.WebTemplateCore.SessionTimeout.AdditionalData = "";
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Enabled = true;
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Inactivity = 30000;
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.ReactionTime = 10000;
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.SessionAlive = 30000;
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.LogoutUrl = "Logout.aspx";            
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshCallBackUrl = "SessionValidity.aspx";
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshOnClick = false;
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshLimit = 3;
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Method = "";
+            WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.AdditionalData = "";
         }
     }
 }

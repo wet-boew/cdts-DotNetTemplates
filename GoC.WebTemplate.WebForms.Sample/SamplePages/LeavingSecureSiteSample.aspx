@@ -61,12 +61,11 @@
     <div class="wb-prettify all-pre lang-vb linenums">
         <h3>C# Code Sample to enable the warning</h3>
         <pre>
-//note other then the message the rest could be set in the web.config
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
-//this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;
-this.WebTemplateMaster.WebTemplateCore.leavingSecureSiteWarning.RedirectURL = "redirect.aspx";
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+//note: other then the message the rest could be set in the web.config
+WebTemplateMaster.WebTemplateModel.Settings.LeavingSecureSiteWarning.Enabled = true;
+WebTemplateMaster.WebTemplateModel.Settings.LeavingSecureSiteWarning.RedirectUrl = "redirect.aspx";
+WebTemplateMaster.WebTemplateModel.Settings.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+WebTemplateMaster.WebTemplateModel.Settings.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";  
         </pre>
     </div>
 

@@ -31,12 +31,12 @@
         <h3>C# Code Sample</h3>
         <pre>
 //Add a CSS to the header
-this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("&lt;link rel='stylesheet' type='text/css' href='mystyle.css'&gt;");
+WebTemplateMaster.WebTemplateModel.HTMLHeaderElements.Add("&lt;link rel='stylesheet' type='text/css' href='mystyle.css'&gt;");
 
 //Add a JS to the header
-//this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("&lt;script src='myJS.js'/&gt;");
+//WebTemplateMaster.WebTemplateModel.HTMLHeaderElements.Add("&lt;script src='myJS.js'/&gt;");
 //or to add it to the body (bottom of page)
-this.WebTemplateMaster.WebTemplateCore.HTMLBodyElements.Add("&lt;script src='myJS.js'/&gt;");
+WebTemplateMaster.WebTemplateModel.HTMLBodyElements.Add("&lt;script src='myJS.js'/&gt;");
         </pre>
     </div>
     <!-- #include virtual="SamplesNavigation.html" -->

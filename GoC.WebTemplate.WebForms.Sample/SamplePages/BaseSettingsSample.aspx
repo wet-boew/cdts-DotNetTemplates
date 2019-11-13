@@ -35,26 +35,26 @@
     <h3>C# Code Sample</h3>
 <pre>
 //specify a title for this page
-this.WebTemplateMaster.WebTemplateCore.HeaderTitle = "My Title";
+this.WebTemplateMaster.WebTemplateModel.HeaderTitle = "My Title";
 
 //specify the metatags
-this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta charset='UTF-8'&gt;");
-this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta name='singer' content='Elvis'&gt;");
-this.WebTemplateMaster.WebTemplateCore.HTMLHeaderElements.Add("&lt;meta http-equiv='default-style' content='sample'&gt;");
+this.WebTemplateMaster.WebTemplateModel.HTMLHeaderElements.Add("&lt;meta charset='UTF-8'&gt;");
+this.WebTemplateMaster.WebTemplateModel.HTMLHeaderElements.Add("&lt;meta name='singer' content='Elvis'&gt;");
+this.WebTemplateMaster.WebTemplateModel.HTMLHeaderElements.Add("&lt;meta http-equiv='default-style' content='sample'&gt;");
 
 //specify a specific date modified
-this.WebTemplateMaster.WebTemplateCore.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
+this.WebTemplateMaster.WebTemplateModel.DateModified = Convert.ToDateTime("2016-08-28", CultureInfo.CurrentCulture);
 //or for using the current date
-//this.WebTemplateMaster.WebTemplateCore.DateModified = DateTime.Now.Date;
+//this.WebTemplateMaster.WebTemplateModel.DateModified = DateTime.Now.Date;
 
 //specify the version identifier (Note: since the date modified is supplied the date takes precedence)
-this.WebTemplateMaster.WebTemplateCore.VersionIdentifier = "AA927823737.00.99";
+this.WebTemplateMaster.WebTemplateModel.VersionIdentifier = "AA927823737.00.99";
 
 //specify a screen identifier
-this.WebTemplateMaster.WebTemplateCore.ScreenIdentifier = "SP-3485-01";
+this.WebTemplateMaster.WebTemplateModel.ScreenIdentifier = "SP-3485-01";
 
 //Specify the Contact Link
-this.WebTemplateCore.ContactLinks = new List<Link>(){ new Link() {Href="http://travel.gc.ca/"} };
+this.WebTemplateModel.ContactLinks = new List<Link>(){ new Link() {Href="http://travel.gc.ca/"} };
 </pre>
 </div>
    <!-- #include virtual="SamplesNavigation.html" -->
