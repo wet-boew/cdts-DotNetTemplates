@@ -25,19 +25,10 @@ namespace GoC.WebTemplate.Components
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
 
         public WebTemplateSettings Settings { get; }
-
-        public Model(
-            IFileContentCacheProvider fileContentCacheProvider,
-            WebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider
-        ) : this(fileContentCacheProvider, settings, cdtsCacheProvider, string.Empty)
-        {
-        }
-
+        
         public Model(IFileContentCacheProvider fileContentCacheProvider,
             WebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider,
-            string queryString)
+            ICdtsCacheProvider cdtsCacheProvider)
         {
             if (fileContentCacheProvider == null) throw new ArgumentNullException(nameof(fileContentCacheProvider));
             if (cdtsCacheProvider == null) throw new ArgumentNullException(nameof(cdtsCacheProvider));
@@ -45,11 +36,6 @@ namespace GoC.WebTemplate.Components
 
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
             _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
-            
-            LanguageLink = new LanguageLink
-            {
-                Href = ModelBuilder.BuildLanguageLinkURL(queryString)
-            };
         }
 
         /// <summary>

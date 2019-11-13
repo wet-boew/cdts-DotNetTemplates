@@ -4,8 +4,8 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Web;
-using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Entities;
+using System.Collections.Specialized;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils
@@ -25,7 +25,7 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>The URL to be used for the language toggle link</returns>
         public static string BuildLanguageLinkURL(string queryString)
         {
-            System.Collections.Specialized.NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
+            NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
 
             //Set the value of the "GoCTemplateCulture" parameter
             nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY,

@@ -2,13 +2,12 @@
 using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Entities;
+using GoC.WebTemplate.Components.Framework.Utils;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
 using System;
 using System.Configuration;
-using System.Globalization;
 using System.Reflection;
-using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 
@@ -70,48 +69,11 @@ namespace GoC.WebTemplate.MVC
         /// <returns></returns>
         protected override IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
         {
-            //Get culture from Querystring
-            string culture = this.Request.QueryString.Get(Constants.QUERYSTRING_CULTURE_KEY);
-
-            if ((string.IsNullOrEmpty(culture)))
-            {
-                if (this.HttpContext.Session != null)
-                {
-                    //culture not found in querystring, check session
-                    culture = Convert.ToString(Session[Constants.SESSION_CULTURE_KEY], CultureInfo.CurrentCulture);
-
-                    if ((string.IsNullOrEmpty(culture)))
-                    {
-                        //culture not found in session, use default language
-                        culture = Constants.ENGLISH_CULTURE;
-                        this.Session[Constants.SESSION_CULTURE_KEY] = culture;
-                    }
-                }
-                else
-                {
-                    culture = Constants.ENGLISH_CULTURE;
-                }
-            }
-            else
-            {
-                //culture found in querystring, use it
-                culture = culture.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.CurrentCultureIgnoreCase) ? Constants.ENGLISH_CULTURE : Constants.FRENCH_CULTURE;
-                if (this.HttpContext.Session != null)
-                    this.Session[Constants.SESSION_CULTURE_KEY] = culture;
-            }
-
-            //If we have a culture, set it
-            if (!string.IsNullOrEmpty(culture))
-            {
-                Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(culture);
-                Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(culture);
-            }
-
-            //set the language link according to the culture
-            WebTemplateModel.LanguageLink = new LanguageLink
-            {
-                Href = ModelBuilder.BuildLanguageLinkURL(System.Web.HttpContext.Current.Request.QueryString.ToString())
-            };
+            //update the culture based on the query string or what is stored in session
+            var langSwitcher = new LanguageSwitcher(new SessionController(System.Web.HttpContext.Current.Session));
+            langSwitcher.UpdateCulture(Request.QueryString.Get(Constants.QUERYSTRING_CULTURE_KEY));
+            //update the herf link depending on the current culture keeping the rest of the querystring intact
+            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(Request.QueryString.ToString());
 
             //set timeout based on session
             WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);

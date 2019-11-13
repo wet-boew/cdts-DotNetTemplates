@@ -8,14 +8,8 @@ namespace GoC.WebTemplate.Components.Entities
     //We don't inherit from link as the Text is readonly and not settable
     public class LanguageLink  
     {
-        private readonly string _twoLetterCulture;
+        private readonly string _twoLetterCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
 
-
-        public LanguageLink()
-        {
-        
-            _twoLetterCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName;
-        }
         /// <summary>
         /// URL to be used for the language toggle
         /// Set/built by Template

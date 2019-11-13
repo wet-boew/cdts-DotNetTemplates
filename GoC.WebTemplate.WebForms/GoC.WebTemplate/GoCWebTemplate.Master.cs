@@ -1,6 +1,8 @@
 ﻿using GoC.WebTemplate.Components;
 using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Schemas;
+using GoC.WebTemplate.Components.Entities;
+using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
 using System;
 using System.Configuration;
@@ -17,9 +19,14 @@ namespace GoC.WebTemplate.WebForms
                 new Model(
                     new FileContentCacheProvider(HttpRuntime.Cache), 
                     new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), 
-                    new CdtsCacheProvider(HttpRuntime.Cache),
-                    HttpContext.Current.Request.QueryString.ToString()
+                    new CdtsCacheProvider(HttpRuntime.Cache)
                 );
+            
+            //update the culture based on the query string or what is stored in session
+            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(Request.QueryString.ToString());
+
+            //update the herf link depending on the current culture keeping the rest of the querystring intact
+            WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(Session);
         }
 
         public Model WebTemplateModel { get; set; }
