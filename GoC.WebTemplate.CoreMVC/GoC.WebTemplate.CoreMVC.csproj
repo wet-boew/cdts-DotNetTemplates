@@ -17,6 +17,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
+    <IncludeRazorContentInPack>true</IncludeRazorContentInPack>
   </PropertyGroup>
 
   <ItemGroup>
