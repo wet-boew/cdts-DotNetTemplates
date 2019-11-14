@@ -5,12 +5,12 @@ test_components:
   before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:
-    - 'dotnet test GoC.WebTemplate.Components.Tests --logger "junit;LogFilePath=ComponentsTestResults.xml"'
+    - 'dotnet test Components.Tests --logger "junit;LogFilePath=ComponentsTestResults.xml"'
   after_script:
     - 'del GoC.WebTemplate.snk'
   artifacts:
     reports:
-      junit: GoC.WebTemplate.Components.Tests\ComponentsTestResults.xml
+      junit: Components.Tests\ComponentsTestResults.xml
 
 test_components_core:
   stage: test
@@ -19,12 +19,12 @@ test_components_core:
   before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:
-    - 'dotnet test GoC.WebTemplate.Components.Core.Tests --logger "junit;LogFilePath=ComponentsCoreTestResults.xml"'
+    - 'dotnet test Components.Core.Tests --logger "junit;LogFilePath=ComponentsCoreTestResults.xml"'
   after_script:
     - 'del GoC.WebTemplate.snk'
   artifacts:
     reports:
-      junit: GoC.WebTemplate.Components.Core.Tests\ComponentsCoreTestResults.xml
+      junit: Components.Core.Tests\ComponentsCoreTestResults.xml
 
 test_components_frame:
   stage: test

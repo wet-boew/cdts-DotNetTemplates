@@ -57,7 +57,7 @@
     <Compile Include="Utils\Caching\FileContentCacheProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">
+    <ProjectReference Include="..\Components\Components.csproj">
       <Project>{A2F753B1-CE70-4455-8F5D-79866FBFC567}</Project>
       <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>

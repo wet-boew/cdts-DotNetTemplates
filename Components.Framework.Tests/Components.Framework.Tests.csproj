@@ -115,11 +115,11 @@
     <Compile Include="Utils\SessionControlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj">
+    <ProjectReference Include="..\Components.Framework\Components.Framework.csproj">
       <Project>{234c77be-844a-49f0-a6ae-7f7a5c82aa5d}</Project>
       <Name>GoC.WebTemplate.Components.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">
+    <ProjectReference Include="..\Components\Components.csproj">
       <Project>{a2f753b1-ce70-4455-8f5d-79866fbfc567}</Project>
       <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>
@@ -132,11 +132,11 @@
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GoC.WebTemplate.Components.Framework\GoC.WebTemplate.Components.Framework.csproj">
+    <ProjectReference Include="..\Components.Framework\Components.Framework.csproj">
       <Project>{234c77be-844a-49f0-a6ae-7f7a5c82aa5d}</Project>
       <Name>GoC.WebTemplate.Components.Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj">
+    <ProjectReference Include="..\Components\Components.csproj">
       <Project>{a2f753b1-ce70-4455-8f5d-79866fbfc567}</Project>
       <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>

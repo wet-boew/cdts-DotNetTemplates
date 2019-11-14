@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>GoC.WebTemplate.Components.Core.Tests</AssemblyName>
+
+    <RootNamespace>GoC.WebTemplate.Components.Core.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj" />
+    <ProjectReference Include="..\Components.Core\Components.Core.csproj" />
   </ItemGroup>
 
 </Project>

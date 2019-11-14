@@ -7,9 +7,9 @@ package_components:
     variables:
       - $MAIN_VERSION != null
   before_script:
-    - dotnet restore GoC.WebTemplate.Components/GoC.WebTemplate.Components.csproj
+    - dotnet restore Components/Components.csproj
   script:
-    - dotnet pack "GoC.WebTemplate.Components\\GoC.WebTemplate.Components.csproj" --no-build -c Release -o .
+    - dotnet pack "Components\\Components.csproj" --no-build -c Release -o .
   artifacts:
     expire_in: 1 day
     paths:
@@ -25,7 +25,7 @@ package_componentscore:
     variables:
       - $MAIN_VERSION != null
   script:
-    - dotnet pack "GoC.WebTemplate.Components.Core\\GoC.WebTemplate.Components.Core.csproj" --no-build -c Release -o .
+    - dotnet pack "Components.Core\\Components.Core.csproj" --no-build -c Release -o .
   artifacts:
     expire_in: 1 day
     paths:
@@ -42,8 +42,8 @@ package_componentsframe:
     variables:
       - $MAIN_VERSION != null
   script:
-    - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.Components.Framework" "GoC.WebTemplate.Components.Framework"
-    - '"%NUGET_PATH%" pack "GoC.WebTemplate.Components.Framework\\GoC.WebTemplate.Components.Framework.nuspec"'
+    - powershell.exe "%PACKAGE_PS1%" "Components.Framework" "Components.Framework"
+    - '"%NUGET_PATH%" pack "Components.Framework\\GoC.WebTemplate.Components.Framework.nuspec"'
   artifacts:
     expire_in: 1 day
     paths:
@@ -60,7 +60,7 @@ package_coremvc:
     variables:
       - $MAIN_VERSION != null
   script:
-    - dotnet pack "GoC.WebTemplate.CoreMVC\\GoC.WebTemplate.CoreMVC.csproj" --no-build -c Release -o .
+    - dotnet pack "CoreMVC\\CoreMVC.csproj" --no-build -c Release -o .
   artifacts:
     expire_in: 1 day
     paths:
@@ -77,8 +77,8 @@ package_mvc:
     variables:
       - $MAIN_VERSION != null
   script:       
-    - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.MVC" "GoC.WebTemplate.MVC"
-    - '"%NUGET_PATH%" pack "GoC.WebTemplate.MVC\\GoC.WebTemplate.MVC.nuspec"'
+    - powershell.exe "%PACKAGE_PS1%" "MVC" "MVC"
+    - '"%NUGET_PATH%" pack "MVC\\GoC.WebTemplate.MVC.nuspec"'
   artifacts:
     expire_in: 1 day
     paths:
@@ -95,45 +95,9 @@ package_forms:
     variables:
       - $MAIN_VERSION != null
   script:   
-    - powershell.exe "%PACKAGE_PS1%" "GoC.WebTemplate.WebForms" "GoC.WebTemplate.WebForms"
-    - '"%NUGET_PATH%" pack "GoC.WebTemplate.WebForms\\GoC.WebTemplate.WebForms.nuspec"'    
+    - powershell.exe "%PACKAGE_PS1%" "WebForms" "WebForms"
+    - '"%NUGET_PATH%" pack "WebForms\\GoC.WebTemplate.WebForms.nuspec"'    
   artifacts:
     expire_in: 1 day
     paths:
       - 'GoC.WebTemplate-WebForms.%MAIN_VERSION%.nupkg'
-
-# package_mvc_sample:
-#   stage: package
-#   dependencies: 
-#     - version_mvc_sample
-#     - build_sample
-#   tags:
-#     - nuget
-#   only:
-#     - tags
-#     - master
-#   script:      
-#     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-MVC.Sample" "GoC.WebTemplate-MVC.Sample"
-#     - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-MVC.Sample\\GoC.WebTemplate-MVC.Sample.nuspec"' 
-#   artifacts:
-#     expire_in: 1 day
-#     paths:
-#       - 'GoC.WebTemplate-MVC.Sample.%CI_COMMIT_REF_NAME%.nupkg'
-
-# package_forms_sample:
-#   stage: package
-#   dependencies: 
-#     - version_froms_sample
-#     - build_sample
-#   tags:
-#     - nuget
-#   only:
-#     - tags
-#     - master
-#   script:      
-#     - powershell.exe "%PACKAGE_PS1%" "SampleCode\\GoC.WebTemplate-WebForms.Sample" "GoC.WebTemplate-WebForms.Sample"
-#     - '"%NUGET_PATH%" pack "SampleCode\\GoC.WebTemplate-WebForms.Sample\\GoC.WebTemplate-WebForms.Sample.nuspec"' 
-#   artifacts:
-#     expire_in: 1 day
-#     paths:
-#       - 'GoC.WebTemplate-WebForms.Sample.%CI_COMMIT_REF_NAME%.nupkg'

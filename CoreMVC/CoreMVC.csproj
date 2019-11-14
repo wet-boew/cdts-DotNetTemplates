@@ -20,6 +20,8 @@
     <IncludeRazorContentInPack>true</IncludeRazorContentInPack>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>../GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
+    <AssemblyName>GoC.WebTemplate.CoreMVC</AssemblyName>
+    <RootNamespace>GoC.WebTemplate.CoreMVC</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,7 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoC.WebTemplate.Components.Core\GoC.WebTemplate.Components.Core.csproj" />
+    <ProjectReference Include="..\Components.Core\Components.Core.csproj" />
   </ItemGroup>
 
   <ItemGroup>

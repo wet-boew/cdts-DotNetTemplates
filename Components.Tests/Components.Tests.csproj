@@ -8,6 +8,10 @@
     <SignAssembly>true</SignAssembly>
 
     <AssemblyOriginatorKeyFile>..\GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
+
+    <AssemblyName>GoC.WebTemplate.Components.Tests</AssemblyName>
+
+    <RootNamespace>GoC.WebTemplate.Components.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -34,7 +38,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GoC.WebTemplate.Components\GoC.WebTemplate.Components.csproj" />
+    <ProjectReference Include="..\Components\Components.csproj" />
   </ItemGroup>
 
   <ItemGroup>
