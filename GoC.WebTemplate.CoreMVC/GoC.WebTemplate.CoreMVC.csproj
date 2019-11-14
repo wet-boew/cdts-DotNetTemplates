@@ -18,6 +18,8 @@
     <IsPackable>true</IsPackable>
     <EnableDefaultContentItems>false</EnableDefaultContentItems>
     <IncludeRazorContentInPack>true</IncludeRazorContentInPack>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>

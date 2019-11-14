@@ -224,7 +224,6 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.SplashPage_Layout.cshtml" />
     <Content Include="Views\TestWebTemplatePage\SplashPage.cshtml" />
     <Content Include="Views\Test\SubThemeTestPage.cshtml" />
-    <Content Include="..\GoC.WebTemplate.snk" />
     <Content Include="Views\Test\NoCustomSearchTestPage.cshtml" />
     <None Include="packages.config" />
     <None Include="WebTemplateMVC.xsd">

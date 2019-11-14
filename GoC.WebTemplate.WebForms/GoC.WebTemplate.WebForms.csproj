@@ -133,7 +133,6 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <Content Include="packages.config" />
-    <Content Include="..\GoC.WebTemplate.snk" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
