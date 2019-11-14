@@ -67,7 +67,7 @@ namespace GoC.WebTemplate.CoreMVC
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=TestLayouts}/{action=Index}/{id?}");
+                    template: "{controller=TestLayouts}/{action=Default}/{id?}");
             });
         }
     }

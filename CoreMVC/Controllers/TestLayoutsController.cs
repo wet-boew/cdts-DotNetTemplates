@@ -10,26 +10,77 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         {
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Default(string env)
         {
+            SetEnv(env);
             return View();
         }
 
-        public IActionResult Application()
+        [HttpGet]
+        public IActionResult DefaultLeftMenu(string env)
         {
+            SetEnv(env);
             return View();
         }
 
-        public IActionResult ApplicationLeftMenu()
+        [HttpGet]
+        public IActionResult SplashPage(string env)
         {
+            SetEnv(env);
             return View();
         }
 
-        public IActionResult BilingualErrorPage()
+        [HttpGet]
+        public IActionResult ErrorPageBilingual(string env)
         {
+            SetEnv(env);
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ErrorPageUnilingual(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Application(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ApplicationLeftMenu(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Transactional(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult TransactionalLeftMenu(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        private void SetEnv(string env)
+        {
+            WebTemplateModel.Settings.Environment = string.IsNullOrEmpty(env) ? "AKAMAI" : env;
+            if (WebTemplateModel.Settings.Environment.Equals("ESDC_PROD"))
+            {
+                WebTemplateModel.Settings.UseHttps = false;
+            }
+        }
 
     }
 }
