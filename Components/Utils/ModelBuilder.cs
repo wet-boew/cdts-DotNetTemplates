@@ -23,9 +23,10 @@ namespace GoC.WebTemplate.Components.Utils
         /// The language toggle link, posts back to the same page, and the InitializedCulture method of the BasePage is responsible for setting the culture with the provided value
         /// </summary>
         /// <returns>The URL to be used for the language toggle link</returns>
-        public static string BuildLanguageLinkURL(string queryString)
+        public static string BuildLanguageLinkURL(NameValueCollection nameValues)
         {
-            NameValueCollection nameValues = HttpUtility.ParseQueryString(queryString);
+            //make it writeable
+           // var nameValues = new NameValueCollection(queryString.ToString());
 
             //Set the value of the "GoCTemplateCulture" parameter
             nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY,
