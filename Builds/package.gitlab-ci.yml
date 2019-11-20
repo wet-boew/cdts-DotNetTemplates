@@ -43,7 +43,7 @@ package_componentsframe:
       - $MAIN_VERSION != null
   script:
     - powershell.exe "%PACKAGE_PS1%" "Components.Framework" "Components.Framework"
-    - '"%NUGET_PATH%" pack "Components.Framework\\GoC.WebTemplate.Components.Framework.nuspec"'
+    - '"%NUGET_PATH%" pack "Components.Framework\\Components.Framework.nuspec"'
   artifacts:
     expire_in: 1 day
     paths:
@@ -78,7 +78,7 @@ package_mvc:
       - $MAIN_VERSION != null
   script:       
     - powershell.exe "%PACKAGE_PS1%" "MVC" "MVC"
-    - '"%NUGET_PATH%" pack "MVC\\GoC.WebTemplate.MVC.nuspec"'
+    - '"%NUGET_PATH%" pack "MVC\\MVC.nuspec"'
   artifacts:
     expire_in: 1 day
     paths:
@@ -96,7 +96,7 @@ package_forms:
       - $MAIN_VERSION != null
   script:   
     - powershell.exe "%PACKAGE_PS1%" "WebForms" "WebForms"
-    - '"%NUGET_PATH%" pack "WebForms\\GoC.WebTemplate.WebForms.nuspec"'    
+    - '"%NUGET_PATH%" pack "WebForms\\WebForms.nuspec"'    
   artifacts:
     expire_in: 1 day
     paths:
