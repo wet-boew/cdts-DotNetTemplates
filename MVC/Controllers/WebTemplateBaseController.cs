@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.MVC
             var langSwitcher = new LanguageSwitcher(new SessionController(System.Web.HttpContext.Current.Session));
             langSwitcher.UpdateCulture(Request.QueryString.Get(Constants.QUERYSTRING_CULTURE_KEY));
             //update the herf link depending on the current culture keeping the rest of the querystring intact
-            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(Request.QueryString.ToString());
+            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(HttpUtility.ParseQueryString(Request.QueryString.ToString()));
 
             //set timeout based on session
             WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);

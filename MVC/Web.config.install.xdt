@@ -16,15 +16,6 @@
             </customHeaders>
         </httpProtocol>
     </system.webServer>
-    
-    <system.web>
-      <compilation>
-        <assemblies xdt:Transform="InsertIfMissing">
-          <add xdt:Transform="InsertIfMissing" assembly="netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
-        </assemblies>
-      </compilation>
-    </system.web>
-
 
     <GoC.WebTemplate xdt:Transform="Remove"/>
     <GoC.WebTemplate xmlns="http://tempuri.org/WebTemplateMVC.xsd" xdt:Transform="InsertIfMissing" />

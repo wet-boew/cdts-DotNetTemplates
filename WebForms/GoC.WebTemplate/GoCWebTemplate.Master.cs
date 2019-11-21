@@ -23,7 +23,7 @@ namespace GoC.WebTemplate.WebForms
                 );
             
             //update the culture based on the query string or what is stored in session
-            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(Request.QueryString.ToString());
+            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(HttpUtility.ParseQueryString(Request.QueryString.ToString()));
 
             //update the herf link depending on the current culture keeping the rest of the querystring intact
             WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(Session);

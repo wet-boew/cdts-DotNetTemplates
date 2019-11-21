@@ -4,6 +4,7 @@ using GoC.WebTemplate.Components.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using System.Web;
 
 namespace GoC.WebTemplate.CoreMVC.Controllers
 {
@@ -19,7 +20,7 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             //update the herf link depending on the current culture keeping the rest of the querystring intact
-            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(HttpContext.Request.QueryString.ToString());
+            WebTemplateModel.LanguageLink.Href = ModelBuilder.BuildLanguageLinkURL(HttpUtility.ParseQueryString(HttpContext.Request.QueryString.ToString()));
 
             base.OnActionExecuting(context);
         }

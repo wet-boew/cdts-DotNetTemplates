@@ -3,6 +3,7 @@ using GoC.WebTemplate.Components.Utils;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Threading;
+using System.Web;
 using Xunit;
 
 namespace GoC.WebTemplate.Components.Test.UtilTests
@@ -16,7 +17,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
         public void LanguageLinkSetsFrenchinEnglishCulture()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Constants.ENGLISH_CULTURE);
-            var result = ModelBuilder.BuildLanguageLinkURL(string.Empty);
+            var result = ModelBuilder.BuildLanguageLinkURL(HttpUtility.ParseQueryString(string.Empty));
             result.Should().Be("?" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.FRENCH_CULTURE);
         }
         
@@ -24,7 +25,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
         public void LanguageLinkSetsEnglishinFrenchCulture()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Constants.FRENCH_CULTURE);
-            var result = ModelBuilder.BuildLanguageLinkURL(string.Empty);
+            var result = ModelBuilder.BuildLanguageLinkURL(HttpUtility.ParseQueryString(string.Empty));
             result.Should().Be("?" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.ENGLISH_CULTURE);
         }
 
@@ -36,7 +37,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
                 { "fancypants", "homeboy" }
             };
 
-            var result = ModelBuilder.BuildLanguageLinkURL(customQueryString.ToString());
+            var result = ModelBuilder.BuildLanguageLinkURL(customQueryString);
 
             result.Should().Contain(customQueryString.ToString());
         }
