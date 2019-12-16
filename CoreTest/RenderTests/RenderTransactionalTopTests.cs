@@ -37,7 +37,18 @@ namespace CoreTest.RenderTests
         sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
         sut.RenderTransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
     }
-        
-        
-  }
+
+        [Theory, AutoNSubstituteData]
+        public void CustomSearchRenders(Core sut)
+        {
+            sut.CustomSearch = new CustomSearch
+            {
+                Action = "#",
+                Placeholder = "Custom Search Placeholder",
+                Method = "get"
+            };
+            var result = sut.RenderTransactionalTop().ToString();
+            result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
+        }
+    }
 }

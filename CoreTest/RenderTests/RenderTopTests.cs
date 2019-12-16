@@ -74,5 +74,17 @@ namespace CoreTest.RenderTests
             sut.RenderTop().ToString().Should().Contain("\"topSecMenu\":true");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void CustomSearchRenders(Core sut)
+        {
+            sut.CustomSearch = new CustomSearch
+            {
+                Action = "#",
+                Placeholder = "Custom Search Placeholder",
+                Method = "get"
+            };
+            var result = sut.RenderTop().ToString();
+            result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
+        }
     }
 }

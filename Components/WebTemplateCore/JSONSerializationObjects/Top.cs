@@ -14,5 +14,6 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         public string LocalPath { get; set; }
         public bool TopSecMenu { get; set; }
         public bool SiteMenu { get; set; }
+        public List<CustomSearch> CustomSearch { get; set; }
     }
 }
