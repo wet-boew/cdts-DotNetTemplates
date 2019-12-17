@@ -334,6 +334,8 @@ namespace GoC.WebTemplate.Components
                 ExitURL = _core.LeavingSecureSiteWarning.RedirectURL,
                 ExitMsg = WebUtility.HtmlEncode(_core.LeavingSecureSiteWarning.Message),
                 ExitDomains = _core.Builder.GetStringForJson(_core.LeavingSecureSiteWarning.ExcludedDomains),
+                CancelMsg = _core.Builder.GetStringForJson(_core.LeavingSecureSiteWarning.CancelMessage),
+                YesMsg = _core.Builder.GetStringForJson(_core.LeavingSecureSiteWarning.YesMessage),
                 JqueryEnv = _core.Builder.BuildJqueryEnv(),
                 LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion)
             });

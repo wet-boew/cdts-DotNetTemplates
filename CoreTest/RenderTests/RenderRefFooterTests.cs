@@ -14,7 +14,7 @@ namespace CoreTest.RenderTests
             sut.LeavingSecureSiteWarning.ExcludedDomains = "Exclude Domains 3";
 
             var result = sut.RenderRefFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\",\"displayModal\":false}");
+            result.ToString().Should().Contain("\"cdnEnv\":\"\"","\"exitScript\":true","\"exitURL\":\"Redirect URL 1\"","\"exitMsg\":\"Message 2\"","\"exitDomains\":\"Exclude Domains 3\"","\"displayModal\":false");
         }
 
         [Theory, AutoNSubstituteData]
@@ -34,7 +34,18 @@ namespace CoreTest.RenderTests
             sut.LeavingSecureSiteWarning.ExcludedDomains = "Exclude Domains 3";
 
             var result = sut.RenderRefFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\",\"displayModal\":false}");
+            result.ToString().Should().Contain("\"cdnEnv\":\"\"","\"exitScript\":true","\"exitURL\":\"Redirect URL 1\"","\"exitMsg\":\"Message 2\"","\"exitDomains\":\"Exclude Domains 3\"","\"displayModal\":false");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void SecureSiteYesCancelRender(Core sut)
+        {
+            sut.LeavingSecureSiteWarning.CancelMessage = "My Cancel Message";
+            sut.LeavingSecureSiteWarning.YesMessage = "This is a Yes message";
+
+            var result = sut.RenderRefFooter();
+            result.ToString().Should().Contain("\"cancelMsg\":\"" + sut.LeavingSecureSiteWarning.CancelMessage + "\"");
+            result.ToString().Should().Contain("\"yesMsg\":\"" + sut.LeavingSecureSiteWarning.YesMessage + "\"");
         }
 
 
