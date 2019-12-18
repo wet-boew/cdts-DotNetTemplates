@@ -65,6 +65,8 @@ namespace CoreTest
             //Default to environments not having any fields be modifiable so that we are in a good known state to start
             fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));
+
+            fixture.Customize<WebAnalytics>(c => c.With(p => p.Active, false));
             //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
             //that the keys are deterministic.
             fixture.Register<IDictionary<string, ICDTSEnvironment>>(() =>

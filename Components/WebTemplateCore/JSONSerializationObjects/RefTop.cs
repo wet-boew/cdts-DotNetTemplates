@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GoC.WebTemplate.Components.JSONSerializationObjects
 {
     internal class RefTop
@@ -7,5 +9,6 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         public string JqueryEnv { get; set; }
         public string LocalPath { get; set; }
         public bool IsApplication { get; set; }
+        public List<WebAnalytics> WebAnalytics { get; set; }
     }
 }

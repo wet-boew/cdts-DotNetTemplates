@@ -14,5 +14,6 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         public int FooterSectionLimit { get; set; }
         public bool CanHaveMultipleContactLinks { get; set; }
         public bool CanHaveContactLinkInAppTemplate { get; set; }
+        public bool CanUseWebAnalytics { get; set; }
     }
 }

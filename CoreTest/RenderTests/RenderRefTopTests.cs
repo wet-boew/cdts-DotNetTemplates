@@ -83,7 +83,16 @@ namespace CoreTest.RenderTests
             environments[sut.Environment].CDN = "prod";
             sut.RenderRefTop(false).ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
-
+        
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsRenders(Core sut)
+        {
+            sut.WebAnalytics.Active = true;
+            sut.WebAnalytics.Environment = "staging";
+            sut.WebAnalytics.Version = 1;
+            var result = sut.RenderRefTop(false);
+            result.ToString().Should().Contain("\"webAnalytics\":[{\"environment\":\"staging\",\"version\":1}]");
+        }
 
     }
 }

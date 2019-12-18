@@ -62,6 +62,7 @@
     <Compile Include="CoreBuilder.cs" />
     <Compile Include="CoreRenderer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="JSONSerializationObjects\WebAnalytics.cs" />
     <Compile Include="JSONSerializationObjects\CustomSearch.cs" />
     <Compile Include="JSONSerializationObjects\Footer.cs" />
     <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />

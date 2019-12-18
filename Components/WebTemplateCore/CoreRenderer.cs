@@ -96,7 +96,8 @@ namespace GoC.WebTemplate.Components
                 SubTheme = _core.WebTemplateSubTheme,
                 JqueryEnv = _core.LoadJQueryFromGoogle ? "external" : null,
                 LocalPath = _core.Builder.BuildLocalPath(),
-                IsApplication = isApplication
+                IsApplication = isApplication,
+                WebAnalytics = _core.WebAnalytics.Active ? new List<WebAnalytics> { _core.WebAnalytics } : null
             });
         }
 
@@ -174,6 +175,8 @@ namespace GoC.WebTemplate.Components
 
         internal HtmlString RenderRefFooter()
         {
+            if (_core.WebAnalytics.Active && !_core.CurrentEnvironment.CanUseWebAnalytics) throw new NotSupportedException("The WebAnalytics is not supported in this enviornment.");
+
             if (_core.LeavingSecureSiteWarning.Enabled &&
                 !string.IsNullOrEmpty(_core.LeavingSecureSiteWarning.RedirectURL))
             {
@@ -184,7 +187,8 @@ namespace GoC.WebTemplate.Components
                 CdnEnv = _core.CDNEnvironment,
                 ExitScript = false,
                 JqueryEnv = _core.Builder.BuildJqueryEnv(),
-                LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion)
+                LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
+                WebAnalytics = _core.WebAnalytics.Active
             });
         }
 
@@ -337,7 +341,8 @@ namespace GoC.WebTemplate.Components
                 CancelMsg = _core.Builder.GetStringForJson(_core.LeavingSecureSiteWarning.CancelMessage),
                 YesMsg = _core.Builder.GetStringForJson(_core.LeavingSecureSiteWarning.YesMessage),
                 JqueryEnv = _core.Builder.BuildJqueryEnv(),
-                LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion)
+                LocalPath = _core.Builder.GetFormattedJsonString(_core.LocalPath, _core.WebTemplateTheme, _core.WebTemplateVersion),
+                WebAnalytics = _core.WebAnalytics.Active
             });
 
         }

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components;
+using System;
 using Xunit;
 
 namespace CoreTest.RenderTests
@@ -23,7 +24,7 @@ namespace CoreTest.RenderTests
             sut.LeavingSecureSiteWarning.Enabled = false;
 
             var result = sut.RenderRefFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"exitScript\":false,\"displayModal\":false}");
+            result.ToString().Should().Contain("\"cdnEnv\":\"\"","\"exitScript\":false","\"displayModal\":false");
         }
 
         [Theory, AutoNSubstituteData]
@@ -48,6 +49,22 @@ namespace CoreTest.RenderTests
             result.ToString().Should().Contain("\"yesMsg\":\"" + sut.LeavingSecureSiteWarning.YesMessage + "\"");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsRenders(Core sut)
+        {
+            sut.WebAnalytics.Active = false;
+            var result = sut.RenderRefFooter();
+            result.ToString().Should().Contain("\"webAnalytics\":false");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsOnlyRendersInSpecifiedEnv(Core sut)
+        {
+            sut.WebAnalytics.Active = true;
+            sut.CurrentEnvironment.CanUseWebAnalytics = false;
+            Action act = () => sut.RenderRefFooter();
+            act.Should().Throw<NotSupportedException>().WithMessage("The WebAnalytics is not supported in this enviornment.");
+        }
 
     }
 }

@@ -496,6 +496,11 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         public List<MenuLink> MenuLinks { get; set; }
 
+        /// <summary>
+        /// Use this variable to include Adobe Analytics (AA)
+        /// </summary>
+        public WebAnalytics WebAnalytics { get; set; } = new WebAnalytics();
+
         public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
         public HtmlString RenderAppFooter() => Render.RenderAppFooter();

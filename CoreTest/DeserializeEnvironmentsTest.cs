@@ -30,7 +30,8 @@ namespace CoreTest
                 AppendToTitle = " - Canada.ca",
                 FooterSectionLimit = 0,
                 CanHaveMultipleContactLinks = false,
-                CanHaveContactLinkInAppTemplate = true
+                CanHaveContactLinkInAppTemplate = true,
+                CanUseWebAnalytics = true
             });
         }
 

@@ -12,5 +12,6 @@ namespace GoC.WebTemplate.Components.JSONSerializationObjects
         public string LocalPath { get; set; }
         public string CancelMsg { get; set; }
         public string YesMsg { get; set; }
+        public bool WebAnalytics { get; set; }
     }
 }
