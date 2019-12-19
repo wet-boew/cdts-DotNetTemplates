@@ -83,16 +83,23 @@ namespace CoreTest.RenderTests
             environments[sut.Environment].CDN = "prod";
             sut.RenderRefTop(false).ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
-        
+
         [Theory, AutoNSubstituteData]
         public void WebAnaliticsRenders(Core sut)
         {
             sut.WebAnalytics.Active = true;
-            sut.WebAnalytics.Environment = "staging";
+            sut.WebAnalytics.Environment = WebAnalytics.EnvironmentOption.staging;
             sut.WebAnalytics.Version = 1;
             var result = sut.RenderRefTop(false);
             result.ToString().Should().Contain("\"webAnalytics\":[{\"environment\":\"staging\",\"version\":1}]");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsGetsActiveValueFromConfig(ICurrentRequestProxy currentRequest, ICacheProxy cacheProxy, IConfigurationProxy configProxy, IDictionary<string, ICDTSEnvironment> cdtsEnvironments)
+        {
+            var sut = new Core(currentRequest, cacheProxy, new ConfigurationProxy(), cdtsEnvironments);
+            var result = sut.RenderRefTop(false);
+            result.ToString().Should().Contain("\"webAnalytics\":");
+        }
     }
 }

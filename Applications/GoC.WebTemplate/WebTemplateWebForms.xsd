@@ -72,6 +72,7 @@
       <xs:attribute name="showSearch" type="xs:boolean" use="required" />
       <xs:attribute name="showSharePageLink" type="xs:boolean" use="required" />
       <xs:attribute name="showLanguageLink" type="xs:boolean" use="required" />
+      <xs:attribute name="useWebAnalytics" type="xs:boolean" use="optional" />
     </xs:complexType>
   </xs:element>
 </xs:schema>

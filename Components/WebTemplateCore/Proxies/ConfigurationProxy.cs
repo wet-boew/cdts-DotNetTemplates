@@ -29,5 +29,6 @@ namespace GoC.WebTemplate.Components.Proxies
         public string Theme => Configurations.Settings.Theme;
         public string Version => Configurations.Settings.Version;
         public bool? UseHttps => Configurations.Settings.UseHttps;
+        public bool? UseWebAnalytics => Configurations.Settings.UseWebAnalytics;
     }
 }

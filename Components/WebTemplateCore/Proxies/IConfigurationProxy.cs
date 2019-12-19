@@ -76,5 +76,7 @@ namespace GoC.WebTemplate.Components.Proxies
 
         bool? UseHttps { get; }
         string CustomSiteMenuURL { get; }
+
+        bool? UseWebAnalytics { get; }
     }
 }

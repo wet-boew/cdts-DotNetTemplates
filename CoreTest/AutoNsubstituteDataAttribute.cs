@@ -66,6 +66,7 @@ namespace CoreTest
             fixture.Customize<CDTSEnvironment>(c => c.With(p => p.IsEncryptionModifiable, false)
                                                       .With(p => p.IsVersionRNCombined, false));
 
+            //When auto generated Active should default to false, changed to true if grabing from config
             fixture.Customize<WebAnalytics>(c => c.With(p => p.Active, false));
             //Since we need to have specific keys for the environments I have to make sure when you get a dictionary of environments
             //that the keys are deterministic.

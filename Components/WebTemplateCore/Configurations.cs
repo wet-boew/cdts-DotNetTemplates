@@ -190,6 +190,16 @@ namespace GoC.WebTemplate.Components
             get { return (string)this["staticFilesLocation"]; }
             set { this["staticFilesLocation"] = value; }
         }
+
+        /// <summary>
+        /// Use Built in CDTS Web Analytics
+        /// </summary>
+        [ConfigurationProperty("useWebAnalytics", IsRequired = false)]
+        public bool? UseWebAnalytics
+        {
+            get { return (bool?)this["useWebAnalytics"]; }
+            set { this["useWebAnalytics"] = value; }
+        }
     }
 
 }

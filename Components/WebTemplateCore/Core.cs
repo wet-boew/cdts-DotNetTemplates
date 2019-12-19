@@ -117,6 +117,7 @@ namespace GoC.WebTemplate.Components
             SignOutLinkURL = _configProxy.SignOutLinkURL;
             SignInLinkURL = _configProxy.SignInLinkURL;
             CustomSiteMenuURL = string.IsNullOrEmpty(_configProxy.CustomSiteMenuURL) ? null : _configProxy.CustomSiteMenuURL;
+            WebAnalytics.Active = _configProxy.UseWebAnalytics ?? false;
         }
 
         public LeavingSecureSiteWarning LeavingSecureSiteWarning { get; set; }
@@ -497,9 +498,10 @@ namespace GoC.WebTemplate.Components
         public List<MenuLink> MenuLinks { get; set; }
 
         /// <summary>
-        /// Use this variable to include Adobe Analytics (AA)
+        /// Use this variable to activate and customize the built in Adobe Analytics (AA)
         /// </summary>
         public WebAnalytics WebAnalytics { get; set; } = new WebAnalytics();
+
 
         public HtmlString RenderHeaderTitle() => new HtmlString(HeaderTitle);
 
