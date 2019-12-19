@@ -28,6 +28,14 @@ namespace GoC.WebTemplate.Components.Core.Tests.Configs
             sut.Settings.LeavingSecureSiteWarning.RedirectUrl.Should().Be("foo");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsGetsActiveValueFromConfig(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider)
+        {
+            //We want to use the app.config to test this so we don't use autonsubstitute to test it.
+            var sut = GetModelWithActualSettings(fileContentCacheProvider, cdtsCacheProvider);
+            sut.Settings.WebAnalytics.Active.Should().BeTrue();
+        }
+
         private Model GetModelWithActualSettings(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider)
         {
             var configs = new GocWebTemplateConfigurationSection();

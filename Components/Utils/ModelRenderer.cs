@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
-using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -95,7 +93,9 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 JqueryEnv = _model.Settings.LoadScriptsFromGoogle ? "external" : null,
                 LocalPath = _model.Builder.BuildLocalPath(),
-                IsApplication = isApplication
+                IsApplication = isApplication,
+                WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
+
             });
         }
 
@@ -170,6 +170,8 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString RefFooter()
         {
+            if (_model.Settings.WebAnalytics.Active && !_model.CdtsEnvironment.CanUseWebAnalytics) throw new NotSupportedException("The WebAnalytics is not supported in this enviornment.");
+
             if (_model.Settings.LeavingSecureSiteWarning.Enabled &&
                 !string.IsNullOrEmpty(_model.Settings.LeavingSecureSiteWarning.RedirectUrl))
             {
@@ -180,17 +182,16 @@ namespace GoC.WebTemplate.Components.Utils
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 ExitScript = false,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version)
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                WebAnalytics = _model.Settings.WebAnalytics.Active
             });
         }
 
         public HtmlString SessionTimeoutControl()
         {
-            HtmlString jsonSessionTimeout = null;
-
             if (_model.Settings.SessionTimeout.Enabled)
             {
-                jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_model.Settings.SessionTimeout);
+                HtmlString jsonSessionTimeout = JsonSerializationHelper.SerializeToJson(_model.Settings.SessionTimeout);
                 return new HtmlString($"<span class='wb-sessto' data-wb-sessto='{jsonSessionTimeout}'></span>");
             }
 
@@ -346,7 +347,8 @@ namespace GoC.WebTemplate.Components.Utils
                 ExitMsg = WebUtility.HtmlEncode(_model.Settings.LeavingSecureSiteWarning.Message),
                 ExitDomains = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version)
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                WebAnalytics = _model.Settings.WebAnalytics.Active
             });
 
         }

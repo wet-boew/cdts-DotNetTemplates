@@ -38,5 +38,6 @@ namespace GoC.WebTemplate.Components.Configs.Cdts
         int FooterSectionLimit { get; set; }
         bool CanHaveMultipleContactLinks { get; set; }
         bool CanHaveContactLinkInAppTemplate { get; set; }
+        bool CanUseWebAnalytics { get; set; }
     }
 }

@@ -129,10 +129,12 @@ namespace GoC.WebTemplate.Components.Configs
 
         public string StaticFilesLocation { get; set; }
 
-        public WebTemplateSettings()
-        {
-        }
+        /// <summary>        
+        /// Use this variable to activate and customize the built in Adobe Analytics (AA)
+        /// </summary>
+        public WebAnalytics WebAnalytics { get; set; } = new WebAnalytics();
 
+        public WebTemplateSettings() { }
         public WebTemplateSettings(GocWebTemplateConfigurationSection configurationSection)
         {
             if (configurationSection == null)
@@ -176,6 +178,13 @@ namespace GoC.WebTemplate.Components.Configs
             StaticFilesLocation = configurationSection.StaticFilesLocation;
             UseHttps = configurationSection.UseHttps;
             Version = configurationSection.Version;
+            WebAnalytics =
+                new WebAnalytics()
+                {
+                    Active = configurationSection.UseWebAnalytics ?? false,
+                    Environment = WebAnalytics.EnvironmentOption.production,
+                    Version = 2
+                };
         }
     }
 }

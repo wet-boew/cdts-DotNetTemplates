@@ -1,6 +1,7 @@
 ﻿using AutoFixture.Xunit2;
 using FluentAssertions;
 using GoC.WebTemplate.Components.Configs;
+using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils.Caching;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
@@ -80,6 +81,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Render.RefTop(false).ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
 
-
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsRenders(Model sut)
+        {
+            sut.Settings.WebAnalytics.Active = true;
+            sut.Settings.WebAnalytics.Environment = WebAnalytics.EnvironmentOption.staging;
+            sut.Settings.WebAnalytics.Version = 1;
+            var result = sut.Render.RefTop(false);
+            result.ToString().Should().Contain("\"webAnalytics\":[{\"environment\":\"staging\",\"version\":1}]");
+        }
     }
 }

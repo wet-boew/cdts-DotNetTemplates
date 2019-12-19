@@ -259,7 +259,7 @@ namespace GoC.WebTemplate.Components
         public List<MenuLink> MenuLinks { get; set; }
 
         public IntranetTitle IntranetTitle { get; set; }
-
+               
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
         /// </summary>

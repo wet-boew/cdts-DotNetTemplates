@@ -24,11 +24,11 @@ namespace GoC.WebTemplate.Components.Entities
         /// Use this value to state if the AA running is either 'staging' or 'production'.
         /// </summary>
         [JsonConverter(typeof(WebAnalyticsEnvironmentConverter))]
-        public EnvironmentOption Environment { get; set; } = EnvironmentOption.production;
+        public EnvironmentOption Environment { get; set; }
 
         /// <summary>
         /// Use this value to state which version of AA your application / site uses. Presently only versions 1 or 2 are available.
         /// </summary>
-        public int Version { get; set; } = 2;
+        public int Version { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using System;
 using Xunit;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
@@ -38,6 +39,21 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             result.ToString().Should().Be("{\"cdnEnv\":\"\",\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\"}");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsRenders(Model sut)
+        {
+            sut.Settings.WebAnalytics.Active = false;
+            var result = sut.Render.RefFooter();
+            result.ToString().Should().NotContain("\"webAnalytics\"");
+        }
 
+        [Theory, AutoNSubstituteData]
+        public void WebAnaliticsOnlyRendersInSpecifiedEnv(Model sut)
+        {
+            sut.Settings.WebAnalytics.Active = true;
+            sut.CdtsEnvironment.CanUseWebAnalytics = false;
+            Action act = () => sut.Render.RefFooter();
+            act.Should().Throw<NotSupportedException>().WithMessage("The WebAnalytics is not supported in this enviornment.");
+        }
     }
 }
