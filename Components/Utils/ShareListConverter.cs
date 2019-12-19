@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
+using GoC.WebTemplate.Components.Entities;
 using Newtonsoft.Json;
 
 namespace GoC.WebTemplate.Components.Utils

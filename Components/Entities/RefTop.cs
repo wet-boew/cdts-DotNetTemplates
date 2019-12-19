@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GoC.WebTemplate.Components.Entities
 {
     internal class RefTop

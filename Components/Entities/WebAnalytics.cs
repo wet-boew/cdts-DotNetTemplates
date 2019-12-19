@@ -1,7 +1,7 @@
-﻿using GoC.WebTemplate.Components.JSONSerializationObjects.CustomJsonConverters;
+﻿using GoC.WebTemplate.Components.Utils;
 using Newtonsoft.Json;
 
-namespace GoC.WebTemplate.Components.JSONSerializationObjects
+namespace GoC.WebTemplate.Components.Entities
 {
     public class WebAnalytics
     {
