@@ -14,9 +14,10 @@ Make sure to remove this comment when you are done.
 
 ### Checklist
 
-- [ ] Basic functionality is unchanged
-- [ ] Tests are unchanged (_assert_ line)
-- [ ] Conforms to the [code review guidelines](CONTRIBUTING.md#merge-requests-reviews)
+- [ ] Samples created/updated (documentation)
+- [ ] Tests added 
+- [ ] Conforms to the [GoC style guides](https://www.canada.ca/en/government/about/design-system.html)
+- [ ] Conforms to the [code review guidelines](CONTRIBUTING.md#Merge Requests Reviews)
 
 ### Related issues
 

@@ -17,5 +17,6 @@ namespace GoC.WebTemplate.Components.Entities
         [JsonProperty(DefaultValueHandling=DefaultValueHandling.Include)]
         public bool TopSecMenu { get; set; }
         public bool SiteMenu { get; set; }
+        public List<CustomSearch> CustomSearch { get; set; }
     }
 }

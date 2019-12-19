@@ -372,6 +372,8 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
     <None Include="WebTemplateWebForms.xsd">
       <SubType>Designer</SubType>

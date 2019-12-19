@@ -15,7 +15,8 @@
       "appendToTitle": " - Canada.ca",
       "footerSectionLimit": 0,
       "canHaveMultipleContactLinks": false,
-      "canHaveContactLinkInAppTemplate": true
+      "canHaveContactLinkInAppTemplate": true,
+      "canUseWebAnalytics": true
     },
     {
       "name": "PROD_SSL",
@@ -27,7 +28,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "PROD_SSL_ECCCSUB",
@@ -40,7 +42,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "PROD_UNSECURE",
@@ -52,7 +55,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "ESDC_PROD",
@@ -65,7 +69,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "ESDC_GCINTRANET_SADE",
@@ -78,7 +83,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "ESDC_GCINTRANET_QA",
@@ -91,7 +97,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_SADE",
@@ -104,7 +111,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "ESDC_GCINTRANET_ESDCSUB_QA",
@@ -117,7 +125,8 @@
       "appendToTitle": "",
       "footerSectionLimit": 3,
       "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false
+      "canHaveContactLinkInAppTemplate": false,
+      "canUseWebAnalytics": false
     },
     {
       "name": "ESDC_GCWEB_SADE",
@@ -130,7 +139,8 @@
       "appendToTitle": " - Canada.ca",
       "footerSectionLimit": 0,
       "canHaveMultipleContactLinks": false,
-      "canHaveContactLinkInAppTemplate": true
+      "canHaveContactLinkInAppTemplate": true,
+      "canUseWebAnalytics": true
     },
     {
       "name": "ESDC_GCWEB_QA",
@@ -143,7 +153,8 @@
       "appendToTitle": " - Canada.ca",
       "footerSectionLimit": 0,
       "canHaveMultipleContactLinks": false,
-      "canHaveContactLinkInAppTemplate": true
+      "canHaveContactLinkInAppTemplate": true,
+      "canUseWebAnalytics": true
     }
   ]
 }

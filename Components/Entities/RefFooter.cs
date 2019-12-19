@@ -10,5 +10,8 @@ namespace GoC.WebTemplate.Components.Entities
         public bool DisplayModal { get; set; }
         public string JqueryEnv { get; set; }
         public string LocalPath { get; set; }
+        public string CancelMsg { get; set; }
+        public string YesMsg { get; set; }
+        public bool WebAnalytics { get; set; }
     }
 }

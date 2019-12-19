@@ -256,6 +256,8 @@
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
     </None>

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A9ACE274-5F6A-4634-A40A-E775F5B81B90}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GoC.WebTemplate.Components</RootNamespace>
+    <AssemblyName>GoC.WebTemplate.Components</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\..\WebTemplate.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CDTSEnvironmentLoader.cs" />
+    <Compile Include="CoreBuilder.cs" />
+    <Compile Include="CoreRenderer.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="JSONSerializationObjects\WebAnalytics.cs" />
+    <Compile Include="JSONSerializationObjects\CustomSearch.cs" />
+    <Compile Include="JSONSerializationObjects\Footer.cs" />
+    <Compile Include="JSONSerializationObjects\FeedbackLink.cs" />
+    <Compile Include="JSONSerializationObjects\CustomJsonConverters\FeedbackLinkConverter.cs" />
+    <Compile Include="JSONSerializationObjects\AppTop.cs" />
+    <Compile Include="JSONSerializationObjects\FooterSection.cs" />
+    <Compile Include="JSONSerializationObjects\IFooterSection.cs" />
+    <Compile Include="JSONSerializationObjects\IntranetTitle.cs" />
+    <Compile Include="JSONSerializationObjects\MenuLink.cs" />
+    <Compile Include="JSONSerializationObjects\ShareList.cs" />
+    <Compile Include="JSONSerializationObjects\CustomJsonConverters\ShareListConverter.cs" />
+    <Compile Include="JSONSerializationObjects\SplashInfo.cs" />
+    <Compile Include="JSONSerializationObjects\SubLink.cs" />
+    <Compile Include="JSONSerializationObjects\UnilingualPreFooter.cs" />
+    <Compile Include="Proxies\CacheProxy.cs" />
+    <Compile Include="Proxies\ICacheProxy.cs" />
+    <Compile Include="JsonSerializationHelper.cs" />
+    <Compile Include="JSONSerializationObjects\AppFooter.cs" />
+    <Compile Include="JSONSerializationObjects\GCIntranetAppTop.cs" />
+    <Compile Include="JSONSerializationObjects\Breadcrumb.cs" />
+    <Compile Include="JSONSerializationObjects\CDTSEnvironment.cs" />
+    <Compile Include="JSONSerializationObjects\ICDTSEnvironment.cs" />
+    <Compile Include="JSONSerializationObjects\LanguageLink.cs" />
+    <Compile Include="JSONSerializationObjects\LeavingSecureSiteWarning.cs" />
+    <Compile Include="JSONSerializationObjects\PreFooter.cs" />
+    <Compile Include="Proxies\ConfigurationProxy.cs" />
+    <Compile Include="Configurations.cs" />
+    <Compile Include="ConfigSections\LeavingSecureSiteWarningElement.cs" />
+    <Compile Include="ConfigSections\SessionTimeOutElement.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Core.cs" />
+    <Compile Include="Proxies\IConfigurationProxy.cs" />
+    <Compile Include="Proxies\CurrentRequestProxy.cs" />
+    <Compile Include="JSONSerializationObjects\FooterLink.cs" />
+    <Compile Include="Proxies\ICurrentRequestProxy.cs" />
+    <Compile Include="JSONSerializationObjects\Link.cs" />
+    <Compile Include="JSONSerializationObjects\MenuItem.cs" />
+    <Compile Include="JSONSerializationObjects\MenuSection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxies\ILeavingSecureSiteWarningElementProxy.cs" />
+    <Compile Include="Proxies\ISessionTimeOutElementProxy.cs" />
+    <Compile Include="Proxies\LeaveSecureSiteWarningElementProxy.cs" />
+    <Compile Include="Proxies\SessionTimeOutElementProxy.cs" />
+    <Compile Include="JSONSerializationObjects\RefTop.cs" />
+    <Compile Include="JSONSerializationObjects\RefFooter.cs" />
+    <Compile Include="JSONSerializationObjects\SessionTimeout.cs" />
+    <Compile Include="JSONSerializationObjects\Top.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CDTSEnvironments.json" />
+    <None Include="GoC.WebTemplate.snk" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\..\packages\SecurityCodeScan.3.3.0.0\analyzers\dotnet\SecurityCodeScan.dll" />
+    <Analyzer Include="..\..\packages\SecurityCodeScan.3.3.0.0\analyzers\dotnet\YamlDotNet.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
