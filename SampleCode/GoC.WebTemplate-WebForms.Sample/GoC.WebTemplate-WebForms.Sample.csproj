@@ -57,15 +57,15 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=1.31.7157.16525, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.31.1\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=1.32.7292.15102, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-Components.1.32.0-unstable1\Lib\Net45\GoC.WebTemplate.Components.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.WebForms, Version=1.31.7157.16525, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.31.1\Lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.WebForms, Version=1.32.7292.15104, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GoC.WebTemplate-WebForms.1.32.0-unstable1\lib\Net45\GoC.WebTemplate.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
@@ -326,6 +326,8 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu.Master" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
     <None Include="WebTemplateWebForms.xsd">
       <SubType>Designer</SubType>

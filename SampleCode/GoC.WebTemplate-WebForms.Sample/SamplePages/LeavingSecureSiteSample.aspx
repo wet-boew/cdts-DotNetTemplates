@@ -18,8 +18,8 @@
         <li>If <code class="wb-prettify">DisplayModalWindow</code> is set to true (default):
             <ul>
                 <li>When the user clicks an external link, the modal window will be displayed to the user.</li>
-                <li>A "Cancel" button appears on the window to allow the user to return to their page.</li>
-                <li>A "Yes" button appears on the window to allow the user to continue with the redirection to the selected link.</li>
+                <li>A "Cancel" button appears on the window to allow the user to return to their page. (Text programmable, see below.)</li>
+                <li>A "Yes" button appears on the window to allow the user to continue with the redirection to the selected link. (Text programmable, see below.)</li>
             </ul>
         </li>
         <li>if the "Yes" button is clicked on the modal window or if <code class="wb-prettify">DisplayModalWindow</code> was set to false:
@@ -49,6 +49,8 @@
                 <li>If you have multiple links to the same URL, but some links start with "www" and others don't, you will need to include both domains in the collections.</li>
             </ul>   
         </li>
+        <li>Optionally provide a cancel message by setting the <code class="wb-prettify">LeavingSecureSiteWarning.CancelMessage</code> programatically. It will default to "Cancel".</li>
+        <li>Optionally provide a yes message by setting the <code class="wb-prettify">LeavingSecureSiteWarning.YesMessage</code> programatically. It will default to "Yes".</li>
     </ul>
     <h3>Create your "redirect" page</h3>
     <ul>
@@ -62,11 +64,13 @@
         <h3>C# Code Sample to enable the warning</h3>
         <pre>
 //note other then the message the rest could be set in the web.config
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
-//this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;
-this.WebTemplateMaster.WebTemplateCore.leavingSecureSiteWarning.RedirectURL = "redirect.aspx";
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
-this.WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Enabled = true;
+//WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.DisplayModalWindow = true;
+WebTemplateMaster.WebTemplateCore.leavingSecureSiteWarning.RedirectURL = "redirect.aspx";
+WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
+WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.CancelMessage = "NO NO NO NO!!!!";
+WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.YesMessage = "mmmm Fine.";
         </pre>
     </div>
 

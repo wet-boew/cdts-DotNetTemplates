@@ -12,6 +12,8 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.RedirectURL = "redirect.aspx";
             WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.ExcludedDomains = "www.esdc.gc.ca, esdc.gc.ca, jobbank.gc.ca";
             WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.Message = "You are leaving a secure session sample text!";
+            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.CancelMessage = "NO NO NO NO!!!!";
+            WebTemplateMaster.WebTemplateCore.LeavingSecureSiteWarning.YesMessage = "mmmm Fine.";
         }
     }
 }
