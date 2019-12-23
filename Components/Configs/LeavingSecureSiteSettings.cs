@@ -35,5 +35,18 @@ namespace GoC.WebTemplate.Components.Configs
         /// Set by application programmatically
         /// </summary>
         public string Message { get; set; }
+
+        /// <summary>
+        /// Specify the text for the button (Cancel) the users will get if they want to close the exitMsg window. 
+        /// Set by application programmatically
+        /// </summary>
+        public string CancelMessage { get; set; }
+
+        /// <summary>
+        /// Specify the text for the button (Yes) the users will get if they want to close the exitMsg window. 
+        /// Set by application programmatically
+        /// </summary>
+        public string YesMessage { get; set; }
+
     }
 }

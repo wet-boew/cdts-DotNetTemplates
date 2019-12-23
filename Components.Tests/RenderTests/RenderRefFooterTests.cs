@@ -9,13 +9,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderRefFooter(Model sut)
         {
-            sut.Settings.LeavingSecureSiteWarning.Enabled = true;
-            sut.Settings.LeavingSecureSiteWarning.RedirectUrl = "Redirect URL 1";
-            sut.Settings.LeavingSecureSiteWarning.Message = "Message 2";
-            sut.Settings.LeavingSecureSiteWarning.ExcludedDomains = "Exclude Domains 3";
-
             var result = sut.Render.RefFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\"}");
+            result.ToString().Should().Contain("\"cdnEnv\":\"\"");
         }
 
         [Theory, AutoNSubstituteData]
@@ -36,7 +31,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.LeavingSecureSiteWarning.ExcludedDomains = "Exclude Domains 3";
 
             var result = sut.Render.RefFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\"}");
+            result.ToString().Should().Contain("\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\"");
         }
 
         [Theory, AutoNSubstituteData]
@@ -55,5 +50,17 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Action act = () => sut.Render.RefFooter();
             act.Should().Throw<NotSupportedException>().WithMessage("The WebAnalytics is not supported in this enviornment.");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void SecureSiteYesCancelRender(Model sut)
+        {
+            sut.Settings.LeavingSecureSiteWarning.CancelMessage = "My Cancel Message";
+            sut.Settings.LeavingSecureSiteWarning.YesMessage = "This is a Yes message";
+
+            var result = sut.Render.RefFooter();
+            result.ToString().Should().Contain("\"cancelMsg\":\"" + sut.Settings.LeavingSecureSiteWarning.CancelMessage + "\"");
+            result.ToString().Should().Contain("\"yesMsg\":\"" + sut.Settings.LeavingSecureSiteWarning.YesMessage + "\"");
+        }
+
     }
 }
