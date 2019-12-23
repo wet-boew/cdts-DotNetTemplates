@@ -75,5 +75,19 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             });
             sut.Render.Top().ToString().Should().Contain("\"topSecMenu\":true");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void CustomSearchRenders(Model sut)
+        {
+            sut.CustomSearch = new CustomSearch
+            {
+                Action = "#",
+                Placeholder = "Custom Search Placeholder",
+                Method = "get"
+            };
+            var result = sut.Render.Top().ToString();
+            result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
+        }
+
     }
 }

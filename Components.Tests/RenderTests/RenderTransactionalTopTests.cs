@@ -36,7 +36,20 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
         sut.Render.TransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
     }
-        
-        
-  }
+
+        [Theory, AutoNSubstituteData]
+        public void CustomSearchRenders(Model sut)
+        {
+            sut.CustomSearch = new CustomSearch
+            {
+                Action = "#",
+                Placeholder = "Custom Search Placeholder",
+                Method = "get"
+            };
+            var result = sut.Render.TransactionalTop().ToString();
+            result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
+        }
+
+
+    }
 }

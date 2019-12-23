@@ -63,6 +63,7 @@ namespace GoC.WebTemplate.Components.Utils
                 ShowPreContent = false,
                 LocalPath = _model.Builder.BuildLocalPath(),
                 TopSecMenu = _model.LeftMenuItems.Any(),
+                CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 SiteMenu = false
 
             });
@@ -81,6 +82,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
                 LocalPath = _model.Builder.BuildLocalPath(),
                 TopSecMenu = _model.LeftMenuItems.Any(),
+                CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 SiteMenu = true
             });
         }
