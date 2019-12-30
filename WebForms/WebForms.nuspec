@@ -18,6 +18,6 @@
     <file src="Web.config.install.xdt" target="Content" />
     <file src="WebTemplateWebForms.xsd" target="Content" />
     <file src="GoC.WebTemplate\**\*.*" target="Content\GoC.WebTemplate" exclude="GoC.WebTemplate\*.cs" />
-    <file src="bin\GoC.WebTemplate.WebForms.dll" target="lib\Net47" />
+    <file src="bin\GoC.WebTemplate.WebForms.dll" target="lib\Net461" />
   </files>
 </package>

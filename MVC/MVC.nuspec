@@ -17,7 +17,7 @@
   <files>
     <file src="Web.config.install.xdt" target="Content" />
     <file src="WebTemplateMVC.xsd" target="Content" />
-    <file src="bin\GoC.WebTemplate.MVC.dll" target="lib\Net47" />
+    <file src="bin\GoC.WebTemplate.MVC.dll" target="lib\Net461" />
     <file src="Views\GoC.WebTemplate\**\*.*" target="Content\Views\GoC.WebTemplate" />
   </files>
 </package>
