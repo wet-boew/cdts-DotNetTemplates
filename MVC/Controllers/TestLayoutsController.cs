@@ -5,44 +5,77 @@ using GoC.WebTemplate.Components;
 
 namespace GoC.WebTemplate.MVC.Controllers
 {
-    public class TestController : WebTemplateBaseController
+    public class TestLayoutsController : WebTemplateBaseController
     {
-
-
-        public ActionResult BilingualErrorPage()
+        public ActionResult Default(string env)
         {
-            WebTemplateModel.HeaderTitle = "Bilingual Error Test Page";
+            SetEnv(env);
+            AddBasicBreadcrumbs();
             return View();
         }
 
-        public ActionResult UnilingualErrorPage()
+        public ActionResult DefaultLeftMenu(string env)
         {
-            WebTemplateModel.HeaderTitle = "Unilingual Error Test Page";
-            return View();
-        }
-        public ActionResult SubThemeTestPage()
-        {
-            WebTemplateModel.Settings.Environment = "ESDC_PROD";
-            WebTemplateModel.Settings.UseHttps = false;
-            WebTemplateModel.HeaderTitle = "SubTheme Test Page";
-            WebTemplateModel.IntranetTitle = new IntranetTitle
-            {
-                Acronym = "yoyo",
-                BoldText = "BOLD",
-                Href = "https://ssl-templates.services.gc.ca/app/cls/WET/gcintranet/v4_0_31/cdts/samples/subtheme-eccc-en.shtml",
-                Text = "CDTS Example"
-            };
-            AddABasicLeftMenu();
-
-            return View();
-        }
-
-        public ActionResult NoCustomSearchTestPage()
-        {
+            SetEnv(env);
             AddABasicLeftMenu();
             AddBasicBreadcrumbs();
-
             return View();
+        }
+
+        public ActionResult SplashPage(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        public ActionResult ErrorPageBilingual(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        public ActionResult ErrorPageUnilingual(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        public ActionResult Application(string env)
+        {
+            SetEnv(env);
+            AddBasicBreadcrumbs();
+            return View();
+        }
+
+        public ActionResult ApplicationLeftMenu(string env)
+        {
+            SetEnv(env);
+            AddABasicLeftMenu();
+            AddBasicBreadcrumbs();
+            return View();
+        }
+
+        public ActionResult Transactional(string env)
+        {
+            SetEnv(env);
+            return View();
+        }
+
+        public ActionResult TransactionalLeftMenu(string env)
+        {
+            SetEnv(env);
+            AddABasicLeftMenu();
+            AddBasicBreadcrumbs();
+            return View();
+        }
+
+        private void SetEnv(string env)
+        {
+            WebTemplateModel.Settings.Environment = string.IsNullOrEmpty(env) ? "AKAMAI" : env;
+            if (WebTemplateModel.Settings.Environment.Equals("ESDC_PROD"))
+            {
+                WebTemplateModel.Settings.UseHttps = false;
+            }
         }
 
         private void AddBasicBreadcrumbs()

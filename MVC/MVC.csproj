@@ -123,8 +123,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TestWebTemplatePageController.cs" />
+    <Compile Include="Controllers\TestLayoutsController.cs" />
+    <Compile Include="Controllers\TestFeaturesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -180,7 +180,6 @@
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactFooter-fr.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcweb\transactTop-fr.html" />
-    <Content Include="Views\TestWebTemplatePage\HelloWorld.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -196,36 +195,34 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate_Layout.cshtml" />
-    <Content Include="Views\TestWebTemplatePage\TestPage.cshtml" />
+    <Content Include="Views\TestFeatures\TestPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.LeftMenu_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional_Layout.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Transactional.LeftMenu_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Web.config.install.xdt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\TestWebTemplatePage\HelloWorldTransactional.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.LeftMenu_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\TestWebTemplatePage\HelloWorldLeftMenu.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.BilingualErrorPage_Layout.cshtml" />
-    <Content Include="Views\Test\BilingualErrorPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage_Layout.cshtml" />
-    <Content Include="Views\Test\UnilingualErrorPage.cshtml" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.SplashPage_Layout.cshtml" />
-    <Content Include="Views\TestWebTemplatePage\SplashPage.cshtml" />
-    <Content Include="Views\Test\SubThemeTestPage.cshtml" />
-    <Content Include="Views\Test\NoCustomSearchTestPage.cshtml" />
     <None Include="packages.config" />
+    <Content Include="Views\Shared\_LayoutsNav.cshtml" />
+    <Content Include="Views\TestLayouts\Application.cshtml" />
+    <Content Include="Views\TestLayouts\ApplicationLeftMenu.cshtml" />
+    <Content Include="Views\TestLayouts\Default.cshtml" />
+    <Content Include="Views\TestLayouts\DefaultLeftMenu.cshtml" />
+    <Content Include="Views\TestLayouts\ErrorPageBilingual.cshtml" />
+    <Content Include="Views\TestLayouts\ErrorPageUnilingual.cshtml" />
+    <Content Include="Views\TestLayouts\Transactional.cshtml" />
+    <Content Include="Views\TestLayouts\TransactionalLeftMenu.cshtml" />
+    <Content Include="Views\TestFeatures\TestTransactionalPage.cshtml" />
+    <Content Include="Views\TestFeatures\TestAppPage.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

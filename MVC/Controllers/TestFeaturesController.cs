@@ -6,83 +6,10 @@ using GoC.WebTemplate.Components.Entities;
 
 namespace GoC.WebTemplate.MVC.Controllers
 {
-    public class TestWebTemplatePageController : WebTemplateBaseController
+    public class TestFeaturesController : WebTemplateBaseController
     {
-
-        public ActionResult LeftMenuSecure()
-        {
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            WebTemplateModel.LeftMenuItems = new List<MenuSection>
-            {
-                new MenuSection
-                {
-                    Items = new List<MenuItem> { 
-                        new MenuItem {
-                            Href = "",
-                            Text = "Menu Item 1"
-                        }, new MenuItem {
-                            Href= "#",
-                            Text = "Menu Item 2"
-                        }
-                    } ,
-                    Href = "#",
-                    Text  = "MenuSection",
-                    NewWindow = false
-                },
-                new MenuSection{
-                    Text="Principale",
-                    Items= new List<MenuItem> {
-                        new MenuItem{
-                            Href="linka",
-                            Text="Secondaire",
-                            SubItems= new List<Link> {
-                                new Link{
-                                    Href="linkb",
-                                    Text="Tertiaire"
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-            return View("HelloWorldLeftMenu");
-        }
-        public ActionResult HelloWorld()
-        {
-            WebTemplateModel.ApplicationTitle.Text = "Application Web Template";
-            WebTemplateModel.Breadcrumbs = null;
-            return View();
-        }
-
-        public ActionResult StandardPage()
-        {
-            WebTemplateModel.AppSettingsURL = "http://tempuri.com";
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
-        }
-
-        public ActionResult Secure()
-        {
-
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
-        }
-
         public ActionResult SignIn()
         {
-
             WebTemplateModel.ApplicationTitle.Text = "Application Name";
             WebTemplateModel.Breadcrumbs = null;
             WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
@@ -90,7 +17,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateModel.Settings.ShowPostContent = false;
             WebTemplateModel.ShowSignInLink = true;
             WebTemplateModel.Settings.SignInLinkUrl = "about//blank";
-            return View("HelloWorld");
+
+            return View("TestAppPage");
         }
         public ActionResult SignOut()
         {
@@ -102,7 +30,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateModel.Settings.ShowPostContent = false;
             WebTemplateModel.ShowSignOutLink = true;
             WebTemplateModel.Settings.SignOutLinkUrl = "about//blank";
-            return View("HelloWorld");
+
+            return View("TestAppPage");
         }
         public ActionResult NoSearch()
         {
@@ -113,17 +42,8 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateModel.Settings.ShowLanguageLink = true;
             WebTemplateModel.Settings.ShowSearch = false;
             WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
-        }
-        public ActionResult NoMenu()
-        {
 
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
+            return View("TestAppPage");
         }
 
         public ActionResult CustomMenu()
@@ -134,28 +54,13 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateModel.Settings.ShowLanguageLink = true;
             WebTemplateModel.CustomSiteMenuURL =
                "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/" + WebTemplateModel.Settings.Version + "/cdts/ajax/appmenu-en.html";
-
             WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
-        }
-        public ActionResult SignInWithCustomMenu()
-        {
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.CustomSiteMenuURL =
-               "https://ssl-templates.services.gc.ca/app/cls/WET/gcweb/" + WebTemplateModel.Settings.Version + "/cdts/ajax/appmenu-en.html";
 
-            WebTemplateModel.Settings.SignInLinkUrl = "about//blank";
-            WebTemplateModel.ShowSignInLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
+            return View("TestAppPage");
         }
 
         public ActionResult WithBreadCrumbs()
         {
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
             WebTemplateModel.Breadcrumbs = new List<Breadcrumb>
             {
                 new Breadcrumb{ Href = "https://www.canada.ca/en.html", Title = "GoC", Acronym = "Government of Canada"  },
@@ -165,96 +70,9 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateModel.Settings.ShowLanguageLink = true;
             WebTemplateModel.Settings.ShowPostContent = false;
 
-            return View("HelloWorld");
+            return View("TestPage");
         }
 
-        public ActionResult StandardFooter()
-        {
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            return View("HelloWorld");
-        }
-        public ActionResult CustomFooterGcWeb()
-        {
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            WebTemplateModel.CustomFooterLinks = new List<FooterLink>
-            {
-                new FooterLink {Href= "#", Text= "Link 1"},
-                new FooterLink {Href= "#", Text= "Link 2"},
-                new FooterLink {Href= "#", Text= "Link 3", NewWindow= true},
-                new FooterLink {Href= "#", Text= "Link 4"},
-                new FooterLink {Href= "#", Text= "Link 5"},
-                new FooterLink {Href= "#", Text= "Link 6"},
-                new FooterLink {Href= "#", Text= "Link 7"},
-                new FooterLink {Href= "#", Text= "Link 8"},
-                new FooterLink {Href= "#", Text= "Link 9"}
-            };
-            return View("HelloWorld");
-        }
-
-        public ActionResult CustomFooterGcIntranet()
-        {
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.Settings.ShowPostContent = false;
-            WebTemplateModel.FooterSections = new List<FooterSection>
-            {
-                new FooterSection
-                {
-                    SectionName = "Section 1 Custom",
-                    CustomFooterLinks = new List<FooterLink>
-                    {
-                        new FooterLink {Href= "google.ca", Text= "Link 1"},
-                        new FooterLink {Href= "#", Text= "Link 2"},
-                        new FooterLink {Href= "google.ca", Text= "Link 3", NewWindow= true},
-                    }
-                },
-                new FooterSection
-                {
-                    SectionName = "Section 2 Custom",
-                    CustomFooterLinks = new List<FooterLink>
-                    {
-                        new FooterLink {Href= "#", Text= "Link 4"},
-                        new FooterLink {Href= "#", Text= "Link 5"},
-                        new FooterLink {Href= "#", Text= "Link 6"},
-                    }
-                },
-                new FooterSection
-                {
-                    SectionName = "Section 3 Custom",
-                    CustomFooterLinks = new List<FooterLink>
-                    {
-                        new FooterLink {Href= "#", Text= "Link 7"},
-                        new FooterLink {Href= "#", Text= "Link 8"},
-                        new FooterLink {Href= "#", Text= "Link 9"},
-                    }
-                }
-            };
-            return View("HelloWorld");
-        }
-
-        public ActionResult TransactionalFooterCustomLinks()
-        {
-
-            WebTemplateModel.ApplicationTitle.Text = "Application Name";
-            WebTemplateModel.Breadcrumbs = null;
-            WebTemplateModel.LanguageLink.Href = "apptop-fr.html";
-            WebTemplateModel.Settings.ShowLanguageLink = true;
-            WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "#" };
-            WebTemplateModel.PrivacyLink = new FooterLink { Href = "#" };
-            return View("HelloWorld");
-        }
-        //
-        // GET: /TestWebTemplatePage/
         public ActionResult TestPage()
         {
             //BASIC SETTINGS ====================================
@@ -415,55 +233,5 @@ namespace GoC.WebTemplate.MVC.Controllers
 
             return View();
         }
-        public ActionResult SplashPage()
-        {
-            WebTemplateModel.SplashPageInfo.EnglishHomeUrl = "http://www.canada.ca/en/index.html";
-            WebTemplateModel.SplashPageInfo.FrenchHomeUrl = "http://www.canada.ca/fr/index.html";
-            WebTemplateModel.SplashPageInfo.EnglishTermsUrl = "http://www.canada.ca/en/transparency/terms.html";
-            WebTemplateModel.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
-            WebTemplateModel.SplashPageInfo.EnglishName = "[My web asset]";
-            WebTemplateModel.SplashPageInfo.FrenchName = "[Mon actif web]";
-            return View();
-        }
-
-        //public RedirectResult RedirectTest()
-        //{
-        //    return Redirect("http://www.lapresse.com");
-        //}
-
-        //public RedirectToRouteResult RedirecttoRouteTest()
-        //{
-        //    return RedirectToAction("Index");
-        //}
-
-        //public FileStreamResult FileResutTest()
-        //{
-        //    string name = "C://sf-ml/me.txt";
-        //    System.IO.FileInfo info = new System.IO.FileInfo(name);
-        //    if (!info.Exists)
-        //    {
-        //        using (System.IO.StreamWriter writer = info.CreateText())
-        //        {
-        //            writer.WriteLine("Hello, I am a new text file");
-        //        }
-        //    }
-        //    return File(info.OpenRead(), "text/plain");
-        //}
-
-        //public ActionResult EmptyRestultTest()
-        //{
-        //    return EmptyResult();
-        //}
-
-        //public PartialViewResult PartialVR()
-        //{
-        //    return PartialView(); tested in separate project
-        //}
-
-        //public ContentResult ContentResultTest()
-        //{
-        //    return Content();
-        //}
-
     }
 }
