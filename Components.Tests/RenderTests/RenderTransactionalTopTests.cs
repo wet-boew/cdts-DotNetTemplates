@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using GoC.WebTemplate.Components.Entities;
 using Xunit;
 
@@ -22,7 +22,20 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
     {
       sut.Render.TransactionalTop().ToString().Should().Contain("\"topSecMenu\":false");
     }
-        
+
+    [Theory, AutoNSubstituteData]
+    public void TopSecSiteMenuFalseInTransactionalTop(Model sut)
+    {
+        sut.Render.TransactionalTop().ToString().Should().Contain("\"siteMenu\":false");
+    }
+
+    [Theory, AutoNSubstituteData]
+    public void TopSecSearchFalseInTransactionalTop(Model sut)
+    {
+        sut.Settings.ShowSearch = false;
+        sut.Render.TransactionalTop().ToString().Should().Contain("\"search\":false");
+    }
+
     [Theory, AutoNSubstituteData]
     public void IntranetTitleShouldNotRenderWhenNullInTransactionalTop(Model sut)
     {
@@ -37,19 +50,19 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         sut.Render.TransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
     }
 
-        [Theory, AutoNSubstituteData]
-        public void CustomSearchRenders(Model sut)
+    [Theory, AutoNSubstituteData]
+    public void CustomSearchRenders(Model sut)
+    {
+        sut.CustomSearch = new CustomSearch
         {
-            sut.CustomSearch = new CustomSearch
-            {
-                Action = "#",
-                Placeholder = "Custom Search Placeholder",
-                Method = "get"
-            };
-            var result = sut.Render.TransactionalTop().ToString();
-            result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
-        }
-
-
+            Action = "#",
+            Placeholder = "Custom Search Placeholder",
+            Method = "get"
+        };
+        var result = sut.Render.TransactionalTop().ToString();
+        result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
     }
+
+
+    }   
 }
