@@ -8,6 +8,7 @@ namespace GoC.WebTemplate.Components.Entities
         public string CdnEnv { get; set; }
         public string SubTheme { get; set; }
         public List<IntranetTitle> IntranetTitle { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Include)]
         public bool Search { get; set; }
         public List<LanguageLink> LngLinks { get; set; }
         public bool ShowPreContent { get; set; }
@@ -16,6 +17,7 @@ namespace GoC.WebTemplate.Components.Entities
 
         [JsonProperty(DefaultValueHandling=DefaultValueHandling.Include)]
         public bool TopSecMenu { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Include)]
         public bool SiteMenu { get; set; }
         public List<CustomSearch> CustomSearch { get; set; }
     }
