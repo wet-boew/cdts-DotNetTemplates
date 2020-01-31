@@ -2,6 +2,7 @@ test_components:
   stage: test
   tags:
     - secrets
+    - dotnet
   before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:
@@ -16,6 +17,7 @@ test_components_core:
   stage: test
   tags:
     - secrets
+    - dotnet
   before_script:
     - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:

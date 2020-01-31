@@ -43,6 +43,7 @@ namespace GoC.WebTemplate.Components.Entities
         /// <summary>
         /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallBackUrl has been specified).
         /// </summary>
+        [JsonProperty(DefaultValueHandling=DefaultValueHandling.Include)] 
         public bool RefreshOnClick { get; set; }
 
         /// <summary>

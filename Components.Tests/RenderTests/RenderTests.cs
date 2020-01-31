@@ -111,6 +111,15 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void RenderSessionRefreshRendersDefaultValue(Model sut)
+        {
+            sut.Settings.SessionTimeout.RefreshOnClick = default;
+
+            var result = sut.Render.SessionTimeoutControl();
+            result.ToString().Should().Contain("\"refreshOnClick\":false");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void RenderServerTop(Model sut)
         {
             var result = sut.Render.ServerTop();
