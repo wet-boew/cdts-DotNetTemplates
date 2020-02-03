@@ -187,5 +187,12 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (bool?)this["useWebAnalytics"]; }
             set { this["useWebAnalytics"] = value; }
         }
+
+        [ConfigurationProperty("gcToolsModal", IsRequired = false)]
+        public bool? GcToolsModal
+        {
+            get { return (bool?)this["gcToolsModal"]; }
+            set { this["gcToolsModal"] = value; }
+        }
     }
 }

@@ -134,6 +134,11 @@ namespace GoC.WebTemplate.Components.Configs
         /// </summary>
         public WebAnalytics WebAnalytics { get; set; } = new WebAnalytics();
 
+        /// <summary>
+        /// Use this in the intranet theme to change the GCTools links into a Modal
+        /// </summary>
+        public bool GcToolsModal { get; set; }
+
         public WebTemplateSettings() { }
         public WebTemplateSettings(GocWebTemplateConfigurationSection configurationSection)
         {
@@ -185,6 +190,7 @@ namespace GoC.WebTemplate.Components.Configs
                     Environment = WebAnalytics.EnvironmentOption.production,
                     Version = 2
                 };
+            GcToolsModal = configurationSection.GcToolsModal ?? false;
         }
     }
 }

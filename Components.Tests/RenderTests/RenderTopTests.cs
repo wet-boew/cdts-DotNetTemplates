@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components.Entities;
+using System;
 using Xunit;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
@@ -87,6 +88,26 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
             var result = sut.Render.Top().ToString();
             result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void GcToolsMoalRendersInIntranet(Model sut)
+        {
+            sut.Settings.GcToolsModal = true;
+            sut.CdtsEnvironment.Theme = "gcintranet";
+
+            var result = sut.Render.Top().ToString();
+            result.Should().Contain("\"GCToolsModal\":true");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void GcToolsMoalThrowsExeptionInGcWeb(Model sut)
+        {
+            sut.Settings.GcToolsModal = true;
+            sut.CdtsEnvironment.Theme = "gcweb";
+            
+            Action act = () => sut.Render.Top();
+            act.Should().Throw<NotSupportedException>();
         }
 
     }

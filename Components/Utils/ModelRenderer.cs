@@ -51,9 +51,11 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString TransactionalTop()
         {
+            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.Theme.Equals("gcweb", StringComparison.OrdinalIgnoreCase))
+                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+
             return JsonSerializationHelper.SerializeToJson(new Top
             {
-
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
@@ -64,13 +66,16 @@ namespace GoC.WebTemplate.Components.Utils
                 LocalPath = _model.Builder.BuildLocalPath(),
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
-                SiteMenu = false
-
+                SiteMenu = false,
+                GcToolsModal = _model.Settings.GcToolsModal
             });
         }
 
         public HtmlString Top()
         {
+            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.Theme.Equals("gcweb", StringComparison.OrdinalIgnoreCase))
+                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+
             return JsonSerializationHelper.SerializeToJson(new Top
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
@@ -83,7 +88,8 @@ namespace GoC.WebTemplate.Components.Utils
                 LocalPath = _model.Builder.BuildLocalPath(),
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
-                SiteMenu = true
+                SiteMenu = true,
+                GcToolsModal = _model.Settings.GcToolsModal
             });
         }
 
@@ -312,7 +318,8 @@ namespace GoC.WebTemplate.Components.Utils
                 MenuPath = _model.CustomSiteMenuURL,
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 TopSecMenu = _model.LeftMenuItems.Any(),
-                MenuLinks = _model.MenuLinks
+                MenuLinks = _model.MenuLinks,
+                GcToolsModal = _model.Settings.GcToolsModal
             });
         }
 

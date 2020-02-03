@@ -278,5 +278,24 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             json.ToString().Should().Contain("\"lngLinks\":[{\"href\":\"foo-en.lang\"");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void GcToolsMoalRendersInIntranet(Model sut)
+        {
+            sut.Settings.GcToolsModal = true;
+            sut.CdtsEnvironment.Theme = "gcintranet";
+
+            var result = sut.Render.AppTop().ToString();
+            result.Should().Contain("\"GCToolsModal\":true");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void GcToolsMoalDoesntRenderInGcWeb(Model sut)
+        {
+            sut.Settings.GcToolsModal = true;
+            sut.CdtsEnvironment.Theme = "gcweb";
+
+            var result = sut.Render.AppTop().ToString();
+            result.Should().NotContain("GCToolsModal");
+        }
     }
 }

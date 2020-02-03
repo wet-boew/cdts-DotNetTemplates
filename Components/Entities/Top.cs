@@ -20,5 +20,8 @@ namespace GoC.WebTemplate.Components.Entities
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Include)]
         public bool SiteMenu { get; set; }
         public List<CustomSearch> CustomSearch { get; set; }
+
+        [JsonProperty(PropertyName = "GCToolsModal")]
+        public bool GcToolsModal { get; set; }
     }
 }
