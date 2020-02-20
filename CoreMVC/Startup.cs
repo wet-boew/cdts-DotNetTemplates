@@ -1,4 +1,5 @@
-﻿using GoC.WebTemplate.Components.Core.Services;
+using GoC.WebTemplate.Components.Core.Services;
+using GoC.WebTemplate.Components.Core.Utils.CultureProviders;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -28,7 +29,6 @@ namespace GoC.WebTemplate.CoreMVC
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSession(
                 options =>
@@ -43,12 +43,17 @@ namespace GoC.WebTemplate.CoreMVC
             );
 
             services.AddModelAccessor();
+
+            services.ConfigureGoCTemplateRequestLocalization();
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseRequestLocalization(CultureConfiguration.GetLocalizationOptions());
+            app.UseRequestLocalization();
 
             if (env.IsDevelopment())
             {
