@@ -31,9 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Components.Core\Components.Core.csproj" />
   </ItemGroup>
 
