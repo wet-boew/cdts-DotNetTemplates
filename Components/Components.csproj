@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
     <PackageId>GoC.WebTemplate-Components</PackageId>
@@ -19,16 +19,16 @@
     <AssemblyName>GoC.WebTemplate.Components</AssemblyName>
     <RootNamespace>GoC.WebTemplate.Components</RootNamespace>
   </PropertyGroup>
-  
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CodeAnalysisRuleSet>..\WebTemplate.ruleset</CodeAnalysisRuleSet>
     <NoWarn>1701;1702;CA1812</NoWarn>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <None Remove="Configs\Cdts\CdtsEnvironments.json" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <EmbeddedResource Include="Configs\Cdts\CdtsEnvironments.json" />
   </ItemGroup>

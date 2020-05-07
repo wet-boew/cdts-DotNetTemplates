@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
     <PackageId>GoC.WebTemplate-Components.Core</PackageId>
     <Authors>Solution Design Services</Authors>
     <Company>Employment and Social Development Canada - GoC</Company>
@@ -32,5 +32,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Components\Components.csproj" />
   </ItemGroup>
-  
+
 </Project>
