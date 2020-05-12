@@ -51,17 +51,10 @@ namespace GoC.WebTemplate.MVC.ActionFilters
             // Set timeout based on session
             WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(System.Web.HttpContext.Current.Session);
 
+            filterContext.Controller.ViewData["WebTemplateModel"] = WebTemplateModel;
+            filterContext.Controller.ViewData["WebTemplateVersion"] = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
             base.OnActionExecuting(filterContext);
-        }
-
-        public override void OnResultExecuting(ResultExecutingContext filterContext)
-        {
-            var controller = filterContext.Controller;
-
-            controller.ViewData["WebTemplateModel"] = WebTemplateModel;
-            controller.ViewData["WebTemplateVersion"] = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-
-            base.OnResultExecuting(filterContext);
         }
     }
 }

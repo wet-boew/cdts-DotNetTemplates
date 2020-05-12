@@ -133,6 +133,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\WebTemplateBaseController.cs" />
+    <Compile Include="ViewDataDictionaryExtension.cs" />
     <Content Include="Views\GoC.WebTemplate\GoCWebTemplate.Application.cshtml" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />
@@ -226,6 +227,7 @@
     <Content Include="Views\TestFeatures\TestTransactionalPage.cshtml" />
     <Content Include="Views\TestFeatures\TestAppPage.cshtml" />
     <Content Include="Views\TestActionFilter\Default.cshtml" />
+    <Content Include="Views\TestActionFilter\WithBreadCrumbs.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
