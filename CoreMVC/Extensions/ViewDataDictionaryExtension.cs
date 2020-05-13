@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
-namespace GoC.WebTemplate.CoreMVC
+namespace GoC.WebTemplate.CoreMVC.Extensions
 {
     public static class ViewDataDictionaryExtension
     {

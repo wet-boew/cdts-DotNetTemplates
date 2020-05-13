@@ -1,7 +1,7 @@
 ﻿using GoC.WebTemplate.Components;
 using System.Web.Mvc;
 
-namespace GoC.WebTemplate.MVC
+namespace GoC.WebTemplate.MVC.Extensions
 {
     public static class ViewDataDictionaryExtension
     {

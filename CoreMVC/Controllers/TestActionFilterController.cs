@@ -1,5 +1,6 @@
 ﻿using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.CoreMVC.ActionFilters;
+using GoC.WebTemplate.CoreMVC.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
