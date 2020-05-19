@@ -10,7 +10,7 @@
   environment:
     url: $env:ARTIFACTORY_DEPLOY
   script:
-    - 'curl -u $env:ARTIFACTORY_CRED -X PUT $env:ARTIFACTORY_DEPLOY -T GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k'
+    - 'curl.exe -u $env:ARTIFACTORY_CRED -X PUT $env:ARTIFACTORY_DEPLOY -T GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k'
 
 Deploy:Components:
   extends: .deploy
