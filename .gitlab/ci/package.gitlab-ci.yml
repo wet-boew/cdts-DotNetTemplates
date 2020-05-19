@@ -1,103 +1,75 @@
-package_components:
-  stage: package
-  dependencies:
-    - build_sln
-    - version_components
+.package:
+  stage: Package
   only:
     variables:
-      - $MAIN_VERSION != null
-  before_script:
-    - dotnet restore Components/Components.csproj
-  script:
-    - dotnet pack "Components\\Components.csproj" --no-build -c Release -o .
+      - $DEPLOY_VERSION != null
   artifacts:
     expire_in: 1 day
     paths:
-      - 'GoC.WebTemplate-Components.%MAIN_VERSION%.nupkg'
+      - 'GoC.WebTemplate-$env:PROJECT.$DEPLOY_VERSION.nupkg'
 
-package_componentscore:
-  stage: package
-  dependencies:
-    - build_sln
-    - version_components # to extract proper dependency
-    - version_componentscore
-  only:
-    variables:
-      - $MAIN_VERSION != null
+.package:core:
+  extends: .package
+  tags:
+    - dotnet
   script:
-    - dotnet pack "Components.Core\\Components.Core.csproj" --no-build -c Release -o .
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-Components.Core.%MAIN_VERSION%.nupkg'
+    - dotnet pack $env:PROJECT\$env:PROJECT.csproj --no-build -c Release -o .
+
+.package:fw:
+  extends: .package
+  tags:
+    - nuget
+  script:
+    - powershell.exe "$env:PACKAGE_PS" "$env:PROJECT" $env:PROJECT"
+    - nuget pack "$env:PROJECT\$env:PROJECT.nuspec"
+
+Package:Components:
+  extends: .package.core
+  dependencies:
+    - Compile:Default_SLN
+    - Version:Components
+  variables:
+    PROJECT: 'Components'
+
+Package:Components.Core:
+  extends: .package.core
+  dependencies:
+    - Compile:Default_SLN
+    - Version:Components # to extract proper dependency
+    - Version:Components.Core
+  variables:
+    PROJECT: 'Components.Core'
       
-package_componentsframe:
-  stage: package
-  dependencies: 
-    - version_componentsframe
-    - build_sln
-  tags:
-    - nuget
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:
-    - powershell.exe "%PACKAGE_PS1%" "Components.Framework" "Components.Framework"
-    - '"%NUGET_PATH%" pack "Components.Framework\\Components.Framework.nuspec"'
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-Components.Framework.%MAIN_VERSION%.nupkg'
-
-package_coremvc:
-  stage: package
+Package:Components.Framework:
+  extends: .package:fw
   dependencies:
-    - build_sln
-    - version_components # to extract proper dependency
-    - version_componentscore # to extract proper dependency
-    - version_coremvc
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:
-    - dotnet pack "CoreMVC\\CoreMVC.csproj" --no-build -c Release -o .
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-CoreMVC.%MAIN_VERSION%.nupkg'
+    - Compile:Default_SLN
+    - Version:Components.Framework
+  variables:
+    PROJECT: 'Components.Framework'
 
-package_mvc:
-  stage: package
+Package:CoreMVC:
+  extends: package.core
+  dependencies:
+    - Compile:Default_SLN
+    - Version:Components # to extract proper dependency
+    - Version:Components.Core # to extract proper dependency
+    - Version:CoreMVC
+  variables:
+    PROJECT: 'CoreMVC'
+
+Package:MVC:
+  extends: package.fw
   dependencies: 
-    - version_mvc
-    - build_sln
-  tags:
-    - nuget
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:       
-    - powershell.exe "%PACKAGE_PS1%" "MVC" "MVC"
-    - '"%NUGET_PATH%" pack "MVC\\MVC.nuspec"'
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-MVC.%MAIN_VERSION%.nupkg'
+    - Compile:Default_SLN
+    - Version:MVC
+  variables:
+    PROJECT: 'MVC'
       
-package_forms:
-  stage: package
+Package:Forms:
+  extends: package.fw
   dependencies: 
-    - version_forms
-    - build_sln
-  tags:
-    - nuget
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:   
-    - powershell.exe "%PACKAGE_PS1%" "WebForms" "WebForms"
-    - '"%NUGET_PATH%" pack "WebForms\\WebForms.nuspec"'    
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - 'GoC.WebTemplate-WebForms.%MAIN_VERSION%.nupkg'
+    - Compile:Default_SLN
+    - Version:WebForms
+  variables:
+    PROJECT: 'WebForms'

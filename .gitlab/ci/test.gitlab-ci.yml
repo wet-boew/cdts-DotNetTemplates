@@ -1,39 +1,31 @@
-test_components:
-  stage: test
+.unit_test:
+  stage: Test
+  extends: .secrets
   tags:
     - secrets
     - dotnet
-  before_script:
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
   script:
-    - 'dotnet test Components.Tests --logger "junit;LogFilePath=ComponentsTestResults.xml"'
-  after_script:
-    - 'del GoC.WebTemplate.snk'
+    - dotnet test $env:PROJECT --logger "junit;LogFilePath=UnitTestResults.xml"
   artifacts:
     reports:
-      junit: Components.Tests\ComponentsTestResults.xml
+      junit: $env:PROJECT\UnitTestResults.xml
 
-test_components_core:
-  stage: test
-  tags:
-    - secrets
-    - dotnet
-  before_script:
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
-  script:
-    - 'dotnet test Components.Core.Tests --logger "junit;LogFilePath=ComponentsCoreTestResults.xml"'
-  after_script:
-    - 'del GoC.WebTemplate.snk'
-  artifacts:
-    reports:
-      junit: Components.Core.Tests\ComponentsCoreTestResults.xml
+Unit_Test:Components:
+  extends: .unit_test
+  variables:
+    PROJECT: Components.Tests
 
-test_components_frame:
-  stage: test
+Unit_Test:Components.Core:
+  extends: .unit_test
+  variables:
+    PROJECT: Components.Core.Tests
+
+Unit_Test:Components.Framework:
+  stage: Test
   dependencies:
-    - build_sln
+    - Compile:Default_SLN
   script:
-    - '"%xUNIT_PATH%\\xunit.console.exe" "%TEST_FRAME_PATH%\\GoC.WebTemplate.Components.Framework.Tests.dll" -junit ComponentsFrameworkTestResults.xml'
+    - "$env:xUNIT_PATH\xunit.console.exe" "$env:TEST_FRAME_PATH\GoC.WebTemplate.Components.Framework.Tests.dll" -junit ComponentsFrameworkTestResults.xml
   artifacts:
     reports:
       junit: ComponentsFrameworkTestResults.xml

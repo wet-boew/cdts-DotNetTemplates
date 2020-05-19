@@ -1,28 +1,28 @@
 variables:
-  VERSION_PS1: 'Builds\\version.ps1'
-  DOTNET_VERSION_PS: 'Builds\\dotnet-version.ps1'
-  PACKAGE_PS1: 'Builds\\package.ps1'
+  FW_VERSION_PS: '.scripts\fw-version.ps1'
+  CORE_VERSION_PS: '.scripts\core-version.ps1'
+  PACKAGE_PS: '.scripts\package.ps1'
   DEFAULT_SLN: 'GoC.WebTemplate.sln'
-  SAMPLES_SLN: 'GoC.WebTemplate.Samples.sln'
-  xUNIT_PATH: 'packages\\xunit.runner.console.2.4.1\\tools\\net472'
-  TEST_FRAME_PATH: 'Components.Framework.Tests\\bin\\Release'
+  xUNIT_PATH: 'packages\xunit.runner.console.2.4.1\tools\net461'
+  TEST_FRAME_PATH: 'Components.Framework.Tests\bin\Release'
   ARTIFACTORY_DEPLOY: 'https://jade-repos.intra.dev/artifactory/ca-gc-sds-libs-nuget-local/'
-  # variables from runner
-  # - NUGET_PATH
-  # - MSBUILD_PATH
-  # - CURL_PATH
-  # - ARTIFACTORY_CRED
   
 stages:
-  - prepare
-  - build
-  - test
-  - package
-  - deploy
+  - Prepare
+  - Build
+  - Test
+  - Package
+  - Deploy
 
 include:
-  - local: '/Builds/prepare.gitlab-ci.yml'
-  - local: '/Builds/build.gitlab-ci.yml'
-  - local: '/Builds/test.gitlab-ci.yml'
-  - local: '/Builds/package.gitlab-ci.yml'
-  - local: '/Builds/deploy.gitlab-ci.yml'
+  - local: '/.gitlab/ci/prepare.gitlab-ci.yml'
+  - local: '/.gitlab/ci/build.gitlab-ci.yml'
+  - local: '/.gitlab/ci/test.gitlab-ci.yml'
+  - local: '/.gitlab/ci/package.gitlab-ci.yml'
+  - local: '/.gitlab/ci/deploy.gitlab-ci.yml'
+
+.secrets:
+  before_script:
+    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
+  after_script:
+    - 'del GoC.WebTemplate.snk'
