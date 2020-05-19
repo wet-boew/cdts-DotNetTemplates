@@ -24,7 +24,7 @@
     - nuget pack "$env:PROJECT\$env:PROJECT.nuspec"
 
 Package:Components:
-  extends: .package.core
+  extends: .package:core
   dependencies:
     - Compile:Default_SLN
     - Version:Components
@@ -32,7 +32,7 @@ Package:Components:
     PROJECT: 'Components'
 
 Package:Components.Core:
-  extends: .package.core
+  extends: .package:core
   dependencies:
     - Compile:Default_SLN
     - Version:Components # to extract proper dependency
@@ -49,7 +49,7 @@ Package:Components.Framework:
     PROJECT: 'Components.Framework'
 
 Package:CoreMVC:
-  extends: package.core
+  extends: .package:core
   dependencies:
     - Compile:Default_SLN
     - Version:Components # to extract proper dependency
@@ -59,7 +59,7 @@ Package:CoreMVC:
     PROJECT: 'CoreMVC'
 
 Package:MVC:
-  extends: package.fw
+  extends: .package:fw
   dependencies: 
     - Compile:Default_SLN
     - Version:MVC
@@ -67,7 +67,7 @@ Package:MVC:
     PROJECT: 'MVC'
       
 Package:Forms:
-  extends: package.fw
+  extends: .package:fw
   dependencies: 
     - Compile:Default_SLN
     - Version:WebForms
