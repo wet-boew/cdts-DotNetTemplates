@@ -3,6 +3,7 @@
   tags:
     - curl
     - artifactory
+    - ps
   only:
     variables:
       - $DEPLOY_VERSION != null

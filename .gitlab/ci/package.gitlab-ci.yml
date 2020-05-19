@@ -12,6 +12,7 @@
   extends: .package
   tags:
     - dotnet
+    - ps
   script:
     - dotnet pack $env:PROJECT\$env:PROJECT.csproj --no-build -c Release -o .
 
@@ -19,6 +20,7 @@
   extends: .package
   tags:
     - nuget
+    - ps
   script:
     - powershell.exe "$env:PACKAGE_PS" "$env:PROJECT" $env:PROJECT"
     - nuget pack "$env:PROJECT\$env:PROJECT.nuspec"

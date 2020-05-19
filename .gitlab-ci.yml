@@ -23,6 +23,6 @@ include:
 
 .secrets:
   before_script:
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
+    - 'copy $env:SECRETS_PATH\\GoC.WebTemplate.snk .'
   after_script:
     - 'del GoC.WebTemplate.snk'

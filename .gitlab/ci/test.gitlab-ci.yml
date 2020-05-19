@@ -4,6 +4,7 @@
   tags:
     - secrets
     - dotnet
+    - ps
   script:
     - dotnet test $env:PROJECT --logger "junit;LogFilePath=UnitTestResults.xml"
   artifacts:

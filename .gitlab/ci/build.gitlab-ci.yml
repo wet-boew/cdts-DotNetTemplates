@@ -5,6 +5,7 @@ Compile:Default_SLN:
     - nuget
     - msbuild
     - secrets
+    - ps
   script:
     - nuget restore $env:DEFAULT_SLN
     - msbuild $env:DEFAULT_SLN /p:Configuration=Release

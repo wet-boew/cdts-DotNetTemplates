@@ -1,6 +1,8 @@
 .version:
   stage: Prepare
   allow_failure: true
+  tags:
+    - ps
   only:
     variables:
       - $DEPLOY_VERSION != null
