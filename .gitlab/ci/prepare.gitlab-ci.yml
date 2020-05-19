@@ -1,77 +1,52 @@
-version_components:
-  stage: prepare
+.version:
+  stage: Prepare
   allow_failure: true
+  tags:
+    - ps
   only:
     variables:
-      - $MAIN_VERSION != null
-  script:    
-    - powershell.exe %DOTNET_VERSION_PS% %MAIN_VERSION% "Components\Components.csproj"
+      - $DEPLOY_VERSION != null
   artifacts:
     expire_in: 1 hour
     paths:
-      - 'Components\Components.csproj'
+      - $env:VERSION_FILE
 
-version_componentscore:
-  stage: prepare
-  allow_failure: true
-  only:
-    variables:
-      - $MAIN_VERSION != null
+.version:core:
+  extends: .version
   script:    
-    - powershell.exe %DOTNET_VERSION_PS% %MAIN_VERSION% "Components.Core\Components.Core.csproj"
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - 'Components.Core\Components.Core.csproj'
+    - powershell.exe $env:CORE_VERSION_PS $env:DEPLOY_VERSION $env:VERSION_FILE
 
-version_componentsframe:
-  stage: prepare
-  allow_failure: true
-  only:
-    variables:
-      - $MAIN_VERSION != null
+.version:fw:
+  extends: .version
   script:    
-    - powershell.exe %VERSION_PS1% %MAIN_VERSION% "Components.Framework\Properties\AssemblyInfo.cs"
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - 'Components.Framework\Properties\AssemblyInfo.cs'
+    - powershell.exe $env:FW_VERSION_PS $env:DEPLOY_VERSION $env:VERSION_FILE
 
-version_coremvc:
-  stage: prepare
-  allow_failure: true
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:    
-    - powershell.exe %DOTNET_VERSION_PS% %MAIN_VERSION% "CoreMVC\CoreMVC.csproj"
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - 'CoreMVC\CoreMVC.csproj'
+Version:Components:
+  extends: .version:core
+  variables:
+    VERSION_FILE: 'Components\Components.csproj'
 
-version_forms:
-  stage: prepare
-  allow_failure: true
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:    
-    - powershell.exe %VERSION_PS1% %MAIN_VERSION% "WebForms\Properties\AssemblyInfo.cs"
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - 'WebForms\Properties\AssemblyInfo.cs'
+Version:Components.Core:
+  extends: .version:core
+  variables:
+    VERSION_FILE: 'Components.Core\Components.Core.csproj'
 
-version_mvc:
-  stage: prepare
-  allow_failure: true
-  only:
-    variables:
-      - $MAIN_VERSION != null
-  script:    
-    - powershell.exe %VERSION_PS1% %MAIN_VERSION% "MVC\Properties\AssemblyInfo.cs"
-  artifacts:
-    expire_in: 1 hour
-    paths:
-      - 'MVC\Properties\AssemblyInfo.cs' 
+Version:Components.Framework:
+  extends: .version:fw
+  variables:
+    VERSION_FILE: 'Components.Framework\Properties\AssemblyInfo.cs'
+
+Version:CoreMVC:
+  extends: .version:core
+  variables:
+    VERSION_FILE: 'CoreMVC\CoreMVC.csproj'
+
+Version:WebForms:
+  extends: .version:fw
+  variables:
+    VERSION_FILE: 'WebForms\Properties\AssemblyInfo.cs'
+
+Version:MVC:
+  extends: .version:fw
+  variables:
+    VERSION_FILE: 'MVC\Properties\AssemblyInfo.cs'

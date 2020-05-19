@@ -1,95 +1,67 @@
-deploy_components:
-  stage: deploy
-  dependencies: 
-    - package_components
+.deploy:
+  stage: Deploy
   tags:
     - curl
     - artifactory
+    - ps
   only:
     variables:
-      - $MAIN_VERSION != null
+      - $DEPLOY_VERSION != null
+  environment:
+    url: $env:ARTIFACTORY_DEPLOY
+  script:
+    - 'curl.exe -u $env:ARTIFACTORY_CRED -X PUT $env:ARTIFACTORY_DEPLOY -T GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k'
+
+Deploy:Components:
+  extends: .deploy
+  needs: 
+    - Package:Components
+  variables:
+    PROJECT: 'Components'
   environment:
     name: Artifactory-Components
-    url: '%ARTIFACTORY_DEPLOY%'
-  script:
-    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.%MAIN_VERSION%.nupkg -k'
 
-deploy_componentscore:
-  stage: deploy
-  dependencies: 
-    - package_componentscore
-  tags:
-    - curl
-    - artifactory
-  only:
-    variables:
-      - $MAIN_VERSION != null
+Deploy:Components.Core:
+  extends: .deploy
+  needs: 
+    - Package:Components.Core
+  variables:
+    PROJECT: 'Components.Core'
   environment:
     name: Artifactory-ComponentsCore
-    url: '%ARTIFACTORY_DEPLOY%'
-  script:
-    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.Core.%MAIN_VERSION%.nupkg -k'
 
-deploy_componentsframe:
-  stage: deploy
-  dependencies: 
-    - package_componentsframe
-  tags:
-    - curl
-    - artifactory
-  only:
-    variables:
-      - $MAIN_VERSION != null
+Deploy:Components.Framework:
+  extends: .deploy
+  needs: 
+    - Package:Components.Framework
+  variables:
+    PROJECT: 'Components.Framework'
   environment:
     name: Artifactory-ComponentsFramework
-    url: '%ARTIFACTORY_DEPLOY%'
-  script:
-    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-Components.Framework.%MAIN_VERSION%.nupkg -k'
 
-deploy_coremvc:
-  stage: deploy
-  dependencies: 
-    - package_coremvc
-  tags:
-    - curl
-    - artifactory
-  only:
-    variables:
-      - $MAIN_VERSION != null
+Deploy:CoreMVC:
+  extends: .deploy
+  needs: 
+    - Package:CoreMVC
+  variables:
+    PROJECT: 'CoreMVC'
   environment:
     name: Artifactory-CoreMVC
-    url: '%ARTIFACTORY_DEPLOY%'
-  script:
-    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-CoreMVC.%MAIN_VERSION%.nupkg -k'
 
-deploy_mvc:
-  stage: deploy
-  dependencies: 
-    - package_mvc
-  tags:
-    - curl
-    - artifactory
-  only:
-    variables:
-      - $MAIN_VERSION != null
+Deploy:MVC:
+  extends: .deploy
+  needs: 
+    - Package:MVC
+  variables:
+    PROJECT: 'MVC'
   environment:
     name: Artifactory-MVC
-    url: '%ARTIFACTORY_DEPLOY%'
-  script:
-    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-MVC.%MAIN_VERSION%.nupkg -k'
 
-deploy_forms:
-  stage: deploy
-  dependencies: 
-    - package_forms
-  tags:
-    - curl
-    - artifactory
-  only:
-    variables:
-      - $MAIN_VERSION != null
+Deploy:WebForms:
+  extends: .deploy
+  needs: 
+    - Package:WebForms
+  variables:
+    PROJECT: 'WebForms'
   environment:
     name: Artifactory-WebForms
-    url: '%ARTIFACTORY_DEPLOY%'
-  script:
-    - '"%CURL_PATH%" -u %ARTIFACTORY_CRED% -X PUT %ARTIFACTORY_DEPLOY% -T GoC.WebTemplate-WebForms.%MAIN_VERSION%.nupkg -k'

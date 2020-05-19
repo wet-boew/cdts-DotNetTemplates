@@ -1,16 +1,14 @@
-build_sln:
-  stage: build
+Compile:Default_SLN:
+  stage: Build
+  extends: .secrets
   tags:
     - nuget
     - msbuild
     - secrets
-  before_script:
-    - 'copy %SECRETS_PATH%\\GoC.WebTemplate.snk .'
-    - '"%NUGET_PATH%" restore %DEFAULT_SLN%'
+    - ps
   script:
-    - '"%MSBUILD_PATH%" %DEFAULT_SLN% /p:Configuration=Release'
-  after_script:
-    - 'del GoC.WebTemplate.snk'
+    - nuget restore $env:DEFAULT_SLN
+    - msbuild $env:DEFAULT_SLN /p:Configuration=Release
   artifacts:
     expire_in: 1 hour
     paths:
@@ -23,5 +21,5 @@ build_sln:
       - 'CoreMVC\\obj\\project.assets.json'
       - 'MVC\\bin\\GoC.WebTemplate.MVC.dll'
       - 'WebForms\\bin\\GoC.WebTemplate.Webforms.dll'
-      - '%xUNIT_PATH%'
-      - '%TEST_FRAME_PATH%'
+      - '$env:xUNIT_PATH'
+      - '$env:TEST_FRAME_PATH'
