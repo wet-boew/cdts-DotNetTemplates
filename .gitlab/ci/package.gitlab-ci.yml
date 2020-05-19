@@ -22,7 +22,7 @@
     - nuget
     - ps
   script:
-    - powershell.exe "$env:PACKAGE_PS" "$env:PROJECT" $env:PROJECT"
+    - powershell.exe "$env:PACKAGE_PS" "$env:PROJECT" "$env:PROJECT"
     - nuget pack "$env:PROJECT\$env:PROJECT.nuspec"
 
 Package:Components:
