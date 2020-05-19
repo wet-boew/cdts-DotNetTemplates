@@ -7,7 +7,6 @@
     variables:
       - $DEPLOY_VERSION != null
   environment:
-    name: Artifactory-$env:PROJECT
     url: $env:ARTIFACTORY_DEPLOY
   script:
     - 'curl -u $env:ARTIFACTORY_CRED -X PUT $env:ARTIFACTORY_DEPLOY -T GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k'
@@ -18,6 +17,8 @@ Deploy:Components:
     - Package:Components
   variables:
     PROJECT: 'Components'
+  environment:
+    name: Artifactory-Components
 
 Deploy:Components.Core:
   extends: .deploy
@@ -25,6 +26,8 @@ Deploy:Components.Core:
     - Package:Components.Core
   variables:
     PROJECT: 'Components.Core'
+  environment:
+    name: Artifactory-ComponentsCore
 
 Deploy:Components.Framework:
   extends: .deploy
@@ -32,6 +35,8 @@ Deploy:Components.Framework:
     - Package:Components.Framework
   variables:
     PROJECT: 'Components.Framework'
+  environment:
+    name: Artifactory-ComponentsFramework
 
 Deploy:CoreMVC:
   extends: .deploy
@@ -39,6 +44,8 @@ Deploy:CoreMVC:
     - Package:CoreMVC
   variables:
     PROJECT: 'CoreMVC'
+  environment:
+    name: Artifactory-CoreMVC
 
 Deploy:MVC:
   extends: .deploy
@@ -46,6 +53,8 @@ Deploy:MVC:
     - Package:MVC
   variables:
     PROJECT: 'MVC'
+  environment:
+    name: Artifactory-MVC
 
 Deploy:WebForms:
   extends: .deploy
@@ -53,3 +62,5 @@ Deploy:WebForms:
     - Package:WebForms
   variables:
     PROJECT: 'WebForms'
+  environment:
+    name: Artifactory-WebForms
