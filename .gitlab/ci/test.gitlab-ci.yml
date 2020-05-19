@@ -23,10 +23,12 @@ Unit_Test:Components.Core:
 
 Unit_Test:Components.Framework:
   stage: Test
+  tags:
+    - ps
   dependencies:
     - Compile:Default_SLN
   script:
-    - '"$env:xUNIT_PATH\xunit.console.exe" "$env:TEST_FRAME_PATH\GoC.WebTemplate.Components.Framework.Tests.dll" -junit ComponentsFrameworkTestResults.xml'
+    - $env:xUNIT_PATH\xunit.console.exe $env:TEST_FRAME_PATH\GoC.WebTemplate.Components.Framework.Tests.dll -junit ComponentsFrameworkTestResults.xml
   artifacts:
     reports:
       junit: ComponentsFrameworkTestResults.xml
