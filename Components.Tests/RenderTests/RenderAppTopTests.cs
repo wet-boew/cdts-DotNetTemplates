@@ -5,6 +5,7 @@ using Xunit;
 using AutoFixture.Xunit2;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Configs.Cdts;
+using NSubstitute;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {
@@ -292,7 +293,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void GcToolsMoalDoesntRenderInGcWeb(Model sut)
         {
             sut.Settings.GcToolsModal = true;
-            sut.CdtsEnvironment.Theme = "gcweb";
+            sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
 
             var result = sut.Render.AppTop().ToString();
             result.Should().NotContain("GCToolsModal");

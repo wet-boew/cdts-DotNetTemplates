@@ -1,5 +1,6 @@
 using FluentAssertions;
 using GoC.WebTemplate.Components.Entities;
+using NSubstitute;
 using System;
 using Xunit;
 
@@ -78,7 +79,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void GcToolsMoalThrowsExeptionInGcWeb(Model sut)
         {
             sut.Settings.GcToolsModal = true;
-            sut.CdtsEnvironment.Theme = "gcweb";
+            sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
 
             Action act = () => sut.Render.Top();
             act.Should().Throw<NotSupportedException>();

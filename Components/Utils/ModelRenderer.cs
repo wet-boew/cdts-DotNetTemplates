@@ -46,12 +46,12 @@ namespace GoC.WebTemplate.Components.Utils
 
             //For v4.0.26.x we have to render this section differently depending on the theme, 
             //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
-            return _model.CdtsEnvironment.Theme.Equals("gcweb", StringComparison.OrdinalIgnoreCase) ? GCWebAppTop() : GCIntranetApptop();
+            return _model.CdtsEnvironment.ThemeIsGCWeb() ? GCWebAppTop() : GCIntranetApptop();
         }
 
         public HtmlString TransactionalTop()
         {
-            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.Theme.Equals("gcweb", StringComparison.OrdinalIgnoreCase))
+            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
                 throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
 
             return JsonSerializationHelper.SerializeToJson(new Top
@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString Top()
         {
-            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.Theme.Equals("gcweb", StringComparison.OrdinalIgnoreCase))
+            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
                 throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
 
             return JsonSerializationHelper.SerializeToJson(new Top

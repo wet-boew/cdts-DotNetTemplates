@@ -85,5 +85,19 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             });
         }
 
+        [Theory, AutoNSubstituteData]
+        public void IfThemeIsGCWebTrueIsReturned(CdtsEnvironment sut)
+        {
+            sut.Theme = CdtsEnvironment.CdtsThemes.GCWeb.ToString();
+            sut.ThemeIsGCWeb().Should().BeTrue();
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void IfThemeIsGCIntrantFalseIsReturned(CdtsEnvironment sut)
+        {
+            sut.Theme = CdtsEnvironment.CdtsThemes.GCIntranet.ToString();
+            sut.ThemeIsGCWeb().Should().BeFalse();
+        }
+
     }
 }

@@ -39,5 +39,7 @@ namespace GoC.WebTemplate.Components.Configs.Cdts
         bool CanHaveMultipleContactLinks { get; set; }
         bool CanHaveContactLinkInAppTemplate { get; set; }
         bool CanUseWebAnalytics { get; set; }
+
+        bool ThemeIsGCWeb();
     }
 }

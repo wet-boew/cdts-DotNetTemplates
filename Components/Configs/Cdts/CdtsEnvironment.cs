@@ -1,3 +1,5 @@
+using System;
+
 namespace GoC.WebTemplate.Components.Configs.Cdts
 {
     public class CdtsEnvironment : ICdtsEnvironment
@@ -15,5 +17,16 @@ namespace GoC.WebTemplate.Components.Configs.Cdts
         public bool CanHaveMultipleContactLinks { get; set; }
         public bool CanHaveContactLinkInAppTemplate { get; set; }
         public bool CanUseWebAnalytics { get; set; }
+
+        public bool ThemeIsGCWeb()
+        {
+            return Theme.Equals(CdtsThemes.GCWeb.ToString(), StringComparison.OrdinalIgnoreCase);
+        }
+
+        public enum CdtsThemes
+        {
+            GCWeb,
+            GCIntranet
+        }
     }
 }
