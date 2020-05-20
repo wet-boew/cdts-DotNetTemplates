@@ -9,10 +9,13 @@
       - 'GoC.WebTemplate-$env:PROJECT.$DEPLOY_VERSION.nupkg'
 
 .package:core:
-  extends: .package
+  extends: 
+   - .package
+   - .secrets #dotnet pack sometimes requires the secrets, so make sure they are there
   tags:
     - dotnet
     - ps
+    - secrets 
   script:
     - dotnet pack $env:PROJECT\$env:PROJECT.csproj --no-build -c Release -o .
 
