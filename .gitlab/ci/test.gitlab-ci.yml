@@ -1,6 +1,8 @@
 .unit_test:
   stage: Test
-  extends: .secrets
+  extends: 
+    - .secrets
+    - .cache
   tags:
     - secrets
     - dotnet

@@ -1,6 +1,8 @@
 Compile:Default_SLN:
   stage: Build
-  extends: .secrets
+  extends: 
+    - .secrets
+    - .cache
   tags:
     - nuget
     - msbuild

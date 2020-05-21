@@ -26,3 +26,9 @@ include:
     - 'copy $env:SECRETS_PATH\\GoC.WebTemplate.snk .'
   after_script:
     - 'del GoC.WebTemplate.snk'
+
+.cache:
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths: 
+      - packages/

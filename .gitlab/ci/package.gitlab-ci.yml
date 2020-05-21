@@ -12,6 +12,7 @@
   extends: 
    - .package
    - .secrets #dotnet pack sometimes requires the secrets, so make sure they are there
+   - .cache #if dotnet pack tries to rebuild, load cache for quicker build
   tags:
     - dotnet
     - ps
