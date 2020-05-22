@@ -5,7 +5,6 @@ variables:
   DEFAULT_SLN: 'GoC.WebTemplate.sln'
   xUNIT_PATH: 'packages\xunit.runner.console.2.4.1\tools\net461'
   TEST_FRAME_PATH: 'Components.Framework.Tests\bin\Release'
-  ARTIFACTORY_DEPLOY: 'https://jade-repos.intra.dev/artifactory/ca-gc-sds-libs-nuget-local/'
   
 stages:
   - Prepare
