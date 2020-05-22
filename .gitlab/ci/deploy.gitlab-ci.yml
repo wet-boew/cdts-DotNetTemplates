@@ -1,24 +1,24 @@
 .deploy:
   stage: Deploy
   tags:
-    - curl
-    - artifactory
     - ps
+    - dotnet
   environment:
     url: 'https://www.nuget.org/packages/GoC.WebTemplate-$env:PROJECT/'
-    name: GoC.WebTemplate-$env:PROJECT
   only:
     variables:
       - $DEPLOY_VERSION != null
   script:
-    - dotnet nuget push GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k $env:NUGET_DEPLOY_APIKEY -s https://api.nuget.org/v3/index.json
+    - 'dotnet nuget push GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k $env:NUGET_DEPLOY_APIKEY -s https://api.nuget.org/v3/index.json'
 
 Deploy:Components:
   extends: .deploy
   needs: 
     - Package:Components
   variables:
-    PROJECT: 'Components'
+    PROJECT: Components
+  environment:
+    name: GoC.WebTemplate-Components
 
 Deploy:Components.Core:
   extends: .deploy
@@ -26,6 +26,8 @@ Deploy:Components.Core:
     - Package:Components.Core
   variables:
     PROJECT: 'Components.Core'
+  environment:
+    name: GoC.WebTemplate-Components.Core
 
 Deploy:Components.Framework:
   extends: .deploy
@@ -33,6 +35,8 @@ Deploy:Components.Framework:
     - Package:Components.Framework
   variables:
     PROJECT: 'Components.Framework'
+  environment:
+    name: GoC.WebTemplate-Components.Framework
 
 Deploy:CoreMVC:
   extends: .deploy
@@ -40,6 +44,8 @@ Deploy:CoreMVC:
     - Package:CoreMVC
   variables:
     PROJECT: 'CoreMVC'
+  environment:
+    name: GoC.WebTemplate-CoreMVC
 
 Deploy:MVC:
   extends: .deploy
@@ -47,6 +53,8 @@ Deploy:MVC:
     - Package:MVC
   variables:
     PROJECT: 'MVC'
+  environment:
+    name: GoC.WebTemplate-MVC
 
 Deploy:WebForms:
   extends: .deploy
@@ -54,3 +62,5 @@ Deploy:WebForms:
     - Package:WebForms
   variables:
     PROJECT: 'WebForms'
+  environment:
+    name: GoC.WebTemplate-WebForms
