@@ -1,8 +1,6 @@
 .package:
   stage: Package
-  only:
-    variables:
-      - $DEPLOY_VERSION != null
+  extends: .deploy_version
   artifacts:
     expire_in: 1 day
     paths:
