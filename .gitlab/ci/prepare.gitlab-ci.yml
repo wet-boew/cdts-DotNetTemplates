@@ -1,11 +1,9 @@
 .version:
   stage: Prepare
+  extends: .deploy_version
   allow_failure: true
   tags:
     - ps
-  only:
-    variables:
-      - $DEPLOY_VERSION != null
   artifacts:
     expire_in: 1 hour
     paths:
