@@ -1,13 +1,11 @@
 .deploy:
   stage: Deploy
+  extends: .deploy_version
   tags:
     - ps
     - dotnet
   environment:
     url: 'https://www.nuget.org/packages/GoC.WebTemplate-$env:PROJECT/'
-  only:
-    variables:
-      - $DEPLOY_VERSION != null
   script:
     - 'dotnet nuget push GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k $env:NUGET_DEPLOY_APIKEY -s https://api.nuget.org/v3/index.json'
 
