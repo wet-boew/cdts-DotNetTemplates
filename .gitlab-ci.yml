@@ -31,3 +31,9 @@ include:
     key: "$CI_COMMIT_REF_SLUG"
     paths: 
       - packages/
+
+Tag:
+  stage: .post
+  script:
+    - git tag -a v1.0 -m "test tag"
+    - git push origin --tags
