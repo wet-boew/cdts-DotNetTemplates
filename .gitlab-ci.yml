@@ -37,4 +37,4 @@ Tag:
   tags:
     - curl
   script:
-    - 'curl.exe --request POST --header "PRIVATE-TOKEN: $env:API_TOKEN" "https://gccode.ssc-spc.gc.ca/api/v4/projects/$env:CI_PROJECT_ID/repository/tags?tag_name=test&ref=master&release_description=Automated%20Release:%20See%20CHANGELOG.md%20for%20details"'
+    - 'curl.exe --request POST --header "PRIVATE-TOKEN: $env:API_TOKEN" "https://gccode.ssc-spc.gc.ca/api/v4/projects/$env:CI_PROJECT_ID/repository/tags?tag_name=$env:CI_COMMIT_REF_SLUG&ref=master&release_description=Automated+Release++%0D%0APlease+review+the+%5BCHANGELOG%5D%28CHANGELOG.md%29+for+details+of+the+release."'
