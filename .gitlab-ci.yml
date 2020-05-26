@@ -35,5 +35,8 @@ include:
 Tag:
   stage: .post
   script:
+    - git config --global user.email $env:GIT_AUTHOR_EMAIL
+    - git config --global user.name &env:GIT_AUTHOR_NAME
+    - sed -i -r 's/(url = .*):(.*)@(.*)/\1:'$env:GIT_AUTHOR_TOKEN'@\3/' .git/config
     - git tag -a v1.0 -m "test tag"
-    - git push origin --tags
+    - git push -o ci.skip origin --tags
