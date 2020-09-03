@@ -21,8 +21,8 @@
         @WebTemplateModel.LoadStaticFile("refTop.html")
     </noscript>
     <!-- Write closure template -->
-    <script type="text/javascript">
-        document.write(wet.builder.refTop(@WebTemplateModel.Render.RefTop(isApplication : false)));
+    <script id="wt-scr-rt" type="text/javascript">
+        document.getElementById('wt-scr-rt').insertAdjacentHTML('afterend', wet.builder.refTop(@WebTemplateModel.Render.RefTop(isApplication : false)));
     </script>
     @WebTemplateModel.Render.HtmlHeaderElements()
     @RenderSection("CustomStyles", required: false)
@@ -62,8 +62,8 @@
         defFooter.outerHTML = wet.builder.footer(@WebTemplateModel.Render.Footer());
     </script>
     <!-- Write closure template -->
-    <script type="text/javascript">
-        document.write(wet.builder.refFooter(@WebTemplateModel.Render.RefFooter()));
+    <script id="wt-scr-rf" type="text/javascript">
+        document.getElementById('wt-scr-rf').insertAdjacentHTML('afterend', wet.builder.refFooter(@WebTemplateModel.Render.RefFooter()));
     </script>
     @WebTemplateModel.Render.HtmlBodyElements()
     @RenderSection("CustomScripts", required: false)

@@ -20,9 +20,10 @@
             <%= WebTemplateModel.LoadStaticFile("refTop.html") %>
         </noscript>
          <!-- Write closure template -->
-        <script type="text/javascript">
-            document.write(wet.builder.splashTop({
-            cdnEnv: "<%= WebTemplateModel.CdtsEnvironment.CDN %>"}));
+        <script id="wt-scr-rt" type="text/javascript">
+            document.getElementById('wt-scr-rt').insertAdjacentHTML('afterend', wet.builder.splashTop({
+                cdnEnv: "<%= WebTemplateModel.CdtsEnvironment.CDN %>"
+            }));
         </script>
 
         <%= WebTemplateModel.Render.HtmlHeaderElements() %>

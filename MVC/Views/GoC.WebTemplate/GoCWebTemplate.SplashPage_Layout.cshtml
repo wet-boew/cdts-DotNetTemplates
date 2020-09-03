@@ -21,8 +21,8 @@
         @Html.Raw(WebTemplateModel.LoadStaticFile("refTop.html"))
     </noscript>
     <!-- Write closure template -->
-    <script type="text/javascript">
-        document.write(wet.builder.splashTop({
+    <script id="wt-scr-st" type="text/javascript">
+        document.getElementById('wt-scr-st').insertAdjacentHTML('afterend', wet.builder.splashTop({
             cdnEnv: "@WebTemplateModel.CdtsEnvironment.CDN"
         }));
     </script>
