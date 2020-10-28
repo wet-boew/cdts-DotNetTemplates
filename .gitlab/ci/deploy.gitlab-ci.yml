@@ -7,7 +7,7 @@
   environment:
     url: 'https://www.nuget.org/packages/GoC.WebTemplate-$env:PROJECT/'
   script:
-    - 'dotnet nuget push GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k $env:NUGET_DEPLOY_APIKEY -s https://api.nuget.org/v3/index.json'
+    - 'dotnet nuget push GoC.WebTemplate-$env:PROJECT.$env:DEPLOY_VERSION.nupkg -k $env:NUGETORG_DEPLOY_APIKEY -s https://api.nuget.org/v3/index.json'
 
 Deploy:Components:
   extends: .deploy
