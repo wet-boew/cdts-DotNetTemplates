@@ -1,3 +1,4 @@
+using GoC.WebTemplate.Components.Utils;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
@@ -23,7 +24,9 @@ namespace GoC.WebTemplate.Components.Entities
         /// </summary>
         public List<Link> SignOut { get; set; }
         public bool Search { get; set; }
-        public List<Breadcrumb> Breadcrumbs { get; set; }
+        //We have to use custom serializers because breadcrumbs can be both bool and a list of breadcrumbs.
+        [JsonConverter(typeof(BreadcrumbListConverter))]
+        public BreadcrumbList Breadcrumbs { get; set; }
         public string SubTheme { get; set; }
         public bool ShowPreContent { get; set; }
         public string LocalPath { get; set; }
