@@ -30,5 +30,10 @@ namespace GoC.WebTemplate.Components.Entities
         /// Use this value to state which version of AA your application / site uses. Presently only versions 1 or 2 are available.
         /// </summary>
         public int Version { get; set; }
+
+        /// <summary>
+        /// This is used for incorporating Adobe Analytics Version 3 from CDTS
+        /// </summary>
+        public string Custom { get; set; }
     }
 }
