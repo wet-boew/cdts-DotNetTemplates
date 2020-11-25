@@ -22,6 +22,6 @@ Compile:Default_SLN:
       - 'CoreMVC\\bin\\Release'
       - 'CoreMVC\\obj\\project.assets.json'
       - 'MVC\\bin\\GoC.WebTemplate.MVC.dll'
-      - 'WebForms\\bin\\GoC.WebTemplate.Webforms.dll'
+      - 'WebForms\\bin\\GoC.WebTemplate.WebForms.dll'
       - '$env:xUNIT_PATH'
       - '$env:TEST_FRAME_PATH'
