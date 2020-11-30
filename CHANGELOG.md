@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.3.1
+
+### Fixes
+
+- Package error
+
 ## v2.3.0
 
 ### New features and improvements
