@@ -21,8 +21,8 @@
         @Html.Raw(WebTemplateModel.LoadStaticFile("serverRefTop.html"))
     </noscript>
     <!-- Write closure template -->
-    <script id="wt-scr-rt" type="text/javascript">
-        document.getElementById('wt-scr-rt').insertAdjacentHTML('afterend', wet.builder.refTop(@Html.Raw(WebTemplateModel.Render.ServerRefTop())));
+    <script type="text/javascript">
+        document.write(wet.builder.refTop(@Html.Raw(WebTemplateModel.Render.ServerRefTop())));
     </script>
     @Html.Raw(WebTemplateModel.Render.HtmlHeaderElements())
     @RenderSection("CustomStyles", required: false)
@@ -56,8 +56,8 @@
         defFooter.outerHTML = wet.builder.serverBottom(@Html.Raw(WebTemplateModel.Render.ServerBottom()));
     </script>
     <!-- Write closure template -->
-    <script id="wt-scr-rf" type="text/javascript">
-        document.getElementById('wt-scr-rf').insertAdjacentHTML('afterend', wet.builder.refFooter(@Html.Raw(WebTemplateModel.Render.ServerRefFooter())));
+    <script type="text/javascript">
+        document.write(wet.builder.refFooter(@Html.Raw(WebTemplateModel.Render.ServerRefFooter())));
     </script>
     @Html.Raw(WebTemplateModel.Render.HtmlBodyElements())
     @RenderSection("CustomScripts", required: false)

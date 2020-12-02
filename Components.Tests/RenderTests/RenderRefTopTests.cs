@@ -82,13 +82,24 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void WebAnaliticsRenders(Model sut)
+        public void WebAnalyticsRenders(Model sut)
         {
             sut.Settings.WebAnalytics.Active = true;
+            sut.Settings.WebAnalytics.Custom = null;
             sut.Settings.WebAnalytics.Environment = WebAnalytics.EnvironmentOption.staging;
             sut.Settings.WebAnalytics.Version = 1;
             var result = sut.Render.RefTop(false);
             result.ToString().Should().Contain("\"webAnalytics\":[{\"environment\":\"staging\",\"version\":1}]");
+            result.ToString().Should().NotContain("custom");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void WebAnalyticsRendersVersion3(Model sut)
+        {
+            sut.Settings.WebAnalytics.Active = true;
+            sut.Settings.WebAnalytics.Custom = "launch-EN0cf6c2810a2b48f8a4c36502a1b09541.min.js";
+            var result = sut.Render.RefTop(false);
+            result.ToString().Should().Contain("\"custom\":\"launch-EN0cf6c2810a2b48f8a4c36502a1b09541.min.js\"}]");
         }
     }
 }

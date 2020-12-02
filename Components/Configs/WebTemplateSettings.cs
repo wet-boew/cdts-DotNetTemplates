@@ -195,6 +195,7 @@ namespace GoC.WebTemplate.Components.Configs
                 new WebAnalytics()
                 {
                     Active = configurationSection.UseWebAnalytics ?? false,
+                    Custom = null,
                     Environment = WebAnalytics.EnvironmentOption.production,
                     Version = 2
                 };

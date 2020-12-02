@@ -1,5 +1,17 @@
 # DotNetTemplates Change Log
 
+## v2.3.1
+
+### Fixes
+
+- Package error
+
+## v2.3.0
+
+### New features and improvements
+
+- Adds support for Adobe Analytics Version 3
+
 ## v2.2.0
 
 ### New features and improvements
