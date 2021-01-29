@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.3.2
+
+### Fixes
+
+- Fixing the issue of the search bar showing even when set to false
+
 ## v2.3.1
 
 ### Fixes
