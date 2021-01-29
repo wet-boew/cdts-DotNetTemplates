@@ -22,6 +22,7 @@ namespace GoC.WebTemplate.Components.Entities
         /// This is an array but it should only have one item in it. 
         /// </summary>
         public List<Link> SignOut { get; set; }
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Include)]
         public bool Search { get; set; }
         public List<Breadcrumb> Breadcrumbs { get; set; }
         public string SubTheme { get; set; }
