@@ -45,5 +45,15 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["excludedDomains"]; }
             set { this["excludedDomains"] = value; }
         }
+
+        /// <summary>
+        /// Determines if the popup window should be displayed with the warning message if the user navigates outside the secure session (for links that open in a window)
+        /// </summary>
+        [ConfigurationProperty("displayModalForNewWindow", DefaultValue = true, IsRequired = false)]
+        public bool DisplayModalForNewWindow
+        {
+            get { return (bool)this["displayModalForNewWindow"]; }
+            set { this["displayModalForNewWindow"] = value; }
+        }
     }
 }

@@ -359,7 +359,9 @@ namespace GoC.WebTemplate.Components.Utils
                 YesMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                WebAnalytics = _model.Settings.WebAnalytics.Active
+                WebAnalytics = _model.Settings.WebAnalytics.Active,
+                TargetWarning = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
+                DisplayModalForNewWindow = _model.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow
             });
 
         }

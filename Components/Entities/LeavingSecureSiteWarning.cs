@@ -44,5 +44,18 @@ namespace GoC.WebTemplate.Components.Entities
         /// Set by application programmatically
         /// </summary>
         public string YesMessage { get; set; }
+
+        /// <summary>
+        /// Specify the text that will warn the user that the link will open in a new window. 
+        /// Set by application programmatically
+        /// </summary>
+        public string TargetWarning { get; set; }
+
+        /// <summary>
+        /// Determines if the popup window should be displayed with the warning message if the user navigates outside the secure session (for links that open in a window)
+        /// Set by application via web.config
+        /// or Set by application programmatically
+        /// </summary>
+        public bool DisplayModalForNewWindow { get; set; }
     }
 }

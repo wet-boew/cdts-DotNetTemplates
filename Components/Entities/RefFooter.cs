@@ -13,5 +13,7 @@ namespace GoC.WebTemplate.Components.Entities
         public string CancelMsg { get; set; }
         public string YesMsg { get; set; }
         public bool WebAnalytics { get; set; }
+        public string TargetWarning { get; set; }
+        public bool? DisplayModalForNewWindow { get; set; }
     }
 }

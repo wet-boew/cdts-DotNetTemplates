@@ -156,7 +156,8 @@ namespace GoC.WebTemplate.Components.Configs
                     DisplayModalWindow = configurationSection.LeavingSecureSiteWarning.DisplayModalWindow,
                     Enabled = configurationSection.LeavingSecureSiteWarning.Enabled,
                     ExcludedDomains = configurationSection.LeavingSecureSiteWarning.ExcludedDomains,
-                    RedirectUrl = configurationSection.LeavingSecureSiteWarning.RedirectURL
+                    RedirectUrl = configurationSection.LeavingSecureSiteWarning.RedirectURL,
+                    DisplayModalForNewWindow = configurationSection.LeavingSecureSiteWarning.DisplayModalForNewWindow
                 };
             LoadScriptsFromGoogle = configurationSection.LoadJQueryFromGoogle;
             SessionTimeout =
