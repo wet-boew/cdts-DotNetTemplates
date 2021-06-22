@@ -11,5 +11,6 @@ namespace GoC.WebTemplate.Components.Entities
         public List<FooterLink> PrivacyLink { get; set; }
         public string SubTheme { get; set; }
         public string LocalPath { get; set; }
+        public string FooterPath { get; set; }
     }
 }

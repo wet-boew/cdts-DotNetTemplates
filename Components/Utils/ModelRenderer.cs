@@ -33,7 +33,8 @@ namespace GoC.WebTemplate.Components.Utils
                 PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
                 ContactLink = _model.Builder.BuildContactLinks(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                FooterSections = _model.Builder.BuildCustomFooterSections
+                FooterSections = _model.Builder.BuildCustomFooterSections,
+                FooterPath = _model.Builder.GetStringForJson(_model.FooterPath)
             });
         }
 

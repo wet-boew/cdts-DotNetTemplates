@@ -282,5 +282,18 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
         }
 
+        [Theory, AutoNSubstituteData]
+        public void CustomFooterPath([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        {
+            var currentEnv = new CdtsEnvironment
+            {
+                Name = "PROD_SSL"
+            };
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            sut.FooterPath = "https://ssl-templates.services.gc.ca/app/cls/WET/global/esdcfooter-eng.html";
+
+            sut.Render.AppFooter().ToString().Should().Contain("\"footerPath\":\"https://ssl-templates.services.gc.ca/app/cls/WET/global/esdcfooter-eng.html\"");
+        }
+
     }
 }

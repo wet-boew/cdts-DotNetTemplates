@@ -270,5 +270,11 @@ namespace GoC.WebTemplate.Components
             var content = _fileContentCache.GetContent(fileName, StaticFilesPath);
             return new HtmlString(content);
         }
+
+        /// <summary>
+        /// The path for a custom footer
+        /// Set by application programmatically
+        /// </summary>
+        public string FooterPath { get; set; }
     }
 }
