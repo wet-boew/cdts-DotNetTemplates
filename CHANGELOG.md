@@ -1,5 +1,15 @@
 # DotNetTemplates Change Log
 
+## v2.4.0
+
+### New features and improvements
+
+- Adding a targetWarning parameter for the exitScript allowing users to be warned that link will open in a new window
+- Adding a displayModalForNewWindow parameter for the exitScript allowing users to not show a modal if link opens in a new window
+- Adding a footerPath parameter allowing users to provide a custom footer link for the GCIntranet template
+- Updating static fallback files
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v4.0.43 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.43
+
 ## v2.3.3
 
 ### Fixes
