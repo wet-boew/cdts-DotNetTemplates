@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.4.1
+
+### Fixes
+
+- Fixing compatibility issue with .NET Framework
+
 ## v2.4.0
 
 ### New features and improvements

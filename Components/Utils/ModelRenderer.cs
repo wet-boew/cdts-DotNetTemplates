@@ -4,7 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using GoC.WebTemplate.Components.Entities;
-using Microsoft.AspNetCore.Html;
+#if NETCOREAPP
+    using Microsoft.AspNetCore.Html;
+#elif NETFRAMEWORK
+    using System.Web;
+#endif
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils

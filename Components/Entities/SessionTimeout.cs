@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
 namespace GoC.WebTemplate.Components.Entities

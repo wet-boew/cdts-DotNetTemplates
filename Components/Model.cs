@@ -3,11 +3,15 @@ using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
-using Microsoft.AspNetCore.Html;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Threading;
+#if NETCOREAPP
+    using Microsoft.AspNetCore.Html;
+#elif NETFRAMEWORK
+    using System.Web;
+#endif
 
 namespace GoC.WebTemplate.Components
 {

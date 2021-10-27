@@ -6,8 +6,12 @@ using System.Resources;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using GoC.WebTemplate.Components.Configs;
-using Microsoft.AspNetCore.Html;
 using GoC.WebTemplate.Components.Configs.Cdts;
+#if NETCOREAPP
+    using Microsoft.AspNetCore.Html;
+#elif NETFRAMEWORK
+    using System.Web;
+#endif
 
 namespace GoC.WebTemplate.Components.Utils
 {
