@@ -29,7 +29,7 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateModel.Settings.SessionTimeout.CheckWithServerSessionTimeout(Session);
         }
 
-        public Model WebTemplateModel { get; set; }
+        public IModel WebTemplateModel { get; set; }
 
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template

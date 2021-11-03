@@ -14,7 +14,7 @@ namespace GoC.WebTemplate.CoreMVC.ActionFilters
         {
             if (context.Controller is Controller controller)
             {
-                var modelAccessor = (ModelAccessor)controller.HttpContext.RequestServices.GetService(typeof(ModelAccessor));
+                var modelAccessor = (IModelAccessor)controller.HttpContext.RequestServices.GetService(typeof(IModelAccessor));
                 var webTemplateModel = modelAccessor.Model;
 
                 // Update the herf link depending on the current culture keeping the rest of the querystring intact

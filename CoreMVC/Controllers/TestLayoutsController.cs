@@ -5,7 +5,7 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
 {
     public class TestLayoutsController : WebTemplateBaseController
     {
-        public TestLayoutsController(ModelAccessor modelAccessor)
+        public TestLayoutsController(IModelAccessor modelAccessor)
             : base(modelAccessor)
         {
         }

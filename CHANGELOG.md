@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.4.2
+
+### Internal Change
+
+- Adding an interface for Model and ModelAccessor classes
+
 ## v2.4.1
 
 ### Fixes

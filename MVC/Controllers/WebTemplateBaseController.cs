@@ -81,6 +81,6 @@ namespace GoC.WebTemplate.MVC
             return base.BeginExecuteCore(callback, state);
         }
 
-        protected Model WebTemplateModel { get; set; }
+        protected IModel WebTemplateModel { get; set; }
     }
 }

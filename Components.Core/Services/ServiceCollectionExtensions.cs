@@ -15,7 +15,7 @@ namespace GoC.WebTemplate.Components.Core.Services
 
             services.AddMemoryCache();
             services.AddHttpContextAccessor();
-            services.TryAdd(ServiceDescriptor.Scoped<ModelAccessor, ModelAccessor>());
+            services.TryAdd(ServiceDescriptor.Scoped<IModelAccessor, ModelAccessor>());
         }
     }
 }

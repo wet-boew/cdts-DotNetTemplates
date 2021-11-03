@@ -10,9 +10,9 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
 {
     public class WebTemplateBaseController : Controller
     {
-        protected Model WebTemplateModel { get; }
+        protected IModel WebTemplateModel { get; }
 
-        public WebTemplateBaseController(ModelAccessor modelAccessor)
+        public WebTemplateBaseController(IModelAccessor modelAccessor)
         {
             WebTemplateModel = modelAccessor.Model;
         }

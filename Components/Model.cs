@@ -15,7 +15,7 @@ using System.Threading;
 
 namespace GoC.WebTemplate.Components
 {
-    public class Model
+    public class Model : IModel
     {
         private readonly FileContentCache _fileContentCache;
         private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
@@ -25,11 +25,11 @@ namespace GoC.WebTemplate.Components
         private ModelBuilder _builder;
         private ModelRenderer _renderer;
 
-        internal ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
+        public ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
 
         public WebTemplateSettings Settings { get; }
-        
+
         public Model(IFileContentCacheProvider fileContentCacheProvider,
             WebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
@@ -93,7 +93,7 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public DateTime DateModified { get; set; }
-        
+
         /// <summary>
         /// Configures the Privacy Link
         /// Set by application programmatically
@@ -263,7 +263,7 @@ namespace GoC.WebTemplate.Components
         public List<MenuLink> MenuLinks { get; set; }
 
         public IntranetTitle IntranetTitle { get; set; }
-               
+
         /// <summary>
         /// This method is used to get the static file content from the cache. if the cache is empty it will read the content from the file and load it into the cache.
         /// </summary>

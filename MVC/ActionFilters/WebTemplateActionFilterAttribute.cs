@@ -37,7 +37,7 @@ namespace GoC.WebTemplate.MVC.ActionFilters
                 cdtsCacheProvider);
         }
 
-        public Model WebTemplateModel { get; }
+        public IModel WebTemplateModel { get; }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {

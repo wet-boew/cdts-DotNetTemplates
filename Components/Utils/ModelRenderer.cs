@@ -15,8 +15,8 @@ namespace GoC.WebTemplate.Components.Utils
 {
     public class ModelRenderer
     {
-        private readonly Model _model;
-        internal ModelRenderer(Model model)
+        private readonly IModel _model;
+        internal ModelRenderer(IModel model)
         {
             _model = model;
         }

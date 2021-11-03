@@ -13,5 +13,10 @@ namespace GoC.WebTemplate.MVC.Extensions
         /// <returns>The <see cref="Model"/> from the <see cref="ViewPage.ViewData"/> property.</returns>
         public static Model GetWebTemplateModel(this ViewDataDictionary viewData, string key = "WebTemplateModel")
             => (Model)viewData[key];
+
+        public static IModel GetWebTemplateIModel(this ViewDataDictionary viewData, string key = "WebTemplateModel")
+        {
+            return (IModel)viewData[key];
+        }
     }
 }

@@ -8,9 +8,9 @@ using System.IO;
 
 namespace GoC.WebTemplate.Components.Core.Services
 {
-    public class ModelAccessor
+    public class ModelAccessor : IModelAccessor
     {
-        public Model Model { get; }
+        public IModel Model { get; }
 
         public ModelAccessor(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment)
         {
