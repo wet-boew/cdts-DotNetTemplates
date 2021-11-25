@@ -6,6 +6,7 @@ using System.Threading;
 using System.Web;
 using GoC.WebTemplate.Components.Entities;
 using System.Collections.Specialized;
+using System.Net;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils
@@ -156,6 +157,23 @@ namespace GoC.WebTemplate.Components.Utils
                 new LanguageLink {
                     Href = _model.LanguageLink.Href
                 }
+            };
+        }
+
+        internal ExitSecureSite BuildExitSecureSite()
+        {
+            return new ExitSecureSite
+            {
+                ExitScript = true,
+                DisplayModal = _model.Settings.LeavingSecureSiteWarning.DisplayModalWindow,
+                MsgBoxHeader = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.MsgBoxHeader),
+                ExitURL = _model.Settings.LeavingSecureSiteWarning.RedirectUrl,
+                ExitMsg = WebUtility.HtmlEncode(_model.Settings.LeavingSecureSiteWarning.Message),
+                CancelMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.CancelMessage),
+                YesMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
+                ExitDomains = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
+                TargetWarning = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
+                DisplayModalForNewWindow = _model.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow
             };
         }
 

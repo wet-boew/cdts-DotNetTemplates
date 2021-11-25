@@ -193,7 +193,6 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new RefFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                ExitScript = false,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 WebAnalytics = _model.Settings.WebAnalytics.Active
@@ -354,19 +353,11 @@ namespace GoC.WebTemplate.Components.Utils
         {
             return JsonSerializationHelper.SerializeToJson(new RefFooter
             {
+                ExitSecureSite = _model.Builder.BuildExitSecureSite(),
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                ExitScript = true,
-                DisplayModal = _model.Settings.LeavingSecureSiteWarning.DisplayModalWindow,
-                ExitURL = _model.Settings.LeavingSecureSiteWarning.RedirectUrl,
-                ExitMsg = WebUtility.HtmlEncode(_model.Settings.LeavingSecureSiteWarning.Message),
-                ExitDomains = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
-                CancelMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.CancelMessage),
-                YesMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                WebAnalytics = _model.Settings.WebAnalytics.Active,
-                TargetWarning = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
-                DisplayModalForNewWindow = _model.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow
+                WebAnalytics = _model.Settings.WebAnalytics.Active
             });
 
         }

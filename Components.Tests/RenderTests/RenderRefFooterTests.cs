@@ -33,9 +33,10 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow = false;
             sut.Settings.LeavingSecureSiteWarning.CancelMessage = null;
             sut.Settings.LeavingSecureSiteWarning.YesMessage = null;
+            sut.Settings.LeavingSecureSiteWarning.MsgBoxHeader = null;
 
             var result = sut.Render.RefFooter();
-            result.ToString().Should().Contain("\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\",\"targetWarning\":\"Target\",\"displayModalForNewWindow\":false");
+            result.ToString().Should().Contain("\"exitSecureSite\":{\"exitScript\":true,\"exitURL\":\"Redirect URL 1\",\"exitMsg\":\"Message 2\",\"exitDomains\":\"Exclude Domains 3\",\"targetWarning\":\"Target\",\"displayModalForNewWindow\":false}");
         }
 
         [Theory, AutoNSubstituteData]

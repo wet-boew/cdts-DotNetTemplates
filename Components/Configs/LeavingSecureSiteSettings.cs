@@ -64,5 +64,10 @@ namespace GoC.WebTemplate.Components.Configs
         [DefaultValue(true)]
         public bool DisplayModalForNewWindow { get; set; } = true;
 
+        /// <summary>
+        /// Specify the title of the popup window
+        /// Set by application programmatically
+        /// </summary>
+        public string MsgBoxHeader { get; set; }
     }
 }
