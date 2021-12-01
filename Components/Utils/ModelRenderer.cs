@@ -181,20 +181,21 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        public HtmlString RefFooter()
+        public HtmlString RefFooter(bool isApplication)
         {
             if (_model.Settings.WebAnalytics.Active && !_model.CdtsEnvironment.CanUseWebAnalytics) throw new NotSupportedException("The WebAnalytics is not supported in this enviornment.");
 
             if (_model.Settings.LeavingSecureSiteWarning.Enabled &&
                 !string.IsNullOrEmpty(_model.Settings.LeavingSecureSiteWarning.RedirectUrl))
             {
-                return SecureSiteWarningRefFooter();
+                return SecureSiteWarningRefFooter(isApplication);
             }
             return JsonSerializationHelper.SerializeToJson(new RefFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                IsApplication = isApplication,
                 WebAnalytics = _model.Settings.WebAnalytics.Active
             });
         }
@@ -349,7 +350,7 @@ namespace GoC.WebTemplate.Components.Utils
             });
         }
 
-        private HtmlString SecureSiteWarningRefFooter()
+        private HtmlString SecureSiteWarningRefFooter(bool isApplication)
         {
             return JsonSerializationHelper.SerializeToJson(new RefFooter
             {
@@ -357,6 +358,7 @@ namespace GoC.WebTemplate.Components.Utils
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                IsApplication = isApplication,
                 WebAnalytics = _model.Settings.WebAnalytics.Active
             });
 

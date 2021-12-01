@@ -78,7 +78,7 @@
     </script>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refFooter(@WebTemplateModel.Render.RefFooter()));
+        document.write(wet.builder.refFooter(@WebTemplateModel.Render.RefFooter(isApplication: false)));
     </script>
     @WebTemplateModel.Render.HtmlBodyElements()
     @RenderSection("CustomScripts", required: false)
