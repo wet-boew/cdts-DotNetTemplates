@@ -1,16 +1,14 @@
 # DotNetTemplates Change Log
 
-## v2.4.2
+## v2.5.0
 
-### Internal Change
-
-- Adding an interface for Model and ModelAccessor classes
-
-## v2.4.1
-
-### Fixes
+### New features and improvements
 
 - Fixing compatibility issue with .NET Framework
+- Adding an interface for Model and ModelAccessor classes
+- Updating static fallback files
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v4.0.44 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.44.5
+- Internal changes and bug fixes
 
 ## v2.4.0
 
