@@ -122,7 +122,7 @@ namespace GoC.WebTemplate.MVC.Controllers
             //Share this page LINK ====================================
             WebTemplateModel.Settings.ShowSharePageLink = true;
 
-            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.bitly);
+            WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.blogger);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.facebook);
 
 

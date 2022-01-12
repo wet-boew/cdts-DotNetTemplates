@@ -18,13 +18,13 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
                     Show = true,
                     Enums = new List<SocialMediaSites>
                     {
-                        SocialMediaSites.bitly,
-                        SocialMediaSites.blogger
+                        SocialMediaSites.blogger,
+                        SocialMediaSites.diigo
                     }
                 }
             };
             var json = JsonSerializationHelper.SerializeToJson(preFooter);
-            json.ToString().Should().Contain("\"showShare\":[\"bitly\",\"blogger\"]");
+            json.ToString().Should().Contain("\"showShare\":[\"blogger\",\"diigo\"]");
         }
         [Fact]
         public void RenderShowShareAsTrue()

@@ -25,7 +25,7 @@ namespace GoC.WebTemplate.WebForms
             WebTemplateMaster.WebTemplateModel.TermsConditionsLink = new FooterLink { Href = "http://www.pinkbike.com" }; 
             WebTemplateMaster.WebTemplateModel.PrivacyLink = new FooterLink { Href = "http://www.lapresse.ca" };
             WebTemplateMaster.WebTemplateModel.Settings.ShowSharePageLink = true;
-            WebTemplateMaster.WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.bitly);
+            WebTemplateMaster.WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.blogger);
             WebTemplateMaster.WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.facebook);
             WebTemplateMaster.WebTemplateModel.Settings.LeavingSecureSiteWarning.Enabled = false;
             WebTemplateMaster.WebTemplateModel.Settings.LeavingSecureSiteWarning.DisplayModalWindow = true;            

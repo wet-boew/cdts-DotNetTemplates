@@ -7,22 +7,19 @@
     /// <remarks>The enum item name must match the name expected by the Closure Template for the template to work.  The enum item name is used by the Closure Template to retreive the url, image, text for that social site</remarks>
     public enum SocialMediaSites
     {
-        bitly,
         blogger,
-        delicious,
-        digg,
         diigo,
         email,
         facebook,
         gmail,
-        googleplus,
         linkedin,
         myspace,
         pinterest,
         reddit,
-        stumbleupon,
+        tinyurl,
         tumblr,
         twitter,
+        whatsapp,
         yahoomail
     }; //NOTE: The item names must match the parameter names expected by the Closure Template for this to work
 }
