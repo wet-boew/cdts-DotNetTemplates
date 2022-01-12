@@ -12,17 +12,11 @@ namespace GoC.WebTemplate.Components.Core.Services
     {
         public IModel Model { get; }
 
-        public ModelAccessor(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment)
+        public ModelAccessor(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment, IConfiguration configuration)
         {
             var configs = new GocWebTemplateConfigurationSection();
 
-            var configBuilder =
-                new ConfigurationBuilder()
-                    .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .Build();
-
-            configBuilder.GetSection("GoCWebTemplate").Bind(configs);
+            configuration.GetSection("GoCWebTemplate").Bind(configs);
 
             var settings = new WebTemplateSettings(configs);
 
