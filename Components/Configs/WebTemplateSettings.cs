@@ -5,7 +5,7 @@ using System.Globalization;
 
 namespace GoC.WebTemplate.Components.Configs
 {
-    public class WebTemplateSettings
+    public class WebTemplateSettings : IWebTemplateSettings
     {
         private string _environment;
         private string _customSiteMenuUrl;
@@ -57,7 +57,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// Set by application via web.config or programmatically
         /// </summary>
         public string Version { get; set; }
-        
+
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
         /// The environment provided will determine the CDTS that will be used (url and cdnenv)
@@ -99,7 +99,7 @@ namespace GoC.WebTemplate.Components.Configs
         public bool ShowPostContent { get; set; }
 
         public FeedbackLink FeedbackLink { get; set; } = new FeedbackLink();
-        
+
         /// <summary>
         /// Determines if the Search control of the header are to be displayed
         /// Set by application via web.config

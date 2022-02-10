@@ -23,7 +23,7 @@ namespace GoC.WebTemplate.MVC
         { }
 
         public WebTemplateBaseController(IFileContentCacheProvider fileContentCacheProvider,
-            WebTemplateSettings settings,
+            IWebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
         {
             WebTemplateModel = 

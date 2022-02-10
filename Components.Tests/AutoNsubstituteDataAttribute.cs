@@ -26,6 +26,7 @@ namespace GoC.WebTemplate.Components.Test
         public void Customize(IFixture fixture)
         {
             //TODO: Why are we settings these default values? If some tests depend on specific values, they should set it themselves... Either we auto-set everything or nothing.
+            fixture.Register<IWebTemplateSettings>(() => fixture.Create<WebTemplateSettings>());
             fixture.Customize<WebTemplateSettings>(c => c
                 .Without(p => p.UseHttps)
                 .Without(p => p.LoadScriptsFromGoogle)

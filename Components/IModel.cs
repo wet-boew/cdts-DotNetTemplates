@@ -150,7 +150,7 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         string ScreenIdentifier { get; set; }
 
-        WebTemplateSettings Settings { get; }
+        IWebTemplateSettings Settings { get; }
 
         /// <summary>
         /// Representes the list of items to be displayed in the Share Page window

@@ -28,10 +28,10 @@ namespace GoC.WebTemplate.Components
         public ModelBuilder Builder => _builder ?? (_builder = new ModelBuilder(this));
         public ModelRenderer Render => _renderer ?? (_renderer = new ModelRenderer(this));
 
-        public WebTemplateSettings Settings { get; }
+        public IWebTemplateSettings Settings { get; }
 
         public Model(IFileContentCacheProvider fileContentCacheProvider,
-            WebTemplateSettings settings,
+            IWebTemplateSettings settings,
             ICdtsCacheProvider cdtsCacheProvider)
         {
             if (fileContentCacheProvider == null) throw new ArgumentNullException(nameof(fileContentCacheProvider));
