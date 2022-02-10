@@ -1,5 +1,13 @@
 # DotNetTemplates Change Log
 
+## v2.5.1
+
+### New features and improvements
+
+- Fixing a memory leak issue by passing an IConfiguration interface in the ModelAccessor
+- Adding an interface for WebTemplateSettings classes
+- Updating social media sites that can be displayed as part of the share modal
+
 ## v2.5.0
 
 ### New features and improvements
