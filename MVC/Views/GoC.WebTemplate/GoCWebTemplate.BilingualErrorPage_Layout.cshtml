@@ -22,7 +22,7 @@
     </noscript>
     <!-- Write closure template -->
     <script type="text/javascript">
-        document.write(wet.builder.refTop(@Html.Raw(WebTemplateModel.Render.ServerRefTop())));
+        document.write(wet.builder.serverRefTop(@Html.Raw(WebTemplateModel.Render.ServerRefTop())));
     </script>
     @Html.Raw(WebTemplateModel.Render.HtmlHeaderElements())
     @RenderSection("CustomStyles", required: false)
