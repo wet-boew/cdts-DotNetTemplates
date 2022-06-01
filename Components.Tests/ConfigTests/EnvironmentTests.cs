@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             env["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "PROD_SSL",
-                Path = "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+                Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
                 Theme = "gcintranet",
                 CDN = "prod",
                 IsVersionRNCombined = false,

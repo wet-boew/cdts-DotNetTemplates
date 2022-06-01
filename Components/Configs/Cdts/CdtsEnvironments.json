@@ -20,7 +20,7 @@
     },
     {
       "name": "PROD_SSL",
-      "path": "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+      "path": "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
       "theme": "gcintranet",
       "cdn": "prod",
       "isVersionRnCombined": false,
@@ -33,7 +33,7 @@
     },
     {
       "name": "PROD_SSL_ECCCSUB",
-      "path": "https://ssl-templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+      "path": "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
       "theme": "gcintranet",
       "subTheme": "eccc",
       "cdn": "prod",
@@ -47,7 +47,7 @@
     },
     {
       "name": "PROD_UNSECURE",
-      "path": "http://templates.services.gc.ca/{1}/cls/wet/{2}/{3}cdts/compiled/",
+      "path": "http://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
       "theme": "gcintranet",
       "cdn": "prod",
       "isVersionRnCombined": false,
