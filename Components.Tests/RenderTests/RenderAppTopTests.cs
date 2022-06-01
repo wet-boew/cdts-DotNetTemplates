@@ -59,10 +59,11 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
           Href = "foo",
           Text = "bar",
+          Acronym = "baz"
         }
       };
 
-            sut.Render.AppTop().ToString().Should().Contain("\"menuLinks\":[{\"href\":\"foo\",\"text\":\"bar\"}]");
+            sut.Render.AppTop().ToString().Should().Contain("\"menuLinks\":[{\"href\":\"foo\",\"text\":\"bar\",\"acronym\":\"baz\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -79,14 +80,16 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                         {
                             Text = "SubLinkText1",
                             Href = "SubLinkHerf1",
-                            NewWindow = true
+                            NewWindow = true,
+                            Acronym = "baz"
+
                         }
                     }
                 }
             };
             var result = sut.Render.AppTop();
 
-            result.ToString().Should().Contain("\"menuLinks\":[{\"subLinks\":[{\"subhref\":\"SubLinkHerf1\",\"subtext\":\"SubLinkText1\",\"newWindow\":true}],\"text\":\"MenuLink\"}]");
+            result.ToString().Should().Contain("\"menuLinks\":[{\"subLinks\":[{\"subhref\":\"SubLinkHerf1\",\"subtext\":\"SubLinkText1\",\"acronym\":\"baz\",\"newWindow\":true}],\"text\":\"MenuLink\"}]");
         }
 
         [Theory, AutoNSubstituteData]

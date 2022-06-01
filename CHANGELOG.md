@@ -1,12 +1,16 @@
 # DotNetTemplates Change Log
 
-## v2.5.1
+## v2.6.0
 
 ### New features and improvements
 
 - Fixing a memory leak issue by passing an IConfiguration interface in the ModelAccessor
 - Adding an interface for WebTemplateSettings classes
+- Added an acronym parameter to the custom menu allowing users to provide a description for an abbreviation.
 - Updating social media sites that can be displayed as part of the share modal
+- Updating static fallback files
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v4.0.45 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.50.1
+- Internal changes and bug fixes
 
 ## v2.5.0
 
