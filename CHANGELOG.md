@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.6.1
+
+### Fixes
+
+- Fixing a Cross Site Scripting issue in the CoreMVC project
+
 ## v2.6.0
 
 ### New features and improvements
