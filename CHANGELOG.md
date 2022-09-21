@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.6.1
+
+### Fixes
+
+- Fixing a Cross Site Scripting issue
+
 ## v2.6.0
 
 ### New features and improvements
