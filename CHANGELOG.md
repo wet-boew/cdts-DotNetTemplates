@@ -4,7 +4,7 @@
 
 ### Fixes
 
-- Fixing a Cross Site Scripting issue in the CoreMVC project
+- Fixing a Cross Site Scripting issue
 
 ## v2.6.0
 
