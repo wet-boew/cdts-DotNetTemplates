@@ -40,9 +40,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 
 
         [Theory, AutoNSubstituteData]
-        public void DoNotRenderBreadCrumbsByDefault(Model sut)
+        public void RenderNullBreadCrumbsByDefault(Model sut)
         {
-            sut.Render.Top().ToString().Should().NotContain("\"breadcrumbs\"");
+            sut.Render.Top().ToString().Should().Contain("\"breadcrumbs\":null");
         }
 
         [Theory, AutoNSubstituteData]

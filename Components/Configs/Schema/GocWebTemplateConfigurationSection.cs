@@ -130,6 +130,17 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["feedbackLinkUrlFr"]; }
             set { this["feedbackLinkUrlFr"] = value; }
         }
+
+        /// <summary>
+        /// ShowBreadcrumbs
+        /// </summary>
+        [ConfigurationProperty("showBreadcrumbs", DefaultValue = true, IsRequired = false)]
+        public Boolean ShowBreadcrumbs
+        {
+            get { return (Boolean)this["showBreadcrumbs"]; }
+            set { this["showBreadcrumbs"] = value; }
+        }
+
         /// <summary>
         /// ShowSearch
         /// </summary>

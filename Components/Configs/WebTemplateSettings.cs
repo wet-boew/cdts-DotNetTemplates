@@ -85,6 +85,13 @@ namespace GoC.WebTemplate.Components.Configs
         public bool LoadScriptsFromGoogle { get; set; }
 
         /// <summary>
+        /// Determines if the breadcrumbs of the top are to be displayed
+        /// Set by application via web.config
+        /// or Set by application programmatically
+        /// </summary>
+        public bool ShowBreadcrumbs { get; set; }
+
+        /// <summary>
         /// Determines if the Pre Content of the header are to be displayed
         /// Set by application via web.config
         /// or Set by application programmatically
@@ -174,6 +181,7 @@ namespace GoC.WebTemplate.Components.Configs
                     RefreshOnClick = configurationSection.SessionTimeOut.RefreshOnClick,
                     SessionAlive = configurationSection.SessionTimeOut.SessionAlive
                 };
+            ShowBreadcrumbs = configurationSection.ShowBreadcrumbs;
             ShowLanguageLink = configurationSection.ShowLanguageLink;
             ShowPostContent = configurationSection.ShowPostContent;
             ShowPreContent = configurationSection.ShowPreContent;

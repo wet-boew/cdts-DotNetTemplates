@@ -66,7 +66,11 @@ namespace GoC.WebTemplate.Components.Utils
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
                 Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
-                Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                Breadcrumbs = new BreadcrumbList
+                {
+                    Show = _model.Settings.ShowBreadcrumbs,
+                    Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                },
                 ShowPreContent = false,
                 LocalPath = _model.Builder.BuildLocalPath(),
                 TopSecMenu = _model.LeftMenuItems.Any(),
@@ -89,7 +93,11 @@ namespace GoC.WebTemplate.Components.Utils
                 Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
-                Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                Breadcrumbs = new BreadcrumbList
+                {
+                    Show = _model.Settings.ShowBreadcrumbs,
+                    Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                },
                 LocalPath = _model.Builder.BuildLocalPath(),
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
@@ -317,7 +325,11 @@ namespace GoC.WebTemplate.Components.Utils
                 Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
-                Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                Breadcrumbs = new BreadcrumbList
+                {
+                    Show = _model.Settings.ShowBreadcrumbs,
+                    Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                },
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
@@ -340,7 +352,11 @@ namespace GoC.WebTemplate.Components.Utils
                 Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
-                Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                Breadcrumbs = new BreadcrumbList
+                {
+                    Show = _model.Settings.ShowBreadcrumbs,
+                    Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                },
                 LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
