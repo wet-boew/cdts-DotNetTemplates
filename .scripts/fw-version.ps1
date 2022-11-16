@@ -1,6 +1,8 @@
 $newVersion = $args[0]
 $filePath = $args[1]
 
+Write-Host "fw-version: Change version of ${filePath} to : [${newVersion}]"
+
     $assemblyPatternCS ='\[assembly: AssemblyInformationalVersion\("(.*)"\)\]'
     $assemblyPatternVB ='\<Assembly: AssemblyInformationalVersion\("(.*)"\)\>'
 

@@ -1,0 +1,74 @@
+name: DotNetTemplates-CI
+# Builds and test GoC.WebTemplate.sln solution
+# Requires secret variable CI_SIGNING_KEY_SNK which must be a base64 encoded byte array that will be used to generate the SNK file.
+#   A throw-away (which is fine for Ci builds) key can be generated with (VS prompt): 
+#         sn.exe -k ./mykey.snk
+#   Secret Variable's value can be created in powershell with:
+#         $pfx_cert = Get-Content 'mykey.snk' -Encoding Byte
+#         [System.Convert]::ToBase64String($pfx_cert)
+
+on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    #NOTE: windows-latest (VS2022 as of this writing) does NOT work as long as we target .NET Framework 4.6.1
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          2.1.x
+          3.1.x
+          5.0.x
+          6.0.x
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+      with:
+        nuget-version: '6.0.x'
+    - name: Nuget Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.nuget/packages
+          ./packages
+        #key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.config', '**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+      
+    - name: Restore dependencies
+      # Note that is "nuget restore" and not "dotnet restore" (for now)
+      run: nuget restore GoC.WebTemplate.sln -NonInteractive -Verbosity normal
+
+    - name: Create SNK
+      # Creates SNK file from repository variable (created key is not meant for deployment)
+      run: |
+        [IO.File]::WriteAllBytes("GoC.WebTemplate.snk", [System.Convert]::FromBase64String("${{ secrets.CI_SIGNING_KEY_SNK }}"))
+
+    - name: Build Solution
+      #run: dotnet build --no-restore
+      run: msbuild GoC.WebTemplate.sln /p:Configuration=Release
+
+    - name: Test Components
+      run: dotnet test Components.Tests --no-build --configuration Release --verbosity normal
+
+    - name: Test Components.Core
+      run: dotnet test Components.Core.Tests --no-build --configuration Release --verbosity normal
+
+    - name: Test Components.Framework
+      run: |
+        & packages\xunit.runner.console.2.4.1\tools\net461\xunit.console.exe Components.Framework.Tests\bin\Release\GoC.WebTemplate.Components.Framework.Tests.dll
