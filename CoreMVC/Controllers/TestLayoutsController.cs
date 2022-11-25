@@ -14,6 +14,7 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         public IActionResult Default(string env)
         {
             SetEnv(env);
+            //WebTemplateModel.HidePlaceholderMenu = true;
             return View();
         }
 
