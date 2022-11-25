@@ -280,5 +280,11 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public string FooterPath { get; set; }
+
+        /// <summary>
+        /// Used to hide the placeholder menu while a custom menu is being loaded
+        /// Set by application programmatically
+        /// </summary>
+        public bool HidePlaceholderMenu { get; set; }
     }
 }

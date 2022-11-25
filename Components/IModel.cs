@@ -99,6 +99,13 @@ namespace GoC.WebTemplate.Components
         string HeaderTitle { get; set; }
 
         /// <summary>
+        /// Used to hide the placeholder menu while a custom menu is being loaded
+        /// Set by application programmatically
+        /// Only applicable to the Intranet theme
+        /// </summary>
+        bool HidePlaceholderMenu { get; set; }
+
+        /// <summary>
         /// Represents the list of html elements to add at the end of the body tag
         /// will be used to add metatags, css, js etc.
         /// Set by application programmatically

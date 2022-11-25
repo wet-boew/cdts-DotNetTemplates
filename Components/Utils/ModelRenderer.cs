@@ -72,7 +72,8 @@ namespace GoC.WebTemplate.Components.Utils
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 SiteMenu = false,
-                GcToolsModal = _model.Settings.GcToolsModal
+                GcToolsModal = _model.Settings.GcToolsModal,
+                HidePlaceholderMenu = _model.HidePlaceholderMenu
             });
         }
 
@@ -94,7 +95,8 @@ namespace GoC.WebTemplate.Components.Utils
                 TopSecMenu = _model.LeftMenuItems.Any(),
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 SiteMenu = true,
-                GcToolsModal = _model.Settings.GcToolsModal
+                GcToolsModal = _model.Settings.GcToolsModal,
+                HidePlaceholderMenu = _model.HidePlaceholderMenu
             });
         }
 

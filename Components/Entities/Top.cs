@@ -23,5 +23,6 @@ namespace GoC.WebTemplate.Components.Entities
 
         [JsonProperty(PropertyName = "GCToolsModal")]
         public bool GcToolsModal { get; set; }
+        public bool HidePlaceholderMenu { get; set; }
     }
 }
