@@ -111,5 +111,11 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             act.Should().Throw<NotSupportedException>();
         }
 
+        [Theory, AutoNSubstituteData]
+        public void HidePlaceholderMenuTrue(Model sut)
+        {
+            sut.HidePlaceholderMenu = true;
+            sut.Render.Top().ToString().Should().Contain("\"hidePlaceholderMenu\":true");
+        }
     }
 }

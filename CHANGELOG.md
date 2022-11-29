@@ -1,5 +1,14 @@
 # DotNetTemplates Change Log
 
+## v2.7.0
+
+### New features and improvements
+
+- Added an optional parameter hidePlaceholderMenu to the GCIntranet theme. When set to true, this parameter is used to hide the placeholder menu while a custom menu is being loaded.
+- Updating static fallback files
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v4.0.46 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.55
+- Internal changes and bug fixes
+
 ## v2.6.1
 
 ### Fixes
