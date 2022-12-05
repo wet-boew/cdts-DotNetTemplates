@@ -177,7 +177,7 @@ jobs:
         name: ${{ matrix.templateComponent }}
 
     - name: Deploy to Nuget repository
-      run: echo dotnet nuget push "GoC.WebTemplate-${env:DEPLOY_PROJECT}.${env:DEPLOY_VERSION}.nupkg" -k "$env:NUGETORG_DEPLOY_APIKEY" -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push "GoC.WebTemplate-${env:DEPLOY_PROJECT}.${env:DEPLOY_VERSION}.nupkg" -k "$env:NUGETORG_DEPLOY_APIKEY" -s https://api.nuget.org/v3/index.json
       env:
         DEPLOY_PROJECT: ${{ matrix.templateComponent }}
         DEPLOY_VERSION: ${{ inputs.deploy_version }}
