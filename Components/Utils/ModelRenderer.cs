@@ -348,7 +348,8 @@ namespace GoC.WebTemplate.Components.Utils
                 MenuPath = _model.CustomSiteMenuURL,
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 TopSecMenu = _model.LeftMenuItems.Any(),
-                MenuLinks = _model.MenuLinks
+                MenuLinks = _model.MenuLinks,
+                InfoBanner = _model.InfoBanner
             });
         }
 

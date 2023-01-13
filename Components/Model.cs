@@ -286,5 +286,11 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public bool HidePlaceholderMenu { get; set; }
+
+        /// <summary>
+        /// Used to display an information banner on top of the page
+        /// Set by application programmatically
+        /// </summary>
+        public InfoBanner InfoBanner { get; set; }
     }
 }

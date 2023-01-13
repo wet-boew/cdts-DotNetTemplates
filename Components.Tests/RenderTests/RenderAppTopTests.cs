@@ -301,5 +301,15 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var result = sut.Render.AppTop().ToString();
             result.Should().NotContain("GCToolsModal");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderInfoBanner(Model sut)
+        {
+            sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
+            sut.InfoBanner = new InfoBanner() { MainHTML = "Information Banner", Button = new Link() { Text = "Button", Href = "google" }, Link = new Link() { Text = "Link", Href = "google" } };
+
+            var result = sut.Render.AppTop().ToString();
+            result.Should().Contain("\"infoBanner\":{\"mainHTML\":\"Information Banner\",\"link\":{\"href\":\"google\",\"text\":\"Link\"},\"button\":{\"href\":\"google\",\"text\":\"Button\"}");
+        }
     }
 }
