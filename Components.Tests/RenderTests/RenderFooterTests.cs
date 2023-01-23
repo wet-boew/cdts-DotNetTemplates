@@ -234,5 +234,34 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ContactLinks = new List<Link>() { new Link() { Href = "http://testvalue" } };
             sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void HideMainCorporateFooter(Model sut)
+        {
+            sut.HideFooterMain = true;
+            sut.HideFooterCorporate = true;
+            sut.Render.Footer().ToString().Should().Contain("\"hideFooterMain\":true,\"hideFooterCorporate\":true");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void ShowContextualFooter(Model sut)
+        {
+            List<Link> links = new List<Link>
+            {
+                new Link() {Text = "Link 1", Href = "google"},
+                new Link() {Text = "Link 2", Href = "google", NewWindow = true}
+            };
+
+            sut.ContextualFooter = new ContextualFooter() { Links = links, Title = "Contextual" };
+            sut.Render.Footer().ToString().Should().Contain("\"contextualFooter\":{\"title\":\"Contextual\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}]");
+        }
+
+        [Theory, AutoNSubstituteData]
+        public void ModifyTermsPrivacyLink(Model sut)
+        {
+            sut.PrivacyFooterLink = new SubFooterLink() { Href = "google" };
+            sut.TermsFooterLink = new SubFooterLink() { Href = "google" };
+            sut.Render.Footer().ToString().Should().Contain("\"privacyLink\":{\"href\":\"google\"},\"termsLink\":{\"href\":\"google\"}");
+        }
     }
 }

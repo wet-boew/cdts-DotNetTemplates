@@ -163,15 +163,17 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = true,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = null,
-                TermsLink = null
-
+                PrivacyFooterLink = _model.PrivacyFooterLink,
+                TermsFooterLink = _model.TermsFooterLink,
+                ContextualFooter = _model.ContextualFooter,
+                HideFooterMain = _model.HideFooterMain,
+                HideFooterCorporate = _model.HideFooterCorporate,
             });
         }
 
         public HtmlString TransactionalFooter()
         {
-            return JsonSerializationHelper.SerializeToJson(new Footer
+            return JsonSerializationHelper.SerializeToJson(new TransactionalFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
