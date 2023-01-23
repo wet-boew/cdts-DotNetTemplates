@@ -32,5 +32,6 @@ namespace GoC.WebTemplate.Components.Entities
         [JsonProperty(DefaultValueHandling=DefaultValueHandling.Include)]
         public bool TopSecMenu { get; set; }
         public List<MenuLink> MenuLinks { get; set; }
+        public InfoBanner InfoBanner { get; set; }
     }
 }

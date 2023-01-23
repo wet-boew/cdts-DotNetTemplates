@@ -120,6 +120,12 @@ namespace GoC.WebTemplate.Components
         List<string> HTMLHeaderElements { get; set; }
 
         /// <summary>
+        /// Used to display an information banner on top of the page
+        /// Set by application programmatically
+        /// </summary>
+        InfoBanner InfoBanner { get; set; }
+
+        /// <summary>
         /// Used to display a custom intranet title
         /// </summary>
         IntranetTitle IntranetTitle { get; set; }
