@@ -259,8 +259,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void ModifyTermsPrivacyLink(Model sut)
         {
-            sut.PrivacyFooterLink = new SubFooterLink() { Href = "google" };
-            sut.TermsFooterLink = new SubFooterLink() { Href = "google" };
+            sut.PrivacyLink = new FooterLink() { Href = "google" };
+            sut.TermsConditionsLink = new FooterLink() { Href = "google" };
             sut.Render.Footer().ToString().Should().Contain("\"privacyLink\":{\"href\":\"google\"},\"termsLink\":{\"href\":\"google\"}");
         }
     }

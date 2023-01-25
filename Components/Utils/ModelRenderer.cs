@@ -163,8 +163,8 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = true,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyFooterLink = _model.PrivacyFooterLink,
-                TermsFooterLink = _model.TermsFooterLink,
+                PrivacyLink = string.IsNullOrEmpty(_model.PrivacyLink.Href) ? null : new FooterLinkContext { ShowFooter = true, FooterLink = _model.PrivacyLink },
+                TermsLink = string.IsNullOrEmpty(_model.TermsConditionsLink.Href) ? null : new FooterLinkContext { ShowFooter = true, FooterLink = _model.TermsConditionsLink },
                 ContextualFooter = _model.ContextualFooter,
                 HideFooterMain = _model.HideFooterMain,
                 HideFooterCorporate = _model.HideFooterCorporate,
@@ -173,14 +173,14 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString TransactionalFooter()
         {
-            return JsonSerializationHelper.SerializeToJson(new TransactionalFooter
+            return JsonSerializationHelper.SerializeToJson(new Footer
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = false,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
-                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink)
+                PrivacyLink = string.IsNullOrEmpty(_model.PrivacyLink.Href) ? null : new FooterLinkContext { ShowFooter = false, FooterLink = _model.PrivacyLink },
+                TermsLink = string.IsNullOrEmpty(_model.TermsConditionsLink.Href) ? null : new FooterLinkContext { ShowFooter = false, FooterLink = _model.TermsConditionsLink },
 
             });
         }

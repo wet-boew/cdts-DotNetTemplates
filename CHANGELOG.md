@@ -8,7 +8,7 @@
 - For information on how to implement the new features introduced with the footer, please visit our sample pages: https://github.com/wet-boew/cdts-DotNetTemplates/tree/master/samples
 - Updating static fallback files
 - [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v4.0.47 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.56.5
-- Internal changes and bug fixes
+- Bug fixes
 
 ## v2.7.0
 

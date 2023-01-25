@@ -310,17 +310,5 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public bool HideFooterCorporate { get; set; }
-
-        /// <summary>
-        /// Configures the Privacy Link in the footer
-        /// Set by application programmatically
-        /// </summary>
-        public SubFooterLink PrivacyFooterLink { get; set; }
-
-        /// <summary>
-        /// Configures the Terms and Conditions Link in the footer
-        /// Set by application programmatically
-        /// </summary>
-        public SubFooterLink TermsFooterLink { get; set; }
     }
 }

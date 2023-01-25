@@ -173,12 +173,6 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         FooterLink PrivacyLink { get; set; }
 
-        /// <summary>
-        /// Configures the Privacy Link in the subfooter
-        /// Set by application programmatically
-        /// </summary>
-        SubFooterLink PrivacyFooterLink { get; set; }
-
         ModelBuilder Builder { get; }
 
         ModelRenderer Render { get; }
@@ -240,12 +234,6 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         FooterLink TermsConditionsLink { get; set; }
-
-        /// <summary>
-        /// Configures the Terms and Conditions Link in the footer
-        /// Set by application programmatically
-        /// </summary>
-        SubFooterLink TermsFooterLink { get; set; }
 
         /// <summary>
         /// Retreive the first 2 letters of the current culture "en" or "fr"
