@@ -112,7 +112,6 @@ namespace GoC.WebTemplate.Components
         bool HidePlaceholderMenu { get; set; }
 
         /// <summary>
-
         /// Used to determine if the corportate footer links will be displayed 
         /// Set by application programmatically
         /// </summary>

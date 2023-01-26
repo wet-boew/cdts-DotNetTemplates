@@ -263,5 +263,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.TermsConditionsLink = new FooterLink() { Href = "google" };
             sut.Render.Footer().ToString().Should().Contain("\"privacyLink\":{\"href\":\"google\"},\"termsLink\":{\"href\":\"google\"}");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void ModifyTermsPrivacyLinkTransactionalFooter(Model sut)
+        {
+            sut.PrivacyLink = new FooterLink() { Href = "google" };
+            sut.TermsConditionsLink = new FooterLink() { Href = "google" };
+            sut.Render.TransactionalFooter().ToString().Should().Contain("\"privacyLink\":[{\"href\":\"google\"}],\"termsLink\":[{\"href\":\"google\"}]");
+        }
     }
 }

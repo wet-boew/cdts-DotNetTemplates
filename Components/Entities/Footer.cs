@@ -32,10 +32,9 @@ namespace GoC.WebTemplate.Components.Entities
                 //this converter should never be on a type that's not a FooterLinkContext so just throw exceptions.
                 Debug.Assert(footerLink != null, "The footerLink cannot be null.");
 
-                var listFooterLink = new List<FooterLink> { footerLink.FooterLink };
-
                 if (!footerLink.ShowFooter)
                 {
+                    var listFooterLink = new List<FooterLink> { footerLink.FooterLink };
                     serializer.Serialize(writer, listFooterLink);
                     return;
                 }
