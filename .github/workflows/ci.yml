@@ -17,8 +17,7 @@ on:
 jobs:
   build:
 
-    #NOTE: windows-latest (VS2022 as of this writing) does NOT work as long as we target .NET Framework 4.6.1
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v3
@@ -27,7 +26,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: |
-          2.1.x
           3.1.x
           5.0.x
           6.0.x
