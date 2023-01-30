@@ -292,5 +292,23 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public InfoBanner InfoBanner { get; set; }
+
+        /// <summary>
+        /// Used to add a contextual band above the main footer that can display up to 3 links
+        /// Set by application programmatically
+        /// </summary>
+        public ContextualFooter ContextualFooter { get; set; }
+
+        /// <summary>
+        /// Used to hide the main footer
+        /// Set by application programmatically
+        /// </summary>
+        public bool HideFooterMain { get; set; }
+
+        /// <summary>
+        /// Used to determine if the corportate footer links will be displayed 
+        /// Set by application programmatically
+        /// </summary>
+        public bool HideFooterCorporate { get; set; }
     }
 }

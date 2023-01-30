@@ -163,9 +163,11 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = true,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = null,
-                TermsLink = null
-
+                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, true),
+                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, true),
+                ContextualFooter = _model.ContextualFooter,
+                HideFooterMain = _model.HideFooterMain,
+                HideFooterCorporate = _model.HideFooterCorporate,
             });
         }
 
@@ -177,8 +179,8 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = false,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
-                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink)
+                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, false),
+                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, false),
 
             });
         }

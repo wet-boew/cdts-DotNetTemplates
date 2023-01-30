@@ -54,6 +54,12 @@ namespace GoC.WebTemplate.Components
         List<Link> ContactLinks { get; set; }
 
         /// <summary>
+        /// Used to add a contextual band above the main footer that can display up to 3 links
+        /// Set by application programmatically
+        /// </summary>
+        ContextualFooter ContextualFooter { get; set; }
+
+        /// <summary>
         /// Custom links if null uses standard links if not null overrides the existing footer links
         /// Set by application programmatically
         /// Only available in the Application Template in GCWeb enviornment
@@ -104,6 +110,18 @@ namespace GoC.WebTemplate.Components
         /// Only applicable to the Intranet theme
         /// </summary>
         bool HidePlaceholderMenu { get; set; }
+
+        /// <summary>
+        /// Used to determine if the corportate footer links will be displayed 
+        /// Set by application programmatically
+        /// </summary>
+        bool HideFooterCorporate { get; set; }
+
+        /// <summary>
+        /// Used to hide the main footer
+        /// Set by application programmatically
+        /// </summary>
+        bool HideFooterMain { get; set; }
 
         /// <summary>
         /// Represents the list of html elements to add at the end of the body tag

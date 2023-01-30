@@ -1,5 +1,15 @@
 # DotNetTemplates Change Log
 
+## v2.8.0
+
+### New features and improvements
+
+- **IMPORTANT** The GCWeb site footer has been updated to reflect the changes introduced in WET footer version 4. These changes will be applied automatically. For more information, please visit the WET documentation: https://wet-boew.github.io/GCWeb/sites/footers/footers-en.html
+- For information on how to implement the new features introduced with the footer, please visit our sample pages: https://github.com/wet-boew/cdts-DotNetTemplates/tree/master/samples
+- Updating static fallback files
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v4.0.47 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.56.5
+- Bug fixes
+
 ## v2.7.0
 
 ### New features and improvements

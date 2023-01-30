@@ -63,6 +63,11 @@ namespace GoC.WebTemplate.Components.Utils
             return string.IsNullOrWhiteSpace(link?.Href) ? null : new List<FooterLink> { link };
         }
 
+        internal FooterLinkContext BuildFooterLinkContext(FooterLink link, bool showFooter)
+        {
+            return string.IsNullOrEmpty(link.Href) ? null : new FooterLinkContext { ShowFooter = showFooter, FooterLink = link };
+        }
+
         internal string BuildLocalPath()
         {
             return GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version);
