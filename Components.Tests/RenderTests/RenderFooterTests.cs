@@ -256,6 +256,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Render.Footer().ToString().Should().Contain("\"contextualFooter\":{\"title\":\"Contextual\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}]");
         }
 
+        /// <summary>
+        /// This is testing that the footer (when showFooter = true) renders the privacyLink and the termsLink as a single object
+        /// </summary>
         [Theory, AutoNSubstituteData]
         public void ModifyTermsPrivacyLink(Model sut)
         {
@@ -264,6 +267,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Render.Footer().ToString().Should().Contain("\"privacyLink\":{\"href\":\"google\"},\"termsLink\":{\"href\":\"google\"}");
         }
 
+        /// <summary>
+        /// This is testing that the transactional footer (when showFooter = false) renders the privacyLink and the termsLink as an array
+        /// </summary>
         [Theory, AutoNSubstituteData]
         public void ModifyTermsPrivacyLinkTransactionalFooter(Model sut)
         {
