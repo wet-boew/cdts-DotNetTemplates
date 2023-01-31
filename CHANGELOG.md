@@ -4,6 +4,7 @@
 
 ### New features and improvements
 
+- **IMPORTANT** .NET Core 2.1 is no longer supported. The dependencies have been updated accordingly.
 - **IMPORTANT** The GCWeb site footer has been updated to reflect the changes introduced in WET footer version 4. These changes will be applied automatically. For more information, please visit the WET documentation: https://wet-boew.github.io/GCWeb/sites/footers/footers-en.html
 - For information on how to implement the new features introduced with the footer, please visit our sample pages: https://github.com/wet-boew/cdts-DotNetTemplates/tree/master/samples
 - Updating static fallback files
