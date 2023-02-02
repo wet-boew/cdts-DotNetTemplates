@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 
 namespace GoC.WebTemplate.CoreMVC
@@ -46,12 +47,12 @@ namespace GoC.WebTemplate.CoreMVC
 
             services.ConfigureGoCTemplateRequestLocalization();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRequestLocalization();
 
@@ -68,11 +69,14 @@ namespace GoC.WebTemplate.CoreMVC
             app.UseCookiePolicy();
 
             app.UseSession();
-            app.UseMvc(routes =>
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=TestLayouts}/{action=Default}/{id?}");
+                    pattern: "{controller=TestLayouts}/{action=Default}/{id?}");
             });
         }
     }
