@@ -310,5 +310,11 @@ namespace GoC.WebTemplate.Components
         /// Set by application programmatically
         /// </summary>
         public bool HideFooterCorporate { get; set; }
+
+        /// <summary>
+        /// Used to display a custom header menu on the top of the page for app templates
+        /// Set by application programmatically
+        /// </summary>
+        public HeaderMenu HeaderMenu { get; set; }
     }
 }
