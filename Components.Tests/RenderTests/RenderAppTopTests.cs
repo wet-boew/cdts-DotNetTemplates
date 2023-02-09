@@ -311,5 +311,24 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var result = sut.Render.AppTop().ToString();
             result.Should().Contain("\"infoBanner\":{\"mainHTML\":\"Information Banner\",\"link\":{\"href\":\"google\",\"text\":\"Link\"},\"button\":{\"href\":\"google\",\"text\":\"Button\"}");
         }
+
+        [Theory, AutoNSubstituteData]
+        public void RenderHeaderMenu(Model sut)
+        {
+            sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
+            sut.HeaderMenu = new HeaderMenu()
+            {
+                Text = "Menu",
+                Links = new List<Components.Entities.Link>()
+                {
+                    new Link(){Href = "google", Text = "Link 1"},
+                    new Link(){Href = "google", Text = "Link 2", NewWindow = true}
+                },
+                LogoutLink = new Link() { Text = "Logout", Href = "google" }
+            };
+
+            var result = sut.Render.AppTop().ToString();
+            result.Should().Contain("\"headerMenu\":{\"text\":\"Menu\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}],\"logoutLink\":{\"href\":\"google\",\"text\":\"Logout\"}}");
+        }
     }
 }

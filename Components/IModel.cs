@@ -99,6 +99,13 @@ namespace GoC.WebTemplate.Components
         List<FooterSection> FooterSections { get; set; }
 
         /// <summary>
+        /// Used to display a custom header menu on the top of the page
+        /// Set by application programmatically
+        /// Only available in the Application Template in GCWEB enviornment
+        /// </summary>
+        HeaderMenu HeaderMenu { get; set; }
+
+        /// <summary>
         /// title of page, will automatically add '- Canada.ca' to all pages implementing GCWeb theme as per
         /// Set by application programmatically
         /// </summary>
@@ -140,6 +147,7 @@ namespace GoC.WebTemplate.Components
         /// <summary>
         /// Used to display an information banner on top of the page
         /// Set by application programmatically
+        /// Only available in the Application Template in GCWEB enviornment
         /// </summary>
         InfoBanner InfoBanner { get; set; }
 

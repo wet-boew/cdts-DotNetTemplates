@@ -33,5 +33,6 @@ namespace GoC.WebTemplate.Components.Entities
         public bool TopSecMenu { get; set; }
         public List<MenuLink> MenuLinks { get; set; }
         public InfoBanner InfoBanner { get; set; }
+        public HeaderMenu HeaderMenu { get; set; }
     }
 }
