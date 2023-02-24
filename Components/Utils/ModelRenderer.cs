@@ -21,6 +21,103 @@ namespace GoC.WebTemplate.Components.Utils
             _model = model;
         }
 
+        /// <summary>
+        /// Builds a string with the format required by the closure template to represent the JSON object used 
+        /// as parameter for the CDTS "setup" function for a basic web page
+        /// </summary>
+        public HtmlString Setup()
+        {
+            return JsonSerializationHelper.SerializeToJson(_model.Builder.BuildCommonSetup(false, false));
+        }
+
+        /// <summary>
+        /// Builds a string with the format required by the closure template to represent the JSON object used
+        /// as parameter for the CDTS "setup" function for a transactional web page
+        /// </summary>
+        public HtmlString TransactionalSetup()
+        {
+            return JsonSerializationHelper.SerializeToJson(_model.Builder.BuildCommonSetup(true, false));
+        }
+
+        /// <summary>
+        /// Builds a string with the format required by the closure template to represent the JSON object used 
+        /// as parameter for the CDTS "setup" function for an unilingual error web pagee
+        /// </summary>
+        public HtmlString UnilingualErrorSetup()
+        {
+            return JsonSerializationHelper.SerializeToJson(_model.Builder.BuildCommonSetup(false, true));
+        }
+
+        /// <summary>
+        /// Builds a string with the format required by the closure template to represent the JSON object used 
+        /// as parameter for the CDTS "setup" function for a "application" web page
+        /// </summary>
+        public HtmlString AppSetup()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Setup
+            {
+                CdnEnv = _model.CdtsEnvironment.CDN,
+                Mode = Mode.App,
+                Base = _model.Builder.BuildSetupBase(),
+                Top = _model.Builder.BuildAppTop(),
+                PreFooter = _model.Builder.BuildPreFooter(false, false),
+                Footer = _model.Builder.BuildAppFooter(),
+                //SecMenu = 
+                Splash = null,
+                OnCDTSPageFinalized = _model.HTMLBodyElements
+            });
+        }
+
+        /// <summary>
+        /// Builds a string with the format required by the closure template to represent the JSON object used 
+        /// as parameter for the CDTS "setup" function for a "server" web page (ie used for error pages)
+        /// </summary>
+        public HtmlString ServerSetup()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Setup
+            {
+                CdnEnv = _model.CdtsEnvironment.CDN,
+                Mode = Mode.Server,
+                Base = null,
+                Top = null,
+                PreFooter = null,
+                Footer = null,
+                //SecMenu = null,
+                Splash = null,
+                OnCDTSPageFinalized = _model.HTMLBodyElements
+            });
+        }
+
+        /// <summary>
+        /// Builds a string with the format required by the closure template to represent the JSON object used 
+        /// as parameter for the CDTS "setup" function for a "splash" web page
+        /// </summary>
+        public HtmlString SplashSetup()
+        {
+            return JsonSerializationHelper.SerializeToJson(new Setup
+            {
+                CdnEnv = _model.CdtsEnvironment.CDN,
+                Mode = Mode.Splash,
+                Base = null,
+                Top = null,
+                PreFooter = null,
+                Footer = null,
+                SecMenu = null,
+                Splash = new Splash
+                {
+                    CdnEnv = null,
+                    IndexEng = _model.SplashPageInfo.EnglishHomeUrl,
+                    IndexFra = _model.SplashPageInfo.FrenchHomeUrl,
+                    TermsEng = _model.Builder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
+                    TermsFra = _model.Builder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
+                    NameEng = _model.SplashPageInfo.EnglishName,
+                    NameFra = _model.SplashPageInfo.FrenchName
+
+                },
+                OnCDTSPageFinalized = _model.HTMLBodyElements
+            });
+        }
+
         public HtmlString AppFooter()
         {
             if (!_model.CdtsEnvironment.CanHaveContactLinkInAppTemplate && _model.ContactLinks.Any())

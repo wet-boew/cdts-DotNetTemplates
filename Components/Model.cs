@@ -66,7 +66,25 @@ namespace GoC.WebTemplate.Components
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
+        public string AppCSSPath => Builder.BuildAppCSSPath();
+
+        /// <summary>
+        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Set by Core
+        /// </summary>
         public string CDNPath => Builder.BuildCDNPath();
+
+        /// <summary>
+        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Set by Core
+        /// </summary>
+        public string CSSPath => Builder.BuildCSSPath();
+
+        /// <summary>
+        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Set by Core
+        /// </summary>
+        public string SplashCSSPath => Builder.BuildSplashCSSPath();
 
         /// <summary>
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter

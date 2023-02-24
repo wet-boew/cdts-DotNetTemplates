@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    internal class AppFooter
+    public class AppFooter : IFooter
     {
         public string CdnEnv { get; set; }
         public List<IFooterSection> FooterSections { get; set; }

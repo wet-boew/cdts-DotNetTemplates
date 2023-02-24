@@ -43,7 +43,25 @@ namespace GoC.WebTemplate.Components
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
+        string AppCSSPath { get; }
+
+        /// <summary>
+        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Set by Core
+        /// </summary>
+        string CSSPath { get; }
+
+        /// <summary>
+        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Set by Core
+        /// </summary>
         string CDNPath { get; }
+
+        /// <summary>
+        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Set by Core
+        /// </summary>
+        string SplashCSSPath { get; }
 
         ICdtsEnvironment CdtsEnvironment { get; }
 

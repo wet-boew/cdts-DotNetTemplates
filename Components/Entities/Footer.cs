@@ -5,7 +5,7 @@ using System.Diagnostics;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    public class Footer
+    public class Footer: IFooter
     {
         public string CdnEnv { get; set; }
         public string SubTheme { get; set; }
