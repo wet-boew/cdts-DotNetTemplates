@@ -62,7 +62,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Top = _model.Builder.BuildAppTop(),
                 PreFooter = _model.Builder.BuildPreFooter(false, false),
                 Footer = _model.Builder.BuildAppFooter(),
-                //SecMenu = 
+                SecMenu = _model.LeftMenuItems.Any() ? new SecMenu(_model.LeftMenuItems) : null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             });
@@ -77,12 +77,12 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Setup
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                Mode = Mode.Server,
+                Mode = Mode.server,
                 Base = null,
                 Top = null,
                 PreFooter = null,
                 Footer = null,
-                //SecMenu = null,
+                SecMenu = null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             });

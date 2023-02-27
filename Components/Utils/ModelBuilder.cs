@@ -39,7 +39,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Top = BuildTop(isTransactional),
                 PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
                 Footer = BuildFooter(isTransactional),
-                //SecMenu = this.getHasLeftMenuSections() ? new SecMenu(this.getLeftMenuSections()) : null,
+                SecMenu = _model.LeftMenuItems.Any() ? new SecMenu(_model.LeftMenuItems) : null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             };
@@ -413,7 +413,7 @@ namespace GoC.WebTemplate.Components.Utils
             if (!_model.CdtsEnvironment.ThemeIsGCWeb())
             {
                 string subTheme = _model.CdtsEnvironment.SubTheme;
-                if (string.IsNullOrEmpty(subTheme))
+                if (!string.IsNullOrEmpty(subTheme))
                 {
                     subTheme = subTheme.ToLower();
                     //...limit to supported subthemes

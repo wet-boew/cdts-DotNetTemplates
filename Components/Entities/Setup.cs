@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ namespace GoC.WebTemplate.Components.Entities
     public class Setup
     {
         public string CdnEnv { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public Mode Mode { get; set; }
         public SetupBase Base {get; set;}
         public ITop Top { get; set; }
@@ -28,6 +31,6 @@ public enum Mode
 {
     Common,
     App,
-    Server,
+    server,
     Splash
 }
