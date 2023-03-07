@@ -57,7 +57,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Setup
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                Mode = Mode.App,
+                Mode = Mode.APP,
                 Base = _model.Builder.BuildSetupBase(),
                 Top = _model.Builder.BuildAppTop(),
                 PreFooter = _model.Builder.BuildPreFooter(false, false),
@@ -77,7 +77,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Setup
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                Mode = Mode.server,
+                Mode = Mode.SERVER,
                 Base = null,
                 Top = null,
                 PreFooter = null,
@@ -97,7 +97,7 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new Setup
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                Mode = Mode.Splash,
+                Mode = Mode.SPLASH,
                 Base = null,
                 Top = null,
                 PreFooter = null,

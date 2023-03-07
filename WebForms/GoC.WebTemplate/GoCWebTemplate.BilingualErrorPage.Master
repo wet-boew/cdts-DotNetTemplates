@@ -12,53 +12,31 @@
         <title><%= WebTemplateModel.Render.HeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport"/>
         <!-- Load closure template scripts -->
-        <script type="text/javascript" src="<%= string.Concat(WebTemplateModel.CDNPath, "soyutils.js")  %>"></script>
-        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)  %>"></script>
+        <link rel="stylesheet" href="<%= WebTemplateModel.CSSPath%>"/>
+        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}compiled/wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)  %>"data-cdts-setup='<%= WebTemplateModel.Render.ServerSetup() %>'></script>
         <noscript>
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile("serverRefTop.html") %>
         </noscript>
-         <!-- Write closure template -->
-        <script type="text/javascript">
-            document.write(wet.builder.serverRefTop(<%= WebTemplateModel.Render.ServerRefTop() %>));
-        </script>
-
         <%= WebTemplateModel.Render.HtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->
         <!-- GoC.WebTemplate.Core Version <%= WebTemplateModel.AssemblyVersion %> -->
     </head>
     <body vocab="http://schema.org/" typeof="WebPage">
         <%= WebTemplateModel.Render.SessionTimeoutControl() %>
-        <div id="def-top">
+        <div id="cdts-def-top">
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile("serverTop.html") %>
         </div>
-        <!-- Write closure template -->
-        <script type="text/javascript">
-            var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.serverTop(<%= WebTemplateModel.Render.ServerTop() %>);
-        </script>
-
         <main role="main" property="mainContentOfPage" class="container" typeof="WebPageElement">
-
             <!-- the main content -->
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
             <!-- end main content -->
         </main>
-        <div id="def-footer">
+        <div id="cdts-def-footer">
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile("serverBottom.html") %>
         </div>
-        <!-- Write closure template -->
-        <script type="text/javascript">
-            var defFooter = document.getElementById("def-footer");
-            defFooter.outerHTML = wet.builder.serverBottom( <%= WebTemplateModel.Render.ServerBottom() %>);
-        </script>
-        <!-- Write closure template -->
-            <script type="text/javascript">
-                document.write(wet.builder.refFooter(<%= WebTemplateModel.Render.ServerRefFooter() %>));
-            </script>
-        <%= WebTemplateModel.Render.HtmlBodyElements() %>
     </body>
 </html>
 

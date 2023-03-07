@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoC.WebTemplate.Components.Entities
 {
+    /// <summary>
+    /// Marks class as being a valid object to be passed in the CDTS "footer" function/parameter.
+    /// </summary>
     public class IFooter
     {
     }

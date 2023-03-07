@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
+    /// <summary>
+    /// Objects of this class are meant to be serialized to a JSON object to be passed as part of "base" 
+    /// parameter to the 'wet.builder.setup' JavaScript function in the template pages. (see Setup class)
+    /// </summary>
     public class SetupBase
     {
         public string SubTheme { get; set; }

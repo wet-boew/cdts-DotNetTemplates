@@ -14,16 +14,12 @@
     <title>@Html.Raw(WebTemplateModel.Render.HeaderTitle())</title>
     <meta content="width=device-width,initial-scale=1" name="viewport" />
     <!-- Load closure template scripts -->
-    <script type="text/javascript" src="@string.Concat(WebTemplateModel.CDNPath, "soyutils.js")"></script>
-    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}compiled/wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)"></script>
+    <link rel="stylesheet" href="@WebTemplateModel.AppCSSPath">
+    <script type="text/javascript" src="@string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}compiled/wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)" data-cdts-setup='@WebTemplateModel.Render.AppSetup()'></script>
     <noscript>
         <!-- Write closure fall-back static file -->
         @Html.Raw(WebTemplateModel.LoadStaticFile("refTop.html"))
     </noscript>
-    <!-- Write closure template -->
-    <script type="text/javascript">
-        document.write(wet.builder.refTop(@Html.Raw(WebTemplateModel.Render.RefTop(isApplication : true))));
-    </script>
     @Html.Raw(WebTemplateModel.Render.HtmlHeaderElements())
     @RenderSection("CustomStyles", required: false)
     <!-- GoC.WebTemplate Version MVC @ViewData["WebTemplateVersion"] -->
@@ -31,57 +27,31 @@
 </head>
 <body vocab="http://schema.org/" typeof="WebPage">
     @Html.Raw(WebTemplateModel.Render.SessionTimeoutControl())
-    <div id="def-top">
+    <div id="cdts-def-top">
         <!-- Write closure fall-back static file -->
         @Html.Raw(WebTemplateModel.LoadStaticFile(string.Concat("appTop-", WebTemplateModel.TwoLetterCultureLanguage, ".html")))
     </div>
-    <!-- Write closure template -->
-    <script type="text/javascript">
-        var defTop = document.getElementById("def-top");
-        defTop.outerHTML = wet.builder.appTop(@Html.Raw(WebTemplateModel.Render.AppTop()));
-    </script>
     <div class="container">
         <div class="row">
             <main property="mainContentOfPage" class="col-md-9 col-md-push-3" role="main" typeof="WebPageElement">
                 <!-- the main content -->
                 @RenderBody()
                 <!-- end main content -->
-                <div id="def-preFooter">
+                <div id="cdts-def-preFooter">
                     <!-- Write closure fall-back static file -->
                     @Html.Raw(WebTemplateModel.LoadStaticFile(string.Concat("preFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")))
                 </div>
-                <!-- Write closure template -->
-                <script type="text/javascript">
-                    var defPreFooter = document.getElementById("def-preFooter");
-                    defPreFooter.outerHTML = wet.builder.preFooter(@Html.Raw(WebTemplateModel.Render.PreFooter()));
-                </script>
             </main>
             <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
                 <!-- Write closure fall-back static file -->
                 @Html.Raw(WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html")))
             </nav>
-            <!-- Write closure template -->
-            <script type="text/javascript">
-                var secondarymenu = document.getElementById("wb-sec");
-                secondarymenu.innerHTML = wet.builder.secmenu(
-                    @Html.Raw(WebTemplateModel.Render.LeftMenu())
-                );
-            </script>
         </div>
     </div>
-    <div id="def-footer">
+    <div id="cdts-def-footer">
         <!-- Write closure fall-back static file -->
         @Html.Raw(WebTemplateModel.LoadStaticFile(string.Concat("appFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")))
     </div>
-    <!-- Write closure template -->
-    <script type="text/javascript">
-        var defFooter = document.getElementById("def-footer");
-        defFooter.outerHTML = wet.builder.appFooter(@Html.Raw(WebTemplateModel.Render.AppFooter()));
-    </script>
-    <!-- Write closure template -->
-    <script type="text/javascript">
-        document.write(wet.builder.refFooter(@Html.Raw(WebTemplateModel.Render.RefFooter(isApplication: true))));
-    </script>
     @Html.Raw(WebTemplateModel.Render.HtmlBodyElements())
     @RenderSection("CustomScripts", required: false)
 </body>

@@ -20,21 +20,14 @@ namespace GoC.WebTemplate.Components.Utils
         }
 
         /// <summary>
-        /// Build functions for no doc write
-        /// 
-        /// 
+        /// Builds the "common" CDTS setup object based on parameteres (used by the render functions)
         /// </summary>
-
-        /**
-         *  Builds the "common" CDTS setup object based on parameteres (used by the render functions)
-         */
-
         public Setup BuildCommonSetup(bool isTransactional, bool isUnilingualError)
         {
             return new Setup
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                Mode = Mode.Common, // passing null for mode since "common" is CDTS default
+                Mode = Mode.COMMON, // passing null for mode since "common" is CDTS default
                 Base = BuildSetupBase(),
                 Top = BuildTop(isTransactional),
                 PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
@@ -45,21 +38,35 @@ namespace GoC.WebTemplate.Components.Utils
             };
         }
 
-        /** Creates the `SetupBase` object needed in rendering the CDTS setup JSON
-         *  (assumes initializeOnce() was called)
-         */
+        /// <summary>
+        /// Creates the `SetupBase` object needed in rendering the CDTS setup JSON
+        /// </summary>
         public SetupBase BuildSetupBase()
         {
             if (_model.Settings.WebAnalytics.Active && !_model.CdtsEnvironment.CanUseWebAnalytics) throw new NotSupportedException("The WebAnalytics is not supported in this enviornment.");
 
+            if (_model.Settings.LeavingSecureSiteWarning.Enabled &&
+                !string.IsNullOrEmpty(_model.Settings.LeavingSecureSiteWarning.RedirectUrl))
+            {
+                return new SetupBase
+                {
+                    SubTheme = _model.CdtsEnvironment.SubTheme,
+                    ExitSecureSite = _model.Builder.BuildExitSecureSite(),
+                    JqueryEnv = _model.Builder.BuildJqueryEnv(),
+                    WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
+                };
+            }
+
             return new SetupBase{
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                ExitSecureSite = _model.Builder.BuildExitSecureSite(),
                 WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
             };
         }
 
+        /// <summary>
+        /// Builds the "Top" object needed in rendering the CDTS setup JSON
+        /// </summary>
         public Top BuildTop(bool isTransactional)
         {
             if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
@@ -83,6 +90,9 @@ namespace GoC.WebTemplate.Components.Utils
             };
         }
 
+        /// <summary>
+        /// Builds the "AppTop" object needed in rendering the CDTS setup JSON
+        /// </summary>
         public AppTop BuildAppTop()
         {
             if (_model.ShowSignInLink && _model.ShowSignOutLink)
@@ -140,40 +150,76 @@ namespace GoC.WebTemplate.Components.Utils
             }
         }
 
+        /// <summary>
+        /// Builds the "PreFooter" object needed in rendering the CDTS setup JSON
+        /// </summary>
         public IPreFooter BuildPreFooter(bool isTransactional, bool isUnilingualError)
         {
-            return new PreFooter
+            if (!isTransactional)
             {
-                CdnEnv = _model.CdtsEnvironment.CDN,
-                DateModified = _model.Builder.BuildDateModified(),
-                VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
-                ShowPostContent = _model.Settings.ShowPostContent,
-                ShowFeedback = _model.Settings.FeedbackLink,
-                ShowShare = new ShareList
+                if (!isUnilingualError)
                 {
-                    Show = _model.Settings.ShowSharePageLink,
-                    Enums = _model.SharePageMediaSites
-                },
-                ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
-            };
+                    return new PreFooter 
+                    {
+                        CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                        DateModified = _model.Builder.BuildDateModified(),
+                        VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                        ShowPostContent = _model.Settings.ShowPostContent,
+                        ShowFeedback = _model.Settings.FeedbackLink,
+                        ShowShare = new ShareList
+                        {
+                            Show = _model.Settings.ShowSharePageLink,
+                            Enums = _model.SharePageMediaSites
+                        },
+                        ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                    };
+                }
+                else
+                { //(isUnilingualError)
+                    return new UnilingualPreFooter() { CdnEnv = null, PageDetails = false};
+                }
+            }
+            else
+            { //(isTransactional)
+                return new PreFooter
+                {
+                    CdnEnv = _model.CdtsEnvironment.CDN,
+                    DateModified = _model.Builder.BuildDateModified(),
+                    VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                    ShowPostContent = false,
+                    ShowFeedback = new FeedbackLink { Show = false },
+                    ShowShare = new ShareList
+                    {
+                        Show = false,
+                        Enums = null
+                    },
+                    ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                };
+            }
         }
 
+        /// <summary>
+        /// Builds the "Footer" object needed in rendering the CDTS setup JSON
+        /// </summary>
         public Footer BuildFooter(bool isTransactional)
         {
             return new Footer
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
-                ShowFooter = true,
+                ShowFooter = !isTransactional,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, true),
-                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, true),
-                ContextualFooter = _model.ContextualFooter,
-                HideFooterMain = _model.HideFooterMain,
-                HideFooterCorporate = _model.HideFooterCorporate,
+                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, !isTransactional),
+                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, !isTransactional),
+                ContextualFooter = isTransactional ? null : _model.ContextualFooter,
+                HideFooterMain = isTransactional ? false : _model.HideFooterMain,
+                HideFooterCorporate = isTransactional ? false : _model.HideFooterCorporate,
             };
         }
 
+        /// <summary>
+        /// Builds the "AppFooter" object needed in rendering the CDTS setup JSON
+        /// </summary>
         public AppFooter BuildAppFooter()
         {
             if (!_model.CdtsEnvironment.CanHaveContactLinkInAppTemplate && _model.ContactLinks.Any())
@@ -405,10 +451,10 @@ namespace GoC.WebTemplate.Components.Utils
         }
 
         /// <summary>
-        ///Builds the CDN path to the cdts-app-styles.css file.
+        /// Builds the CDN path to the cdts-app-styles.css file.
         /// </summary>
         /// <returns>String, the complete path to the cdn</returns>
-        internal string BuildCSSPath()
+        public string BuildCSSPath()
         {
             if (!_model.CdtsEnvironment.ThemeIsGCWeb())
             {
@@ -431,7 +477,7 @@ namespace GoC.WebTemplate.Components.Utils
         /// <summary>
         ///Builds the CDN path to the cdts-[subtheme]-styles.css file.
         /// </summary>
-        internal string BuildAppCSSPath()
+        public string BuildAppCSSPath()
         {
             if (_model.CdtsEnvironment.ThemeIsGCWeb())
             {
@@ -444,9 +490,9 @@ namespace GoC.WebTemplate.Components.Utils
         }
 
         /// <summary>
-        ///Builds the CDN path to the cdts-splash-styles.css file.
+        /// Builds the CDN path to the cdts-splash-styles.css file.
         /// </summary>
-        internal string BuildSplashCSSPath()
+        public string BuildSplashCSSPath()
         {
             return $"{BuildCDNPath()}cdts-splash-styles.css";
         }
