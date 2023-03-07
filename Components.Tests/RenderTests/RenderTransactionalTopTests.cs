@@ -16,40 +16,40 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         Href = "foo",
         Text = "bar"
       });
-      sut.Render.TransactionalTop().ToString().Should().Contain("\"topSecMenu\":true");
+      sut.Render.TransactionalSetup().ToString().Should().Contain("\"topSecMenu\":true");
     }
        
     [Theory, AutoNSubstituteData]
     public void TopSecMenuFalseInTransactionalTopWhenLeftMenuItems(Model sut)
     {
-      sut.Render.TransactionalTop().ToString().Should().Contain("\"topSecMenu\":false");
+      sut.Render.TransactionalSetup().ToString().Should().Contain("\"topSecMenu\":false");
     }
 
     [Theory, AutoNSubstituteData]
     public void TopSecSiteMenuFalseInTransactionalTop(Model sut)
     {
-        sut.Render.TransactionalTop().ToString().Should().Contain("\"siteMenu\":false");
+        sut.Render.TransactionalSetup().ToString().Should().Contain("\"siteMenu\":false");
     }
 
     [Theory, AutoNSubstituteData]
     public void TopSecSearchFalseInTransactionalTop(Model sut)
     {
         sut.Settings.ShowSearch = false;
-        sut.Render.TransactionalTop().ToString().Should().Contain("\"search\":false");
+        sut.Render.TransactionalSetup().ToString().Should().Contain("\"search\":false");
     }
 
     [Theory, AutoNSubstituteData]
     public void IntranetTitleShouldNotRenderWhenNullInTransactionalTop(Model sut)
     {
       sut.IntranetTitle = null;
-      sut.Render.TransactionalTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+      sut.Render.TransactionalSetup().ToString().Should().NotContain("\"intranetTitle\":[null]");
 
     }
     [Theory, AutoNSubstituteData]
     public void IntranetTitleTransacationalTop(Model sut)
     {
         sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
-        sut.Render.TransactionalTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
+        sut.Render.TransactionalSetup().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
     }
 
     [Theory, AutoNSubstituteData]
@@ -61,7 +61,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Placeholder = "Custom Search Placeholder",
             Method = "get"
         };
-        var result = sut.Render.TransactionalTop().ToString();
+        var result = sut.Render.TransactionalSetup().ToString();
         result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
     }
 

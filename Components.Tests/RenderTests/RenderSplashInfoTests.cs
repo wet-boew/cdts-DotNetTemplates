@@ -15,9 +15,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
             sut.SplashPageInfo.EnglishName = "[My web asset]";
             sut.SplashPageInfo.FrenchName = "[Mon actif web]";
-            var result = sut.Render.SplashInfo();
+            var result = sut.Render.SplashSetup();
 
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"indexEng\":\"http://www.canada.ca/en/index.html\",\"indexFra\":\"http://www.canada.ca/fr/index.html\",\"termsEng\":\"http://www.canada.ca/en/transparency/terms.html\",\"termsFra\":\"http://www.canada.ca/fr/transparence/avis.html\",\"nameEng\":\"[My web asset]\",\"nameFra\":\"[Mon actif web]\"}");
+            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"mode\":\"splash\",\"splash\":{\"indexEng\":\"http://www.canada.ca/en/index.html\",\"indexFra\":\"http://www.canada.ca/fr/index.html\",\"termsEng\":\"http://www.canada.ca/en/transparency/terms.html\",\"termsFra\":\"http://www.canada.ca/fr/transparence/avis.html\",\"nameEng\":\"[My web asset]\",\"nameFra\":\"[Mon actif web]\"},\"onCDTSPageFinalized\":[]}");
         }
     }
 }

@@ -17,7 +17,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Acronym = ""
             });
 
-            sut.Render.Top().ToString().Should().NotContain("\"acronym\":\"\"");
+            sut.Render.Setup().ToString().Should().NotContain("\"acronym\":\"\"");
         }
 
         [Theory, AutoNSubstituteData]
@@ -28,35 +28,35 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Title = "Foo.bar",
                 Href = ""
             });
-            sut.Render.Top().ToString().Should().NotContain("\"href\":\"\"");
+            sut.Render.Setup().ToString().Should().NotContain("\"href\":\"\"");
         }
 
         [Theory, AutoNSubstituteData]
         public void BreadCrumbConstructorPropertiesRender(Model sut)
         {
             sut.Breadcrumbs.Add(new Breadcrumb { Href = "www.href.com", Title = "Herf Title", Acronym = "HHH" });
-            sut.Render.Top().ToString().Should().ContainAll(new string[] { "\"href\":\"www.href.com\"", "\"title\":\"Herf Title\"", "\"acronym\":\"HHH\"" });
+            sut.Render.Setup().ToString().Should().ContainAll(new string[] { "\"href\":\"www.href.com\"", "\"title\":\"Herf Title\"", "\"acronym\":\"HHH\"" });
         }
 
 
         [Theory, AutoNSubstituteData]
         public void DoNotRenderBreadCrumbsByDefault(Model sut)
         {
-            sut.Render.Top().ToString().Should().NotContain("\"breadcrumbs\"");
+            sut.Render.Setup().ToString().Should().NotContain("\"breadcrumbs\"");
         }
 
         [Theory, AutoNSubstituteData]
         public void IntranetTitleShouldNotRenderWhenNullInTop(Model sut)
         {
             sut.IntranetTitle = null;
-            sut.Render.Top().ToString().Should().NotContain("\"intranetTitle\":[null]");
+            sut.Render.Setup().ToString().Should().NotContain("\"intranetTitle\":[null]");
         }
 
         [Theory, AutoNSubstituteData]
         public void IntranetTitleTop(Model sut)
         {
             sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
-            sut.Render.Top().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
         }
 
 
@@ -64,7 +64,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void TopSecMenuFalseInTopWhenLeftMenuItems(Model sut)
         {
-            sut.Render.Top().ToString().Should().Contain("\"topSecMenu\":false");
+            sut.Render.Setup().ToString().Should().Contain("\"topSecMenu\":false");
         }
 
         [Theory, AutoNSubstituteData]
@@ -75,7 +75,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Href = "foo",
                 Text = "bar"
             });
-            sut.Render.Top().ToString().Should().Contain("\"topSecMenu\":true");
+            sut.Render.Setup().ToString().Should().Contain("\"topSecMenu\":true");
         }
 
         [Theory, AutoNSubstituteData]
@@ -87,7 +87,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Placeholder = "Custom Search Placeholder",
                 Method = "get"
             };
-            var result = sut.Render.Top().ToString();
+            var result = sut.Render.Setup().ToString();
             result.Should().Contain("\"customSearch\":[{\"action\":\"#\",\"placeholder\":\"Custom Search Placeholder\",\"method\":\"get\"}]");
         }
 
@@ -97,7 +97,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.GcToolsModal = true;
             sut.CdtsEnvironment.Theme = "gcintranet";
 
-            var result = sut.Render.Top().ToString();
+            var result = sut.Render.Setup().ToString();
             result.Should().Contain("\"GCToolsModal\":true");
         }
 
@@ -107,7 +107,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.GcToolsModal = true;
             sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
 
-            Action act = () => sut.Render.Top();
+            Action act = () => sut.Render.Setup();
             act.Should().Throw<NotSupportedException>();
         }
 
@@ -115,7 +115,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void HidePlaceholderMenuTrue(Model sut)
         {
             sut.HidePlaceholderMenu = true;
-            sut.Render.Top().ToString().Should().Contain("\"hidePlaceholderMenu\":true");
+            sut.Render.Setup().ToString().Should().Contain("\"hidePlaceholderMenu\":true");
         }
     }
 }

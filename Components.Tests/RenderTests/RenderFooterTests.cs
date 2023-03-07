@@ -15,21 +15,21 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void ContactLinksShoulNotRenderWhenNull(Model sut)
         {
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[]");
         }
 
         [Theory, AutoNSubstituteData]
         public void ContactLinksShoulNotRenderWhenEmpty(Model sut)
         {
             sut.ContactLinks = new List<Link>();
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[]");
         }
 
         [Theory, AutoNSubstituteData]
         public void ContactLinksHrefMustBeSpecifieds(Model sut)
         {
             sut.ContactLinks = new List<Link> { new Link() };
-            Action act = () => sut.Render.Footer();
+            Action act = () => sut.Render.Setup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Href must be specified");
         }
 
@@ -37,7 +37,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void ContactLinksShouldNotBeEmptyWhenValueIsSet(Model sut)
         {
             sut.ContactLinks = new List<Link> { new Link() { Href = "foo" } };
-            sut.Render.Footer().ToString().Should().NotContain("\"contactLinks\":[{}]")
+            sut.Render.Setup().ToString().Should().NotContain("\"contactLinks\":[{}]")
               .And.Contain("\"contactLinks\":[{\"href\":\"foo\"}]");
 
         }
@@ -47,11 +47,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             var currentEnv = new CdtsEnvironment
             {
-                Name = "AKAMAI"
+                Name = "AKAMAI",
+                Theme = "gcweb"
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
-            Action act = () => sut.Render.Footer();
+            sut.Settings.GcToolsModal = false;
+            Action act = () => sut.Render.Setup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
         }
 
@@ -61,11 +63,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -74,12 +77,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "ESDC_PROD",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             sut.Settings.UseHttps = true;
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -87,7 +91,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             var currentEnv = new CdtsEnvironment
             {
-                Name = "AKAMAI"
+                Name = "AKAMAI",
+                Theme = "gcweb"
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
@@ -101,11 +106,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -114,12 +120,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "ESDC_PROD",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             sut.Settings.UseHttps = true;
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -127,11 +134,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             var currentEnv = new CdtsEnvironment
             {
-                Name = "AKAMAI"
+                Name = "AKAMAI",
+                Theme = "gcweb"
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            Action act = () => sut.Render.Footer();
+            sut.Settings.GcToolsModal = false;
+            Action act = () => sut.Render.Setup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
         }
 
@@ -142,11 +151,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -155,11 +165,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "ESDC_PROD",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -171,7 +182,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            Action act = () => sut.Render.TransactionalFooter();
+            Action act = () => sut.Render.TransactionalSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
         }
 
@@ -185,7 +196,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            sut.Render.TransactionalFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
+            sut.Render.TransactionalSetup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -199,14 +210,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.UseHttps = true;
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
-            sut.Render.TransactionalFooter().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
+            sut.Render.TransactionalSetup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
         public void ShouldNotEncodeURL(Model sut)
         {
             sut.ContactLinks = new List<Link>() { new Link { Href = "http://localhost:8080/foo.html" } };
-            var htmlstring = sut.Render.Footer();
+            var htmlstring = sut.Render.Setup();
             htmlstring.ToString().Should().Contain("http://localhost:8080/foo.html");
         }
 
@@ -215,7 +226,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             Action execute = () =>
             {
-                var ignore = sut.Render.Footer();
+                var ignore = sut.Render.Setup();
             };
             execute.Should().NotThrow<NullReferenceException>();
 
@@ -225,14 +236,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void HandleEmptyContactLinkList(Model sut)
         {
             sut.ContactLinks = new List<Link>();
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[]");
         }
 
         [Theory, AutoNSubstituteData]
         public void HandleContactLinkValue(Model sut)
         {
             sut.ContactLinks = new List<Link>() { new Link() { Href = "http://testvalue" } };
-            sut.Render.Footer().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"http://testvalue\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -240,7 +251,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.HideFooterMain = true;
             sut.HideFooterCorporate = true;
-            sut.Render.Footer().ToString().Should().Contain("\"hideFooterMain\":true,\"hideFooterCorporate\":true");
+            sut.Render.Setup().ToString().Should().Contain("\"hideFooterMain\":true,\"hideFooterCorporate\":true");
         }
 
         [Theory, AutoNSubstituteData]
@@ -253,7 +264,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
 
             sut.ContextualFooter = new ContextualFooter() { Links = links, Title = "Contextual" };
-            sut.Render.Footer().ToString().Should().Contain("\"contextualFooter\":{\"title\":\"Contextual\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}]");
+            sut.Render.Setup().ToString().Should().Contain("\"contextualFooter\":{\"title\":\"Contextual\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}]");
         }
 
         /// <summary>
@@ -264,7 +275,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.PrivacyLink = new FooterLink() { Href = "google" };
             sut.TermsConditionsLink = new FooterLink() { Href = "google" };
-            sut.Render.Footer().ToString().Should().Contain("\"privacyLink\":{\"href\":\"google\"},\"termsLink\":{\"href\":\"google\"}");
+            sut.Render.Setup().ToString().Should().Contain("\"privacyLink\":{\"href\":\"google\"},\"termsLink\":{\"href\":\"google\"}");
         }
 
         /// <summary>
