@@ -42,5 +42,6 @@
         <!-- Write closure fall-back static file -->
         @WebTemplateModel.LoadStaticFile(string.Concat("footer-", WebTemplateModel.TwoLetterCultureLanguage, ".html"))
     </div>
+    @RenderSection("CustomScripts", required: false)
 </body>
 </html>

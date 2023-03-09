@@ -96,7 +96,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
-            Action act = () => sut.Render.TransactionalFooter();
+            sut.Settings.GcToolsModal = false;
+            Action act = () => sut.Render.TransactionalSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
         }
 
@@ -178,10 +179,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             var currentEnv = new CdtsEnvironment
             {
-                Name = "AKAMAI"
+                Name = "AKAMAI",
+                Theme = "gcweb",
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
+            sut.Settings.GcToolsModal = false;
             Action act = () => sut.Render.TransactionalSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
         }
@@ -192,6 +195,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
@@ -205,6 +209,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "ESDC_PROD",
+                Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
             sut.Settings.UseHttps = true;
@@ -286,7 +291,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.PrivacyLink = new FooterLink() { Href = "google" };
             sut.TermsConditionsLink = new FooterLink() { Href = "google" };
-            sut.Render.TransactionalFooter().ToString().Should().Contain("\"privacyLink\":[{\"href\":\"google\"}],\"termsLink\":[{\"href\":\"google\"}]");
+            sut.Render.TransactionalSetup().ToString().Should().Contain("\"privacyLink\":[{\"href\":\"google\"}],\"termsLink\":[{\"href\":\"google\"}]");
         }
     }
 }

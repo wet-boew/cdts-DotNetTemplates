@@ -71,7 +71,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.GcToolsModal = true;
             sut.CdtsEnvironment.Theme = "gcintranet";
 
-            var result = sut.Render.Top().ToString();
+            var result = sut.Render.TransactionalSetup().ToString();
             result.Should().Contain("\"GCToolsModal\":true");
         }
 
@@ -81,7 +81,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.GcToolsModal = true;
             sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
 
-            Action act = () => sut.Render.Top();
+            Action act = () => sut.Render.TransactionalSetup();
             act.Should().Throw<NotSupportedException>();
         }
     }   

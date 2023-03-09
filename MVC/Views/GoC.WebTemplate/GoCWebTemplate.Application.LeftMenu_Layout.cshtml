@@ -52,7 +52,6 @@
         <!-- Write closure fall-back static file -->
         @Html.Raw(WebTemplateModel.LoadStaticFile(string.Concat("appFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")))
     </div>
-    @Html.Raw(WebTemplateModel.Render.HtmlBodyElements())
     @RenderSection("CustomScripts", required: false)
 </body>
 </html>

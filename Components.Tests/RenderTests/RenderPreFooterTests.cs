@@ -83,7 +83,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ScreenIdentifier = "Screen Ident 2";
 
             var result = sut.Render.TransactionalSetup();
-            result.ToString().Should().Contain("{\"versionIdentifier\":\"Version Ident 1\",\"dateModified\":\"2018-09-21\",\"showFeedback\":false,\"showShare\":false,\"screenIdentifier\":\"Screen Ident 2\"}");
+            result.ToString().Should().Contain("\"versionIdentifier\":\"Version Ident 1\",\"dateModified\":\"2018-09-21\",\"showFeedback\":false,\"showShare\":false,\"screenIdentifier\":\"Screen Ident 2\"");
         }
 
     }

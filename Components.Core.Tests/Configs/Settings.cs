@@ -16,7 +16,8 @@ namespace GoC.WebTemplate.Components.Core.Tests.Configs
         {
             //We want to use the appsettings.json to test this so we don't use autonsubstitute to test it.
             var sut = GetModelWithActualSettings(fileContentCacheProvider, cdtsCacheProvider);
-            var json = sut.Render.AppTop();
+            sut.Settings.WebAnalytics.Active = false;
+            var json = sut.Render.AppSetup();
             json.ToString().Should().Contain("\"search\":true");
         }
 

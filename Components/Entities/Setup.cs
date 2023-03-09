@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 using Newtonsoft.Json;
@@ -19,19 +20,21 @@ namespace GoC.WebTemplate.Components.Entities
         public ITop Top { get; set; }
         public IPreFooter PreFooter { get; set; }
         public IFooter Footer { get; set; }
-        public SecMenu SecMenu { get; set; }
+        public object SecMenu { get; set; }
         public Splash Splash { get; set; }
         public List<string> OnCDTSPageFinalized { get; set; }
     }
+
+    public enum Mode
+    {
+        [EnumMember(Value = "common")]
+        COMMON,
+        [EnumMember(Value = "app")]
+        APP,
+        [EnumMember(Value = "server")]
+        SERVER,
+        [EnumMember(Value = "splash")]
+        SPLASH
+    }
 }
-public enum Mode
-{
-    [EnumMember(Value = "common")]
-    COMMON,
-    [EnumMember(Value = "app")]
-    APP,
-    [EnumMember(Value = "server")]
-    SERVER,
-    [EnumMember(Value = "splash")]
-    SPLASH
-}
+

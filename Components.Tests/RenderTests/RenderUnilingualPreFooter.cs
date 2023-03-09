@@ -8,7 +8,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void PageDetails(Model sut)
         {
-            sut.Render.UnilingualPreFooter().ToString().Should().Contain("\"cdnEnv\":\"\"");
+            sut.Render.UnilingualErrorSetup().ToString().Should().Contain("\"cdnEnv\":\"\"");
         }
     }
 }

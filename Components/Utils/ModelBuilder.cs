@@ -32,7 +32,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Top = BuildTop(isTransactional),
                 PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
                 Footer = BuildFooter(isTransactional),
-                SecMenu = _model.LeftMenuItems.Any() ? new SecMenu(_model.LeftMenuItems) : null,
+                SecMenu = _model.LeftMenuItems.Any() ? BuildLeftMenu() : null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             };
@@ -188,11 +188,7 @@ namespace GoC.WebTemplate.Components.Utils
                     VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                     ShowPostContent = false,
                     ShowFeedback = new FeedbackLink { Show = false },
-                    ShowShare = new ShareList
-                    {
-                        Show = false,
-                        Enums = null
-                    },
+                    ShowShare = new ShareList { Show = false },
                     ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
                 };
             }
@@ -238,6 +234,65 @@ namespace GoC.WebTemplate.Components.Utils
                 FooterSections = _model.Builder.BuildCustomFooterSections,
                 FooterPath = _model.Builder.GetStringForJson(_model.FooterPath)
             };
+        }
+
+        /// <summary>
+        /// Builds the "LeftMenu" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public object BuildLeftMenu()
+        {
+            var leftMenuForSerialization = new { sections = new List<object>() };
+
+            // capitalization on anonymous types matters here, CDTS will reject the json objects if not done right
+            foreach (var menu in _model.LeftMenuItems)
+            {
+                var menuForSerialization = new
+                {
+                    sectionName = WebUtility.HtmlEncode(menu.Text),
+                    sectionLink = _model.Builder.GetStringForJson(menu.Href),
+                    newWindow = menu.NewWindow,
+                    menuLinks = new List<object>() //can't be null
+                };
+
+                foreach (var menuItem in menu.Items)
+                {
+                    var item = menuItem as MenuItem;
+                    if (item == null)
+                    {
+                        menuForSerialization.menuLinks.Add(new
+                        {
+                            href = menuItem.Href,
+                            text = menuItem.Text
+                        });
+                    }
+                    else
+                    {
+                        var subMenuForSerialization = new
+                        {
+                            href = item.Href,
+                            text = item.Text,
+                            newWindow = item.NewWindow,
+                            subLinks = item.SubItems.Any() ? new List<object>() : null
+                        };
+
+                        foreach (var subMenuItem in item.SubItems)
+                        {
+                            subMenuForSerialization.subLinks.Add(new
+                            {
+                                subhref = subMenuItem.Href,
+                                subtext = subMenuItem.Text,
+                                newWindow = subMenuItem.NewWindow
+                            });
+                        }
+
+                        menuForSerialization.menuLinks.Add(subMenuForSerialization);
+                    }
+                }
+
+                leftMenuForSerialization.sections.Add(menuForSerialization);
+            }
+
+            return leftMenuForSerialization;
         }
 
         /// <summary>
