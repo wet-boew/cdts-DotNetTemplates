@@ -27,7 +27,7 @@ namespace GoC.WebTemplate.Components.Utils
             return new Setup
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                Mode = Mode.COMMON, // passing null for mode since "common" is CDTS default
+                Mode = Mode.COMMON,
                 Base = BuildSetupBase(),
                 Top = BuildTop(isTransactional),
                 PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
@@ -74,7 +74,7 @@ namespace GoC.WebTemplate.Components.Utils
 
             return new Top
             {
-                CdnEnv = _model.CdtsEnvironment.CDN,
+                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
                 Search = _model.Settings.ShowSearch,
@@ -183,7 +183,7 @@ namespace GoC.WebTemplate.Components.Utils
             { //(isTransactional)
                 return new PreFooter
                 {
-                    CdnEnv = _model.CdtsEnvironment.CDN,
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                     DateModified = _model.Builder.BuildDateModified(),
                     VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                     ShowPostContent = false,
@@ -201,7 +201,7 @@ namespace GoC.WebTemplate.Components.Utils
         {
             return new Footer
             {
-                CdnEnv = _model.CdtsEnvironment.CDN,
+                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = !isTransactional,
                 ContactLinks = _model.Builder.BuildContactLinks(),
@@ -225,7 +225,7 @@ namespace GoC.WebTemplate.Components.Utils
 
             return new AppFooter
             {
-                CdnEnv = _model.CdtsEnvironment.CDN,
+                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                 SubTheme = _model.Builder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
                 TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink),
                 PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),

@@ -1,11 +1,6 @@
-﻿using FluentAssertions;
-using GoC.WebTemplate.Components.Test;
+﻿using GoC.WebTemplate.Components.Test;
 using GoC.WebTemplate.Components.Utils;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
-using System.Threading;
+
 using Xunit;
 
 namespace GoC.WebTemplate.Components.Tests.UtilTests
