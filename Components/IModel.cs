@@ -40,13 +40,13 @@ namespace GoC.WebTemplate.Components
         List<Breadcrumb> Breadcrumbs { get; set; }
 
         /// <summary>
-        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Complete path of the CSS file required for application GCWeb/GCIntranet layouts
         /// Set by Core
         /// </summary>
         string AppCSSPath { get; }
 
         /// <summary>
-        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Complete path of the CSS file required for regular GCWeb/GCIntranet layouts
         /// Set by Core
         /// </summary>
         string CSSPath { get; }
@@ -58,7 +58,7 @@ namespace GoC.WebTemplate.Components
         string CDNPath { get; }
 
         /// <summary>
-        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Complete path of the CSS file required for the splash page
         /// Set by Core
         /// </summary>
         string SplashCSSPath { get; }

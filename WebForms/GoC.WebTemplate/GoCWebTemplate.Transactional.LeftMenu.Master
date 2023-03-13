@@ -28,11 +28,6 @@
 		    <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile(string.Concat("transactTop-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>   
         </div>
-        <!-- Write closure template -->
-        <script type="text/javascript">
-            var defTop = document.getElementById("def-top");
-            defTop.outerHTML = wet.builder.top(<%= WebTemplateModel.Render.TransactionalTop() %>);
-        </script>
         <div class="container">
 	        <div class="row">
 	            <main property="mainContentOfPage" class="col-md-9 col-md-push-3" role="main" typeof="WebPageElement">

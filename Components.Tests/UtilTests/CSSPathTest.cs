@@ -13,7 +13,7 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         [Theory, AutoNSubstituteData]
         public void TestBasicGCWeb(Model sut)
         {
-            sut.CdtsEnvironment.Theme = "gcintranet";
+            sut.CdtsEnvironment.Theme = "gcweb";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
             var result = modelBuilder.BuildCSSPath();
@@ -36,7 +36,7 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         public void TestBasicGCIntranetESDC(Model sut)
         {
             sut.CdtsEnvironment.Theme = "gcintranet";
-            sut.CdtsEnvironment.SubTheme = "esdc";
+            sut.CdtsEnvironment.SubTheme = "eSdC"; //test case insensitivity
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
             var result = modelBuilder.BuildCSSPath();
@@ -48,7 +48,7 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         public void TestBasicGCIntranetECCC(Model sut)
         {
             sut.CdtsEnvironment.Theme = "gcintranet";
-            sut.CdtsEnvironment.SubTheme = "eccc";
+            sut.CdtsEnvironment.SubTheme = "eCcC"; //test case insensitivity
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
             var result = modelBuilder.BuildCSSPath();
@@ -85,7 +85,7 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         [Theory, AutoNSubstituteData]
         public void TestAppGCWeb(Model sut)
         {
-            sut.CdtsEnvironment.Theme = "gcintranet";
+            sut.CdtsEnvironment.Theme = "gcweb";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
             var result = modelBuilder.BuildAppCSSPath();
@@ -157,7 +157,7 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         [Theory, AutoNSubstituteData]
         public void TestSplashGCWeb(Model sut)
         {
-            sut.CdtsEnvironment.Theme = "gcintranet";
+            sut.CdtsEnvironment.Theme = "gcweb";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
             var result = modelBuilder.BuildSplashCSSPath();

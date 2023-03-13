@@ -37,7 +37,7 @@
                 <%= WebTemplateModel.LoadStaticFile(string.Concat("preFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
             </div>
         </main>
-        <div id="def-footer">
+        <div id="cdts-def-footer">
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile(string.Concat("appFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
         </div>

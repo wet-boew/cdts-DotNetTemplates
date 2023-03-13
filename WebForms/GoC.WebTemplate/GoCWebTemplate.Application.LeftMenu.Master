@@ -16,7 +16,6 @@
         <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}compiled/wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)  %>" data-cdts-setup='<%= WebTemplateModel.Render.AppSetup() %>'></script> 
         <noscript>
             <!-- Write closure fall-back static file -->
-            <a href="GoCWebTemplate.LeftMenu.Master">GoCWebTemplate.LeftMenu.Master</a>
             <%= WebTemplateModel.LoadStaticFile("refTop.html") %>
         </noscript>
          <%= WebTemplateModel.Render.HtmlHeaderElements() %>

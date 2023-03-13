@@ -63,7 +63,7 @@ namespace GoC.WebTemplate.Components
         public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Settings.Environment];
 
         /// <summary>
-        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Complete path of the CSS file required for application GCWeb/GCIntranet layouts
         /// Set by Core
         /// </summary>
         public string AppCSSPath => Builder.BuildAppCSSPath();
@@ -75,13 +75,13 @@ namespace GoC.WebTemplate.Components
         public string CDNPath => Builder.BuildCDNPath();
 
         /// <summary>
-        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Complete path of the CSS file required for regular GCWeb/GCIntranet layouts
         /// Set by Core
         /// </summary>
         public string CSSPath => Builder.BuildCSSPath();
 
         /// <summary>
-        /// Complete path of the CDN including http(s), theme and run or versioned
+        /// Complete path of the CSS file required for the splash page
         /// Set by Core
         /// </summary>
         public string SplashCSSPath => Builder.BuildSplashCSSPath();

@@ -29,7 +29,7 @@ namespace GoC.WebTemplate.Components.Tests.RenderTests
         public void TestRenderSetupApos(Model sut)
         {
             sut.ScreenIdentifier = "This is an 'identifier'";
-            sut.Render.Setup().ToString().Should().Contain("\"screenIdentifier\":\"This is an 'identifier'\"");
+            sut.Render.Setup().ToString().Should().Contain("\"screenIdentifier\":\"This is an \\u0027identifier\\u0027\"");
         }
 
         [Theory, AutoNSubstituteData]

@@ -19,7 +19,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.LeavingSecureSiteWarning.Enabled = false;
 
             var result = sut.Render.Setup();
-            result.ToString().Should().NotContain("{\"exitScript\":\"\"}");
+            result.ToString().Should().NotContain("{\"exitScript\":");
         }
 
         [Theory, AutoNSubstituteData]

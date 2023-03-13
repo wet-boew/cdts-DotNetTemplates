@@ -109,7 +109,7 @@ namespace GoC.WebTemplate.Components.Utils
                     AppName = new List<Link> { _model.ApplicationTitle },
                     SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
                     SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
-                    CdnEnv = _model.CdtsEnvironment.CDN,
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                     SubTheme = _model.CdtsEnvironment.SubTheme,
                     Search = _model.Settings.ShowSearch,
                     LngLinks = _model.Builder.BuildLanguageLinkList(),
@@ -133,7 +133,7 @@ namespace GoC.WebTemplate.Components.Utils
                     IntranetTitle = _model.Builder.BuildIntranentTitleList(),
                     SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
                     SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
-                    CdnEnv = _model.CdtsEnvironment.CDN,
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                     SubTheme = _model.CdtsEnvironment.SubTheme,
                     Search = _model.Settings.ShowSearch,
                     LngLinks = _model.Builder.BuildLanguageLinkList(),
