@@ -242,6 +242,7 @@
     <Content Include="Views\TestFeatures\TestAppPage.cshtml" />
     <Content Include="Views\TestActionFilter\Default.cshtml" />
     <Content Include="Views\TestActionFilter\WithBreadCrumbs.cshtml" />
+    <Content Include="Views\TestLayouts\SplashPage.cshtml" />
     <None Include="WebTemplateMVC.xsd">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

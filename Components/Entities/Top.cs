@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    public class Top
+    public class Top : ITop
     {
         public string CdnEnv { get; set; }
         public string SubTheme { get; set; }

@@ -140,6 +140,7 @@
     <Content Include="TestErrorPage.aspx" />
     <Content Include="TestSplashTemplate.aspx" />
     <Content Include="TestUnilingualErrorPage.aspx" />
+    <Content Include="TransacationalLeftMenuPage.aspx" />
     <Content Include="TransactionalTemplateTestPage.aspx" />
     <Content Include="Web.config.install.xdt" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.Application.Master" />
@@ -148,6 +149,7 @@
     <Content Include="GoC.WebTemplate\GoCWebTemplate.UnilingualErrorPage.Master" />
     <Content Include="GoC.WebTemplate\GoCWebTemplate.SplashPage.Master" />
     <Content Include="packages.config" />
+    <Content Include="TestWebTemplateLeftMenuPage.aspx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -215,6 +217,20 @@
     </Compile>
     <Compile Include="TestWebTemplatePage.aspx.designer.cs">
       <DependentUpon>TestWebTemplatePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestWebTemplateLeftMenuPage.aspx.cs">
+      <DependentUpon>TestWebTemplateLeftMenuPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestWebTemplateLeftMenuPage.aspx.designer.cs">
+      <DependentUpon>TestWebTemplateLeftMenuPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TransacationalLeftMenuPage.aspx.cs">
+      <DependentUpon>TransacationalLeftMenuPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TransacationalLeftMenuPage.aspx.designer.cs">
+      <DependentUpon>TransacationalLeftMenuPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

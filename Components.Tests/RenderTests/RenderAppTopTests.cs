@@ -15,7 +15,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void MenuLinksShouldNotRenderWhenNull(Model sut)
         {
             sut.MenuLinks = null;
-            sut.Render.AppTop().ToString().Should().NotContain("menuLinks");
+            sut.Render.AppSetup().ToString().Should().NotContain("menuLinks");
         }
 
         [Theory, AutoNSubstituteData]
@@ -31,7 +31,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 }
             };
 
-            sut.Render.AppTop().ToString().Should().NotContain("newWindow");
+            sut.Render.AppSetup().ToString().Should().Contain("\"menuLinks\":[{\"href\":\"foo\",\"text\":\"bar\"}]}");
         }
 
         [Theory, AutoNSubstituteData]
@@ -47,7 +47,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
       };
 
-            sut.Render.AppTop().ToString().Should().Contain("newWindow");
+            sut.Render.AppSetup().ToString().Should().Contain("\"menuLinks\":[{\"href\":\"foo\",\"text\":\"bar\",\"newWindow\":true}]}");
         }
 
         [Theory, AutoNSubstituteData]
@@ -63,7 +63,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
       };
 
-            sut.Render.AppTop().ToString().Should().Contain("\"menuLinks\":[{\"href\":\"foo\",\"text\":\"bar\",\"acronym\":\"baz\"}]");
+            sut.Render.AppSetup().ToString().Should().Contain("\"menuLinks\":[{\"href\":\"foo\",\"text\":\"bar\",\"acronym\":\"baz\"}]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -87,7 +87,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                     }
                 }
             };
-            var result = sut.Render.AppTop();
+            var result = sut.Render.AppSetup();
 
             result.ToString().Should().Contain("\"menuLinks\":[{\"subLinks\":[{\"subhref\":\"SubLinkHerf1\",\"subtext\":\"SubLinkText1\",\"acronym\":\"baz\",\"newWindow\":true}],\"text\":\"MenuLink\"}]");
         }
@@ -99,7 +99,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.CustomSiteMenuURL = "Foo";
 
             // ReSharper disable once MustUseReturnValue
-            Action act = () => sut.Render.AppTop();
+            Action act = () => sut.Render.AppSetup();
 
             act.Should().Throw<InvalidOperationException>();
         }
@@ -116,7 +116,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ApplicationTitle.Href = "bar";
 
 
-            sut.Render.AppTop().ToString()
+            sut.Render.AppSetup().ToString()
               .Should().Contain("\"appName\":[{\"href\":\"bar\",\"text\":\"foo\"}]");
         }
         [Theory, AutoNSubstituteData]
@@ -126,7 +126,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var testurl = "http://tempuri.com";
             sut.AppSettingsURL = testurl;
             //Test
-            var results = sut.Render.AppTop();
+            var results = sut.Render.AppSetup();
             //Verify
             results.ToString().Should().Contain("\"appSettings\":[{\"href\":\"" + testurl + "\"}]");
         }
@@ -137,7 +137,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             //Setup           
             sut.AppSettingsURL = null;
             //Test
-            var results = sut.Render.AppTop();
+            var results = sut.Render.AppSetup();
             //Verify
             results.ToString().Should().NotContain("\"appSettings\"");
         }
@@ -151,27 +151,27 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Href = "foo",
                 Text = "bar"
             });
-            sut.Render.AppTop().ToString().Should().Contain("\"topSecMenu\":true");
+            sut.Render.AppSetup().ToString().Should().Contain("\"topSecMenu\":true");
         }
 
         [Theory, AutoNSubstituteData]
         public void TopSecMenuFalseInAppTopWhenLeftMenuItems(Model sut)
         {
-            sut.Render.AppTop().ToString().Should().Contain("\"topSecMenu\":false");
+            sut.Render.AppSetup().ToString().Should().Contain("\"topSecMenu\":false");
         }
 
         [Theory, AutoNSubstituteData]
         public void IntranetTitleShouldNotRenderWhenNullInAppTop(Model sut)
         {
             sut.IntranetTitle = null;
-            sut.Render.AppTop().ToString().Should().NotContain("\"intranetTitle\":[null]");
+            sut.Render.AppSetup().ToString().Should().NotContain("\"intranetTitle\":[null]");
         }
 
         [Theory, AutoNSubstituteData]
         public void IntranetTitleAppTop(Model sut)
         {
             sut.IntranetTitle = new IntranetTitle { Text = "foo", Href = "bar", Acronym = "plat" };
-            sut.Render.AppTop().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
+            sut.Render.AppSetup().ToString().Should().Contain("\"intranetTitle\":[{\"href\":\"bar\",\"text\":\"foo\",\"acronym\":\"plat\"}]");
         }
         
         [Theory, AutoNSubstituteData]
@@ -190,21 +190,21 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 }
             };
 
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().Contain("\"customSearch\":[{\"action\":\"action1\",\"placeholder\":\"placeholder5\",\"id\":\"id3\",\"method\":\"method4\",\"hiddenInput\":[{\"name\":\"name1\",\"value\":\"val1\"},{\"name\":\"name2\",\"value\":\"val2\"}]}]");
         }
         
         [Theory, AutoNSubstituteData]
         public void RenderCustomSearchNotSet(Model sut)
         {
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("customSearch");
         }
         
         [Theory, AutoNSubstituteData]
         public void AppSearchIsNullByDefault(Model sut)
         {
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("\"Search\"");
         }
 
@@ -213,14 +213,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.Breadcrumbs = null;
             // ReSharper disable once MustUseReturnValue
-            Action execute = () => sut.Render.AppTop();
+            Action execute = () => sut.Render.AppSetup();
             execute.Should().NotThrow<ArgumentNullException>();
         }
 
         [Theory, AutoNSubstituteData]
         public void SiteMenuPathShouldNotRenderWhenNull(Model sut)
         {
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("menuPath");
         }
 
@@ -229,7 +229,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
 
             sut.ShowSignInLink = false;
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("signIn");
         }
 
@@ -239,7 +239,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 
             sut.ShowSignInLink = true;
             sut.Settings.SignInLinkUrl = null;
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("signIn");
         }
 
@@ -248,7 +248,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
 
             sut.ShowSignOutLink = false;
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("signOut");
         }
 
@@ -259,7 +259,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ShowSignOutLink = true;
             sut.ShowSignInLink = false;
             sut.Settings.SignOutLinkUrl = null;
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().NotContain("signOut");
         }
 
@@ -269,7 +269,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ShowSignOutLink = true;
             sut.ShowSignInLink = true;
             // ReSharper disable once MustUseReturnValue
-            Action act = () => sut.Render.AppTop();
+            Action act = () => sut.Render.AppSetup();
             act.Should().Throw<InvalidOperationException>();
         }
 
@@ -278,7 +278,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.LanguageLink.Href = "foo-en.lang";
             sut.Settings.ShowLanguageLink = true;
-            var json = sut.Render.AppTop();
+            var json = sut.Render.AppSetup();
             json.ToString().Should().Contain("\"lngLinks\":[{\"href\":\"foo-en.lang\"");
         }
 
@@ -288,7 +288,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.GcToolsModal = true;
             sut.CdtsEnvironment.Theme = "gcintranet";
 
-            var result = sut.Render.AppTop().ToString();
+            var result = sut.Render.AppSetup().ToString();
             result.Should().Contain("\"GCToolsModal\":true");
         }
 
@@ -298,7 +298,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.GcToolsModal = true;
             sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
 
-            var result = sut.Render.AppTop().ToString();
+            var result = sut.Render.AppSetup().ToString();
             result.Should().NotContain("GCToolsModal");
         }
 
@@ -308,7 +308,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.CdtsEnvironment.ThemeIsGCWeb().Returns(true);
             sut.InfoBanner = new InfoBanner() { MainHTML = "Information Banner", Button = new Link() { Text = "Button", Href = "google" }, Link = new Link() { Text = "Link", Href = "google" } };
 
-            var result = sut.Render.AppTop().ToString();
+            var result = sut.Render.AppSetup().ToString();
             result.Should().Contain("\"infoBanner\":{\"mainHTML\":\"Information Banner\",\"link\":{\"href\":\"google\",\"text\":\"Link\"},\"button\":{\"href\":\"google\",\"text\":\"Button\"}");
         }
 
@@ -327,7 +327,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 LogoutLink = new Link() { Text = "Logout", Href = "google" }
             };
 
-            var result = sut.Render.AppTop().ToString();
+            var result = sut.Render.AppSetup().ToString();
             result.Should().Contain("\"headerMenu\":{\"text\":\"Menu\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}],\"logoutLink\":{\"href\":\"google\",\"text\":\"Logout\"}}");
         }
     }

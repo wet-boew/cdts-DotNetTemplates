@@ -21,9 +21,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ScreenIdentifier = "Test ID";
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
-            var result = sut.Render.PreFooter();
+            var result = sut.Render.Setup();
 
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"versionIdentifier\":\"1.2.3\",\"dateModified\":\"2015-01-09\",\"showFeedback\":\"test feedback url\",\"showShare\":true,\"screenIdentifier\":\"Test ID\"}");
+            result.ToString().Should().Contain("{\"versionIdentifier\":\"1.2.3\",\"dateModified\":\"2015-01-09\",\"showFeedback\":\"test feedback url\",\"showShare\":true,\"screenIdentifier\":\"Test ID\"}");
         }
         [Theory, AutoNSubstituteData]
         public void RenderPreFooterWithNullsTest(Model sut)
@@ -35,9 +35,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ScreenIdentifier = null;
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
-            var result = sut.Render.PreFooter();
+            var result = sut.Render.Setup();
 
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"showFeedback\":\"test feedback url\",\"showShare\":true}");
+            result.ToString().Should().Contain("{\"showFeedback\":\"test feedback url\",\"showShare\":true}");
         }
 
         [Theory, AutoNSubstituteData]
@@ -50,9 +50,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
-            var result = sut.Render.PreFooter();
+            var result = sut.Render.Setup();
 
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"showFeedback\":\"test feedback url\",\"showShare\":true}");
+            result.ToString().Should().Contain("{\"showFeedback\":\"test feedback url\",\"showShare\":true}");
         }
 
         [Theory, AutoNSubstituteData]
@@ -67,9 +67,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
-            var result = sut.Render.PreFooter();
+            var result = sut.Render.Setup();
 
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"showFeedback\":\"test feedback french url\",\"showShare\":true}");
+            result.ToString().Should().Contain("{\"showFeedback\":\"test feedback french url\",\"showShare\":true}");
             //need to reset the culture back to english as that is what other tests expect it to be by default
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Constants.ENGLISH_CULTURE);
         }
@@ -82,8 +82,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.VersionIdentifier = "Version Ident 1";
             sut.ScreenIdentifier = "Screen Ident 2";
 
-            var result = sut.Render.TransactionalPreFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"versionIdentifier\":\"Version Ident 1\",\"dateModified\":\"2018-09-21\",\"showFeedback\":false,\"showShare\":false,\"screenIdentifier\":\"Screen Ident 2\"}");
+            var result = sut.Render.TransactionalSetup();
+            result.ToString().Should().Contain("\"versionIdentifier\":\"Version Ident 1\",\"dateModified\":\"2018-09-21\",\"showFeedback\":false,\"showShare\":false,\"screenIdentifier\":\"Screen Ident 2\"");
         }
 
     }

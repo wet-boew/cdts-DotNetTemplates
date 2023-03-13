@@ -63,10 +63,28 @@ namespace GoC.WebTemplate.Components
         public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Settings.Environment];
 
         /// <summary>
+        /// Complete path of the CSS file required for application GCWeb/GCIntranet layouts
+        /// Set by Core
+        /// </summary>
+        public string AppCSSPath => Builder.BuildAppCSSPath();
+
+        /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
         /// Set by Core
         /// </summary>
         public string CDNPath => Builder.BuildCDNPath();
+
+        /// <summary>
+        /// Complete path of the CSS file required for regular GCWeb/GCIntranet layouts
+        /// Set by Core
+        /// </summary>
+        public string CSSPath => Builder.BuildCSSPath();
+
+        /// <summary>
+        /// Complete path of the CSS file required for the splash page
+        /// Set by Core
+        /// </summary>
+        public string SplashCSSPath => Builder.BuildSplashCSSPath();
 
         /// <summary>
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter

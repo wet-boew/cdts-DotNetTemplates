@@ -27,7 +27,8 @@ namespace GoC.WebTemplate.Components.Utils
                 }
             },
             NullValueHandling = NullValueHandling.Ignore,
-            DefaultValueHandling = DefaultValueHandling.Ignore
+            DefaultValueHandling = DefaultValueHandling.Ignore,
+            StringEscapeHandling = StringEscapeHandling.EscapeHtml
         };
 
         /// <summary>

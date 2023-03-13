@@ -18,6 +18,283 @@ namespace GoC.WebTemplate.Components.Utils
         {
             _model = model;
         }
+
+        /// <summary>
+        /// Builds the "common" CDTS setup object based on parameteres (used by the render functions)
+        /// </summary>
+        public Setup BuildCommonSetup(bool isTransactional, bool isUnilingualError)
+        {
+            return new Setup
+            {
+                CdnEnv = _model.CdtsEnvironment.CDN,
+                Mode = Mode.COMMON,
+                Base = BuildSetupBase(),
+                Top = BuildTop(isTransactional),
+                PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
+                Footer = BuildFooter(isTransactional),
+                SecMenu = _model.LeftMenuItems.Any() ? BuildLeftMenu() : null,
+                Splash = null,
+                OnCDTSPageFinalized = _model.HTMLBodyElements
+            };
+        }
+
+        /// <summary>
+        /// Creates the `SetupBase` object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public SetupBase BuildSetupBase()
+        {
+            if (_model.Settings.WebAnalytics.Active && !_model.CdtsEnvironment.CanUseWebAnalytics) throw new NotSupportedException("The WebAnalytics is not supported in this enviornment.");
+
+            if (_model.Settings.LeavingSecureSiteWarning.Enabled &&
+                !string.IsNullOrEmpty(_model.Settings.LeavingSecureSiteWarning.RedirectUrl))
+            {
+                return new SetupBase
+                {
+                    SubTheme = _model.CdtsEnvironment.SubTheme,
+                    ExitSecureSite = _model.Builder.BuildExitSecureSite(),
+                    JqueryEnv = _model.Builder.BuildJqueryEnv(),
+                    WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
+                };
+            }
+
+            return new SetupBase{
+                SubTheme = _model.CdtsEnvironment.SubTheme,
+                JqueryEnv = _model.Builder.BuildJqueryEnv(),
+                WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
+            };
+        }
+
+        /// <summary>
+        /// Builds the "Top" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public Top BuildTop(bool isTransactional)
+        {
+            if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
+                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+
+            return new Top
+            {
+                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                SubTheme = _model.CdtsEnvironment.SubTheme,
+                IntranetTitle = _model.Builder.BuildIntranentTitleList(),
+                Search = _model.Settings.ShowSearch,
+                LngLinks = _model.Builder.BuildLanguageLinkList(),
+                ShowPreContent = isTransactional ? false : _model.ShowPreContent,
+                Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                LocalPath = _model.Builder.BuildLocalPath(),
+                TopSecMenu = _model.LeftMenuItems.Any(),
+                CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
+                SiteMenu = !isTransactional,
+                GcToolsModal = _model.Settings.GcToolsModal,
+                HidePlaceholderMenu = _model.HidePlaceholderMenu
+            };
+        }
+
+        /// <summary>
+        /// Builds the "AppTop" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public AppTop BuildAppTop()
+        {
+            if (_model.ShowSignInLink && _model.ShowSignOutLink)
+                throw new InvalidOperationException("Unable to show sign in and sign out link together");
+            if (_model.CustomSiteMenuURL != null && _model.MenuLinks != null && _model.MenuLinks.Any())
+                throw new InvalidOperationException("Unable to have both a custom menu url and dynamically generated menu at the same time");
+
+            //For v4.0.26.x we have to render this section differently depending on the theme, 
+            //GCIntranet theme renders AppName and AppUrl seperately in GCWeb we render it as a List of Links. 
+            if (_model.CdtsEnvironment.ThemeIsGCWeb())
+            {
+                return new AppTop
+                {
+                    AppName = new List<Link> { _model.ApplicationTitle },
+                    SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                    SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                    SubTheme = _model.CdtsEnvironment.SubTheme,
+                    Search = _model.Settings.ShowSearch,
+                    LngLinks = _model.Builder.BuildLanguageLinkList(),
+                    ShowPreContent = _model.ShowPreContent,
+                    Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                    LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                    AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
+                    MenuPath = _model.CustomSiteMenuURL,
+                    CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
+                    TopSecMenu = _model.LeftMenuItems.Any(),
+                    MenuLinks = _model.MenuLinks,
+                    InfoBanner = _model.InfoBanner,
+                    HeaderMenu = _model.HeaderMenu
+                };
+            }
+            else
+            {
+                return new AppTopGcIntranet
+                {
+                    AppName = new List<Link> { _model.ApplicationTitle },
+                    IntranetTitle = _model.Builder.BuildIntranentTitleList(),
+                    SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                    SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                    SubTheme = _model.CdtsEnvironment.SubTheme,
+                    Search = _model.Settings.ShowSearch,
+                    LngLinks = _model.Builder.BuildLanguageLinkList(),
+                    ShowPreContent = _model.ShowPreContent,
+                    Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
+                    LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                    AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
+                    MenuPath = _model.CustomSiteMenuURL,
+                    CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
+                    TopSecMenu = _model.LeftMenuItems.Any(),
+                    MenuLinks = _model.MenuLinks,
+                    GcToolsModal = _model.Settings.GcToolsModal
+                };
+            }
+        }
+
+        /// <summary>
+        /// Builds the "PreFooter" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public IPreFooter BuildPreFooter(bool isTransactional, bool isUnilingualError)
+        {
+            if (!isTransactional)
+            {
+                if (!isUnilingualError)
+                {
+                    return new PreFooter 
+                    {
+                        CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                        DateModified = _model.Builder.BuildDateModified(),
+                        VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                        ShowPostContent = _model.Settings.ShowPostContent,
+                        ShowFeedback = _model.Settings.FeedbackLink,
+                        ShowShare = new ShareList
+                        {
+                            Show = _model.Settings.ShowSharePageLink,
+                            Enums = _model.SharePageMediaSites
+                        },
+                        ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                    };
+                }
+                else
+                { //(isUnilingualError)
+                    return new UnilingualPreFooter() { CdnEnv = null, PageDetails = false};
+                }
+            }
+            else
+            { //(isTransactional)
+                return new PreFooter
+                {
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                    DateModified = _model.Builder.BuildDateModified(),
+                    VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                    ShowPostContent = false,
+                    ShowFeedback = new FeedbackLink { Show = false },
+                    ShowShare = new ShareList { Show = false },
+                    ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                };
+            }
+        }
+
+        /// <summary>
+        /// Builds the "Footer" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public Footer BuildFooter(bool isTransactional)
+        {
+            return new Footer
+            {
+                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                SubTheme = _model.CdtsEnvironment.SubTheme,
+                ShowFooter = !isTransactional,
+                ContactLinks = _model.Builder.BuildContactLinks(),
+                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, !isTransactional),
+                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, !isTransactional),
+                ContextualFooter = isTransactional ? null : _model.ContextualFooter,
+                HideFooterMain = isTransactional ? false : _model.HideFooterMain,
+                HideFooterCorporate = isTransactional ? false : _model.HideFooterCorporate,
+            };
+        }
+
+        /// <summary>
+        /// Builds the "AppFooter" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public AppFooter BuildAppFooter()
+        {
+            if (!_model.CdtsEnvironment.CanHaveContactLinkInAppTemplate && _model.ContactLinks.Any())
+            {
+                throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
+            }
+
+            return new AppFooter
+            {
+                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                SubTheme = _model.Builder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
+                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink),
+                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
+                ContactLink = _model.Builder.BuildContactLinks(),
+                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                FooterSections = _model.Builder.BuildCustomFooterSections,
+                FooterPath = _model.Builder.GetStringForJson(_model.FooterPath)
+            };
+        }
+
+        /// <summary>
+        /// Builds the "LeftMenu" object needed in rendering the CDTS setup JSON
+        /// </summary>
+        public object BuildLeftMenu()
+        {
+            var leftMenuForSerialization = new { sections = new List<object>() };
+
+            // capitalization on anonymous types matters here, CDTS will reject the json objects if not done right
+            foreach (var menu in _model.LeftMenuItems)
+            {
+                var menuForSerialization = new
+                {
+                    sectionName = WebUtility.HtmlEncode(menu.Text),
+                    sectionLink = _model.Builder.GetStringForJson(menu.Href),
+                    newWindow = menu.NewWindow,
+                    menuLinks = new List<object>() //can't be null
+                };
+
+                foreach (var menuItem in menu.Items)
+                {
+                    var item = menuItem as MenuItem;
+                    if (item == null)
+                    {
+                        menuForSerialization.menuLinks.Add(new
+                        {
+                            href = menuItem.Href,
+                            text = menuItem.Text
+                        });
+                    }
+                    else
+                    {
+                        var subMenuForSerialization = new
+                        {
+                            href = item.Href,
+                            text = item.Text,
+                            newWindow = item.NewWindow,
+                            subLinks = item.SubItems.Any() ? new List<object>() : null
+                        };
+
+                        foreach (var subMenuItem in item.SubItems)
+                        {
+                            subMenuForSerialization.subLinks.Add(new
+                            {
+                                subhref = subMenuItem.Href,
+                                subtext = subMenuItem.Text,
+                                newWindow = subMenuItem.NewWindow
+                            });
+                        }
+
+                        menuForSerialization.menuLinks.Add(subMenuForSerialization);
+                    }
+                }
+
+                leftMenuForSerialization.sections.Add(menuForSerialization);
+            }
+
+            return leftMenuForSerialization;
+        }
+
         /// <summary>
         /// Builds the URL to be used by the English/francais link at the top of the page for the language toggle.
         /// The method will add or update the "GoCTemplateCulture" querystring parameter with the culture to be set
@@ -226,6 +503,53 @@ namespace GoC.WebTemplate.Components.Utils
             }
 
             return string.Format(CultureInfo.InvariantCulture, _model.CdtsEnvironment.Path, https, run, _model.CdtsEnvironment.Theme, version);
+        }
+
+        /// <summary>
+        /// Builds the CDN path to the cdts-app-styles.css file.
+        /// </summary>
+        /// <returns>String, the complete path to the cdn</returns>
+        public string BuildCSSPath()
+        {
+            if (!_model.CdtsEnvironment.ThemeIsGCWeb())
+            {
+                string subTheme = _model.CdtsEnvironment.SubTheme;
+                if (!string.IsNullOrEmpty(subTheme))
+                {
+                    subTheme = subTheme.ToLower();
+                    //...limit to supported subthemes
+                    if (subTheme.Equals("esdc") || subTheme.Equals("eccc"))
+                    {
+                        return $"{BuildCDNPath()}cdts-{subTheme}-styles.css";
+                    }
+                }
+            }
+
+            //(if we get here, we're gcweb or gcintranet with no subtheme value)
+            return $"{BuildCDNPath()}cdts-styles.css";
+        }
+
+        /// <summary>
+        ///Builds the CDN path to the cdts-[subtheme]-styles.css file.
+        /// </summary>
+        public string BuildAppCSSPath()
+        {
+            if (_model.CdtsEnvironment.ThemeIsGCWeb())
+            {
+                return $"{BuildCDNPath()}cdts-app-styles.css";
+            }
+            else
+            {
+                return BuildCSSPath();
+            }
+        }
+
+        /// <summary>
+        /// Builds the CDN path to the cdts-splash-styles.css file.
+        /// </summary>
+        public string BuildSplashCSSPath()
+        {
+            return $"{BuildCDNPath()}cdts-splash-styles.css";
         }
 
         #region GetJson

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    internal class AppTop
+    public class AppTop : ITop
     {
         /// <summary>
         /// This is an array but it should only have one item in it. 

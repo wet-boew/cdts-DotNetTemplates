@@ -82,16 +82,16 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                     new MenuItem { Href = "Herf", Text = "Text", NewWindow = true }
                 }
             });
-            var result = sut.Render.LeftMenu();
+            var result = sut.Render.Setup();
 
-            result.ToString().Should().Be("{\"sections\":[{\"sectionName\":\"SectionName\",\"sectionLink\":\"SectionLink\",\"menuLinks\":[{\"href\":\"Href\",\"text\":\"Text\"},{\"href\":\"Href\",\"text\":\"Text\",\"subLinks\":[{\"subhref\":\"subHerf\",\"subtext\":\"subText\"}]},{\"href\":\"Herf\",\"text\":\"Text\",\"newWindow\":true}]}]}");
+            result.ToString().Should().Contain("{\"sections\":[{\"sectionName\":\"SectionName\",\"sectionLink\":\"SectionLink\",\"menuLinks\":[{\"href\":\"Href\",\"text\":\"Text\"},{\"href\":\"Href\",\"text\":\"Text\",\"subLinks\":[{\"subhref\":\"subHerf\",\"subtext\":\"subText\"}]},{\"href\":\"Herf\",\"text\":\"Text\",\"newWindow\":true}]}]}");
         }
 
         [Theory, AutoNSubstituteData]
         public void RenderEmptyLeftMenu(Model sut)
         {
-            var result = sut.Render.LeftMenu();
-            result.ToString().Should().BeEmpty();
+            var result = sut.Render.Setup();
+            result.ToString().Should().NotContain("sectionName");
         }
 
         [Theory, AutoNSubstituteData]
@@ -120,34 +120,6 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void RenderServerTop(Model sut)
-        {
-            var result = sut.Render.ServerTop();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void RenderServerBottom(Model sut)
-        {
-            var result = sut.Render.ServerBottom();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void RenderServerRefTop(Model sut)
-        {
-            var result = sut.Render.ServerRefTop();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
-        }
-
-        [Theory, AutoNSubstituteData]
-        public void RenderServerRefFooter(Model sut)
-        {
-            var result = sut.Render.ServerRefFooter();
-            result.ToString().Should().Be("{\"cdnEnv\":\"\"}");
-        }
-
-        [Theory, AutoNSubstituteData]
         public void RenderHeaderTitle(Model sut)
         {
             sut.HeaderTitle = "MasterfullHeaderTitle";
@@ -158,8 +130,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void RenderHtmlBodyElementsEmpty(Model sut)
         {
-            var result = sut.Render.HtmlBodyElements();
-            result.ToString().Should().BeEmpty();
+            var result = sut.Render.Setup();
+            result.ToString().Should().Contain("\"onCDTSPageFinalized\":[]");
         }
 
         [Theory, AutoNSubstituteData]
@@ -173,8 +145,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void RenderHtmlBodyElements(Model sut)
         {
             sut.HTMLBodyElements = new List<string> { "Fake Body Element", "Other Item" };
-            var result = sut.Render.HtmlBodyElements();
-            result.ToString().Should().Be("Fake Body Element\r\nOther Item\r\n");
+            var result = sut.Render.Setup();
+            result.ToString().Should().Contain("\"Fake Body Element\",\"Other Item\"");
         }
 
         [Theory, AutoNSubstituteData]

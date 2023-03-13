@@ -19,7 +19,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
       Model sut)
         {
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.ReturnsNull();
-            sut.Render.RefTop(false).ToString().Should().NotContain("localPath");
+            sut.Render.Setup().ToString().Should().NotContain("localPath");
         }
 
         [Theory, AutoNSubstituteData]
@@ -30,42 +30,43 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Model sut)
         {
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.Returns("{0}:{1}");
-            sut.Render.RefTop(false).ToString().Should().Contain($"\"localPath\":\"{sut.CdtsEnvironment.SubTheme}:{sut.Settings.Version}");
+            sut.Render.Setup().ToString().Should().Contain($"\"localPath\":\"{sut.CdtsEnvironment.SubTheme}:{sut.Settings.Version}");
         }
         [Theory, AutoNSubstituteData]
         public void LocalPathRendersWhenNotNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.LocalPath = "foo";
-            sut.Render.RefTop(false).ToString().Should().Contain("\"localPath\":\"foo\"");
+            sut.Render.Setup().ToString().Should().Contain("\"localPath\":\"foo\"");
         }
         [Theory, AutoNSubstituteData]
         public void JQueryExternalRendersWhenLoadJQueryFromGoogleIsTrue(Model sut)
         {
             sut.Settings.LoadScriptsFromGoogle = true;
 
-            sut.Render.RefTop(false).ToString().Should().Contain("\"jqueryEnv\":\"external\"");
+            sut.Render.Setup().ToString().Should().Contain("\"jqueryEnv\":\"external\"");
         }
         [Theory, AutoNSubstituteData]
         public void JQueryExternalDoesNotRenderWhenLoadJQueryFromGoogleIsFalse(Model sut)
         {
             sut.Settings.LoadScriptsFromGoogle = false;
 
-            sut.Render.RefTop(false).ToString().Should().NotContain("jqueryEnv");
+            sut.Render.Setup().ToString().Should().NotContain("jqueryEnv");
         }
         [Theory, AutoNSubstituteData]
         public void WebSubThemeRenderedProperly(Model sut)
         {
 
-            sut.Render.RefTop(false).ToString().Should().Contain($"\"subTheme\":\"{sut.CdtsEnvironment.SubTheme}\"");
+            sut.Render.Setup().ToString().Should().Contain($"\"subTheme\":\"{sut.CdtsEnvironment.SubTheme}\"");
         }
 
-        [Theory]
+        //With the removal of document.write(), this test is no longer requiored
+        /*[Theory]
         [InlineAutoNSubstituteData(true)]
         public void IsApplicationSetFromParam(bool isApplication, Model sut)
         {
-            sut.Render.RefTop(isApplication).ToString().Should().Contain($"\"isApplication\":{isApplication.ToString().ToLower()}");
-        }
+            sut.Render.AppSetup().ToString().Should().Contain($"\"isApplication\":{isApplication.ToString().ToLower()}");
+        }*/
 
         /*
             //Current different types of environments
@@ -78,17 +79,18 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         public void CdnEnvRenderedProperly([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].CDN = "prod";
-            sut.Render.RefTop(false).ToString().Should().Contain("\"cdnEnv\":\"prod\"");
+            sut.Render.Setup().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
 
         [Theory, AutoNSubstituteData]
         public void WebAnalyticsRenders(Model sut)
         {
+            sut.CdtsEnvironment.CanUseWebAnalytics = true;
             sut.Settings.WebAnalytics.Active = true;
             sut.Settings.WebAnalytics.Custom = null;
             sut.Settings.WebAnalytics.Environment = WebAnalytics.EnvironmentOption.staging;
             sut.Settings.WebAnalytics.Version = 1;
-            var result = sut.Render.RefTop(false);
+            var result = sut.Render.Setup();
             result.ToString().Should().Contain("\"webAnalytics\":[{\"environment\":\"staging\",\"version\":1}]");
             result.ToString().Should().NotContain("custom");
         }
@@ -96,9 +98,10 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         [Theory, AutoNSubstituteData]
         public void WebAnalyticsRendersVersion3(Model sut)
         {
+            sut.CdtsEnvironment.CanUseWebAnalytics = true;
             sut.Settings.WebAnalytics.Active = true;
             sut.Settings.WebAnalytics.Custom = "launch-EN0cf6c2810a2b48f8a4c36502a1b09541.min.js";
-            var result = sut.Render.RefTop(false);
+            var result = sut.Render.Setup();
             result.ToString().Should().Contain("\"custom\":\"launch-EN0cf6c2810a2b48f8a4c36502a1b09541.min.js\"}]");
         }
     }

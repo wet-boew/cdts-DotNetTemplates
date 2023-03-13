@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    public class UnilingualPreFooter 
+    public class UnilingualPreFooter : IPreFooter
     {
         public string CdnEnv { get; set; }
 

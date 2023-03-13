@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    public class PreFooter
+    public class PreFooter : IPreFooter
     {
         public string CdnEnv { get; set; }
         public string VersionIdentifier { get; set; }

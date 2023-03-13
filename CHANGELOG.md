@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v3.0.0
+
+### New features and improvements
+
+- **IMPORTANT** ALL LAYOUT DEFINITIONS UPDATED - All inline scripts and occurences of `document.write` were removed. 
+
 ## v2.8.0
 
 ### New features and improvements

@@ -53,7 +53,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             env["AKAMAI"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "AKAMAI",
-                Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/compiled/",
+                Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/",
                 Theme = "gcweb",
                 CDN = "prod",
                 IsVersionRNCombined = true,
@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             env["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "PROD_SSL",
-                Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
+                Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
                 Theme = "gcintranet",
                 CDN = "prod",
                 IsVersionRNCombined = false,
