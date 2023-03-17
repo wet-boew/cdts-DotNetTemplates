@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="AddJSandCSSFilesSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.AddCSSandJSFilesSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>GoC Web Template Samples - Adding CSS or JS</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Adding CSS or JS</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <p>This sample page demonstrates how your application can add your own CSS files or JS files via the GoC Web Template.</p>

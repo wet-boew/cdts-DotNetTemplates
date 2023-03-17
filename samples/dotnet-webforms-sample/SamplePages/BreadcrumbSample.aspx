@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="BreadcrumbSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.BreadcrumbSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>GoC Web Template Samples - Breadcrumbs</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Breadcrumbs</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <p>The breadcrumbs are a list of links displayed near to the top of the content to help the user determine where they are on the site and to help them navigate.</p>

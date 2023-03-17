@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SamplePages/NestedMasterPageSample.master" AutoEventWireup="true" CodeBehind="NestedMasterPageSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.NestedMasterPageSample1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="LeftContent" runat="server">
-   <h1>GoC Web Template Samples - Nested Master Page</h1>
+   <h1 id="wb-cont">GoC Web Template Samples - Nested Master Page</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <p>This sample demonstrates how a Nested Master Page could be implemented with the GoC Web Template.</p>

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.LeftMenu.Master" AutoEventWireup="true" CodeBehind="LeftSideMenuSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.LeftSideMenuSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-<h1>GoC Web Template Samples - Left Side Menu</h1>
+<h1 id="wb-cont">GoC Web Template Samples - Left Side Menu</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <p>This sample uses the <code class="wb-prettify">"GoCWebTemplate.LeftMenu"</code> master page to demonstrate how the left menu is displayed and configured.</p>

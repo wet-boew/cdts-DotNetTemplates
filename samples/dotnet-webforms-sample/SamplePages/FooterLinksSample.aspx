@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="FooterLinksSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.FooterLinksSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">   
-    <h1>GoC Web Template Samples - Footer Links</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Footer Links</h1>
 <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
 <p>This sample page demonstrates how your application can add custom footer links via the GoC Web Template.</p>
