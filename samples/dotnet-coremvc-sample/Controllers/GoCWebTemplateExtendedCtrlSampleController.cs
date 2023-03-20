@@ -5,7 +5,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
 {
     public class GoCWebTemplateExtendedCtrlSampleController : ExtendedBaseController
     {
-        public GoCWebTemplateExtendedCtrlSampleController(ModelAccessor modelAccessor)
+        public GoCWebTemplateExtendedCtrlSampleController(IModelAccessor modelAccessor)
             : base(modelAccessor) { }
 
         public IActionResult ExtendedCtrlSample()

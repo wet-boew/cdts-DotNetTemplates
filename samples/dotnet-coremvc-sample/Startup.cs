@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace GoC.WebTemplate.CoreMVC.Sample
 {
@@ -36,14 +37,14 @@ namespace GoC.WebTemplate.CoreMVC.Sample
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddRazorPages().AddRazorRuntimeCompilation();
 
             services.AddModelAccessor();
             services.ConfigureGoCTemplateRequestLocalization();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -60,12 +61,13 @@ namespace GoC.WebTemplate.CoreMVC.Sample
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseSession();
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=GoCWebTemplateSamples}/{action=BaseSettingsSample}/{id?}");
+                    pattern: "{controller=GoCWebTemplateSamples}/{action=BaseSettingsSample}/{id?}");
             });
         }
     }
