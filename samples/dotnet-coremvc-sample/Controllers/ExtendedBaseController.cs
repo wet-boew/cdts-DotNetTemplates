@@ -7,7 +7,7 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
     {
         public string UserName = "Mr. Fancy Pants";
 
-        public ExtendedBaseController(ModelAccessor modelAccessor)
+        public ExtendedBaseController(IModelAccessor modelAccessor)
             : base(modelAccessor)
         {
             //Set a the common title for everypage here
