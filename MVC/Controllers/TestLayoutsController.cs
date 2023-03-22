@@ -44,6 +44,9 @@ namespace GoC.WebTemplate.MVC.Controllers
         {
             SetEnv(env);
             AddBasicBreadcrumbs();
+
+            WebTemplateModel.ApplicationTitle.Text = "Application Title";
+
             return View();
         }
 
@@ -52,6 +55,9 @@ namespace GoC.WebTemplate.MVC.Controllers
             SetEnv(env);
             AddABasicLeftMenu();
             AddBasicBreadcrumbs();
+
+            WebTemplateModel.ApplicationTitle.Text = "Application Title";
+
             return View();
         }
 

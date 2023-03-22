@@ -1,4 +1,8 @@
-﻿using GoC.WebTemplate.Components.Core.Services;
+﻿using System.Collections.Generic;
+
+using GoC.WebTemplate.Components.Core.Services;
+using GoC.WebTemplate.Components.Entities;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace GoC.WebTemplate.CoreMVC.Controllers
@@ -21,6 +25,32 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         public IActionResult DefaultLeftMenu(string env)
         {
             SetEnv(env);
+
+            var item = new MenuItem
+            {
+                Href = "",
+                Text = "Sports",
+                SubItems = new List<Link> {
+                    new Link { Href="http://www.nhl.com", Text="NHL", NewWindow= true },
+                    new Link { Href="http://www.mlb.com", Text="MLB" }
+                }
+            };
+
+            //add section to template
+            WebTemplateModel.LeftMenuItems = new List<MenuSection>
+            {
+                new MenuSection
+                {
+                    Text = "Section A",
+                    Href = "http://www.google.ca",
+                    NewWindow = true,
+                    Items = new List<MenuItem> {
+                        new MenuItem { Href = "http://www.tsn.ca", Text = "TSN" },
+                        item
+                    }
+                }
+            };
+
             return View();
         }
 
@@ -49,6 +79,9 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         public IActionResult Application(string env)
         {
             SetEnv(env);
+
+            WebTemplateModel.ApplicationTitle.Text = "Application Title";
+
             return View();
         }
 
@@ -56,6 +89,34 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         public IActionResult ApplicationLeftMenu(string env)
         {
             SetEnv(env);
+
+            WebTemplateModel.ApplicationTitle.Text = "Application Title";
+
+            var item = new MenuItem
+            {
+                Href = "",
+                Text = "Sports",
+                SubItems = new List<Link> {
+                    new Link { Href="http://www.nhl.com", Text="NHL", NewWindow= true },
+                    new Link { Href="http://www.mlb.com", Text="MLB" }
+                }
+            };
+
+            //add section to template
+            WebTemplateModel.LeftMenuItems = new List<MenuSection>
+            {
+                new MenuSection
+                {
+                    Text = "Section A",
+                    Href = "http://www.google.ca",
+                    NewWindow = true,
+                    Items = new List<MenuItem> {
+                        new MenuItem { Href = "http://www.tsn.ca", Text = "TSN" },
+                        item
+                    }
+                }
+            };
+
             return View();
         }
 
@@ -70,6 +131,32 @@ namespace GoC.WebTemplate.CoreMVC.Controllers
         public IActionResult TransactionalLeftMenu(string env)
         {
             SetEnv(env);
+
+            var item = new MenuItem
+            {
+                Href = "",
+                Text = "Sports",
+                SubItems = new List<Link> {
+                    new Link { Href="http://www.nhl.com", Text="NHL", NewWindow= true },
+                    new Link { Href="http://www.mlb.com", Text="MLB" }
+                }
+            };
+
+            //add section to template
+            WebTemplateModel.LeftMenuItems = new List<MenuSection>
+            {
+                new MenuSection
+                {
+                    Text = "Section A",
+                    Href = "http://www.google.ca",
+                    NewWindow = true,
+                    Items = new List<MenuItem> {
+                        new MenuItem { Href = "http://www.tsn.ca", Text = "TSN" },
+                        item
+                    }
+                }
+            };
+
             return View();
         }
 
