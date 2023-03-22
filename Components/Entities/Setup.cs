@@ -20,6 +20,7 @@ namespace GoC.WebTemplate.Components.Entities
         public ITop Top { get; set; }
         public IPreFooter PreFooter { get; set; }
         public IFooter Footer { get; set; }
+        [JsonProperty("secmenu")]
         public object SecMenu { get; set; }
         public Splash Splash { get; set; }
         public List<string> OnCDTSPageFinalized { get; set; }
