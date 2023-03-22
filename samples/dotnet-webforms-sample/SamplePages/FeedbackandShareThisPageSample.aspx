@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="FeedbackandShareThisPageSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.FeedbackandShareThisPageSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-   <h1>GoC Web Template Samples - Feedback Link and Share This Page Link</h1>
+   <h1 id="wb-cont">GoC Web Template Samples - Feedback Link and Share This Page Link</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <h2>Report a Problem Link (formerly Feedback Link)</h2>

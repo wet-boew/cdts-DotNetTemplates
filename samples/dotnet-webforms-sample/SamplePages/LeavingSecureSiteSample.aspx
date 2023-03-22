@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="LeavingSecureSiteSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.LeavingSecureSiteSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>GoC Web Template Samples - Leaving Secure Site</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Leaving Secure Site</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
     
     <p>In certain scenarios (ex: secure sites) we want to notify the user that the link or action they have just performed will exit the current secured site/session and it is possible that data could be lost. The message allows the user to cancel the redirect or continue with the redirect.</p>

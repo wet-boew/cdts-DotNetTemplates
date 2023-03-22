@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="AdobeAnalyticsSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.AdobeAnalyticsSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>GoC Web Template Samples - Adobe Analytics</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Adobe Analytics</h1>
     <p><a href="https://cenw-wscoe.github.io/sgdc-cdts/docs/templates-en.html">Web Template Documentation</a></p>
 
     <p>This sample page demonstrates how your application can incorporate Adobe Analytics via the GoC Web Template.</p>

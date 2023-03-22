@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="BaseSettingsSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.BaseSettingsSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>GoC Web Template Samples - Basic Settings</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Basic Settings</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <p>This sample page provides the basic items to configure in your pages, when using the GoC Web Template.</p>

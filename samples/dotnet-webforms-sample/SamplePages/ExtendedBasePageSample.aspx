@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="ExtendedBasePageSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.ExtendedBasePageSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <h1>GoC Web Template Samples - Extended BasePage</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Extended BasePage</h1>
     <p><a href="http://www.gcpedia.gc.ca/wiki/Content_Delivery_Network/GoC_.NET_template_guide">Web Template Documentation (GCPedia)</a></p>
 
     <p>This page provides an example on how to extend the <code class="wb-prettify">BasePage</code> provided by the Web Template.  The <code class="wb-prettify">BasePage</code> provided by the Web Template has very little functions and therefore applications may wish to extend its functionality. This will be useful should you require to add your own common logic that will be used by your applications' pages.</p>

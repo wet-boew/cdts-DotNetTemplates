@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GoC.WebTemplate/GoCWebTemplate.Master" AutoEventWireup="true" CodeBehind="SessionTimeoutSample.aspx.cs" Inherits="GoC.WebTemplate.WebForm.Sample.SamplePages.SessionTimeoutSample" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h1>GoC Web Template Samples - Session Timeout</h1>
+    <h1 id="wb-cont">GoC Web Template Samples - Session Timeout</h1>
 
     <asp:Label ID="lblID" runat="server"></asp:Label>
 
