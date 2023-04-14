@@ -13,8 +13,8 @@
         <title><%= WebTemplateModel.Render.HeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport"/>
         <!-- Load closure template scripts -->
-        <link rel="stylesheet" href="<%= WebTemplateModel.SplashCSSPath%>"/>
-        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}compiled/wet-en.js", WebTemplateModel.CDNPath)  %>" data-cdts-setup='<%= WebTemplateModel.Render.SplashSetup() %>'></script>
+        <link rel="stylesheet" <%= WebTemplateModel.SplashCSSPath%>/>
+        <script type="text/javascript" <%= @WebTemplateModel.Builder.BuildWetJsPathAttributes(@WebTemplateModel.TwoLetterCultureLanguage) %> data-cdts-setup='<%= WebTemplateModel.Render.SplashSetup() %>'></script>
         <noscript>
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile("refTop.html") %>

@@ -11,23 +11,23 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
     {
 
         [Theory, AutoNSubstituteData]
-        public void FileHasElevenEnvironments(ICdtsCacheProvider cdtsCacheProvider)
+        public void FileHasElevenEnvironments(ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
-            var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
+            var result = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).DeserializeEnvironments();
             result.Count.Should().Be(11);
         }
 
         [Theory, AutoNSubstituteData]
-        public void LoadCDTSEnvironments(ICdtsCacheProvider cdtsCacheProvider)
+        public void LoadCDTSEnvironments(ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
-            var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
+            var result = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).DeserializeEnvironments();
             result.Should().NotBeNull();
         }
 
         [Theory, AutoNSubstituteData]
-        public void SubThemeMustChangeWhenEnvironmentChanges([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void SubThemeMustChangeWhenEnvironmentChanges([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
-            var environments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
+            var environments = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent();
             sut.Settings.Environment = "ITEM2";
             var subTheme = "foo";
             environments["ITEM1"].SubTheme = "IncorrectSubTheme";
@@ -36,20 +36,20 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void SubThemeMustReturnCorectValue([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void SubThemeMustReturnCorectValue([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             sut.Settings.Environment = "ITEM1";
 
-            var environments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
+            var environments = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent();
             environments["ITEM1"].SubTheme = "CorrectSubTheme";
             environments["ITEM2"].SubTheme = "IncorrectSubTheme";
             sut.CdtsEnvironment.SubTheme.Should().Be("CorrectSubTheme");
         }
         
         [Theory, AutoNSubstituteData]
-        public void AKAMAIDeserialize(ICdtsCacheProvider cdtsCacheProvider)
+        public void AKAMAIDeserialize(ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
-            var env = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
+            var env = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).DeserializeEnvironments();
             env["AKAMAI"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "AKAMAI",
@@ -67,9 +67,9 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void PRODSSLDeserialize(ICdtsCacheProvider cdtsCacheProvider)
+        public void PRODSSLDeserialize(ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
-            var env = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
+            var env = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).DeserializeEnvironments();
             env["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "PROD_SSL",

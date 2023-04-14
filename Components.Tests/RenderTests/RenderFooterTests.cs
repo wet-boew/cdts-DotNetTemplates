@@ -43,14 +43,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void ContactLinkSetTextAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void ContactLinkSetTextAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "AKAMAI",
                 Theme = "gcweb"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
             sut.Settings.GcToolsModal = false;
             Action act = () => sut.Render.Setup();
@@ -58,7 +58,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void ContactLinkSetTextPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void ContactLinkSetTextPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -66,13 +66,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void ContactLinkSetTextESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void ContactLinkSetTextESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -81,20 +81,20 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 CanHaveMultipleContactLinks = true
             };
             sut.Settings.UseHttps = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void TransactionalFooterContactLinkSetTextAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void TransactionalFooterContactLinkSetTextAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "AKAMAI",
                 Theme = "gcweb"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Text = "LinkText" } };
             sut.Settings.GcToolsModal = false;
             Action act = () => sut.Render.TransactionalSetup();
@@ -102,7 +102,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void TransactionalFooterContactLinkSetTextPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void TransactionalFooterContactLinkSetTextPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -110,13 +110,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void TransactionalFooterContactLinkSetTextESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void TransactionalFooterContactLinkSetTextESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -125,20 +125,20 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 CanHaveMultipleContactLinks = true
             };
             sut.Settings.UseHttps = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void MultipleContactLinksAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void MultipleContactLinksAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "AKAMAI",
                 Theme = "gcweb"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Settings.GcToolsModal = false;
             Action act = () => sut.Render.Setup();
@@ -147,7 +147,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 
 
         [Theory, AutoNSubstituteData]
-        public void MultipleContactLinksPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void MultipleContactLinksPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -155,13 +155,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void MultipleContactLinksESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void MultipleContactLinksESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -169,20 +169,20 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.Setup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void TransactionalFooterMultipleContactLinksAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void TransactionalFooterMultipleContactLinksAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "AKAMAI",
                 Theme = "gcweb",
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Settings.GcToolsModal = false;
             Action act = () => sut.Render.TransactionalSetup();
@@ -190,7 +190,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void TransactionalFooterMultipleContactLinksPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void TransactionalFooterMultipleContactLinksPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -198,13 +198,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet",
                 CanHaveMultipleContactLinks = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.TransactionalSetup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void TransactionalFooterMultipleContactLinksESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
+        public void TransactionalFooterMultipleContactLinksESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -213,7 +213,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 CanHaveMultipleContactLinks = true
             };
             sut.Settings.UseHttps = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             sut.Render.TransactionalSetup().ToString().Should().Contain("\"contactLinks\":[{\"href\":\"TestLink1\",\"text\":\"Link1\"},{\"href\":\"TestLink2\",\"text\":\"Link2\"}]");
         }

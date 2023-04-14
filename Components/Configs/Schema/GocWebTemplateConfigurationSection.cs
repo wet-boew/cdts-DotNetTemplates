@@ -194,5 +194,15 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (bool?)this["gcToolsModal"]; }
             set { this["gcToolsModal"] = value; }
         }
+
+        /// <summary>
+        /// Determine if SRI is enabled
+        /// </summary>
+        [ConfigurationProperty("sriEnabled", DefaultValue = true, IsRequired = false)]
+        public bool SRIEnabled
+        {
+            get { return (bool)this["sriEnabled"]; }
+            set { this["sriEnabled"] = value; }
+        }
     }
 }

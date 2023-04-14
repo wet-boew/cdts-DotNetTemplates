@@ -19,6 +19,7 @@ namespace GoC.WebTemplate.Components
     {
         private readonly FileContentCache _fileContentCache;
         private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
+        private readonly IDictionary<string, IDictionary<string, string>> _currentSRIHashes;
 
         private string _headerTitle;
         private string _staticFilesPath;
@@ -32,14 +33,16 @@ namespace GoC.WebTemplate.Components
 
         public Model(IFileContentCacheProvider fileContentCacheProvider,
             IWebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider)
+            ICdtsCacheProvider cdtsCacheProvider,
+            ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
             if (fileContentCacheProvider == null) throw new ArgumentNullException(nameof(fileContentCacheProvider));
             if (cdtsCacheProvider == null) throw new ArgumentNullException(nameof(cdtsCacheProvider));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
-            _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
+            _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent();
+            _currentSRIHashes = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetSRIHashes();
         }
 
         /// <summary>
@@ -61,12 +64,13 @@ namespace GoC.WebTemplate.Components
         public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
         public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Settings.Environment];
+        public IDictionary<string, string> CurrentSRIHashes => _currentSRIHashes[$"{CdtsEnvironment.Theme}/{Settings.Version}"];
 
         /// <summary>
         /// Complete path of the CSS file required for application GCWeb/GCIntranet layouts
         /// Set by Core
         /// </summary>
-        public string AppCSSPath => Builder.BuildAppCSSPath();
+        public string AppCSSPath => Builder.BuildAppCSSPathAttributes();
 
         /// <summary>
         /// Complete path of the CDN including http(s), theme and run or versioned
@@ -78,13 +82,13 @@ namespace GoC.WebTemplate.Components
         /// Complete path of the CSS file required for regular GCWeb/GCIntranet layouts
         /// Set by Core
         /// </summary>
-        public string CSSPath => Builder.BuildCSSPath();
+        public string CSSPath => Builder.BuildCSSPathAttributes();
 
         /// <summary>
         /// Complete path of the CSS file required for the splash page
         /// Set by Core
         /// </summary>
-        public string SplashCSSPath => Builder.BuildSplashCSSPath();
+        public string SplashCSSPath => Builder.BuildSplashCSSPathAttributes();
 
         /// <summary>
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter

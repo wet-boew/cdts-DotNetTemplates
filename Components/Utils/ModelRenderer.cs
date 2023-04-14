@@ -78,7 +78,7 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 Mode = Mode.SERVER,
-                Base = null,
+                Base = _model.Settings.SRIEnabled ? null : new SetupBase { SRIEnabled = null}, //base left null for defaults is SRI is true
                 Top = null,
                 PreFooter = null,
                 Footer = null,
@@ -98,7 +98,7 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 Mode = Mode.SPLASH,
-                Base = null,
+                Base = _model.Builder.BuildSetupBase(),
                 Top = null,
                 PreFooter = null,
                 Footer = null,

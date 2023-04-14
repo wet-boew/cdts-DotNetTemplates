@@ -19,7 +19,8 @@ namespace GoC.WebTemplate.WebForms
                 new Model(
                     new FileContentCacheProvider(HttpRuntime.Cache), 
                     new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), 
-                    new CdtsCacheProvider(HttpRuntime.Cache)
+                    new CdtsCacheProvider(HttpRuntime.Cache),
+                    new CdtsSRIHashesCacheProvider(HttpRuntime.Cache)
                 );
             
             //update the culture based on the query string or what is stored in session

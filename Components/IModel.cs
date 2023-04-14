@@ -64,6 +64,7 @@ namespace GoC.WebTemplate.Components
         string SplashCSSPath { get; }
 
         ICdtsEnvironment CdtsEnvironment { get; }
+        IDictionary<string, string> CurrentSRIHashes { get; }
 
         /// <summary>
         /// Used to override the Contact link in Footer, AppFooter and TransacationalFooter

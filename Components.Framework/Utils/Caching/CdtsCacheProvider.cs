@@ -12,4 +12,12 @@ namespace GoC.WebTemplate.Components.Utils.Caching
         {
         }
     }
+
+    public class CdtsSRIHashesCacheProvider : CacheProvider<IDictionary<string, IDictionary<string, string>>>, ICdtsSRIHashesCacheProvider
+    {
+        public CdtsSRIHashesCacheProvider(Cache cache)
+            : base(cache)
+        {
+        }
+    }
 }

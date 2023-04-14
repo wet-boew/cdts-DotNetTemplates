@@ -8,7 +8,7 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
     public class CSSPathTest
     {
         /// <summary>
-        /// BuildCSSPath
+        /// BuildCSSPathAttributes
         /// </summary>
         [Theory, AutoNSubstituteData]
         public void TestBasicGCWeb(Model sut)
@@ -16,9 +16,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcweb";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -27,9 +27,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcintranet";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -39,9 +39,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.SubTheme = "eSdC"; //test case insensitivity
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-esdc-styles.css");
+            result.Contains("/cdts-esdc-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -51,9 +51,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.SubTheme = "eCcC"; //test case insensitivity
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-eccc-styles.css");
+            result.Contains("/cdts-eccc-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -62,9 +62,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "whatever";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -74,9 +74,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "whatever";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         /// <summary>
@@ -88,9 +88,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcweb";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildAppCSSPath();
+            var result = modelBuilder.BuildAppCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -99,9 +99,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcintranet";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildCSSPath();
+            var result = modelBuilder.BuildCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -111,9 +111,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.SubTheme = "esdc";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildAppCSSPath();
+            var result = modelBuilder.BuildAppCSSPathAttributes();
 
-            result.EndsWith("/cdts-esdc-styles.css");
+            result.Contains("/cdts-esdc-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -123,9 +123,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.SubTheme = "eccc";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildAppCSSPath();
+            var result = modelBuilder.BuildAppCSSPathAttributes();
 
-            result.EndsWith("/cdts-eccc-styles.css");
+            result.Contains("/cdts-eccc-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -134,9 +134,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "whatever";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildAppCSSPath();
+            var result = modelBuilder.BuildAppCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -146,9 +146,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "whatever";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildAppCSSPath();
+            var result = modelBuilder.BuildAppCSSPathAttributes();
 
-            result.EndsWith("/cdts-styles.css");
+            result.Contains("/cdts-styles.css");
         }
 
         /// <summary>
@@ -160,9 +160,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcweb";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildSplashCSSPath();
+            var result = modelBuilder.BuildSplashCSSPathAttributes();
 
-            result.EndsWith("/cdts-splash-styles.css");
+            result.Contains("/cdts-splash-styles.css");
         }
 
         [Theory, AutoNSubstituteData]
@@ -171,9 +171,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcintranet";
 
             ModelBuilder modelBuilder = new ModelBuilder(sut);
-            var result = modelBuilder.BuildSplashCSSPath();
+            var result = modelBuilder.BuildSplashCSSPathAttributes();
 
-            result.EndsWith("/cdts-splash-styles.css");
+            result.Contains("/cdts-splash-styles.css");
         }
     }
 }

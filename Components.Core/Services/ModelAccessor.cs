@@ -24,7 +24,8 @@ namespace GoC.WebTemplate.Components.Core.Services
                 new Model(
                     new FileContentMemoryCacheProvider(memoryCache, hostingEnvironment),
                     settings, 
-                    new CdtsMemoryCacheProvider(memoryCache)
+                    new CdtsMemoryCacheProvider(memoryCache),
+                    new CdtsSRIHashesMemoryCacheProvider(memoryCache)
                 );
         }
     }

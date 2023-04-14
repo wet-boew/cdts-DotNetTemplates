@@ -139,6 +139,11 @@ namespace GoC.WebTemplate.Components.Configs
         /// </summary>
         public bool GcToolsModal { get; set; }
 
+        /// <summary>
+        /// Determines if SRI is enabled
+        /// </summary>
+        public bool SRIEnabled { get; set; }
+
         public WebTemplateSettings() { }
         public WebTemplateSettings(GocWebTemplateConfigurationSection configurationSection)
         {
@@ -193,6 +198,7 @@ namespace GoC.WebTemplate.Components.Configs
                     Version = 2
                 };
             GcToolsModal = configurationSection.GcToolsModal ?? false;
+            SRIEnabled = configurationSection.SRIEnabled;
         }
     }
 }

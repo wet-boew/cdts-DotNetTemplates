@@ -11,30 +11,30 @@ namespace GoC.WebTemplate.Components.Framework.Tests.Configs
     {
         //TODO: re-implement tests using config data from a web.config or the like
         [Theory, AutoNSubstituteData]
-        public void SearchBoxShownByDefault(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider)
+        public void SearchBoxShownByDefault(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
             var settings = new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection);
-            var sut = new Model(fileContentCacheProvider, settings, cdtsCacheProvider);
+            var sut = new Model(fileContentCacheProvider, settings, cdtsCacheProvider, cdtsSRIHashesCacheProvider);
             sut.Settings.WebAnalytics.Active = false;
             var json = sut.Render.AppSetup();
             json.ToString().Should().Contain("\"search\":true");
         }
 
         [Theory, AutoNSubstituteData]
-        public void LeavingSecureSiteWarningElementCapitilizationFix(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider)
+        public void LeavingSecureSiteWarningElementCapitilizationFix(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Model(fileContentCacheProvider, new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), cdtsCacheProvider);
+            var sut = new Model(fileContentCacheProvider, new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), cdtsCacheProvider, cdtsSRIHashesCacheProvider);
             sut.Settings.LeavingSecureSiteWarning.RedirectUrl.Should().Be("foo");
         }
 
 
         [Theory, AutoNSubstituteData]
-        public void WebAnaliticsGetsActiveValueFromConfig(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider)
+        public void WebAnaliticsGetsActiveValueFromConfig(IFileContentCacheProvider fileContentCacheProvider, ICdtsCacheProvider cdtsCacheProvider, ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
-            var sut = new Model(fileContentCacheProvider, new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), cdtsCacheProvider);
+            var sut = new Model(fileContentCacheProvider, new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection), cdtsCacheProvider, cdtsSRIHashesCacheProvider);
             sut.Settings.WebAnalytics.Active.Should().BeTrue();
         }
     }
