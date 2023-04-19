@@ -20,6 +20,7 @@ namespace GoC.WebTemplate.Components
         private readonly FileContentCache _fileContentCache;
         private readonly IDictionary<string, ICdtsEnvironment> _cdtsEnvironments;
         private readonly IDictionary<string, IDictionary<string, string>> _currentSRIHashes;
+        private IDictionary<string, string> sriHashes;
 
         private string _headerTitle;
         private string _staticFilesPath;
@@ -64,7 +65,7 @@ namespace GoC.WebTemplate.Components
         public List<Breadcrumb> Breadcrumbs { get; set; } = new List<Breadcrumb>();
 
         public ICdtsEnvironment CdtsEnvironment => _cdtsEnvironments[Settings.Environment];
-        public IDictionary<string, string> CurrentSRIHashes => _currentSRIHashes[$"{CdtsEnvironment.Theme}/{Settings.Version}"];
+        public IDictionary<string, string> CurrentSRIHashes => _currentSRIHashes.TryGetValue($"{CdtsEnvironment.Theme}/{Settings.Version}", out sriHashes) ? sriHashes : new Dictionary<string, string>();
 
         /// <summary>
         /// Complete path of the CSS file required for application GCWeb/GCIntranet layouts

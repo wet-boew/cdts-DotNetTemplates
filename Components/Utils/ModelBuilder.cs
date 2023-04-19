@@ -519,7 +519,7 @@ namespace GoC.WebTemplate.Components.Utils
             buf.Append("\"");
             if (_model.Settings.SRIEnabled)
             {
-                string hash = _model.CurrentSRIHashes[fileName];
+                string hash = _model.CurrentSRIHashes.TryGetValue(fileName, out hash) ? hash : null;
                 if (!string.IsNullOrEmpty(hash))
                 { //if not found, simply don't issue SRI attributes
                     buf.Append(" integrity=\"");

@@ -6,9 +6,11 @@ using AutoFixture.AutoNSubstitute;
 using AutoFixture.Xunit2;
 using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Cdts;
-using GoC.WebTemplate.Components.Configs.Schemas;
+using GoC.WebTemplate.Components.Core.Utils.Caching;
 using GoC.WebTemplate.Components.Entities;
-using NSubstitute;
+using GoC.WebTemplate.Components.Utils.Caching;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 using Xunit.Sdk;
 
@@ -67,6 +69,16 @@ namespace GoC.WebTemplate.Components.Test
                  var values = fixture.Create<Generator<ICdtsEnvironment>>();
                  return keys.Zip(values, Tuple.Create).ToDictionary(x => x.Item1, x => x.Item2);
              });
+
+            var services = new ServiceCollection();
+            services.AddMemoryCache();
+            var serviceProvider = services.BuildServiceProvider();
+            var memoryCache = serviceProvider.GetService<IMemoryCache>();
+
+            CdtsSRIHashesMemoryCacheProvider cdtsSRIMemoryCacheProvider = new CdtsSRIHashesMemoryCacheProvider(memoryCache);
+
+            fixture.Customize<ICdtsSRIHashesCacheProvider>(
+                 c => c.FromFactory(() => cdtsSRIMemoryCacheProvider));
         }
     }
 
