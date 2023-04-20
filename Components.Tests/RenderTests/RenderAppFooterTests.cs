@@ -12,45 +12,45 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
     public class RenderAppFooterTests
     {
         [Theory, AutoNSubstituteData]
-        public void HandleEmptyContactLinkListAkamai([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void HandleEmptyContactLinkListAkamai([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "AKAMAI",
                 Theme = "gcweb"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>();
             sut.Render.AppSetup().ToString().Should().Contain("\"contactLink\":[]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void HandleEmptyContactLinkListPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void HandleEmptyContactLinkListPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
                 Theme = "gcintranet"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>();
             sut.Render.AppSetup().ToString().Should().Contain("\"contactLink\":[]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void HandleEmptyContactLinkListESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void HandleEmptyContactLinkListESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "ESDC_PROD",
                 Theme = "gcintranet"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>();
             sut.Render.AppSetup().ToString().Should().Contain("\"contactLink\":[]");
         }
         [Theory, AutoNSubstituteData]
-        public void ContactLinkRendered([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ContactLinkRendered([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -58,14 +58,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcweb",
                 CanHaveContactLinkInAppTemplate = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.ContactLinks = new List<Link>() { new Link() { Href = "http://testvalue" } };
             sut.Render.AppSetup().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
         }
 
         [Theory, AutoNSubstituteData]
-        public void ContactFooterLinkRendered([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ContactFooterLinkRendered([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             //environment.CanHaveContactLinkInAppTemplate = true;
             var currentEnv = new CdtsEnvironment
@@ -74,14 +74,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcweb",
                 CanHaveContactLinkInAppTemplate = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.ContactLinks = new List<Link>() { new FooterLink() { Href = "http://testvalue", NewWindow = false } };
             sut.Render.AppSetup().ToString().Should().Contain("\"contactLink\":[{\"href\":\"http://testvalue\"}]");
         }
 
     [Theory, AutoNSubstituteData]
-    public void ContactLinkSetTextAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+    public void ContactLinkSetTextAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
     {
         var currentEnv = new CdtsEnvironment
         {
@@ -89,28 +89,28 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Theme = "gcweb",
             CanHaveContactLinkInAppTemplate = true
         };
-        new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+        new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
         Action act = () => sut.Render.AppSetup();
         act.Should().Throw<InvalidOperationException>().WithMessage("Unable to edit Contact Link text in this environment");
     }
 
         [Theory, AutoNSubstituteData]
-        public void ContactLinkSetTextPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ContactLinkSetTextPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
                 Theme = "gcintranet"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             Action act = () => sut.Render.AppSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
         }
 
         [Theory, AutoNSubstituteData]
-        public void ContactLinkSetTextESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ContactLinkSetTextESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -118,14 +118,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet"
             };
             sut.Settings.UseHttps = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" } };
             Action act = () => sut.Render.AppSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
         }
 
     [Theory, AutoNSubstituteData]
-    public void MultipleContactLinksAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+    public void MultipleContactLinksAKAMAI([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
     {
         var currentEnv = new CdtsEnvironment
         {
@@ -133,28 +133,28 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             Theme = "gcweb",
             CanHaveContactLinkInAppTemplate = true
         };
-        new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+        new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
         sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
         Action act = () => sut.Render.AppSetup();
         act.Should().Throw<InvalidOperationException>().WithMessage("Having multiple contact links not allowed in this environment");
     }
 
         [Theory, AutoNSubstituteData]
-        public void MultipleContactLinksPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void MultipleContactLinksPRODSSL([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
                 Theme = "gcintranet"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.Render.AppSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
         }
 
         [Theory, AutoNSubstituteData]
-        public void MultipleContactLinksESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void MultipleContactLinksESDCProd([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -162,7 +162,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcintranet"
             };
             sut.Settings.UseHttps = true;
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.ContactLinks = new List<Link>() { new Link() { Href = "TestLink1", Text = "Link1" }, new Link() { Href = "TestLink2", Text = "Link2" } };
             Action act = () => sut.Render.AppSetup();
             act.Should().Throw<InvalidOperationException>().WithMessage("Please use a CustomFooter to add a contact link in this environment");
@@ -201,7 +201,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void CustomFooterLinksCantBeUsedWithLimit([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void CustomFooterLinksCantBeUsedWithLimit([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -209,7 +209,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcweb",
                 FooterSectionLimit = 3
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.CustomFooterLinks = new List<FooterLink> { new FooterLink { Href = "href", Text = "text" } };
 
             //Action act = () => new Utils.ModelRenderer(sut).AppSetup();
@@ -226,7 +226,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void FooterSectionsCantBeUsedWithLimitZero([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void FooterSectionsCantBeUsedWithLimitZero([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -234,7 +234,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcweb",
                 FooterSectionLimit = 0
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterSections = GetTestableFooterSectionList();
 
             Action act = () => sut.Render.AppSetup();
@@ -242,7 +242,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
         
         [Theory, AutoNSubstituteData]
-        public void FooterSectionsThrowsTooManyLimit([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void FooterSectionsThrowsTooManyLimit([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -250,7 +250,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcweb",
                 FooterSectionLimit = 1
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterSections = GetTestableFooterSectionList();
 
             Action act = () => sut.Render.AppSetup();
@@ -258,7 +258,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void FooterSectionsRendersMultiple([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void FooterSectionsRendersMultiple([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -266,7 +266,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Theme = "gcweb",
                 FooterSectionLimit = 3
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterSections = GetTestableFooterSectionList();
 
             var json = sut.Render.AppSetup();
@@ -298,14 +298,14 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void CustomFooterPath([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void CustomFooterPath([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
                 Name = "PROD_SSL",
                 Theme = "gcintranet"
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
             sut.FooterPath = "https://ssl-templates.services.gc.ca/app/cls/WET/global/esdcfooter-eng.html";
 
             sut.Render.AppSetup().ToString().Should().Contain("\"footerPath\":\"https://ssl-templates.services.gc.ca/app/cls/WET/global/esdcfooter-eng.html\"");

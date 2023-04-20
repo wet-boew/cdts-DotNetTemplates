@@ -18,16 +18,14 @@ namespace GoC.WebTemplate.MVC.ActionFilters
         public WebTemplateActionFilterAttribute()
             : this(new FileContentCacheProvider(HttpRuntime.Cache),
                   new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection),
-                  new CdtsCacheProvider(HttpRuntime.Cache),
-                  new CdtsSRIHashesCacheProvider(HttpRuntime.Cache))
+                  new CdtsCacheProvider(HttpRuntime.Cache))
         {
         }
 
         public WebTemplateActionFilterAttribute(
             IFileContentCacheProvider fileContentCacheProvider,
             WebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider,
-            ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
+            ICdtsCacheProvider cdtsCacheProvider)
         {
             if (fileContentCacheProvider is null) throw new ArgumentNullException(nameof(fileContentCacheProvider));
             if (settings is null) throw new ArgumentNullException(nameof(settings));
@@ -36,8 +34,7 @@ namespace GoC.WebTemplate.MVC.ActionFilters
             WebTemplateModel = new Model(
                 fileContentCacheProvider,
                 settings,
-                cdtsCacheProvider,
-                cdtsSRIHashesCacheProvider);
+                cdtsCacheProvider);
         }
 
         public IModel WebTemplateModel { get; }

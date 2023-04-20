@@ -4,11 +4,7 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Utils.Caching
 {
-    public interface ICdtsCacheProvider : ICacheProvider<IDictionary<string, ICdtsEnvironment>>
-    {
-    }
-
-    public interface ICdtsSRIHashesCacheProvider : ICacheProvider<IDictionary<string, IDictionary<string, string>>>
+    public interface ICdtsCacheProvider : ICacheProvider<EnvironmentMaps>
     {
     }
 }

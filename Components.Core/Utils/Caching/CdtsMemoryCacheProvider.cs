@@ -6,17 +6,9 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Core.Utils.Caching
 {
-    public class CdtsMemoryCacheProvider : MemoryCacheProvider<IDictionary<string, ICdtsEnvironment>>, ICdtsCacheProvider
+    public class CdtsMemoryCacheProvider : MemoryCacheProvider<EnvironmentMaps>, ICdtsCacheProvider
     {
         public CdtsMemoryCacheProvider(IMemoryCache cache)
-            : base(cache)
-        {
-        }
-    }
-
-    public class CdtsSRIHashesMemoryCacheProvider : MemoryCacheProvider<IDictionary<string, IDictionary<string, string>>>, ICdtsSRIHashesCacheProvider
-    {
-        public CdtsSRIHashesMemoryCacheProvider(IMemoryCache cache)
             : base(cache)
         {
         }

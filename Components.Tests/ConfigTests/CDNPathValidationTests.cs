@@ -11,9 +11,9 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
 
         [Theory, AutoNSubstituteData]
-        public void ThrowExceptionIfHTTPSIsNonModifiableButUseHTTPSIsSet([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ThrowExceptionIfHTTPSIsNonModifiableButUseHTTPSIsSet([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.IsEncryptionModifiable = false;
             sut.Settings.UseHttps = true;
 
@@ -26,9 +26,9 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void DoNotThrowExceptionIfHTTPSIsNonModifiableAndUseHTTPSIsNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void DoNotThrowExceptionIfHTTPSIsNonModifiableAndUseHTTPSIsNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.IsEncryptionModifiable = false;
             sut.Settings.UseHttps = null;
 
@@ -40,9 +40,9 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void ThrowExceptionIfHTTPSIsModifiableAndUseHTTPSIsNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ThrowExceptionIfHTTPSIsModifiableAndUseHTTPSIsNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.IsEncryptionModifiable = true;
             sut.Settings.UseHttps = null;
 

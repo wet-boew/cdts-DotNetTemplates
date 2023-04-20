@@ -11,7 +11,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCSADETestAppHTTPSGCWeb([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCSADETestAppHTTPSGCWeb([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedVersion = "v1";
             var expectedEnvironmentTheme = "gcweb";
@@ -25,7 +25,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsEncryptionModifiable = true,
                 Theme = expectedEnvironmentTheme,
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");
@@ -33,7 +33,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCSADETestAppHTTPGCIntranet([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCSADETestAppHTTPGCIntranet([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedVersion = "v1";
             var expectedEnvironmentTheme = "gcintranet";
@@ -47,14 +47,14 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsEncryptionModifiable = true,
                 Theme = expectedEnvironmentTheme
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"http://s2tst-cdn-canada.sade-edap.prv/app/cls/wet/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");
         }
         [Theory, AutoNSubstituteData]
 
-        public void ESDCSADETestRnHTTPSGCWeb([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCSADETestRnHTTPSGCWeb([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedEnvironmentTheme = "gcweb";
 
@@ -67,7 +67,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsEncryptionModifiable = true,
                 Theme = expectedEnvironmentTheme
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/{expectedEnvironmentTheme}/cdts/compiled/");
@@ -75,7 +75,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCSADETestRnHTTPGCIntranet([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCSADETestRnHTTPGCIntranet([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedEnvironmentTheme = "GCIntranet";
 
@@ -88,7 +88,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsEncryptionModifiable = true,
                 Theme = expectedEnvironmentTheme
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"http://s2tst-cdn-canada.sade-edap.prv/rn/cls/wet/{expectedEnvironmentTheme}/cdts/compiled/");
@@ -98,7 +98,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCProdTestRnHTTPS([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCProdTestRnHTTPS([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedEnvironmentTheme = "gcweb";
 
@@ -111,7 +111,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://templates.service.gc.ca/rn/cls/wet/{expectedEnvironmentTheme}/cdts/compiled/");
@@ -119,7 +119,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCProdTestRnHTTP([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCProdTestRnHTTP([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedEnvironmentTheme = "gcweb";
 
@@ -132,7 +132,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"http://templates.service.gc.ca/rn/cls/wet/{expectedEnvironmentTheme}/cdts/compiled/");
@@ -140,7 +140,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCProdTestAppHTTPS([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCProdTestAppHTTPS([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedVersion = "v1";
             var expectedEnvironmentTheme = "gcweb";
@@ -154,7 +154,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://templates.service.gc.ca/app/cls/wet/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");
@@ -162,7 +162,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
         [Theory, AutoNSubstituteData]
 
-        public void ESDCProdTestAppHTTP([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ESDCProdTestAppHTTP([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedVersion = "v1";
             var expectedEnvironmentTheme = "gcweb";
@@ -176,14 +176,14 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = true
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"http://templates.service.gc.ca/app/cls/wet/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");
         }
         [Theory, AutoNSubstituteData]
 
-        public void ProdSSLUrlTestApp([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ProdSSLUrlTestApp([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedVersion = "v1";
             var expectedEnvironmentTheme = "gcweb";
@@ -196,7 +196,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = false,
                 IsEncryptionModifiable = false
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://ssl-templates.services.gc.ca/app/cls/wet/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");
@@ -204,7 +204,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
 
 
         [Theory, AutoNSubstituteData]
-        public void ProdSSLUrlTestRun([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void ProdSSLUrlTestRun([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var currentEnv = new CdtsEnvironment
             {
@@ -215,14 +215,14 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             };
 
             sut.Settings.Version = string.Empty;
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://ssl-templates.services.gc.ca/rn/cls/wet/{sut.CdtsEnvironment.Theme}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
-        public void AkamaiURLTestRun([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void AkamaiURLTestRun([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
             var expectedVersion = "rn";
             var expectedEnvironmentTheme = "gcweb";
@@ -235,14 +235,14 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = true,
                 IsEncryptionModifiable = false
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
 
             sut.CDNPath.Should()
                 .Be($"https://www.canada.ca/etc/designs/canada/cdts/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");
         }
 
         [Theory, AutoNSubstituteData]
-        public void AkamaiURLTestApp([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, ICdtsEnvironment env, Model sut)
+        public void AkamaiURLTestApp([Frozen]ICdtsCacheProvider cdtsCacheProvider, ICdtsEnvironment env, Model sut)
         {
             var expectedVersion = "v1";
             var expectedEnvironmentTheme = "gcweb";
@@ -255,7 +255,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
                 IsVersionRNCombined = true,
                 IsEncryptionModifiable = false
             };
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.CDNPath.Should()
                 .Be($"https://www.canada.ca/etc/designs/canada/cdts/{expectedEnvironmentTheme}/{expectedVersion}/cdts/compiled/");

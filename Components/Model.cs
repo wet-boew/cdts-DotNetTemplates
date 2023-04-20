@@ -34,16 +34,15 @@ namespace GoC.WebTemplate.Components
 
         public Model(IFileContentCacheProvider fileContentCacheProvider,
             IWebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider,
-            ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
+            ICdtsCacheProvider cdtsCacheProvider)
         {
             if (fileContentCacheProvider == null) throw new ArgumentNullException(nameof(fileContentCacheProvider));
             if (cdtsCacheProvider == null) throw new ArgumentNullException(nameof(cdtsCacheProvider));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
-            _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent();
-            _currentSRIHashes = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetSRIHashes();
+            _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
+            _currentSRIHashes = new CdtsEnvironmentCache(cdtsCacheProvider).GetSRIHashes();
         }
 
         /// <summary>

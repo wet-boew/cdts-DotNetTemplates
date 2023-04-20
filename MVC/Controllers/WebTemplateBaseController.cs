@@ -19,21 +19,18 @@ namespace GoC.WebTemplate.MVC
         public WebTemplateBaseController()
             : this(new FileContentCacheProvider(HttpRuntime.Cache),
                   new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection),
-                  new CdtsCacheProvider(HttpRuntime.Cache),
-                  new CdtsSRIHashesCacheProvider(HttpRuntime.Cache))
+                  new CdtsCacheProvider(HttpRuntime.Cache))
         { }
 
         public WebTemplateBaseController(IFileContentCacheProvider fileContentCacheProvider,
             IWebTemplateSettings settings,
-            ICdtsCacheProvider cdtsCacheProvider,
-            ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider)
+            ICdtsCacheProvider cdtsCacheProvider)
         {
             WebTemplateModel = 
                 new Model(
                     fileContentCacheProvider, 
                     settings, 
-                    cdtsCacheProvider,
-                    cdtsSRIHashesCacheProvider
+                    cdtsCacheProvider
                 );
         }
 

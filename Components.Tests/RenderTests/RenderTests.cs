@@ -17,35 +17,35 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
     {
 
         [Theory, AutoNSubstituteData]
-        public void DoNotAddCanadaCaToTitlesIfItIsAlreadyThere([Frozen] ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider,
+        public void DoNotAddCanadaCaToTitlesIfItIsAlreadyThere([Frozen] ICdtsCacheProvider cdtsCacheProvider,
             ICdtsEnvironment env,
             Model sut)
         {
 
             env.AppendToTitle.Returns(" - Canada.ca");
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.HeaderTitle = "Foo - Canada.ca";
             sut.HeaderTitle.Should().Be("Foo - Canada.ca");
         }
 
         [Theory, AutoNSubstituteData]
-        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, 
+        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, 
             ICdtsEnvironment env, Model sut)
         {
             env.AppendToTitle.Returns(" - Canada.ca");
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
             sut.HeaderTitle = "Foo";
 
             sut.HeaderTitle.Should().Be("Foo - Canada.ca");
         }
 
         [Theory, AutoNSubstituteData]
-        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, 
+        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, 
             ICdtsEnvironment env, Model sut)
         {
             env.AppendToTitle.Returns(" - Canada.ca");
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.HeaderTitle = null;
 
@@ -53,12 +53,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void DontAddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen] ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider,
+        public void DontAddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen] ICdtsCacheProvider cdtsCacheProvider,
             ICdtsEnvironment env,
             Model sut)
         {
             env.AppendToTitle.Returns("");
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment] = env;
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
 
             sut.HeaderTitle = "Foo";
 

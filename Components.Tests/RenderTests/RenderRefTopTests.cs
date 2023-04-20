@@ -12,30 +12,30 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
     public class RenderRefTopTests
     {
         [Theory, AutoNSubstituteData]
-        public void LocalPathDoesNotRendersWhenNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider,
+        public void LocalPathDoesNotRendersWhenNull([Frozen]ICdtsCacheProvider cdtsCacheProvider,
 #pragma warning disable xUnit1026 // proxy needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
       [Frozen]WebTemplateSettings settings,
 #pragma warning restore xUnit1026
       Model sut)
         {
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.ReturnsNull();
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.ReturnsNull();
             sut.Render.Setup().ToString().Should().NotContain("localPath");
         }
 
         [Theory, AutoNSubstituteData]
-        public void LocalPathFormatsCorrectly([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen]ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider,
+        public void LocalPathFormatsCorrectly([Frozen]ICdtsCacheProvider cdtsCacheProvider,
 #pragma warning disable xUnit1026 // // proxy needs to be frozen here even though it is not noticably used, it is being used on the creation though AutoNSubstituteData
             [Frozen]WebTemplateSettings settings,
 #pragma warning restore xUnit1026
             Model sut)
         {
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.Returns("{0}:{1}");
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].LocalPath.Returns("{0}:{1}");
             sut.Render.Setup().ToString().Should().Contain($"\"localPath\":\"{sut.CdtsEnvironment.SubTheme}:{sut.Settings.Version}");
         }
         [Theory, AutoNSubstituteData]
-        public void LocalPathRendersWhenNotNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void LocalPathRendersWhenNotNull([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment];
+            var currentEnv = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment];
             currentEnv.LocalPath = "foo";
             sut.Render.Setup().ToString().Should().Contain("\"localPath\":\"foo\"");
         }
@@ -76,9 +76,9 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                   "Path": "http{0}://s2tst-cdn-canada.sade-edap.prv/{1}/cls/wet/{2}/{3}cdts/compiled/",
             */
         [Theory, AutoNSubstituteData]
-        public void CdnEnvRenderedProperly([Frozen]ICdtsCacheProvider cdtsCacheProvider, [Frozen] ICdtsSRIHashesCacheProvider cdtsSRIHashesCacheProvider, Model sut)
+        public void CdnEnvRenderedProperly([Frozen]ICdtsCacheProvider cdtsCacheProvider, Model sut)
         {
-            new CdtsEnvironmentCache(cdtsCacheProvider, cdtsSRIHashesCacheProvider).GetContent()[sut.Settings.Environment].CDN = "prod";
+            new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment].CDN = "prod";
             sut.Render.Setup().ToString().Should().Contain("\"cdnEnv\":\"prod\"");
         }
 

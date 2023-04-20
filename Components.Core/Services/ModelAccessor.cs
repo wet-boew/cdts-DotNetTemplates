@@ -20,12 +20,11 @@ namespace GoC.WebTemplate.Components.Core.Services
 
             var settings = new WebTemplateSettings(configs);
 
-            Model = 
+            Model =
                 new Model(
                     new FileContentMemoryCacheProvider(memoryCache, hostingEnvironment),
-                    settings, 
-                    new CdtsMemoryCacheProvider(memoryCache),
-                    new CdtsSRIHashesMemoryCacheProvider(memoryCache)
+                    settings,
+                    new CdtsMemoryCacheProvider(memoryCache)
                 );
         }
     }
