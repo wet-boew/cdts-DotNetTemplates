@@ -8,9 +8,11 @@ using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Core.Utils.Caching;
 using GoC.WebTemplate.Components.Entities;
+using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
 using Xunit;
 using Xunit.Sdk;
 
@@ -70,15 +72,15 @@ namespace GoC.WebTemplate.Components.Test
                  return keys.Zip(values, Tuple.Create).ToDictionary(x => x.Item1, x => x.Item2);
              });
 
-            var services = new ServiceCollection();
-            services.AddMemoryCache();
-            var serviceProvider = services.BuildServiceProvider();
-            var memoryCache = serviceProvider.GetService<IMemoryCache>();
-
-            CdtsSRIHashesMemoryCacheProvider cdtsSRIMemoryCacheProvider = new CdtsSRIHashesMemoryCacheProvider(memoryCache);
-
-            fixture.Customize<ICdtsSRIHashesCacheProvider>(
-                 c => c.FromFactory(() => cdtsSRIMemoryCacheProvider));
+            fixture.Customize<ICdtsCacheProvider>(
+                 c => c.FromFactory((EnvironmentMaps m) =>
+                 {
+                     m.Environments = Substitute.For<IDictionary<string, ICdtsEnvironment>>();
+                     var cdtsCacheProvider = Substitute.For<ICdtsCacheProvider>();
+                     cdtsCacheProvider.Get(Constants.CACHE_KEY_ENVIRONMENTS).Returns(m);
+                     return cdtsCacheProvider;
+                 })
+            );
         }
     }
 
