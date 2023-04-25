@@ -29,15 +29,15 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void TestHasSRIForGCIntranetDefaultVersion(Model sut)
+        public void TestNoSRIForGCIntranetRunVersion(Model sut)
         {
             sut.Settings.SRIEnabled = true;
-            sut.Settings.Version = "v4_0_47";
+            sut.Settings.Version = "";
             sut.CdtsEnvironment.Theme = "gcintranet";
 
             sut.CSSPath.Contains("v4_0_47");
-            Assert.Contains("integrity", sut.CSSPath);
-            Assert.Contains("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
+            Assert.DoesNotContain("integrity", sut.CSSPath);
+            Assert.DoesNotContain("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
         }
 
         [Theory, AutoNSubstituteData]
