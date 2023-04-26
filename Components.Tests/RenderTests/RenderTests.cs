@@ -30,7 +30,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, ICdtsEnvironment env, Model sut)
+        public void AddCanadaCaToAllTitlesOnPagesImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, 
+            ICdtsEnvironment env, Model sut)
         {
             env.AppendToTitle.Returns(" - Canada.ca");
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;
@@ -40,7 +41,8 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
-        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, ICdtsEnvironment env, Model sut)
+        public void AddCanadaCaToAllTitlesOnPagesWhenTitleIsNullImplementingGCWebTheme([Frozen]ICdtsCacheProvider cdtsCacheProvider, 
+            ICdtsEnvironment env, Model sut)
         {
             env.AppendToTitle.Returns(" - Canada.ca");
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = env;

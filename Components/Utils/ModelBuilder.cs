@@ -7,6 +7,7 @@ using System.Web;
 using GoC.WebTemplate.Components.Entities;
 using System.Collections.Specialized;
 using System.Net;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils
@@ -53,14 +54,16 @@ namespace GoC.WebTemplate.Components.Utils
                     SubTheme = _model.CdtsEnvironment.SubTheme,
                     ExitSecureSite = _model.Builder.BuildExitSecureSite(),
                     JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                    WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
+                    WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null,
+                    SRIEnabled = _model.Settings.SRIEnabled ? (bool?)null : false
                 };
             }
 
             return new SetupBase{
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null
+                WebAnalytics = _model.Settings.WebAnalytics.Active ? new List<WebAnalytics> { _model.Settings.WebAnalytics } : null,
+                SRIEnabled = _model.Settings.SRIEnabled ? (bool?)null : false
             };
         }
 
@@ -505,12 +508,43 @@ namespace GoC.WebTemplate.Components.Utils
             return string.Format(CultureInfo.InvariantCulture, _model.CdtsEnvironment.Path, https, run, _model.CdtsEnvironment.Theme, version);
         }
 
+        private string BuildPathAttributes(string pathAttributeName, string fileName)
+        {
+            StringBuilder buf = new StringBuilder(384);
+
+            buf.Append(pathAttributeName);
+            buf.Append("=\"");
+            buf.Append(BuildCDNPath());
+            buf.Append(fileName);
+            buf.Append("\"");
+            if (_model.Settings.SRIEnabled)
+            {
+                string hash = _model.CurrentSRIHashes.TryGetValue(fileName, out hash) ? hash : null;
+                if (!string.IsNullOrEmpty(hash))
+                { //if not found, simply don't issue SRI attributes
+                    buf.Append(" integrity=\"");
+                    buf.Append(hash);
+                    buf.Append("\" crossorigin=\"anonymous\"");
+                }
+            }
+
+            return buf.ToString();
+        }
+
+        public string BuildWetJsPathAttributes(string lang)
+        {
+            return BuildPathAttributes("src", $"compiled/wet-{lang}.js");
+        }
+
         /// <summary>
-        /// Builds the CDN path to the cdts-app-styles.css file.
+        /// Builds the href/integrity/crossorigin attribute path to the cdts-styles.css file.
         /// </summary>
         /// <returns>String, the complete path to the cdn</returns>
-        public string BuildCSSPath()
+        public string BuildCSSPathAttributes()
         {
+            //---[ Figure out CSS file name
+            string fileName = "cdts-styles.css";
+
             if (!_model.CdtsEnvironment.ThemeIsGCWeb())
             {
                 string subTheme = _model.CdtsEnvironment.SubTheme;
@@ -520,36 +554,37 @@ namespace GoC.WebTemplate.Components.Utils
                     //...limit to supported subthemes
                     if (subTheme.Equals("esdc") || subTheme.Equals("eccc"))
                     {
-                        return $"{BuildCDNPath()}cdts-{subTheme}-styles.css";
+                        fileName = $"cdts-{subTheme}-styles.css";
                     }
                 }
             }
 
             //(if we get here, we're gcweb or gcintranet with no subtheme value)
-            return $"{BuildCDNPath()}cdts-styles.css";
+            //return $"{BuildCDNPath()}cdts-styles.css";
+            return BuildPathAttributes("href", fileName);
         }
 
         /// <summary>
-        ///Builds the CDN path to the cdts-[subtheme]-styles.css file.
+        ///Builds the href/integrity/crossorigin attribute path to the cdts-[subtheme]-styles.css file.
         /// </summary>
-        public string BuildAppCSSPath()
+        public string BuildAppCSSPathAttributes()
         {
             if (_model.CdtsEnvironment.ThemeIsGCWeb())
             {
-                return $"{BuildCDNPath()}cdts-app-styles.css";
+                return BuildPathAttributes("href", "cdts-app-styles.css");
             }
             else
             {
-                return BuildCSSPath();
+                return BuildCSSPathAttributes();
             }
         }
 
         /// <summary>
-        /// Builds the CDN path to the cdts-splash-styles.css file.
+        /// Builds the href/integrity/crossorigin path to the cdts-splash-styles.css file.
         /// </summary>
-        public string BuildSplashCSSPath()
+        public string BuildSplashCSSPathAttributes()
         {
-            return $"{BuildCDNPath()}cdts-splash-styles.css";
+            return BuildPathAttributes("href", "cdts-splash-styles.css");
         }
 
         #region GetJson

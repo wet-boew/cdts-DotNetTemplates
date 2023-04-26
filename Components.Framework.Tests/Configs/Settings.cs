@@ -15,6 +15,7 @@ namespace GoC.WebTemplate.Components.Framework.Tests.Configs
         {
             //We want to use the app.config to test this so we don't use autonsubstitute to test it.
             var settings = new WebTemplateSettings(ConfigurationManager.GetSection("GoC.WebTemplate") as GocWebTemplateConfigurationSection);
+            settings.Environment = "AKAMAI";
             var sut = new Model(fileContentCacheProvider, settings, cdtsCacheProvider);
             sut.Settings.WebAnalytics.Active = false;
             var json = sut.Render.AppSetup();

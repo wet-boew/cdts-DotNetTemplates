@@ -14,7 +14,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         public void FileHasElevenEnvironments(ICdtsCacheProvider cdtsCacheProvider)
         {
             var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            result.Count.Should().Be(11);
+            result.Environments.Count.Should().Be(11);
         }
 
         [Theory, AutoNSubstituteData]
@@ -50,7 +50,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         public void AKAMAIDeserialize(ICdtsCacheProvider cdtsCacheProvider)
         {
             var env = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            env["AKAMAI"].Should().BeEquivalentTo(new CdtsEnvironment
+            env.Environments["AKAMAI"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "AKAMAI",
                 Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/",
@@ -70,7 +70,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         public void PRODSSLDeserialize(ICdtsCacheProvider cdtsCacheProvider)
         {
             var env = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            env["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
+            env.Environments["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "PROD_SSL",
                 Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",

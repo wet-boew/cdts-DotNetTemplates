@@ -12,8 +12,8 @@
         <title><%= WebTemplateModel.Render.HeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport"/>
         <!-- Load closure template scripts -->
-        <link rel="stylesheet" href="<%= WebTemplateModel.AppCSSPath%>"/>
-        <script type="text/javascript" src="<%= string.Format(System.Globalization.CultureInfo.InvariantCulture, "{0}compiled/wet-{1}.js", WebTemplateModel.CDNPath, WebTemplateModel.TwoLetterCultureLanguage)  %>" data-cdts-setup='<%= WebTemplateModel.Render.AppSetup() %>'></script> 
+        <link rel="stylesheet" <%= WebTemplateModel.AppCSSPath%>/>
+        <script type="text/javascript" <%= @WebTemplateModel.Builder.BuildWetJsPathAttributes(@WebTemplateModel.TwoLetterCultureLanguage) %> data-cdts-setup='<%= WebTemplateModel.Render.AppSetup() %>'></script> 
         <noscript>
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile("refTop.html") %>

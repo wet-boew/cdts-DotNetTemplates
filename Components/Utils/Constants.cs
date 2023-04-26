@@ -14,5 +14,6 @@
 
         public const string CACHE_KEY_STATICFILES_PREFIX = "GoC.Template.CacheKey";
         public const string CACHE_KEY_ENVIRONMENTS = "GoC.Template.Environments";
+        public const string CACHE_KEY_ENVIRONMENTSLIST = "GoC.Template.ThemeSRIHashes";
     }
 }

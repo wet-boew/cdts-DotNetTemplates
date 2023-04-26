@@ -10,12 +10,19 @@ using System.Resources;
 
 namespace GoC.WebTemplate.Components.Utils.Caching
 {
+    public class EnvironmentMaps
+    {
+        public IDictionary<string, ICdtsEnvironment> Environments { get; set; }
+        public IDictionary<string, IDictionary<string, string>> ThemeSRIHashes { get; set; }
+    }
+
     public class CdtsEnvironmentCache
     {
         //Because of how JSonDesrialization works we need to have a container class for the environments.
         private class EnvironmentContainer
         {
             public List<CdtsEnvironment> Environments { get; set; }
+            public IDictionary<string, IDictionary<string, string>> ThemeSRIHashes { get; set; }
         }
 
         private const string ResouceName = @"GoC.WebTemplate.Components.Configs.Cdts.CdtsEnvironments.json";
@@ -55,7 +62,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
                 }
             }
 
-            return content;
+            return content.Environments;
         }
 
         /// <summary>
@@ -63,7 +70,7 @@ namespace GoC.WebTemplate.Components.Utils.Caching
         /// own caching implementation
         /// </summary>
         /// <returns>A dictionary of environments with the ICDTSEnvironment.Name being the key.</returns>
-        public IDictionary<string, ICdtsEnvironment> DeserializeEnvironments()
+        public EnvironmentMaps DeserializeEnvironments()
         {
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(ResouceName))
             {
@@ -80,9 +87,42 @@ namespace GoC.WebTemplate.Components.Utils.Caching
                         DefaultValueHandling = DefaultValueHandling.Ignore
                     };
                     var environments = serializer.Deserialize<EnvironmentContainer>(jsonReader);
-                    return environments.Environments.Cast<ICdtsEnvironment>().ToDictionary(x => x.Name, x => x);
+                    return new EnvironmentMaps
+                    {
+                        Environments = environments.Environments.Cast<ICdtsEnvironment>().ToDictionary(x => x.Name, x => x),
+                        ThemeSRIHashes = environments.ThemeSRIHashes
+                    };
                 }
             }
+        }
+
+        public IDictionary<string, IDictionary<string, string>> GetSRIHashes()
+        {
+            Debug.Assert(_cacheProvider != null, "Cache proxy cannot be null");
+
+            var cacheKey = Constants.CACHE_KEY_ENVIRONMENTSLIST;
+            var content = _cacheProvider.Get(cacheKey);
+
+            // Implements the double-check pattern.
+            if (content == null)
+            {
+                lock (_lock)
+                {
+                    content = _cacheProvider.Get(cacheKey);
+
+                    if (content == null)
+                    {
+                        // We don't catch exceptions because this file needs to exist.
+                        // So we want the app to crash if it isn't.
+                        content = DeserializeEnvironments();
+
+                        //---[ Now that the data is loaded, add it to the cache
+                        _cacheProvider.Set(cacheKey, content);
+                    }
+                }
+            }
+
+            return content.ThemeSRIHashes;
         }
     }
 }

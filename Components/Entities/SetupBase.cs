@@ -12,5 +12,6 @@ namespace GoC.WebTemplate.Components.Entities
         public string JqueryEnv { get; set; }
         public ExitSecureSite ExitSecureSite { get; set; }
         public List<WebAnalytics> WebAnalytics { get; set; }
+        public bool? SRIEnabled { get; set; }
     }
 }
