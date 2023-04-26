@@ -11,7 +11,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         {
             sut.Settings.SRIEnabled = true;
             sut.Settings.Version = "v999_999_999";
-            sut.CSSPath.Contains("v999_999_999");
+            sut.CdtsEnvironment.Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/";
+
+            Assert.Contains("v999_999_999", sut.CSSPath);
             Assert.DoesNotContain("integrity", sut.CSSPath);
             Assert.DoesNotContain("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
         }
@@ -22,8 +24,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.Settings.SRIEnabled = true;
             sut.Settings.Version = "v4_0_47";
             sut.CdtsEnvironment.Theme = "gcweb";
+            sut.CdtsEnvironment.Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/";
 
-            sut.CSSPath.Contains("v4_0_47");
+            Assert.Contains("v4_0_47", sut.CSSPath);
             Assert.Contains("integrity", sut.CSSPath);
             Assert.Contains("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
         }
@@ -34,8 +37,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.Settings.SRIEnabled = true;
             sut.Settings.Version = "";
             sut.CdtsEnvironment.Theme = "gcintranet";
+            sut.CdtsEnvironment.Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/";
 
-            sut.CSSPath.Contains("v4_0_47");
+            Assert.Contains("rn", sut.CSSPath);
             Assert.DoesNotContain("integrity", sut.CSSPath);
             Assert.DoesNotContain("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
         }

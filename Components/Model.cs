@@ -40,9 +40,10 @@ namespace GoC.WebTemplate.Components
             if (cdtsCacheProvider == null) throw new ArgumentNullException(nameof(cdtsCacheProvider));
             Settings = settings ?? throw new ArgumentNullException(nameof(settings));
 
+            CdtsEnvironmentCache cdtsEnvironmentCache = new CdtsEnvironmentCache(cdtsCacheProvider);
             _fileContentCache = new FileContentCache(fileContentCacheProvider);
-            _cdtsEnvironments = new CdtsEnvironmentCache(cdtsCacheProvider).GetContent();
-            _currentSRIHashes = new CdtsEnvironmentCache(cdtsCacheProvider).GetSRIHashes();
+            _cdtsEnvironments = cdtsEnvironmentCache.GetContent();
+            _currentSRIHashes = cdtsEnvironmentCache.GetSRIHashes();
         }
 
         /// <summary>
