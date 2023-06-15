@@ -8,45 +8,45 @@
     <head>
         <meta charset="utf-8">
         <!-- Web Experience Toolkit (WET) / Boîte à outils de l'expérience Web (BOEW)
-		    wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
+            wet-boew.github.io/wet-boew/License-en.html / wet-boew.github.io/wet-boew/Licence-fr.html -->
         <title><%= WebTemplateModel.Render.HeaderTitle() %></title>
         <meta content="width=device-width,initial-scale=1" name="viewport">
         <!-- Load closure template scripts -->
         <link rel="stylesheet" <%= WebTemplateModel.CSSPath%>/>
         <script type="text/javascript" <%= @WebTemplateModel.Builder.BuildWetJsPathAttributes(@WebTemplateModel.TwoLetterCultureLanguage) %> data-cdts-setup='<%= WebTemplateModel.Render.TransactionalSetup() %>'></script> 
         <noscript>
-		    <!-- Write closure fall-back static file -->
-		    <%= WebTemplateModel.LoadStaticFile("refTop.html") %>
+            <!-- Write closure fall-back static file -->
+            <%= WebTemplateModel.LoadStaticFile("refTop.html") %>
         </noscript>
          <%= WebTemplateModel.Render.HtmlHeaderElements() %>
         <!-- GoC.WebTemplate Version ASPX <%= WebTemplateVersion %> -->
         <!-- GoC.WebTemplate.Core Version <%= WebTemplateModel.AssemblyVersion %> -->
     </head>
     <body vocab="http://schema.org/" typeof="WebPage">
-	     <%= WebTemplateModel.Render.SessionTimeoutControl() %>
+         <%= WebTemplateModel.Render.SessionTimeoutControl() %>
         <div id="cdts-def-top">
-		    <!-- Write closure fall-back static file -->
+            <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile(string.Concat("transactTop-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>   
         </div>
         <div class="container">
-	        <div class="row">
-	            <main property="mainContentOfPage" class="col-md-9 col-md-push-3" role="main" typeof="WebPageElement">
+            <div class="row">
+                 <nav class="wb-sec col-md-3" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
+                    <!-- Write closure fall-back static file -->
+                    <%= WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
+                </nav>
+                <main property="mainContentOfPage" class="col-md-9" role="main" typeof="WebPageElement">
                     <!-- the main content -->
                     <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
                     <!-- end main content -->
                     <div id="cdts-def-preFooter">
-       		            <!-- Write closure fall-back static file -->
-			                <%= WebTemplateModel.LoadStaticFile(string.Concat("preFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
+                           <!-- Write closure fall-back static file -->
+                            <%= WebTemplateModel.LoadStaticFile(string.Concat("preFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
                     </div>
                 </main>
-                 <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
-                    <!-- Write closure fall-back static file -->
-                    <%= WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
-		        </nav>
             </div>
         </div>
         <div id="cdts-def-footer">
-       	    <!-- Write closure fall-back static file -->
+               <!-- Write closure fall-back static file -->
              <%= WebTemplateModel.LoadStaticFile(string.Concat("transactFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
         </div>
     </body>
