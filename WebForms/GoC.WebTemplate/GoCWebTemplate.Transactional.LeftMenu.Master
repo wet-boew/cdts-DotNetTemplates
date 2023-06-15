@@ -30,7 +30,11 @@
         </div>
         <div class="container">
 	        <div class="row">
-	            <main property="mainContentOfPage" class="col-md-9 col-md-push-3" role="main" typeof="WebPageElement">
+                 <nav class="wb-sec col-md-3" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
+                    <!-- Write closure fall-back static file -->
+                    <%= WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
+		        </nav>
+	            <main property="mainContentOfPage" class="col-md-9" role="main" typeof="WebPageElement">
                     <!-- the main content -->
                     <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
                     <!-- end main content -->
@@ -39,10 +43,6 @@
 			                <%= WebTemplateModel.LoadStaticFile(string.Concat("preFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
                     </div>
                 </main>
-                 <nav class="wb-sec col-md-3 col-md-pull-9" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
-                    <!-- Write closure fall-back static file -->
-                    <%= WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
-		        </nav>
             </div>
         </div>
         <div id="cdts-def-footer">
