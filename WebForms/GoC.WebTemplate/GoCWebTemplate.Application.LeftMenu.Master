@@ -29,12 +29,12 @@
             <%= WebTemplateModel.LoadStaticFile(string.Concat("appTop-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>            
         </div>
         <div class="container">
-	        <div class="row">
-        	    <nav class="wb-sec col-md-3" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
+            <div class="row">
+                <nav class="wb-sec col-md-3" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
                     <!-- Write closure fall-back static file -->
                     <%= WebTemplateModel.LoadStaticFile(string.Concat("secMenu-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
-		        </nav>
-	            <main property="mainContentOfPage" class="col-md-9" role="main" typeof="WebPageElement">
+                </nav>
+                <main property="mainContentOfPage" class="col-md-9" role="main" typeof="WebPageElement">
                     <!-- the main content -->
                     <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
                     <!-- end main content -->
@@ -44,7 +44,7 @@
                     </div>
                 </main>
              </div>
-	    </div>
+        </div>
         <div id="cdts-def-footer">
             <!-- Write closure fall-back static file -->
             <%= WebTemplateModel.LoadStaticFile(string.Concat("appFooter-", WebTemplateModel.TwoLetterCultureLanguage, ".html")) %>
