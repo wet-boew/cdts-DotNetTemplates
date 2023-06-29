@@ -11,10 +11,10 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
     {
 
         [Theory, AutoNSubstituteData]
-        public void FileHasElevenEnvironments(ICdtsCacheProvider cdtsCacheProvider)
+        public void FileHasFiveEnvironments(ICdtsCacheProvider cdtsCacheProvider)
         {
             var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            result.Environments.Count.Should().Be(11);
+            result.Environments.Count.Should().Be(5);
         }
 
         [Theory, AutoNSubstituteData]
