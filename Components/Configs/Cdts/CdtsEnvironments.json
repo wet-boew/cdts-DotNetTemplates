@@ -75,6 +75,21 @@
   ],
   "//sri": "To add SRI hashes, create entries with key '<theme>/<version>' and value from the corresponding CDTS SRI-INFO.json file",
   "themeSRIHashes": {
+    "gcweb/v4_1_0": {
+      "cdtsPath": "gcweb/v4_1_0/cdts/",
+      "compiled/wet-en.js": "sha512-lSU0LI1sjHEUkRASTTpDHaLg0kL1H7DT4cbPXjtKepizDqqLmkF8vjmUHvSx2QaBV3w0kPe+l50d0V8K2TJQ0A==",
+      "compiled/wet-fr.js": "sha512-vaMZcx7BWb8z8v4Ty3+8ym9l4iUkj8hsARRGnwLAaK6+ruGocK79RGehRUKNBBEQMtj8h2fNz3NlvP2wfXPxjQ==",
+    },
+    "gcintranet/v4_1_0": {
+      "cdtsPath": "gcintranet/v4_1_0/cdts/",
+      "compiled/wet-en.js": "sha512-RGu4EtF23KOVIZA+ZSl55ZhLIpwkgpf1l16LiGe+DqQYdn+ke4DFMOhnsA1L4+Zq2vQD7f/7q2m74K86Tf21Hg==",
+      "compiled/wet-fr.js": "sha512-+ErlCtTP7ITdeV908E0p+XTa5DJ/GVi9NBJ/hDI6HP74NbNnKy7o1xyKVwwmb0K/N4V0r4duATSeem75ha2SHA==",
+      "cdts-styles.css": "sha512-dqrBeYZXK6RYeYmF7LSMsQ7efhL3Lalpi1P09QpwGXVBbuEB2lnqzhhVN1yPXTYN/5/4UeRlCf3SDtiXnk6sOQ==",
+      "cdts-splash-styles.css": "sha512-0ydKRZxST0akj4GM/lin6DobWLxhDLA2k8iPwrTBl4tFS5/0C/ERsRMpurzWf5yalJNqh6ffJcOguX8LB+yAKg==",
+      "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
+      "cdts-esdc-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA==",
+      "cdts-labour-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA=="
+    },
     "gcweb/v4_0_47": {
       "cdtsPath": "gcweb/v4_0_47/cdts/",
       "compiled/wet-en.js": "sha512-tnH5+ICb+88XGv1clBrCDzUWXrOAt5nvaiFof1ewyLxhRJ/MaRHbdOaXzAFTOh9TW3/g5VkF9OkikW1civqFTA==",
