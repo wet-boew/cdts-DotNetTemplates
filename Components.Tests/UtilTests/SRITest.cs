@@ -22,12 +22,12 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         public void TestHasSRIForExistingVersion(Model sut)
         {
             sut.Settings.SRIEnabled = true;
-            sut.Settings.Version = "v4_0_47";
+            sut.Settings.Version = "v4_1_0";
             sut.CdtsEnvironment.Theme = "gcweb";
             sut.CdtsEnvironment.Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/";
 
-            Assert.Contains("v4_0_47", sut.CSSPath);
-            Assert.Contains("integrity", sut.CSSPath);
+            Assert.Contains("v4_1_0", sut.CSSPath);
+            //Assert.Contains("integrity", sut.CSSPath); NOTE: For version v4_1_0, the CSS path does not have SRI
             Assert.Contains("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
         }
 

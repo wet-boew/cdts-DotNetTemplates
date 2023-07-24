@@ -5,6 +5,9 @@
 ### New features and improvements
 
 - **IMPORTANT** ALL LAYOUT DEFINITIONS UPDATED - All inline scripts and occurences of `document.write` were removed. 
+- Updating static fallback files
+- [CDTS](https://github.com/wet-boew/cdts-sgdc/) v4.1.0 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.63
+- Internal changes and bug fixes
 
 ## v2.8.0
 
