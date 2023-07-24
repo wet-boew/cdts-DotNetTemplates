@@ -89,24 +89,6 @@
       "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
       "cdts-esdc-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA==",
       "cdts-labour-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA=="
-    },
-    "gcweb/v4_0_47": {
-      "cdtsPath": "gcweb/v4_0_47/cdts/",
-      "compiled/wet-en.js": "sha512-tnH5+ICb+88XGv1clBrCDzUWXrOAt5nvaiFof1ewyLxhRJ/MaRHbdOaXzAFTOh9TW3/g5VkF9OkikW1civqFTA==",
-      "compiled/wet-fr.js": "sha512-5PIFDx8SrhansLOaqmlaRcBKqk3zwbHH5O6fc9KJ2i6qwxaXveeDiz73Fxtmz3/iREvjk9oDeGYM4RNk93aQAA==",
-      "cdts-styles.css": "sha512-/T5FIU41V7THC9+5bpPKSj0Aeuf2joUyIpXvTqAi1w4fYFI4w4BXataUGlzgCQF0vcq319tQ+dmuTayab32FkQ==",
-      "cdts-app-styles.css": "sha512-oUT4s4bz1vlqoI0kPCRWy6BnuUZLddSL0Lfp13oPDBzzpNjL4r+ejSDoXxkLa41J96kaB7yJk4QXWygRIFFF+w==",
-      "cdts-splash-styles.css": "sha512-/8L+im/vk0lx8k7ELdf6MAZr0H6s5mxs66iC3R22UD4qySG1r7eUHdQ5aJ2v+9nNfdIof2TMmH0kC0vlgRvo+g=="
-    },
-    "gcintranet/v4_0_47": {
-      "cdtsPath": "gcintranet/v4_0_47/cdts/",
-      "compiled/wet-en.js": "sha512-XyVGRR6hzCvlZoQoLSP1wydsRN9ZYvif8lqU9InPMUzBNu/QoS041cjOtevg2kOp/GLL1lLEaKmHPZEjr4KaTQ==",
-      "compiled/wet-fr.js": "sha512-hdzS4GIh0LrY05Evgdn2pLRotzSHYPFh1o57p7HEUr0BIa0z1yovBGA+yekJL58drLfcjX09eRShGOO6Fw5xxw==",
-      "cdts-styles.css": "sha512-dqrBeYZXK6RYeYmF7LSMsQ7efhL3Lalpi1P09QpwGXVBbuEB2lnqzhhVN1yPXTYN/5/4UeRlCf3SDtiXnk6sOQ==",
-      "cdts-splash-styles.css": "sha512-0ydKRZxST0akj4GM/lin6DobWLxhDLA2k8iPwrTBl4tFS5/0C/ERsRMpurzWf5yalJNqh6ffJcOguX8LB+yAKg==",
-      "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
-      "cdts-esdc-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA==",
-      "cdts-labour-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA=="
     }
   }
 }
