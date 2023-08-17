@@ -1,0 +1,18 @@
+﻿@inject IJSRuntime jsRuntime
+
+<div id="cdts-react-def-preFooter">
+</div>
+
+@code {
+
+    [Parameter]
+    public Blazor.Model.PreFooter PreFooterObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {   
+        jsRuntime.InvokeVoidAsync("setPreFooter", JsonSerializationHelper.SerializeToJson(PreFooterObj).ToString());
+        //jsRuntime.InvokeVoidAsync("alert", PreFooterObj.DateModified);
+        
+    }
+
+}

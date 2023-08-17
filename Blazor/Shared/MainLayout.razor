@@ -1,0 +1,137 @@
+﻿@inherits LayoutComponentBase
+@using System.Web
+@inject NavigationManager NavManager
+
+    <HeadContent>
+        <RefTop RefTopObj="@refTopObj"/>
+    </HeadContent>
+    <Top TopObj = "@topObj"/>
+    <!--<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>-->
+
+    @if(@topObj.TopSecMenu)
+    {
+        <SectionMenu LeftMenuItems = "@leftMenuObj"/>
+    }
+    <main id="cdts-main" property="mainContentOfPage" typeof="WebPageElement" class="@(@topObj.TopSecMenu? "col-md-9" : "container")">
+            <NavLink href="" Match="NavLinkMatch.All">
+                <button class="btn">Home</button>
+            </NavLink>
+            <NavLink href="counter">
+                <button class="btn">Counter</button>
+            </NavLink>
+            <NavLink href="fetchdata">
+                <button class="btn">Fetch Data</button>
+            </NavLink>
+            <button class="btn" @onclick="AddBreadcrumbs">Add Search</button>
+            <button class="btn" @onclick="AddFooter">Add Footer</button>
+            <button class="btn" @onclick="AddLeftMenu">Add left Menu</button>
+        @Body
+        <PreFooter PreFooterObj = "@obj"/>
+    </main>
+
+    <Footer FooterObj = "@footerObj"/>
+    <RefFooter RefFooterObj = "@refFooterObj"/>
+
+    <!--<Setup SetupObj = "@setup"/>
+    <div id="cdts-def-top"></div>
+    <main property="mainContentOfPage" typeof="WebPageElement" class="container">
+        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+        <button class="btn" @onclick="AddFooter">Add Footer</button>
+        @Body
+        <div id="cdts-def-preFooter">
+        </div>
+    </main>
+    <div id="cdts-def-footer"></div>-->
+
+@code{
+    Blazor.Model.Top topObj { get; set; } = new Blazor.Model.Top();
+
+    protected override Task OnInitializedAsync()
+    {
+        topObj.Breadcrumbs = new List<Breadcrumb>
+        {
+            new Breadcrumb(){Href="", Title="CDTS", Acronym="CDTS"}
+        };
+        //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } };
+        topObj.SiteMenu = true;
+        /*topObj.LngLinks = new List<LanguageLink>
+        {
+            new LanguageLink(){Href=BuildLanguageLinkURL(HttpUtility.ParseQueryString(uri))}
+        };*/
+
+        return base.OnInitializedAsync();
+    }
+
+    /*public void AddBreadcrumbs()
+    {
+        topObj.Search = true;
+    }*/
+    public void AddFooter()
+    {
+        footerObj.ShowFooter = true;
+    }
+
+
+
+    private void IncrementCount()
+    {
+        topObj.CdnEnv = "canada";
+    }
+
+    Blazor.Model.PreFooter obj = new Blazor.Model.PreFooter()
+    {
+        DateModified = "July 18th, 2023"
+    };
+
+    Blazor.Model.Footer footerObj = new Blazor.Model.Footer()
+    {
+
+    };
+
+    Blazor.Model.RefFooter refFooterObj = new Blazor.Model.RefFooter()
+    {
+        ExitSecureSite = new ExitSecureSite()
+        {
+            ExitScript = true,
+            DisplayModal = true
+
+        }
+    };
+
+    Blazor.Model.RefTop refTopObj = new Blazor.Model.RefTop()
+        {
+            //IsApplication = true
+    };
+
+    List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuObj;
+
+    private void AddLeftMenu()
+    {
+        topObj.TopSecMenu = true;
+
+        var item = new MenuItem
+        {
+            Href = "http://www.tsn.ca",
+            Text = "TSN",
+            SubItems = new List<Link> {
+                new Link { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+                new Link { Href="http://www.rds.ca", Text="sub 2" }
+            }
+        };
+
+        leftMenuObj = new List<MenuSection>
+        {
+            new MenuSection
+            {
+                Text = "Section A",
+                Href = "http://www.servicecanada.gc.ca",
+                NewWindow = true,
+                Items = new List<MenuItem> {
+                    item,
+                    new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" }
+                }
+            }
+        };
+    }
+
+}

@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime jsRuntime
+
+
+
+@code {
+        [Parameter]
+    public Blazor.Model.RefTop RefTopObj { get; set; }
+    
+    protected override void OnInitialized() // = On Page Load
+    {   
+        //jsRuntime.InvokeVoidAsync("installCDTS");
+        jsRuntime.InvokeVoidAsync("setRefTop", JsonSerializationHelper.SerializeToJson(RefTopObj).ToString());
+       
+    }
+}

@@ -1,0 +1,17 @@
+﻿@inject IJSRuntime jsRuntime
+
+<!--<p role="status">Current object: @TopObj.CdnEnv</p>-->
+
+
+@code {
+
+    [Parameter]
+    public Blazor.Model.Top TopObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {        
+        //jsRuntime.InvokeVoidAsync("alert", "Warning!");
+        string str = JsonSerializationHelper.SerializeToJson(TopObj).ToString();
+        jsRuntime.InvokeVoidAsync("setTop", str, false);
+    }
+}

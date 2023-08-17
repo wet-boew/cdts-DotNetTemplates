@@ -1,4 +1,11 @@
-﻿<h1 id="wb-cont">GoC Web Template Samples - Adding Custom CSS or JS</h1>
+﻿@section CustomScripts {
+   <script>
+        $("#btnProfile").html('Save');
+   </script>      
+      
+}
+
+<h1 id="wb-cont">GoC Web Template Samples - Adding Custom CSS or JS</h1>
 
 <p>This sample page demonstrates how your application can add your own CSS files or JS files via the GoC Web Template.</p>
 
@@ -36,5 +43,5 @@ WebTemplateModel.HTMLHeaderElements.Add("&lt;link rel='stylesheet' type='text/cs
 WebTemplateModel.HTMLBodyElements.Add("&lt;script src='/js/myJS.js'&gt;&lt;/script&gt;");
     </pre>
 </div>
-
+<button id="btnProfile" class=" btn">Text</button>
 <partial name="_SamplesNavigation" />

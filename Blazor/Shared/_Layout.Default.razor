@@ -1,0 +1,25 @@
+﻿@inherits LayoutComponentBase
+
+<HeadContent>
+	<PageTitle>@WebTemplateModel.Render.HeaderTitle()</PageTitle>
+</HeadContent>
+
+<div id="cdts-def-top">
+	<!-- Write closure fall-back static file -->
+	<!-- top-en.html -->
+</div>
+<main property="mainContentOfPage" typeof="WebPageElement" class="container">
+	<div id="cdts-def-preFooter">
+		<!-- Write closure fall-back static file -->
+		<!-- preFooter-en.html -->
+	</div>
+</main>
+<div id="cdts-def-footer">
+	<!-- Write closure fall-back static file -->
+	<!-- footer-en.html -->
+</div>
+
+@code {
+	public GoC.WebTemplate.Components.IModel? WebTemplateModel { get; set; }
+	private string title = "hello";
+}

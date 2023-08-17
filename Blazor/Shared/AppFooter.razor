@@ -1,0 +1,13 @@
+﻿@inject IJSRuntime jsRuntime
+
+@code {
+    [Parameter]
+    public Blazor.Model.AppFooter AppFooterObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {        
+        string str = JsonSerializationHelper.SerializeToJson(AppFooterObj).ToString();
+        jsRuntime.InvokeVoidAsync("setFooter", str);
+    }
+}
+

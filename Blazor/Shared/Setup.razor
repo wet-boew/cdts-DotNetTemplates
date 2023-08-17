@@ -1,0 +1,17 @@
+﻿@inject IJSRuntime jsRuntime
+
+<p></p>
+
+@code {
+    
+    [Parameter]
+    public Blazor.Model.Setup SetupObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {        
+        //jsRuntime.InvokeVoidAsync("alert", "Warning!");
+        string str = JsonSerializationHelper.SerializeToJson(SetupObj).ToString();
+        jsRuntime.InvokeVoidAsync("cdtsSetup", str);
+    }
+
+}

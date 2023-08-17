@@ -1,0 +1,12 @@
+﻿@inject IJSRuntime jsRuntime
+
+@code {
+    [Parameter]
+    public Blazor.Model.AppTop AppTopObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {        
+        string str = JsonSerializationHelper.SerializeToJson(AppTopObj).ToString();
+        jsRuntime.InvokeVoidAsync("setTop", str, true);
+    }
+}
