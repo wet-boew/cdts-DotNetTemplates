@@ -183,6 +183,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
                 Id = "id3",
                 Method = "method4",
                 Placeholder = "placeholder5",
+                Name = "name6",
                 HiddenInput = new List<KeyValuePair<string, string>>
                 {
                     new KeyValuePair<string, string>("name1", "val1"),
@@ -191,7 +192,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             };
 
             var json = sut.Render.AppSetup();
-            json.ToString().Should().Contain("\"customSearch\":[{\"action\":\"action1\",\"placeholder\":\"placeholder5\",\"id\":\"id3\",\"method\":\"method4\",\"hiddenInput\":[{\"name\":\"name1\",\"value\":\"val1\"},{\"name\":\"name2\",\"value\":\"val2\"}]}]");
+            json.ToString().Should().Contain("\"customSearch\":[{\"action\":\"action1\",\"placeholder\":\"placeholder5\",\"id\":\"id3\",\"method\":\"method4\",\"name\":\"name6\",\"hiddenInput\":[{\"name\":\"name1\",\"value\":\"val1\"},{\"name\":\"name2\",\"value\":\"val2\"}]}]");
         }
         
         [Theory, AutoNSubstituteData]
