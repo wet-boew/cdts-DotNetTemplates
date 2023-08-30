@@ -27,6 +27,11 @@ namespace GoC.WebTemplate.Components.Entities
         public string Method { get; set; }
 
         /// <summary>
+        /// Optional. Used to customize the `name` atribute for the search
+        /// </summary>
+        public string Name { get; set; }
+
+        /// <summary>
         /// Optional. Used to create hidden form inputs.
         /// </summary>
         [JsonConverter(typeof(HiddenInputConverter))]
