@@ -10,13 +10,13 @@ namespace GoC.WebTemplate.Components.Entities
         public bool Show { get; set; }
 
         /// <summary>
-        /// URL to be used for the feedback link
+        /// URL to be used for the feedback link (legacy) OR used for href of contact link
         /// Set by application via web.config 'FeedbackLinkUrl' or programmatically
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        /// URL to be used for the feedback link when in french culture
+        /// URL to be used for the feedback link (legacy) OR used for href of contact link when in french culture
         /// Set by application via web.config 'FeedbackLinkUrlFr' or programmatically
         /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
         /// </summary>
@@ -29,10 +29,10 @@ namespace GoC.WebTemplate.Components.Entities
         public string Text { get; set; }
 
         /// <summary>
-        /// URL to be used for the contact link within the feedback tool
-        /// Set by application via web.config 'FeedbackLinkHref' or programmatically
+        /// Set a display name of your contact link within the feedback tool when in french culture
+        /// Set by application via web.config 'FeedbackLinkTextFr' or programmatically
         /// </summary>
-        public string Href { get; set; }
+        public string TextFr { get; set; }
 
         /// <summary>
         /// Define the theme of your page

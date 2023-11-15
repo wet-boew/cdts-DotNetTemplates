@@ -55,7 +55,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
             var result = sut.Render.PreFooter();
 
-            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback french url\"},\"showShare\":true}");
+            result.ToString().Should().Be("{\"cdnEnv\":\"\",\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true}");
         }
 
         [Theory, AutoNSubstituteData]

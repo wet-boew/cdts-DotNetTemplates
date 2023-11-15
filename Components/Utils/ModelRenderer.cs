@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using GoC.WebTemplate.Components.Entities;
 #if NETCOREAPP
     using Microsoft.AspNetCore.Html;
@@ -125,18 +126,27 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString PreFooter()
         {
-            Feedback feedback = new Feedback()
-            {
-                Enabled = _model.Settings.FeedbackLink.Show,
-                Text = _model.Settings.FeedbackLink.Text,
-                Href = _model.Settings.FeedbackLink.Href,
-                Section = _model.Settings.FeedbackLink.Section,
-                Theme = _model.Settings.FeedbackLink.Theme
-            };
+            Feedback feedback = new Feedback();
+            feedback.Enabled = _model.Settings.FeedbackLink.Show;
 
-            if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
+            if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Text) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Section) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Theme))
             {
-                feedback.LegacyBtnUrl = !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+                feedback.Section = _model.Settings.FeedbackLink.Section;
+                feedback.Theme = _model.Settings.FeedbackLink.Theme;
+                if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
+                {
+                    feedback.Text = _model.Settings.FeedbackLink.TextFr;
+                    feedback.Href = _model.Settings.FeedbackLink.UrlFr;
+                }
+                else
+                {
+                    feedback.Text = _model.Settings.FeedbackLink.Text;
+                    feedback.Href = _model.Settings.FeedbackLink.Url;
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
+            {
+                feedback.LegacyBtnUrl = (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
             }
 
             return JsonSerializationHelper.SerializeToJson(new PreFooter

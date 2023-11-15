@@ -142,13 +142,13 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
         }
 
         /// <summary>
-        /// FeedbackLinkHref
+        /// FeedbackLinkTextFr
         /// </summary>
-        [ConfigurationProperty("feedbackLinkHref", IsRequired = false)]
-        public string FeedbackLinkHref
+        [ConfigurationProperty("feedbackLinkTextFr", IsRequired = false)]
+        public string FeedbackLinkTextFr
         {
-            get { return (string)this["feedbackLinkHref"]; }
-            set { this["feedbackLinkHref"] = value; }
+            get { return (string)this["feedbackLinkTextFr"]; }
+            set { this["feedbackLinkTextFr"] = value; }
         }
 
         /// <summary>
