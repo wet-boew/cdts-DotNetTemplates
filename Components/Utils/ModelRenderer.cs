@@ -133,16 +133,8 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 feedback.Section = _model.Settings.FeedbackLink.Section;
                 feedback.Theme = _model.Settings.FeedbackLink.Theme;
-                if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase))
-                {
-                    feedback.Text = _model.Settings.FeedbackLink.TextFr;
-                    feedback.Href = _model.Settings.FeedbackLink.UrlFr;
-                }
-                else
-                {
-                    feedback.Text = _model.Settings.FeedbackLink.Text;
-                    feedback.Href = _model.Settings.FeedbackLink.Url;
-                }
+                feedback.Text = (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.TextFr)) ? _model.Settings.FeedbackLink.TextFr : _model.Settings.FeedbackLink.Text;
+                feedback.Href = (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
             }
             else if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
             {
