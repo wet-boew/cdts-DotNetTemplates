@@ -129,16 +129,18 @@ namespace GoC.WebTemplate.Components.Utils
             Feedback feedback = new Feedback();
             feedback.Enabled = _model.Settings.FeedbackLink.Show;
 
+            var isFrenchCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase);
+
             if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Text) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Section) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Theme))
             {
                 feedback.Section = _model.Settings.FeedbackLink.Section;
                 feedback.Theme = _model.Settings.FeedbackLink.Theme;
-                feedback.Text = (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.TextFr)) ? _model.Settings.FeedbackLink.TextFr : _model.Settings.FeedbackLink.Text;
-                feedback.Href = (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+                feedback.Text = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.TextFr)) ? _model.Settings.FeedbackLink.TextFr : _model.Settings.FeedbackLink.Text;
+                feedback.Href = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
             }
             else if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
             {
-                feedback.LegacyBtnUrl = (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+                feedback.LegacyBtnUrl = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
             }
 
             return JsonSerializationHelper.SerializeToJson(new PreFooter
