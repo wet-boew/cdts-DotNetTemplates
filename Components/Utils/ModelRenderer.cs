@@ -125,13 +125,27 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString PreFooter()
         {
+            Feedback feedback = new Feedback()
+            {
+                Enabled = _model.Settings.FeedbackLink.Show,
+                Text = _model.Settings.FeedbackLink.Text,
+                Href = _model.Settings.FeedbackLink.Href,
+                Section = _model.Settings.FeedbackLink.Section,
+                Theme = _model.Settings.FeedbackLink.Theme
+            };
+
+            if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
+            {
+                feedback.LegacyBtnUrl = !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+            }
+
             return JsonSerializationHelper.SerializeToJson(new PreFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = _model.Settings.ShowPostContent,
-                ShowFeedback = _model.Settings.FeedbackLink,
+                ShowFeedback = feedback,
                 ShowShare = new ShareList
                 {
                     Show = _model.Settings.ShowSharePageLink,
@@ -149,7 +163,7 @@ namespace GoC.WebTemplate.Components.Utils
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = false,
-                ShowFeedback = new FeedbackLink { Show = false },
+                ShowFeedback = new Feedback { Enabled = false },
                 ShowShare = new ShareList { Show = false },
                 ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
             });

@@ -130,6 +130,47 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["feedbackLinkUrlFr"]; }
             set { this["feedbackLinkUrlFr"] = value; }
         }
+
+        /// <summary>
+        /// FeedbackLinkText
+        /// </summary>
+        [ConfigurationProperty("feedbackLinkText", IsRequired = false)]
+        public string FeedbackLinkText
+        {
+            get { return (string)this["feedbackLinkText"]; }
+            set { this["feedbackLinkText"] = value; }
+        }
+
+        /// <summary>
+        /// FeedbackLinkHref
+        /// </summary>
+        [ConfigurationProperty("feedbackLinkHref", IsRequired = false)]
+        public string FeedbackLinkHref
+        {
+            get { return (string)this["feedbackLinkHref"]; }
+            set { this["feedbackLinkHref"] = value; }
+        }
+
+        /// <summary>
+        /// FeedbackLinkTheme
+        /// </summary>
+        [ConfigurationProperty("feedbackLinkTheme", IsRequired = false)]
+        public string FeedbackLinkTheme
+        {
+            get { return (string)this["feedbackLinkTheme"]; }
+            set { this["feedbackLinkTheme"] = value; }
+        }
+
+        /// <summary>
+        /// FeedbackLinkSection
+        /// </summary>
+        [ConfigurationProperty("feedbackLinkSection", IsRequired = false)]
+        public string FeedbackLinkSection
+        {
+            get { return (string)this["feedbackLinkSection"]; }
+            set { this["feedbackLinkSection"] = value; }
+        }
+
         /// <summary>
         /// ShowSearch
         /// </summary>
