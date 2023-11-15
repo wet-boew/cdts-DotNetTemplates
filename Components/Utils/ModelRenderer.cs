@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using GoC.WebTemplate.Components.Entities;
 #if NETCOREAPP
     using Microsoft.AspNetCore.Html;
@@ -125,13 +126,30 @@ namespace GoC.WebTemplate.Components.Utils
 
         public HtmlString PreFooter()
         {
+            Feedback feedback = new Feedback();
+            feedback.Enabled = _model.Settings.FeedbackLink.Show;
+
+            var isFrenchCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase);
+
+            if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Text) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Section) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Theme))
+            {
+                feedback.Section = _model.Settings.FeedbackLink.Section;
+                feedback.Theme = _model.Settings.FeedbackLink.Theme;
+                feedback.Text = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.TextFr)) ? _model.Settings.FeedbackLink.TextFr : _model.Settings.FeedbackLink.Text;
+                feedback.Href = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+            }
+            else if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
+            {
+                feedback.LegacyBtnUrl = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+            }
+
             return JsonSerializationHelper.SerializeToJson(new PreFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = _model.Settings.ShowPostContent,
-                ShowFeedback = _model.Settings.FeedbackLink,
+                ShowFeedback = feedback,
                 ShowShare = new ShareList
                 {
                     Show = _model.Settings.ShowSharePageLink,
@@ -149,7 +167,7 @@ namespace GoC.WebTemplate.Components.Utils
                 DateModified = _model.Builder.BuildDateModified(),
                 VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = false,
-                ShowFeedback = new FeedbackLink { Show = false },
+                ShowFeedback = new Feedback { Enabled = false },
                 ShowShare = new ShareList { Show = false },
                 ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
             });

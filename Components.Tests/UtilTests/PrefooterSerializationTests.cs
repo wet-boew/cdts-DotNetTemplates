@@ -61,29 +61,29 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
         {
             var preFooter = new PreFooter
             {
-                ShowFeedback = new FeedbackLink
+                ShowFeedback = new Feedback
                 {
-                    Show = true,
-                    Url = string.Empty
+                    Enabled = true
                 }
             };
             var json = JsonSerializationHelper.SerializeToJson(preFooter);
-            json.ToString().Should().Contain("\"showFeedback\":true");
+            json.ToString().Should().Contain("\"showFeedback\":{\"enabled\":true}");
         } 
 
         [Fact]
-        public void RenderShowFeedbackAsURL()
+        public void RenderShowFeedbackURL()
         {
             var preFooter = new PreFooter
             {
-                ShowFeedback = new FeedbackLink
+                ShowFeedback = new Feedback
                 {
-                    Show = true,
-                    Url = "foo"
+                    Enabled = true,
+                    Text = "Contact us",
+                    Href = "google.ca"
                 }
             };
             var json = JsonSerializationHelper.SerializeToJson(preFooter);
-            json.ToString().Should().Contain("\"showFeedback\":\"foo\"");
+            json.ToString().Should().Contain("\"showFeedback\":{\"enabled\":true,\"text\":\"Contact us\",\"href\":\"google.ca\"");
         }
 
         [Fact]
@@ -91,14 +91,29 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
         {
             var preFooter = new PreFooter
             {
-                ShowFeedback = new FeedbackLink
+                ShowFeedback = new Feedback
                 {
-                    Show = false,
-                    Url = "foo"
+                    Enabled = false
                 }
             };
             var json = JsonSerializationHelper.SerializeToJson(preFooter);
-            json.ToString().Should().Contain("\"showFeedback\":false");
+            json.ToString().Should().Contain("\"showFeedback\":{}");
+        }
+
+        [Fact]
+        public void RenderShowFeedbackHiddenFields()
+        {
+            var preFooter = new PreFooter
+            {
+                ShowFeedback = new Feedback
+                {
+                    Enabled = true,
+                    Theme = "Theme",
+                    Section = "Section"
+                }
+            };
+            var json = JsonSerializationHelper.SerializeToJson(preFooter);
+            json.ToString().Should().Contain("\"showFeedback\":{\"enabled\":true,\"theme\":\"Theme\",\"section\":\"Section\"");
         }
 
     }
