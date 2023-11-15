@@ -155,6 +155,10 @@ namespace GoC.WebTemplate.Components.Configs
             FeedbackLink.Show = configurationSection.ShowFeedbackLink;
             FeedbackLink.Url = configurationSection.FeedbackLinkUrl;
             FeedbackLink.UrlFr = configurationSection.FeedbackLinkUrlFr;
+            FeedbackLink.Text = configurationSection.FeedbackLinkText;
+            FeedbackLink.TextFr = configurationSection.FeedbackLinkTextFr;
+            FeedbackLink.Theme = configurationSection.FeedbackLinkTheme;
+            FeedbackLink.Section = configurationSection.FeedbackLinkSection;
             LeavingSecureSiteWarning =
                 new LeavingSecureSiteSettings()
                 {

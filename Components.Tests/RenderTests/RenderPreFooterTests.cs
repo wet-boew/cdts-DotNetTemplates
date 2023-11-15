@@ -19,11 +19,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.DateModified = Convert.ToDateTime("9 january 2015");
             sut.VersionIdentifier = "1.2.3";
             sut.ScreenIdentifier = "Test ID";
+            sut.Settings.FeedbackLink = new Entities.FeedbackLink();
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             var result = sut.Render.Setup();
 
-            result.ToString().Should().Contain("{\"versionIdentifier\":\"1.2.3\",\"dateModified\":\"2015-01-09\",\"showFeedback\":\"test feedback url\",\"showShare\":true,\"screenIdentifier\":\"Test ID\"}");
+            result.ToString().Should().Contain("{\"versionIdentifier\":\"1.2.3\",\"dateModified\":\"2015-01-09\",\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true,\"screenIdentifier\":\"Test ID\"}");
         }
         [Theory, AutoNSubstituteData]
         public void RenderPreFooterWithNullsTest(Model sut)
@@ -33,11 +34,12 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.DateModified = DateTime.MinValue;
             sut.VersionIdentifier = "  ";
             sut.ScreenIdentifier = null;
+            sut.Settings.FeedbackLink = new Entities.FeedbackLink();
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             var result = sut.Render.Setup();
 
-            result.ToString().Should().Contain("{\"showFeedback\":\"test feedback url\",\"showShare\":true}");
+            result.ToString().Should().Contain("{\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true}");
         }
 
         [Theory, AutoNSubstituteData]
@@ -47,12 +49,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.DateModified = DateTime.MinValue;
             sut.VersionIdentifier = "  ";
             sut.ScreenIdentifier = null;
+            sut.Settings.FeedbackLink = new Entities.FeedbackLink();
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
             var result = sut.Render.Setup();
 
-            result.ToString().Should().Contain("{\"showFeedback\":\"test feedback url\",\"showShare\":true}");
+            result.ToString().Should().Contain("{\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true}");
         }
 
         [Theory, AutoNSubstituteData]
@@ -64,12 +67,13 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.DateModified = DateTime.MinValue;
             sut.VersionIdentifier = "  ";
             sut.ScreenIdentifier = null;
+            sut.Settings.FeedbackLink = new Entities.FeedbackLink();
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
             var result = sut.Render.Setup();
 
-            result.ToString().Should().Contain("{\"showFeedback\":\"test feedback french url\",\"showShare\":true}");
+            result.ToString().Should().Contain("{\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback french url\"},\"showShare\":true}");
             //need to reset the culture back to english as that is what other tests expect it to be by default
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(Constants.ENGLISH_CULTURE);
         }
@@ -83,7 +87,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.ScreenIdentifier = "Screen Ident 2";
 
             var result = sut.Render.TransactionalSetup();
-            result.ToString().Should().Contain("\"versionIdentifier\":\"Version Ident 1\",\"dateModified\":\"2018-09-21\",\"showFeedback\":false,\"showShare\":false,\"screenIdentifier\":\"Screen Ident 2\"");
+            result.ToString().Should().Contain("\"versionIdentifier\":\"Version Ident 1\",\"dateModified\":\"2018-09-21\",\"showFeedback\":{},\"showShare\":false,\"screenIdentifier\":\"Screen Ident 2\"");
         }
 
     }

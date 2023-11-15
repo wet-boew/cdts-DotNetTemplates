@@ -162,13 +162,30 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 if (!isUnilingualError)
                 {
+                    Feedback feedback = new Feedback();
+                    feedback.Enabled = _model.Settings.FeedbackLink.Show;
+
+                    var isFrenchCulture = Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.StartsWith(Constants.FRENCH_ACCRONYM, StringComparison.OrdinalIgnoreCase);
+
+                    if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Text) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Section) || !string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Theme))
+                    {
+                        feedback.Section = _model.Settings.FeedbackLink.Section;
+                        feedback.Theme = _model.Settings.FeedbackLink.Theme;
+                        feedback.Text = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.TextFr)) ? _model.Settings.FeedbackLink.TextFr : _model.Settings.FeedbackLink.Text;
+                        feedback.Href = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+                    }
+                    else if (!string.IsNullOrWhiteSpace(_model.Settings.FeedbackLink.Url))
+                    {
+                        feedback.LegacyBtnUrl = (isFrenchCulture && !string.IsNullOrEmpty(_model.Settings.FeedbackLink.UrlFr)) ? _model.Settings.FeedbackLink.UrlFr : _model.Settings.FeedbackLink.Url;
+                    }
+
                     return new PreFooter 
                     {
                         CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                         DateModified = _model.Builder.BuildDateModified(),
                         VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                         ShowPostContent = _model.Settings.ShowPostContent,
-                        ShowFeedback = _model.Settings.FeedbackLink,
+                        ShowFeedback = feedback,
                         ShowShare = new ShareList
                         {
                             Show = _model.Settings.ShowSharePageLink,
@@ -190,7 +207,7 @@ namespace GoC.WebTemplate.Components.Utils
                     DateModified = _model.Builder.BuildDateModified(),
                     VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
                     ShowPostContent = false,
-                    ShowFeedback = new FeedbackLink { Show = false },
+                    ShowFeedback = new Feedback { Enabled = false },
                     ShowShare = new ShareList { Show = false },
                     ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
                 };

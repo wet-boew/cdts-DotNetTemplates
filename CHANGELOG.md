@@ -1,5 +1,14 @@
 # DotNetTemplates Change Log
 
+## v4.0.0
+
+### New features and improvements
+
+- Replacing the 'Report a problem button' with the new Page Feedback tool. The Page Feedback tool is optional and will be hidden unless explicitly enabled and other conditions are met. Please visit the [sample pages](https://github.com/wet-boew/cdts-DotNetTemplates/tree/master/samples) for more information.
+- Updating static fallback files
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v5.0.0 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.70.1
+- Bug fixes
+
 ## v3.0.0
 
 ### New features and improvements
