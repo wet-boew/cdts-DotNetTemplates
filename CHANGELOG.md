@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.9.1
+
+### Fixes
+
+- Fixing an ExitScript issue
+
 ## v2.9.0
 
 ### New features and improvements

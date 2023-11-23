@@ -207,8 +207,7 @@ namespace GoC.WebTemplate.Components.Utils
         {
             if (_model.Settings.WebAnalytics.Active && !_model.CdtsEnvironment.CanUseWebAnalytics) throw new NotSupportedException("The WebAnalytics is not supported in this enviornment.");
 
-            if (_model.Settings.LeavingSecureSiteWarning.Enabled &&
-                !string.IsNullOrEmpty(_model.Settings.LeavingSecureSiteWarning.RedirectUrl))
+            if (_model.Settings.LeavingSecureSiteWarning.Enabled)
             {
                 return SecureSiteWarningRefFooter(isApplication);
             }

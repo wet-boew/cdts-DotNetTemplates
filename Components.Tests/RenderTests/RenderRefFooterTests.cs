@@ -40,6 +40,24 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void RenderSecureSiteWarningRefFooterWithoutRedirect(Model sut)
+        {
+            sut.Settings.LeavingSecureSiteWarning.Enabled = true;
+            sut.Settings.LeavingSecureSiteWarning.DisplayModalWindow = true;
+            sut.Settings.LeavingSecureSiteWarning.RedirectUrl = null;
+            sut.Settings.LeavingSecureSiteWarning.Message = null;
+            sut.Settings.LeavingSecureSiteWarning.ExcludedDomains = null;
+            sut.Settings.LeavingSecureSiteWarning.TargetWarning = null;
+            sut.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow = false;
+            sut.Settings.LeavingSecureSiteWarning.CancelMessage = null;
+            sut.Settings.LeavingSecureSiteWarning.YesMessage = null;
+            sut.Settings.LeavingSecureSiteWarning.MsgBoxHeader = null;
+
+            var result = sut.Render.RefFooter(isApplication: false);
+            result.ToString().Should().Contain("\"exitSecureSite\":{\"exitScript\":true,\"displayModal\":true,\"displayModalForNewWindow\":false}");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void WebAnaliticsRenders(Model sut)
         {
             sut.Settings.WebAnalytics.Active = false;
