@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v4.0.1
+
+### Fixes
+
+- Fixing an Exitscript issue
+
 ## v4.0.0
 
 ### New features and improvements
