@@ -7,12 +7,15 @@
     <p>The Report a Problem Link is a way for the users of your site to provide feedback on their experience navigating through the site or to report an issue.  Displaying the link is optional but it cannot be contextualized and Portfolio Web or the Principal Publisher should be contacted to help you determine if it should be displayed on your site. The URL of the link is pre-defined by the theme but can be modified in the web.config or programmatically.</p>
 
     <p>To display the link</p>
-        <ul>
-            <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.ShowFeedbackLink"</code> in the web.config to "true".</li>
-            <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateMaster.WebTemplateModel.ShowFeedbackLink = true;"</code></li>
-            <li>If you wish to redirect the user to your own pages instead of the default canada.ca page, set the key <code class="wb-prettify">"FeedbackLinkURL"</code> in the web.config to the url of your page.</li>
-            <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateMaster.WebTemplateModel.FeedbackLinkURL = [page];"</code></li>
-        </ul>
+    <ul>
+        <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.ShowFeedbackLink"</code> in the web.config to "true".</li>
+        <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateCore.ShowFeedbackLink = true;"</code></li>
+        <li>Your page MUST have the following metadata defined for the feedback tool to be enabled: <code>&lt;meta name="dcterms.creator" content="[Department name / Nom du département]"&gt;</code></li>
+        <li>If you wish to add contact information to the feedback tool, set the key <code class="wb-prettify">"feedbackLinkUrl"</code> and <code class="wb-prettify">"feedbackLinkText"</code> in the web.config to the url of your page.</li>
+        <li>or set the property programmatically. <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Url"</code> and <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Textl"</code></li>
+        <li>If you wish to specify Theme and Section, set the key <code class="wb-prettify">"feedbackLinkTheme"</code> and <code class="wb-prettify">"feedbackLinkSection"</code> in the web.config to the url of your page.</li>
+        <li>or set the property programmatically. <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Theme"</code> and <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Section"</code></li>
+    </ul>
             
     <h2>Share This Page Link</h2>
     <p>The "Share This Page" Link is a way for the users to share the URL of the site via Social Media .  Displaying the link is optional and Portfolio Web or the Principal Publisher should be contacted to help you determine if it should be displayed on your site.</p>

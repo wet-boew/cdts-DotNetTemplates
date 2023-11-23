@@ -22,13 +22,14 @@
                 <li>A "Yes" button appears on the window to allow the user to continue with the redirection to the selected link. (Text programmable, see below.)</li>
             </ul>
         </li>
-        <li>if the "Yes" button is clicked on the modal window or if <code class="wb-prettify">DisplayModalWindow</code> was set to false:
+        <li>If the "Yes" button is clicked on the modal window, the user is directed towards the url of the clicked link</li>
+        <li>
+            If  <code class="wb-prettify"><code class="wb-prettify">LeavingSecureSiteWarning.URL</code></code> is set and <code class="wb-prettify"><code class="wb-prettify">LeavingSecureSiteWarning.DisplayModalWindow</code></code> is false:
             <ul>
-                <li>the user will first be redirect to the url set in <code class="wb-prettify">"LeavingSecureSiteWarning.URL"</code></li>
-                <li>the info of the linked that was clicked is part of the querystring</li>
-                <li>this page should be invisible to the user.</li>
+                <li>the user will redirect to the url set in <code class="wb-prettify">LeavingSecureSiteWarning.URL</code></li>
+                <li>the info of the link that was clicked can be retrieved on the redirect page via  <code class="wb-prettify">&lt;span class=\"wb-exitscript wb-exitscript-urlparam\>&lt;/span>"</code></li>
                 <li>this page is there to execute any clean up code your application requires</li>
-                <li>once executed this page redirects the user to the url of the clicked link</li>
+                <li>once executed, this page can display the destination url that the user can click on, to be redirected</li>
             </ul>
         </li>
     </ul>
