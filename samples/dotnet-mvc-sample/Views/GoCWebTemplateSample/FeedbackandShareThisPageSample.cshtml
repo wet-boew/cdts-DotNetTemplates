@@ -10,9 +10,12 @@
 <p>To display the link</p>
 <ul>
     <li>Set the key <code class="wb-prettify">"GoC.WebTemplate.ShowFeedbackLink"</code> in the web.config to "true".</li>
-    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateModel.ShowFeedbackLink = true;"</code></li>
-    <li>If you wish to redirect the user to your own pages instead of the default canada.ca page, set the key <code class="wb-prettify">"feedbackLinkUrl"</code> in the web.config to the url of your page.</li>
-    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateModel.FeedbackLinkUrl = [page];"</code></li>
+    <li>or set the property programmatically. <code class="wb-prettify">"this.WebTemplateCore.ShowFeedbackLink = true;"</code></li>
+    <li>Your page MUST have the following metadata defined for the feedback tool to be enabled: <code>&lt;meta name="dcterms.creator" content="[Department name / Nom du département]"&gt;</code></li>
+    <li>If you wish to add contact information to the feedback tool, set the key <code class="wb-prettify">"feedbackLinkUrl"</code> and <code class="wb-prettify">"feedbackLinkText"</code> in the web.config to the url of your page.</li>
+    <li>or set the property programmatically. <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Url"</code> and <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Textl"</code></li>
+    <li>If you wish to specify Theme and Section, set the key <code class="wb-prettify">"feedbackLinkTheme"</code> and <code class="wb-prettify">"feedbackLinkSection"</code> in the web.config to the url of your page.</li>
+    <li>or set the property programmatically. <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Theme"</code> and <code class="wb-prettify">"WebTemplateModel.Settings.FeedbackLink.Section"</code></li>
 </ul>
 
 <h2>Share This Page Link</h2>
