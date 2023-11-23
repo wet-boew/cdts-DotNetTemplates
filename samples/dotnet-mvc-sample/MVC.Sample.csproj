@@ -157,6 +157,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="static\myJS.js" />
+    <Content Include="static\mystyle.css" />
     <Content Include="Views\GoC.WebTemplate\ChangeLog.txt" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-en.html" />
     <Content Include="Views\GoC.WebTemplate\StaticFallbackFiles\gcintranet\appFooter-fr.html" />

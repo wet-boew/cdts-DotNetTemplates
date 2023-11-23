@@ -53,12 +53,12 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
         public ActionResult AddJSandCSSFilesSample()
         {
             //Add a CSS to the header
-            WebTemplateModel.HTMLHeaderElements.Add("<link rel='stylesheet' type='text/css' href='/Content/mystyle.css'>");
+            WebTemplateModel.HTMLHeaderElements.Add("<link rel='stylesheet' type='text/css' href='/static/mystyle.css'>");
 
             //Add a JS to the header
             //WebTemplateMaster.HTMLHeaderElements.Add("<script src='myJS.js'></script>");
             //or to add it to the body (bottom of page)
-            WebTemplateModel.HTMLBodyElements.Add("<script src='/Scripts/myJS.js'></script>");
+            WebTemplateModel.HTMLBodyElements.Add("<script src='/static/myJS.js'></script>");
 
             return View();
         }
