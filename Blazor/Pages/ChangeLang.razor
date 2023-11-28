@@ -1,0 +1,14 @@
+﻿@using  System.Globalization
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@page "/ChangeLang"
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        var js = (IJSInProcessRuntime)JS;
+        if (CultureInfo.CurrentCulture.DisplayName == "en (CA)") js.InvokeVoid("blazorCulture.set", "fr-CA");
+        else js.InvokeVoid("blazorCulture.set", "en-CA");
+        Navigation.NavigateTo("/", forceLoad: true);
+    }
+}

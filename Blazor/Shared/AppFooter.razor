@@ -2,12 +2,12 @@
 
 @code {
     [Parameter]
-    public Blazor.Model.AppFooter AppFooterObj { get; set; }
+    public Blazor.Model.AppFooter FooterObj { get; set; }
 
     protected override void OnAfterRender(bool firstRender) // = On Page Load
     {        
-        string str = JsonSerializationHelper.SerializeToJson(AppFooterObj).ToString();
-        jsRuntime.InvokeVoidAsync("setFooter", str);
+        string str = JsonSerializationHelper.SerializeToJson(FooterObj).ToString();
+        jsRuntime.InvokeVoidAsync("setFooter", str, true);
     }
 }
 

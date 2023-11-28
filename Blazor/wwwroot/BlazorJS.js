@@ -1,4 +1,20 @@
-﻿//nodocwrite function
+﻿window.blazorCulture = {
+    get: () => window.localStorage['BlazorCulture'],
+    set: (value) => window.localStorage['BlazorCulture'] = value
+};
+
+var exitScriptObj = null;
+
+/*$('a[href="?GoCTemplateCulture"]').click(function () {
+    alert('Contains question mark');
+});*/
+function linkClick(e) {
+    alert(e.target.href);
+}
+links = document.getElementsByTagName('a');
+for (i = 0; i < links.length; i++)
+    links[i].addEventListener('click', linkClick, false);
+//nodocwrite function
 /*function cdtsSetup(obj) {
     var script = document.createElement('script');
     script.setAttribute('type', 'text/javascript');
@@ -38,6 +54,7 @@ function setPreFooter(obj) {
     //(can't use outerHTML on an orphan element)
     tmpElem.insertAdjacentHTML('afterbegin', wet.builder.preFooter(y));
     const element = document.getElementById('cdts-react-def-preFooter');
+    //TODO: Check for null
     if (element.childNodes.length > 0) {
         element.replaceChild(tmpElem);
     }
@@ -71,11 +88,11 @@ function setSectionMenu(obj) {
 	var defFooter = document.getElementById("def-footer");
 	defFooter.outerHTML = wet.builder.footer(y );
 }*/
-function setFooter(obj) {
+function setFooter(obj, isApp) {
     const y = JSON.parse(obj);
     const tmpElem = document.createElement('template'); //footer's content must be directly in <body>, so use "template" element as temporary container
     //(can't use outerHTML on an orphan element)
-    tmpElem.insertAdjacentHTML('afterbegin', wet.builder.footer(y)); //eslint-disable-line
+    tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appFooter(y) : wet.builder.footer(y)); //eslint-disable-line
     //inject a "marker/tag" class
     for (let e of tmpElem.children) e.classList.add('cdtsreact-footer-tag'); //using `children` and not `childNodes`, we only want elements
 
@@ -88,10 +105,12 @@ function setFooter(obj) {
         const e = children[i];
         document.body.appendChild(e);
     }
+    resetExitScript(exitScriptObj);
 }
 
 
-function setRefFooter(obj) {
+function setRefFooter(obj, exit) {
+    exitScriptObj = exit;
     applyRefFooter(obj, onRefFooterCompleted);	
 }
 
@@ -151,6 +170,7 @@ function FragmentLoader(targetElem, fragmentNodes, doneFunc) {
 }
 
 function applyRefTop(obj, onCompletedFunc) {
+    //CStoJSCall();
     const parser = new DOMParser();
 
     const y = JSON.parse(obj);
@@ -163,7 +183,6 @@ function applyRefTop(obj, onCompletedFunc) {
 }
 
 function applyRefFooter(obj, onCompletedFunc) {
-
     const parser = new DOMParser();
 
     const y = JSON.parse(obj);
@@ -175,30 +194,30 @@ function applyRefFooter(obj, onCompletedFunc) {
     loader.run();
 }
 
-function installCDTS() {
+async function installCDTS(lang) {
+    document.documentElement.setAttribute('lang', lang);
     const cssHref = findCDTSCssHref();
     if (cssHref) {
         var cdtsEnvironment = deriveCDTSEnv(cssHref);
     }//TODO: Add the else condition
-    appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-en.js`, 'cdts-main-js', false); //change from false to sriHash
+    await appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-${lang}.js`, 'cdts-main-js', false); //change from false to sriHash
 }
-
 function appendScriptElement(parentElement, src, id, sriHash) {
-    //return new Promise(function cdase(resolve, reject) {
+    return new Promise(function cdase(resolve, reject) {
         const elem = document.createElement('script');
-    if (id) elem.setAttribute('id', id);
+        if (id) elem.setAttribute('id', id);
         if (sriHash) {
             elem.setAttribute('integrity', sriHash);
             elem.setAttribute('crossorigin', 'anonymous');
-    }
-        //elem.onload = resolve.bind(null);
-        //elem.onerror = reject;
+        }
+        elem.onload = resolve.bind(null);
+        elem.onerror = reject;
         elem.setAttribute('src', src);
 
         parentElement.appendChild(elem);
-    //});
+    });
 }
-
+ 
 function deriveCDTSEnv(cssHref) {
     if (!cssHref) return null;
     try {
@@ -244,4 +263,14 @@ function deriveCDTSEnv(cssHref) {
 
 function findCDTSCssHref() {
     return Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).map((e) => e.getAttribute('href')).find((href) => href?.includes('/cdts/cdts-')) || null;
+}
+
+function CStoJSCall() {
+    // Invoke to call C# function from JavaScript.
+    DotNet.invokeMethodAsync("Blazor", "TestMethod");
+}
+
+function resetExitScript(exitScriptObj) {
+    var elems = document.getElementsByTagName('a');
+    wet.utilities.wetExitScript(exitScriptObj.displayModal.toString(), exitScriptObj.exitURL, exitScriptObj.exitDomains, exitScriptObj.exitMsg, exitScriptObj.yesMsg, exitScriptObj.cancelMsg, exitScriptObj.msgBoxHeader, exitScriptObj.targetWarning, exitScriptObj.displayModalForNewWindow.toString(), elems);
 }

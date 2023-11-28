@@ -48,14 +48,22 @@ namespace Blazor.Shared
             //topObj.LngLinks[0].Href = "google";
         }
 
-        public void AddBreadcrumbs()
+        public void AddLanguageLink()
         {
             var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
             topObj.Search = true;
             topObj.LngLinks = new List<LanguageLink>
-                {
-                    new LanguageLink(){Href=BuildLanguageLinkURL(HttpUtility.ParseQueryString(uri.Query))}
-                };
+            {
+                new LanguageLink(){Href=BuildLanguageLinkURL(HttpUtility.ParseQueryString(uri.Query))}
+            };
+        }
+
+        private void RequestCultureChange()
+        {
+            var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+            var query = BuildLanguageLinkURL(HttpUtility.ParseQueryString(uri.Query));
+
+            Navigation.NavigateTo("/Culture/SetCuture" + query, forceLoad: true);
         }
 
     }

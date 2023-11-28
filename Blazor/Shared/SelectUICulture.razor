@@ -1,0 +1,65 @@
+﻿@using  System.Globalization
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+<p>
+    <label>
+        Select your locale:
+        <select @bind="Culture">
+            @foreach (var culture in supportedCultures)
+            {
+                <option value="@culture">@culture.DisplayName</option>
+            }
+        </select>
+    </label>
+</p>
+<a @onclick="ChangeLang">@CultureInfo.CurrentCulture.ToString()</a>
+@code {
+    private CultureInfo[] supportedCultures = new[]
+    {
+        new CultureInfo("en-CA"),
+        new CultureInfo("fr-CA"),
+    };
+
+    private CultureInfo Culture
+    {
+        get => CultureInfo.CurrentCulture;
+        set
+        {
+            if (CultureInfo.CurrentCulture != value)
+            {
+                var js = (IJSInProcessRuntime)JS;
+                js.InvokeVoid("blazorCulture.set", value.Name);
+                //reload top
+                Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //var js = (IJSInProcessRuntime)JS;
+        //if (CultureInfo.CurrentCulture.DisplayName == "en (CA)") js.InvokeVoid("blazorCulture.set", "fr-CA");
+        //else js.InvokeVoid("blazorCulture.set", "en-CA");
+        //reload top
+        //Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+    }
+
+    [JSInvokable]
+    public void ChangeLang()
+    {
+        var js = (IJSInProcessRuntime)JS;
+        if (CultureInfo.CurrentCulture.DisplayName == "en (CA)") js.InvokeVoid("blazorCulture.set", "fr-CA");
+        else js.InvokeVoid("blazorCulture.set", "en-CA");
+        //reload top
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+    }
+
+    [JSInvokable]
+    public void TestMethod()
+    {
+        Console.WriteLine("hello from testmethod");
+        StateHasChanged();
+
+    }
+}

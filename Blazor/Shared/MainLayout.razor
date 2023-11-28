@@ -1,10 +1,17 @@
 ﻿@inherits LayoutComponentBase
 @using System.Web
 @inject NavigationManager NavManager
+@using  System.Globalization
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 
-    <HeadContent>
+
         <RefTop RefTopObj="@refTopObj"/>
-    </HeadContent>
+
+    <!--For AppTop, change the following component to AppTOp-->
     <Top TopObj = "@topObj"/>
     <!--<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>-->
 
@@ -22,9 +29,15 @@
             <NavLink href="fetchdata">
                 <button class="btn">Fetch Data</button>
             </NavLink>
-            <button class="btn" @onclick="AddBreadcrumbs">Add Search</button>
+            
+            <SelectUICulture/>
+
+
+
+            <button class="btn" @onclick="AddSearch">Add Search</button>
             <button class="btn" @onclick="AddFooter">Add Footer</button>
             <button class="btn" @onclick="AddLeftMenu">Add left Menu</button>
+            <button class="btn" @onclick="AddLanguageLink">Add Language Link</button>
         @Body
         <PreFooter PreFooterObj = "@obj"/>
     </main>
@@ -44,31 +57,49 @@
     <div id="cdts-def-footer"></div>-->
 
 @code{
+
+
+
+
+    //For AppTop, change the following: 
     Blazor.Model.Top topObj { get; set; } = new Blazor.Model.Top();
 
     protected override Task OnInitializedAsync()
     {
+        //JS.InvokeVoidAsync("installCDTS", CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
         topObj.Breadcrumbs = new List<Breadcrumb>
         {
             new Breadcrumb(){Href="", Title="CDTS", Acronym="CDTS"}
         };
-        //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } };
+
+        //For AppTop, comment the following:
         topObj.SiteMenu = true;
-        /*topObj.LngLinks = new List<LanguageLink>
+
+        topObj.LngLinks = new List<LanguageLink>
         {
-            new LanguageLink(){Href=BuildLanguageLinkURL(HttpUtility.ParseQueryString(uri))}
-        };*/
+            new LanguageLink(){Href=Navigation.Uri + "/ChangeLang"}
+        };
+
+        //For AppTop, uncomment the following:
+        //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } };
 
         return base.OnInitializedAsync();
     }
 
-    /*public void AddBreadcrumbs()
+    public void AddSearch()
     {
         topObj.Search = true;
-    }*/
+    }
     public void AddFooter()
     {
+        //For AppTop, change the following:
         footerObj.ShowFooter = true;
+
+        /*footerObj.ContactLink = new List<Link>
+        {
+            new Link { Href = "http://travel.gc.ca/", Text = "Contact Now" },
+            new Link { Href = "http://travel.gc.ca/", Text = "Contact Info" }
+        };*/
     }
 
 
@@ -83,6 +114,7 @@
         DateModified = "July 18th, 2023"
     };
 
+    //For AppFooter, change the following
     Blazor.Model.Footer footerObj = new Blazor.Model.Footer()
     {
 
@@ -100,6 +132,7 @@
 
     Blazor.Model.RefTop refTopObj = new Blazor.Model.RefTop()
         {
+            //For AppTop, uncomment the following:
             //IsApplication = true
     };
 
@@ -133,5 +166,15 @@
             }
         };
     }
+
+    /*[JSInvokable]
+    public void ChangeLang()
+    {
+        var js = (IJSInProcessRuntime)JS;
+        if (CultureInfo.CurrentCulture.DisplayName == "en (CA)") js.InvokeVoid("blazorCulture.set", "fr-CA");
+        else js.InvokeVoid("blazorCulture.set", "en-CA");
+        //reload top
+        Navigation.NavigateTo(Navigation.Uri, forceLoad: true);
+    }*/
 
 }

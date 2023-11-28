@@ -8,7 +8,6 @@
     protected override void OnAfterRender(bool firstRender) // = On Page Load
     {   
         jsRuntime.InvokeVoidAsync("setRefFooter", JsonSerializationHelper.SerializeToJson(RefFooterObj).ToString());
-       
     }
 
 }
