@@ -7,7 +7,7 @@
     protected override async Task OnInitializedAsync()
     {
         var js = (IJSInProcessRuntime)JS;
-        if (CultureInfo.CurrentCulture.DisplayName == "en (CA)") js.InvokeVoid("blazorCulture.set", "fr-CA");
+        if (CultureInfo.CurrentCulture.Name.StartsWith("en")) js.InvokeVoid("blazorCulture.set", "fr-CA");
         else js.InvokeVoid("blazorCulture.set", "en-CA");
         Navigation.NavigateTo("/", forceLoad: true);
     }

@@ -6,7 +6,7 @@
     public Blazor.Model.Footer FooterObj { get; set; }
 
     protected override void OnAfterRender(bool firstRender) // = On Page Load
-    {   
+    {
         jsRuntime.InvokeVoidAsync("setFooter", JsonSerializationHelper.SerializeToJson(FooterObj).ToString(), false);
     }
 }

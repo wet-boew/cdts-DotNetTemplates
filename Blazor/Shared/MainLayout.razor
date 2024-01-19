@@ -8,57 +8,28 @@
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor httpContextAccessor
 
-
-        <RefTop RefTopObj="@refTopObj"/>
-
-    <!--For AppTop, change the following component to AppTOp-->
-    <Top TopObj = "@topObj"/>
-    <!--<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>-->
-
-    @if(@topObj.TopSecMenu)
-    {
-        <SectionMenu LeftMenuItems = "@leftMenuObj"/>
-    }
-    <main id="cdts-main" property="mainContentOfPage" typeof="WebPageElement" class="@(@topObj.TopSecMenu? "col-md-9" : "container")">
-            <NavLink href="" Match="NavLinkMatch.All">
-                <button class="btn">Home</button>
-            </NavLink>
-            <NavLink href="counter">
-                <button class="btn">Counter</button>
-            </NavLink>
-            <NavLink href="fetchdata">
-                <button class="btn">Fetch Data</button>
-            </NavLink>
+    <DefaultLayout RefTop = "@refTopObj" Top = "topObj" PreFooter = "@obj" Footer = "@footerObj" RefFooter = "@refFooterObj" LeftMenu = "@leftMenuObj">
+        <NavLink href="" Match="NavLinkMatch.All">
+            <button class="btn">Home</button>
+        </NavLink>
+        <NavLink href="counter">
+            <button class="btn">Counter</button>
+        </NavLink>
+        <NavLink href="fetchdata">
+            <button class="btn">Fetch Data</button>
+        </NavLink>
+        <NavLink href="wetform">
+            <button class="btn">Wet Form</button>
+        </NavLink>
             
-            <SelectUICulture/>
-
-
-
-            <button class="btn" @onclick="AddSearch">Add Search</button>
-            <button class="btn" @onclick="AddFooter">Add Footer</button>
-            <button class="btn" @onclick="AddLeftMenu">Add left Menu</button>
-            <button class="btn" @onclick="AddLanguageLink">Add Language Link</button>
-        @Body
-        <PreFooter PreFooterObj = "@obj"/>
-    </main>
-
-    <Footer FooterObj = "@footerObj"/>
-    <RefFooter RefFooterObj = "@refFooterObj"/>
-
-    <!--<Setup SetupObj = "@setup"/>
-    <div id="cdts-def-top"></div>
-    <main property="mainContentOfPage" typeof="WebPageElement" class="container">
-        <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+        <button class="btn" @onclick="AddSearch">Add Search</button>
         <button class="btn" @onclick="AddFooter">Add Footer</button>
+        <button class="btn" @onclick="AddLeftMenu">Add left Menu</button>  
+        <button class="btn" @onclick="AddShareBtn">Add Share</button>  
         @Body
-        <div id="cdts-def-preFooter">
-        </div>
-    </main>
-    <div id="cdts-def-footer"></div>-->
+    </DefaultLayout>
 
 @code{
-
-
 
 
     //For AppTop, change the following: 
@@ -96,10 +67,15 @@
         footerObj.ShowFooter = true;
 
         /*footerObj.ContactLink = new List<Link>
-        {
+            {
             new Link { Href = "http://travel.gc.ca/", Text = "Contact Now" },
             new Link { Href = "http://travel.gc.ca/", Text = "Contact Info" }
         };*/
+    }
+    public void AddShareBtn()
+    {
+        obj.DateModified = "July 20th, 2024";
+        obj.ShowShare = new ShareList() { Show = true, Enums = new List<SocialMediaSites>() { SocialMediaSites.blogger, SocialMediaSites.facebook } };
     }
 
 
@@ -110,8 +86,9 @@
     }
 
     Blazor.Model.PreFooter obj = new Blazor.Model.PreFooter()
-    {
-        DateModified = "July 18th, 2023"
+        {
+            DateModified = "July 18th, 2023",
+            ShowShare = new ShareList() { Show = false }
     };
 
     //For AppFooter, change the following

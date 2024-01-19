@@ -2,11 +2,11 @@
 
 @code {
     [Parameter]
-    public Blazor.Model.AppTop TopObj { get; set; }
+    public Blazor.Model.AppTop AppTopObj { get; set; }
 
     protected override void OnAfterRender(bool firstRender) // = On Page Load
     {        
-        string str = JsonSerializationHelper.SerializeToJson(TopObj).ToString();
+        string str = JsonSerializationHelper.SerializeToJson(AppTopObj).ToString();
         jsRuntime.InvokeVoidAsync("setTop", str, true);
     }
 }

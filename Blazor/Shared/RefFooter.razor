@@ -4,10 +4,10 @@
 
     [Parameter]
     public Blazor.Model.RefFooter RefFooterObj { get; set; }
-    
-    protected override void OnAfterRender(bool firstRender) // = On Page Load
+
+    protected override void OnInitialized() // = On Page Load
     {   
-        jsRuntime.InvokeVoidAsync("setRefFooter", JsonSerializationHelper.SerializeToJson(RefFooterObj).ToString());
+        jsRuntime.InvokeVoidAsync("setRefFooter", JsonSerializationHelper.SerializeToJson(RefFooterObj).ToString(), RefFooterObj.ExitSecureSite);
     }
 
 }

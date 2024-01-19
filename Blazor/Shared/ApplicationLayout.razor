@@ -1,0 +1,50 @@
+﻿@inherits LayoutComponentBase
+@using System.Web
+@inject NavigationManager NavManager
+@using  System.Globalization
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
+
+
+    <RefTop RefTopObj="@RefTop"/>
+
+    <AppTop AppTopObj = "@AppTop"/>
+
+    @if(@AppTop.TopSecMenu)
+    {
+        <SectionMenu LeftMenuItems = "@LeftMenu"/>
+    }
+    <main id="cdts-main" property="mainContentOfPage" typeof="WebPageElement" class="@(@AppTop.TopSecMenu? "col-md-9" : "container")">
+        @ChildContent
+        <PreFooter PreFooterObj = "@PreFooter"/>
+    </main>
+
+    <AppFooter AppFooterObj = "@AppFooter"/>
+    <RefFooter RefFooterObj = "@RefFooter"/>
+
+@code{
+    [Parameter]
+    public Blazor.Model.RefTop RefTop { get; set; }
+
+    [Parameter]
+    public Blazor.Model.AppTop AppTop { get; set; }
+
+    [Parameter]
+    public Blazor.Model.PreFooter PreFooter { get; set; }
+
+    [Parameter]
+    public Blazor.Model.AppFooter AppFooter { get; set; }
+
+    [Parameter]
+    public Blazor.Model.RefFooter RefFooter { get; set; }
+
+    [Parameter]
+    public List<GoC.WebTemplate.Components.Entities.MenuSection> LeftMenu  { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+}

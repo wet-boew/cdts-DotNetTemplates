@@ -4,63 +4,52 @@
 };
 
 var exitScriptObj = null;
-
-/*$('a[href="?GoCTemplateCulture"]').click(function () {
-    alert('Contains question mark');
-});*/
-function linkClick(e) {
-    alert(e.target.href);
-}
-links = document.getElementsByTagName('a');
-for (i = 0; i < links.length; i++)
-    links[i].addEventListener('click', linkClick, false);
-//nodocwrite function
-/*function cdtsSetup(obj) {
-    var script = document.createElement('script');
-    script.setAttribute('type', 'text/javascript');
-    script.setAttribute('src', 'https://cdts.service.canada.ca/app/cls/WET/gcweb/v4_1_0/cdts/compiled/wet-en.js');
-    script.setAttribute('data-cdts-setup', obj);
-    document.getElementsByTagName('head')[0].appendChild(script);
-}*/
-//end nodoc functions functions
-
-/*function setTop(obj) {
-	const y = JSON.parse(obj);
-    var defTop = document.getElementById("def-top");
-    defTop.insertAdjacentHTML("afterend", wet.builder.top(y));
-}*/
+//var isRefDone = false;
+var localFooterObj = null;
+var localTopObj = null;
+var localPreFooterObj = null;
 
 function setTop(obj, isApp) {
-    const y = JSON.parse(obj);
-    const tmpElem = document.createElement('template'); //top's content must be directly in <body>, so use "template" element as temporary container
-    //(can't use outerHTML on an orphan element)
-    tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appTop(y) : wet.builder.top(y)); //eslint-disable-line
-    //inject a "marker/tag" class
-    for (let e of tmpElem.children) e.classList.add('cdtsreact-top-tag'); //using `children` and not `childNodes`, we only want elements
-    
-    //---[ Remove any elements from previous runs
-    document.body.querySelectorAll('.cdtsreact-top-tag').forEach((e) => e.remove());
+    if (localTopObj != obj) {
+        const y = JSON.parse(obj);
+        const tmpElem = document.createElement('template'); //top's content must be directly in <body>, so use "template" element as temporary container
+        //(can't use outerHTML on an orphan element)
+        tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appTop(y) : wet.builder.top(y)); //eslint-disable-line
+        //inject a "marker/tag" class
+        for (let e of tmpElem.children) e.classList.add('cdtsreact-top-tag'); //using `children` and not `childNodes`, we only want elements
 
-    //---[ Install right after body
-    for (let i = tmpElem.children.length - 1; i >= 0; i--) {
-        const e = tmpElem.children[i];
-        document.body.insertAdjacentElement('afterbegin', e);
-    }
+        //---[ Remove any elements from previous runs
+        document.body.querySelectorAll('.cdtsreact-top-tag').forEach((e) => e.remove());
+
+        //---[ Install right after body
+        for (let i = tmpElem.children.length - 1; i >= 0; i--) {
+            const e = tmpElem.children[i];
+            document.body.insertAdjacentElement('afterbegin', e);
+        }
+
+        if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
+        localTopObj = obj;
+    }    
 }
 
 function setPreFooter(obj) {
     const y = JSON.parse(obj);
-    const tmpElem = document.createElement('div');
+    const tmpElem = document.createElement('template'); //top's content must be directly in <body>, so use "template" element as temporary container
     //(can't use outerHTML on an orphan element)
     tmpElem.insertAdjacentHTML('afterbegin', wet.builder.preFooter(y));
-    const element = document.getElementById('cdts-react-def-preFooter');
-    //TODO: Check for null
-    if (element.childNodes.length > 0) {
-        element.replaceChild(tmpElem);
+    //inject a "marker/tag" class
+    for (let e of tmpElem.children) e.classList.add('cdtsreact-preFooter-tag'); //using `children` and not `childNodes`, we only want elements
+
+    //---[ Remove any elements from previous runs
+    document.querySelector('main').querySelectorAll('.cdtsreact-preFooter-tag').forEach((e) => e.remove());
+
+    //---[ Install right after body
+    for (let i = tmpElem.children.length - 1; i >= 0; i--) {
+        const e = tmpElem.children[i];
+        document.querySelector('main').insertAdjacentElement('beforeend', e);
     }
-    else {
-        element.appendChild(tmpElem);
-    }    
+
+    if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
 }
 
 function setSectionMenu(obj) {
@@ -76,42 +65,41 @@ function setSectionMenu(obj) {
     else {
         element.appendChild(tmpElem);
     }
+    if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
 }
-/*function setPreFooter(obj) {
-	const y = JSON.parse(obj);
-	var defPreFooter = document.getElementById("def-preFooter");
-	defPreFooter.outerHTML = wet.builder.preFooter(y);
-}*/
 
-/*function setFooter(obj) {
-	const y = JSON.parse(obj);
-	var defFooter = document.getElementById("def-footer");
-	defFooter.outerHTML = wet.builder.footer(y );
-}*/
-function setFooter(obj, isApp) {
-    const y = JSON.parse(obj);
-    const tmpElem = document.createElement('template'); //footer's content must be directly in <body>, so use "template" element as temporary container
-    //(can't use outerHTML on an orphan element)
-    tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appFooter(y) : wet.builder.footer(y)); //eslint-disable-line
-    //inject a "marker/tag" class
-    for (let e of tmpElem.children) e.classList.add('cdtsreact-footer-tag'); //using `children` and not `childNodes`, we only want elements
 
-    //---[ Remove any elements from previous runs
-    document.body.querySelectorAll('.cdtsreact-footer-tag').forEach((e) => e.remove());
+function setFooter(obj, isApp) {    
+    if (localFooterObj != obj) {
+        const y = JSON.parse(obj);
+        const tmpElem = document.createElement('template'); //footer's content must be directly in <body>, so use "template" element as temporary container
+        //(can't use outerHTML on an orphan element)
+        tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appFooter(y) : wet.builder.footer(y)); //eslint-disable-line
+        //inject a "marker/tag" class
+        for (let e of tmpElem.children) e.classList.add('cdtsreact-footer-tag'); //using `children` and not `childNodes`, we only want elements
 
-    //---[ Install right after body
-    const children = Array.from(tmpElem.children); //don't want a live list for this, so convert to array
-    for (let i = 0; i < children.length; i++) {
-        const e = children[i];
-        document.body.appendChild(e);
+        //---[ Remove any elements from previous runs
+        document.body.querySelectorAll('.cdtsreact-footer-tag').forEach((e) => e.remove());
+
+        //---[ Install right after body
+        const children = Array.from(tmpElem.children); //don't want a live list for this, so convert to array
+        for (let i = 0; i < children.length; i++) {
+            const e = children[i];
+            document.body.appendChild(e);
+        }
+        if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
+        localFooterObj = obj;
     }
-    resetExitScript(exitScriptObj);
+    
 }
 
 
 function setRefFooter(obj, exit) {
+    
     exitScriptObj = exit;
-    applyRefFooter(obj, onRefFooterCompleted);	
+    //if (isRefDone != true) applyRefFooter(obj, onRefFooterCompleted);
+    applyRefFooter(obj, onRefFooterCompleted);
+    //isRefDone = true;
 }
 
 function setRefTop(obj) {
@@ -183,6 +171,7 @@ function applyRefTop(obj, onCompletedFunc) {
 }
 
 function applyRefFooter(obj, onCompletedFunc) {
+    //alert('set ref footer');
     const parser = new DOMParser();
 
     const y = JSON.parse(obj);
@@ -202,6 +191,7 @@ async function installCDTS(lang) {
     }//TODO: Add the else condition
     await appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-${lang}.js`, 'cdts-main-js', false); //change from false to sriHash
 }
+
 function appendScriptElement(parentElement, src, id, sriHash) {
     return new Promise(function cdase(resolve, reject) {
         const elem = document.createElement('script');
@@ -265,12 +255,29 @@ function findCDTSCssHref() {
     return Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).map((e) => e.getAttribute('href')).find((href) => href?.includes('/cdts/cdts-')) || null;
 }
 
+function resetExitScript(exitScriptObj) {
+    var elems = document.getElementsByTagName('a');
+    wet.utilities.wetExitScript(
+        exitScriptObj.displayModal != null ? exitScriptObj.displayModal.toString() : 'undefined',
+        exitScriptObj.exitURL != null ? exitScriptObj.exitURL : 'undefined',
+        exitScriptObj.exitDomains != null ? exitScriptObj.exitDomains : 'undefined',
+        exitScriptObj.exitMsg != null ? exitScriptObj.exitMsg : 'undefined',
+        exitScriptObj.yesMsg != null ? exitScriptObj.yesMsg : 'undefined',
+        exitScriptObj.cancelMsg != null ? exitScriptObj.cancelMsg : 'undefined',
+        exitScriptObj.msgBoxHeader != null ? exitScriptObj.msgBoxHeader : 'undefined',
+        exitScriptObj.targetWarning != null ? exitScriptObj.targetWarning : 'undefined',
+        exitScriptObj.displayModalForNewWindow != null ? exitScriptObj.displayModalForNewWindow.toString() : 'undefined',
+        elems);
+}
+
+//Test Fnnction: To be removed
 function CStoJSCall() {
     // Invoke to call C# function from JavaScript.
     DotNet.invokeMethodAsync("Blazor", "TestMethod");
 }
 
-function resetExitScript(exitScriptObj) {
-    var elems = document.getElementsByTagName('a');
-    wet.utilities.wetExitScript(exitScriptObj.displayModal.toString(), exitScriptObj.exitURL, exitScriptObj.exitDomains, exitScriptObj.exitMsg, exitScriptObj.yesMsg, exitScriptObj.cancelMsg, exitScriptObj.msgBoxHeader, exitScriptObj.targetWarning, exitScriptObj.displayModalForNewWindow.toString(), elems);
+function resetWetComponents(component) {
+    if (typeof $ === 'undefined') return;
+
+    $(`.${component}`).trigger('wb-init'); //eslint-disable-line
 }

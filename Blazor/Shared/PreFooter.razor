@@ -1,7 +1,7 @@
 ﻿@inject IJSRuntime jsRuntime
 
-<div id="cdts-react-def-preFooter">
-</div>
+<!--<div id="cdts-react-def-preFooter">
+</div>-->
 
 @code {
 
@@ -11,6 +11,7 @@
     protected override void OnAfterRender(bool firstRender) // = On Page Load
     {   
         jsRuntime.InvokeVoidAsync("setPreFooter", JsonSerializationHelper.SerializeToJson(PreFooterObj).ToString());
+        jsRuntime.InvokeVoidAsync("resetWetComponents", "wb-share");
         //jsRuntime.InvokeVoidAsync("alert", PreFooterObj.DateModified);
     }
 
