@@ -72,7 +72,7 @@ namespace GoC.WebTemplate.Components.Utils
         public Top BuildTop(bool isTransactional)
         {
             if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
-                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+                throw new NotSupportedException($"The {nameof(_model.Settings.GcToolsModal)} is not supported in the {_model.CdtsEnvironment.Name} enviornment.");
 
             return new Top
             {
@@ -322,8 +322,10 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>The URL to be used for the language toggle link</returns>
         public static string BuildLanguageLinkURL(NameValueCollection nameValues)
         {
+            if (nameValues is null) throw new ArgumentNullException(nameof(nameValues));
+
             //make it writeable
-           // var nameValues = new NameValueCollection(queryString.ToString());
+            // var nameValues = new NameValueCollection(queryString.ToString());
 
             //Set the value of the "GoCTemplateCulture" parameter
             nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY,
@@ -566,9 +568,9 @@ namespace GoC.WebTemplate.Components.Utils
                 string subTheme = _model.CdtsEnvironment.SubTheme;
                 if (!string.IsNullOrEmpty(subTheme))
                 {
-                    subTheme = subTheme.ToLower();
+                    //subTheme = subTheme.ToLower();
                     //...limit to supported subthemes
-                    if (subTheme.Equals("esdc") || subTheme.Equals("eccc"))
+                    if (subTheme.Equals("esdc", StringComparison.OrdinalIgnoreCase) || subTheme.Equals("eccc", StringComparison.OrdinalIgnoreCase))
                     {
                         fileName = $"cdts-{subTheme}-styles.css";
                     }

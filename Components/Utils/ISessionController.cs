@@ -3,7 +3,7 @@
     public interface ISessionController
     {
         bool SessionExists();
-        void Set(string key, string value);
-        object Get(string key);
+        void SetSession(string key, string value);
+        object GetSession(string key);
     }
 }
