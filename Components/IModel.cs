@@ -21,12 +21,14 @@ namespace GoC.WebTemplate.Components
         /// <remarks>Usable in Intranet Themes and Application Template</remarks>
         Link ApplicationTitle { get; }
 
+#pragma warning disable CA1056
         /// <summary>
         /// The link to use for the App Settings in the AppTop
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
         /// </summary>
         string AppSettingsURL { get; set; }
+#pragma warning restore CA1056
 
         /// <summary>
         /// property to hold the version of the template. it will be put as a comment in the html of the master pages. this will help us troubleshoot issues with clients using the template
@@ -90,6 +92,7 @@ namespace GoC.WebTemplate.Components
         /// </summary>
         CustomSearch CustomSearch { get; set; }
 
+#pragma warning disable CA1056
         /// <summary>
         /// A custom site menu to be used in place of the standard canada.ca site menu
         /// This defaults to null (use standard menu)
@@ -97,6 +100,7 @@ namespace GoC.WebTemplate.Components
         /// Only available in the Application Template
         /// </summary>
         string CustomSiteMenuURL { get; set; }
+#pragma warning restore CA1056
 
         /// <summary>
         /// Represents the date modified displayed just above the footer

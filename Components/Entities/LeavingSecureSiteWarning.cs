@@ -15,12 +15,14 @@ namespace GoC.WebTemplate.Components.Entities
         /// or Set by application programmatically
         /// </summary>
         public bool DisplayModalWindow { get; set; }
+#pragma warning disable CA1056
         /// <summary>
         /// URL to redirect to when sercuresitewarning is enabled and user clicked a link that leaves the secure session
         /// Set by application via web.config
         /// Can be set by application programmatically
         /// </summary>
         public string RedirectURL { get; set; }
+#pragma warning restore CA1056
         /// <summary>
         /// A comma delimited list of domains that would be excluded from raising the warning
         /// Set by application via web.config

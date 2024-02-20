@@ -13,7 +13,7 @@ namespace GoC.WebTemplate.Components.Framework.Utils
             _session = session;
         }
 
-        public object GetSession(string key)
+        public object GetSessionValue(string key)
         {
             return _session[key];
         }
@@ -23,7 +23,7 @@ namespace GoC.WebTemplate.Components.Framework.Utils
             return _session != null;
         }
 
-        public void SetSession(string key, string value)
+        public void SetSessionValue(string key, string value)
         {
             _session[key] = value;
         }

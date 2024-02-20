@@ -50,6 +50,7 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             set { this["sessionAlive"] = value; }
         }
 
+#pragma warning disable CA1056
         /// <summary>
         /// URL that users are sent to when the session has expired.
         /// </summary>
@@ -69,6 +70,7 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["refreshCallBackUrl"]; }
             set { this["refreshCallBackUrl"] = value; }
         }
+#pragma warning restore CA1056
 
         /// <summary>
         /// Determines if clicking on the document should reset the inactivity timeout and perform an ajax request (if a refreshCallBackUrl has been specified).
