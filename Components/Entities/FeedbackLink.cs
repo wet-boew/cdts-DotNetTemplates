@@ -9,7 +9,6 @@ namespace GoC.WebTemplate.Components.Entities
         /// </summary>
         public bool Show { get; set; }
 
-#pragma warning disable CA1056
         /// <summary>
         /// URL to be used for the feedback link (legacy) OR used for href of contact link
         /// Set by application via web.config 'FeedbackLinkUrl' or programmatically
@@ -22,7 +21,6 @@ namespace GoC.WebTemplate.Components.Entities
         /// If it is empty will asume FeebackLinkurl is bilingual or also non-existant
         /// </summary>
         public string UrlFr { get; set; }
-#pragma warning restore CA1056
 
         /// <summary>
         /// Set a display name of your contact link within the feedback tool

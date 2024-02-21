@@ -26,7 +26,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             set { this["displayModalWindow"] = value; }
         }
 
-#pragma warning disable CA1056
         /// <summary>
         /// URL that users are sent to when "yes" is selected on the warning message.  URL to write application code clean up before redirecting to selected url.
         /// </summary>
@@ -36,7 +35,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["redirectURL"]; }
             set { this["redirectURL"] = value; }
         }
-#pragma warning restore CA1056
 
         /// <summary>
         /// domains that should not raise the warning message

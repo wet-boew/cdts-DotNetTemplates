@@ -23,15 +23,15 @@
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <CodeAnalysisRuleSet>..\WebTemplate.ruleset</CodeAnalysisRuleSet>
-    <NoWarn>1701;1702;CA1812;CA1002;CA2227;CA1014</NoWarn>
+    <NoWarn>1701;1702;CA1812;CA1002;CA1014;CA1056;CA2227;</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net472|AnyCPU'">
-    <NoWarn>1701;1702;CA1812;CA1002;CA2227;CA1014</NoWarn>
+    <NoWarn>1701;1702;CA1812;CA1002;CA1014;CA1056;CA2227;</NoWarn>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
-    <NoWarn>1701;1702;CA1812;CA1002;CA2227;CA1014</NoWarn>
+    <NoWarn>1701;1702;CA1812;CA1002;CA1014;CA1056;CA2227;</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,9 +10,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// Set by application programmatically or in the Web.Config
         /// Only available in the Application Template
         /// </summary>
-#pragma warning disable CA1056
         string CustomSiteMenuUrl { get; set; }
-#pragma warning restore CA1056
 
         /// <summary>
         /// The environment to use (akamai, ESDCPRod, ESDCNonProd)
@@ -78,7 +76,6 @@ namespace GoC.WebTemplate.Components.Configs
         /// </summary>
         bool ShowSharePageLink { get; set; }
 
-#pragma warning disable CA1056
         /// <summary>
         /// The link to use for the sign in button, will only appear if <see cref="ShowSignInLink"/> is set to true
         /// Set by application programmatically or in the Web.Config
@@ -92,7 +89,6 @@ namespace GoC.WebTemplate.Components.Configs
         /// Only available in the Application Template
         /// </summary>
         string SignOutLinkUrl { get; set; }
-#pragma warning restore CA1056
 
         /// <summary>
         /// Used to determine if SRI is enabled

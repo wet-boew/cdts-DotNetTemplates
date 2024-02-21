@@ -16,7 +16,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             set { this["xmlns"] = value; }
         }
 
-#pragma warning disable CA1056
         [ConfigurationProperty("signOutLinkURL")]
         public string SignOutLinkURL
         {
@@ -37,7 +36,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["customSiteMenuURL"]; }
             set { this["customSiteMenuURL"] = value; }
         }
-#pragma warning restore CA1056
 
         // Create a "sessionTimeOut element."
         //TODO: Rename config and property to sessionTimeout.
@@ -113,7 +111,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             set { this["showFeedbackLink"] = value; }
         }
 
-#pragma warning disable CA1056
         /// <summary>
         /// URL used to redirect users when they click the feedback link
         /// </summary>
@@ -144,7 +141,6 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (string)this["feedbackLinkText"]; }
             set { this["feedbackLinkText"] = value; }
         }
-#pragma warning restore CA1056
 
         /// <summary>
         /// FeedbackLinkTextFr
