@@ -1,23 +1,24 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;;netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net472;net6.0</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
     <PackageId>GoC.WebTemplate-Components</PackageId>
     <Authors>Solution Design Services</Authors>
     <Company>Employment and Social Development Canada - GoC</Company>
     <Description>The Components to the DotNetTemplates for the .NET Core archetecture</Description>
-    <Copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</Copyright>
+    <Copyright>Copyright (c) His Majesty the King in Right of Canada, as represented by the Employment and Social Development Canada, 2024</Copyright>
     <PackageProjectUrl>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates</PackageProjectUrl>
     <PackageIconUrl>https://gccode.ssc-spc.gc.ca/uploads/-/system/project/avatar/4622/Capture.PNG</PackageIconUrl>
     <PackageTags>SCWASI CDN Template SDS SF Web Core</PackageTags>
-    <AssemblyVersion>2.0.*</AssemblyVersion>
-    <Version>2.0.0</Version>
-    <FileVersion>2.0.0.0</FileVersion>
+    <AssemblyVersion>5.0.*</AssemblyVersion>
+    <Version>5.0.0</Version>
+    <FileVersion>5.0.0.0</FileVersion>
     <Deterministic>False</Deterministic>
     <AssemblyName>GoC.WebTemplate.Components</AssemblyName>
     <RootNamespace>GoC.WebTemplate.Components</RootNamespace>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -34,20 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetFramework.TrimEnd(`0123456789.`))' == 'netcoreapp' ">
-    <PackageReference Include="Microsoft.AspNetCore.Html.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="2.2.0" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework.TrimEnd(`0123456789.`))' == 'net' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
     <Reference Include="System.Web" />
     <Reference Include="System.XML" />
   </ItemGroup>

@@ -39,7 +39,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
 
             var result = ModelBuilder.BuildLanguageLinkURL(customQueryString);
 
-            result.Should().Contain(customQueryString.ToString());
+            result.Should().Contain("?" + "fancypants=homeboy&" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.FRENCH_CULTURE);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Constants.ENGLISH_CULTURE);
             var result = ModelBuilder.BuildLanguageLinkURL(HttpUtility.ParseQueryString("<script> Tést=</script>&a=b&x=y"));
-            result.Should().Be("?" + "%3Cscript%3E%20T%C3%A9st=%253c%252fscript%253e&a=b&x=y&" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.FRENCH_CULTURE);
+            result.Should().Be("?" + "%3Cscript%3E%20T%C3%A9st=%3C%2Fscript%3E&a=b&x=y&" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.FRENCH_CULTURE);
         }
     }
 }

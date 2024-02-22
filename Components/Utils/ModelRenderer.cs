@@ -108,8 +108,8 @@ namespace GoC.WebTemplate.Components.Utils
                     CdnEnv = null,
                     IndexEng = _model.SplashPageInfo.EnglishHomeUrl,
                     IndexFra = _model.SplashPageInfo.FrenchHomeUrl,
-                    TermsEng = _model.Builder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
-                    TermsFra = _model.Builder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
+                    TermsEng = ModelBuilder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
+                    TermsFra = ModelBuilder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
                     NameEng = _model.SplashPageInfo.EnglishName,
                     NameFra = _model.SplashPageInfo.FrenchName
 

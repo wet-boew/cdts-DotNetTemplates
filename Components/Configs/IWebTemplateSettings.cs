@@ -89,7 +89,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// Only available in the Application Template
         /// </summary>
         string SignOutLinkUrl { get; set; }
-        
+
         /// <summary>
         /// Used to determine if SRI is enabled
         /// </summary>
