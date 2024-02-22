@@ -19,6 +19,8 @@
     <AssemblyName>GoC.WebTemplate.Components</AssemblyName>
     <RootNamespace>GoC.WebTemplate.Components</RootNamespace>
     <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
