@@ -335,14 +335,12 @@ namespace GoC.WebTemplate.Components.Utils
                     ? Constants.FRENCH_CULTURE
                     : Constants.ENGLISH_CULTURE);
 
-            NameValueCollection queryStringValues = new NameValueCollection();
             StringBuilder buff = new StringBuilder(256);
             char seperator = '?';
 
             foreach(string key in nameValues.Keys)
             {
                 buff.Append(seperator);
-                queryStringValues[Uri.EscapeDataString(key)] = Uri.EscapeDataString(nameValues[key]);
                 buff.Append(Uri.EscapeDataString(key));
                 buff.Append('=');
                 buff.Append(Uri.EscapeDataString(nameValues[key]));
