@@ -1,0 +1,17 @@
+﻿@inject IJSRuntime jsRuntime
+
+@ChildContent
+
+@code {
+	[Parameter]
+    public Blazor.Model.WetContainer WetContainerObj { get; set; }
+
+	[Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+	{
+		if (WetContainerObj.WetComponentNames is null) jsRuntime.InvokeVoidAsync("resetWetComponents", WetContainerObj.WetComponentName);
+		else jsRuntime.InvokeVoidAsync("resetWetComponents", WetContainerObj.WetComponentNames);
+	}
+}

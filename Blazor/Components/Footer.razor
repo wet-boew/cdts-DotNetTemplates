@@ -1,0 +1,13 @@
+﻿@inject IJSRuntime jsRuntime
+
+@code {
+
+    [Parameter]
+    public GoC.WebTemplate.Components.Entities.IFooter FooterObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {
+        if (FooterObj is Blazor.Model.Footer) jsRuntime.InvokeVoidAsync("setFooter", JsonSerializationHelper.SerializeToJson(FooterObj).ToString(), false);
+        else jsRuntime.InvokeVoidAsync("setFooter", JsonSerializationHelper.SerializeToJson(FooterObj).ToString(), true);
+    }
+}

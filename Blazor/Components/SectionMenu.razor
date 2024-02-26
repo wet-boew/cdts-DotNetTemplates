@@ -1,0 +1,75 @@
+﻿@inject IJSRuntime jsRuntime
+
+<nav class="wb-sec col-md-3" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
+    <!-- Write closure fall-back static file -->                
+</nav>
+
+@code {
+    [Parameter]
+    public List<GoC.WebTemplate.Components.Entities.MenuSection> LeftMenuItems  { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {
+        Object secmenu = BuildLeftMenu(LeftMenuItems);
+        string str = JsonSerializationHelper.SerializeToJson(secmenu).ToString();
+        jsRuntime.InvokeVoidAsync("setSectionMenu", str);
+    }
+
+        public object BuildLeftMenu(List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuItems)
+        {
+            var leftMenuForSerialization = new { sections = new List<object>() };
+
+            // capitalization on anonymous types matters here, CDTS will reject the json objects if not done right
+            foreach (var menu in leftMenuItems)
+            {
+                var menuForSerialization = new
+                {
+                    sectionName = System.Net.WebUtility.HtmlEncode(menu.Text),
+                    sectionLink = GetStringForJson(menu.Href),
+                    newWindow = menu.NewWindow,
+                    menuLinks = new List<object>() //can't be null
+                };
+
+                foreach (var menuItem in menu.Items)
+                {
+                    var item = menuItem as MenuItem;
+                    if (item == null)
+                    {
+                        menuForSerialization.menuLinks.Add(new
+                        {
+                            href = menuItem.Href,
+                            text = menuItem.Text
+                        });
+                    }
+                    else
+                    {
+                        var subMenuForSerialization = new
+                        {
+                            href = item.Href,
+                            text = item.Text,
+                            newWindow = item.NewWindow,
+                            subLinks = item.SubItems.Any() ? new List<object>() : null
+                        };
+
+                        foreach (var subMenuItem in item.SubItems)
+                        {
+                            subMenuForSerialization.subLinks.Add(new
+                            {
+                                subhref = subMenuItem.Href,
+                                subtext = subMenuItem.Text,
+                                newWindow = subMenuItem.NewWindow
+                            });
+                        }
+
+                        menuForSerialization.menuLinks.Add(subMenuForSerialization);
+                    }
+                }
+
+                leftMenuForSerialization.sections.Add(menuForSerialization);
+            }
+
+            return leftMenuForSerialization;
+        }
+
+        internal string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
+}

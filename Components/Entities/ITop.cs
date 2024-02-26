@@ -9,5 +9,6 @@ namespace GoC.WebTemplate.Components.Entities
     public interface ITop
 #pragma warning restore CA1040 // Avoid empty interfaces
     {
+        bool TopSecMenu { get; set; }
     }
 }

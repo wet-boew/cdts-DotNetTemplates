@@ -1,0 +1,16 @@
+﻿@inject IJSRuntime jsRuntime
+
+<a @attributes="LinkAttributes">@ChildContent</a>
+
+@code {
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter(CaptureUnmatchedValues = true)]
+    public Dictionary<string, object>? LinkAttributes { get; set; }
+
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {
+        jsRuntime.InvokeVoidAsync("resetExitScriptOnPage");
+    }
+}

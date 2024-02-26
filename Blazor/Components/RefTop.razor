@@ -1,0 +1,23 @@
+﻿@inject IJSRuntime jsRuntime
+@using  System.Globalization
+
+
+
+@code {
+    [Parameter]
+    public Blazor.Model.RefTop RefTopObj { get; set; }
+
+    protected override void OnInitialized() // = On Page Load
+    {
+        //jsRuntime.InvokeVoidAsync("installCDTS", CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
+        jsRuntime.InvokeVoidAsync("setAlert", "This is from reftop");
+        jsRuntime.InvokeVoidAsync("setRefTop", JsonSerializationHelper.SerializeToJson(RefTopObj).ToString());
+    }
+
+    [JSInvokable("TestMethod")]
+    public static void TestMethod()
+    {
+        Console.WriteLine("hello from testmethod");
+        
+    }
+}

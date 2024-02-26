@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime jsRuntime
+
+@code {
+
+    [Parameter]
+    public GoC.WebTemplate.Components.Entities.ITop TopObj { get; set; }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        string str = JsonSerializationHelper.SerializeToJson(TopObj).ToString();
+
+        if (TopObj is Blazor.Model.Top) jsRuntime.InvokeVoidAsync("setTop", str, false);
+        else jsRuntime.InvokeVoidAsync("setTop", str, true);
+    }
+}

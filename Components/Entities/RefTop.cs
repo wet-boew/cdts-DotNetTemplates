@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
-    internal class RefTop
+    public class RefTop
     {
         public string CdnEnv { get; set; } 
         public string SubTheme { get; set; }
