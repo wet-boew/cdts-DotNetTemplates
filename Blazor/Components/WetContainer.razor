@@ -3,18 +3,18 @@
 @ChildContent
 
 @code {
-	[Parameter]
-	public string WetComponentName { get; set; }
+    [Parameter]
+    public string WetComponentName { get; set; }
 
-	[Parameter]
-	public List<string> WetComponentNames { get; set; }
+    [Parameter]
+    public List<string> WetComponentNames { get; set; }
 
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
 
-	protected override void OnAfterRender(bool firstRender) // = On Page Load
-	{
-		if (WetComponentNames is null) jsRuntime.InvokeVoidAsync("resetWetComponents", WetComponentName);
-		else jsRuntime.InvokeVoidAsync("resetWetComponents", WetComponentNames);
-	}
+    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    {
+        if (WetComponentNames is null) jsRuntime.InvokeVoidAsync("resetWetComponents", WetComponentName);
+        else jsRuntime.InvokeVoidAsync("resetWetComponents", WetComponentNames);
+    }
 }
