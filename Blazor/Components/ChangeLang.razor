@@ -4,21 +4,22 @@
 @page "/ChangeLang"
 
 @code {
-    public static string page;
+    public static string currentPage;
 
     protected override async Task OnInitializedAsync()
     {
         await JS.InvokeVoidAsync("GetCurrentPage");
         var js = (IJSInProcessRuntime)JS;
+
         if (CultureInfo.CurrentCulture.Name.StartsWith("en")) js.InvokeVoid("blazorCulture.set", "fr-CA");
         else js.InvokeVoid("blazorCulture.set", "en-CA");
-        Navigation.NavigateTo("/" + page, forceLoad: true);
+
+        Navigation.NavigateTo("/" + currentPage, forceLoad: true);
     }
 
     [JSInvokable("GetCurrentPage")]
-    public static void GetCurrentPage(string p)
+    public static void GetCurrentPage(string page)
     {
-        page = p;
+        currentPage = page;
     }
-
 }

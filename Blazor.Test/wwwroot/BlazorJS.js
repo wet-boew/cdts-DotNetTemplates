@@ -10,12 +10,12 @@ var globalSerializedFooter = null;
 var globalSerializedTop = null;
 var globalSerializedPreFooter = null;
 var globalSerializedSectionMenu = null;
-var currentPage;
+var currentPage = null;
 var defaultCSSHref = "https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css";
 
 //Functions
 function setRefTop(serializedRefTop) {
-    applyRefTop(serializedRefTop, onRefFooterCompleted);
+    applyRefTop(serializedRefTop);
 }
 
 function setTop(serializedTop, isApp) {
@@ -36,7 +36,7 @@ function setTop(serializedTop, isApp) {
             document.body.insertAdjacentElement('afterbegin', e);
         }
 
-        if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
+        if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
         globalSerializedTop = serializedTop;
     }    
 }
@@ -59,7 +59,7 @@ function setPreFooter(serializedPreFooter) {
             document.querySelector('main').insertAdjacentElement('beforeend', e);
         }
 
-        if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
+        if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
         globalSerializedPreFooter = serializedPreFooter;
     }
 }
@@ -82,17 +82,14 @@ function setFooter(seriealizedFooter, isApp) {
             const e = children[i];
             document.body.appendChild(e);
         }
-        if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
+        if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
         globalSerializedFooter = seriealizedFooter;
     }
 }
 
 function setRefFooter(serializedRefFooter, exitSecureSiteObj) {
-
     exitScriptObj = exitSecureSiteObj;
-    //if (isRefDone != true) applyRefFooter(obj, onRefFooterCompleted);
-    applyRefFooter(serializedRefFooter, onRefFooterCompleted);
-    //isRefDone = true;
+    applyRefFooter(serializedRefFooter);
 }
 
 function setSectionMenu(serializedSectionMenu) {
@@ -109,43 +106,38 @@ function setSectionMenu(serializedSectionMenu) {
         else {
             element.appendChild(tmpElem);
         }
-        if (exitScriptObj.displayModal || exitScriptObj.exitURL != null || exitScriptObj.exitURL != "") resetExitScript(exitScriptObj);
+        if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
         globalSerializedSectionMenu = serializedSectionMenu;
     }
 }
 
-function onRefFooterCompleted() {
-    //blah
-}
-
-function applyRefTop(obj, onCompletedFunc) {
+function applyRefTop(serializedRefTop) {
     const parser = new DOMParser();
 
-    const y = JSON.parse(obj);
+    const parsedRefTop = JSON.parse(serializedRefTop);
 
     //---[ Insert refTop at the end of HEAD
-    const tmpDoc = parser.parseFromString('<html><head>' + wet.builder.refTop(y) + '</head></html>', 'text/html');
+    const tmpDoc = parser.parseFromString('<html><head>' + wet.builder.refTop(parsedRefTop) + '</head></html>', 'text/html');
     const nodes = tmpDoc.head.childNodes; //NOTE: Must use `childNodes` and not `children` for comments to be inserted
-    const loader = new FragmentLoader(document.head, nodes, onCompletedFunc);
+    const loader = new FragmentLoader(document.head, nodes);
     loader.run();
 }
 
-function applyRefFooter(obj, onCompletedFunc) {
+function applyRefFooter(serializedRefFooter) {
     const parser = new DOMParser();
 
-    const y = JSON.parse(obj);
+    const parsedRefFooter = JSON.parse(serializedRefFooter);
 
     //---[ Insert refFooter at the end of BODY
-    const tmpDoc = parser.parseFromString('<html><body>' + wet.builder.refFooter(y) + '</body></html>', 'text/html');
+    const tmpDoc = parser.parseFromString('<html><body>' + wet.builder.refFooter(parsedRefFooter) + '</body></html>', 'text/html');
     const nodes = tmpDoc.body.childNodes; //NOTE: Must use `childNodes` and not `children` for comments to be inserted
-    const loader = new FragmentLoader(document.body, nodes, onCompletedFunc);
+    const loader = new FragmentLoader(document.body, nodes);
     loader.run();
 }
 
-function FragmentLoader(targetElem, fragmentNodes, doneFunc) {
+function FragmentLoader(targetElem, fragmentNodes) {
     this.targetElem = targetElem;
     this.fragmentNodes = fragmentNodes;
-    this.doneFunc = doneFunc;
     this.cursorIndex = 0;
 
     this.nodeScriptClone = function nodeScriptClone(node) {
@@ -183,9 +175,6 @@ function FragmentLoader(targetElem, fragmentNodes, doneFunc) {
                 this.cursorIndex++;
             }
         } //of while
-
-        //(if we get here, we're done)
-        if (this.doneFunc) this.doneFunc(this);
     }
 }
 
@@ -198,7 +187,7 @@ async function installCDTS(lang) {
     else {
         var cdtsEnvironment = deriveCDTSEnv(defaultCSSHref);
     }
-    await appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-${lang}.js`, 'cdts-main-js', false); //change from false to sriHash
+    await appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-${lang}.js`, 'cdts-main-js', false); //TODO: change from false to sriHash
 }
 
 function appendScriptElement(parentElement, src, id, sriHash) {
@@ -283,15 +272,6 @@ function resetExitScriptOnPage() {
     resetExitScript(exitScriptObj);
 }
 
-function SetCurrentPage(page) {
-    if (page !== "ChangeLang") currentPage = page;
-}
-
-function GetCurrentPage() {
-    // Invoke to call C# function from JavaScript.
-    DotNet.invokeMethodAsync("BlazorTest", "GetCurrentPage", currentPage);
-}
-
 function resetWetComponents(component) {
     if (typeof $ === 'undefined') return;
 
@@ -303,4 +283,14 @@ function resetWetComponents(component) {
     else {
         $(`.${component}`).trigger('wb-init');
     }
+}
+
+//Functions required by the ChangLang component
+function SetCurrentPage(page) {
+    currentPage = page;
+}
+
+function GetCurrentPage() {
+    // Invoke to call C# function from JavaScript.
+    DotNet.invokeMethodAsync("Blazor", "GetCurrentPage", currentPage);
 }

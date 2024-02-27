@@ -9,7 +9,7 @@
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object>? LinkAttributes { get; set; }
 
-    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    protected override void OnAfterRender(bool firstRender)
     {
         jsRuntime.InvokeVoidAsync("resetExitScriptOnPage");
     }

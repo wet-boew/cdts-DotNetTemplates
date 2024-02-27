@@ -4,14 +4,17 @@
 
 @code {
 	[Parameter]
-    public Blazor.Model.WetContainer WetContainerObj { get; set; }
+	public string WetComponentName { get; set; }
 
 	[Parameter]
-    public RenderFragment ChildContent { get; set; }
+	public List<string> WetComponentNames { get; set; }
 
-    protected override void OnAfterRender(bool firstRender) // = On Page Load
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	protected override void OnAfterRender(bool firstRender) // = On Page Load
 	{
-		if (WetContainerObj.WetComponentNames is null) jsRuntime.InvokeVoidAsync("resetWetComponents", WetContainerObj.WetComponentName);
-		else jsRuntime.InvokeVoidAsync("resetWetComponents", WetContainerObj.WetComponentNames);
+		if (WetComponentNames is null) jsRuntime.InvokeVoidAsync("resetWetComponents", WetComponentName);
+		else jsRuntime.InvokeVoidAsync("resetWetComponents", WetComponentNames);
 	}
 }

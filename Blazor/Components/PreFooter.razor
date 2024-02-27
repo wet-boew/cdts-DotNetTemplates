@@ -1,8 +1,5 @@
 ﻿@inject IJSRuntime jsRuntime
 
-<!--<div id="cdts-react-def-preFooter">
-</div>-->
-
 @code {
 
     [Parameter]
@@ -12,7 +9,5 @@
     {   
         jsRuntime.InvokeVoidAsync("setPreFooter", JsonSerializationHelper.SerializeToJson(PreFooterObj).ToString());
         jsRuntime.InvokeVoidAsync("resetWetComponents", "wb-share");
-        //jsRuntime.InvokeVoidAsync("alert", PreFooterObj.DateModified);
     }
-
 }

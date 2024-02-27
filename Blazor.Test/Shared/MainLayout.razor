@@ -1,12 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@using System.Web
-@inject NavigationManager NavManager
-@using  System.Globalization
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
-@using Microsoft.AspNetCore.Localization
-@using Microsoft.AspNetCore.Http
-@inject IHttpContextAccessor httpContextAccessor
 
     <CDTSLayout RefTop = "@refTopObj" Top = "@topObj" PreFooter = "@obj" Footer = "@footerObj" RefFooter = "@refFooterObj" LeftMenu = "@leftMenuObj">
         <NavLink href="" Match="NavLinkMatch.All">
@@ -28,9 +22,40 @@
 
 @code{
 
+    //Create your objects
+    Blazor.Model.RefTop refTopObj = new Blazor.Model.RefTop()
+    {
+        //For an application template, set IsApplication to true:
+        //IsApplication = true
+    };
 
-    //For AppTop, change the following: 
-    Blazor.Model.Top topObj { get; set; } = new Blazor.Model.Top();
+    //For an application template, change the following and create an appTop object instead: 
+    Blazor.Model.Top topObj = new Blazor.Model.Top()
+    {
+        Breadcrumbs = new List<Breadcrumb>() { new Breadcrumb() { Href = "", Title = "CDTS", Acronym = "CDTS" } },
+        SiteMenu = true //For an application template, comment this line
+        //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } }; //For an application template, set your application name
+    };
+
+    Blazor.Model.PreFooter obj = new Blazor.Model.PreFooter()
+    {
+        DateModified = "Feb 27th, 2024",
+        ShowShare = new ShareList() { Show = false }
+    };
+
+    //For an application template, change the following and create an appFooter object instead:
+    Blazor.Model.Footer footerObj = new Blazor.Model.Footer();
+
+    Blazor.Model.RefFooter refFooterObj = new Blazor.Model.RefFooter()
+    {
+        ExitSecureSite = new ExitSecureSite()
+        {
+            ExitScript = true,
+            DisplayModal = true
+        }
+    };
+
+    List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuObj;
 
     protected override Task OnInitializedAsync()
     {
@@ -43,32 +68,28 @@
 
         topObj.LngLinks = links;
 
+        //Detect when the user has clicked on another page
         Navigation.LocationChanged += (o, e) => {
             JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
         };
 
-        topObj.Breadcrumbs = new List<Breadcrumb>
-        {
-            new Breadcrumb(){Href="", Title="CDTS", Acronym="CDTS"}
-        };
-
-        //For AppTop, comment the following:
-        topObj.SiteMenu = true;
-
-        //For AppTop, uncomment the following:
-        //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } };
-
         return base.OnInitializedAsync();
     }
-
 
     public void AddSearch()
     {
         topObj.Search = true;
     }
+
+    public void AddShareBtn()
+    {
+        obj.DateModified = "July 20th, 2024";
+        obj.ShowShare = new ShareList() { Show = true, Enums = new List<SocialMediaSites>() { SocialMediaSites.blogger, SocialMediaSites.facebook } };
+    }
+
     public void AddFooter()
     {
-        //For AppTop, change the following:
+        //For an application template, change the following:
         footerObj.ShowFooter = true;
 
         /*footerObj.ContactLink = new List<Link>
@@ -77,45 +98,6 @@
             new Link { Href = "http://travel.gc.ca/", Text = "Contact Info" }
         };*/
     }
-    public void AddShareBtn()
-    {
-        obj.DateModified = "July 20th, 2024";
-        obj.ShowShare = new ShareList() { Show = true, Enums = new List<SocialMediaSites>() { SocialMediaSites.blogger, SocialMediaSites.facebook } };
-    }
-
-    private void IncrementCount()
-    {
-        topObj.CdnEnv = "canada";
-    }
-
-    Blazor.Model.PreFooter obj = new Blazor.Model.PreFooter()
-        {
-            DateModified = "July 18th, 2023",
-            ShowShare = new ShareList() { Show = false }
-    };
-
-    //For AppFooter, change the following
-    Blazor.Model.Footer footerObj = new Blazor.Model.Footer()
-    {
-
-    };
-
-    Blazor.Model.RefFooter refFooterObj = new Blazor.Model.RefFooter()
-    {
-        ExitSecureSite = new ExitSecureSite()
-        {
-            ExitScript = true,
-            DisplayModal = true
-        }
-    };
-
-    Blazor.Model.RefTop refTopObj = new Blazor.Model.RefTop()
-        {
-            //For AppTop, uncomment the following:
-            //IsApplication = true
-    };
-
-    List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuObj;
 
     private void AddLeftMenu()
     {

@@ -2,7 +2,7 @@
 @page "/wetform"
 <h3>WetComponent</h3>
 
-<Blazor.Components.WetContainer WetContainerObj = "@wetObj">
+<WetContainer WetComponentName = "@wetComponentToRefresh">
 	<div class="wb-frmvld">
 		<form action="#" method="get" id="validation-example">
 			<div class="form-group">
@@ -22,9 +22,8 @@
 			<input type="submit" value="Submit" class="btn btn-primary"> <input type="reset" value="Reset page to defaults" class="btn btn-link btn-sm show p-0 mrgn-tp-md">
 		</form>
 	</div>
-</Blazor.Components.WetContainer>
+</WetContainer>
 
 @code {
-	Blazor.Model.WetContainer wetObj = new Blazor.Model.WetContainer() { WetComponentName = "wb-frmvld" };
-
+	string wetComponentToRefresh = "wb-frmvld" ;
 }
