@@ -26,8 +26,10 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>The URL to be used for the language toggle link</returns>
         public static string BuildLanguageLinkURL(NameValueCollection nameValues)
         {
+            if (nameValues is null) throw new ArgumentNullException(nameof(nameValues));
+
             //make it writeable
-           // var nameValues = new NameValueCollection(queryString.ToString());
+            // var nameValues = new NameValueCollection(queryString.ToString());
 
             //Set the value of the "GoCTemplateCulture" parameter
             nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY,

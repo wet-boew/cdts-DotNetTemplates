@@ -58,7 +58,7 @@ namespace GoC.WebTemplate.Components.Utils
         public HtmlString TransactionalTop()
         {
             if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
-                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+                throw new NotSupportedException($"The {nameof(_model.Settings.GcToolsModal)} is not supported in the {_model.CdtsEnvironment.Name} enviornment.");
 
             return JsonSerializationHelper.SerializeToJson(new Top
             {
@@ -81,7 +81,7 @@ namespace GoC.WebTemplate.Components.Utils
         public HtmlString Top()
         {
             if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
-                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+                throw new NotSupportedException($"The {nameof(_model.Settings.GcToolsModal)} is not supported in the {_model.CdtsEnvironment.Name} enviornment.");
 
             return JsonSerializationHelper.SerializeToJson(new Top
             {
