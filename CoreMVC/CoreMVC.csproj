@@ -6,7 +6,7 @@
     <Authors>Solution Design Services</Authors>
     <Company>Employment and Social Development Canada - GoC</Company>
     <Description>The CoreMVC Template as part of the DotNetTemplates for .NET Core that incorporates SCWASI and the CDTS, written in C#</Description>
-    <Copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</Copyright>
+    <Copyright>Copyright (c) His Majesty the King in Right of Canada, as represented by the Employment and Social Development Canada, 2024</Copyright>
     <PackageProjectUrl>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates</PackageProjectUrl>
     <PackageIconUrl>https://gccode.ssc-spc.gc.ca/uploads/-/system/project/avatar/4622/Capture.PNG</PackageIconUrl>
     <PackageTags>SCWASI CDN Template SDS SF Web Template MVC Core</PackageTags>

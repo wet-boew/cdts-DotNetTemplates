@@ -33,13 +33,13 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new AppFooter
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
-                SubTheme = _model.Builder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
-                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink),
-                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
+                SubTheme = ModelBuilder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
+                TermsLink = ModelBuilder.BuildSingleFooterLink(_model.TermsConditionsLink),
+                PrivacyLink = ModelBuilder.BuildSingleFooterLink(_model.PrivacyLink),
                 ContactLink = _model.Builder.BuildContactLinks(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                LocalPath = ModelBuilder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 FooterSections = _model.Builder.BuildCustomFooterSections,
-                FooterPath = _model.Builder.GetStringForJson(_model.FooterPath)
+                FooterPath = ModelBuilder.GetStringForJson(_model.FooterPath)
             });
         }
 
@@ -147,7 +147,7 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 DateModified = _model.Builder.BuildDateModified(),
-                VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                VersionIdentifier = ModelBuilder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = _model.Settings.ShowPostContent,
                 ShowFeedback = feedback,
                 ShowShare = new ShareList
@@ -155,7 +155,7 @@ namespace GoC.WebTemplate.Components.Utils
                     Show = _model.Settings.ShowSharePageLink,
                     Enums = _model.SharePageMediaSites
                 },
-                ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                ScreenIdentifier = ModelBuilder.GetStringForJson(_model.ScreenIdentifier)
             });
         }
 
@@ -165,11 +165,11 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 DateModified = _model.Builder.BuildDateModified(),
-                VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                VersionIdentifier = ModelBuilder.GetStringForJson(_model.VersionIdentifier),
                 ShowPostContent = false,
                 ShowFeedback = new Feedback { Enabled = false },
                 ShowShare = new ShareList { Show = false },
-                ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                ScreenIdentifier = ModelBuilder.GetStringForJson(_model.ScreenIdentifier)
             });
         }
 
@@ -181,8 +181,8 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = true,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, true),
-                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, true),
+                PrivacyLink = ModelBuilder.BuildFooterLinkContext(_model.PrivacyLink, true),
+                TermsLink = ModelBuilder.BuildFooterLinkContext(_model.TermsConditionsLink, true),
                 ContextualFooter = _model.ContextualFooter,
                 HideFooterMain = _model.HideFooterMain,
                 HideFooterCorporate = _model.HideFooterCorporate,
@@ -197,8 +197,8 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = false,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, false),
-                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, false),
+                PrivacyLink = ModelBuilder.BuildFooterLinkContext(_model.PrivacyLink, false),
+                TermsLink = ModelBuilder.BuildFooterLinkContext(_model.TermsConditionsLink, false),
 
             });
         }
@@ -215,7 +215,7 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                LocalPath = ModelBuilder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 IsApplication = isApplication,
                 WebAnalytics = _model.Settings.WebAnalytics.Active
             });
@@ -245,7 +245,7 @@ namespace GoC.WebTemplate.Components.Utils
                 var menuForSerialization = new
                 {
                     sectionName = WebUtility.HtmlEncode(menu.Text),
-                    sectionLink = _model.Builder.GetStringForJson(menu.Href),
+                    sectionLink = ModelBuilder.GetStringForJson(menu.Href),
                     newWindow = menu.NewWindow,
                     menuLinks = new List<object>() //can't be null
                 };
@@ -331,16 +331,16 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 AppName = new List<Link> { _model.ApplicationTitle },
                 IntranetTitle = _model.Builder.BuildIntranentTitleList(),
-                SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
-                SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
+                SignIn = ModelBuilder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                SignOut = ModelBuilder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
+                LocalPath = ModelBuilder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                AppSettings = ModelBuilder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 TopSecMenu = _model.LeftMenuItems.Any(),
@@ -354,16 +354,16 @@ namespace GoC.WebTemplate.Components.Utils
             return JsonSerializationHelper.SerializeToJson(new AppTop
             {
                 AppName = new List<Link> { _model.ApplicationTitle },
-                SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
-                SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
+                SignIn = ModelBuilder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                SignOut = ModelBuilder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 Search = _model.Settings.ShowSearch,
                 LngLinks = _model.Builder.BuildLanguageLinkList(),
                 ShowPreContent = _model.ShowPreContent,
                 Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
+                LocalPath = ModelBuilder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                AppSettings = ModelBuilder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                 MenuPath = _model.CustomSiteMenuURL,
                 CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                 TopSecMenu = _model.LeftMenuItems.Any(),
@@ -380,7 +380,7 @@ namespace GoC.WebTemplate.Components.Utils
                 ExitSecureSite = _model.Builder.BuildExitSecureSite(),
                 CdnEnv = _model.CdtsEnvironment.CDN,
                 JqueryEnv = _model.Builder.BuildJqueryEnv(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                LocalPath = ModelBuilder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 IsApplication = isApplication,
                 WebAnalytics = _model.Settings.WebAnalytics.Active
             });
@@ -394,8 +394,8 @@ namespace GoC.WebTemplate.Components.Utils
                 cdnEnv = _model.CdtsEnvironment.CDN,
                 indexEng = _model.SplashPageInfo.EnglishHomeUrl,
                 indexFra = _model.SplashPageInfo.FrenchHomeUrl,
-                termsEng = _model.Builder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
-                termsFra = _model.Builder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
+                termsEng = ModelBuilder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
+                termsFra = ModelBuilder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
                 nameEng = _model.SplashPageInfo.EnglishName,
                 nameFra = _model.SplashPageInfo.FrenchName
             });

@@ -29,13 +29,13 @@ namespace GoC.WebTemplate.Components.Utils
                 if (_sessionController.SessionExists())
                 {
                     //culture not found in querystring, check session
-                    culture = Convert.ToString(_sessionController.GetSession(Constants.SESSION_CULTURE_KEY), CultureInfo.CurrentCulture);
+                    culture = Convert.ToString(_sessionController.GetSessionValue(Constants.SESSION_CULTURE_KEY), CultureInfo.CurrentCulture);
 
                     if (string.IsNullOrEmpty(culture))
                     {
                         //culture not found in session, use default language
                         culture = Constants.ENGLISH_CULTURE;
-                        _sessionController.SetSession(Constants.SESSION_CULTURE_KEY, culture);
+                        _sessionController.SetSessionValue(Constants.SESSION_CULTURE_KEY, culture);
                     }
                 }
                 else
@@ -48,7 +48,7 @@ namespace GoC.WebTemplate.Components.Utils
                 //culture found in querystring, use it
                 culture = culture.StartsWith(Constants.ENGLISH_ACCRONYM, StringComparison.CurrentCultureIgnoreCase) ? Constants.ENGLISH_CULTURE : Constants.FRENCH_CULTURE;
                 if (_sessionController.SessionExists())
-                    _sessionController.SetSession(Constants.SESSION_CULTURE_KEY, culture);
+                    _sessionController.SetSessionValue(Constants.SESSION_CULTURE_KEY, culture);
             }
 
             //If we have a culture, set it
