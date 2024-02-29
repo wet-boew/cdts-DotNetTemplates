@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Employment and Social Development Canada")]
 [assembly: AssemblyProduct("GoC.WebTemplate.MVC")]
-[assembly: AssemblyCopyright("Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019")]
+[assembly: AssemblyCopyright("Copyright (c) His Majesty the King in Right of Canada, as represented by the Employment and Social Development Canada, 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v2.10.0
+
+### New features and improvements
+
+- **IMPORTANT** .NET Core 3.0/3.1 is no longer supported. This version now supports .NET 6.0. The dependencies have been updated accordingly.
+
 ## v2.9.1
 
 ### Fixes

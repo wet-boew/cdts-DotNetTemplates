@@ -8,7 +8,7 @@
     <owners>Employment and Social Development Canada - GoC</owners>
     <projectUrl>https://gccode.ssc-spc.gc.ca/iitb-dgiit/sds/GOCWebTemplates/DotNetTemplates</projectUrl>
     <iconUrl>https://gccode.ssc-spc.gc.ca/uploads/-/system/project/avatar/4622/Capture.PNG</iconUrl>
-    <copyright>Copyright (c) Her Majesty the Queen in Right of Canada, as represented by the Employment and Social Development Canada, 2019</copyright>
+    <copyright>Copyright (c) His Majesty the King in Right of Canada, as represented by the Employment and Social Development Canada, 2024</copyright>
     <tags>SCWASI CDN Template SDS SF Web Template MVC Framework</tags>
     <dependencies>
       <dependency id="GoC.WebTemplate-Components.Framework" version="2.0.0" />

@@ -12,7 +12,7 @@ namespace GoC.WebTemplate.Components.Core.Services
     {
         public IModel Model { get; }
 
-        public ModelAccessor(IMemoryCache memoryCache, IHostingEnvironment hostingEnvironment, IConfiguration configuration)
+        public ModelAccessor(IMemoryCache memoryCache, IWebHostEnvironment hostingEnvironment, IConfiguration configuration)
         {
             var configs = new GocWebTemplateConfigurationSection();
 

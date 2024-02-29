@@ -7,6 +7,7 @@ using System.Web;
 using GoC.WebTemplate.Components.Entities;
 using System.Collections.Specialized;
 using System.Net;
+using System.Text;
 
 // ReSharper disable once CheckNamespace
 namespace GoC.WebTemplate.Components.Utils
@@ -18,6 +19,8 @@ namespace GoC.WebTemplate.Components.Utils
         {
             _model = model;
         }
+
+#pragma warning disable CA1055
         /// <summary>
         /// Builds the URL to be used by the English/francais link at the top of the page for the language toggle.
         /// The method will add or update the "GoCTemplateCulture" querystring parameter with the culture to be set
@@ -26,8 +29,10 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>The URL to be used for the language toggle link</returns>
         public static string BuildLanguageLinkURL(NameValueCollection nameValues)
         {
+            if (nameValues is null) throw new ArgumentNullException(nameof(nameValues));
+
             //make it writeable
-           // var nameValues = new NameValueCollection(queryString.ToString());
+            // var nameValues = new NameValueCollection(queryString.ToString());
 
             //Set the value of the "GoCTemplateCulture" parameter
             nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY,
@@ -36,10 +41,21 @@ namespace GoC.WebTemplate.Components.Utils
                     ? Constants.FRENCH_CULTURE
                     : Constants.ENGLISH_CULTURE);
 
-            string url = string.Concat("?", Uri.EscapeUriString(nameValues.ToString()));
+            StringBuilder buff = new StringBuilder(256);
+            char seperator = '?';
 
-            return url;
+            foreach (string key in nameValues.Keys)
+            {
+                buff.Append(seperator);
+                buff.Append(Uri.EscapeDataString(key));
+                buff.Append('=');
+                buff.Append(Uri.EscapeDataString(nameValues[key]));
+                seperator = '&';
+            }
+
+            return buff.ToString();
         }
+#pragma warning restore 1055
 
         internal List<Link> BuildContactLinks()
         {
@@ -58,12 +74,12 @@ namespace GoC.WebTemplate.Components.Utils
 
         }
 
-        internal List<FooterLink> BuildSingleFooterLink(FooterLink link)
+        internal static List<FooterLink> BuildSingleFooterLink(FooterLink link)
         {
             return string.IsNullOrWhiteSpace(link?.Href) ? null : new List<FooterLink> { link };
         }
 
-        internal FooterLinkContext BuildFooterLinkContext(FooterLink link, bool showFooter)
+        internal static FooterLinkContext BuildFooterLinkContext(FooterLink link, bool showFooter)
         {
             return string.IsNullOrEmpty(link.Href) ? null : new FooterLinkContext { ShowFooter = showFooter, FooterLink = link };
         }
@@ -126,7 +142,7 @@ namespace GoC.WebTemplate.Components.Utils
             }
         }
 
-        internal List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
+        internal static List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
         {
             if (!showLink || string.IsNullOrWhiteSpace(href))
                 return null;
@@ -171,13 +187,13 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 ExitScript = true,
                 DisplayModal = _model.Settings.LeavingSecureSiteWarning.DisplayModalWindow,
-                MsgBoxHeader = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.MsgBoxHeader),
+                MsgBoxHeader = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.MsgBoxHeader),
                 ExitURL = _model.Settings.LeavingSecureSiteWarning.RedirectUrl,
                 ExitMsg = WebUtility.HtmlEncode(_model.Settings.LeavingSecureSiteWarning.Message),
-                CancelMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.CancelMessage),
-                YesMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
-                ExitDomains = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
-                TargetWarning = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
+                CancelMsg = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.CancelMessage),
+                YesMsg = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
+                ExitDomains = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
+                TargetWarning = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
                 DisplayModalForNewWindow = _model.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow
             };
         }
@@ -230,9 +246,9 @@ namespace GoC.WebTemplate.Components.Utils
 
         #region GetJson
 
-        internal string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
+        internal static string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
 
-        internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(CultureInfo.CurrentCulture, formatStr, strs);
+        internal static string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(CultureInfo.CurrentCulture, formatStr, strs);
 
         #endregion
     }
