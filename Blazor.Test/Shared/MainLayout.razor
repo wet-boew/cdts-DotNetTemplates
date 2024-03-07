@@ -23,30 +23,30 @@
 @code{
 
     //Create your objects
-    Blazor.Model.RefTop refTopObj = new Blazor.Model.RefTop()
+    GoC.WebTemplate.Blazor.Model.RefTop refTopObj = new GoC.WebTemplate.Blazor.Model.RefTop()
     {
         //For an application template, set IsApplication to true:
         //IsApplication = true
     };
 
     //For an application template, change the following and create an appTop object instead: 
-    Blazor.Model.Top topObj = new Blazor.Model.Top()
+    GoC.WebTemplate.Blazor.Model.Top topObj = new GoC.WebTemplate.Blazor.Model.Top()
     {
         Breadcrumbs = new List<Breadcrumb>() { new Breadcrumb() { Href = "", Title = "CDTS", Acronym = "CDTS" } },
         SiteMenu = true //For an application template, comment this line
         //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } }; //For an application template, set your application name
     };
 
-    Blazor.Model.PreFooter obj = new Blazor.Model.PreFooter()
+    GoC.WebTemplate.Blazor.Model.PreFooter obj = new GoC.WebTemplate.Blazor.Model.PreFooter()
     {
         DateModified = "Feb 27th, 2024",
         ShowShare = new ShareList() { Show = false }
     };
 
     //For an application template, change the following and create an appFooter object instead:
-    Blazor.Model.Footer footerObj = new Blazor.Model.Footer();
+    GoC.WebTemplate.Blazor.Model.Footer footerObj = new GoC.WebTemplate.Blazor.Model.Footer();
 
-    Blazor.Model.RefFooter refFooterObj = new Blazor.Model.RefFooter()
+    GoC.WebTemplate.Blazor.Model.RefFooter refFooterObj = new GoC.WebTemplate.Blazor.Model.RefFooter()
     {
         ExitSecureSite = new ExitSecureSite()
         {
