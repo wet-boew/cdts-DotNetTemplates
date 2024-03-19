@@ -292,5 +292,5 @@ function SetCurrentPage(page) {
 
 function GetCurrentPage() {
     // Invoke to call C# function from JavaScript.
-    DotNet.invokeMethodAsync("Blazor", "GetCurrentPage", currentPage);
+    DotNet.invokeMethodAsync("GoC.WebTemplate.Blazor", "GetCurrentPage", currentPage);
 }
