@@ -11,7 +11,7 @@
     protected override void OnAfterRender(bool firstRender) // = On Page Load
     {
         Object secmenu = BuildLeftMenu(LeftMenuItems);
-        string str = JsonSerializationHelper.SerializeToJson(secmenu).ToString();
+        string str = JsonPlainSerializationHelper.SerializeToJson(secmenu).ToString();
         jsRuntime.InvokeVoidAsync("setSectionMenu", str);
     }
 

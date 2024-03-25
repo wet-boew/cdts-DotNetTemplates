@@ -6,7 +6,7 @@
 
     protected override void OnAfterRender(bool firstRender) // = On Page Load
     {   
-        jsRuntime.InvokeVoidAsync("setPreFooter", JsonSerializationHelper.SerializeToJson(PreFooterObj).ToString());
+        jsRuntime.InvokeVoidAsync("setPreFooter", JsonPlainSerializationHelper.SerializeToJson(PreFooterObj).ToString());
         jsRuntime.InvokeVoidAsync("resetWetComponents", "wb-share");
     }
 }

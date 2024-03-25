@@ -6,7 +6,7 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        if (FooterObj is GoC.WebTemplate.Blazor.Model.Footer) jsRuntime.InvokeVoidAsync("setFooter", JsonSerializationHelper.SerializeToJson(FooterObj).ToString(), false);
-        else jsRuntime.InvokeVoidAsync("setFooter", JsonSerializationHelper.SerializeToJson(FooterObj).ToString(), true);
+        if (FooterObj is GoC.WebTemplate.Blazor.Model.Footer) jsRuntime.InvokeVoidAsync("setFooter", JsonPlainSerializationHelper.SerializeToJson(FooterObj).ToString(), false);
+        else jsRuntime.InvokeVoidAsync("setFooter", JsonPlainSerializationHelper.SerializeToJson(FooterObj).ToString(), true);
     }
 }

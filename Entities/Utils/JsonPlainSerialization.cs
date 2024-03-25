@@ -1,9 +1,9 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace GoC.WebTemplate.Entities.Utils
+namespace GoC.WebTemplate.Components.Utils
 {
-    public static class JsonSerializationHelper
+    public static class JsonPlainSerializationHelper
     {
         private static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {

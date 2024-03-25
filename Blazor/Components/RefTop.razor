@@ -6,6 +6,6 @@
 
     protected override void OnInitialized()
     {
-        jsRuntime.InvokeVoidAsync("setRefTop", JsonSerializationHelper.SerializeToJson(RefTopObj).ToString());
+        jsRuntime.InvokeVoidAsync("setRefTop", JsonPlainSerializationHelper.SerializeToJson(RefTopObj).ToString());
     }
 }

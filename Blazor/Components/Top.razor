@@ -6,7 +6,7 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
-        string str = JsonSerializationHelper.SerializeToJson(TopObj).ToString();
+        string str = JsonPlainSerializationHelper.SerializeToJson(TopObj).ToString();
 
         if (TopObj is GoC.WebTemplate.Blazor.Model.Top) jsRuntime.InvokeVoidAsync("setTop", str, false);
         else jsRuntime.InvokeVoidAsync("setTop", str, true);
