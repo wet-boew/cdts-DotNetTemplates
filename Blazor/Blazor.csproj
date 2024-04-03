@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseBlazorWebAssembly>true</UseBlazorWebAssembly>
     <PackageProjectUrl>https://github.com/wet-boew/cdts-DotNetTemplates</PackageProjectUrl>
@@ -14,6 +13,15 @@
     <RootNamespace>GoC.WebTemplate.Blazor</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\cdts-blazor.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
+    <None Include="wwwroot\cdts-blazor.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <SupportedPlatform Include="browser" />

@@ -2,7 +2,7 @@
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 
-    <CDTSLayout RefTop = "@refTopObj" Top = "@topObj" PreFooter = "@obj" Footer = "@footerObj" RefFooter = "@refFooterObj" LeftMenu = "@leftMenuObj">
+    <CDTSLayout RefTop = "@refTopObj" Top = "@topObj" PreFooter = "@preFooterObj" Footer = "@footerObj" RefFooter = "@refFooterObj" LeftMenu = "@leftMenuObj">
         <NavLink href="" Match="NavLinkMatch.All">
             <button class="btn">Home</button>
         </NavLink>
@@ -37,7 +37,7 @@
         //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } }; //For an application template, set your application name
     };
 
-    GoC.WebTemplate.Blazor.Model.PreFooter obj = new GoC.WebTemplate.Blazor.Model.PreFooter()
+    GoC.WebTemplate.Blazor.Model.PreFooter preFooterObj = new GoC.WebTemplate.Blazor.Model.PreFooter()
     {
         DateModified = "Feb 27th, 2024",
         ShowShare = new ShareList() { Show = false }
@@ -83,8 +83,8 @@
 
     public void AddShareBtn()
     {
-        obj.DateModified = "July 20th, 2024";
-        obj.ShowShare = new ShareList() { Show = true, Enums = new List<SocialMediaSites>() { SocialMediaSites.blogger, SocialMediaSites.facebook } };
+        preFooterObj.DateModified = "July 20th, 2024";
+        preFooterObj.ShowShare = new ShareList() { Show = true, Enums = new List<SocialMediaSites>() { SocialMediaSites.blogger, SocialMediaSites.facebook } };
     }
 
     public void AddFooter()
