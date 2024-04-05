@@ -34,7 +34,7 @@
     {
         Breadcrumbs = new List<Breadcrumb>() { new Breadcrumb() { Href = "", Title = "CDTS", Acronym = "CDTS" } },
         SiteMenu = true //For an application template, comment this line
-        //topObj.AppName = new List<Link>() { new Link() { Text = "App name" } }; //For an application template, set your application name
+        //AppName = new List<Link>() { new Link() { Text = "App name" } } //For an application template, set your application name
     };
 
     GoC.WebTemplate.Blazor.Model.PreFooter preFooterObj = new GoC.WebTemplate.Blazor.Model.PreFooter()
@@ -56,25 +56,6 @@
     };
 
     List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuObj;
-
-    protected override Task OnInitializedAsync()
-    {
-        JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
-        
-        List<LanguageLink> links = new List<LanguageLink>()
-        {
-            new LanguageLink(){Href=Navigation.BaseUri + "ChangeLang"}
-        };        
-
-        topObj.LngLinks = links;
-
-        //Detect when the user has clicked on another page
-        Navigation.LocationChanged += (o, e) => {
-            JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
-        };
-
-        return base.OnInitializedAsync();
-    }
 
     public void AddSearch()
     {

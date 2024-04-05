@@ -130,34 +130,11 @@ To use, in your project:
 
 The CDTS and the WET library support both English and French languages but only one can be active at any given time. 
 
-Currently, there is a Blazor component called 'ChangeLang' that can take care of language handling when called. 
+Currently, there is a Blazor component called 'ChangeLang' that takes care of language handling when called. 
 
-The way it works is on the initial page load AND on page change, you have to call the 'SetCurrentPage' function and pass the current page name (the function temporarily stores the passed page name). 
+The component stores and retrieves the page name, changes the language and reloads that same page the user was on in the other language. 
 
-You have to create and assign the language link and set the href of the link to the BaseUri + 'ChangeLang'. 
-The component, when called, retrieves the stored page name, changes the language and reloads that same page the user was on in the other language. 
-
-```
-protected override Task OnInitializedAsync()
-{
-    JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
-
-    List<LanguageLink> links = new List<LanguageLink>()
-    {
-        new LanguageLink(){Href=Navigation.BaseUri + "ChangeLang"}
-    };
-
-    topObj.LngLinks = links;
-
-    //Detect when the user has clicked on another page
-    Navigation.LocationChanged += (o, e) =>
-    {
-        JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
-    };
-
-    return base.OnInitializedAsync();
-}
-```
+OPTIONAL: You can override the language link if you would like handle the language switching on your end by setting the `LngLinks` property. 
 
 ## Using WET Components
 

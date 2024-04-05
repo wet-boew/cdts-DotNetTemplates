@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
@@ -10,5 +11,6 @@ namespace GoC.WebTemplate.Components.Entities
 #pragma warning restore CA1040 // Avoid empty interfaces
     {
         bool TopSecMenu { get; set; }
+        List<LanguageLink> LngLinks { get; set; }
     }
 }

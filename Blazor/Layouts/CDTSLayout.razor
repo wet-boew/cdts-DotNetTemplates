@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
+    <GoC.WebTemplate.Blazor.Utils.HandleLanguageLink></GoC.WebTemplate.Blazor.Utils.HandleLanguageLink>
+
     <RefTop RefTopObj="@RefTop"/>
 
     <Top TopObj = "@Top"/>
@@ -37,4 +39,9 @@
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (Top is GoC.WebTemplate.Blazor.Model.AppTop) RefTop.IsApplication = true;
+    }
 }

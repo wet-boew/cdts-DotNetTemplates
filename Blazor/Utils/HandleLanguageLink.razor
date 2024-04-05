@@ -1,0 +1,15 @@
+﻿@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+@code {
+    protected override void OnInitialized()
+    {
+        JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
+
+        //Detect when the user has clicked on another page
+        Navigation.LocationChanged += (o, e) =>
+        {
+            JS.InvokeVoidAsync("SetCurrentPage", Navigation.ToBaseRelativePath(Navigation.Uri));
+        };
+    }
+}

@@ -1,4 +1,5 @@
 ﻿@inject IJSRuntime jsRuntime
+@inject NavigationManager Navigation
 
 @code {
     [Parameter]
@@ -6,6 +7,16 @@
 
     protected override void OnAfterRender(bool firstRender)
     {
+        if (TopObj.LngLinks is null)
+        {
+            List<LanguageLink> links = new List<LanguageLink>()
+            {
+                new LanguageLink(){Href=Navigation.BaseUri + "ChangeLang"}
+            };
+
+            TopObj.LngLinks = links;
+        }
+
         string str = JsonPlainSerializationHelper.SerializeToJson(TopObj).ToString();
 
         if (TopObj is GoC.WebTemplate.Blazor.Model.Top) jsRuntime.InvokeVoidAsync("setTop", str, false);
