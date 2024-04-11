@@ -19,7 +19,7 @@
 
         string str = JsonPlainSerializationHelper.SerializeToJson(TopObj).ToString();
 
-        if (TopObj is GoC.WebTemplate.Blazor.Model.Top) jsRuntime.InvokeVoidAsync("setTop", str, false);
-        else jsRuntime.InvokeVoidAsync("setTop", str, true);
+        if (TopObj is GoC.WebTemplate.Blazor.Model.Top) jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, false);
+        else jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, true);
     }
 }

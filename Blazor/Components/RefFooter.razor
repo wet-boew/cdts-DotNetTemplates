@@ -6,6 +6,6 @@
 
     protected override void OnInitialized()
     {   
-        jsRuntime.InvokeVoidAsync("setRefFooter", JsonPlainSerializationHelper.SerializeToJson(RefFooterObj).ToString(), RefFooterObj.ExitSecureSite);
+        jsRuntime.InvokeVoidAsync("cdtsBlazor.setRefFooter", JsonPlainSerializationHelper.SerializeToJson(RefFooterObj).ToString(), RefFooterObj.ExitSecureSite);
     }
 }

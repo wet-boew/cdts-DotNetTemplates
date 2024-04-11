@@ -5,7 +5,6 @@ window.blazorCulture = {
 };
 
 var cdtsBlazor = {
-    //Define global variables
     exitScriptObj: null,
     globalSerializedFooter: null,
     globalSerializedTop: null,
@@ -15,12 +14,12 @@ var cdtsBlazor = {
     defaultCSSHref: "https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css",
 
     //Functions
-    setRefTop = function setRefTop(serializedRefTop) {
-        applyRefTop(serializedRefTop);
+    setRefTop: function setRefTop(serializedRefTop) {
+        this.applyRefTop(serializedRefTop);
     },
 
-    setTop = function setTop(serializedTop, isApp) {
-        if (globalSerializedTop != serializedTop) {
+    setTop: function setTop(serializedTop, isApp) {
+        if (this.globalSerializedTop != serializedTop) {
             const parsedTop = JSON.parse(serializedTop);
             const tmpElem = document.createElement('template'); //top's content must be directly in <body>, so use "template" element as temporary container
             //(can't use outerHTML on an orphan element)
@@ -36,14 +35,14 @@ var cdtsBlazor = {
                 const e = tmpElem.children[i];
                 document.body.insertAdjacentElement('afterbegin', e);
             }
-
-            if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
-            globalSerializedTop = serializedTop;
-        }    
+            
+            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+            this.globalSerializedTop = serializedTop;
+        }
     },
 
-    setPreFooter = function setPreFooter(serializedPreFooter) {
-        if (globalSerializedPreFooter != serializedPreFooter) {
+    setPreFooter: function setPreFooter(serializedPreFooter) {
+        if (this.globalSerializedPreFooter != serializedPreFooter) {
             const parsedPreFooter = JSON.parse(serializedPreFooter);
             const tmpElem = document.createElement('template'); //top's content must be directly in <body>, so use "template" element as temporary container
             //(can't use outerHTML on an orphan element)
@@ -60,13 +59,13 @@ var cdtsBlazor = {
                 document.querySelector('main').insertAdjacentElement('beforeend', e);
             }
 
-            if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
-            globalSerializedPreFooter = serializedPreFooter;
+            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+            this.globalSerializedPreFooter = serializedPreFooter;
         }
     },
 
-    setFooter = function setFooter(seriealizedFooter, isApp) {
-        if (globalSerializedFooter != seriealizedFooter) {
+    setFooter: function setFooter(seriealizedFooter, isApp) {
+        if (this.globalSerializedFooter != seriealizedFooter) {
             const y = JSON.parse(seriealizedFooter);
             const tmpElem = document.createElement('template'); //footer's content must be directly in <body>, so use "template" element as temporary container
             //(can't use outerHTML on an orphan element)
@@ -83,18 +82,18 @@ var cdtsBlazor = {
                 const e = children[i];
                 document.body.appendChild(e);
             }
-            if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
-            globalSerializedFooter = seriealizedFooter;
+            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+            this.globalSerializedFooter = seriealizedFooter;
         }
     },
 
-    setReFFooter = function setRefFooter(serializedRefFooter, exitSecureSiteObj) {
-        exitScriptObj = exitSecureSiteObj;
-        applyRefFooter(serializedRefFooter);
+    setRefFooter: function setRefFooter(serializedRefFooter, exitSecureSiteObj) {
+        this.exitScriptObj = exitSecureSiteObj;
+        this.applyRefFooter(serializedRefFooter);
     },
 
-    setSectionMenu = function setSectionMenu(serializedSectionMenu) {
-        if (globalSerializedSectionMenu != serializedSectionMenu) {
+    setSectionMenu: function setSectionMenu(serializedSectionMenu) {
+        if (this.globalSerializedSectionMenu != serializedSectionMenu) {
             $('#wb-sec, #cdts-main').wrapAll("<div class='container'><div class='row'></div></div>");
             const parsedSectionMenu = JSON.parse(serializedSectionMenu);
             const tmpElem = document.createElement('div');
@@ -107,12 +106,12 @@ var cdtsBlazor = {
             else {
                 element.appendChild(tmpElem);
             }
-            if (exitScriptObj.exitScript && (exitScriptObj.displayModal || exitScriptObj.exitURL != "" || exitScriptObj.exitURL != null)) resetExitScript(exitScriptObj);
-            globalSerializedSectionMenu = serializedSectionMenu;
+            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+            this.globalSerializedSectionMenu = serializedSectionMenu;
         }
     },
 
-    appRefTop = function applyRefTop(serializedRefTop) {
+    applyRefTop: function applyRefTop(serializedRefTop) {
         const parser = new DOMParser();
 
         const parsedRefTop = JSON.parse(serializedRefTop);
@@ -120,11 +119,11 @@ var cdtsBlazor = {
         //---[ Insert refTop at the end of HEAD
         const tmpDoc = parser.parseFromString('<html><head>' + wet.builder.refTop(parsedRefTop) + '</head></html>', 'text/html');
         const nodes = tmpDoc.head.childNodes; //NOTE: Must use `childNodes` and not `children` for comments to be inserted
-        const loader = new FragmentLoader(document.head, nodes);
+        const loader = new this.FragmentLoader(document.head, nodes);
         loader.run();
     },
 
-    applyRefFooter = function applyRefFooter(serializedRefFooter) {
+    applyRefFooter: function applyRefFooter(serializedRefFooter) {
         const parser = new DOMParser();
 
         const parsedRefFooter = JSON.parse(serializedRefFooter);
@@ -132,11 +131,11 @@ var cdtsBlazor = {
         //---[ Insert refFooter at the end of BODY
         const tmpDoc = parser.parseFromString('<html><body>' + wet.builder.refFooter(parsedRefFooter) + '</body></html>', 'text/html');
         const nodes = tmpDoc.body.childNodes; //NOTE: Must use `childNodes` and not `children` for comments to be inserted
-        const loader = new FragmentLoader(document.body, nodes);
+        const loader = new this.FragmentLoader(document.body, nodes);
         loader.run();
     },
 
-    FragmentLoader = function FragmentLoader(targetElem, fragmentNodes) {
+    FragmentLoader: function FragmentLoader(targetElem, fragmentNodes) {
         this.targetElem = targetElem;
         this.fragmentNodes = fragmentNodes;
         this.cursorIndex = 0;
@@ -154,6 +153,7 @@ var cdtsBlazor = {
         };
 
         this.onScriptLoaded = function onScriptLoaded(/*ev*/) {
+
             this.run(); //resume processing
         };
 
@@ -179,19 +179,19 @@ var cdtsBlazor = {
         }
     },
 
-    installCDTS = async function installCDTS(lang) {
+    installCDTS: async function installCDTS(lang) {
         document.documentElement.setAttribute('lang', lang);
-        const cssHref = findCDTSCssHref();
+        const cssHref = this.findCDTSCssHref();
         if (cssHref) {
-            var cdtsEnvironment = deriveCDTSEnv(cssHref);
+            var cdtsEnvironment = this.deriveCDTSEnv(cssHref);
         }
         else {
-            var cdtsEnvironment = deriveCDTSEnv(defaultCSSHref);
+            var cdtsEnvironment = this.deriveCDTSEnv(this.defaultCSSHref);
         }
-        await appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-${lang}.js`, 'cdts-main-js', false); //TODO: change from false to sriHash
+        await this.appendScriptElement(document.head, `${cdtsEnvironment.baseUrl}cdts/compiled/wet-${lang}.js`, 'cdts-main-js', false); //TODO: change from false to sriHash
     },
 
-    appendScriptElement = function appendScriptElement(parentElement, src, id, sriHash) {
+    appendScriptElement: function appendScriptElement(parentElement, src, id, sriHash) {
         return new Promise(function cdase(resolve, reject) {
             const elem = document.createElement('script');
             if (id) elem.setAttribute('id', id);
@@ -206,8 +206,8 @@ var cdtsBlazor = {
             parentElement.appendChild(elem);
         });
     },
- 
-    deriveCDTSEnv = function deriveCDTSEnv(cssHref) {
+
+    deriveCDTSEnv: function deriveCDTSEnv(cssHref) {
         if (!cssHref) return null;
         try {
             const url = new URL(cssHref);
@@ -250,11 +250,11 @@ var cdtsBlazor = {
         }
     },
 
-    findCDTSCssHref = function findCDTSCssHref() {
+    findCDTSCssHref: function findCDTSCssHref() {
         return Array.from(document.head.querySelectorAll('link[rel="stylesheet"]')).map((e) => e.getAttribute('href')).find((href) => href?.includes('/cdts/cdts-')) || null;
     },
 
-    resetExitScript = function resetExitScript(exitScriptObj) {
+    resetExitScript: function resetExitScript(exitScriptObj) {
         var elems = document.getElementsByTagName('a');
         wet.utilities.wetExitScript(
             exitScriptObj.displayModal != null ? exitScriptObj.displayModal.toString() : 'undefined',
@@ -269,11 +269,11 @@ var cdtsBlazor = {
             elems);
     },
 
-    resetExitScriptOnPage = function resetExitScriptOnPage() {
-        resetExitScript(exitScriptObj);
+    resetExitScriptOnPage: function resetExitScriptOnPage() {
+        this.resetExitScript(exitScriptObj);
     },
 
-    resetWetComponents = function resetWetComponents(component) {
+    resetWetComponents: function resetWetComponents(component) {
         if (typeof $ === 'undefined') return;
 
         if (Array.isArray(component)) {
@@ -287,12 +287,12 @@ var cdtsBlazor = {
     },
 
     //Functions required by the ChangLang component
-    SetCurrentPage = function SetCurrentPage(page) {
-        currentPage = page;
+    SetCurrentPage: function SetCurrentPage(page) {
+        this.currentPage = page;
     },
 
-    GetCurrentPage = function GetCurrentPage() {
+    GetCurrentPage: function GetCurrentPage() {
         // Invoke to call C# function from JavaScript.
-        DotNet.invokeMethodAsync("GoC.WebTemplate.Blazor", "GetCurrentPage", currentPage);
+        DotNet.invokeMethodAsync("GoC.WebTemplate.Blazor", "GetCurrentPage", this.currentPage);
     }
 };

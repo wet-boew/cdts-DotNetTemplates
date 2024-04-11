@@ -12,7 +12,7 @@
     {
         Object secmenu = BuildLeftMenu(LeftMenuItems);
         string str = JsonPlainSerializationHelper.SerializeToJson(secmenu).ToString();
-        jsRuntime.InvokeVoidAsync("setSectionMenu", str);
+        jsRuntime.InvokeVoidAsync("cdtsBlazor.setSectionMenu", str);
     }
 
         public object BuildLeftMenu(List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuItems)

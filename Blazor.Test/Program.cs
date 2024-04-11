@@ -29,6 +29,6 @@ else
 CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-await js.InvokeVoidAsync("installCDTS", CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
+await js.InvokeVoidAsync("cdtsBlazor.installCDTS", CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
 
 await host.RunAsync();
