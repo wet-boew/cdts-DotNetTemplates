@@ -1,4 +1,5 @@
 using Blazor.Test;
+using GoC.WebTemplate.Blazor.Utils;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.JSInterop;
@@ -29,6 +30,6 @@ else
 CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-await js.InvokeVoidAsync("cdtsBlazor.installCDTS", CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
+await CDTSMain.InstallCDTS(js, CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
 
 await host.RunAsync();

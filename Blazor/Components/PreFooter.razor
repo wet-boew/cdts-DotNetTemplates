@@ -4,9 +4,9 @@
     [Parameter]
     public GoC.WebTemplate.Blazor.Model.PreFooter PreFooterObj { get; set; }
 
-    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    protected override async void OnAfterRender(bool firstRender) // = On Page Load
     {   
-        jsRuntime.InvokeVoidAsync("cdtsBlazor.setPreFooter", JsonPlainSerializationHelper.SerializeToJson(PreFooterObj).ToString());
-        jsRuntime.InvokeVoidAsync("cdtsBlazor.resetWetComponents", "wb-share");
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setPreFooter", JsonPlainSerializationHelper.SerializeToJson(PreFooterObj).ToString());
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.resetWetComponents", "wb-share");
     }
 }

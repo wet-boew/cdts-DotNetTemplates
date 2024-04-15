@@ -4,8 +4,8 @@
     [Parameter]
     public GoC.WebTemplate.Blazor.Model.RefFooter RefFooterObj { get; set; }
 
-    protected override void OnInitialized()
+    protected override async void OnInitialized()
     {   
-        jsRuntime.InvokeVoidAsync("cdtsBlazor.setRefFooter", JsonPlainSerializationHelper.SerializeToJson(RefFooterObj).ToString(), RefFooterObj.ExitSecureSite);
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setRefFooter", JsonPlainSerializationHelper.SerializeToJson(RefFooterObj).ToString(), RefFooterObj.ExitSecureSite);
     }
 }

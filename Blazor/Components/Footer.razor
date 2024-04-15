@@ -4,9 +4,9 @@
     [Parameter]
     public GoC.WebTemplate.Components.Entities.IFooter FooterObj { get; set; }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async void OnAfterRender(bool firstRender)
     {
         string str = JsonPlainSerializationHelper.SerializeToJson(FooterObj).ToString();
-        jsRuntime.InvokeVoidAsync("setFooter", str, FooterObj is GoC.WebTemplate.Blazor.Model.AppFooter);
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setFooter", str, FooterObj is GoC.WebTemplate.Blazor.Model.AppFooter);
     }
 }

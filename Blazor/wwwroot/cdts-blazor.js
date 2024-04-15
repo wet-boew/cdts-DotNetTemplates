@@ -11,6 +11,7 @@ var cdtsBlazor = {
     globalSerializedPreFooter: null,
     globalSerializedSectionMenu: null,
     currentPage: null,
+    cdnEnv: null, 
     defaultCSSHref: "https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css",
 
     //Functions
@@ -233,6 +234,8 @@ var cdtsBlazor = {
                 cdnEnv = baseUrl; //anything else is taken as-is minux the stylesheet's location, including trailing slash
             }
 
+            this.cdnEnv = cdnEnv;
+
             //version
             let version = null;
             if (pathname.includes('/rn/cls/') || pathname.includes('/rn/cdts/')) {
@@ -270,7 +273,7 @@ var cdtsBlazor = {
     },
 
     resetExitScriptOnPage: function resetExitScriptOnPage() {
-        this.resetExitScript(exitScriptObj);
+        this.resetExitScript(this.exitScriptObj);
     },
 
     resetWetComponents: function resetWetComponents(component) {

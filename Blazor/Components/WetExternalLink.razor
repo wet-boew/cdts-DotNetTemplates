@@ -9,8 +9,8 @@
     [Parameter(CaptureUnmatchedValues = true)]
     public Dictionary<string, object> LinkAttributes { get; set; }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async void OnAfterRender(bool firstRender)
     {
-        jsRuntime.InvokeVoidAsync("cdtsBlazor.resetExitScriptOnPage");
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.resetExitScriptOnPage");
     }
 }

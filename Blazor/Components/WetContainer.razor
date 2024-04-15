@@ -12,9 +12,8 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    protected override void OnAfterRender(bool firstRender) // = On Page Load
+    protected override async void OnAfterRender(bool firstRender) // = On Page Load
     {
-        if (WetComponentNames is null) jsRuntime.InvokeVoidAsync("cdtsBlazor.resetWetComponents", WetComponentName);
-        else jsRuntime.InvokeVoidAsync("cdtsBlazor.resetWetComponents", WetComponentNames);
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.resetWetComponents", WetComponentNames is null ? WetComponentName : WetComponentNames);
     }
 }

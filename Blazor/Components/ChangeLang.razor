@@ -9,10 +9,9 @@
     protected override async Task OnInitializedAsync()
     {
         await JS.InvokeVoidAsync("cdtsBlazor.GetCurrentPage");
-        var js = (IJSInProcessRuntime)JS;
 
-        if (CultureInfo.CurrentCulture.Name.StartsWith("en")) js.InvokeVoid("blazorCulture.set", "fr-CA");
-        else js.InvokeVoid("blazorCulture.set", "en-CA");
+        if (CultureInfo.CurrentCulture.Name.StartsWith("en")) await JS.InvokeVoidAsync("blazorCulture.set", "fr-CA");
+        else await JS.InvokeVoidAsync("blazorCulture.set", "en-CA");
 
         Navigation.NavigateTo("/" + currentPage, forceLoad: true);
     }

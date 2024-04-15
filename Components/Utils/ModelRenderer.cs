@@ -62,7 +62,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Top = _model.Builder.BuildAppTop(),
                 PreFooter = _model.Builder.BuildPreFooter(false, false),
                 Footer = _model.Builder.BuildAppFooter(),
-                SecMenu = _model.LeftMenuItems.Any() ? _model.Builder.BuildLeftMenu() : null,
+                SecMenu = _model.LeftMenuItems.Any() ? BuildSectionMenu.BuildLeftMenu(_model.LeftMenuItems) : null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             });

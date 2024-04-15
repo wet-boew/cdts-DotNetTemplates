@@ -5,7 +5,7 @@
     [Parameter]
     public GoC.WebTemplate.Components.Entities.ITop TopObj { get; set; }
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async void OnAfterRender(bool firstRender)
     {
         if (TopObj.LngLinks is null)
         {
@@ -19,7 +19,6 @@
 
         string str = JsonPlainSerializationHelper.SerializeToJson(TopObj).ToString();
 
-        if (TopObj is GoC.WebTemplate.Blazor.Model.Top) jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, false);
-        else jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, true);
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, TopObj is GoC.WebTemplate.Blazor.Model.AppTop);
     }
 }
