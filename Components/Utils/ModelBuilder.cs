@@ -33,7 +33,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Top = BuildTop(isTransactional),
                 PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
                 Footer = BuildFooter(isTransactional),
-                SecMenu = _model.LeftMenuItems.Any() ? BuildSectionMenu.BuildLeftMenu(_model.LeftMenuItems) : null,
+                SecMenu = _model.LeftMenuItems.Any() ? SectionMenuBuilder.BuildLeftMenu(_model.LeftMenuItems) : null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             };

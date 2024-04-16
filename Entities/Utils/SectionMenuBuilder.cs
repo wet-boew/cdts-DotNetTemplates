@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GoC.WebTemplate.Components.Utils
 {
-    public static class BuildSectionMenu
+    public static class SectionMenuBuilder
     {
         /// <summary>
         /// Builds the "LeftMenu" object needed in rendering the CDTS setup JSON

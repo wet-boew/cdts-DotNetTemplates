@@ -15,8 +15,14 @@ var cdtsBlazor = {
     defaultCSSHref: "https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css",
 
     //Functions
-    setRefTop: function setRefTop(serializedRefTop) {
-        this.applyRefTop(serializedRefTop);
+    setRefTop: function setRefTop(serializedSetupBase, exitSecureSiteObj, isApp) {
+        this.exitScriptObj = exitSecureSiteObj;
+        wet.localConfig = { cdnEnv: this.cdnEnv, base: { ...serializedSetupBase, isApplication: isApp, sriEnabled: false, cdtsSetupExcludeCSS: true } }; //eslint-disable-line
+        wet.utilities.applyRefTop(() => {
+            wet.utilities.applyRefFooter(() => { 
+                wet.utilities.onRefFooterCompleted();
+            });
+        });
     },
 
     setTop: function setTop(serializedTop, isApp) {
@@ -88,11 +94,6 @@ var cdtsBlazor = {
         }
     },
 
-    setRefFooter: function setRefFooter(serializedRefFooter, exitSecureSiteObj) {
-        this.exitScriptObj = exitSecureSiteObj;
-        this.applyRefFooter(serializedRefFooter);
-    },
-
     setSectionMenu: function setSectionMenu(serializedSectionMenu) {
         if (this.globalSerializedSectionMenu != serializedSectionMenu) {
             $('#wb-sec, #cdts-main').wrapAll("<div class='container'><div class='row'></div></div>");
@@ -109,74 +110,6 @@ var cdtsBlazor = {
             }
             if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
             this.globalSerializedSectionMenu = serializedSectionMenu;
-        }
-    },
-
-    applyRefTop: function applyRefTop(serializedRefTop) {
-        const parser = new DOMParser();
-
-        const parsedRefTop = JSON.parse(serializedRefTop);
-
-        //---[ Insert refTop at the end of HEAD
-        const tmpDoc = parser.parseFromString('<html><head>' + wet.builder.refTop(parsedRefTop) + '</head></html>', 'text/html');
-        const nodes = tmpDoc.head.childNodes; //NOTE: Must use `childNodes` and not `children` for comments to be inserted
-        const loader = new this.FragmentLoader(document.head, nodes);
-        loader.run();
-    },
-
-    applyRefFooter: function applyRefFooter(serializedRefFooter) {
-        const parser = new DOMParser();
-
-        const parsedRefFooter = JSON.parse(serializedRefFooter);
-
-        //---[ Insert refFooter at the end of BODY
-        const tmpDoc = parser.parseFromString('<html><body>' + wet.builder.refFooter(parsedRefFooter) + '</body></html>', 'text/html');
-        const nodes = tmpDoc.body.childNodes; //NOTE: Must use `childNodes` and not `children` for comments to be inserted
-        const loader = new this.FragmentLoader(document.body, nodes);
-        loader.run();
-    },
-
-    FragmentLoader: function FragmentLoader(targetElem, fragmentNodes) {
-        this.targetElem = targetElem;
-        this.fragmentNodes = fragmentNodes;
-        this.cursorIndex = 0;
-
-        this.nodeScriptClone = function nodeScriptClone(node) {
-            const script = document.createElement("script");
-            script.text = node.innerHTML;
-
-            let i = -1;
-            const attrs = node.attributes
-            let attr;
-            while (++i < attrs.length) script.setAttribute((attr = attrs[i]).name, attr.value);
-
-            return script;
-        };
-
-        this.onScriptLoaded = function onScriptLoaded(/*ev*/) {
-
-            this.run(); //resume processing
-        };
-
-        this.run = function run() {
-            //---[ While we still have nodes to load...
-            while (this.cursorIndex < this.fragmentNodes.length) {
-                if (this.fragmentNodes[this.cursorIndex].tagName != null && this.fragmentNodes[this.cursorIndex].tagName.toUpperCase() === 'SCRIPT') {
-                    //---[ node is a SCRIPT, special treatment (document.importNode(nodes[i], true) does NOT work for scripts)
-                    const tmpScript = this.nodeScriptClone(this.fragmentNodes[this.cursorIndex]);
-                    const hasSrc = tmpScript.hasAttribute('src');
-                    if (hasSrc) tmpScript.onload = this.onScriptLoaded.bind(this); //(else, if there is no src, there'll be no load event so don't attach the handler)
-                    this.targetElem.appendChild(tmpScript);
-                    this.cursorIndex++;
-                    if (hasSrc) return; //GET OUT OF HERE, event handler will call us again to resume when script is finished loading
-                    //(if there is no event handler, consider the script loaded and just keep going)
-                }
-                else {
-                    //---[ node is "normal", just inject
-                    this.targetElem.appendChild(document.importNode(this.fragmentNodes[this.cursorIndex], true));
-                    this.cursorIndex++;
-                }
-            } //of while
         }
     },
 

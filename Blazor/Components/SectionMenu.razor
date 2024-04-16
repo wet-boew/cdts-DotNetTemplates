@@ -10,7 +10,7 @@
 
     protected override async void OnAfterRender(bool firstRender) // = On Page Load
     {
-        Object secmenu = BuildSectionMenu.BuildLeftMenu(LeftMenuItems);
+        Object secmenu = SectionMenuBuilder.BuildLeftMenu(LeftMenuItems);
         string str = JsonPlainSerializationHelper.SerializeToJson(secmenu).ToString();
         await jsRuntime.InvokeVoidAsync("cdtsBlazor.setSectionMenu", str);
     }

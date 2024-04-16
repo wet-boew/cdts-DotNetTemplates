@@ -2,7 +2,7 @@
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 
-    <CDTSLayout RefTop = "@refTopObj" Top = "@topObj" PreFooter = "@preFooterObj" Footer = "@footerObj" RefFooter = "@refFooterObj" LeftMenu = "@leftMenuObj">
+    <CDTSLayout Top = "@topObj" PreFooter = "@preFooterObj" Footer = "@footerObj" LeftMenu = "@leftMenuObj">
         <NavLink href="" Match="NavLinkMatch.All">
             <button class="btn">Home</button>
         </NavLink>
@@ -21,9 +21,7 @@
     </CDTSLayout>
 
 @code{
-
     //Create your objects
-    GoC.WebTemplate.Blazor.Model.RefTop refTopObj = new GoC.WebTemplate.Blazor.Model.RefTop(){};
 
     //For an application template, change the following and create an appTop object instead: 
     GoC.WebTemplate.Blazor.Model.Top topObj = new GoC.WebTemplate.Blazor.Model.Top()
@@ -41,15 +39,6 @@
 
     //For an application template, change the following and create an appFooter object instead:
     GoC.WebTemplate.Blazor.Model.Footer footerObj = new GoC.WebTemplate.Blazor.Model.Footer();
-
-    GoC.WebTemplate.Blazor.Model.RefFooter refFooterObj = new GoC.WebTemplate.Blazor.Model.RefFooter()
-    {
-        ExitSecureSite = new ExitSecureSite()
-        {
-            ExitScript = true,
-            DisplayModal = true
-        }
-    };
 
     List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuObj;
 
