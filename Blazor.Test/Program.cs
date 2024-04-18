@@ -32,11 +32,13 @@ CultureInfo.DefaultThreadCurrentCulture = culture;
 CultureInfo.DefaultThreadCurrentUICulture = culture;
 
 //OPTIONAL: Custom SetupBase object
-SetupBase setupBase = new SetupBase();
-setupBase.ExitSecureSite = new ExitSecureSite()
+SetupBase setupBase = new SetupBase()
 {
-    ExitScript = true,
-    DisplayModal = true
+    ExitSecureSite = new ExitSecureSite()
+    {
+        ExitScript = true,
+        DisplayModal = true
+    }
 };
 
 await CDTSMain.InstallCDTS(js, CultureInfo.CurrentCulture.Parent.IetfLanguageTag, setupBase);

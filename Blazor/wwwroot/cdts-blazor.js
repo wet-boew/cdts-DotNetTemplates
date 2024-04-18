@@ -15,9 +15,10 @@ var cdtsBlazor = {
     defaultCSSHref: "https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css",
 
     //Functions
-    setRefTop: function setRefTop(serializedSetupBase, exitSecureSiteObj, isApp) {
-        this.exitScriptObj = exitSecureSiteObj;
-        wet.localConfig = { cdnEnv: this.cdnEnv, base: { ...serializedSetupBase, isApplication: isApp, sriEnabled: false, cdtsSetupExcludeCSS: true } }; //eslint-disable-line
+    setRefTop: function setRefTop(serializedSetupBase, isApp) {
+        const parsedSetupBase = JSON.parse(serializedSetupBase);
+        this.exitScriptObj = parsedSetupBase.exitSecureSite;
+        wet.localConfig = { cdnEnv: this.cdnEnv, base: { ...parsedSetupBase, isApplication: isApp, sriEnabled: false, cdtsSetupExcludeCSS: true } };
         wet.utilities.applyRefTop(() => {
             wet.utilities.applyRefFooter(() => { 
                 wet.utilities.onRefFooterCompleted();
@@ -42,8 +43,8 @@ var cdtsBlazor = {
                 const e = tmpElem.children[i];
                 document.body.insertAdjacentElement('afterbegin', e);
             }
-            
-            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+
+            this.resetExitScriptForSection();
             this.globalSerializedTop = serializedTop;
         }
     },
@@ -66,17 +67,17 @@ var cdtsBlazor = {
                 document.querySelector('main').insertAdjacentElement('beforeend', e);
             }
 
-            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+            this.resetExitScriptForSection();
             this.globalSerializedPreFooter = serializedPreFooter;
         }
     },
 
     setFooter: function setFooter(seriealizedFooter, isApp) {
         if (this.globalSerializedFooter != seriealizedFooter) {
-            const y = JSON.parse(seriealizedFooter);
+            const parsedFooter = JSON.parse(seriealizedFooter);
             const tmpElem = document.createElement('template'); //footer's content must be directly in <body>, so use "template" element as temporary container
             //(can't use outerHTML on an orphan element)
-            tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appFooter(y) : wet.builder.footer(y)); //eslint-disable-line
+            tmpElem.insertAdjacentHTML('afterbegin', isApp ? wet.builder.appFooter(parsedFooter) : wet.builder.footer(parsedFooter)); //eslint-disable-line
             //inject a "marker/tag" class
             for (let e of tmpElem.children) e.classList.add('cdtsfooter-footer-tag'); //using `children` and not `childNodes`, we only want elements
 
@@ -89,7 +90,8 @@ var cdtsBlazor = {
                 const e = children[i];
                 document.body.appendChild(e);
             }
-            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+
+            this.resetExitScriptForSection();
             this.globalSerializedFooter = seriealizedFooter;
         }
     },
@@ -108,7 +110,8 @@ var cdtsBlazor = {
             else {
                 element.appendChild(tmpElem);
             }
-            if (this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
+
+            this.resetExitScriptForSection();
             this.globalSerializedSectionMenu = serializedSectionMenu;
         }
     },
@@ -220,6 +223,10 @@ var cdtsBlazor = {
         else {
             $(`.${component}`).trigger('wb-init');
         }
+    },
+
+    resetExitScriptForSection: function resetExitScriptForSection() {
+        if (this.exitScriptObj != null && this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
     },
 
     //Functions required by the ChangLang component

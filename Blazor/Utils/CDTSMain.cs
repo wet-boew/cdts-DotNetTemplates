@@ -11,9 +11,8 @@ namespace GoC.WebTemplate.Blazor.Utils
             await js.InvokeVoidAsync("cdtsBlazor.installCDTS", lang);
 
             setupBase ??= new SetupBase();
-            setupBase.ExitSecureSite ??= new ExitSecureSite();
 
-            await js.InvokeVoidAsync("cdtsBlazor.setRefTop", JsonPlainSerializationHelper.SerializeToJson(setupBase).ToString(), setupBase.ExitSecureSite, isApp);
+            await js.InvokeVoidAsync("cdtsBlazor.setRefTop", JsonPlainSerializationHelper.SerializeToJson(setupBase).ToString(), isApp);
         }
     }
 }

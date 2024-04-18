@@ -6,6 +6,7 @@
 
     protected override async void OnAfterRender(bool firstRender)
     {
+        //Serialization done in c# due to custom rules set in DotNetTemplates
         string str = JsonPlainSerializationHelper.SerializeToJson(FooterObj).ToString();
         await jsRuntime.InvokeVoidAsync("cdtsBlazor.setFooter", str, FooterObj is GoC.WebTemplate.Blazor.Model.AppFooter);
     }
