@@ -7,7 +7,7 @@
     protected override async void OnAfterRender(bool firstRender) // = On Page Load
     {   
         //Serialization done in c# due to custom rules set in DotNetTemplates (for example: showShare can be both bool and a list of strings)
-        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setPreFooter", JsonPlainSerializationHelper.SerializeToJson(PreFooterObj).ToString());
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setPreFooter", JsonPlainSerializationHelper.SerializeToJson(PreFooterObj));
         await jsRuntime.InvokeVoidAsync("cdtsBlazor.resetWetComponents", "wb-share");
     }
 }

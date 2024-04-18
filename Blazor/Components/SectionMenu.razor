@@ -13,7 +13,7 @@
         Object secmenu = SectionMenuBuilder.BuildLeftMenu(LeftMenuItems);
 
         //Serialization done in c# due to custom rules set in DotNetTemplates
-        string str = JsonPlainSerializationHelper.SerializeToJson(secmenu).ToString();
+        string str = JsonPlainSerializationHelper.SerializeToJson(secmenu);
         await jsRuntime.InvokeVoidAsync("cdtsBlazor.setSectionMenu", str);
     }
 }

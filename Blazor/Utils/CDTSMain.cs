@@ -12,7 +12,7 @@ namespace GoC.WebTemplate.Blazor.Utils
 
             setupBase ??= new SetupBase();
 
-            await js.InvokeVoidAsync("cdtsBlazor.setRefTop", JsonPlainSerializationHelper.SerializeToJson(setupBase).ToString(), isApp);
+            await js.InvokeVoidAsync("cdtsBlazor.setRefTop", JsonPlainSerializationHelper.SerializeToJson(setupBase), isApp);
         }
     }
 }

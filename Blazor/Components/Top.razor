@@ -18,7 +18,7 @@
         }
 
         //Serialization done in c# due to custom rules set in DotNetTemplates
-        string str = JsonPlainSerializationHelper.SerializeToJson(TopObj).ToString();
+        string str = JsonPlainSerializationHelper.SerializeToJson(TopObj);
         await jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, TopObj is GoC.WebTemplate.Blazor.Model.AppTop);
     }
 }
