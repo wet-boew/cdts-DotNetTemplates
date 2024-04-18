@@ -1,0 +1,8 @@
+[
+  {
+    "outputFileName": "wwwroot/cdts-blazor.min.js",
+    "inputFiles": [
+      "wwwroot/cdts-blazor.js"
+    ]
+  }
+]

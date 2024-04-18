@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GoC.WebTemplate.Components.Entities
 {
@@ -7,5 +8,7 @@ namespace GoC.WebTemplate.Components.Entities
     /// </summary>
     public interface ITop
     {
+        bool TopSecMenu { get; set; }
+        List<LanguageLink> LngLinks { get; set; }
     }
 }

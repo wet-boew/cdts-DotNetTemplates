@@ -110,6 +110,7 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
             get { return (Boolean)this["showFeedbackLink"]; }
             set { this["showFeedbackLink"] = value; }
         }
+
         /// <summary>
         /// URL used to redirect users when they click the feedback link
         /// </summary>

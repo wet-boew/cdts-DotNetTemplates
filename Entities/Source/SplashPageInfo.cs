@@ -1,7 +1,7 @@
 ﻿namespace GoC.WebTemplate.Components.Entities
 {
     public class SplashPageInfo
-    {        
+    {
         public string EnglishHomeUrl { get; set; }
         public string FrenchHomeUrl { get; set; }
         public string EnglishTermsUrl { get; set; }

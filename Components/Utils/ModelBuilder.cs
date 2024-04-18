@@ -33,7 +33,7 @@ namespace GoC.WebTemplate.Components.Utils
                 Top = BuildTop(isTransactional),
                 PreFooter = BuildPreFooter(isTransactional, isUnilingualError),
                 Footer = BuildFooter(isTransactional),
-                SecMenu = _model.LeftMenuItems.Any() ? BuildLeftMenu() : null,
+                SecMenu = _model.LeftMenuItems.Any() ? SectionMenuBuilder.BuildLeftMenu(_model.LeftMenuItems) : null,
                 Splash = null,
                 OnCDTSPageFinalized = _model.HTMLBodyElements
             };
@@ -72,7 +72,7 @@ namespace GoC.WebTemplate.Components.Utils
         public Top BuildTop(bool isTransactional)
         {
             if (_model.Settings.GcToolsModal && _model.CdtsEnvironment.ThemeIsGCWeb())
-                throw new NotSupportedException(string.Format("The {0} is not supported in the {1} enviornment.", nameof(_model.Settings.GcToolsModal), _model.CdtsEnvironment.Name));
+                throw new NotSupportedException($"The {nameof(_model.Settings.GcToolsModal)} is not supported in the {_model.CdtsEnvironment.Name} enviornment.");
 
             return new Top
             {
@@ -109,16 +109,16 @@ namespace GoC.WebTemplate.Components.Utils
                 return new AppTop
                 {
                     AppName = new List<Link> { _model.ApplicationTitle },
-                    SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
-                    SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
+                    SignIn = BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                    SignOut = BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
                     CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                     SubTheme = _model.CdtsEnvironment.SubTheme,
                     Search = _model.Settings.ShowSearch,
                     LngLinks = _model.Builder.BuildLanguageLinkList(),
                     ShowPreContent = _model.ShowPreContent,
                     Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
-                    LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                    AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
+                    LocalPath = GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                    AppSettings = BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                     MenuPath = _model.CustomSiteMenuURL,
                     CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                     TopSecMenu = _model.LeftMenuItems.Any(),
@@ -132,17 +132,17 @@ namespace GoC.WebTemplate.Components.Utils
                 return new AppTopGcIntranet
                 {
                     AppName = new List<Link> { _model.ApplicationTitle },
-                    IntranetTitle = _model.Builder.BuildIntranentTitleList(),
-                    SignIn = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
-                    SignOut = _model.Builder.BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
+                    IntranetTitle = BuildIntranentTitleList(),
+                    SignIn = BuildHideableHrefOnlyLink(_model.Settings.SignInLinkUrl, _model.ShowSignInLink),
+                    SignOut = BuildHideableHrefOnlyLink(_model.Settings.SignOutLinkUrl, _model.ShowSignOutLink),
                     CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                     SubTheme = _model.CdtsEnvironment.SubTheme,
                     Search = _model.Settings.ShowSearch,
                     LngLinks = _model.Builder.BuildLanguageLinkList(),
                     ShowPreContent = _model.ShowPreContent,
                     Breadcrumbs = _model.Builder.BuildBreadcrumbs(),
-                    LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                    AppSettings = _model.Builder.BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
+                    LocalPath = GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                    AppSettings = BuildHideableHrefOnlyLink(_model.AppSettingsURL, true),
                     MenuPath = _model.CustomSiteMenuURL,
                     CustomSearch = _model.CustomSearch == null ? null : new List<CustomSearch> { _model.CustomSearch },
                     TopSecMenu = _model.LeftMenuItems.Any(),
@@ -182,7 +182,7 @@ namespace GoC.WebTemplate.Components.Utils
                     {
                         CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                         DateModified = _model.Builder.BuildDateModified(),
-                        VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                        VersionIdentifier = GetStringForJson(_model.VersionIdentifier),
                         ShowPostContent = _model.Settings.ShowPostContent,
                         ShowFeedback = feedback,
                         ShowShare = new ShareList
@@ -190,7 +190,7 @@ namespace GoC.WebTemplate.Components.Utils
                             Show = _model.Settings.ShowSharePageLink,
                             Enums = _model.SharePageMediaSites
                         },
-                        ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                        ScreenIdentifier = GetStringForJson(_model.ScreenIdentifier)
                     };
                 }
                 else
@@ -204,11 +204,11 @@ namespace GoC.WebTemplate.Components.Utils
                 {
                     CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
                     DateModified = _model.Builder.BuildDateModified(),
-                    VersionIdentifier = _model.Builder.GetStringForJson(_model.VersionIdentifier),
+                    VersionIdentifier = GetStringForJson(_model.VersionIdentifier),
                     ShowPostContent = false,
                     ShowFeedback = new Feedback { Enabled = false },
                     ShowShare = new ShareList { Show = false },
-                    ScreenIdentifier = _model.Builder.GetStringForJson(_model.ScreenIdentifier)
+                    ScreenIdentifier = GetStringForJson(_model.ScreenIdentifier)
                 };
             }
         }
@@ -224,8 +224,8 @@ namespace GoC.WebTemplate.Components.Utils
                 SubTheme = _model.CdtsEnvironment.SubTheme,
                 ShowFooter = !isTransactional,
                 ContactLinks = _model.Builder.BuildContactLinks(),
-                PrivacyLink = _model.Builder.BuildFooterLinkContext(_model.PrivacyLink, !isTransactional),
-                TermsLink = _model.Builder.BuildFooterLinkContext(_model.TermsConditionsLink, !isTransactional),
+                PrivacyLink = BuildFooterLinkContext(_model.PrivacyLink, !isTransactional),
+                TermsLink = BuildFooterLinkContext(_model.TermsConditionsLink, !isTransactional),
                 ContextualFooter = isTransactional ? null : _model.ContextualFooter,
                 HideFooterMain = isTransactional ? false : _model.HideFooterMain,
                 HideFooterCorporate = isTransactional ? false : _model.HideFooterCorporate,
@@ -245,75 +245,17 @@ namespace GoC.WebTemplate.Components.Utils
             return new AppFooter
             {
                 CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
-                SubTheme = _model.Builder.GetStringForJson(_model.CdtsEnvironment.SubTheme),
-                TermsLink = _model.Builder.BuildSingleFooterLink(_model.TermsConditionsLink),
-                PrivacyLink = _model.Builder.BuildSingleFooterLink(_model.PrivacyLink),
+                SubTheme = GetStringForJson(_model.CdtsEnvironment.SubTheme),
+                TermsLink = BuildSingleFooterLink(_model.TermsConditionsLink),
+                PrivacyLink = BuildSingleFooterLink(_model.PrivacyLink),
                 ContactLink = _model.Builder.BuildContactLinks(),
-                LocalPath = _model.Builder.GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                LocalPath = GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
                 FooterSections = _model.Builder.BuildCustomFooterSections,
-                FooterPath = _model.Builder.GetStringForJson(_model.FooterPath)
+                FooterPath = GetStringForJson(_model.FooterPath)
             };
         }
 
-        /// <summary>
-        /// Builds the "LeftMenu" object needed in rendering the CDTS setup JSON
-        /// </summary>
-        public object BuildLeftMenu()
-        {
-            var leftMenuForSerialization = new { sections = new List<object>() };
-
-            // capitalization on anonymous types matters here, CDTS will reject the json objects if not done right
-            foreach (var menu in _model.LeftMenuItems)
-            {
-                var menuForSerialization = new
-                {
-                    sectionName = WebUtility.HtmlEncode(menu.Text),
-                    sectionLink = _model.Builder.GetStringForJson(menu.Href),
-                    newWindow = menu.NewWindow,
-                    menuLinks = new List<object>() //can't be null
-                };
-
-                foreach (var menuItem in menu.Items)
-                {
-                    var item = menuItem as MenuItem;
-                    if (item == null)
-                    {
-                        menuForSerialization.menuLinks.Add(new
-                        {
-                            href = menuItem.Href,
-                            text = menuItem.Text
-                        });
-                    }
-                    else
-                    {
-                        var subMenuForSerialization = new
-                        {
-                            href = item.Href,
-                            text = item.Text,
-                            newWindow = item.NewWindow,
-                            subLinks = item.SubItems.Any() ? new List<object>() : null
-                        };
-
-                        foreach (var subMenuItem in item.SubItems)
-                        {
-                            subMenuForSerialization.subLinks.Add(new
-                            {
-                                subhref = subMenuItem.Href,
-                                subtext = subMenuItem.Text,
-                                newWindow = subMenuItem.NewWindow
-                            });
-                        }
-
-                        menuForSerialization.menuLinks.Add(subMenuForSerialization);
-                    }
-                }
-
-                leftMenuForSerialization.sections.Add(menuForSerialization);
-            }
-
-            return leftMenuForSerialization;
-        }
-
+#pragma warning disable CA1055
         /// <summary>
         /// Builds the URL to be used by the English/francais link at the top of the page for the language toggle.
         /// The method will add or update the "GoCTemplateCulture" querystring parameter with the culture to be set
@@ -322,8 +264,10 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>The URL to be used for the language toggle link</returns>
         public static string BuildLanguageLinkURL(NameValueCollection nameValues)
         {
+            if (nameValues is null) throw new ArgumentNullException(nameof(nameValues));
+
             //make it writeable
-           // var nameValues = new NameValueCollection(queryString.ToString());
+            // var nameValues = new NameValueCollection(queryString.ToString());
 
             //Set the value of the "GoCTemplateCulture" parameter
             nameValues.Set(Constants.QUERYSTRING_CULTURE_KEY,
@@ -332,10 +276,21 @@ namespace GoC.WebTemplate.Components.Utils
                     ? Constants.FRENCH_CULTURE
                     : Constants.ENGLISH_CULTURE);
 
-            string url = string.Concat("?", Uri.EscapeUriString(nameValues.ToString()));
+            StringBuilder buff = new StringBuilder(256);
+            char seperator = '?';
 
-            return url;
+            foreach(string key in nameValues.Keys)
+            {
+                buff.Append(seperator);
+                buff.Append(Uri.EscapeDataString(key));
+                buff.Append('=');
+                buff.Append(Uri.EscapeDataString(nameValues[key]));
+                seperator = '&';
+            }
+
+            return buff.ToString();
         }
+#pragma warning restore CA1055
 
         internal List<Link> BuildContactLinks()
         {
@@ -354,12 +309,12 @@ namespace GoC.WebTemplate.Components.Utils
 
         }
 
-        internal List<FooterLink> BuildSingleFooterLink(FooterLink link)
+        internal static List<FooterLink> BuildSingleFooterLink(FooterLink link)
         {
             return string.IsNullOrWhiteSpace(link?.Href) ? null : new List<FooterLink> { link };
         }
 
-        internal FooterLinkContext BuildFooterLinkContext(FooterLink link, bool showFooter)
+        internal static FooterLinkContext BuildFooterLinkContext(FooterLink link, bool showFooter)
         {
             return string.IsNullOrEmpty(link.Href) ? null : new FooterLinkContext { ShowFooter = showFooter, FooterLink = link };
         }
@@ -422,7 +377,7 @@ namespace GoC.WebTemplate.Components.Utils
             }
         }
 
-        internal List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
+        internal static List<Link> BuildHideableHrefOnlyLink(string href, bool showLink)
         {
             if (!showLink || string.IsNullOrWhiteSpace(href))
                 return null;
@@ -467,13 +422,13 @@ namespace GoC.WebTemplate.Components.Utils
             {
                 ExitScript = true,
                 DisplayModal = _model.Settings.LeavingSecureSiteWarning.DisplayModalWindow,
-                MsgBoxHeader = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.MsgBoxHeader),
+                MsgBoxHeader = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.MsgBoxHeader),
                 ExitURL = _model.Settings.LeavingSecureSiteWarning.RedirectUrl,
                 ExitMsg = WebUtility.HtmlEncode(_model.Settings.LeavingSecureSiteWarning.Message),
-                CancelMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.CancelMessage),
-                YesMsg = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
-                ExitDomains = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
-                TargetWarning = _model.Builder.GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
+                CancelMsg = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.CancelMessage),
+                YesMsg = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.YesMessage),
+                ExitDomains = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.ExcludedDomains),
+                TargetWarning = GetStringForJson(_model.Settings.LeavingSecureSiteWarning.TargetWarning),
                 DisplayModalForNewWindow = _model.Settings.LeavingSecureSiteWarning.DisplayModalForNewWindow
             };
         }
@@ -566,9 +521,9 @@ namespace GoC.WebTemplate.Components.Utils
                 string subTheme = _model.CdtsEnvironment.SubTheme;
                 if (!string.IsNullOrEmpty(subTheme))
                 {
-                    subTheme = subTheme.ToLower();
+                    //subTheme = subTheme.ToLower();
                     //...limit to supported subthemes
-                    if (subTheme.Equals("esdc") || subTheme.Equals("eccc"))
+                    if (subTheme.Equals("esdc", StringComparison.OrdinalIgnoreCase) || subTheme.Equals("eccc", StringComparison.OrdinalIgnoreCase))
                     {
                         fileName = $"cdts-{subTheme}-styles.css";
                     }
@@ -605,9 +560,9 @@ namespace GoC.WebTemplate.Components.Utils
 
         #region GetJson
 
-        internal string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
+        internal static string GetStringForJson(string str) => string.IsNullOrWhiteSpace(str) ? null : str;
 
-        internal string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(CultureInfo.CurrentCulture, formatStr, strs);
+        internal static string GetFormattedJsonString(string formatStr, params object[] strs) => string.IsNullOrWhiteSpace(formatStr) ? null : string.Format(CultureInfo.CurrentCulture, formatStr, strs);
 
         #endregion
     }
