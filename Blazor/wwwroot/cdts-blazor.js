@@ -209,7 +209,7 @@ var cdtsBlazor = {
     },
 
     resetExitScriptOnPage: function resetExitScriptOnPage() {
-        this.resetExitScript(this.exitScriptObj);
+        if (this.exitScriptObj != null && this.exitScriptObj.exitScript && (this.exitScriptObj.displayModal || this.exitScriptObj.exitURL != "" || this.exitScriptObj.exitURL != null)) this.resetExitScript(this.exitScriptObj);
     },
 
     resetWetComponents: function resetWetComponents(component) {
