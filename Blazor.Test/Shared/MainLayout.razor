@@ -1,0 +1,96 @@
+﻿@inherits LayoutComponentBase
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+    <CDTSLayout Top = "@topObj" PreFooter = "@preFooterObj" Footer = "@footerObj" LeftMenu = "@leftMenuObj">
+        <NavLink href="/" Match="NavLinkMatch.All">
+            <button class="btn">Home</button>
+        </NavLink>
+        <NavLink href="externallink">
+            <button class="btn">External Link</button>
+        </NavLink>
+        <NavLink href="wetform">
+            <button class="btn">Wet Form</button>
+        </NavLink>
+            
+        <button class="btn" @onclick="AddSearch">Add Search</button>
+        <button class="btn" @onclick="AddFooter">Add Footer</button>
+        <button class="btn" @onclick="AddLeftMenu">Add left Menu</button>  
+        <button class="btn" @onclick="AddShareBtn">Add Share</button>  
+        @Body
+    </CDTSLayout>
+
+@code{
+    //Create your objects
+
+    //For an application template, change the following and create an appTop object instead: 
+    GoC.WebTemplate.Blazor.Model.Top topObj = new GoC.WebTemplate.Blazor.Model.Top()
+    {
+        Breadcrumbs = new List<Breadcrumb>() { new Breadcrumb() { Href = "", Title = "CDTS", Acronym = "CDTS" } },
+        SiteMenu = true //For an application template, comment this line
+        //AppName = new List<Link>() { new Link() { Text = "App name" } } //For an application template, set your application name
+    };
+
+    GoC.WebTemplate.Blazor.Model.PreFooter preFooterObj = new GoC.WebTemplate.Blazor.Model.PreFooter()
+    {
+        DateModified = "Feb 27th, 2024",
+        ShowShare = new ShareList() { Show = false }
+    };
+
+    //For an application template, change the following and create an appFooter object instead:
+    GoC.WebTemplate.Blazor.Model.Footer footerObj = new GoC.WebTemplate.Blazor.Model.Footer();
+
+    List<GoC.WebTemplate.Components.Entities.MenuSection> leftMenuObj;
+
+    public void AddSearch()
+    {
+        topObj.Search = true;
+    }
+
+    public void AddShareBtn()
+    {
+        preFooterObj.DateModified = "July 20th, 2024";
+        preFooterObj.ShowShare = new ShareList() { Show = true, Enums = new List<SocialMediaSites>() { SocialMediaSites.blogger, SocialMediaSites.facebook } };
+    }
+
+    public void AddFooter()
+    {
+        //For an application template, change the following:
+        footerObj.ShowFooter = true;
+
+        /*footerObj.ContactLink = new List<Link>
+            {
+            new Link { Href = "http://travel.gc.ca/", Text = "Contact Now" },
+            new Link { Href = "http://travel.gc.ca/", Text = "Contact Info" }
+        };*/
+    }
+
+    private void AddLeftMenu()
+    {
+        topObj.TopSecMenu = true;
+
+        var item = new MenuItem
+        {
+            Href = "http://www.tsn.ca",
+            Text = "TSN",
+            SubItems = new List<Link> {
+                new Link { Href="http://www.cbc.ca", Text="sub 1", NewWindow= true },
+                new Link { Href="http://www.rds.ca", Text="sub 2" }
+            }
+        };
+
+        leftMenuObj = new List<MenuSection>
+        {
+            new MenuSection
+            {
+                Text = "Section A",
+                Href = "http://www.servicecanada.gc.ca",
+                NewWindow = true,
+                Items = new List<MenuItem> {
+                    item,
+                    new MenuItem { Href = "http://www.cnn.ca", Text = "CNN" }
+                }
+            }
+        };
+    }
+}

@@ -1,0 +1,19 @@
+﻿@inject IJSRuntime jsRuntime
+
+<nav class="wb-sec col-md-3" typeof="SiteNavigationElement" id="wb-sec" role="navigation">
+    <!-- Write closure fall-back static file -->
+</nav>
+
+@code {
+    [Parameter]
+    public List<GoC.WebTemplate.Components.Entities.MenuSection> LeftMenuItems { get; set; }
+
+    protected override async void OnAfterRender(bool firstRender) // = On Page Load
+    {
+        Object secmenu = SectionMenuBuilder.BuildLeftMenu(LeftMenuItems);
+
+        //Serialization done in c# due to custom rules set in DotNetTemplates
+        string str = JsonPlainSerializationHelper.SerializeToJson(secmenu);
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setSectionMenu", str);
+    }
+}

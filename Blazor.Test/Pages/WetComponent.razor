@@ -1,0 +1,31 @@
+﻿@inject IJSRuntime jsRuntime
+@page "/wetform"
+
+<PageTitle>Wet Component</PageTitle>
+<h3>Wet Component</h3>
+
+<WetContainer WetComponentName = "@wetComponentToRefresh">
+	<div class="wb-frmvld">
+		<form action="#" method="get" id="validation-example">
+			<div class="form-group">
+				<label for="fname1" class="required"><span class="field-name">First name</span> <strong class="required">(required)</strong></label>
+				<input class="form-control" id="fname1" name="fname1" type="text" autocomplete="given-name" required="required" data-rule-minlength="2" />
+				<label for="lname1" class="required"><span class="field-name">Last name</span> <strong class="required">(required)</strong></label>
+				<input class="form-control" id="lname1" name="lname1" type="text" autocomplete="family-name" required="required" data-rule-minlength="2" />
+				<label for="title1" class="required"><span class="field-name">Title</span> <strong class="required">(required)</strong></label>
+				<select class="form-control" id="title1" name="title1" autocomplete="honorific-prefix" required="required">
+					<option label="Select a title"></option>
+					<option value="dr">Dr.</option>
+					<option value="esq">Esq.</option>
+					<option value="mr">Mr.</option>
+					<option value="ms">Ms.</option>
+				</select>
+			</div>
+			<input type="submit" value="Submit" class="btn btn-primary"> <input type="reset" value="Reset page to defaults" class="btn btn-link btn-sm show p-0 mrgn-tp-md">
+		</form>
+	</div>
+</WetContainer>
+
+@code {
+	string wetComponentToRefresh = "wb-frmvld" ;
+}

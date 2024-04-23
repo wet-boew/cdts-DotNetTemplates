@@ -1,0 +1,24 @@
+﻿@inject IJSRuntime jsRuntime
+@inject NavigationManager Navigation
+
+@code {
+    [Parameter]
+    public GoC.WebTemplate.Components.Entities.ITop TopObj { get; set; }
+
+    protected override async void OnAfterRender(bool firstRender)
+    {
+        if (TopObj.LngLinks is null)
+        {
+            List<LanguageLink> links = new List<LanguageLink>()
+            {
+                new LanguageLink(){Href=Navigation.BaseUri + "ChangeLang"}
+            };
+
+            TopObj.LngLinks = links;
+        }
+
+        //Serialization done in c# due to custom rules set in DotNetTemplates
+        string str = JsonPlainSerializationHelper.SerializeToJson(TopObj);
+        await jsRuntime.InvokeVoidAsync("cdtsBlazor.setTop", str, TopObj is GoC.WebTemplate.Blazor.Model.AppTop);
+    }
+}

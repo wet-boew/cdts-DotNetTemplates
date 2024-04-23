@@ -1,0 +1,24 @@
+﻿@using  System.Globalization
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+@page "/ChangeLang"
+
+@code {
+    public static string currentPage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JS.InvokeVoidAsync("cdtsBlazor.GetCurrentPage");
+
+        if (CultureInfo.CurrentCulture.Name.StartsWith("en")) await JS.InvokeVoidAsync("blazorCulture.set", "fr-CA");
+        else await JS.InvokeVoidAsync("blazorCulture.set", "en-CA");
+
+        Navigation.NavigateTo("/" + currentPage, forceLoad: true);
+    }
+
+    [JSInvokable("GetCurrentPage")]
+    public static void GetCurrentPage(string page)
+    {
+        currentPage = page;
+    }
+}
