@@ -1,0 +1,125 @@
+name: DotNetTemplates-DEPLOY-BLAZOR
+# Deploys DotNetTemplates components to Nuget.org
+# Requires environment nuget.org
+# Requires secret variable NUGETORG_DEPLOY_APIKEY variable
+# Requires secret variable DEPLOY_SIGNING_KEY_SNK which must be a base64 encoded byte array that will be used to generate the SNK file.
+#   Secret Variable's value can be created in powershell with:
+#         $pfx_cert = Get-Content 'GoC.WebTemplate.snk' -Encoding Byte
+#         [System.Convert]::ToBase64String($pfx_cert)
+
+on:
+  workflow_dispatch:
+    inputs:
+      # https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#workflow_dispatch
+      deploy_version:
+        description: 'Version to set for all components before build/deploy.'
+        required: true
+        type: string
+      environment:
+        description: 'Deployment target environment'
+        required: true
+        type: environment
+        default: 'nuget.org'
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    environment: ${{ inputs.environment }}
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: |
+          6.0.x
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+      with:
+        nuget-version: '6.0.x'
+
+    - name: Nuget Cache
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.nuget/packages
+          ./packages
+        #key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.config', '**/*.csproj') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
+    - name: Validate version
+      run: |
+        nuget install Nuget.Core -Version 2.14.0 -OutputDirectory .\packages.pipeline
+        Add-Type -Path .\packages.pipeline\NuGet.Core.2.14.0\lib\net40-Client\NuGet.Core.dll
+        [Nuget.SemanticVersion]::Parse($env:DEPLOY_VERSION)
+      env:
+        DEPLOY_VERSION: ${{ inputs.deploy_version }}
+
+    - name: Set versions
+      run: |
+        echo "Setting version to [$env:DEPLOY_VERSION]"
+        .scripts\core-version.ps1 "$env:DEPLOY_VERSION" Blazor\Blazor.csproj
+      env:
+        DEPLOY_VERSION: ${{ inputs.deploy_version }}
+
+    - name: Restore dependencies
+      # Note that is "nuget restore" and not "dotnet restore" (for now)
+      run: nuget restore GoC.WebTemplate.sln -NonInteractive -Verbosity normal
+
+    - name: Create SNK
+      # Creates SNK file from repository variable (created key is not meant for deployment)
+      run: |
+        [IO.File]::WriteAllBytes("GoC.WebTemplate.snk", [System.Convert]::FromBase64String("${{ secrets.DEPLOY_SIGNING_KEY_SNK }}"))
+
+    - name: Build Solution
+      #run: dotnet build --no-restore
+      run: msbuild GoC.WebTemplate.sln /p:Configuration=Release
+
+    - name: Create Nuget Packages
+      run: |
+        dotnet pack Blazor\Blazor.csproj --no-build -c Release -o .
+
+    - name: Upload Blazor
+      uses: actions/upload-artifact@v3
+      with:
+        name: Blazor
+        path: GoC.WebTemplate-Blazor.${{ inputs.deploy_version }}.nupkg
+        if-no-files-found: error
+
+  deploy:
+    runs-on: windows-2019
+
+    needs: build
+
+    strategy:
+
+      matrix:
+        templateComponent: [Blazor]
+
+    environment: ${{ inputs.environment }}
+
+    steps:
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+
+    - name: Download ${{ matrix.templateComponent }}
+      uses: actions/download-artifact@v3
+      with:
+        name: ${{ matrix.templateComponent }}
+
+    - name: Deploy to Nuget repository
+      run: dotnet nuget push "GoC.WebTemplate-${env:DEPLOY_PROJECT}.${env:DEPLOY_VERSION}.nupkg" -k "$env:NUGETORG_DEPLOY_APIKEY" -s https://api.nuget.org/v3/index.json
+      env:
+        DEPLOY_PROJECT: ${{ matrix.templateComponent }}
+        DEPLOY_VERSION: ${{ inputs.deploy_version }}
+        NUGETORG_DEPLOY_APIKEY: ${{ secrets.NUGETORG_DEPLOY_APIKEY }}
