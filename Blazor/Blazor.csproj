@@ -12,6 +12,7 @@
     <AssemblyName>GoC.WebTemplate.Blazor</AssemblyName>
     <RootNamespace>GoC.WebTemplate.Blazor</RootNamespace>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
