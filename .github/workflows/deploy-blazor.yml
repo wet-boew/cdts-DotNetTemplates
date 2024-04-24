@@ -85,7 +85,7 @@ jobs:
 
     - name: Create Nuget Packages
       run: |
-        dotnet pack Blazor\Blazor.csproj --no-build -c Release -o .
+        dotnet pack Blazor\Blazor.csproj -c Release -o .
 
     - name: Upload Blazor
       uses: actions/upload-artifact@v3
