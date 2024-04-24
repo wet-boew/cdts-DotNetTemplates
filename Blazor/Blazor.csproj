@@ -7,7 +7,7 @@
     <PackageProjectUrl>https://github.com/wet-boew/cdts-DotNetTemplates</PackageProjectUrl>
     <Description>CDTS templates that supports Blazor applications.</Description>
     <Authors>Solution Design Services</Authors>
-    <PackageId>GoC.WebTemplate.Blazor</PackageId>
+    <PackageId>GoC.WebTemplate-Blazor</PackageId>
     <Copyright>Copyright (c) His Majesty the King in Right of Canada, as represented by the Employment and Social Development Canada, 2024</Copyright>
     <AssemblyName>GoC.WebTemplate.Blazor</AssemblyName>
     <RootNamespace>GoC.WebTemplate.Blazor</RootNamespace>
