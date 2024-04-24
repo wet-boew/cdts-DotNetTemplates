@@ -281,6 +281,10 @@
       <Project>{a2f753b1-ce70-4455-8f5d-79866fbfc567}</Project>
       <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{01610917-b7ea-44e4-968d-43d9b5aabfc4}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

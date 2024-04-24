@@ -62,6 +62,10 @@
       <Project>{A2F753B1-CE70-4455-8F5D-79866FBFC567}</Project>
       <Name>GoC.WebTemplate.Components</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{01610917-b7ea-44e4-968d-43d9b5aabfc4}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

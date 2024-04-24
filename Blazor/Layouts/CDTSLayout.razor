@@ -1,0 +1,36 @@
+﻿@inherits LayoutComponentBase
+
+    <GoC.WebTemplate.Blazor.Utils.HandleLanguageLink></GoC.WebTemplate.Blazor.Utils.HandleLanguageLink>
+
+    <Top TopObj = "@Top"/>
+
+    @if(@Top.TopSecMenu)
+    {
+        <SectionMenu LeftMenuItems = "@LeftMenu"/>
+    }
+    <main id="cdts-main" property="mainContentOfPage" typeof="WebPageElement" class="@(@Top.TopSecMenu? "col-md-9" : "container")">
+        @ChildContent
+        <PreFooter PreFooterObj = "@PreFooter"/>
+    </main>
+
+    <Footer FooterObj = "@Footer"/>
+
+@code{
+    [Parameter]
+    public GoC.WebTemplate.Components.Entities.ITop Top { get; set; }
+
+    [Parameter]
+    public GoC.WebTemplate.Blazor.Model.PreFooter PreFooter { get; set; }
+
+    [Parameter]
+    public GoC.WebTemplate.Components.Entities.IFooter Footer { get; set; }
+
+    [Parameter]
+    public GoC.WebTemplate.Blazor.Model.RefFooter RefFooter { get; set; }
+
+    [Parameter]
+    public List<GoC.WebTemplate.Components.Entities.MenuSection> LeftMenu  { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

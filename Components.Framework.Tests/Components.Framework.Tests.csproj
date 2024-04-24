@@ -198,6 +198,10 @@
       <Project>{234c77be-844a-49f0-a6ae-7f7a5c82aa5d}</Project>
       <Name>GoC.WebTemplate.Components.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{01610917-b7ea-44e4-968d-43d9b5aabfc4}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
