@@ -14,5 +14,10 @@ namespace GoC.WebTemplate.Blazor.Utils
 
             await js.InvokeVoidAsync("cdtsBlazor.setRefTop", JsonPlainSerializationHelper.SerializeToJson(setupBase), isApp);
         }
+
+        public static async Task ResetWetComponents(IJSRuntime js, List<string> wetComponentNames)
+        {
+            await js.InvokeVoidAsync("cdtsBlazor.resetWetComponents", wetComponentNames);
+        }
     }
 }
