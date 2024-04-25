@@ -19,20 +19,20 @@ Issues can be reported on the [Github repository](https://github.com/wet-boew/cd
 
 To use, in your project: 
 
-  - Add the GoC.WebTemplate.Blazor nuget package to your Blazor project. This should automatically pull in the GoC.WebTEmplate.Entities package as well.
+  - Add the GoC.WebTemplate.Blazor nuget package to your Blazor project. This should automatically pull in the GoC.WebTEmplate.Entities dll as well.
 
   - In index.html, add the stylesheet element to the HEAD section corresponding to the desired template/environment:
 
     | Version                   | Theme                          | Environment | CSS URL                                                                                                                  |
     | ------------------------- | ------------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------ |
-    | specific<br>(e.g. v4_1_0) | gcweb                          | prod        | `<link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-app-styles.css">`     |
-    | specific<br>(e.g. v4_1_0) | gcweb                          | prod        | `<link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css">`         |
-    | specific<br>(e.g. v4_1_0) | gcweb                          | esdcprod    | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcweb/v5_0_0/cdts/cdts-app-styles.css">`        |
-    | specific<br>(e.g. v4_1_0) | gcweb                          | esdcprod    | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcweb/v5_0_0/cdts/cdts-styles.css">`            |
-    | specific<br>(e.g. v4_1_0) | gcintranet                     | prod        | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-styles.css">`       |
-    | specific<br>(e.g. v4_1_0) | gcintranet                     | esdcprod    | `<link rel="stylesheet" href="https://templates.service.gc.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-styles.css">`      |
-    | specific<br>(e.g. v4_1_0) | gcintranet<br>(ESDC sub-theme) | prod        | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-esdc-styles.css">`  |
-    | specific<br>(e.g. v4_1_0) | gcintranet<br>(ESDC sub-theme) | esdcprod    | `<link rel="stylesheet" href="https://templates.service.gc.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-esdc-styles.css">` |
+    | specific<br>(e.g. v5_0_0) | gcweb                          | prod        | `<link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-app-styles.css">`     |
+    | specific<br>(e.g. v5_0_0) | gcweb                          | prod        | `<link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/v5_0_0/cdts/cdts-styles.css">`         |
+    | specific<br>(e.g. v5_0_0) | gcweb                          | esdcprod    | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcweb/v5_0_0/cdts/cdts-app-styles.css">`        |
+    | specific<br>(e.g. v5_0_0) | gcweb                          | esdcprod    | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcweb/v5_0_0/cdts/cdts-styles.css">`            |
+    | specific<br>(e.g. v5_0_0) | gcintranet                     | prod        | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-styles.css">`       |
+    | specific<br>(e.g. v5_0_0) | gcintranet                     | esdcprod    | `<link rel="stylesheet" href="https://templates.service.gc.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-styles.css">`      |
+    | specific<br>(e.g. v5_0_0) | gcintranet<br>(ESDC sub-theme) | prod        | `<link rel="stylesheet" href="https://cdts.service.canada.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-esdc-styles.css">`  |
+    | specific<br>(e.g. v5_0_0) | gcintranet<br>(ESDC sub-theme) | esdcprod    | `<link rel="stylesheet" href="https://templates.service.gc.ca/app/cls/WET/gcintranet/v5_0_0/cdts/cdts-esdc-styles.css">` |
     | rolling                   | gcweb                          | prod        | `<link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/cdts-app-styles.css">`         |
     | rolling                   | gcweb                          | prod        | `<link rel="stylesheet" href="https://www.canada.ca/etc/designs/canada/cdts/gcweb/rn/cdts/cdts-styles.css">`             |
     | rolling                   | gcweb                          | esdcprod    | `<link rel="stylesheet" href="https://cdts.service.canada.ca/rn/cls/WET/gcweb/cdts/cdts-app-styles.css">`                |
@@ -83,7 +83,7 @@ To use, in your project:
     CultureInfo.DefaultThreadCurrentCulture = culture;
     CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-    await js.InvokeVoidAsync("installCDTS", CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
+    await CDTSMain.InstallCDTS(js, CultureInfo.CurrentCulture.Parent.IetfLanguageTag);
 
     await host.RunAsync();
 ```
@@ -100,21 +100,19 @@ To use, in your project:
 
   - The main CDTS component required is `<CDTSLayout></CDTSLayout>`
   
-  - This component requires five parameters which are the sections that need to be configured in any CDTS layout with the sixth being optional
+  - This component requires three parameters which are the sections that need to be configured in any CDTS layout with the fourth being optional
   
  ``` 
-    RefTop
     Top
     PreFooter
     Footer
-    RefFooter
     LeftMenu (optional)
 ```
     
   - Create your objects, set the optional properties, and pass it to the component
 
 ```
-<CDTSLayout RefTop="@refTopObj" Top="@topObj" PreFooter="@obj" Footer="@footerObj" RefFooter="@refFooterObj" LeftMenu="@leftMenuObj">
+<CDTSLayout Top="@topObj" PreFooter="@obj" Footer="@footerObj" LeftMenu="@leftMenuObj">
     @Body
 </CDTSLayout>
 
@@ -125,12 +123,19 @@ To use, in your project:
     ...    
 ```
   - If using the application template, simply use `appTop` and `appFooter` instead
+  - When calling InstallCDTS in Program.cs, one of the optional parameters is a boolean that needs to be set to true if using the application template
+
+## RefTop/RefFooter
+
+ - By default the user does not need to configure the refTop and refFooter objects for the layout. If required, this can be done in Program.cs through the SetupBase object.
+
+ - When calling the InstallCDTS in Program.cs, it can take an optional SetupBase object which you can use to define the RefTop and RefFooter properties such as ExitScript.
 
 ## Handling CDTS Language Switching
 
 The CDTS and the WET library support both English and French languages but only one can be active at any given time. 
 
-Currently, there is a Blazor component called 'ChangeLang' that takes care of language handling when called. 
+Currently, there is a Blazor component called 'ChangeLang' that takes care of language handling by default.
 
 The component stores and retrieves the page name, changes the language and reloads that same page the user was on in the other language. 
 
@@ -185,7 +190,7 @@ Parameters:
 
 ### WetExternalLink
 
-If the [exitSecureSite functionality](https://cdts.service.canada.ca/app/cls/WET/gcweb/v5_0_0/cdts/samples/exitscript-en.html) of CDTS is enabled in the `refFooter` object, the CDTS Blazor component will ensure any external links it has under its control are properly handled.
+If the [exitSecureSite functionality](https://cdts.service.canada.ca/app/cls/WET/gcweb/v5_0_0/cdts/samples/exitscript-en.html) of CDTS is enabled in the `SetupBase` object, the CDTS Blazor component will ensure any external links it has under its control are properly handled.
 To make sure any external link that are within the application's components are handled in a consistent manner, the `WetExternalLink` component should be used.
 (**If normal `<a>` elements are used, the exit popup may show up inconsistently depending on timing**)
 
@@ -202,6 +207,7 @@ Example:
 This function is mainly used by the `WetContainer` component and typically would not be called directly, but is begin made available should there be a need.
 
 This function triggers a re-initialization of all instances of WET components with the specified name(s) currently on the page.
+
 NOTE: WET components should not be confused with Blazor components, WET components are identified by the CSS class used to mark HTML elements they should apply to (e.g. "wb-frmvld")
 
 Parameters:
@@ -209,3 +215,9 @@ Parameters:
   | Name              | Type        | Description                                                                     |
   | ----------------- | ----------- | ------------------------------------------------------------------------------- |
   | wetComponentNames | {...string} | Series of string parameters specifiying the WET components to be re-initialized |
+
+## Test Project
+
+  - The cdts-DotNetTemplates repository contains the Blazor.Test project
+
+  - This is a sample project that shows how a user can setup their Blazor project with CDTS
