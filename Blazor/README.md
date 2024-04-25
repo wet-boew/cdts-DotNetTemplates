@@ -202,7 +202,7 @@ The component stores and retrieves the page name, changes the language and reloa
 OPTIONAL: You can override the language link if you would like handle the language switching on your end by setting the `LngLinks` property of the `top` section:
   - If left `undefined` or set to `lngLinks: null` : The CDTS Blazor component will install its default event. This is the recommended option.
   - If set to an empty array (i.e. `lngLinks: []`) : Disables the generation of the standard CDTS language link.
-  - If set to any other valid value (e.g. `lngLinks: [{"lang": "fr", "href": "/to_french",    "text": "Français"}]`) : A "normal" language link will be generated accordingly and the CDTS language switch event will NOT be attached.
+  - If set to any other valid value (e.g. `lngLinks: [{"lang": "fr", "href": "/to_french", "text": "Français"}]`) : A "normal" language link will be generated accordingly and the CDTS language switch event will NOT be attached.
   The user will be responsible for handling the language switch or the language link will need to add `ChnageLang` as part of the href
 
 ## Using WET Components
