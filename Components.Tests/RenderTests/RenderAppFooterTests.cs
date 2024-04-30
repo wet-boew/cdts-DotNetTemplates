@@ -263,7 +263,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             var currentEnv = new CdtsEnvironment
             {
                 Name = "TEST_LIMIT_3",
-                Theme = "gcweb",
+                Theme = "gcintranet",
                 FooterSectionLimit = 3
             };
             new CdtsEnvironmentCache(cdtsCacheProvider).GetContent()[sut.Settings.Environment] = currentEnv;
@@ -311,5 +311,17 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Render.AppSetup().ToString().Should().Contain("\"footerPath\":\"https://ssl-templates.services.gc.ca/app/cls/WET/global/esdcfooter-eng.html\"");
         }
 
+        [Theory, AutoNSubstituteData]
+        public void RenderContextualFooter(Model sut)
+        {
+            List<Link> links = new List<Link>
+            {
+                new Link() {Text = "Link 1", Href = "google"},
+                new Link() {Text = "Link 2", Href = "google", NewWindow = true}
+            };
+
+            sut.ContextualFooter = new ContextualFooter() { Links = links, Title = "Contextual" };
+            sut.Render.Setup().ToString().Should().Contain("\"contextualFooter\":{\"title\":\"Contextual\",\"links\":[{\"href\":\"google\",\"text\":\"Link 1\"},{\"href\":\"google\",\"text\":\"Link 2\",\"newWindow\":true}]");
+        }
     }
 }
