@@ -5,7 +5,7 @@ namespace GoC.WebTemplate.Components.Entities
     public class AppFooter : IFooter
     {
         public string CdnEnv { get; set; }
-        public List<IFooterSection> FooterSections { get; set; }
+        public ContextualFooter FooterSections { get; set; }
         public List<Link> ContactLink { get; set; }
         public List<FooterLink> TermsLink { get; set; }
         public List<FooterLink> PrivacyLink { get; set; }

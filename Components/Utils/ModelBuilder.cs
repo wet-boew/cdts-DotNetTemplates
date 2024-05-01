@@ -242,17 +242,34 @@ namespace GoC.WebTemplate.Components.Utils
                 throw new InvalidOperationException("Please use a CustomFooter to add a contact link in this environment");
             }
 
-            return new AppFooter
+            if (_model.CdtsEnvironment.ThemeIsGCWeb())
             {
-                CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
-                SubTheme = GetStringForJson(_model.CdtsEnvironment.SubTheme),
-                TermsLink = BuildSingleFooterLink(_model.TermsConditionsLink),
-                PrivacyLink = BuildSingleFooterLink(_model.PrivacyLink),
-                ContactLink = _model.Builder.BuildContactLinks(),
-                LocalPath = GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
-                FooterSections = _model.Builder.BuildCustomFooterSections,
-                FooterPath = GetStringForJson(_model.FooterPath)
-            };
+                return new AppFooter
+                {
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                    SubTheme = GetStringForJson(_model.CdtsEnvironment.SubTheme),
+                    TermsLink = BuildSingleFooterLink(_model.TermsConditionsLink),
+                    PrivacyLink = BuildSingleFooterLink(_model.PrivacyLink),
+                    ContactLink = _model.Builder.BuildContactLinks(),
+                    LocalPath = GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                    FooterSections = _model.Builder.BuildContextualFooter,
+                    FooterPath = GetStringForJson(_model.FooterPath)
+                };
+            }
+            else
+            {
+                return new AppFooterGcIntranet
+                {
+                    CdnEnv = null, //no need for cdnEnv now that we're using CDTS setup function
+                    SubTheme = GetStringForJson(_model.CdtsEnvironment.SubTheme),
+                    TermsLink = BuildSingleFooterLink(_model.TermsConditionsLink),
+                    PrivacyLink = BuildSingleFooterLink(_model.PrivacyLink),
+                    ContactLink = _model.Builder.BuildContactLinks(),
+                    LocalPath = GetFormattedJsonString(_model.CdtsEnvironment.LocalPath, _model.CdtsEnvironment.Theme, _model.Settings.Version),
+                    FooterSections = _model.Builder.BuildCustomFooterSections,
+                    FooterPath = GetStringForJson(_model.FooterPath)
+                };
+            }
         }
 
 #pragma warning disable CA1055
@@ -373,6 +390,44 @@ namespace GoC.WebTemplate.Components.Utils
                         NewWindow = fl.NewWindow,
                         Text = GetStringForJson(fl.Text)
                     }));
+                }
+            }
+        }
+
+        internal ContextualFooter BuildContextualFooter
+        {
+            get
+            {
+                if (_model.ContextualFooter != null) return _model.ContextualFooter;
+
+                if (!_model.FooterSections.Any() && !_model.CustomFooterLinks.Any()) return null;
+
+                if (_model.CdtsEnvironment.FooterSectionLimit > 0)
+                { // use FooterSections
+                    if (!_model.FooterSections.Any())
+                        throw new InvalidOperationException(
+                            "The CustomFooterLinks cannot be used in this enviornment, please use the Contextual Footer");
+
+                    if (_model.FooterSections.Count > _model.CdtsEnvironment.FooterSectionLimit)
+                        throw new InvalidOperationException(
+                            $"The maximum FooterSections allowed for this environment is {_model.CdtsEnvironment.FooterSectionLimit}");
+
+                    return new ContextualFooter()
+                    {
+                        Links =_model.FooterSections.SelectMany(fs => fs.CustomFooterLinks)
+                    };
+                }
+                else
+                { // use CustomFooterLinks
+
+                    if (!_model.CustomFooterLinks.Any())
+                        throw new InvalidOperationException(
+                            "The FooterSections cannot be used in this enviornment, please use the CustomFooterLinks");
+
+                    return new ContextualFooter()
+                    {
+                        Links = _model.CustomFooterLinks
+                    };
                 }
             }
         }

@@ -49,7 +49,8 @@ namespace GoC.WebTemplate.Components.Test
                 .Without(p => p.LeftMenuItems)
                 .Without(p => p.ContactLinks)
                 .Without(p => p.CustomFooterLinks)
-                .Without(p => p.FooterSections));
+                .Without(p => p.FooterSections)
+                .Without(p => p.ContextualFooter));
 
             fixture.Customize<IntranetTitle>(c => c.With(p => p.NewWindow, false));
 

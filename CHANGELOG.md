@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v5.0.1
+
+### Fixes
+
+- Fixing an application footer issue that was unable to render contextual footer
+
 ## v5.0.0
 
 ### New features and improvements

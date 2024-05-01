@@ -6,6 +6,6 @@ namespace GoC.WebTemplate.Components.Entities
     public class ContextualFooter
     {
         public string Title { get; set; }
-        public List<Link> Links { get; set; }
+        public IEnumerable<Link> Links { get; set; }
     }
 }
