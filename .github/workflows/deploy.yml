@@ -102,7 +102,7 @@ jobs:
 
     - name: Create Nuget Packages
       run: |
-        dotnet pack Components\Components.csproj --no-build -c Release -o .
+        dotnet pack Components\Components.csproj -c Release -o .
         dotnet pack Components.Core\Components.Core.csproj --no-build -c Release -o .
         dotnet pack CoreMVC\CoreMVC.csproj --no-build -c Release -o .
         .scripts\package.ps1 Components.Framework Components.Framework
