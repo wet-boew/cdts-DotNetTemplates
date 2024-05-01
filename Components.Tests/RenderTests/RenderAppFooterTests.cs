@@ -214,7 +214,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
 
             //Action act = () => new Utils.ModelRenderer(sut).AppSetup();
             Action act = () => sut.Render.AppSetup();
-            act.Should().Throw<InvalidOperationException>().WithMessage("The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
+            act.Should().Throw<InvalidOperationException>().WithMessage("The CustomFooterLinks cannot be used in this enviornment, please use the Contextual Footer");
         }
         
         [Theory, AutoNSubstituteData]

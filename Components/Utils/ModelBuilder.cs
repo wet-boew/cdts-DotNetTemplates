@@ -406,7 +406,7 @@ namespace GoC.WebTemplate.Components.Utils
                 { // use FooterSections
                     if (!_model.FooterSections.Any())
                         throw new InvalidOperationException(
-                            "The CustomFooterLinks cannot be used in this enviornment, please use the FooterSections");
+                            "The CustomFooterLinks cannot be used in this enviornment, please use the Contextual Footer");
 
                     if (_model.FooterSections.Count > _model.CdtsEnvironment.FooterSectionLimit)
                         throw new InvalidOperationException(
@@ -414,12 +414,7 @@ namespace GoC.WebTemplate.Components.Utils
 
                     return new ContextualFooter()
                     {
-                        Links = new List<Link>(_model.FooterSections.SelectMany(fs => fs.CustomFooterLinks.Select(f1 => new FooterLink
-                        {
-                            Href = f1.Href,
-                            NewWindow = f1.NewWindow,
-                            Text = GetStringForJson(f1.Text)
-                        })))
+                        Links =_model.FooterSections.SelectMany(fs => fs.CustomFooterLinks)
                     };
                 }
                 else
@@ -429,15 +424,9 @@ namespace GoC.WebTemplate.Components.Utils
                         throw new InvalidOperationException(
                             "The FooterSections cannot be used in this enviornment, please use the CustomFooterLinks");
 
-
                     return new ContextualFooter()
                     {
-                        Links = new List<Link>(_model.CustomFooterLinks.Select(fl => new FooterLink
-                        {
-                            Href = fl.Href,
-                            NewWindow = fl.NewWindow,
-                            Text = GetStringForJson(fl.Text)
-                        }))
+                        Links = _model.CustomFooterLinks
                     };
                 }
             }
