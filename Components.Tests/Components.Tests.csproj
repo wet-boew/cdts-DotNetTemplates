@@ -43,6 +43,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Components.Core\Components.Core.csproj" />
     <ProjectReference Include="..\Components\Components.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
   <ItemGroup>

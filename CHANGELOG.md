@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v5.0.2
+
+### Fixes
+
+- Fixing CoreMVC dependency issue
+
 ## v5.0.1
 
 ### Fixes
