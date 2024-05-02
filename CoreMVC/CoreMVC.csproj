@@ -22,10 +22,12 @@
     <AssemblyOriginatorKeyFile>../GoC.WebTemplate.snk</AssemblyOriginatorKeyFile>
     <AssemblyName>GoC.WebTemplate.CoreMVC</AssemblyName>
     <RootNamespace>GoC.WebTemplate.CoreMVC</RootNamespace>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Components.Core\Components.Core.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" PrivateAssets="all"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -36,5 +38,11 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.26" />
     <PackageReference Include="Microsoft.Extensions.Primitives" Version="8.0.0" />
   </ItemGroup>
+
+  <Target DependsOnTargets="BuildOnlySettings;ResolveReferences" Name="CopyProjectReferencesToPackage">
+    <ItemGroup>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+  </Target>
 
 </Project>
