@@ -107,6 +107,24 @@
       "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
       "cdts-esdc-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA==",
       "cdts-labour-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA=="
+    },
+    "gcweb/v5_0_1": {
+      "cdtsPath": "gcweb/v5_0_1/cdts/",
+      "compiled/wet-en.js": "sha512-B938eXEuH3R4A0e7+3EMdeqYV8QUCvdlPk3YqHQ4G0ga/puANt/Cw2+o6VwWwOTcitCK51K3UMHzD5IsWWhZjw==",
+      "compiled/wet-fr.js": "sha512-QHy0TkGpeFa26obDtm7sz7ky4xPJNrLN2CortiG5OomLhlZDtl4JMr8rBWpSS7QY9ThayWdhwOWsPPVsHbtQzA==",
+      "cdts-styles.css": "sha512-9XjF3MCbcyrmE5Xxp3JaLAQsYbSdIrwd8aJGafX6V7T8d7SrkAIrd6HFwsev0eAQrOMtDQ4pO65La3CrVHXo8w==",
+      "cdts-app-styles.css": "sha512-LdDduYGImuTiQIQCuQgOEttk+oe7wg5+rauqTbA/Qi1qTeZuvBcWcoqr5Nn1mHepDsboEadVW9HnHuMAOqJefA==",
+      "cdts-splash-styles.css": "sha512-Ux0hmX3uXA6WcF0i6+JHf0J3Z4HzzxDNyWdV+5mo1qakQwUBeDKMY+xcCcrWHySqStFvndhaJ5OqbIiqaADb9g=="
+    },
+    "gcintranet/v5_0_1": {
+      "cdtsPath": "gcintranet/v5_0_1/cdts/",
+      "compiled/wet-en.js": "sha512-+S0fCsUQUYD9e+SWSoId240kegM/NRVHynrpZqk8hKGg4A134VcCmvNPFn8uOO/UQrTcfKhtZqoRT6y9Hn/jmQ==",
+      "compiled/wet-fr.js": "sha512-Lx8ZcYpAPb6V4B2VR5y6x5cJ480xxWsWLCHpb0RWugsrN0Td+uGc+LpNosSmXVzU/nt0GoeVQC9SEphYWL0lmQ==",
+      "cdts-styles.css": "sha512-dqrBeYZXK6RYeYmF7LSMsQ7efhL3Lalpi1P09QpwGXVBbuEB2lnqzhhVN1yPXTYN/5/4UeRlCf3SDtiXnk6sOQ==",
+      "cdts-splash-styles.css": "sha512-Ux0hmX3uXA6WcF0i6+JHf0J3Z4HzzxDNyWdV+5mo1qakQwUBeDKMY+xcCcrWHySqStFvndhaJ5OqbIiqaADb9g==",
+      "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
+      "cdts-esdc-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA==",
+      "cdts-labour-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA=="
     }
   }
 }
