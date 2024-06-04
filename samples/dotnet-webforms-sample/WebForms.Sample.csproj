@@ -57,14 +57,17 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=2.0.8727.29822, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-Components.4.0.1\lib\net472\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=5.0.8921.28565, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-Components.5.0.3\lib\net472\GoC.WebTemplate.Components.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.Components.Framework, Version=2.0.8727.29828, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-Components.Framework.4.0.1\lib\Net461\GoC.WebTemplate.Components.Framework.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components.Framework, Version=5.0.8921.28535, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-Components.Framework.5.0.3\lib\Net461\GoC.WebTemplate.Components.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.WebForms, Version=2.0.8727.29830, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-WebForms.4.0.1\lib\Net461\GoC.WebTemplate.WebForms.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-Components.5.0.3\lib\net472\GoC.WebTemplate.Entities.dll</HintPath>
+    </Reference>
+    <Reference Include="GoC.WebTemplate.WebForms, Version=5.0.8921.28539, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-WebForms.5.0.3\lib\Net461\GoC.WebTemplate.WebForms.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Html.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
@@ -80,13 +83,13 @@
       <HintPath>packages\Microsoft.Extensions.Primitives.2.2.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Configuration.ConfigurationManager.5.0.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    <Reference Include="System.Configuration.ConfigurationManager, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.OracleClient" />
@@ -98,8 +101,8 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -114,8 +117,8 @@
     </Reference>
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
