@@ -4,7 +4,7 @@
 <li class="wb-slc visible-xs visible-sm visible-md visible-lg"><a class="wb-sl" href="#wb-info">Skip to "About this site"</a></li>
 </ul>
 </nav>
-<header role="banner">
+<header role="banner" aria-label="Intranet Banner">
 <div id="wb-bnr">
 <div id="app-brand">
 <div class="container">
@@ -70,9 +70,9 @@
 </div>
 </div>
 </div>
-<nav role="navigation" id="wb-sm" data-ajax-replace="https://cdts.service.canada.ca/app/cls/WET/gcintranet/v5_0_0/cdts/ajax/sitemenu-eng.html" data-trgt="mb-pnl" class="wb-menu visible-md visible-lg" typeof="SiteNavigationElement">
+<nav role="navigation" id="wb-sm" data-ajax-replace="https://cdts.service.canada.ca/app/cls/WET/gcintranet/v5_0_1/cdts/ajax/sitemenu-eng.html" data-trgt="mb-pnl" class="wb-menu visible-md visible-lg" typeof="SiteNavigationElement" aria-labelledby="cdts-topicsMenu">
 <div class="container nvbar">
-<h2>Topics menu</h2>
+<h2 id="cdts-topicsMenu">Topics menu</h2>
 <div class="row">
 <ul class="list-inline menu">
 <li><a href="https://intranet.canada.ca/psc-fsc/index-eng.asp">News</a></li>
@@ -83,8 +83,8 @@
 </div>
 </div>
 </nav>
-<nav role="navigation" id="wb-bc" property="breadcrumb">
-<h2>You are here:</h2>
+<nav role="navigation" id="wb-bc" property="breadcrumb" aria-labelledby="cdts-breadcrumbPosition">
+<h2 id="cdts-breadcrumbPosition">You are here:</h2>
 <div class="container">
 <ol class="breadcrumb">
 <li><a href="https://intranet.canada.ca/index-eng.asp">Home</a></li>
