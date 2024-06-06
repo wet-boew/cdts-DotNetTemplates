@@ -1,5 +1,13 @@
 # DotNetTemplates Change Log
 
+## v2.11.0
+
+### New features and improvements
+
+- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v5.0.1 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.79
+- Updating static fallback files
+- Bug fixes
+
 ## v2.10.0
 
 ### New features and improvements
