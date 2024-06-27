@@ -1,8 +1,13 @@
 # DotNetTemplates Change Log
 
+## v5.0.4
+
+- [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.2 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.81
+- Updating static fallback files
+
 ## v5.0.3
 
-- [CDTS](https://gccode.ssc-spc.gc.ca/iitb-dgiit/nw-ws/sgdc-cdts) v5.0.1 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.79
+- [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.1 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.79
 - Updating static fallback files
 - Bug fixes
 
