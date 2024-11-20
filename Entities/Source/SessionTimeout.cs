@@ -59,5 +59,11 @@ namespace GoC.WebTemplate.Components.Entities
         /// Additional data to send with the request.
         /// </summary>
         public string AdditionalData { get; set; }
+
+        /// <summary>
+        /// URL used for the Sign In action once the session has expired.
+        /// </summary>
+        [JsonProperty(PropertyName = "signInUrl")]
+        public string SignInUrl { get; set; }
     }
 }
