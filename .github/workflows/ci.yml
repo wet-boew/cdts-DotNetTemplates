@@ -53,9 +53,9 @@ jobs:
       run: nuget restore GoC.WebTemplate.sln -NonInteractive -Verbosity normal
 
     - name: Create SNK
-      # Creates SNK file from repository variable (created key is not meant for deployment)
+      # Creates throw-away SNK file from hard-coded value (created key is not meant for deployment)
       run: |
-        [IO.File]::WriteAllBytes("GoC.WebTemplate.snk", [System.Convert]::FromBase64String("${{ secrets.CI_SIGNING_KEY_SNK }}"))
+        [IO.File]::WriteAllBytes("GoC.WebTemplate.snk", [System.Convert]::FromBase64String("BwIAAAAkAABSU0EyAAQAAAEAAQANuXrKlXvUoiLVNYZHLd7nu2KrubMglyf/v8elReB9LDL6Cr2ThW65Vzqr4yAB4HGEBFNiftVBmhFkqZy1NjqkRRwSwB8XkcaiQDsHUcj1PYbqdVqpGaW5TeVfMXEyWQ6E/ewlB6M8jMhXa5KdnVHW+lNsd9EoXXFe4SGhJlAJsX+BWix44+BO2bwzMlfDa3u3AD0cH4pxaKM2eAzKFgTkRRJOHzeQ+GZTwt8WTEzlJ3G1LoNIwhTPMzEA8Q8VO+Fz85lwv36aVDVbiYrasG962RYuIJ8akUOHt8OGRiMobwWXRWcJgyzRe7FT1kzu/m/Eq1ESQtaD7p0JDA2ZvjjJEeP2q2LGcI93PoFOw64b8wnt2Bc1SiDL5jOleiFJC0JZs6uw4k038bUHH5jWFKTFmz//N0lPXzEK6wkhVzjpW1Et+T1hmIK4ymTvS9hkHPm3n2JnyanrjS7fO1qJmlYLu4NBmX/R2NMhccNPMsQNM4fqsjNEv4DP8kC7inEdiWQkWsZdgTCEsbBynpw2agZP5ZmfJ+0dtaAT9cxayzFspgUQa/ArxYrpCIqtv2P0w5cCSFT9H6SVk+t1K3qzTYDVlXyTtBOAN/Ud5nXfAvmSdMgW+TcR/xtscH1hHe9pTYrev1CRUa2Nj4yYA26RL0qHQ2AHc4PHOexCOG2UPHyLVMoTgD4VxSD0yDg3DGOmjgF3EB0HEjGoqC3FTu64epfQBZz2fQbdmogsqnwIJbqE2KS8q9BhKyCNOMN8Xl4dp7A="))
 
     - name: Build Solution
       #run: dotnet build --no-restore
