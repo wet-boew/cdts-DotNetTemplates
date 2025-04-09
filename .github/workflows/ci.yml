@@ -69,4 +69,4 @@ jobs:
 
     - name: Test Components.Framework
       run: |
-        & packages\xunit.runner.console.2.6.6\tools\net461\xunit.console.exe Components.Framework.Tests\bin\Release\GoC.WebTemplate.Components.Framework.Tests.dll
+        & packages\xunit.runner.console.2.9.3\tools\net461\xunit.console.exe Components.Framework.Tests\bin\Release\GoC.WebTemplate.Components.Framework.Tests.dll
