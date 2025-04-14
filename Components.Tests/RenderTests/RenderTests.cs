@@ -115,7 +115,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         {
             sut.Settings.SessionTimeout.Enabled = true;
             sut.Settings.SessionTimeout.RefreshOnClick = true;
-            sut.Settings.SessionTimeout.TextOverrides = new WebTemplate.Entities.Source.SessionTimeoutTextOverrides
+            sut.Settings.SessionTimeout.TextOverrides = new SessionTimeoutTextOverrides
             {
                 ButtonContinue = "Continue Button",
                 ButtonEnd = "End Button",
