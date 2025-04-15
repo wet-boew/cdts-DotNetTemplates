@@ -111,6 +111,23 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
         }
 
         [Theory, AutoNSubstituteData]
+        public void RenderSessionTimeoutControlTextOverrides(Model sut)
+        {
+            sut.Settings.SessionTimeout.Enabled = true;
+            sut.Settings.SessionTimeout.RefreshOnClick = true;
+            sut.Settings.SessionTimeout.TextOverrides = new SessionTimeoutTextOverrides
+            {
+                ButtonContinue = "Continue Button",
+                ButtonEnd = "End Button",
+                ButtonSignIn = "Sign In Button",
+                TimeoutAlready = "Timeout Already",
+                TimeoutEnd = "Timeout End"
+            };
+            var result = sut.Render.SessionTimeoutControl();
+            result.ToString().Should().ContainAll("class='wb-sessto'", "inactivity", "reactionTime", "sessionalive", "logouturl", "refreshCallbackUrl", "refreshOnClick", "refreshLimit", "method", "additionalData", "textOverrides", "buttonContinue", "buttonEnd", "buttonSignin", "timeoutAlready", "timeoutEnd");
+        }
+
+        [Theory, AutoNSubstituteData]
         public void RenderSessionRefreshRendersDefaultValue(Model sut)
         {
             sut.Settings.SessionTimeout.RefreshOnClick = default;
