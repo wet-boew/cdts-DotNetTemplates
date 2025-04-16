@@ -30,7 +30,16 @@
         <li><code class="wb-prettify">refreshLimit</code>: Sets the amount of time that must pass before an ajax request can be made</li>
         <li><code class="wb-prettify">method</code>: Sets the request method used for ajax requests. Recommended: GET or POST</li>
         <li><code class="wb-prettify">additionalData</code>: Additional data to send with the request</li>
-   </ul>
+        <li><code class="wb-prettify">signInUrl</code>: URL to the Sign-In page</li>
+    </ul>
+    <p>Override the default text and message elements programmatically under <code class="wb-prettify">TextOverrides</code> using the SessionTimeoutTextOverrides object: </p>
+    <ul>
+        <li><code class="wb-prettify">buttonContinue</code>: Text for the Continue Session button</li>
+        <li><code class="wb-prettify">buttonEnd</code>: Text for the End Session button</li>
+        <li><code class="wb-prettify">buttonSignin</code>: Text for the Sign In button</li>
+        <li><code class="wb-prettify">timeoutEnd</code>: Text for the message displayed below the timer</li>
+        <li><code class="wb-prettify">timeoutAlready</code>: Text for the message displayed when the session has expired</li>
+    </ul>
 
     <h4>Notes:</h4>
     <ul>
@@ -64,6 +73,15 @@ WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshOnClick = fals
 WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.RefreshLimit = 3;
 WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.Method = "";
 WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.AdditionalData = "";
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.SignInUrl = "";
+WebTemplateMaster.WebTemplateModel.Settings.SessionTimeout.TextOverrides = new Components.Entities.SessionTimeoutTextOverrides()
+{
+    ButtonContinue = "Continue Button",
+    ButtonEnd = "End Button",
+    ButtonSignIn = "Sign In Button",
+    TimeoutAlready = "Timeout Already",
+    TimeoutEnd = "Timeout End"
+};
         </pre>
     </div>
 

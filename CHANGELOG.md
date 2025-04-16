@@ -3,6 +3,8 @@
 ## v5.0.5
 
 - [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.4 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.85
+- Adding an optional signInUrl property for Session Timeout allowing users to specify the sign-in page url when the session has expired
+- Adding an optional textOverrides property for Session Timeout allowing users to override specific text elements
 - Updating static fallback files
 
 ## v5.0.4
