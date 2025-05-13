@@ -113,42 +113,42 @@ jobs:
         nuget pack WebForms\WebForms.nuspec
 
     - name: Upload Components
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Components
         path: GoC.WebTemplate-Components.${{ inputs.deploy_version }}.nupkg
         if-no-files-found: error
 
     - name: Upload Components.Core
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Components.Core
         path: GoC.WebTemplate-Components.Core.${{ inputs.deploy_version }}.nupkg
         if-no-files-found: error
 
     - name: Upload CoreMVC
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: CoreMVC
         path: GoC.WebTemplate-CoreMVC.${{ inputs.deploy_version }}.nupkg
         if-no-files-found: error
 
     - name: Upload Components.Framework
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Components.Framework
         path: GoC.WebTemplate-Components.Framework.${{ inputs.deploy_version }}.nupkg
         if-no-files-found: error
 
     - name: Upload MVC
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: MVC
         path: GoC.WebTemplate-MVC.${{ inputs.deploy_version }}.nupkg
         if-no-files-found: error
 
     - name: Upload WebForms
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: WebForms
         path: GoC.WebTemplate-WebForms.${{ inputs.deploy_version }}.nupkg
@@ -170,7 +170,7 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Download ${{ matrix.templateComponent }}
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: ${{ matrix.templateComponent }}
 
