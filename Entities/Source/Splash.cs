@@ -15,5 +15,6 @@ namespace GoC.WebTemplate.Components.Entities
         public string TermsFra { get; set; }
         public string NameEng { get; set; }
         public string NameFra { get; set; }
+        public string LanguagePrecedence { get; set; }
     }
 }

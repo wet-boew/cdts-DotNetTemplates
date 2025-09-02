@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v5.0.6
+
+- [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.5 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.89
+- Adding an optional languagePrecedence property for Splash page allowing users to decide the order of official languages
+- Updating static fallback files
+
 ## v5.0.5
 
 - [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.4 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.85

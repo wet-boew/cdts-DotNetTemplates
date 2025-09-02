@@ -111,7 +111,8 @@ namespace GoC.WebTemplate.Components.Utils
                     TermsEng = ModelBuilder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
                     TermsFra = ModelBuilder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
                     NameEng = _model.SplashPageInfo.EnglishName,
-                    NameFra = _model.SplashPageInfo.FrenchName
+                    NameFra = _model.SplashPageInfo.FrenchName,
+                    LanguagePrecedence = _model.SplashPageInfo.LanguagePrecedence
 
                 },
                 OnCDTSPageFinalized = _model.HTMLBodyElements
