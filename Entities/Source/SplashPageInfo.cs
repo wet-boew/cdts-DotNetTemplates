@@ -8,6 +8,7 @@
         public string FrenchTermsUrl { get; set; }
         public string EnglishName { get; set; }
         public string FrenchName { get; set; }
+        public string LanguagePrecedence { get; set; }
 
     }
 }
