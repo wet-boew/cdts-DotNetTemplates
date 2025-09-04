@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using FluentAssertions;
 using Xunit;
+using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
@@ -22,9 +24,10 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink = new Entities.FeedbackLink();
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
+            sut.Contributors = new List<Link>() { new Link() { Text = "ESDC", Href = "esdc.prv" } };
             var result = sut.Render.Setup();
 
-            result.ToString().Should().Contain("{\"versionIdentifier\":\"1.2.3\",\"dateModified\":\"2015-01-09\",\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true,\"screenIdentifier\":\"Test ID\"}");
+            result.ToString().Should().Contain("{\"versionIdentifier\":\"1.2.3\",\"dateModified\":\"2015-01-09\",\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true,\"screenIdentifier\":\"Test ID\",\"contributors\":[{\"href\":\"esdc.prv\",\"text\":\"ESDC\"}]}");
         }
         [Theory, AutoNSubstituteData]
         public void RenderPreFooterWithNullsTest(Model sut)
@@ -37,6 +40,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink = new Entities.FeedbackLink();
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
+            sut.Contributors = null;
             var result = sut.Render.Setup();
 
             result.ToString().Should().Contain("{\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true}");
@@ -53,6 +57,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
+            sut.Contributors = null;
             var result = sut.Render.Setup();
 
             result.ToString().Should().Contain("{\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback url\"},\"showShare\":true}");
@@ -71,6 +76,7 @@ namespace GoC.WebTemplate.Components.Test.RenderTests
             sut.Settings.FeedbackLink.Show = true;
             sut.Settings.FeedbackLink.Url = "test feedback url";
             sut.Settings.FeedbackLink.UrlFr = "test feedback french url";
+            sut.Contributors = null;
             var result = sut.Render.Setup();
 
             result.ToString().Should().Contain("{\"showFeedback\":{\"enabled\":true,\"legacyBtnUrl\":\"test feedback french url\"},\"showShare\":true}");
