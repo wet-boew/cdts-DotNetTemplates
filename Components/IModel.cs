@@ -279,5 +279,11 @@ namespace GoC.WebTemplate.Components
         /// <param name="fileName">static file name to retreive</param>
         /// <returns>A string containing the content of the file.</returns>
         HtmlString LoadStaticFile(string fileName);
+
+        /// <summary>
+        /// Displays the contributors section right before the footer
+        /// Set by application programmatically
+        /// </summary>
+        List<Link> Contributors { get; set; }
     }
 }

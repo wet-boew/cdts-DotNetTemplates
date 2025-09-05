@@ -341,5 +341,11 @@ namespace GoC.WebTemplate.Components
         /// Only available in the Application Template in GCWEB enviornment
         /// </summary>
         public HeaderMenu HeaderMenu { get; set; }
+
+        /// <summary>
+        /// Displays the contributors section right before the footer
+        /// Set by application programmatically
+        /// </summary>
+        public List<Link> Contributors { get; set; }
     }
 }
