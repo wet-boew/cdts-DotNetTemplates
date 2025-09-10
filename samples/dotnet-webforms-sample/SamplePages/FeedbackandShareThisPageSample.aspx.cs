@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.WebForms;
 
@@ -18,6 +19,9 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
 
             WebTemplateMaster.WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.facebook);
             WebTemplateMaster.WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.twitter);
+
+            //Display the Contributors pattern
+            WebTemplateMaster.WebTemplateModel.Contributors = new List<Link>() { new Link() { Text = "ESDC", Href = "esdc.prv" } };
 
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
         }

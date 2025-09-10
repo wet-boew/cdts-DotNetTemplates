@@ -13,6 +13,10 @@ namespace GoC.WebTemplate.WebForm.Sample.SamplePages
             WebTemplateMaster.WebTemplateModel.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
             WebTemplateMaster.WebTemplateModel.SplashPageInfo.EnglishName = "[My web asset]";
             WebTemplateMaster.WebTemplateModel.SplashPageInfo.FrenchName = "[Mon actif web]";
+
+            //Select the order in which the official languages appear in
+            //Values can either be "English" or "French" (English is default)
+            //WebTemplateMaster.WebTemplateModel.SplashPageInfo.LanguagePrecedence = "French";
         }
         
     }

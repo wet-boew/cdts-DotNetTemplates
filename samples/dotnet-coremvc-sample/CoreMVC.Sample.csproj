@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="GoC.WebTemplate-CoreMVC" Version="5.0.5" />
+    <PackageReference Include="GoC.WebTemplate-CoreMVC" Version="5.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 

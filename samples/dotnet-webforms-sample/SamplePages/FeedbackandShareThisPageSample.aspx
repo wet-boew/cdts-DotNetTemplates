@@ -48,5 +48,16 @@
             //Note: For your solution, the values should be coming from your culture sensitive source ex: resource files, db etc...)
         </pre>
     </div>
+
+    <h2>Contributors</h2>
+    <p>The contributors pattern is a way for the users to pattern to highlight institutions/organizations that have contributed to the content on a webpage.</p>
+    <p>Set programmatically via the <code class="wb-prettify">Contributors</code> property of the Web Template.</p>
+    <div class="wb-prettify all-pre lang-vb linenums">
+    <h3>C# Code Sample</h3>
+        <pre>
+            //Display the Contributors pattern
+            WebTemplateModel.Contributors = new List&lt;Link&gt;() { new Link() { Text = "ESDC", Href = "esdc.prv" } };
+        </pre>
+    </div>
     <!-- #include virtual="SamplesNavigation.html" -->
 </asp:Content>

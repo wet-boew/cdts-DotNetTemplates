@@ -96,6 +96,9 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.whatsapp);
             WebTemplateModel.SharePageMediaSites.Add(SocialMediaSites.yahoomail);
 
+            //Display the Contributors pattern
+            WebTemplateModel.Contributors = new List<Link>() { new Link() { Text = "ESDC", Href = "esdc.prv" } };
+
             return View();
         }
 
@@ -295,6 +298,11 @@ namespace GoC.WebTemplate.MVC.Sample.Controllers
             WebTemplateModel.SplashPageInfo.FrenchTermsUrl = "http://www.canada.ca/fr/transparence/avis.html";
             WebTemplateModel.SplashPageInfo.EnglishName = "[My web asset]";
             WebTemplateModel.SplashPageInfo.FrenchName = "[Mon actif web]";
+
+            //Select the order in which the official languages appear in
+            //Values can either be "English" or "French" (English is default)
+            //WebTemplateModel.SplashPageInfo.LanguagePrecedence = "French";
+
             return View();
         }
 	}

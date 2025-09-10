@@ -49,17 +49,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GoC.WebTemplate.Components, Version=5.0.9264.32634, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-Components.5.0.5\lib\net472\GoC.WebTemplate.Components.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components, Version=5.0.9383.31354, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-Components.5.0.6\lib\net472\GoC.WebTemplate.Components.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.Components.Framework, Version=5.0.9264.32557, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-Components.Framework.5.0.5\lib\Net461\GoC.WebTemplate.Components.Framework.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.Components.Framework, Version=5.0.9383.31338, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-Components.Framework.5.0.6\lib\Net461\GoC.WebTemplate.Components.Framework.dll</HintPath>
     </Reference>
     <Reference Include="GoC.WebTemplate.Entities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-Components.5.0.5\lib\net472\GoC.WebTemplate.Entities.dll</HintPath>
+      <HintPath>packages\GoC.WebTemplate-Components.5.0.6\lib\net472\GoC.WebTemplate.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="GoC.WebTemplate.MVC, Version=5.0.9264.32561, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
-      <HintPath>packages\GoC.WebTemplate-MVC.5.0.5\lib\Net461\GoC.WebTemplate.MVC.dll</HintPath>
+    <Reference Include="GoC.WebTemplate.MVC, Version=5.0.9383.31339, Culture=neutral, PublicKeyToken=1461a53e67b98f2c, processorArchitecture=MSIL">
+      <HintPath>packages\GoC.WebTemplate-MVC.5.0.6\lib\Net461\GoC.WebTemplate.MVC.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Html.Abstractions, Version=2.2.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Html.Abstractions.2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Html.Abstractions.dll</HintPath>
