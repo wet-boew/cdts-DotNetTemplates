@@ -397,7 +397,8 @@ namespace GoC.WebTemplate.Components.Utils
                 termsEng = ModelBuilder.GetStringForJson(_model.SplashPageInfo.EnglishTermsUrl),
                 termsFra = ModelBuilder.GetStringForJson(_model.SplashPageInfo.FrenchTermsUrl),
                 nameEng = _model.SplashPageInfo.EnglishName,
-                nameFra = _model.SplashPageInfo.FrenchName
+                nameFra = _model.SplashPageInfo.FrenchName,
+                languagePrecedence = _model.SplashPageInfo.LanguagePrecedence
             });
         }
     }
