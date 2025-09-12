@@ -1,6 +1,7 @@
 using GoC.WebTemplate.Components.Utils;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 
@@ -17,5 +18,6 @@ namespace GoC.WebTemplate.Components.Entities
         [JsonConverter(typeof(ShareListConverter))]
         public ShareList ShowShare { get; set; }
         public string ScreenIdentifier { get; set; }
+        public List<Link> Contributors { get; set; }
     }
 }
