@@ -155,7 +155,8 @@ namespace GoC.WebTemplate.Components.Utils
                     Show = _model.Settings.ShowSharePageLink,
                     Enums = _model.SharePageMediaSites
                 },
-                ScreenIdentifier = ModelBuilder.GetStringForJson(_model.ScreenIdentifier)
+                ScreenIdentifier = ModelBuilder.GetStringForJson(_model.ScreenIdentifier),
+                Contributors = _model.Contributors
             });
         }
 
