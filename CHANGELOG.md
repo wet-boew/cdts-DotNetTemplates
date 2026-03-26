@@ -1,5 +1,11 @@
 # DotNetTemplates Change Log
 
+## v6.0.0
+
+### New features and improvements
+
+- **IMPORTANT** .NET 6.0 is no longer supported. This version now supports .NET 8.0. The dependencies have been updated accordingly.
+
 ## v5.0.6
 
 - [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.5 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.89
