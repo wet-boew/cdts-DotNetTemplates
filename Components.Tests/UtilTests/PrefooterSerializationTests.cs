@@ -2,13 +2,13 @@ using System.Collections.Generic;
 using FluentAssertions;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Test.UtilTests
 {
     public class PrefooterSerializationTests
     {
-        [Fact]
+        [Test]
         public void RenderShowShareAsList()
         {
             var preFooter = new PreFooter
@@ -26,7 +26,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             var json = JsonSerializationHelper.SerializeToJson(preFooter);
             json.ToString().Should().Contain("\"showShare\":[\"blogger\",\"diigo\"]");
         }
-        [Fact]
+        [Test]
         public void RenderShowShareAsTrue()
         {
             var preFooter = new PreFooter
@@ -41,7 +41,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             json.ToString().Should().Contain("\"showShare\":true");
         }
 
-        [Fact]
+        [Test]
         public void RenderShowShareAsFalse()
         {
             var preFooter = new PreFooter
@@ -56,7 +56,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             json.ToString().Should().Contain("\"showShare\":false");
             
         }
-        [Fact]
+        [Test]
         public void RenderShowFeedbackAsTrue()
         {
             var preFooter = new PreFooter
@@ -70,7 +70,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             json.ToString().Should().Contain("\"showFeedback\":{\"enabled\":true}");
         } 
 
-        [Fact]
+        [Test]
         public void RenderShowFeedbackURL()
         {
             var preFooter = new PreFooter
@@ -86,7 +86,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             json.ToString().Should().Contain("\"showFeedback\":{\"enabled\":true,\"text\":\"Contact us\",\"href\":\"google.ca\"");
         }
 
-        [Fact]
+        [Test]
         public void RenderShowFeedbackAsFalse()
         {
             var preFooter = new PreFooter
@@ -100,7 +100,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             json.ToString().Should().Contain("\"showFeedback\":{}");
         }
 
-        [Fact]
+        [Test]
         public void RenderShowFeedbackHiddenFields()
         {
             var preFooter = new PreFooter

@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components.Framework.Utils;
 using System.Web;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Framework.Tests.Utils
 {
     public class SessionControlerTests
     {
-        [Fact]
+        [Test]
         public void SessionCanBeAccessed()
         {
             SessionCreaterTestHelper.CreateSession();

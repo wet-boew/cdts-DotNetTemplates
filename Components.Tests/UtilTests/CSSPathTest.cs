@@ -1,7 +1,7 @@
 ﻿using GoC.WebTemplate.Components.Test;
 using GoC.WebTemplate.Components.Utils;
 
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Tests.UtilTests
 {

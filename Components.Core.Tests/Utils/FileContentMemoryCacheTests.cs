@@ -1,13 +1,13 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components.Core.Utils.Caching;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Core.Tests.Utils
 {
     public class FileContentMemoryCacheTests
     {
         [Theory, AutoNSubstituteData]
-        void GetFullFilePath(FileContentMemoryCacheProvider sut)
+        public void GetFullFilePath(FileContentMemoryCacheProvider sut)
         {
             var fileName = "appsettings.json";
             var staticFilePath = "tests//core";

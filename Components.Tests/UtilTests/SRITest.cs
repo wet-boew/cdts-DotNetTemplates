@@ -1,6 +1,6 @@
 ﻿using GoC.WebTemplate.Components.Test;
 
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Tests.UtilTests
 {
@@ -13,9 +13,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.Settings.Version = "v999_999_999";
             sut.CdtsEnvironment.Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/";
 
-            Assert.Contains("v999_999_999", sut.CSSPath);
-            Assert.DoesNotContain("integrity", sut.CSSPath);
-            Assert.DoesNotContain("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
+            Assert.That(sut.CSSPath, Does.Contain("v999_999_999"));
+            Assert.That(sut.CSSPath, Does.Not.Contain("integrity"));
+            Assert.That(sut.Builder.BuildWetJsPathAttributes("en"), Does.Not.Contain("integrity"));
         }
 
         [Theory, AutoNSubstituteData]
@@ -26,9 +26,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcweb";
             sut.CdtsEnvironment.Path = "https://www.canada.ca/etc/designs/canada/cdts/{2}/{3}cdts/";
 
-            Assert.Contains("v5_0_5", sut.CSSPath);
+            Assert.That(sut.CSSPath, Does.Contain("v5_0_5"));
             //Assert.Contains("integrity", sut.CSSPath); NOTE: For version v5_0_5, the CSS path does not have SRI
-            Assert.Contains("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
+            Assert.That(sut.Builder.BuildWetJsPathAttributes("en"), Does.Contain("integrity"));
         }
 
         [Theory, AutoNSubstituteData]
@@ -39,9 +39,9 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
             sut.CdtsEnvironment.Theme = "gcintranet";
             sut.CdtsEnvironment.Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/";
 
-            Assert.Contains("rn", sut.CSSPath);
-            Assert.DoesNotContain("integrity", sut.CSSPath);
-            Assert.DoesNotContain("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
+            Assert.That(sut.CSSPath, Does.Contain("rn"));
+            Assert.That(sut.CSSPath, Does.Not.Contain("integrity"));
+            Assert.That(sut.Builder.BuildWetJsPathAttributes("en"), Does.Not.Contain("integrity"));
         }
 
         [Theory, AutoNSubstituteData]
@@ -49,8 +49,8 @@ namespace GoC.WebTemplate.Components.Tests.UtilTests
         {
             sut.Settings.SRIEnabled = false;
 
-            Assert.DoesNotContain("integrity", sut.CSSPath);
-            Assert.DoesNotContain("integrity", sut.Builder.BuildWetJsPathAttributes("en"));
+            Assert.That(sut.CSSPath, Does.Not.Contain("integrity"));
+            Assert.That(sut.Builder.BuildWetJsPathAttributes("en"), Does.Not.Contain("integrity"));
         }
     }
 }

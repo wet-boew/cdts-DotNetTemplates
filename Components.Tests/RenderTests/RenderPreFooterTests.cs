@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
 using FluentAssertions;
-using Xunit;
+using NUnit.Framework;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
 

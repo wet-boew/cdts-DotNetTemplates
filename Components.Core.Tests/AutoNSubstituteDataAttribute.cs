@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using AutoFixture.AutoNSubstitute;
-using AutoFixture.Xunit2;
+using AutoFixture.NUnit4;
 
 namespace GoC.WebTemplate.Components.Core.Tests
 {

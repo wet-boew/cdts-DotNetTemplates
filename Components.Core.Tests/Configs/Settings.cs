@@ -4,7 +4,7 @@ using GoC.WebTemplate.Components.Configs.Schemas;
 using GoC.WebTemplate.Components.Utils.Caching;
 using Microsoft.Extensions.Configuration;
 using System.IO;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Core.Tests.Configs
 {

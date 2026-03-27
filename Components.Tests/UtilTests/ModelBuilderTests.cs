@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Globalization;
 using System.Threading;
 using System.Web;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Test.UtilTests
 {
@@ -13,7 +13,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
         /// <summary>
         /// Default link is to french as the current culture is english
         /// </summary>
-        [Fact]
+        [Test]
         public void LanguageLinkSetsFrenchinEnglishCulture()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Constants.ENGLISH_CULTURE);
@@ -21,7 +21,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             result.Should().Be("?" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.FRENCH_CULTURE);
         }
         
-        [Fact]
+        [Test]
         public void LanguageLinkSetsEnglishinFrenchCulture()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Constants.FRENCH_CULTURE);
@@ -29,7 +29,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             result.Should().Be("?" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.ENGLISH_CULTURE);
         }
 
-        [Fact]
+        [Test]
         public void LanguageLinkDoesntChangeOtherValues()
         {
             var customQueryString = new NameValueCollection
@@ -42,7 +42,7 @@ namespace GoC.WebTemplate.Components.Test.UtilTests
             result.Should().Contain("?" + "fancypants=homeboy&" + Constants.QUERYSTRING_CULTURE_KEY + "=" + Constants.FRENCH_CULTURE);
         }
 
-        [Fact]
+        [Test]
         public void LanguageLinkTestEncoding()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo(Constants.ENGLISH_CULTURE);
