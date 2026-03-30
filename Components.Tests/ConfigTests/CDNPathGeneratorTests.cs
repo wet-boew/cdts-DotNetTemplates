@@ -1,8 +1,8 @@
-using AutoFixture.Xunit2;
+using AutoFixture.NUnit4;
 using FluentAssertions;
 using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Utils.Caching;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Test.ConfigTests
 {

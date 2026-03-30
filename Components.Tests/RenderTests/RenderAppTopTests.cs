@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Xunit;
-using AutoFixture.Xunit2;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Configs.Cdts;
 using NSubstitute;
+using NUnit.Framework;
+using AutoFixture.NUnit4;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {

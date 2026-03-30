@@ -1,7 +1,7 @@
 ﻿using System;
 using FluentAssertions;
 using GoC.WebTemplate.Components.Utils.Caching;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Test.UtilTests
 {

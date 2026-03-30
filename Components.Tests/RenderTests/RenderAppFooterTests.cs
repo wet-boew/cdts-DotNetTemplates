@@ -1,11 +1,11 @@
-﻿using AutoFixture.Xunit2;
+﻿using AutoFixture.NUnit4;
 using FluentAssertions;
 using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils.Caching;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using Xunit;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {

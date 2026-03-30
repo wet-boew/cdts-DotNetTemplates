@@ -3,7 +3,7 @@ using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils.Caching;
 using System.Web;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Framework.Tests
 {

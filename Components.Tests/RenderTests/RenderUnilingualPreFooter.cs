@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {

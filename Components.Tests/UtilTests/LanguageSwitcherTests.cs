@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using GoC.WebTemplate.Components.Utils;
+using NUnit.Framework;
 using System.Threading;
-using Xunit;
 
 namespace GoC.WebTemplate.Components.Test.UtilTests
 {

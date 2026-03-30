@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using AutoFixture.AutoNSubstitute;
-using AutoFixture.Xunit2;
+using AutoFixture.NUnit4;
 using GoC.WebTemplate.Components.Configs;
 using GoC.WebTemplate.Components.Configs.Cdts;
 using GoC.WebTemplate.Components.Entities;
 using GoC.WebTemplate.Components.Utils;
 using GoC.WebTemplate.Components.Utils.Caching;
 using NSubstitute;
-using Xunit;
-using Xunit.Sdk;
 
 namespace GoC.WebTemplate.Components.Test
 {
@@ -90,13 +88,10 @@ namespace GoC.WebTemplate.Components.Test
         }
     }
 
-    public class InlineAutoNSubstituteDataAttribute : CompositeDataAttribute
+    public class InlineAutoNSubstituteDataAttribute : InlineAutoDataAttribute
     {
         public InlineAutoNSubstituteDataAttribute(params object[] values)
-            : base(new DataAttribute[]
-            {
-                new InlineDataAttribute(values), new AutoNSubstituteDataAttribute()
-            })
+            : base(() => new Fixture().Customize(new WebTemplateCustomization()))
         {
         }
     }

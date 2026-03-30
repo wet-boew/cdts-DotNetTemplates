@@ -2,7 +2,7 @@ using FluentAssertions;
 using GoC.WebTemplate.Components.Entities;
 using NSubstitute;
 using System;
-using Xunit;
+using NUnit.Framework;
 
 namespace GoC.WebTemplate.Components.Test.RenderTests
 {
