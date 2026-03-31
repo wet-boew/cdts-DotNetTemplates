@@ -29,25 +29,26 @@ jobs:
     environment: ${{ inputs.environment }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
         dotnet-version: |
           3.1.x
           5.0.x
           6.0.x
+          8.0.x
 
     - name: Setup MSBuild
-      uses: microsoft/setup-msbuild@v1
+      uses: microsoft/setup-msbuild@v2
 
     - name: Setup NuGet
-      uses: NuGet/setup-nuget@v1
+      uses: NuGet/setup-nuget@v2
       with:
-        nuget-version: '6.0.x'
+        nuget-version: '6.x'
     - name: Nuget Cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.nuget/packages
@@ -98,7 +99,7 @@ jobs:
 
     - name: Test Components.Framework
       run: |
-        & packages\xunit.runner.console.2.9.3\tools\net461\xunit.console.exe Components.Framework.Tests\bin\Release\GoC.WebTemplate.Components.Framework.Tests.dll
+        & packages\NUnit.ConsoleRunner.3.22.0\tools\nunit3-console.exe Components.Framework.Tests\bin\Release\GoC.WebTemplate.Components.Framework.Tests.dll
 
     - name: Create Nuget Packages
       run: |
@@ -165,9 +166,9 @@ jobs:
 
     steps:
     - name: Setup .NET Core
-      uses: actions/setup-dotnet@v3
+      uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 6.0.x
+        dotnet-version: 8.0.x
 
     - name: Download ${{ matrix.templateComponent }}
       uses: actions/download-artifact@v4
