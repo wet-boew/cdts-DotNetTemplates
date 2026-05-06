@@ -78,7 +78,7 @@
     "gcweb/v4_1_0": {
       "cdtsPath": "gcweb/v4_1_0/cdts/",
       "compiled/wet-en.js": "sha512-lSU0LI1sjHEUkRASTTpDHaLg0kL1H7DT4cbPXjtKepizDqqLmkF8vjmUHvSx2QaBV3w0kPe+l50d0V8K2TJQ0A==",
-      "compiled/wet-fr.js": "sha512-vaMZcx7BWb8z8v4Ty3+8ym9l4iUkj8hsARRGnwLAaK6+ruGocK79RGehRUKNBBEQMtj8h2fNz3NlvP2wfXPxjQ==",
+      "compiled/wet-fr.js": "sha512-vaMZcx7BWb8z8v4Ty3+8ym9l4iUkj8hsARRGnwLAaK6+ruGocK79RGehRUKNBBEQMtj8h2fNz3NlvP2wfXPxjQ=="
     },
     "gcintranet/v4_1_0": {
       "cdtsPath": "gcintranet/v4_1_0/cdts/",
@@ -174,6 +174,24 @@
       "cdtsPath": "gcintranet/v5_0_5/cdts/",
       "compiled/wet-en.js": "sha512-/91HsmqXE2VA+cwwn/LcEZbOqVEQLyXBAZqM9XaDPhyKL6nBNz3CwYttb8deNGsyhM257myAxS0L/WSCTaAf/Q==",
       "compiled/wet-fr.js": "sha512-NltCtgF2wSp2R8GMvtc7ni3OnaoDdvwe7uunhuB2qarNf+BfpclC1QlmVL66MhXMFImmf7toPRrvF93mYk7a7Q==",
+      "cdts-styles.css": "sha512-dqrBeYZXK6RYeYmF7LSMsQ7efhL3Lalpi1P09QpwGXVBbuEB2lnqzhhVN1yPXTYN/5/4UeRlCf3SDtiXnk6sOQ==",
+      "cdts-splash-styles.css": "sha512-Ux0hmX3uXA6WcF0i6+JHf0J3Z4HzzxDNyWdV+5mo1qakQwUBeDKMY+xcCcrWHySqStFvndhaJ5OqbIiqaADb9g==",
+      "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
+      "cdts-esdc-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA==",
+      "cdts-labour-styles.css": "sha512-K10RfHMGrIcS+36XhwMqShTiifXP/cTrMN4y66HPJOeRipyaRtQvrK4VgmodS2QK2IJIyXWSwS8I85uA4MnoTA=="
+    },
+    "gcweb/v5_1_0": {
+      "cdtsPath": "gcweb/v5_1_0/cdts/",
+      "compiled/wet-en.js": "sha512-3uD43jy0EFLeXCCLuhffwqpVUpUomlyUaz4iInW88d7uvyQWx3OD74ocntSg/R5cJASqnjNx0m6OInTXd50JFA==",
+      "compiled/wet-fr.js": "sha512-0SQ+Ztf0kdTdFnSKFy6rB5cks47PpHco77E63LqKuA8ZijylwcvtEqXdMyptVfW/n3cm0cT9JdfPe4nZ3GDzag==",
+      "cdts-styles.css": "sha512-9XjF3MCbcyrmE5Xxp3JaLAQsYbSdIrwd8aJGafX6V7T8d7SrkAIrd6HFwsev0eAQrOMtDQ4pO65La3CrVHXo8w==",
+      "cdts-app-styles.css": "sha512-LdDduYGImuTiQIQCuQgOEttk+oe7wg5+rauqTbA/Qi1qTeZuvBcWcoqr5Nn1mHepDsboEadVW9HnHuMAOqJefA==",
+      "cdts-splash-styles.css": "sha512-Ux0hmX3uXA6WcF0i6+JHf0J3Z4HzzxDNyWdV+5mo1qakQwUBeDKMY+xcCcrWHySqStFvndhaJ5OqbIiqaADb9g=="
+    },
+    "gcintranet/v5_1_0": {
+      "cdtsPath": "gcintranet/v5_1_0/cdts/",
+      "compiled/wet-en.js": "sha512-Lh1+7j6z4qNEGZS2D2dxATebf6/zupN6LAvTQZUD6RpWVPeOg0BlmRlZXdE1m6ApAlVXcQNqFWMJiCoea2TrBQ==",
+      "compiled/wet-fr.js": "sha512-pN9W7w9MU7gfxEtiC8v47/zCtqNSyOzPxD05TvhxdWEla7ViWRD8Bylf6Q5/kL+4waYBRmddOWaObPapLjLX7g==",
       "cdts-styles.css": "sha512-dqrBeYZXK6RYeYmF7LSMsQ7efhL3Lalpi1P09QpwGXVBbuEB2lnqzhhVN1yPXTYN/5/4UeRlCf3SDtiXnk6sOQ==",
       "cdts-splash-styles.css": "sha512-Ux0hmX3uXA6WcF0i6+JHf0J3Z4HzzxDNyWdV+5mo1qakQwUBeDKMY+xcCcrWHySqStFvndhaJ5OqbIiqaADb9g==",
       "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
