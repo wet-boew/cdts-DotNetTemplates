@@ -46,19 +46,6 @@
       "canUseWebAnalytics": false
     },
     {
-      "name": "PROD_UNSECURE",
-      "path": "https://cdts-sgdc.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
-      "theme": "gcintranet",
-      "cdn": "prod",
-      "isVersionRnCombined": false,
-      "isEncryptionModifiable": false,
-      "appendToTitle": "",
-      "footerSectionLimit": 3,
-      "canHaveMultipleContactLinks": true,
-      "canHaveContactLinkInAppTemplate": false,
-      "canUseWebAnalytics": false
-    },
-    {
       "name": "ESDC_PROD",
       "path": "https://cdts-sgdc.service.canada.ca/{1}/cls/wet/{2}/{3}cdts/",
       "theme": "gcintranet",

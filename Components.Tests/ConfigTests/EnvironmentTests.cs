@@ -14,7 +14,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         public void FileHasFiveEnvironments(ICdtsCacheProvider cdtsCacheProvider)
         {
             var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            result.Environments.Count.Should().Be(5);
+            result.Environments.Count.Should().Be(4);
         }
 
         [Theory, AutoNSubstituteData]
