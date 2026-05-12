@@ -20,7 +20,7 @@
     },
     {
       "name": "PROD_SSL",
-      "path": "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
+      "path": "https://cdts-sgdc.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
       "theme": "gcintranet",
       "cdn": "prod",
       "isVersionRnCombined": false,
@@ -33,7 +33,7 @@
     },
     {
       "name": "PROD_SSL_ECCCSUB",
-      "path": "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
+      "path": "https://cdts-sgdc.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
       "theme": "gcintranet",
       "subTheme": "eccc",
       "cdn": "prod",
@@ -47,7 +47,7 @@
     },
     {
       "name": "PROD_UNSECURE",
-      "path": "http://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
+      "path": "https://cdts-sgdc.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
       "theme": "gcintranet",
       "cdn": "prod",
       "isVersionRnCombined": false,
@@ -60,7 +60,7 @@
     },
     {
       "name": "ESDC_PROD",
-      "path": "http{0}://templates.service.gc.ca/{1}/cls/wet/{2}/{3}cdts/",
+      "path": "https://cdts-sgdc.service.canada.ca/{1}/cls/wet/{2}/{3}cdts/",
       "theme": "gcintranet",
       "subTheme": "esdc",
       "cdn": "esdcprod",
@@ -190,8 +190,8 @@
     },
     "gcintranet/v5_1_0": {
       "cdtsPath": "gcintranet/v5_1_0/cdts/",
-      "compiled/wet-en.js": "sha512-Lh1+7j6z4qNEGZS2D2dxATebf6/zupN6LAvTQZUD6RpWVPeOg0BlmRlZXdE1m6ApAlVXcQNqFWMJiCoea2TrBQ==",
-      "compiled/wet-fr.js": "sha512-pN9W7w9MU7gfxEtiC8v47/zCtqNSyOzPxD05TvhxdWEla7ViWRD8Bylf6Q5/kL+4waYBRmddOWaObPapLjLX7g==",
+      "compiled/wet-en.js": "sha512-X3D3i+hU1+7vZCdU5IwccRYROVWUg4U4vQ+IkY9SGjwpvil2k/YvD35fldvj3qzoWmzcm4QXMlNgFCVvJ0JynQ==",
+      "compiled/wet-fr.js": "sha512-AmdoPxBOrhm2T5n7yVdOXr6qhZx6+5cirjJF/Ur1cg+oR1qLsuDt91xmnEzj1L8tGfeQSoGAMZUbXYTWR9Otww==",
       "cdts-styles.css": "sha512-dqrBeYZXK6RYeYmF7LSMsQ7efhL3Lalpi1P09QpwGXVBbuEB2lnqzhhVN1yPXTYN/5/4UeRlCf3SDtiXnk6sOQ==",
       "cdts-splash-styles.css": "sha512-Ux0hmX3uXA6WcF0i6+JHf0J3Z4HzzxDNyWdV+5mo1qakQwUBeDKMY+xcCcrWHySqStFvndhaJ5OqbIiqaADb9g==",
       "cdts-eccc-styles.css": "sha512-VjD7joqLvOMRsDY0x+9zCkn/H9RQGHTbiYLGZtLJ+AU3KF9CysP9vI9igQgNxeVgkqagyTCHVBP2y0jDZnEozg==",
