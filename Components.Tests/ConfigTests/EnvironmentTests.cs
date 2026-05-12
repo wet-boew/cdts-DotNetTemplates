@@ -14,7 +14,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
         public void FileHasFiveEnvironments(ICdtsCacheProvider cdtsCacheProvider)
         {
             var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            result.Environments.Count.Should().Be(5);
+            result.Environments.Count.Should().Be(4);
         }
 
         [Theory, AutoNSubstituteData]
@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             env.Environments["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "PROD_SSL",
-                Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
+                Path = "https://cdts-sgdc.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/",
                 Theme = "gcintranet",
                 CDN = "prod",
                 IsVersionRNCombined = false,

@@ -78,7 +78,6 @@ namespace GoC.WebTemplate.MVC.Controllers
             //BASIC SETTINGS ====================================
             // this.WebTemplateCore.WebTemplateTheme = "GCWeb";
             WebTemplateModel.Settings.Environment = "PROD_SSL";
-            WebTemplateModel.Settings.UseHttps = null;
             WebTemplateModel.HeaderTitle = "Sample Page";
 
             WebTemplateModel.ScreenIdentifier = "897987sadfjkkla--33";
