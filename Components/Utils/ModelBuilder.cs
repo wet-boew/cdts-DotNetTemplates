@@ -495,6 +495,7 @@ namespace GoC.WebTemplate.Components.Utils
         /// <returns>String, the complete path to the cdn</returns>
         internal string BuildCDNPath()
         {
+#pragma warning disable CS0618 // UseHttps is obsolete
             if (!_model.CdtsEnvironment.IsEncryptionModifiable && _model.Settings.UseHttps.HasValue)
             {
                 throw new InvalidOperationException($"{_model.Settings.Environment} does not allow useHTTPS to be toggled");
@@ -512,7 +513,7 @@ namespace GoC.WebTemplate.Components.Utils
                 // ReSharper disable once PossibleInvalidOperationException
                 https = _model.Settings.UseHttps.Value ? "s" : string.Empty;
             }
-
+#pragma warning restore CS0618 // UseHttps is obsolete
             var run = string.Empty;
             var version = string.Empty;
             if (string.IsNullOrWhiteSpace(_model.Settings.Version))
