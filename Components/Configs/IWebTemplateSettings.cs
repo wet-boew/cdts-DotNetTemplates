@@ -1,4 +1,5 @@
 ﻿using GoC.WebTemplate.Components.Entities;
+using System;
 
 namespace GoC.WebTemplate.Components.Configs
 {
@@ -95,6 +96,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// Determines if the communication between the browser and the CDTS should be encrypted
         /// Set by application via web.config or programmatically
         /// </summary>
+        [Obsolete("This property is no longer supported. Https is always enabled.")]
         bool? UseHttps { get; set; }
 
         /// <summary>

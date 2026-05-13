@@ -202,6 +202,7 @@ namespace GoC.WebTemplate.Components.Configs.Schemas
         /// <summary>
         /// StaticFilesLocation
         /// </summary>
+        [Obsolete("This property is no longer supported. Https is always enabled.")]
         [ConfigurationProperty("useHTTPS", IsRequired = false)]
         public bool? UseHttps
         {

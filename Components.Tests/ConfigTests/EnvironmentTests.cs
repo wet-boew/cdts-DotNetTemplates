@@ -11,10 +11,10 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
     {
 
         [Theory, AutoNSubstituteData]
-        public void FileHasElevenEnvironments(ICdtsCacheProvider cdtsCacheProvider)
+        public void FileHasFourEnvironments(ICdtsCacheProvider cdtsCacheProvider)
         {
             var result = new CdtsEnvironmentCache(cdtsCacheProvider).DeserializeEnvironments();
-            result.Count.Should().Be(11);
+            result.Count.Should().Be(4);
         }
 
         [Theory, AutoNSubstituteData]
@@ -73,7 +73,7 @@ namespace GoC.WebTemplate.Components.Test.ConfigTests
             env["PROD_SSL"].Should().BeEquivalentTo(new CdtsEnvironment
             {
                 Name = "PROD_SSL",
-                Path = "https://cdts.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
+                Path = "https://cdts-sgdc.service.canada.ca/{1}/cls/WET/{2}/{3}cdts/compiled/",
                 Theme = "gcintranet",
                 CDN = "prod",
                 IsVersionRNCombined = false,
