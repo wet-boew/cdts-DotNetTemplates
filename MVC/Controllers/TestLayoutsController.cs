@@ -74,7 +74,9 @@ namespace GoC.WebTemplate.MVC.Controllers
             WebTemplateModel.Settings.Environment = string.IsNullOrEmpty(env) ? "AKAMAI" : env;
             if (WebTemplateModel.Settings.Environment.Equals("ESDC_PROD"))
             {
+#pragma warning disable CS0618 // UseHttps is obsolete
                 WebTemplateModel.Settings.UseHttps = false;
+#pragma warning restore CS0618 // UseHttps is obsolete
             }
         }
 
