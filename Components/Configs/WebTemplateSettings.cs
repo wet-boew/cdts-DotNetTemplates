@@ -125,6 +125,7 @@ namespace GoC.WebTemplate.Components.Configs
         /// Determines if the communication between the browser and the CDTS should be encrypted
         /// Set by application via web.config or programmatically
         /// </summary>
+        [Obsolete("This property is no longer supported. Https is always enabled.")]
         public bool? UseHttps { get; set; }
 
         public string StaticFilesLocation { get; set; }
@@ -191,7 +192,9 @@ namespace GoC.WebTemplate.Components.Configs
             SignInLinkUrl = configurationSection.SignInLinkURL;
             SignOutLinkUrl = configurationSection.SignOutLinkURL;
             StaticFilesLocation = configurationSection.StaticFilesLocation;
+#pragma warning disable CS0618 // UseHttps is obsolete
             UseHttps = configurationSection.UseHttps;
+#pragma warning restore CS0618 // UseHttps is obsolete
             Version = configurationSection.Version;
             WebAnalytics =
                 new WebAnalytics()

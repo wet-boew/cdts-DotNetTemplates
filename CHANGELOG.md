@@ -1,5 +1,14 @@
 # DotNetTemplates Change Log
 
+## v5.1.0
+
+- [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.1.0 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.96 (GCIntranet uses v4.0.85)
+- GCIntranet Cloud URL https://cdts.service.canada.ca has been replaced by a bilingual URL https://cdts-sgdc.service.canada.ca.
+- GCIntranet URL https://templates.service.gc.ca has been replaced by a bilingual URL https://cdts-sgdc.service.canada.ca.
+- Environment PROD_UNSECURE has been removed. Use PROD_SSL instead.
+- UseHttps property is no longer supported. Https is always enabled.
+- Updating static fallback files
+
 ## v5.0.6
 
 - [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.0.5 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.89
