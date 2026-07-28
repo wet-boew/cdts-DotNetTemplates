@@ -1,5 +1,10 @@
 # DotNetTemplates Change Log
 
+## v5.1.1
+
+- [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.1.1 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.96.3 (GCIntranet uses v4.0.85)
+- Updating static fallback files
+
 ## v5.1.0
 
 - [CDTS](https://github.com/wet-boew/cdts-sgdc) v5.1.0 & [wet-boew](https://github.com/wet-boew/wet-boew) v4.0.96 (GCIntranet uses v4.0.85)
